@@ -162,7 +162,6 @@ import io.olvid.messenger.discussion.poll.PollMessageBody
 import io.olvid.messenger.discussion.poll.PollResultActivity
 import io.olvid.messenger.discussion.poll.PollResultViewModel
 import io.olvid.messenger.discussion.poll.postPollVote
-import io.olvid.messenger.discussion.search.DiscussionSearch
 import io.olvid.messenger.discussion.search.DiscussionSearchViewModel
 import io.olvid.messenger.main.InitialView
 import io.olvid.messenger.main.contacts.PublishedDetails
@@ -216,7 +215,7 @@ fun ScrollDownButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
         onClick = onClick
     ) {
         Icon(
-            modifier = Modifier.requiredSize(32.dp),
+            modifier = Modifier.padding(top = 2.dp).requiredSize(32.dp),
             painter = painterResource(id = R.drawable.ic_down),
             tint = Color.White,
             contentDescription = null
@@ -266,7 +265,7 @@ fun Message(
     onLocationClick: () -> Unit = {},
     onLocationLongClick: () -> Unit = {},
     onAttachmentLongClick: (fyleAndStatus: FyleAndStatus) -> Unit = {},
-    onCallBackButtonClicked: (callLogId: Long) -> Unit = {},
+    onCallButtonClicked: (callLogId: Long) -> Unit = {},
     scrollToMessage: (messageId: Long) -> Unit = {},
     replyAction: (() -> Unit)? = null,
     menuAction: () -> Unit = {},
@@ -279,7 +278,7 @@ fun Message(
     linkPreviewViewModel: LinkPreviewViewModel? = null,
     messageExpiration: MessageExpiration? = null,
     discussionViewModel: DiscussionViewModel? = null,
-    discussionSearch: DiscussionSearch? = null,
+    discussionSearchViewModel: DiscussionSearchViewModel? = null,
     audioAttachmentServiceBinding: AudioAttachmentServiceBinding? = null,
     openDiscussionDetailsCallback: (() -> Unit)? = null,
     openOnClick: Boolean = true,
@@ -513,9 +512,9 @@ fun Message(
                             onClick = if (message.isLocationMessage) onLocationClick else onClick,
                             onDoubleClick = if (message.isLocationMessage) onLocationClick else onDoubleClick,
                             onLongClick = if (message.isLocationMessage) onLocationLongClick else onLongClick,
-                            onCallBackButtonClicked = onCallBackButtonClicked,
+                            onCallBackButtonClicked = onCallButtonClicked,
                             discussionViewModel = discussionViewModel,
-                            discussionSearch = discussionSearch,
+                            discussionSearchViewModel = discussionSearchViewModel,
                             scale = scale,
                             useAnimatedEmojis = useAnimatedEmojis,
                             loopAnimatedEmojis = loopAnimatedEmojis,
@@ -547,7 +546,7 @@ fun Message(
                                 message = message,
                                 discussionViewModel = discussionViewModel,
                                 linkPreviewViewModel = linkPreviewViewModel,
-                                highlighter = discussionSearch?.viewModel?.let {
+                                highlighter = discussionSearchViewModel?.let {
                                     it::highlight
                                 },
                                 onLongClick = onLongClick,
@@ -570,7 +569,7 @@ fun Message(
                                     openOnClick = openOnClick,
                                     onAttachmentLongClick = onAttachmentLongClick,
                                     openViewerCallback = openViewerCallback,
-                                    discussionSearchViewModel = discussionSearch?.viewModel,
+                                    discussionSearchViewModel = discussionSearchViewModel,
                                     saveAttachment = saveAttachment,
                                     saveAllAttachments = saveAllAttachments,
                                     blockClicks = blockClicks,
@@ -764,6 +763,7 @@ private fun MessageFooter(
 
     pollVoters?.also { voters ->
         Column {
+            @Suppress("UnusedExpression")
             row
             HorizontalDivider(
                 thickness = 1.dp,
@@ -948,7 +948,7 @@ fun MessageBody(
     useAnimatedEmojis: Boolean,
     loopAnimatedEmojis: Boolean,
     discussionViewModel: DiscussionViewModel? = null,
-    discussionSearch: DiscussionSearch? = null,
+    discussionSearchViewModel: DiscussionSearchViewModel? = null,
     openDiscussionDetailsCallback: (() -> Unit)? = null,
     messageBubbleInteractionSource: MutableInteractionSource,
     jsonPoll: JsonPoll?,
@@ -1051,7 +1051,7 @@ fun MessageBody(
             scale = scale,
             onClick = onClick,
             onLongClick = onLongClick,
-            highlighter = discussionSearch?.viewModel?.let {
+            highlighter = discussionSearchViewModel?.let {
                 it::highlight
             },
             blockClicks = blockClicks,
@@ -1218,7 +1218,7 @@ fun MessageBody(
                 }
                 val text = remember(
                     linkUrl,
-                    discussionSearch?.viewModel?.filterRegexes,
+                    discussionSearchViewModel?.filterRegexes,
                     message.contentBody
                 ) {
                     getAnnotatedStringContent(
@@ -1226,7 +1226,7 @@ fun MessageBody(
                         message,
                         linkUrl,
                         discussionViewModel?.discussion?.value?.bytesOwnedIdentity,
-                        discussionSearch?.viewModel
+                        discussionSearchViewModel
                     )
                 }
                 val uriHandler = LocalUriHandler.current
@@ -1234,7 +1234,7 @@ fun MessageBody(
                     PollMessageBody(
                         pollResults = pollResults,
                         jsonPoll = jsonPoll,
-                        highlighter = discussionSearch?.viewModel?.let {
+                        highlighter = discussionSearchViewModel?.let {
                             it::highlight
                         },
                         onVote = { voteUuid, voted ->
@@ -1713,14 +1713,32 @@ fun GroupUpdateMessageInfo(
                 )
             }
         }
-        val kicked = message.mentions?.size == 1 && message.mentions?.first()?.userIdentifier?.contentEquals(AppSingleton.getBytesCurrentIdentity()) ?: false
+        val targetIsSelf = message.mentions?.size == 1 &&
+                message.mentions?.first()?.userIdentifier?.contentEquals(AppSingleton.getBytesCurrentIdentity()) == true
+
         MessageInfo(
             text = if (mention != null) {
-                if (kicked) {
-                    if (displayName != null) {
-                        stringResource(R.string.text_removed_from_group_by, displayName)
+                if (byYou && targetIsSelf) {
+                    when (message.messageType) {
+                        Message.TYPE_GROUP_MEMBER_JOINED -> stringResource(R.string.text_group_joined)
+                        Message.TYPE_GROUP_MEMBER_LEFT -> stringResource(R.string.text_group_left)
+                        else -> "" // should not happen
+                    }
+                } else if (targetIsSelf) {
+                    if (message.messageType == Message.TYPE_GROUP_MEMBER_LEFT) {
+                        if (displayName != null) {
+                            stringResource(R.string.text_removed_from_group_by, displayName)
+                        } else {
+                            stringResource(R.string.text_removed_from_group)
+                        }
+                    } else if (message.messageType == Message.TYPE_GROUP_MEMBER_JOINED) {
+                        if (displayName != null) {
+                            stringResource(R.string.text_group_joined_by, displayName)
+                        } else {
+                            stringResource(R.string.text_group_joined)
+                        }
                     } else {
-                        stringResource(R.string.text_removed_from_group)
+                        pluralStringResource(id = default, mentionCount, mention)
                     }
                 } else if (displayName != null) {
                     if (byYou) {
@@ -1736,12 +1754,12 @@ fun GroupUpdateMessageInfo(
                             mention
                         )
                     }
-                } else {
+                } else { // No known sender, multiple mentioned.
                     pluralStringResource(id = default, mentionCount, mention)
                 }
-            } else if (displayName != null) {
+            } else if (displayName != null) { // No mentions, but sender is known.
                 pluralStringResource(id = default, 1, displayName)
-            } else {
+            } else { // No mentions, no known sender.
                 stringResource(id = unknown)
             },
             interactionSource = interactionSource,
@@ -1787,7 +1805,7 @@ fun MissedMessageCount(modifier: Modifier = Modifier, missedMessageCount: Int) {
                 missedMessageCount
             ),
             style = OlvidTypography.subtitle1.copy(fontStyle = FontStyle.Italic),
-            color = colorResource(id = R.color.greyOverlay)
+            color = colorResource(id = R.color.mediumGrey)
         )
     }
 }

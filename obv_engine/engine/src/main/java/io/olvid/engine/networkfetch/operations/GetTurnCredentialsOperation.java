@@ -46,6 +46,7 @@ public class GetTurnCredentialsOperation extends Operation {
 
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final WellKnownCacheDelegate wellKnownCacheDelegate;
     private final Identity ownedIdentity;
     private final UUID callUuid;
@@ -86,10 +87,11 @@ public class GetTurnCredentialsOperation extends Operation {
         return password2;
     }
 
-    public GetTurnCredentialsOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, WellKnownCacheDelegate wellKnownCacheDelegate, Identity ownedIdentity, UUID callUuid, String username1, String username2, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
+    public GetTurnCredentialsOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, WellKnownCacheDelegate wellKnownCacheDelegate, Identity ownedIdentity, UUID callUuid, String username1, String username2, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
         super(ownedIdentity.computeUniqueUid(), onFinishCallback, onCancelCallback);
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.wellKnownCacheDelegate = wellKnownCacheDelegate;
         this.ownedIdentity = ownedIdentity;
         this.callUuid = callUuid;
@@ -114,7 +116,7 @@ public class GetTurnCredentialsOperation extends Operation {
                     return;
                 }
 
-                if (turnServers == null || turnServers.size() == 0) {
+                if (turnServers == null || turnServers.isEmpty()) {
                     cancel(RFC_SERVER_DOES_NOT_SUPPORT_CALLS);
                     return;
                 }
@@ -132,7 +134,7 @@ public class GetTurnCredentialsOperation extends Operation {
                         username1,
                         username2
                 );
-                serverMethod.setSslSocketFactory(sslSocketFactory);
+                serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
 
                 byte returnStatus = serverMethod.execute(fetchManagerSession.identityDelegate.isActiveOwnedIdentity(fetchManagerSession.session, ownedIdentity));
 

@@ -43,11 +43,13 @@ import io.olvid.engine.networkfetch.operations.StandaloneServerQueryOperation;
 public class DeviceBackupDeleteTask {
     private final BackupManagerSessionFactory backupManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final BackupSeed deviceBackupSeed;
 
-    public DeviceBackupDeleteTask(BackupManagerSessionFactory backupManagerSessionFactory, SSLSocketFactory sslSocketFactory, BackupSeed deviceBackupSeed) {
+    public DeviceBackupDeleteTask(BackupManagerSessionFactory backupManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, BackupSeed deviceBackupSeed) {
         this.backupManagerSessionFactory = backupManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.deviceBackupSeed = deviceBackupSeed;
     }
 
@@ -64,7 +66,7 @@ public class DeviceBackupDeleteTask {
 
             ///////
             // 1. list device backups
-            StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2ListBackupsQuery(deviceServer, deviceDerivedKeysV2.backupKeyUid)), sslSocketFactory);
+            StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2ListBackupsQuery(deviceServer, deviceDerivedKeysV2.backupKeyUid)), sslSocketFactory, userAgentOverride);
             OperationQueue queue = new OperationQueue();
             queue.queue(standaloneServerQueryOperation);
             queue.execute(1, "Engine-DeviceBackupDeleteTask");
@@ -111,7 +113,7 @@ public class DeviceBackupDeleteTask {
                         backupManagerSession.prng
                 );
 
-                standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2DeleteBackupQuery(deviceServer, deviceDerivedKeysV2.backupKeyUid, Constants.DEVICE_BACKUP_THREAD_ID, deviceVersion, signature)), sslSocketFactory);
+                standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2DeleteBackupQuery(deviceServer, deviceDerivedKeysV2.backupKeyUid, Constants.DEVICE_BACKUP_THREAD_ID, deviceVersion, signature)), sslSocketFactory, userAgentOverride);
                 queue = new OperationQueue();
                 queue.queue(standaloneServerQueryOperation);
                 queue.execute(1, "Engine-DeviceBackupDeleteTask");
@@ -139,7 +141,7 @@ public class DeviceBackupDeleteTask {
 
                     ////////
                     // 3.1. list profile backups
-                    standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2ListBackupsQuery(server, derivedKeysV2.backupKeyUid)), sslSocketFactory);
+                    standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2ListBackupsQuery(server, derivedKeysV2.backupKeyUid)), sslSocketFactory, userAgentOverride);
                     queue = new OperationQueue();
                     queue.queue(standaloneServerQueryOperation);
                     queue.execute(1, "Engine-DeviceBackupDeleteTask");
@@ -185,7 +187,7 @@ public class DeviceBackupDeleteTask {
                                 backupManagerSession.prng
                         );
 
-                        standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2DeleteBackupQuery(server, derivedKeysV2.backupKeyUid, profileBackupThreadId.getThreadId(), version, signature)), sslSocketFactory);
+                        standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2DeleteBackupQuery(server, derivedKeysV2.backupKeyUid, profileBackupThreadId.getThreadId(), version, signature)), sslSocketFactory, userAgentOverride);
                         queue = new OperationQueue();
                         queue.queue(standaloneServerQueryOperation);
                         queue.execute(1, "Engine-DeviceBackupDeleteTask");

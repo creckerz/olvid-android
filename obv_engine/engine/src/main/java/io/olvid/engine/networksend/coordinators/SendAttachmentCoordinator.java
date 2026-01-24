@@ -51,6 +51,7 @@ import io.olvid.engine.networksend.operations.UploadAttachmentCompositeOperation
 public class SendAttachmentCoordinator implements OutboxAttachment.OutboxAttachmentCanBeSentListener, Operation.OnCancelCallback {
     private final SendManagerSessionFactory sendManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final RefreshOutboxAttachmentSignedUrlDelegate refreshOutboxAttachmentSignedUrlDelegate;
 
     private final PriorityOperationQueue sendAttachmentOperationQueue;
@@ -70,9 +71,11 @@ public class SendAttachmentCoordinator implements OutboxAttachment.OutboxAttachm
 
     public SendAttachmentCoordinator(SendManagerSessionFactory sendManagerSessionFactory,
                                      SSLSocketFactory sslSocketFactory,
+                                     String userAgentOverride,
                                      RefreshOutboxAttachmentSignedUrlCoordinator refreshOutboxAttachmentSignedUrlCoordinator) {
         this.sendManagerSessionFactory = sendManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.refreshOutboxAttachmentSignedUrlDelegate = refreshOutboxAttachmentSignedUrlCoordinator;
 
         sendAttachmentOperationQueue = new PriorityOperationQueue();
@@ -119,7 +122,7 @@ public class SendAttachmentCoordinator implements OutboxAttachment.OutboxAttachm
 
     private void queueNewSendAttachmentCompositeOperation(Identity ownedIdentity, UID messageUid, int attachmentNumber, long initialPriority) {
         Logger.d("Queueing new UploadAttachmentCompositeOperation " + messageUid + "-" + attachmentNumber + " with priority " + initialPriority);
-        UploadAttachmentCompositeOperation op = new UploadAttachmentCompositeOperation(sendManagerSessionFactory, sslSocketFactory, ownedIdentity, messageUid, attachmentNumber, initialPriority, this, null,this);
+        UploadAttachmentCompositeOperation op = new UploadAttachmentCompositeOperation(sendManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity, messageUid, attachmentNumber, initialPriority, this, null,this);
         sendAttachmentOperationQueue.queue(op);
         PriorityOperation lowestPriorityExecutingOperation = sendAttachmentOperationQueue.getExecutingOperationThatShouldBeCancelledWhenQueueingWithHigherPriority();
         if (lowestPriorityExecutingOperation != null && lowestPriorityExecutingOperation.getPriority() > initialPriority) {

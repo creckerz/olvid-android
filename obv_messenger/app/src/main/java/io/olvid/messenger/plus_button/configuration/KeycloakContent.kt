@@ -22,7 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -63,16 +63,16 @@ internal fun KeycloakContent(
 ) {
     val context = LocalContext.current
     val activity = context as ComponentActivity
-    var authenticating by remember { mutableStateOf(false) }
-    var retrievingDetails by remember { mutableStateOf(false) }
-    var showTransferRestrictedDialog by remember { mutableStateOf(false) }
-    var showTimeErrorDialog by remember { mutableStateOf(false) }
-    var showNoBrowserDialog by remember { mutableStateOf(false) }
+    var authenticating by rememberSaveable { mutableStateOf(false) }
+    var retrievingDetails by rememberSaveable { mutableStateOf(false) }
+    var showTransferRestrictedDialog by rememberSaveable { mutableStateOf(false) }
+    var showTimeErrorDialog by rememberSaveable { mutableStateOf(false) }
+    var showNoBrowserDialog by rememberSaveable { mutableStateOf(false) }
 
-    var discovering by remember { mutableStateOf(false) }
-    var ownedIdentityAlreadyManaged by remember { mutableStateOf(false) }
-    var alreadyBoundOnSameServer by remember { mutableStateOf(false) }
-    var errorMessage: String? by remember { mutableStateOf(null) }
+    var discovering by rememberSaveable { mutableStateOf(false) }
+    var ownedIdentityAlreadyManaged by rememberSaveable { mutableStateOf(false) }
+    var alreadyBoundOnSameServer by rememberSaveable { mutableStateOf(false) }
+    var errorMessage: String? by rememberSaveable { mutableStateOf(null) }
 
 
     if (showTransferRestrictedDialog) {

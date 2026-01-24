@@ -82,6 +82,7 @@ import io.olvid.engine.engine.types.ObvTurnCredentialsFailedReason.PERMISSION_DE
 import io.olvid.engine.engine.types.ObvTurnCredentialsFailedReason.UNABLE_TO_CONTACT_SERVER
 import io.olvid.messenger.App
 import io.olvid.messenger.AppSingleton
+import io.olvid.messenger.BuildConfig
 import io.olvid.messenger.R.color
 import io.olvid.messenger.R.dimen
 import io.olvid.messenger.R.drawable
@@ -148,8 +149,10 @@ import io.olvid.messenger.webrtc.WebrtcPeerConnectionHolder.Companion.audioDevic
 import io.olvid.messenger.webrtc.WebrtcPeerConnectionHolder.Companion.localScreenTrack
 import io.olvid.messenger.webrtc.WebrtcPeerConnectionHolder.Companion.localVideoTrack
 import io.olvid.messenger.webrtc.WebrtcPeerConnectionHolder.DataChannelMessageListener
+import io.olvid.messenger.webrtc.components.humanReadable
 import io.olvid.messenger.webrtc.json.JsonAnswerCallMessage
 import io.olvid.messenger.webrtc.json.JsonAnsweredOrRejectedOnOtherDeviceMessage
+import io.olvid.messenger.webrtc.json.JsonBatchIceCandidatesMessage
 import io.olvid.messenger.webrtc.json.JsonDataChannelInnerMessage
 import io.olvid.messenger.webrtc.json.JsonDataChannelMessage
 import io.olvid.messenger.webrtc.json.JsonHangedUpInnerMessage
@@ -272,6 +275,13 @@ class WebrtcCallService : Service() {
         GATHER_CONTINUOUSLY
     }
 
+    enum class TurnServerOrigin {
+        FROM_CALLER,
+        WELL_KNOWN,
+        REGIONAL_USER_SETTING,
+        FALLBACK,
+    }
+
     private val webrtcCallServiceBinder = WebrtcCallServiceBinder()
     private val objectMapper = AppSingleton.getJsonObjectMapper()
     private var role = NONE
@@ -358,13 +368,26 @@ class WebrtcCallService : Service() {
     private var engineTurnCredentialsReceiver: EngineTurnCredentialsReceiver? = null
     private var turnUserName: String? = null
     private var turnPassword: String? = null
-    private var turnServers: List<String>? = null
+    private var turnServers: MutableMap<TurnServerOrigin, List<String>> = mutableMapOf(
+        TurnServerOrigin.FALLBACK to BuildConfig.TURN_SERVERS.toList()
+    ).apply {
+        // if the user has set a region TURN server, add it to the map of available turn servers
+        when (SettingsActivity.scaledTurn) {
+            "par" -> BuildConfig.TURN_SERVERS_EU.toList()
+            "nyc" -> BuildConfig.TURN_SERVERS_US.toList()
+            "sng" -> BuildConfig.TURN_SERVERS_AP.toList()
+            else -> null
+        }?.let {
+            this[TurnServerOrigin.REGIONAL_USER_SETTING] = it
+        }
+    }
+
     var incomingParticipantCount = 0
         private set
     private var recipientTurnUserName: String? = null
     private var recipientTurnPassword: String? = null
 
-    private val queuedIncomingCalls = emptyList<Call>().toMutableList()
+    private val queuedIncomingCalls = mutableListOf<Call>()
 
     val audioDeviceCallback = object : AudioDeviceCallback() {
         override fun onAudioDevicesAdded(addedDevices: Array<AudioDeviceInfo>) {
@@ -385,10 +408,6 @@ class WebrtcCallService : Service() {
 
     private var currentIncomingCallLiveData: MutableLiveData<Call?> = MutableLiveData(null)
     private var lastRoleWasNone: Boolean = true
-
-    fun getCurrentIncomingCallLiveData(): LiveData<Call?> {
-        return currentIncomingCallLiveData
-    }
 
     private fun stopThisServiceOrRefreshNotificationAndRingers() {
         queuedIncomingCalls.firstOrNull()?.also {
@@ -439,7 +458,7 @@ class WebrtcCallService : Service() {
                 }
                 Handler(Looper.getMainLooper()).postDelayed({
                     // recheck before stoping service
-                    if (queuedIncomingCalls.isEmpty() && role == Role.NONE) {
+                    if (queuedIncomingCalls.isEmpty() && role == NONE) {
                         this.stopSelf()
                     }
                 }, PEER_CALL_ENDED_WAIT_MILLIS)
@@ -457,11 +476,13 @@ class WebrtcCallService : Service() {
         val bytesGroupOwnerAndUidOrIdentifier: ByteArray?,
         val turnUserName: String?,
         val turnPassword: String?,
+        val callerTurnServers: List<String>?,
         val participantCount: Int,
         val gatheringPolicy: GatheringPolicy,
         var discussionType: Int,
         val sessionDescriptionType: String,
         val sessionDescription: String,
+        val supportsIceBatch: Boolean,
         val discussionCustomization: DiscussionCustomization?
     ) {
         private var ringingTimer: Timer? = null
@@ -607,6 +628,7 @@ class WebrtcCallService : Service() {
                             && messageType != NEW_ICE_CANDIDATE_MESSAGE_TYPE
                             && messageType != REMOVE_ICE_CANDIDATES_MESSAGE_TYPE
                             && messageType != ANSWERED_OR_REJECTED_ON_OTHER_DEVICE_MESSAGE_TYPE
+                            && messageType != BATCH_ICE_CANDIDATES_MESSAGE_TYPE
                         ) {
                             return@apply
                         }
@@ -639,10 +661,12 @@ class WebrtcCallService : Service() {
                                             startCallMessage.sessionDescriptionType,
                                             startCallMessage.gzippedSessionDescription,
                                             startCallMessage.turnUserName,
-                                            startCallMessage.turnPassword /*, startCallMessage.turnServers*/,
+                                            startCallMessage.turnPassword,
+                                            startCallMessage.turnServers,
                                             startCallMessage.participantCount,
                                             startCallMessage.bytesGroupOwnerAndUid,
-                                            startCallMessage.gatheringPolicy
+                                            startCallMessage.gatheringPolicy,
+                                            startCallMessage.batchIceSupported
                                         )
                                     }
                                     return START_NOT_STICKY
@@ -654,15 +678,15 @@ class WebrtcCallService : Service() {
                                             serializedMessagePayload,
                                             JsonNewIceCandidateMessage::class.java
                                         )
-                                        handleNewIceCandidateMessage(
+                                        handleNewIceCandidateMessages(
                                             callIdentifier,
                                             bytesOwnedIdentity,
                                             bytesContactIdentity,
-                                            JsonIceCandidate(
+                                            listOf(JsonIceCandidate(
                                                 jsonNewIceCandidateMessage.sdp,
                                                 jsonNewIceCandidateMessage.sdpMLineIndex,
                                                 jsonNewIceCandidateMessage.sdpMid
-                                            )
+                                            ))
                                         )
                                     }
                                     return START_NOT_STICKY
@@ -699,6 +723,22 @@ class WebrtcCallService : Service() {
                                             callIdentifier,
                                             bytesOwnedIdentity,
                                             jsonAnsweredOrRejectedOnOtherDeviceMessage.isAnswered
+                                        )
+                                    }
+                                    return START_NOT_STICKY
+                                }
+
+                                BATCH_ICE_CANDIDATES_MESSAGE_TYPE -> {
+                                    if (bytesOwnedIdentity != null && bytesContactIdentity != null) {
+                                        val jsonBatchIceCandidatesMessage = objectMapper.readValue(
+                                            serializedMessagePayload,
+                                            JsonBatchIceCandidatesMessage::class.java
+                                        )
+                                        handleNewIceCandidateMessages(
+                                            callIdentifier,
+                                            bytesOwnedIdentity,
+                                            bytesContactIdentity,
+                                            jsonBatchIceCandidatesMessage.iceCandidates
                                         )
                                     }
                                     return START_NOT_STICKY
@@ -841,7 +881,8 @@ class WebrtcCallService : Service() {
                         callerHandleAnswerCallMessage(
                             callParticipant,
                             jsonAnswerCallMessage.sessionDescriptionType,
-                            jsonAnswerCallMessage.gzippedSessionDescription
+                            jsonAnswerCallMessage.gzippedSessionDescription,
+                            jsonAnswerCallMessage.batchIceSupported
                         )
                     }
                 }
@@ -934,7 +975,8 @@ class WebrtcCallService : Service() {
                             callParticipant,
                             newParticipantOfferMessage.sessionDescriptionType,
                             newParticipantOfferMessage.gzippedSessionDescription,
-                            newParticipantOfferMessage.gatheringPolicy
+                            newParticipantOfferMessage.gatheringPolicy,
+                            newParticipantOfferMessage.batchIceSupported
                         )
                     }
                 }
@@ -953,7 +995,8 @@ class WebrtcCallService : Service() {
                         handleNewParticipantAnswerMessage(
                             callParticipant,
                             newParticipantAnswerMessage.sessionDescriptionType,
-                            newParticipantAnswerMessage.gzippedSessionDescription
+                            newParticipantAnswerMessage.gzippedSessionDescription,
+                            newParticipantAnswerMessage.batchIceSupported
                         )
                     }
                 }
@@ -970,15 +1013,15 @@ class WebrtcCallService : Service() {
                         serializedMessagePayload,
                         JsonNewIceCandidateMessage::class.java
                     )
-                    handleNewIceCandidateMessage(
+                    handleNewIceCandidateMessages(
                         callIdentifier,
                         bytesOwnedIdentity,
                         bytesContactIdentity!!,
-                        JsonIceCandidate(
+                        listOf(JsonIceCandidate(
                             jsonNewIceCandidateMessage.sdp,
                             jsonNewIceCandidateMessage.sdpMLineIndex,
                             jsonNewIceCandidateMessage.sdpMid
-                        )
+                        ))
                     )
                 }
 
@@ -992,6 +1035,19 @@ class WebrtcCallService : Service() {
                         bytesOwnedIdentity,
                         bytesContactIdentity!!,
                         jsonRemoveIceCandidatesMessage.candidates
+                    )
+                }
+
+                BATCH_ICE_CANDIDATES_MESSAGE_TYPE -> {
+                    val jsonBatchIceCandidatesMessage = objectMapper.readValue(
+                        serializedMessagePayload,
+                        JsonBatchIceCandidatesMessage::class.java
+                    )
+                    handleNewIceCandidateMessages(
+                        callIdentifier,
+                        bytesOwnedIdentity,
+                        bytesContactIdentity!!,
+                        jsonBatchIceCandidatesMessage.iceCandidates
                     )
                 }
             }
@@ -1163,14 +1219,15 @@ class WebrtcCallService : Service() {
         )
         val credentialTimestamp =
             callCredentialsCacheSharedPreference.getLong(PREF_KEY_TIMESTAMP, 0)
-        if (System.currentTimeMillis() < credentialTimestamp + CREDENTIALS_TTL) {
+        val credentialServer =
+            callCredentialsCacheSharedPreference.getString(PREF_KEY_SERVER, BuildConfig.SERVER_NAME)
+        if (System.currentTimeMillis() < credentialTimestamp + CREDENTIALS_TTL
+            && AppSingleton.getEngine().getServerOfIdentity(bytesOwnedIdentity) == credentialServer) {
             val username1 = callCredentialsCacheSharedPreference.getString(PREF_KEY_USERNAME1, null)
             val password1 = callCredentialsCacheSharedPreference.getString(PREF_KEY_PASSWORD1, null)
             val username2 = callCredentialsCacheSharedPreference.getString(PREF_KEY_USERNAME2, null)
             val password2 = callCredentialsCacheSharedPreference.getString(PREF_KEY_PASSWORD2, null)
-            val turnServers = callCredentialsCacheSharedPreference.getStringSet(
-                PREF_KEY_TURN_SERVERS, null
-            )
+            val turnServers = callCredentialsCacheSharedPreference.getStringSet(PREF_KEY_TURN_SERVERS, null)
             if (username1 != null && password1 != null && username2 != null && password2 != null && turnServers != null) {
                 Logger.d("☎ Reusing cached turn credentials")
                 setState(GETTING_TURN_CREDENTIALS)
@@ -1188,10 +1245,11 @@ class WebrtcCallService : Service() {
         // request turn credentials
         setState(GETTING_TURN_CREDENTIALS)
 
-        // check if my current owned identity has call permission, if not, check if another non-hidden identity has it
+        // check if my current owned identity has call permission, if not, check if another non-hidden identity has it for the same server
         var bytesOwnedIdentityWithCallPermission = bytesOwnedIdentity
         val currentOwnedIdentity =
             bytesOwnedIdentity?.let { AppDatabase.getInstance().ownedIdentityDao()[it] }
+        val currentIdentityServer = AppSingleton.getEngine().getServerOfIdentity(bytesOwnedIdentity)
         if (currentOwnedIdentity == null || !currentOwnedIdentity.getApiKeyPermissions().contains(
                 CALL
             )
@@ -1202,7 +1260,10 @@ class WebrtcCallService : Service() {
                     // skip the current identity
                     continue
                 }
-                if (ownedIdentity.getApiKeyPermissions().contains(CALL)) {
+                if (ownedIdentity.active
+                    && ownedIdentity.getApiKeyPermissions().contains(CALL)
+                    && AppSingleton.getEngine().getServerOfIdentity(ownedIdentity.bytesOwnedIdentity) == currentIdentityServer
+                ) {
                     bytesOwnedIdentityWithCallPermission = ownedIdentity.bytesOwnedIdentity
                     break
                 }
@@ -1245,13 +1306,14 @@ class WebrtcCallService : Service() {
             }
             turnUserName = callerUsername
             turnPassword = callerPassword
-            this.turnServers = turnServers
+            this.turnServers[TurnServerOrigin.WELL_KNOWN] = turnServers
             recipientTurnUserName = recipientUsername
             recipientTurnPassword = recipientPassword
             for (callParticipant in callParticipants.values) {
                 callParticipant.peerConnectionHolder.setTurnCredentials(
                     callerUsername,
-                    callerPassword /*, turnServers*/
+                    callerPassword,
+                    pickTurnServers()
                 )
                 if (!callParticipant.peerConnectionHolder.createPeerConnection()) {
                     peerConnectionHolderFailed(callParticipant, PEER_CONNECTION_CREATION_ERROR)
@@ -1268,7 +1330,7 @@ class WebrtcCallService : Service() {
                 UNABLE_TO_CONTACT_SERVER -> failReason = SERVER_UNREACHABLE
                 PERMISSION_DENIED -> {
                     failReason = FailReason.PERMISSION_DENIED
-                    App.openAppDialogSubscriptionRequired(bytesOwnedIdentity, CALL)
+                    App.openAppDialogCallSubscriptionRequired(bytesOwnedIdentity)
                 }
 
                 CALLS_NOT_SUPPORTED_ON_SERVER -> {
@@ -1303,7 +1365,7 @@ class WebrtcCallService : Service() {
                                 sdpDescription,
                                 recipientTurnUserName,
                                 recipientTurnPassword,
-                                turnServers
+                                turnServers[TurnServerOrigin.WELL_KNOWN]
                             )
                         ) {
                             callParticipant.setPeerState(START_CALL_MESSAGE_SENT)
@@ -1396,7 +1458,8 @@ class WebrtcCallService : Service() {
     private fun callerHandleAnswerCallMessage(
         callParticipant: CallParticipant,
         peerSdpType: String?,
-        gzippedPeerSdpDescription: ByteArray
+        gzippedPeerSdpDescription: ByteArray,
+        supportsIceBatch: Boolean,
     ) {
         executor.execute {
             if (callParticipant.peerState != START_CALL_MESSAGE_SENT && callParticipant.peerState != RINGING) {
@@ -1412,8 +1475,9 @@ class WebrtcCallService : Service() {
                 return@execute
             }
             callParticipant.peerConnectionHolder.setPeerSessionDescription(
-                peerSdpType,
-                peerSdpDescription
+                sessionDescriptionType = peerSdpType,
+                sessionDescription = peerSdpDescription,
+                supportsIceBatch = supportsIceBatch
             )
             callParticipant.setPeerState(CONNECTING_TO_PEER)
             if (_state == State.RINGING) {
@@ -1474,7 +1538,7 @@ class WebrtcCallService : Service() {
 
     fun hangUpCall() {
         executor.execute {
-            if (role == Role.NONE) {
+            if (role == NONE) {
                 closeCallActivity()
             }
             hangUpCallInternal(true)
@@ -1483,6 +1547,13 @@ class WebrtcCallService : Service() {
 
     private fun hangUpCallInternal(notifyPeers: Boolean) {
         if (role != NONE) {
+            if (_state == CALL_IN_PROGRESS) {
+                for (callParticipant in callParticipants.values) {
+                    callParticipant.peerConnectionHolder.setAudioEnabled(false)
+                }
+                microphoneMuted = true
+                microphoneMutedLiveData.postValue(true)
+            }
             if (notifyPeers) {
                 // notify peer that you hung up (it's not just a connection loss)
                 sendHangedUpMessage(callParticipants.values)
@@ -1506,6 +1577,10 @@ class WebrtcCallService : Service() {
             role = NONE
             callIdentifier = null
             bytesOwnedIdentity = null
+            // remove received turn servers
+            turnServers.remove(TurnServerOrigin.FROM_CALLER)
+            // also clear well-known as it depends on the server of the profile
+            turnServers.remove(TurnServerOrigin.WELL_KNOWN)
             cameraEnabled = false
             try {
                 localVideoTrack?.setEnabled(false)
@@ -1541,10 +1616,12 @@ class WebrtcCallService : Service() {
         peerSdpType: String?,
         gzippedPeerSdpDescription: ByteArray,
         turnName: String?,
-        turnPass: String?,  /* @Nullable List<String> turnServers,*/
+        turnPass: String?,
+        turnServers: List<String>?,
         participantCount: Int,
         bytesGroupOwnerAndUidOrIdentifier: ByteArray?,
-        gatheringPolicy: GatheringPolicy
+        gatheringPolicy: GatheringPolicy,
+        supportsIceBatch: Boolean,
     ) {
         executor.execute {
             if (callIdentifier == this.callIdentifier && !bytesOwnedIdentity.contentEquals(this.bytesOwnedIdentity)) {
@@ -1604,11 +1681,13 @@ class WebrtcCallService : Service() {
                     bytesGroupOwnerAndUidOrIdentifier = bytesGroupOwnerAndUidOrIdentifier,
                     turnUserName = turnName,
                     turnPassword = turnPass,
+                    callerTurnServers = turnServers,
                     participantCount = participantCount,
                     gatheringPolicy = gatheringPolicy,
                     discussionType = discussion?.discussionType ?: TYPE_CONTACT,
                     sessionDescriptionType = peerSdpType,
                     sessionDescription = peerSdpDescription,
+                    supportsIceBatch = supportsIceBatch,
                     discussionCustomization = getDiscussionCustomization(discussion)
                 )
 
@@ -1711,16 +1790,24 @@ class WebrtcCallService : Service() {
                 this@WebrtcCallService.discussionType = call.discussionType
                 this@WebrtcCallService.turnUserName = call.turnUserName
                 this@WebrtcCallService.turnPassword = call.turnPassword
+                call.callerTurnServers?.let {
+                    this@WebrtcCallService.turnServers[TurnServerOrigin.FROM_CALLER] = it
+                }
+                AppSingleton.getEngine().getWellKnownTurnServers(bytesOwnedIdentity)?.let {
+                    this@WebrtcCallService.turnServers[TurnServerOrigin.WELL_KNOWN] = it
+                }
 
                 callerCallParticipant?.let {
                     it.peerConnectionHolder.setGatheringPolicy(call.gatheringPolicy)
                     it.peerConnectionHolder.setPeerSessionDescription(
                         call.sessionDescriptionType,
-                        call.sessionDescription
+                        call.sessionDescription,
+                        call.supportsIceBatch
                     )
                     it.peerConnectionHolder.setTurnCredentials(
                         call.turnUserName,
-                        call.turnPassword /*, turnServers*/
+                        call.turnPassword,
+                        pickTurnServers()
                     )
                 }
 
@@ -1909,7 +1996,8 @@ class WebrtcCallService : Service() {
                 if (_state != INITIAL && _state != WAITING_FOR_AUDIO_PERMISSION && _state != GETTING_TURN_CREDENTIALS) { // only create the peer if the turn credentials were already retrieved
                     callParticipant.peerConnectionHolder.setTurnCredentials(
                         turnUserName,
-                        turnPassword /*, turnServers*/
+                        turnPassword,
+                        pickTurnServers()
                     )
 
                     if (!callParticipant.peerConnectionHolder.createPeerConnection()) {
@@ -1979,7 +2067,8 @@ class WebrtcCallService : Service() {
         callParticipant: CallParticipant,
         sessionDescriptionType: String,
         gzippedPeerSdpDescription: ByteArray,
-        gatheringPolicy: GatheringPolicy
+        gatheringPolicy: GatheringPolicy,
+        supportsIceBatch: Boolean,
     ) {
         executor.execute {
             if (callParticipant.role != RECIPIENT || shouldISendTheOfferToCallParticipant(
@@ -1998,11 +2087,13 @@ class WebrtcCallService : Service() {
             callParticipant.peerConnectionHolder.setGatheringPolicy(gatheringPolicy)
             callParticipant.peerConnectionHolder.setPeerSessionDescription(
                 sessionDescriptionType,
-                peerSdpDescription
+                peerSdpDescription,
+                supportsIceBatch
             )
             callParticipant.peerConnectionHolder.setTurnCredentials(
                 turnUserName,
-                turnPassword /*, turnServers*/
+                turnPassword,
+                pickTurnServers()
             )
 
             if (!callParticipant.peerConnectionHolder.createPeerConnection()) {
@@ -2014,7 +2105,8 @@ class WebrtcCallService : Service() {
     private fun handleNewParticipantAnswerMessage(
         callParticipant: CallParticipant,
         sessionDescriptionType: String,
-        gzippedPeerSdpDescription: ByteArray
+        gzippedPeerSdpDescription: ByteArray,
+        supportsIceBatch: Boolean,
     ) {
         executor.execute {
             if (callParticipant.role != RECIPIENT || !shouldISendTheOfferToCallParticipant(
@@ -2032,7 +2124,8 @@ class WebrtcCallService : Service() {
             }
             callParticipant.peerConnectionHolder.setPeerSessionDescription(
                 sessionDescriptionType,
-                peerSdpDescription
+                peerSdpDescription,
+                supportsIceBatch
             )
             callParticipant.setPeerState(CONNECTING_TO_PEER)
         }
@@ -2048,23 +2141,21 @@ class WebrtcCallService : Service() {
         }
     }
 
-    private fun handleNewIceCandidateMessage(
+    private fun handleNewIceCandidateMessages(
         callIdentifier: UUID,
         bytesOwnedIdentity: ByteArray,
         bytesContactIdentity: ByteArray,
-        jsonIceCandidate: JsonIceCandidate
+        jsonIceCandidates: List<JsonIceCandidate>
     ) {
         executor.execute {
-            Logger.d(
-                """☎ received new ICE candidate for call ${Logger.getUuidString(callIdentifier)}
-${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
-            )
+            Logger.d("☎ received ${jsonIceCandidates.size} new ICE candidate(s) for call ${Logger.getUuidString(callIdentifier)}:")
+            jsonIceCandidates.forEach { jsonIceCandidate -> Logger.d("☎    ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}") }
             if (bytesOwnedIdentity.contentEquals(this.bytesOwnedIdentity) && callIdentifier == this.callIdentifier) {
                 // we are in the right call, handle the message directly (if the participant is in the call)
                 val callParticipant = getCallParticipant(bytesContactIdentity)
                 if (callParticipant != null) {
                     Logger.d("☎ passing candidate to peerConnectionHolder")
-                    callParticipant.peerConnectionHolder.addIceCandidates(listOf(jsonIceCandidate))
+                    callParticipant.peerConnectionHolder.addIceCandidates(jsonIceCandidates)
                     return@execute
                 }
             }
@@ -2074,7 +2165,7 @@ ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
                 uncalledReceivedIceCandidates.getOrPut(callIdentifier) { mutableMapOf() }
             val candidates =
                 callerCandidatesMap.getOrPut(BytesKey(bytesContactIdentity)) { mutableSetOf() }
-            candidates.add(jsonIceCandidate)
+            candidates.addAll(jsonIceCandidates)
         }
     }
 
@@ -2169,7 +2260,8 @@ ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
                         Logger.d("☎ I am in charge of sending the offer to a new participant")
                         callParticipant.peerConnectionHolder.setTurnCredentials(
                             turnUserName,
-                            turnPassword /*, turnServers*/
+                            turnPassword,
+                            pickTurnServers()
                         )
 
                         if (!callParticipant.peerConnectionHolder.createPeerConnection()) {
@@ -2192,7 +2284,8 @@ ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
                                     callParticipant,
                                     newParticipantOfferMessageAndDeviceUid.first.sessionDescriptionType,
                                     newParticipantOfferMessageAndDeviceUid.first.gzippedSessionDescription,
-                                    newParticipantOfferMessageAndDeviceUid.first.gatheringPolicy
+                                    newParticipantOfferMessageAndDeviceUid.first.gatheringPolicy,
+                                    newParticipantOfferMessageAndDeviceUid.first.batchIceSupported
                                 )
                             }
                     }
@@ -2216,12 +2309,20 @@ ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
     // endregion
 
     // region Setters and Getters
+    fun getCurrentIncomingCallLiveData(): LiveData<Call?> {
+        return currentIncomingCallLiveData
+    }
+
     private fun setState(state: State) {
         if (this._state == FAILED) {
             // we cannot come back from FAILED state
             return
         }
         this._state = state
+        // update call notification
+        CallNotificationManager.currentCallData?.apply {
+            CallNotificationManager.currentCallData = copy(subtitle = state.humanReadable(failReason))
+        }
         stateLiveData.postValue(state)
 
         // handle special state change hooks
@@ -2244,6 +2345,32 @@ ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
 
     val isCaller: Boolean
         get() = role == CALLER
+
+    fun pickTurnServers(): List<String> {
+        val ownServer = AppSingleton.getEngine().getServerOfIdentity(bytesOwnedIdentity)
+        if (isCaller) {
+            if (ownServer == BuildConfig.SERVER_NAME) {
+                Logger.d("Picking regional or well known TURN server")
+                return turnServers[TurnServerOrigin.REGIONAL_USER_SETTING] ?: turnServers[TurnServerOrigin.WELL_KNOWN] ?: turnServers[TurnServerOrigin.FALLBACK]!!
+            } else {
+                Logger.d("Picking well known TURN server")
+                return turnServers[TurnServerOrigin.WELL_KNOWN] ?: turnServers[TurnServerOrigin.FALLBACK]!!
+            }
+        } else {
+            if (getCallerBytesIdentity()?.let { AppSingleton.getEngine().getServerOfIdentity(it) } == ownServer) {
+                if (ownServer == BuildConfig.SERVER_NAME) {
+                    Logger.d("Picking regional or well known TURN server")
+                    return turnServers[TurnServerOrigin.REGIONAL_USER_SETTING] ?: turnServers[TurnServerOrigin.WELL_KNOWN] ?: turnServers[TurnServerOrigin.FALLBACK]!!
+                } else {
+                    Logger.d("Picking well known TURN server")
+                    return turnServers[TurnServerOrigin.WELL_KNOWN] ?: turnServers[TurnServerOrigin.FALLBACK]!!
+                }
+            } else {
+                Logger.d("Picking caller TURN server")
+                return turnServers[TurnServerOrigin.FROM_CALLER] ?: turnServers[TurnServerOrigin.FALLBACK]!!
+            }
+        }
+    }
 
     var speakingWhileMuted by mutableStateOf(false)
     fun toggleMuteMicrophone() {
@@ -2523,6 +2650,10 @@ ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
         return callParticipants[index]
     }
 
+    fun getCallerBytesIdentity(): ByteArray? {
+        return callParticipants.values.firstOrNull{ it.role == CALLER }?.bytesContactIdentity
+    }
+
     private val callerCallParticipant: CallParticipant?
         get() {
             for (callParticipant in callParticipants.values) {
@@ -2589,9 +2720,9 @@ ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
             }
         }
         if (allTimeout && timeoutCount > 0) {
-            if (_state != State.CALL_ENDED && _state != State.FAILED) {
+            if (_state != CALL_ENDED && _state != FAILED) {
                 failReason = FailReason.INITIALIZATION_TIMEOUT
-                setState(State.FAILED)
+                setState(FAILED)
             }
         }
         if (allPeersAreInFinalState) {
@@ -3080,7 +3211,7 @@ ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
                 setupInitialView.forEach { it.invoke(iv) }
             },
             title = notificationName ?: "",
-            subtitle = getString(string.call_notification_ongoing_call),
+            subtitle = _state.humanReadable(failReason),
             fullScreenIntent = callActivityIntent,
             rejectCall = { startService(endCallIntent) }
         )
@@ -3537,6 +3668,7 @@ ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
                             callCredentialsCacheSharedPreference.edit {
                                 clear()
                                 putLong(PREF_KEY_TIMESTAMP, System.currentTimeMillis())
+                                putString(PREF_KEY_SERVER, AppSingleton.getEngine().getServerOfIdentity(bytesOwnedIdentity))
                                 putString(PREF_KEY_USERNAME1, callerUsername)
                                 putString(PREF_KEY_PASSWORD1, callerPassword)
                                 putString(PREF_KEY_USERNAME2, recipientUsername)
@@ -3720,24 +3852,29 @@ ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
 
     fun sendAddIceCandidateMessage(
         callParticipant: CallParticipant,
-        jsonIceCandidate: JsonIceCandidate
+        jsonIceCandidates: List<JsonIceCandidate>
     ) {
         executor.execute {
             if (!callParticipantIndexes.containsKey(BytesKey(callParticipant.bytesContactIdentity))) {
                 return@execute
             }
             try {
-                val jsonNewIceCandidateMessage = JsonNewIceCandidateMessage(
-                    jsonIceCandidate.sdp,
-                    jsonIceCandidate.sdpMLineIndex,
-                    jsonIceCandidate.sdpMid
-                )
-                callIdentifier?.let {
-                    Logger.d(
-                        """☎ sending peer an ice candidate for call ${Logger.getUuidString(it)}
-${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
+                val jsonNewIceCandidateMessage = if (jsonIceCandidates.size == 1) {
+                    JsonNewIceCandidateMessage(
+                        jsonIceCandidates.first().sdp,
+                        jsonIceCandidates.first().sdpMLineIndex,
+                        jsonIceCandidates.first().sdpMid
                     )
+                } else {
+                    JsonBatchIceCandidatesMessage(jsonIceCandidates)
                 }
+                callIdentifier?.let {
+                    Logger.d("☎ sending peer ${jsonIceCandidates.size} ice candidate(s) for call ${Logger.getUuidString(it)}:")
+                    jsonIceCandidates.forEach { jsonIceCandidate ->
+                        Logger.d("☎    ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}")
+                    }
+                }
+
                 if (callParticipant.contact != null && callParticipant.contact.hasChannelOrPreKey()) {
                     postMessage(listOf(callParticipant), jsonNewIceCandidateMessage)
                 } else {
@@ -4078,9 +4215,7 @@ ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
 
     // endregion
 
-    // region JsonDataChannelMessages
-    private inner class DataChannelListener(private val callParticipant: CallParticipant) :
-        DataChannelMessageListener {
+    private inner class DataChannelListener(private val callParticipant: CallParticipant) : DataChannelMessageListener {
         override fun onConnect() {
             executor.execute {
                 sendDataChannelMessage(callParticipant, JsonMutedInnerMessage(microphoneMuted))
@@ -4229,8 +4364,6 @@ ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
             }
         }
     }
-
-    // endregion
 
     inner class CallParticipant {
         internal val role: Role
@@ -4426,6 +4559,7 @@ ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
         }
     }
 
+    @Suppress("ArrayInDataClass")
     data class ParticipantBytesAndRole(val bytesContactIdentity: ByteArray, val role: Role)
 
     fun getAudioLevel(bytesIdentity: ByteArray?): Double? {
@@ -4514,6 +4648,7 @@ ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
         const val ACTION_REJECT_CALL = "action_reject_call"
         const val ACTION_HANG_UP = "action_hang_up"
         const val ACTION_MESSAGE = "action_message"
+
         const val BYTES_OWNED_IDENTITY_INTENT_EXTRA = "bytes_owned_identity"
         const val BYTES_CONTACT_IDENTITY_INTENT_EXTRA = "bytes_contact_identity"
         const val BYTES_CONTACT_DEVICE_UID_INTENT_EXTRA = "bytes_contact_device_uid"
@@ -4524,15 +4659,20 @@ ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
         const val CALL_IDENTIFIER_INTENT_EXTRA = "call_identifier"
         const val MESSAGE_TYPE_INTENT_EXTRA = "message_type"
         const val SERIALIZED_MESSAGE_PAYLOAD_INTENT_EXTRA = "serialized_message_payload"
-        private const val CREDENTIALS_TTL: Long = 43_200_000
+
+        private const val CREDENTIALS_TTL: Long = 0// 43_200_000 // 12 hours
+
         private const val PREF_KEY_TIMESTAMP = "timestamp"
+        private const val PREF_KEY_SERVER = "server" // the server of the ownedIdentity that got these credentials
         private const val PREF_KEY_USERNAME1 = "username1"
         private const val PREF_KEY_PASSWORD1 = "password1"
         private const val PREF_KEY_USERNAME2 = "username2"
         private const val PREF_KEY_PASSWORD2 = "password2"
         private const val PREF_KEY_TURN_SERVERS = "turn_servers"
+
         const val SERVICE_ID = 9001
         const val NOT_FOREGROUND_NOTIFICATION_ID = 9086
+
         const val START_CALL_MESSAGE_TYPE = 0
         const val ANSWER_CALL_MESSAGE_TYPE = 1
         const val REJECT_CALL_MESSAGE_TYPE = 2
@@ -4546,6 +4686,8 @@ ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
         const val NEW_ICE_CANDIDATE_MESSAGE_TYPE = 10
         const val REMOVE_ICE_CANDIDATES_MESSAGE_TYPE = 11
         const val ANSWERED_OR_REJECTED_ON_OTHER_DEVICE_MESSAGE_TYPE = 12
+        const val BATCH_ICE_CANDIDATES_MESSAGE_TYPE = 13
+
         const val MUTED_DATA_MESSAGE_TYPE = 0
         const val UPDATE_PARTICIPANTS_DATA_MESSAGE_TYPE = 1
         const val RELAY_DATA_MESSAGE_TYPE = 2
@@ -4554,6 +4696,7 @@ ${jsonIceCandidate.sdpMLineIndex} -> ${jsonIceCandidate.sdp}"""
         const val VIDEO_SUPPORTED_DATA_MESSAGE_TYPE = 5
         const val VIDEO_SHARING_DATA_MESSAGE_TYPE = 6
         const val SCREEN_SHARING_DATA_MESSAGE_TYPE = 7
+
         const val CALL_TIMEOUT_MILLIS: Long = 30_000
         const val RINGING_TIMEOUT_MILLIS: Long = 50_000
         const val PEER_CALL_ENDED_WAIT_MILLIS: Long = 3_000

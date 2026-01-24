@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">את/ה ו-[PLACEHOLDER_1] אחרים חולקים את המיקום שלכם</item>
 		<item quantity="other" state="needs_review" hash="1789697147">את/ה ו-%1$d אחרים חולקים את המיקום שלכם</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d חודש בחינם</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d חודשים בחינם</item>
+	</plurals>
 </resources>

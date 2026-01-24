@@ -30,6 +30,7 @@ import io.olvid.messenger.webrtc.WebrtcCallService;
 public final class JsonNewParticipantAnswerMessage extends JsonWebrtcProtocolMessage {
     String sessionDescriptionType;
     byte[] gzippedSessionDescription;
+    public boolean batchIceSupported;
 
     @SuppressWarnings("unused")
     public JsonNewParticipantAnswerMessage() {
@@ -38,6 +39,7 @@ public final class JsonNewParticipantAnswerMessage extends JsonWebrtcProtocolMes
     public JsonNewParticipantAnswerMessage(String sessionDescriptionType, byte[] gzippedSessionDescription) {
         this.sessionDescriptionType = sessionDescriptionType;
         this.gzippedSessionDescription = gzippedSessionDescription;
+        this.batchIceSupported = true;
     }
 
     @JsonProperty("sdt")
@@ -58,6 +60,16 @@ public final class JsonNewParticipantAnswerMessage extends JsonWebrtcProtocolMes
     @JsonProperty("sd")
     public void setGzippedSessionDescription(byte[] gzippedSessionDescription) {
         this.gzippedSessionDescription = gzippedSessionDescription;
+    }
+
+    @JsonProperty("bi")
+    public boolean isBatchIceSupported() {
+        return batchIceSupported;
+    }
+
+    @JsonProperty("bi")
+    public void setBatchIceSupported(boolean batchIceSupported) {
+        this.batchIceSupported = batchIceSupported;
     }
 
     @Override

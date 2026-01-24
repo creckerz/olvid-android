@@ -62,13 +62,13 @@ public class SendManager implements NetworkSendDelegate, SendManagerSessionFacto
     private NotificationPostingDelegate notificationPostingDelegate;
     private IdentityDelegate identityDelegate;
 
-    public SendManager(MetaManager metaManager, SSLSocketFactory sslSocketFactory, String engineBaseDirectory, PRNGService prng) {
+    public SendManager(MetaManager metaManager, SSLSocketFactory sslSocketFactory, String userAgentOverride, String engineBaseDirectory, PRNGService prng) {
         this.engineBaseDirectory = engineBaseDirectory;
-        this.sendMessageCoordinator = new SendMessageCoordinator(this, sslSocketFactory);
-        this.refreshOutboxAttachmentSignedUrlCoordinator = new RefreshOutboxAttachmentSignedUrlCoordinator(this, sslSocketFactory);
-        this.sendAttachmentCoordinator = new SendAttachmentCoordinator(this, sslSocketFactory, this.refreshOutboxAttachmentSignedUrlCoordinator);
-        this.cancelAttachmentUploadCoordinator = new CancelAttachmentUploadCoordinator(this, sslSocketFactory);
-        this.sendReturnReceiptCoordinator = new SendReturnReceiptCoordinator(this, sslSocketFactory, prng);
+        this.sendMessageCoordinator = new SendMessageCoordinator(this, sslSocketFactory, userAgentOverride);
+        this.refreshOutboxAttachmentSignedUrlCoordinator = new RefreshOutboxAttachmentSignedUrlCoordinator(this, sslSocketFactory, userAgentOverride);
+        this.sendAttachmentCoordinator = new SendAttachmentCoordinator(this, sslSocketFactory, userAgentOverride, this.refreshOutboxAttachmentSignedUrlCoordinator);
+        this.cancelAttachmentUploadCoordinator = new CancelAttachmentUploadCoordinator(this, sslSocketFactory, userAgentOverride);
+        this.sendReturnReceiptCoordinator = new SendReturnReceiptCoordinator(this, sslSocketFactory, userAgentOverride, prng);
 
         metaManager.requestDelegate(this, CreateSessionDelegate.class);
         metaManager.requestDelegate(this, NotificationPostingDelegate.class);

@@ -36,4 +36,16 @@
         android:description="@string/restriction_alternate_turn_server_password_description"
         android:restrictionType="string"
         android:defaultValue="" />
+    <restriction
+        android:key="user_agent_override"
+        android:title="@string/restriction_user_agent_override_title"
+        android:description="@string/restriction_user_agent_override_description"
+        android:restrictionType="string"
+        android:defaultValue="" />
+    <restriction
+        android:key="user_agent_override_for_link_previews"
+        android:title="@string/restriction_user_agent_override_for_link_previews_title"
+        android:description="@string/restriction_user_agent_override_for_link_previews_description"
+        android:restrictionType="bool"
+        android:defaultValue="false" />
 </restrictions>

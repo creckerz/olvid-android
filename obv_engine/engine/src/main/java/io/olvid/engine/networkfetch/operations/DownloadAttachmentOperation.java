@@ -65,6 +65,7 @@ public class DownloadAttachmentOperation extends PriorityOperation {
 
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final Identity ownedIdentity;
     private final UID messageUid;
     private final int attachmentNumber;
@@ -72,10 +73,11 @@ public class DownloadAttachmentOperation extends PriorityOperation {
     private final WeakReference<DownloadAttachmentCoordinator> coordinatorWeakReference;
     private long priority; // will be updated as the attachment is downloaded, so cannot be final
 
-    public DownloadAttachmentOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, Identity ownedIdentity, UID messageUid, int attachmentNumber, int priorityCategory, long initialPriority, DownloadAttachmentCoordinator coordinator, Operation.OnFinishCallback onFinishCallback, Operation.OnCancelCallback onCancelCallback) {
+    public DownloadAttachmentOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, Identity ownedIdentity, UID messageUid, int attachmentNumber, int priorityCategory, long initialPriority, DownloadAttachmentCoordinator coordinator, Operation.OnFinishCallback onFinishCallback, Operation.OnCancelCallback onCancelCallback) {
         super(InboxAttachment.computeUniqueUid(ownedIdentity, messageUid, attachmentNumber), onFinishCallback, onCancelCallback);
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.ownedIdentity = ownedIdentity;
         this.messageUid = messageUid;
         this.attachmentNumber = attachmentNumber;
@@ -143,7 +145,7 @@ public class DownloadAttachmentOperation extends PriorityOperation {
                     DownloadAttachmentServerMethodForS3 serverMethod = new DownloadAttachmentServerMethodForS3(
                             attachment.getChunkDownloadPrivateUrls()[attachment.getReceivedChunkCount()]
                     );
-                    serverMethod.setSslSocketFactory(sslSocketFactory);
+                    serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
                     serverMethod.setProgressListener(150, new ServerMethodForS3.ServerMethodForS3ProgressListener() {
                         final HashMap<String, Object> userInfo;
                         {

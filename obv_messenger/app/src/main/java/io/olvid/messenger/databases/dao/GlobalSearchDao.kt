@@ -33,7 +33,7 @@ import io.olvid.messenger.discussion.linkpreview.OpenGraph
 @Dao
 interface GlobalSearchDao {
 
-    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
+//    @SuppressWarnings(RoomWarnings.QUERY_MISMATCH)
     @Query(
         "SELECT m.id, NULL AS fyleId, m." + Message.TIMESTAMP + ", m." + Message.SORT_INDEX + "  FROM " + Message.TABLE_NAME + " AS m " +
                 " JOIN " + Message.FTS_TABLE_NAME + " ON m.id = " + Message.FTS_TABLE_NAME + ".rowid" +

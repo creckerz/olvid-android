@@ -94,7 +94,6 @@ import io.olvid.messenger.customClasses.AccessibilityManager
 import io.olvid.messenger.customClasses.StringUtils
 import io.olvid.messenger.databases.AppDatabase
 import io.olvid.messenger.databases.AppDatabaseOpenCallback
-import io.olvid.messenger.designsystem.components.OlvidCircularProgress
 import io.olvid.messenger.designsystem.components.OlvidTextButton
 import io.olvid.messenger.designsystem.theme.OlvidTypography
 import io.olvid.messenger.firebase.ObvFirebaseMessagingService

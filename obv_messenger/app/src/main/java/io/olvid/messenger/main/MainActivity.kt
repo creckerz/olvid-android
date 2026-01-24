@@ -25,8 +25,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.os.Build.VERSION
-import android.os.Build.VERSION_CODES
+import android.os.Build
 import android.os.Bundle
 import android.text.InputType
 import android.view.GestureDetector
@@ -53,8 +52,10 @@ import androidx.appcompat.widget.Toolbar
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -65,6 +66,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
@@ -93,7 +96,7 @@ import io.olvid.messenger.R
 import io.olvid.messenger.activities.ContactDetailsActivity
 import io.olvid.messenger.activities.ObvLinkActivity
 import io.olvid.messenger.activities.storage_manager.StorageManagerActivity
-import io.olvid.messenger.billing.BillingUtils
+import io.olvid.messenger.billing.SubscriptionRepository
 import io.olvid.messenger.customClasses.ConfigurationPojo
 import io.olvid.messenger.customClasses.InitialView
 import io.olvid.messenger.customClasses.LocationIntegrationSelectorDialog
@@ -146,7 +149,7 @@ class MainActivity : LockableActivity(), OnClickListener, SharedPreferences.OnSh
     private var showLocationSharing: Boolean = false
     private var showPlusButton by mutableStateOf(true)
     private var insets by mutableStateOf(Insets.NONE)
-    
+
     
     @JvmField
     var requestNotificationPermission = registerForActivityResult(
@@ -240,7 +243,20 @@ class MainActivity : LockableActivity(), OnClickListener, SharedPreferences.OnSh
             )
 
             Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .then(
+                        if (Build.VERSION.SDK_INT >= 30) {
+                            Modifier.safeDrawingPadding()
+                        } else {
+                            Modifier.absolutePadding(
+                                top = insets.top.dp / LocalDensity.current.density,
+                                bottom = insets.bottom.dp / LocalDensity.current.density,
+                                left = insets.left.dp / LocalDensity.current.density,
+                                right = insets.right.dp / LocalDensity.current.density,
+                            )
+                        }
+                    ),
                 verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
@@ -263,7 +279,7 @@ class MainActivity : LockableActivity(), OnClickListener, SharedPreferences.OnSh
                             modifier = Modifier
                                 .padding(
                                     top = 8.dp,
-                                    bottom = 48.dp
+                                    bottom = dimensionResource(R.dimen.tab_bar_size) + 12.dp
                                 ),
                             callData = it
                         )
@@ -365,7 +381,7 @@ class MainActivity : LockableActivity(), OnClickListener, SharedPreferences.OnSh
 
         @Suppress("KotlinConstantConditions")
         if (BuildConfig.USE_BILLING_LIB) {
-            BillingUtils.initializeBillingClient(baseContext)
+            SubscriptionRepository.initialize(baseContext)
         }
 
         // observe location sharing
@@ -425,7 +441,7 @@ class MainActivity : LockableActivity(), OnClickListener, SharedPreferences.OnSh
         handleIntent(intent)
 
         // check notifications permissions
-        if (VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(
                     this,
                     Manifest.permission.POST_NOTIFICATIONS
@@ -453,6 +469,9 @@ class MainActivity : LockableActivity(), OnClickListener, SharedPreferences.OnSh
         AndroidNotificationManager.clearNeutralNotification()
         if (intent == null) {
             return
+        }
+        if (intent.action == OLVID_PLUS_ACTION) {
+            tipsViewModel.autoOpenOlvidPlusDialog.value = true
         }
         val bytesOwnedIdentityToSelect: ByteArray?
         val hexBytesOwnedIdentityToSelect = intent.getStringExtra(
@@ -721,7 +740,7 @@ class MainActivity : LockableActivity(), OnClickListener, SharedPreferences.OnSh
             .unregisterOnSharedPreferenceChangeListener(this)
     }
 
-    inner class TabsPagerAdapter internal constructor(
+    class TabsPagerAdapter internal constructor(
         activity: FragmentActivity,
         private vararg val notificationDots: View
     ) : FragmentStateAdapter(
@@ -757,14 +776,14 @@ class MainActivity : LockableActivity(), OnClickListener, SharedPreferences.OnSh
         }
 
         fun showNotificationDot(position: Int) {
-            if (position < 0 || position >= itemCount) {
+            if (position !in 0..<itemCount) {
                 return
             }
             notificationDots[position].visibility = View.VISIBLE
         }
 
         fun hideNotificationDot(position: Int) {
-            if (position < 0 || position >= itemCount) {
+            if (position !in 0..<itemCount) {
                 return
             }
             notificationDots[position].visibility = View.GONE
@@ -1038,6 +1057,7 @@ class MainActivity : LockableActivity(), OnClickListener, SharedPreferences.OnSh
         const val LINK_URI_INTENT_EXTRA = "link_uri"
         const val FORWARD_ACTION = "forward_action"
         const val FORWARD_TO_INTENT_EXTRA = "forward_to"
+        const val OLVID_PLUS_ACTION = "olvid_plus_action"
         const val TAB_TO_SHOW_INTENT_EXTRA = "tab_to_show"
         const val ALREADY_CREATED_BUNDLE_EXTRA = "already_created"
         const val KEYCLOAK_AUTHENTICATION_NEEDED_EXTRA = "keycloak_authentication_needed"

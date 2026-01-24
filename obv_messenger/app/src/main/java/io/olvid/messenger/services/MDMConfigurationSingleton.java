@@ -23,21 +23,7 @@ import android.content.Context;
 import android.content.RestrictionsManager;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import java.util.Objects;
-import java.util.regex.Matcher;
-
-import io.olvid.engine.datatypes.ObvBase64;
-import io.olvid.engine.engine.types.JsonIdentityDetails;
-import io.olvid.engine.engine.types.identities.ObvIdentity;
-import io.olvid.engine.engine.types.identities.ObvKeycloakState;
 import io.olvid.messenger.App;
-import io.olvid.messenger.AppSingleton;
-import io.olvid.messenger.activities.ObvLinkActivity;
-import io.olvid.messenger.customClasses.ConfigurationPojo;
-import io.olvid.messenger.customClasses.StringUtils;
 
 public class MDMConfigurationSingleton {
     private static final String KEYCLOAK_CONFIGURATION_URI = "keycloak_configuration_uri";
@@ -46,6 +32,8 @@ public class MDMConfigurationSingleton {
     private static final String ALTERNATE_TURN_SERVER_URL = "alternate_turn_server_url";
     private static final String ALTERNATE_TURN_SERVER_USERNAME = "alternate_turn_server_username";
     private static final String ALTERNATE_TURN_SERVER_PASSWORD = "alternate_turn_server_password";
+    private static final String USER_AGENT_OVERRIDE = "user_agent_override";
+    private static final String USER_AGENT_OVERRIDE_FOR_LINK_PREVIEWS = "user_agent_override_for_link_previews";
 
 
     private static MDMConfigurationSingleton INSTANCE = null;
@@ -56,6 +44,8 @@ public class MDMConfigurationSingleton {
     private final String alternateTurnServerUrl;
     private final String alternateTurnServerUsername;
     private final String alternateTurnServerPassword;
+    private final String userAgentOverride;
+    private final boolean userAgentOverrideForLinkPreviews;
 
     // parse all restrictions once at initialisation
     public MDMConfigurationSingleton() {
@@ -90,6 +80,13 @@ public class MDMConfigurationSingleton {
                 alternateTurnServerUsername = null;
                 alternateTurnServerPassword = null;
             }
+            if (restrictions.containsKey(USER_AGENT_OVERRIDE)) {
+                userAgentOverride = restrictions.getString(USER_AGENT_OVERRIDE);
+                userAgentOverrideForLinkPreviews = restrictions.containsKey(USER_AGENT_OVERRIDE_FOR_LINK_PREVIEWS) && restrictions.getBoolean(USER_AGENT_OVERRIDE_FOR_LINK_PREVIEWS, false);
+            } else {
+                userAgentOverride = null;
+                userAgentOverrideForLinkPreviews = false;
+            }
         } else {
             keycloakConfigurationUri = null;
             disableNewVersionNotification = false;
@@ -97,6 +94,8 @@ public class MDMConfigurationSingleton {
             alternateTurnServerUrl = null;
             alternateTurnServerUsername = null;
             alternateTurnServerPassword = null;
+            userAgentOverride = null;
+            userAgentOverrideForLinkPreviews = false;
         }
     }
 
@@ -142,52 +141,60 @@ public class MDMConfigurationSingleton {
         return getInstance().alternateTurnServerPassword;
     }
 
-    private String replaceWebDavUriVariablesFromKeycloakProfile(String uri, String keycloakConfigurationUri) {
-        try {
-            Matcher matcher = ObvLinkActivity.CONFIGURATION_PATTERN.matcher(keycloakConfigurationUri);
-            if (matcher.find()) {
-                ConfigurationPojo configurationPojo = AppSingleton.getJsonObjectMapper().readValue(ObvBase64.decode(matcher.group(2)), ConfigurationPojo.class);
-                if (configurationPojo.keycloak != null) {
-                    JsonIdentityDetails details = null;
-
-                    ObvIdentity[] ownedIdentities = AppSingleton.getEngine().getOwnedIdentities();
-                    for (ObvIdentity ownedIdentity : ownedIdentities) {
-                        if (ownedIdentity.isKeycloakManaged() && ownedIdentity.isActive()) {
-                            ObvKeycloakState keycloakState = AppSingleton.getEngine().getOwnedIdentityKeycloakState(ownedIdentity.getBytesIdentity());
-                            if (keycloakState != null && Objects.equals(keycloakState.keycloakServer, configurationPojo.keycloak.getServer())) {
-                                if (details == null) {
-                                    details = ownedIdentity.getIdentityDetails();
-                                } else {
-                                    throw new Exception("Multiple identities managed by Keycloak");
-                                }
-                            }
-                        }
-                    }
-
-                    if (details != null) {
-                        String first_name = unAccentAndClean(details.getFirstName());
-                        String last_name = unAccentAndClean(details.getLastName());
-                        String position = unAccentAndClean(details.getPosition());
-                        String company = unAccentAndClean(details.getCompany());
-
-                        return uri.replace("{{first_name}}", first_name).replace("{{last_name}}", last_name).replace("{{position}}", position).replace("{{company}}", company);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (uri.contains("{{first_name}}") || uri.contains("{{last_name}}") || uri.contains("{{position}}") || uri.contains("{{company}}")) {
-            return null;
-        }
-        return uri;
+    public static String getUserAgentOverride() {
+        return getInstance().userAgentOverride;
     }
 
-    @NonNull
-    private String unAccentAndClean(@Nullable String s) {
-        if (s == null) {
-            return "";
-        }
-        return StringUtils.unAccent(s).toLowerCase().trim().replaceAll("[^a-z]", "_");
+    public static boolean overrideUserAgentForLinkPreviews() {
+        return getInstance().userAgentOverrideForLinkPreviews;
     }
+
+//    private String replaceWebDavUriVariablesFromKeycloakProfile(String uri, String keycloakConfigurationUri) {
+//        try {
+//            Matcher matcher = ObvLinkActivity.CONFIGURATION_PATTERN.matcher(keycloakConfigurationUri);
+//            if (matcher.find()) {
+//                ConfigurationPojo configurationPojo = AppSingleton.getJsonObjectMapper().readValue(ObvBase64.decode(matcher.group(2)), ConfigurationPojo.class);
+//                if (configurationPojo.keycloak != null) {
+//                    JsonIdentityDetails details = null;
+//
+//                    ObvIdentity[] ownedIdentities = AppSingleton.getEngine().getOwnedIdentities();
+//                    for (ObvIdentity ownedIdentity : ownedIdentities) {
+//                        if (ownedIdentity.isKeycloakManaged() && ownedIdentity.isActive()) {
+//                            ObvKeycloakState keycloakState = AppSingleton.getEngine().getOwnedIdentityKeycloakState(ownedIdentity.getBytesIdentity());
+//                            if (keycloakState != null && Objects.equals(keycloakState.keycloakServer, configurationPojo.keycloak.getServer())) {
+//                                if (details == null) {
+//                                    details = ownedIdentity.getIdentityDetails();
+//                                } else {
+//                                    throw new Exception("Multiple identities managed by Keycloak");
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                    if (details != null) {
+//                        String first_name = unAccentAndClean(details.getFirstName());
+//                        String last_name = unAccentAndClean(details.getLastName());
+//                        String position = unAccentAndClean(details.getPosition());
+//                        String company = unAccentAndClean(details.getCompany());
+//
+//                        return uri.replace("{{first_name}}", first_name).replace("{{last_name}}", last_name).replace("{{position}}", position).replace("{{company}}", company);
+//                    }
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        if (uri.contains("{{first_name}}") || uri.contains("{{last_name}}") || uri.contains("{{position}}") || uri.contains("{{company}}")) {
+//            return null;
+//        }
+//        return uri;
+//    }
+//
+//    @NonNull
+//    private String unAccentAndClean(@Nullable String s) {
+//        if (s == null) {
+//            return "";
+//        }
+//        return StringUtils.unAccent(s).toLowerCase().trim().replaceAll("[^a-z]", "_");
+//    }
 }

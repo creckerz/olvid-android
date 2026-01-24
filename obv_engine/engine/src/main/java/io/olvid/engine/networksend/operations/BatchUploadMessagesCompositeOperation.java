@@ -44,15 +44,17 @@ public class BatchUploadMessagesCompositeOperation extends Operation {
 
     private final SendManagerSessionFactory sendManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final String server;
     private final SendMessageCoordinator.MessageBatchProvider messageBatchProvider;
     private IdentityAndUid[] messageIdentitiesAndUids;
     private Operation[] suboperations;
 
-    public BatchUploadMessagesCompositeOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, String server, boolean userContentMessages, SendMessageCoordinator.MessageBatchProvider messageBatchProvider, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
+    public BatchUploadMessagesCompositeOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, String server, boolean userContentMessages, SendMessageCoordinator.MessageBatchProvider messageBatchProvider, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
         super(StringAndBoolean.computeUniqueUid(server, userContentMessages), onFinishCallback, onCancelCallback);
         this.sendManagerSessionFactory = sendManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.server = server;
         this.messageBatchProvider = messageBatchProvider;
         this.messageIdentitiesAndUids = null;
@@ -99,7 +101,7 @@ public class BatchUploadMessagesCompositeOperation extends Operation {
             } else {
                 suboperations = new Operation[messageIdentitiesAndUids.length + 1];
 
-                suboperations[0] = new BatchUploadMessagesOperation(sendManagerSessionFactory, sslSocketFactory, server, messageIdentitiesAndUids);
+                suboperations[0] = new BatchUploadMessagesOperation(sendManagerSessionFactory, sslSocketFactory, userAgentOverride, server, messageIdentitiesAndUids);
                 for (int i = 0; i < messageIdentitiesAndUids.length; i++) {
                     suboperations[i + 1] = new TryToDeleteMessageAndAttachmentsOperation(sendManagerSessionFactory, messageIdentitiesAndUids[i].identity, messageIdentitiesAndUids[i].uid);
                     suboperations[i + 1].addDependency(suboperations[0]);

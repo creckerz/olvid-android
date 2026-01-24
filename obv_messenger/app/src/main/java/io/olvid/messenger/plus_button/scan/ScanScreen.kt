@@ -140,11 +140,13 @@ fun ScanScreen(
 ) {
     val context = LocalContext.current
     val currentUiState by plusButtonViewModel.scanUiState.collectAsState()
-    var isScanOnly by remember { mutableStateOf(scanOnly) }
+    var isScanOnly by rememberSaveable { mutableStateOf(scanOnly) }
 
     DisposableEffect(Unit) {
         onDispose {
-            plusButtonViewModel.resetScanState()
+            if (!activity.isChangingConfigurations) {
+                plusButtonViewModel.resetScanState()
+            }
         }
     }
 
@@ -348,8 +350,8 @@ fun BottomSheetContent(
     onCancel: () -> Unit,
     plusButtonViewModel: PlusButtonViewModel,
 ) {
-    var showScanAlternative by remember { mutableStateOf(false) }
-    var showDirectInviteButton by remember { mutableStateOf(false) }
+    var showScanAlternative by rememberSaveable { mutableStateOf(false) }
+    var showDirectInviteButton by rememberSaveable { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         delay(scanAlternativeDelay)
         showScanAlternative = true
@@ -540,7 +542,7 @@ fun BottomSheetContent(
                                 }
                             }
 
-                            var showInvitationDialog by remember { mutableStateOf(false) }
+                            var showInvitationDialog by rememberSaveable { mutableStateOf(false) }
                             (currentUiState as? ScanUiState.InvitationScanned)?.let { invitationScanned ->
                                 if (showInvitationDialog) {
                                     AlertDialog(

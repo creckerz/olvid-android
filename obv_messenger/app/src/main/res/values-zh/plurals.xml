@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">您和另一个人正在共享位置</item>
 		<item quantity="other" state="needs_review" hash="1789697147">您和%1$d人正在共享位置</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d个月免费</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d个月免费</item>
+	</plurals>
 </resources>

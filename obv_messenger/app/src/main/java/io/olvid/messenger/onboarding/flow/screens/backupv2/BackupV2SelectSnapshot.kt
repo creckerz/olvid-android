@@ -74,8 +74,8 @@ import io.olvid.messenger.R
 import io.olvid.messenger.customClasses.ProfileBackupSnapshot
 import io.olvid.messenger.customClasses.StringUtils
 import io.olvid.messenger.customClasses.formatMarkdown
+import io.olvid.messenger.designsystem.constantSp
 import io.olvid.messenger.designsystem.theme.OlvidTypography
-import io.olvid.messenger.discussion.message.attachments.constantSp
 import io.olvid.messenger.onboarding.flow.BackupSnapshotsFetchState
 import io.olvid.messenger.onboarding.flow.OnboardingRoutes
 import io.olvid.messenger.onboarding.flow.OnboardingScreen

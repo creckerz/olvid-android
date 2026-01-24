@@ -79,8 +79,7 @@ class InvitationListViewModel : ViewModel() {
     fun initialViewSetup(initialView: InitialView, invitation: Invitation) {
         val dialog = invitation.associatedDialog
         initialView.reset()
-        val categoryId = dialog.category.id
-        when (categoryId) {
+        when (val categoryId = dialog.category.id) {
             Category.ACCEPT_GROUP_INVITE_DIALOG_CATEGORY -> {
                 initialView.setGroup(dialog.category.bytesGroupOwnerAndUid)
             }

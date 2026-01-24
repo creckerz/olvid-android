@@ -37,7 +37,6 @@ import androidx.core.view.OnReceiveContentListener;
 import androidx.core.view.ViewCompat;
 
 import io.olvid.messenger.App;
-import io.olvid.messenger.R;
 import io.olvid.messenger.discussion.mention.MentionUrlSpan;
 
 
@@ -47,17 +46,23 @@ public class DiscussionInputEditText extends AppCompatEditText {
 
     public DiscussionInputEditText(Context context) {
         super(context);
-        setBackgroundResource(R.drawable.background_discussion_edit_text);
+        int vPadding = (int) (6 * context.getResources().getDisplayMetrics().density);
+        setPadding(getPaddingLeft(), vPadding, getPaddingRight(), vPadding);
+        setBackgroundResource(0);
     }
 
     public DiscussionInputEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setBackgroundResource(R.drawable.background_discussion_edit_text);
+        int vPadding = (int) (6 * context.getResources().getDisplayMetrics().density);
+        setPadding(getPaddingLeft(), vPadding, getPaddingRight(), vPadding);
+        setBackgroundResource(0);
     }
 
     public DiscussionInputEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setBackgroundResource(R.drawable.background_discussion_edit_text);
+        int vPadding = (int) (6 * context.getResources().getDisplayMetrics().density);
+        setPadding(getPaddingLeft(), vPadding, getPaddingRight(), vPadding);
+        setBackgroundResource(0);
     }
 
 

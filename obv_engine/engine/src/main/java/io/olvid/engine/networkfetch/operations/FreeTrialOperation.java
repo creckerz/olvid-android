@@ -40,13 +40,15 @@ import io.olvid.engine.networkfetch.datatypes.FetchManagerSessionFactory;
 public class FreeTrialOperation extends Operation {
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final Identity ownedIdentity;
     private final boolean retrieveApiKey;
 
-    public FreeTrialOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, Identity ownedIdentity, boolean retrieveApiKey) {
+    public FreeTrialOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, Identity ownedIdentity, boolean retrieveApiKey) {
         super(ownedIdentity.computeUniqueUid(), null, null);
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.ownedIdentity = ownedIdentity;
         this.retrieveApiKey = retrieveApiKey;
     }
@@ -68,7 +70,7 @@ public class FreeTrialOperation extends Operation {
                             serverSessionToken,
                             retrieveApiKey
                     );
-                    serverMethod.setSslSocketFactory(sslSocketFactory);
+                    serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
 
                     byte returnStatus = serverMethod.execute(fetchManagerSession.identityDelegate.isActiveOwnedIdentity(fetchManagerSession.session, ownedIdentity));
 

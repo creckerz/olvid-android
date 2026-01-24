@@ -76,8 +76,8 @@ import coil.compose.AsyncImage
 import io.olvid.messenger.R
 import io.olvid.messenger.customClasses.InitialView
 import io.olvid.messenger.customClasses.StringUtils
+import io.olvid.messenger.designsystem.scaledDp
 import io.olvid.messenger.designsystem.theme.OlvidTypography
-import io.olvid.messenger.discussion.message.attachments.scaledDp
 import io.olvid.messenger.main.InitialView
 import sh.calvin.reorderable.ReorderableCollectionItemScope
 import sh.calvin.reorderable.ReorderableItem

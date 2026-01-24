@@ -40,13 +40,13 @@ public class UploadMessageCompositeOperation extends Operation {
     private final UID messageUid;
     private final Operation[] suboperations;
 
-    public UploadMessageCompositeOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, Identity ownedIdentity, UID messageUid, Operation.OnFinishCallback onFinishCallback, Operation.OnCancelCallback onCancelCallback) {
+    public UploadMessageCompositeOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, Identity ownedIdentity, UID messageUid, Operation.OnFinishCallback onFinishCallback, Operation.OnCancelCallback onCancelCallback) {
         super(IdentityAndUid.computeUniqueUid(ownedIdentity, messageUid), onFinishCallback, onCancelCallback);
         this.ownedIdentity = ownedIdentity;
         this.messageUid = messageUid;
         this.suboperations = new Operation[2];
 
-        suboperations[0] = new UploadMessageAndGetUidsOperation(sendManagerSessionFactory, sslSocketFactory, ownedIdentity, messageUid);
+        suboperations[0] = new UploadMessageAndGetUidsOperation(sendManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity, messageUid);
         suboperations[1] = new TryToDeleteMessageAndAttachmentsOperation(sendManagerSessionFactory, ownedIdentity, messageUid);
 
         for (int i = 0; i<suboperations.length-1; i++) {

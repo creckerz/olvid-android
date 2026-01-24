@@ -43,13 +43,15 @@ public class VerifyReceiptOperation extends Operation {
 
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final Identity ownedIdentity;
     private final String storeToken;
 
-    public VerifyReceiptOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, Identity ownedIdentity, String storeToken, OnCancelCallback onCancelCallback) {
+    public VerifyReceiptOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, Identity ownedIdentity, String storeToken, OnCancelCallback onCancelCallback) {
         super(ownedIdentity.computeUniqueUid(), null, onCancelCallback);
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.ownedIdentity = ownedIdentity;
         this.storeToken = storeToken;
     }
@@ -83,7 +85,7 @@ public class VerifyReceiptOperation extends Operation {
                         serverSessionToken,
                         storeToken
                 );
-                serverMethod.setSslSocketFactory(sslSocketFactory);
+                serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
 
                 byte returnStatus = serverMethod.execute(fetchManagerSession.identityDelegate.isActiveOwnedIdentity(fetchManagerSession.session, ownedIdentity));
 

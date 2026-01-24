@@ -94,9 +94,9 @@ import io.olvid.messenger.databases.entity.OwnedIdentity
 import io.olvid.messenger.designsystem.components.CircleCheckBox
 import io.olvid.messenger.designsystem.components.OlvidActionButton
 import io.olvid.messenger.designsystem.components.SearchBar
+import io.olvid.messenger.designsystem.constantSp
 import io.olvid.messenger.designsystem.plus
 import io.olvid.messenger.designsystem.theme.OlvidTypography
-import io.olvid.messenger.discussion.message.attachments.constantSp
 import io.olvid.messenger.group.GroupV2DetailsViewModel
 import io.olvid.messenger.main.InitialView
 import io.olvid.messenger.main.contacts.ContactListItem
@@ -173,8 +173,8 @@ fun MembersScreenContainer(
                                 modifier = Modifier
                                     .animateItem()
                                     .then(
-                                        if (index == 0)
-                                            Modifier.clip(
+                                        when (index) {
+                                            0 -> Modifier.clip(
                                                 RoundedCornerShape(
                                                     topStart = 16.dp,
                                                     topEnd = 16.dp,
@@ -182,15 +182,14 @@ fun MembersScreenContainer(
                                                     bottomEnd = if (it.isEmpty()) 16.dp else 0.dp,
                                                 )
                                             )
-                                        else if (index == it.size)
-                                            Modifier.clip(
+                                            it.size -> Modifier.clip(
                                                 RoundedCornerShape(
                                                     bottomStart = 16.dp,
                                                     bottomEnd = 16.dp,
                                                 )
                                             )
-                                        else
-                                            Modifier
+                                            else -> Modifier
+                                        }
                                     )
                                     .background(colorResource(R.color.lighterGrey)),
                                 padding = PaddingValues(4.dp),

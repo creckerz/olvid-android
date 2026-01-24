@@ -54,6 +54,7 @@ public class RefreshOutboxAttachmentSignedUrlCoordinator implements Operation.On
 
     private final SendManagerSessionFactory sendManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private NotificationPostingDelegate notificationPostingDelegate;
 
     private final HashMap<Identity, List<IdentityAndUidAndNumber>> awaitingIdentityReactivationOperations;
@@ -64,9 +65,10 @@ public class RefreshOutboxAttachmentSignedUrlCoordinator implements Operation.On
     private final NotificationListener notificationListener;
 
 
-    public RefreshOutboxAttachmentSignedUrlCoordinator(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory) {
+    public RefreshOutboxAttachmentSignedUrlCoordinator(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride) {
         this.sendManagerSessionFactory = sendManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.lastUrlRefreshTimestamps = new HashMap<>();
 
         refreshOutboxAttachmentSignedUrlOperationQueue = new NoDuplicateOperationQueue();
@@ -96,7 +98,7 @@ public class RefreshOutboxAttachmentSignedUrlCoordinator implements Operation.On
         synchronized (lastUrlRefreshTimestamps) {
             lastUrlRefreshTimestamps.put(new IdentityAndUidAndNumber(ownedIdentity, messageUid, attachmentNumber), System.currentTimeMillis());
         }
-        RefreshOutboxAttachmentSignedUrlOperation op = new RefreshOutboxAttachmentSignedUrlOperation(sendManagerSessionFactory, sslSocketFactory, ownedIdentity, messageUid, attachmentNumber, this, this);
+        RefreshOutboxAttachmentSignedUrlOperation op = new RefreshOutboxAttachmentSignedUrlOperation(sendManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity, messageUid, attachmentNumber, this, this);
         refreshOutboxAttachmentSignedUrlOperationQueue.queue(op);
     }
 

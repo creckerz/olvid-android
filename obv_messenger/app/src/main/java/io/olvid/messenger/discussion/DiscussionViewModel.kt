@@ -18,7 +18,16 @@
  */
 package io.olvid.messenger.discussion
 
+import android.content.Context
+import android.os.Handler
+import android.os.Looper
+import androidx.appcompat.app.AlertDialog
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -31,7 +40,10 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.liveData
+import io.olvid.messenger.App
 import io.olvid.messenger.AppSingleton
+import io.olvid.messenger.UnreadCountsSingleton
+import io.olvid.messenger.customClasses.SecureDeleteEverywhereDialogBuilder
 import io.olvid.messenger.databases.AppDatabase
 import io.olvid.messenger.databases.dao.DiscussionDao.DiscussionAndGroupMembersCount
 import io.olvid.messenger.databases.dao.FyleMessageJoinWithStatusDao.FyleAndStatus
@@ -45,6 +57,10 @@ import io.olvid.messenger.databases.entity.Group2
 import io.olvid.messenger.databases.entity.Invitation
 import io.olvid.messenger.databases.entity.Message
 import io.olvid.messenger.databases.entity.OwnedIdentity
+import io.olvid.messenger.databases.tasks.DeleteMessagesTask
+import io.olvid.messenger.databases.tasks.PropagateBookmarkedMessageChangeTask
+import io.olvid.messenger.databases.tasks.SetDraftReplyTask
+import io.olvid.messenger.discussion.DiscussionActivity.ScrollRequest
 import io.olvid.messenger.settings.SettingsActivity
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -52,7 +68,7 @@ import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.math.min
 
-class DiscussionViewModel : ViewModel() {
+class DiscussionViewModel : ViewModel(), DiscussionDelegate {
     private val db: AppDatabase = AppDatabase.getInstance()
 
     // region select for deletion
@@ -61,10 +77,28 @@ class DiscussionViewModel : ViewModel() {
 
     var longClickedFyleAndStatus: FyleAndStatus? = null
 
+    val messageIdsToMarkAsRead: MutableSet<Long> by lazy { HashSet() }
+    val editedMessageIdsToMarkAsSeen: MutableSet<Long> by lazy { HashSet() }
+    var latestServerTimestampOfMessageToMarkAsRead by mutableLongStateOf(0)
+
+    var retainWipedOutboundMessages = false
+    var screenShotBlockedForEphemeral by mutableStateOf(false)
+
+    var markAsReadOnPause by mutableStateOf(true)
+
+    var scrollToMessageRequest by mutableStateOf(ScrollRequest.None)
+    var scrollToFirstUnread by mutableStateOf(true)
+
+
+    var locked by mutableStateOf<Boolean?>(null)
+    var canEdit by mutableStateOf<Boolean?>(null)
+    var fullScreenPhotoUrl by mutableStateOf<String?>(null)
+
     @JvmField
     var messageIdsToForward: List<Long>? = null
     val discussionIdLiveData = MutableLiveData<Long?>()
-    val selectedMessageIds = MutableLiveData<MutableList<Long>>()
+    var selectedMessageIds by mutableStateOf(emptyList<Long>())
+    var selectedMessageInfo by mutableStateOf<Message?>(null)
     private val nonForwardableSelectedMessageIds = HashSet<Long>()
     private val nonBookmarkableSelectedMessageIds = HashSet<Long>()
     private val nonBookmarkedSelectedMessageIds = HashSet<Long>()
@@ -223,7 +257,6 @@ class DiscussionViewModel : ViewModel() {
                 .getCurrentlySharingLocationMessagesInDiscussionLiveData(discussionId)
         }
 
-
     var discussionId: Long?
         get() = discussionIdLiveData.value
         set(discussionId) {
@@ -246,7 +279,7 @@ class DiscussionViewModel : ViewModel() {
             val discussionContactsAndPending =
                 discussionLiveData.switchMap<Discussion, List<Contact>> { discussion: Discussion? ->
                     if (discussion == null || discussion.isLocked) {
-                        return@switchMap MutableLiveData<List<Contact>>(ArrayList<Contact>())
+                        return@switchMap MutableLiveData(ArrayList())
                     }
                     if (discussion.isNormal) {
                         when (discussion.discussionType) {
@@ -373,13 +406,8 @@ class DiscussionViewModel : ViewModel() {
     /////
     // bookmarked == null means the message is not bookmarkable
     fun selectMessageId(messageId: Long, forwardable: Boolean, bookmarked: Boolean?) {
-        val ids: MutableList<Long>
-        if (selectedMessageIds.value == null) {
-            ids = ArrayList()
-        } else {
-            ids = ArrayList(selectedMessageIds.value!!.size)
-            ids.addAll(selectedMessageIds.value!!)
-        }
+        val ids = selectedMessageIds.toMutableList()
+
         if (ids.remove(messageId)) {
             nonForwardableSelectedMessageIds.remove(messageId)
             nonBookmarkedSelectedMessageIds.remove(messageId)
@@ -399,16 +427,16 @@ class DiscussionViewModel : ViewModel() {
             }
             isSelectingForDeletion = true
         }
-        selectedMessageIds.postValue(ids)
+        selectedMessageIds = ids
     }
 
     fun unselectMessageId(messageId: Long) {
-        selectedMessageIds.value?.let {
-            it.remove(messageId)
+        selectedMessageIds.toMutableList().apply {
+            remove(messageId)
             nonForwardableSelectedMessageIds.remove(messageId)
             nonBookmarkableSelectedMessageIds.remove(messageId)
             nonBookmarkedSelectedMessageIds.remove(messageId)
-            selectedMessageIds.postValue(it)
+            selectedMessageIds = this
         }
     }
 
@@ -429,10 +457,210 @@ class DiscussionViewModel : ViewModel() {
         nonForwardableSelectedMessageIds.clear()
         nonBookmarkedSelectedMessageIds.clear()
         nonBookmarkableSelectedMessageIds.clear()
-        selectedMessageIds.postValue(ArrayList())
+        selectedMessageIds = emptyList()
     }
 
     fun setForwardMessageBytesOwnedIdentity(bytesOwnedIdentity: ByteArray) {
         forwardMessageBytesOwnedIdentityLiveData.postValue(bytesOwnedIdentity)
+    }
+
+    fun handleBookmarkMessages(bookmark: Boolean) {
+        App.runThread {
+            for (messageId in selectedMessageIds) {
+                AppDatabase.getInstance().messageDao()
+                    .updateBookmarked(bookmark, messageId)
+                val message = AppDatabase.getInstance().messageDao()[messageId]
+                val bytesOwnedIdentity = AppSingleton.getBytesCurrentIdentity()
+                if (message != null && bytesOwnedIdentity != null) {
+                    PropagateBookmarkedMessageChangeTask(
+                        bytesOwnedIdentity,
+                        message,
+                        bookmark
+                    ).run()
+                }
+            }
+            deselectAll()
+        }
+    }
+
+    fun handleForwardMessages(context: Context) {
+        if (selectedMessageIds.isNotEmpty()) {
+            messageIdsToForward = ArrayList(selectedMessageIds)
+            (context as? FragmentActivity)?.let {
+                Utils.openForwardMessageDialog(
+                    it,
+                    selectedMessageIds
+                ) { deselectAll() }
+            }
+        }
+    }
+
+    fun handleDeleteMessages(context: Context) {
+        val discussion = discussion.value
+        if (discussion != null && selectedMessageIds.isNotEmpty()) {
+            App.runThread {
+                var allMessagesAreOutbound = true
+                var remoteDeletingMakesSense = true
+                for (messageId in selectedMessageIds) {
+                    val message =
+                        AppDatabase.getInstance().messageDao()[messageId]
+                            ?: continue
+                    if (message.wipeStatus != Message.WIPE_STATUS_NONE) {
+                        remoteDeletingMakesSense = false
+                        break
+                    }
+                    if (message.messageType != Message.TYPE_OUTBOUND_MESSAGE) {
+                        allMessagesAreOutbound = false
+                    }
+                    if (message.messageType != Message.TYPE_OUTBOUND_MESSAGE && message.messageType != Message.TYPE_INBOUND_MESSAGE && message.messageType != Message.TYPE_INBOUND_EPHEMERAL_MESSAGE) {
+                        remoteDeletingMakesSense = false
+                        break
+                    }
+                }
+                val offerToRemoteDeleteEverywhere: Boolean
+                if (remoteDeletingMakesSense) {
+                    when (discussion.discussionType) {
+                        Discussion.TYPE_GROUP_V2 -> {
+                            val group2 = AppDatabase.getInstance()
+                                .group2Dao()[discussion.bytesOwnedIdentity, discussion.bytesDiscussionIdentifier]
+                            offerToRemoteDeleteEverywhere = if (group2 != null) {
+                                (AppDatabase.getInstance().group2MemberDao()
+                                    .groupHasMembers(
+                                        discussion.bytesOwnedIdentity,
+                                        discussion.bytesDiscussionIdentifier
+                                    )
+                                        && ((allMessagesAreOutbound && group2.ownPermissionEditOrRemoteDeleteOwnMessages)
+                                        || group2.ownPermissionRemoteDeleteAnything))
+                            } else {
+                                false
+                            }
+                        }
+
+                        Discussion.TYPE_GROUP -> {
+                            offerToRemoteDeleteEverywhere =
+                                AppDatabase.getInstance().contactGroupJoinDao()
+                                    .groupHasMembers(
+                                        discussion.bytesOwnedIdentity,
+                                        discussion.bytesDiscussionIdentifier
+                                    ) && (allMessagesAreOutbound && discussion.isNormal)
+                        }
+
+                        else -> {
+                            offerToRemoteDeleteEverywhere =
+                                allMessagesAreOutbound && discussion.isNormal
+                        }
+                    }
+                } else {
+                    offerToRemoteDeleteEverywhere = false
+                }
+
+                val builder: AlertDialog.Builder = SecureDeleteEverywhereDialogBuilder(
+                    context,
+                    SecureDeleteEverywhereDialogBuilder.Type.MESSAGE,
+                    selectedMessageIds.size,
+                    offerToRemoteDeleteEverywhere,
+                    remoteDeletingMakesSense
+                )
+                    .setDeleteCallback { deletionChoice: SecureDeleteEverywhereDialogBuilder.DeletionChoice? ->
+                        App.runThread(
+                            DeleteMessagesTask(
+                                selectedMessageIds,
+                                deletionChoice
+                            )
+                        )
+
+                        deselectAll()
+                    }
+                Handler(Looper.getMainLooper()).post { builder.create().show() }
+            }
+        }
+    }
+
+
+    fun markMessagesRead(wipeReadOnceMessages: Boolean) {
+        val messageIds = messageIdsToMarkAsRead.toTypedArray<Long>()
+        val editedMessageIds = editedMessageIdsToMarkAsSeen.toTypedArray<Long>()
+
+        if (messageIds.isNotEmpty() || editedMessageIds.isNotEmpty()) {
+            val latestTimestamp = latestServerTimestampOfMessageToMarkAsRead
+            val discussion = discussion.value
+            val discussionId = discussionId
+
+            editedMessageIdsToMarkAsSeen.clear()
+            if (wipeReadOnceMessages) {
+                // we keep the list if messages are not wiped yet
+                messageIdsToMarkAsRead.clear()
+                latestServerTimestampOfMessageToMarkAsRead = 0
+            }
+
+
+            App.runThread {
+                val db = AppDatabase.getInstance()
+                if (discussion != null && AppDatabase.getInstance().ownedDeviceDao()
+                        .doesOwnedIdentityHaveAnotherDeviceWithChannel(discussion.bytesOwnedIdentity)
+                ) {
+                    Message.postDiscussionReadMessage(discussion, latestTimestamp)
+                }
+                db.messageDao().markMessagesRead(messageIds)
+                db.messageDao().markEditedMessagesSeen(editedMessageIds)
+                UnreadCountsSingleton.markMessagesRead(discussionId, messageIds)
+
+                if (wipeReadOnceMessages) {
+                    for (message in db.messageDao().getWipeOnReadSubset(messageIds)) {
+                        db.runInTransaction {
+                            if (message.messageType == Message.TYPE_OUTBOUND_MESSAGE && retainWipedOutboundMessages) {
+                                message.wipe(db)
+                                message.deleteAttachments(db)
+                            } else {
+                                message.delete(db)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    override fun markMessagesRead() {
+        markMessagesRead(false)
+    }
+
+    override fun doNotMarkAsReadOnPause() {
+        markAsReadOnPause = false
+    }
+
+    override fun scrollToMessage(messageId: Long) {
+        scrollToMessageRequest = ScrollRequest(messageId)
+    }
+
+    override fun replyToMessage(messageId: Long, rawNewMessageText: String) {
+        App.runThread(
+            SetDraftReplyTask(
+                discussionId,
+                messageId,
+                rawNewMessageText
+            )
+        )
+    }
+
+    override fun initiateMessageForward(
+        activity: FragmentActivity,
+        messageId: Long,
+        openDialogCallback: Runnable?
+    ) {
+        messageIdsToForward = listOf(messageId)
+        Utils.openForwardMessageDialog(
+            activity,
+            listOf(messageId),
+            openDialogCallback
+        )
+    }
+
+    override fun selectMessage(messageId: Long, forwardable: Boolean, bookmarked: Boolean?) {
+        selectMessageId(messageId, forwardable, bookmarked)
+    }
+
+    override fun messageWasSent() {
+        scrollToMessageRequest = ScrollRequest.ToBottom
     }
 }

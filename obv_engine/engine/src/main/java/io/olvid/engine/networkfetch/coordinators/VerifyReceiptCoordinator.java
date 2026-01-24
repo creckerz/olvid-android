@@ -41,6 +41,7 @@ import io.olvid.engine.networkfetch.operations.VerifyReceiptOperation;
 public class VerifyReceiptCoordinator implements Operation.OnCancelCallback {
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final CreateServerSessionDelegate createServerSessionDelegate;
 
     private final OperationQueue verifyReceiptOperationQueue;
@@ -52,9 +53,10 @@ public class VerifyReceiptCoordinator implements Operation.OnCancelCallback {
     private final ServerSessionCreatedNotificationListener serverSessionCreatedNotificationListener;
 
 
-    public VerifyReceiptCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, CreateServerSessionDelegate createServerSessionDelegate) {
+    public VerifyReceiptCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, CreateServerSessionDelegate createServerSessionDelegate) {
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.createServerSessionDelegate = createServerSessionDelegate;
 
         verifyReceiptOperationQueue = new OperationQueue(true);
@@ -71,7 +73,7 @@ public class VerifyReceiptCoordinator implements Operation.OnCancelCallback {
     }
 
     private void queueNewVerifyReceiptOperation(Identity ownedIdentity, String storeToken) {
-        VerifyReceiptOperation op = new VerifyReceiptOperation(fetchManagerSessionFactory, sslSocketFactory, ownedIdentity, storeToken, this);
+        VerifyReceiptOperation op = new VerifyReceiptOperation(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity, storeToken, this);
         verifyReceiptOperationQueue.queue(op);
     }
 

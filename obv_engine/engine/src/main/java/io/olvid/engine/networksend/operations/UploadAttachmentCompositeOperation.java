@@ -42,8 +42,6 @@ public class UploadAttachmentCompositeOperation extends PriorityOperation {
     public static final int RFC_INVALID_SIGNED_URL = 8;
     public static final int RFC_IDENTITY_IS_INACTIVE = 9;
 
-    private final SendManagerSessionFactory sendManagerSessionFactory;
-    private final SSLSocketFactory sslSocketFactory;
     private final Identity ownedIdentity;
     private final UID messageUid;
     private final int attachmentNumber;
@@ -51,16 +49,14 @@ public class UploadAttachmentCompositeOperation extends PriorityOperation {
 
     private final UploadAttachmentOperation uploadAttachmentOperation;
 
-    public UploadAttachmentCompositeOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, Identity ownedIdentity, UID messageUid, int attachmentNumber, long initialPriority, SendAttachmentCoordinator coordinator, Operation.OnFinishCallback onFinishCallback, Operation.OnCancelCallback onCancelCallback) {
+    public UploadAttachmentCompositeOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, Identity ownedIdentity, UID messageUid, int attachmentNumber, long initialPriority, SendAttachmentCoordinator coordinator, Operation.OnFinishCallback onFinishCallback, Operation.OnCancelCallback onCancelCallback) {
         super(OutboxAttachment.computeUniqueUid(ownedIdentity, messageUid, attachmentNumber), onFinishCallback, onCancelCallback);
-        this.sendManagerSessionFactory = sendManagerSessionFactory;
-        this.sslSocketFactory = sslSocketFactory;
         this.ownedIdentity = ownedIdentity;
         this.messageUid = messageUid;
         this.attachmentNumber = attachmentNumber;
         this.suboperations = new Operation[2];
 
-        uploadAttachmentOperation = new UploadAttachmentOperation(sendManagerSessionFactory, sslSocketFactory, ownedIdentity, messageUid, attachmentNumber, initialPriority, coordinator);
+        uploadAttachmentOperation = new UploadAttachmentOperation(sendManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity, messageUid, attachmentNumber, initialPriority, coordinator);
         suboperations[0] = uploadAttachmentOperation;
         suboperations[1] = new TryToDeleteMessageAndAttachmentsOperation(sendManagerSessionFactory, ownedIdentity, messageUid);
 

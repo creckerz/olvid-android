@@ -49,13 +49,16 @@ public class DeviceBackupFetchTask {
     private final BackupSeed deviceBackupSeed;
     private final BackupManagerSessionFactory backupManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
+
     private ObvDeviceBackupForRestore obvDeviceBackupForRestore;
 
-    public DeviceBackupFetchTask(String server, BackupSeed deviceBackupSeed, BackupManagerSessionFactory backupManagerSessionFactory, SSLSocketFactory sslSocketFactory) {
+    public DeviceBackupFetchTask(String server, BackupSeed deviceBackupSeed, BackupManagerSessionFactory backupManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride) {
         this.server = server;
         this.deviceBackupSeed = deviceBackupSeed;
         this.backupManagerSessionFactory = backupManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
     }
 
     public BackupTaskStatus execute() {
@@ -63,7 +66,7 @@ public class DeviceBackupFetchTask {
 
         ///////
         // 1. list device backups
-        StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2ListBackupsQuery(server, derivedKeysV2.backupKeyUid)), sslSocketFactory);
+        StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2ListBackupsQuery(server, derivedKeysV2.backupKeyUid)), sslSocketFactory, userAgentOverride);
         OperationQueue queue = new OperationQueue();
         queue.queue(standaloneServerQueryOperation);
         queue.execute(1, "Engine-DeviceBackupFetchTask");

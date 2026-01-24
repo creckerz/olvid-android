@@ -32,7 +32,7 @@ import androidx.annotation.NonNull;
 import io.olvid.messenger.App;
 import io.olvid.messenger.AppSingleton;
 import io.olvid.messenger.BuildConfig;
-import io.olvid.messenger.billing.BillingUtils;
+import io.olvid.messenger.billing.SubscriptionRepository;
 import io.olvid.messenger.openid.KeycloakManager;
 
 public class NetworkStateMonitorReceiver extends BroadcastReceiver {
@@ -66,7 +66,7 @@ public class NetworkStateMonitorReceiver extends BroadcastReceiver {
             // try to reconnect websocket in case connection was lost for a long time and exponential backup may take some time top try again
             UnifiedForegroundService.connectOrDisconnectWebSocket();
             if (BuildConfig.USE_BILLING_LIB) {
-                BillingUtils.reconnect();
+                SubscriptionRepository.INSTANCE.reconnect();
             }
         }
     }

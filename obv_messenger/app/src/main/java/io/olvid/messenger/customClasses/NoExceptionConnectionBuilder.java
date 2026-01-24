@@ -32,6 +32,7 @@ import java.net.HttpURLConnection;
 import javax.net.ssl.HttpsURLConnection;
 
 import io.olvid.messenger.AppSingleton;
+import io.olvid.messenger.services.MDMConfigurationSingleton;
 
 public class NoExceptionConnectionBuilder implements ConnectionBuilder {
     private static final ConnectionBuilder INSTANCE = DefaultConnectionBuilder.INSTANCE;
@@ -44,7 +45,7 @@ public class NoExceptionConnectionBuilder implements ConnectionBuilder {
             if (connection instanceof HttpsURLConnection && AppSingleton.getSslSocketFactory() != null) {
                 ((HttpsURLConnection) connection).setSSLSocketFactory(AppSingleton.getSslSocketFactory());
             }
-            String userAgentProperty = System.getProperty("http.agent");
+            String userAgentProperty = (MDMConfigurationSingleton.getUserAgentOverride() != null) ? MDMConfigurationSingleton.getUserAgentOverride() : System.getProperty("http.agent");
             if (userAgentProperty != null) {
                 connection.setRequestProperty("User-Agent", userAgentProperty);
             }

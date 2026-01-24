@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">Jy en [PLACEHOLDER_1] ander deel jou ligging</item>
 		<item quantity="other" state="needs_review" hash="1789697147">Jy en %1$d ander mense deel hul ligging</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d maand gratis</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d maande gratis</item>
+	</plurals>
 </resources>

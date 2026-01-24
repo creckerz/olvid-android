@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">Vi i još [PLACEHOLDER_1] osoba dijele svoju lokaciju</item>
 		<item quantity="other" state="needs_review" hash="1789697147">Vi i još %1$d osoba dijele svoju lokaciju</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d mjesec besplatno</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d mjeseci besplatno</item>
+	</plurals>
 </resources>

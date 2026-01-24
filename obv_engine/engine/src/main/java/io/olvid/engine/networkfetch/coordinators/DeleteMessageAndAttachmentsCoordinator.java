@@ -53,6 +53,7 @@ import io.olvid.engine.networkfetch.operations.DeleteMessageAndAttachmentFromSer
 public class DeleteMessageAndAttachmentsCoordinator implements Operation.OnCancelCallback, InboxMessage.MarkAsListedAndDeleteOnServerListener, MessageBatchProvider, Operation.OnFinishCallback {
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final CreateServerSessionDelegate createServerSessionDelegate;
 
 
@@ -67,9 +68,11 @@ public class DeleteMessageAndAttachmentsCoordinator implements Operation.OnCance
 
     public DeleteMessageAndAttachmentsCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory,
                                                   SSLSocketFactory sslSocketFactory,
+                                                  String userAgentOverride,
                                                   CreateServerSessionDelegate createServerSessionDelegate) {
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.createServerSessionDelegate = createServerSessionDelegate;
 
         deleteMessageAndAttachmentsFromServerOperationQueue = new NoDuplicateOperationQueue();
@@ -107,7 +110,7 @@ public class DeleteMessageAndAttachmentsCoordinator implements Operation.OnCance
                 queue.add(new UidAndBoolean(messageUid, markAsListed));
             }
         }
-        DeleteMessageAndAttachmentFromServerAndLocalInboxesOperation op = new DeleteMessageAndAttachmentFromServerAndLocalInboxesOperation(fetchManagerSessionFactory, sslSocketFactory, ownedIdentity, this, this, this);
+        DeleteMessageAndAttachmentFromServerAndLocalInboxesOperation op = new DeleteMessageAndAttachmentFromServerAndLocalInboxesOperation(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity, this, this, this);
         deleteMessageAndAttachmentsFromServerOperationQueue.queue(op);
     }
 

@@ -349,6 +349,9 @@ public class AddFyleToDraftFromUriTask implements Runnable {
                         if (alreadyAttached == null || alreadyAttached) {
                             App.toast(App.getContext().getString(R.string.toast_message_file_already_attached, finalFileName), Toast.LENGTH_SHORT, Gravity.BOTTOM);
                         }
+
+                        // re-post the message if it was put on hold
+                        repostIfDraftIsUnprocessed(db, draftMessage.id);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -407,14 +410,7 @@ public class AddFyleToDraftFromUriTask implements Runnable {
                         }
 
                         // re-post the message if it was put on hold
-                        db.runInTransaction(() -> {
-                            Message reDraftMessage = db.messageDao().get(draftMessage.id);
-                            if (reDraftMessage != null && reDraftMessage.status == Message.STATUS_UNPROCESSED) {
-                                reDraftMessage.recomputeAttachmentCount(db);
-                                db.messageDao().updateAttachmentCount(reDraftMessage.id, reDraftMessage.totalAttachmentCount, reDraftMessage.imageAndVideoCount, draftMessage.videoCount, draftMessage.audioCount, draftMessage.firstAttachmentName, 0, reDraftMessage.imageResolutions);
-                                reDraftMessage.post(false, null);
-                            }
-                        });
+                        repostIfDraftIsUnprocessed(db, draftMessage.id);
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
@@ -455,14 +451,7 @@ public class AddFyleToDraftFromUriTask implements Runnable {
 
 
                     // re-post the message if it was put on hold
-                    db.runInTransaction(() -> {
-                        Message reDraftMessage = db.messageDao().get(draftMessage.id);
-                        if (reDraftMessage != null && reDraftMessage.status == Message.STATUS_UNPROCESSED) {
-                            reDraftMessage.recomputeAttachmentCount(db);
-                            db.messageDao().updateAttachmentCount(reDraftMessage.id, reDraftMessage.totalAttachmentCount, reDraftMessage.imageAndVideoCount, reDraftMessage.videoCount, reDraftMessage.audioCount, reDraftMessage.firstAttachmentName, 0, reDraftMessage.imageResolutions);
-                            reDraftMessage.post(false, null);
-                        }
-                    });
+                    repostIfDraftIsUnprocessed(db, draftMessage.id);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
@@ -556,5 +545,16 @@ public class AddFyleToDraftFromUriTask implements Runnable {
             throw new IOException();
         }
         return photoFile;
+    }
+
+    private static void repostIfDraftIsUnprocessed(AppDatabase db, long draftMessageId) {
+        db.runInTransaction(() -> {
+            Message reDraftMessage = db.messageDao().get(draftMessageId);
+            if (reDraftMessage != null && reDraftMessage.status == Message.STATUS_UNPROCESSED) {
+                reDraftMessage.recomputeAttachmentCount(db);
+                db.messageDao().updateAttachmentCount(reDraftMessage.id, reDraftMessage.totalAttachmentCount, reDraftMessage.imageAndVideoCount, reDraftMessage.videoCount, reDraftMessage.audioCount, reDraftMessage.firstAttachmentName, 0, reDraftMessage.imageResolutions);
+                reDraftMessage.post(false, null);
+            }
+        });
     }
 }

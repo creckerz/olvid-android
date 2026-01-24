@@ -40,16 +40,18 @@ import io.olvid.engine.networkfetch.datatypes.FetchManagerSessionFactory;
 class GetTokenOperation extends Operation {
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final Identity ownedIdentity;
 
     private ServerSession.ApiKeyStatus apiKeyStatus;
     private List<ServerSession.Permission> permissions;
     private long apiKeyExpirationTimestamp;
 
-    public GetTokenOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, Identity ownedIdentity, OnFinishCallback onFinishCallback) {
+    public GetTokenOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, Identity ownedIdentity, OnFinishCallback onFinishCallback) {
         super(ownedIdentity.computeUniqueUid(), onFinishCallback, null);
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.ownedIdentity = ownedIdentity;
     }
 
@@ -107,7 +109,7 @@ class GetTokenOperation extends Operation {
                         serverSession.getResponse(),
                         serverSession.getNonce()
                 );
-                serverMethod.setSslSocketFactory(sslSocketFactory);
+                serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
 
                 byte returnStatus = serverMethod.execute(fetchManagerSession.identityDelegate.isActiveOwnedIdentity(fetchManagerSession.session, ownedIdentity));
 

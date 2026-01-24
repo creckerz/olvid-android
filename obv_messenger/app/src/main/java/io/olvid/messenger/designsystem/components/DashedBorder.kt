@@ -19,20 +19,26 @@
 
 package io.olvid.messenger.designsystem.components
 
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import io.olvid.messenger.R
 
+@Composable
 fun Modifier.dashedBorder(
-    brush: Brush,
-    shape: Shape,
+    brush: Brush = SolidColor(colorResource(id = R.color.greyTint)),
+    shape: Shape = RoundedCornerShape(size = 16.dp),
     strokeWidth: Dp = 2.dp,
     dashLength: Dp = 6.dp,
     gapLength: Dp = 6.dp,

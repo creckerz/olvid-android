@@ -44,9 +44,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ContextualFlowRow
-import androidx.compose.foundation.layout.ContextualFlowRowOverflow
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -92,10 +91,8 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.map
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -124,6 +121,7 @@ import io.olvid.messenger.databases.tasks.StartAttachmentDownloadTask
 import io.olvid.messenger.databases.tasks.StopAttachmentDownloadTask
 import io.olvid.messenger.designsystem.components.OlvidDropdownMenu
 import io.olvid.messenger.designsystem.components.OlvidDropdownMenuItem
+import io.olvid.messenger.designsystem.constantSp
 import io.olvid.messenger.designsystem.theme.OlvidTypography
 import io.olvid.messenger.discussion.gallery.AudioListItem
 import io.olvid.messenger.discussion.gallery.FyleListItem
@@ -141,13 +139,6 @@ enum class Visibility {
     VISIBLE,
     HIDDEN,
 }
-
-@Composable
-fun constantSp(value: Int): TextUnit = with(LocalDensity.current) { (value / fontScale).sp }
-@Composable
-fun constantSp(value: Float): TextUnit = with(LocalDensity.current) { (value / fontScale).sp }
-@Composable
-fun scaledDp(value: Int): Dp = with(LocalDensity.current) { (value * fontScale).dp }
 
 data class Attachment(val fyle: Fyle, val fyleMessageJoinWithStatus: FyleMessageJoinWithStatus) {
     val deterministicContentUriForGallery: Uri by lazy {
@@ -217,7 +208,7 @@ fun Attachments(
         }.getOrNull()
     }
 
-    ContextualFlowRow(
+    FlowRow(
         modifier = modifier
             .fillMaxWidth()
             .requiredHeight(
@@ -231,12 +222,9 @@ fun Attachments(
             .clip(RoundedCornerShape(6.dp)),
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalArrangement = Arrangement.SpaceBetween,
-        itemCount = message.totalAttachmentCount,
         maxItemsInEachRow = 2,
-        maxLines = 2,
-        overflow = ContextualFlowRowOverflow.Visible
-    ) { index ->
-        attachments?.getOrNull(index)?.let { attachment ->
+    ) {
+        attachments?.forEachIndexed { index, attachment ->
             var textBlocks by remember { mutableStateOf(emptyList<TextBlock>()) }
             val progressStatus: ProgressStatus? by remember(
                 attachment.fyleMessageJoinWithStatus.fyleId,
@@ -1201,7 +1189,7 @@ fun AttachmentContextMenu(
                         Intent.EXTRA_STREAM,
                         attachment.contentUriForExternalSharing
                     )
-                    intent.setType(attachment.fyleMessageJoinWithStatus.nonNullMimeType)
+                    intent.type = attachment.fyleMessageJoinWithStatus.nonNullMimeType
                     context.startActivity(
                         Intent.createChooser(
                             intent,

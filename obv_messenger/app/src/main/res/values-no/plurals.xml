@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">Du og [PLACEHOLDER_1] andre deler posisjonen deres</item>
 		<item quantity="other" state="needs_review" hash="1789697147">Du og %1$d andre deler posisjonen deres</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d måneder gratis</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d måneder gratis</item>
+	</plurals>
 </resources>

@@ -22,22 +22,26 @@ package io.olvid.messenger.designsystem.components
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+//noinspection UsingMaterialAndMaterial3Libraries --> this only exists in material
+import androidx.compose.material.TextFieldDefaults.OutlinedTextFieldDecorationBox
 import androidx.compose.material.icons.Icons.Filled
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -60,6 +64,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.colorResource
@@ -68,6 +73,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -83,10 +89,12 @@ fun SearchBar(
     onSearchTextChanged: (String) -> Unit = {},
     onClearClick: () -> Unit = {},
     focusState: MutableState<Boolean>? = null,
+    requestFocus: Boolean = false,
     selectAllBeacon: Any? = null, // any time selectAllBeacon object changes, the text of the search bar is fully selected
     colors: TextFieldColors = OutlinedTextFieldDefaults.colors(
         focusedBorderColor = colorResource(R.color.olvid_gradient_dark),
         unfocusedBorderColor = colorResource(R.color.lightGrey),
+
         cursorColor = colorResource(R.color.olvid_gradient_light)
     )
 ) {
@@ -103,6 +111,7 @@ fun SearchBar(
                 focusState = focusState,
                 onClearClick = onClearClick,
                 selectAllBeacon = selectAllBeacon,
+                requestFocus = requestFocus,
                 colors = colors,
             )
         }
@@ -133,6 +142,7 @@ private fun SearchBarInput(
     val textFieldValue = if (latestBeaconValue == selectAllBeacon) {
         textFieldValueState.copy(text = searchText)
     } else {
+        @Suppress("AssignedValueIsNeverRead")
         latestBeaconValue = selectAllBeacon
         textFieldValueState.copy(text = searchText, selection = TextRange(0, searchText.length))
     }
@@ -142,20 +152,23 @@ private fun SearchBarInput(
             textFieldValue.selection != textFieldValueState.selection ||
             textFieldValue.composition != textFieldValueState.composition
         ) {
+            @Suppress("AssignedValueIsNeverRead")
             textFieldValueState = textFieldValue
         }
     }
 
     var lastTextValue by remember(searchText) { mutableStateOf(searchText) }
 
-    OutlinedTextField(
+    val interactionSource = remember { MutableInteractionSource() }
+
+    BasicTextField(
         modifier = Modifier
             .fillMaxWidth()
-            then(
+                then(
                 backgroundColor?.let {
                     Modifier.clip(RoundedCornerShape(16.dp)).background(backgroundColor)
                 } ?: Modifier
-            )
+                )
             .onFocusChanged { focus ->
                 focusState?.let {
                     it.value = focus.isFocused
@@ -168,54 +181,73 @@ private fun SearchBarInput(
             textFieldValueState = newValue
 
             val stringChanged = lastTextValue != newValue.text
+            @Suppress("AssignedValueIsNeverRead")
             lastTextValue = newValue.text
 
             if (stringChanged) {
                 onSearchTextChanged(newValue.text)
             }
         },
-        placeholder = {
-            Spacer(modifier = Modifier.requiredWidth(2.dp))
-            Text(
-                text = placeholderText,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                style = OlvidTypography.body1.copy(color = colorResource(R.color.darkGrey))
-            )
-        },
-        leadingIcon = {
-            Icon(
-                painter = painterResource(R.drawable.ic_search_blue),
-                contentDescription = stringResource(R.string.menu_action_search),
-                tint = colors.unfocusedIndicatorColor,
-            )
-        },
-        trailingIcon = {
-            val alpha by animateFloatAsState(if (showClearButton) 1f else 0f)
-            IconButton(
-                modifier = Modifier.alpha(alpha),
-                onClick = {
-                    onClearClick()
-                    focusManager.clearFocus()
-                }
-            ) {
-                Icon(
-                    imageVector = Filled.Close,
-                    contentDescription = "Close",
-                    tint = colors.unfocusedIndicatorColor,
-                )
-            }
-        },
+        interactionSource = interactionSource,
         textStyle = OlvidTypography.body1.copy(color = colorResource(R.color.almostBlack)),
-        colors = colors,
         maxLines = 1,
         singleLine = true,
-        shape = RoundedCornerShape(16.dp),
+        cursorBrush = SolidColor(colors.cursorColor),
         keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
         keyboardActions = KeyboardActions(onSearch = {
             keyboardController?.hide()
-        }),
-    )
+        })
+    ) {
+            OutlinedTextFieldDecorationBox(
+                value = textFieldValue.text,
+                innerTextField = it,
+                placeholder = {
+                    Spacer(modifier = Modifier.requiredWidth(2.dp))
+                    Text(
+                        text = placeholderText,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        style = OlvidTypography.body1.copy(color = colorResource(R.color.darkGrey))
+                    )
+                },
+                leadingIcon = {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_search_blue),
+                        contentDescription = stringResource(R.string.menu_action_search),
+                    )
+                },
+                trailingIcon = {
+                    val alpha by animateFloatAsState(if (showClearButton) 1f else 0f)
+                    IconButton(
+                        modifier = Modifier.alpha(alpha),
+                        onClick = {
+                            if (showClearButton) {
+                                onClearClick()
+                                focusManager.clearFocus()
+                            } else {
+                                focusRequester.requestFocus()
+                            }
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Filled.Close,
+                            contentDescription = "Close",
+                        )
+                    }
+                },
+                colors = androidx.compose.material.TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = colors.focusedIndicatorColor,
+                    unfocusedBorderColor = colors.unfocusedIndicatorColor,
+                    cursorColor = colors.cursorColor,
+                ),
+                contentPadding = PaddingValues(8.dp),
+                shape = RoundedCornerShape(16.dp),
+                enabled = true,
+                singleLine = true,
+                visualTransformation = VisualTransformation.None,
+                interactionSource = interactionSource,
+            )
+        }
 
     LaunchedEffect(requestFocus) {
         if (requestFocus) {

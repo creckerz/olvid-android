@@ -49,14 +49,14 @@ public class CreateServerSessionCompositeOperation extends Operation implements 
     private List<ServerSession.Permission> permissions;
     private long apiKeyExpirationTimestamp;
 
-    public CreateServerSessionCompositeOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, Identity ownedIdentity, SolveChallengeDelegate solveChallengeDelegate, Operation.OnFinishCallback onFinishCallback, Operation.OnCancelCallback onCancelCallback) {
+    public CreateServerSessionCompositeOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, Identity ownedIdentity, SolveChallengeDelegate solveChallengeDelegate, Operation.OnFinishCallback onFinishCallback, Operation.OnCancelCallback onCancelCallback) {
         super(ownedIdentity.computeUniqueUid(), onFinishCallback, onCancelCallback);
         this.ownedIdentity = ownedIdentity;
 
         this.suboperations = new Operation[3];
-        suboperations[0] = new RequestChallengeOperation(fetchManagerSessionFactory, sslSocketFactory, ownedIdentity);
+        suboperations[0] = new RequestChallengeOperation(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity);
         suboperations[1] = new SolveChallengeOperation(fetchManagerSessionFactory, ownedIdentity, solveChallengeDelegate);
-        suboperations[2] = new GetTokenOperation(fetchManagerSessionFactory, sslSocketFactory, ownedIdentity, this);
+        suboperations[2] = new GetTokenOperation(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity, this);
 
         for (int i = 0; i<suboperations.length-1; i++) {
             suboperations[i+1].addDependency(suboperations[i]);

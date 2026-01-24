@@ -19,6 +19,7 @@
 
 package io.olvid.messenger.discussion.message
 
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
@@ -30,12 +31,12 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -50,7 +51,8 @@ import io.olvid.messenger.databases.entity.Message
 import io.olvid.messenger.databases.tasks.CopySelectedMessageTask
 import io.olvid.messenger.databases.tasks.PropagateBookmarkedMessageChangeTask
 import io.olvid.messenger.databases.tasks.ShareSelectedMessageTask
-import io.olvid.messenger.discussion.DiscussionActivity.DiscussionDelegate
+import io.olvid.messenger.discussion.DiscussionDelegate
+import io.olvid.messenger.discussion.compose.MessageEditHandler
 
 enum class MessageActionType(val stringRes: Int) {
     REPLY(R.string.label_swipe_reply),
@@ -70,15 +72,24 @@ fun MessageActionItemsList(
     message: Message,
     discussion: Discussion,
     discussionDelegate: DiscussionDelegate,
+    messageEditHandler: MessageEditHandler,
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
+    val activity = LocalActivity.current
+    val keyboardController = LocalSoftwareKeyboardController.current
     val onAction = { actionType: MessageActionType ->
         when (actionType) {
-            MessageActionType.REPLY -> discussionDelegate.replyToMessage(
-                message.discussionId,
-                message.id
-            )
+            MessageActionType.REPLY -> {
+                if (!messageEditHandler.isEditMode()) {
+                    discussionDelegate.replyToMessage(
+                        message.id,
+                        ""
+                    )
+                    keyboardController?.show()
+                }
+            }
+
 
             MessageActionType.SHARE -> App.runThread(
                 ShareSelectedMessageTask(
@@ -88,6 +99,7 @@ fun MessageActionItemsList(
             )
 
             MessageActionType.FORWARD -> discussionDelegate.initiateMessageForward(
+                activity as FragmentActivity,
                 message.id,
                 onDismiss
             )
@@ -119,7 +131,7 @@ fun MessageActionItemsList(
                 )
             }
 
-            MessageActionType.EDIT -> discussionDelegate.editMessage(message)
+            MessageActionType.EDIT -> messageEditHandler.enterEditModeIfAllowed(message)
             MessageActionType.BOOKMARK -> {
                 App.runThread {
                     val newBookmarkState = !message.bookmarked

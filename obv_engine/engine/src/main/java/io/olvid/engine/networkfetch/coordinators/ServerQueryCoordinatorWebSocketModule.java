@@ -58,6 +58,7 @@ public class ServerQueryCoordinatorWebSocketModule {
 
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final ObjectMapper jsonObjectMapper;
     private final PRNGService prng;
     private final HashMap<UID, WebSocketClientAndServerQuery> webSocketsMap;
@@ -67,10 +68,12 @@ public class ServerQueryCoordinatorWebSocketModule {
 
     public ServerQueryCoordinatorWebSocketModule(FetchManagerSessionFactory fetchManagerSessionFactory,
                                                  SSLSocketFactory sslSocketFactory,
+                                                 String userAgentOverride,
                                                  ObjectMapper jsonObjectMapper,
                                                  PRNGService prng) {
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.jsonObjectMapper = jsonObjectMapper;
         this.prng = prng;
         this.webSocketsMap = new HashMap<>();
@@ -313,7 +316,7 @@ public class ServerQueryCoordinatorWebSocketModule {
         private String messageWaitingForWait;
 
         WebSocketClient(UID protocolInstanceUid) {
-            this.okHttpClient = WebsocketCoordinator.initializeOkHttpClientForWebSocket(sslSocketFactory);
+            this.okHttpClient = WebsocketCoordinator.initializeOkHttpClientForWebSocket(sslSocketFactory, userAgentOverride);
             this.protocolInstanceUid = protocolInstanceUid;
             this.connectionStatus = ConnectionStatus.INITIALIZING;
             this.webSocket = null;

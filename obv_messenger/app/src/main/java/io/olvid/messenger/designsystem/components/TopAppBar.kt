@@ -30,6 +30,8 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -42,6 +44,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -60,14 +63,27 @@ import io.olvid.messenger.designsystem.theme.OlvidTypography
 
 @Composable
 fun <T> SelectionTopAppBar(
+    modifier: Modifier = Modifier,
     title: String,
+    content: (@Composable () -> Unit)? = null,
     selection: List<T> = emptyList(),
+    selectedStringResource: Int = R.plurals.action_mode_title_discussion_list,
+    selectionActions: List<Pair<Int, () -> Unit>> = emptyList(),
     actions: List<Pair<Int, () -> Unit>> = emptyList(),
+    otherActions: List<Pair<Int, () -> Unit>> = emptyList(),
+    redItems: List<Int> = emptyList(),
+    disabledItems: List<Int> = emptyList(),
+    transparent: Boolean = false,
     onBackPressed: (() -> Unit)? = null
 ) {
     OlvidTopAppBar(
+        modifier = modifier,
+        transparent = transparent,
         title = {
-            Crossfade(targetState = selection.isEmpty(), label = "title_transition") { notSelecting ->
+            Crossfade(
+                targetState = selection.isEmpty(),
+                label = "title_transition"
+            ) { notSelecting ->
                 // we add a special selectionSize to avoid a flicker in the CrossFade when exiting selection
                 var selectionSize by remember { mutableIntStateOf(1) }
                 LaunchedEffect(selection.size) {
@@ -77,16 +93,20 @@ fun <T> SelectionTopAppBar(
                 }
 
                 if (notSelecting) {
-                    Text(
-                        text = title,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        style = OlvidTypography.h2.copy(fontWeight = FontWeight.Medium)
-                    )
+                    if (content != null) {
+                        content()
+                    } else {
+                        Text(
+                            text = title,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            style = OlvidTypography.h2.copy(fontWeight = FontWeight.Medium)
+                        )
+                    }
                 } else {
                     Text(
                         text = pluralStringResource(
-                            R.plurals.action_mode_title_discussion_list,
+                            selectedStringResource,
                             selectionSize,
                             selectionSize
                         ),
@@ -99,15 +119,48 @@ fun <T> SelectionTopAppBar(
         },
         onBackPressed = onBackPressed,
         actions = {
-            AnimatedVisibility(visible = selection.isNotEmpty()) {
+            AnimatedVisibility(visible = selection.isNotEmpty() || selectionActions.isNotEmpty() || otherActions.isNotEmpty()) {
                 CompositionLocalProvider(LocalContentColor provides colorResource(id = R.color.almostBlack)) {
                     Row {
-                        actions.forEach {
-                            IconButton(onClick = it.second) {
+                        (if (selection.isEmpty()) actions else selectionActions).forEach {
+                            IconButton(onClick = it.second, enabled = it.first !in disabledItems) {
                                 Icon(
                                     painter = painterResource(it.first),
                                     contentDescription = null
                                 )
+                            }
+                        }
+                        if (selection.isEmpty() && otherActions.isNotEmpty()) {
+                            var mainMenuOpened by remember {
+                                mutableStateOf(false)
+                            }
+                            IconButton(onClick = {
+                                mainMenuOpened = true
+                            }) {
+                                Icon(
+                                    imageVector = Icons.Default.MoreVert,
+                                    tint = colorResource(R.color.almostBlack),
+                                    contentDescription = "menu"
+                                )
+                                OlvidDropdownMenu(
+                                    expanded = mainMenuOpened,
+                                    onDismissRequest = { mainMenuOpened = false }
+                                ) {
+                                    otherActions.forEach { menuItem ->
+                                        OlvidDropdownMenuItem(
+                                            text = stringResource(menuItem.first),
+                                            onClick = {
+                                                mainMenuOpened = false
+                                                menuItem.second()
+                                            },
+                                            textColor = if (menuItem.first in redItems
+                                            )
+                                                colorResource(R.color.red)
+                                            else
+                                                null
+                                        )
+                                    }
+                                }
                             }
                         }
                     }
@@ -121,13 +174,15 @@ fun <T> SelectionTopAppBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OlvidTopAppBar(
+    modifier: Modifier = Modifier,
     titleText: String? = null,
     title: (@Composable () -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {},
+    transparent: Boolean = false,
     onBackPressed: (() -> Unit)? = null
 ) {
     TopAppBar(
-        modifier = Modifier.shadow(4.dp),
+        modifier = modifier.shadow(4.dp),
         expandedHeight = if (LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE) 48.dp else 56.dp,
         title = {
             titleText?.let {
@@ -135,11 +190,12 @@ fun OlvidTopAppBar(
                     text = titleText,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    style = OlvidTypography.h2.copy(fontWeight = FontWeight.Medium))
+                    style = OlvidTypography.h2.copy(fontWeight = FontWeight.Medium)
+                )
             } ?: title?.invoke()
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = colorResource(id = R.color.almostWhite),
+            containerColor = colorResource(id = if (transparent) R.color.whiteOverlay else R.color.almostWhite),
             titleContentColor = colorResource(id = R.color.almostBlack)
         ),
         navigationIcon = {
@@ -163,11 +219,11 @@ fun OlvidTopAppBar(
 @Composable
 private fun SelectionTopAppBarPreview() {
     Column(verticalArrangement = Arrangement.spacedBy(32.dp)) {
-        SelectionTopAppBar<String>("Title") {}
+        SelectionTopAppBar<String>(title = "Title") {}
         SelectionTopAppBar(
             selection = listOf(""),
             title = "Title",
-            actions = listOf(R.drawable.ic_star_off to {}, R.drawable.ic_action_mark_read to {})
+            selectionActions = listOf(R.drawable.ic_star_off to {}, R.drawable.ic_action_mark_read to {})
         ) {}
     }
 }

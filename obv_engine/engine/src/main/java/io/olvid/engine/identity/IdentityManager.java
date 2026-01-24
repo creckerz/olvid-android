@@ -583,6 +583,7 @@ public class IdentityManager implements IdentityDelegate, SolveChallengeDelegate
 
         session.addSessionCommitListener(backupNeededSessionCommitListener);
         session.addSessionCommitListener(getSessionCommitListenerForDeviceBackup());
+        session.addSessionCommitListener(getSessionCommitListenerForProfileBackup(ownedIdentity.getOwnedIdentity()));
         return ownedIdentity.getOwnedIdentity();
     }
 
@@ -1086,11 +1087,21 @@ public class IdentityManager implements IdentityDelegate, SolveChallengeDelegate
             throw new Exception();
         }
         if (ownedIdentityObject.isKeycloakManaged()) {
-            // identity already managed --> switch keycloak server Url
+            // identity already managed --> unbind from previous keycloak (if it is different)
             KeycloakServer keycloakServer = KeycloakServer.get(wrapSession(session), ownedIdentityObject.getKeycloakServerUrl(), ownedIdentity);
-            ownedIdentityObject.setKeycloakServerUrl(null);
             if (keycloakServer != null) {
+                if (Objects.equals(keycloakServer.getServerUrl(), keycloakState.keycloakServer)
+                        && Objects.equals(keycloakServer.getClientId(), keycloakState.clientId)
+                        && Objects.equals(keycloakServer.getClientSecret(), keycloakState.clientSecret)) {
+                    // the content of the keycloak QR code is the same, so no need to unbind and rebind
+                    return;
+                }
+
+                ownedIdentityObject.setKeycloakServerUrl(null);
                 keycloakServer.delete();
+            } else {
+                // this case should never happen, but just in case, we set the keycloakServerUrl to null
+                ownedIdentityObject.setKeycloakServerUrl(null);
             }
         }
 
@@ -4010,7 +4021,7 @@ public class IdentityManager implements IdentityDelegate, SolveChallengeDelegate
                     JsonIdentityDetailsWithVersionAndPhoto atomDetails = jsonObjectMapper.readValue(obvSyncAtom.getStringValue(), JsonIdentityDetailsWithVersionAndPhoto.class);
                     JsonIdentityDetailsWithVersionAndPhoto[] dbDetails = getContactPublishedAndTrustedDetails(session, ownedIdentity, obvSyncAtom.getContactIdentity());
                     // check if there are indeed details to trust
-                    if (dbDetails.length == 2) {
+                    if (dbDetails != null && dbDetails.length == 2) {
                         // check that the published details actually match those we received
                         if (Objects.equals(dbDetails[0].getPhotoServerKey() == null ? null : new Encoded(dbDetails[0].getPhotoServerKey()).decodeSymmetricKey(),
                                 atomDetails.getPhotoServerKey() == null ? null : new Encoded(atomDetails.getPhotoServerKey()).decodeSymmetricKey())
@@ -4029,7 +4040,7 @@ public class IdentityManager implements IdentityDelegate, SolveChallengeDelegate
                     JsonGroupDetailsWithVersionAndPhoto atomDetails = jsonObjectMapper.readValue(obvSyncAtom.getStringValue(), JsonGroupDetailsWithVersionAndPhoto.class);
                     JsonGroupDetailsWithVersionAndPhoto[] dbDetails = getGroupPublishedAndLatestOrTrustedDetails(session, ownedIdentity, obvSyncAtom.getBytesGroupOwnerAndUid());
                     // check if there are indeed details to trust
-                    if (dbDetails.length == 2) {
+                    if (dbDetails != null && dbDetails.length == 2) {
                         // check that the published details actually match those we received
                         if (Objects.equals(dbDetails[0].getPhotoServerKey() == null ? null : new Encoded(dbDetails[0].getPhotoServerKey()).decodeSymmetricKey(),
                                 atomDetails.getPhotoServerKey() == null ? null : new Encoded(atomDetails.getPhotoServerKey()).decodeSymmetricKey())

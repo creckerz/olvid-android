@@ -101,7 +101,10 @@
 	<string name="format_identity_details_custom_field" state="needs_review" hash="-1073344790">%1$s: %2$s</string>
 	<string name="hint_company" state="needs_review" hash="379200324">Selskap (valgfritt)</string>
 	<string name="hint_compose_your_message" state="needs_review" hash="-25761578">Skriv melding</string>
+	<string name="hint_compose_your_message_ephemeral" state="needs_review" hash="-1527208333">Midlertidig melding</string>
 	<string name="label_edit_your_message" state="needs_review" hash="1091877412">Rediger meldingen din</string>
+	<string name="label_reply_to_x" state="needs_review" hash="1941377665">Svar til %s</string>
+	<string name="label_reply_to_message" state="needs_review" hash="1280949769">Svar på melding</string>
 	<string name="label_selection_formatting" state="needs_review" hash="205892951">Formatering</string>
 	<string name="label_selection_code" state="needs_review" hash="-803834470">Kode</string>
 	<string name="label_selection_list" state="needs_review" hash="762025321">Liste</string>
@@ -467,7 +470,7 @@
 	<string name="menu_action_choose_picture" state="needs_review" hash="-1655172909">Velg et bilde</string>
 	<string name="menu_action_take_photo" state="needs_review" hash="-1123080444">Ta et bilde</string>
 	<string name="menu_action_remove_image" state="needs_review" hash="1094977672">Fjern bilde</string>
-	<string name="dialog_title_create_empty_group" state="needs_review" hash="-2016542453">Opprett tom gruppe?</string>
+	<string name="dialog_title_create_empty_group" state="needs_review" hash="-663434464">Opprette tom gruppe?</string>
 	<string name="dialog_message_create_empty_group" state="needs_review" hash="-297923005">Du har ikke valgt noen kontakter å legge til i gruppen din. Er du sikker på at du vil opprette en tom gruppe?</string>
 	<string name="pref_dark_mode_title" state="needs_review" hash="816474245">Mørk modus</string>
 	<string name="pref_dark_mode_summary" state="needs_review" hash="-623740894">Aktiver mørk modus for å spare batteri og beskytte øynene dine.</string>
@@ -558,6 +561,37 @@
 	<string name="dialog_title_webrtc_kick_participant" state="needs_review" hash="389469769">Ekskluder kontakt fra samtale?</string>
 	<string name="webrtc_failed_kicked" state="needs_review" hash="-758835021">Du ble ekskludert fra dette anropet</string>
 	<string name="dialog_title_start_conference_call" state="needs_review" hash="-1418585505">Start konferansesamtale</string>
+	<string name="olvid_plus_discover" state="needs_review" hash="-924831172">Oppdag Olvid+</string>
+	<string name="olvid_plus_upgrade_title" state="needs_review" hash="-1960092784">Oppgrader til Olvid+ for å få full app-opplevelse.</string>
+	<string name="olvid_plus_upgrade_renew" state="needs_review" hash="-4149901">Auto-fornyelse for %1$s til den blir kansellert.</string>
+	<string name="olvid_plus_tip_multi_device_title" state="needs_review" hash="481576448">Bruk Olvid på alle enhetene dine.</string>
+	<string name="olvid_plus_tip_multi_device_subtitle" state="needs_review" hash="1352342578">Olvid+ lar deg bruke Olvid på smarttelefoner og datamaskiner.\nMeldingene dine synkroniseres på tvers av alle enhetene dine, slik at du alltid er koblet til.</string>
+	<string name="olvid_plus_tip_call_title" state="needs_review" hash="935809736">Ring ubegrenset</string>
+	<string name="olvid_plus_tip_call_subtitle" state="needs_review" hash="1137191310">Olvid+ lar deg foreta ende-til-ende-krypterte tale- og videosamtaler.\nNå enhver Olvid-bruker sikkert, uavhengig av om de har Olvid+ eller ikke.</string>
+	<string name="olvid_plus_tip_support_title" state="needs_review" hash="-1930411305">Støtt vår visjon</string>
+	<string name="olvid_plus_tip_support_subtitle" state="needs_review" hash="-1404875508">Lås opp multi-enhet og sikre samtaler med Olvid+.\nAbonnementet ditt støtter en bærekraftig og ærlig modell, som holder Olvid gratis for alle, uten annonser eller skjulte kostnader.</string>
+	<string name="olvid_plus_offer_multi_device_title" state="needs_review" hash="-623969503">Bruk Olvid på flere enheter.</string>
+	<string name="olvid_plus_offer_multi_device_subtitle" state="needs_review" hash="-123640091">Bruk Olvid på datamaskinen din. Hold alle meldingene dine trygge.</string>
+	<string name="olvid_plus_offer_call_title" state="needs_review" hash="935809736">Ring ubegrenset</string>
+	<string name="olvid_plus_offer_call_subtitle" state="needs_review" hash="-1827478007">Ring tale- og videoanrop til alle kontaktene dine.</string>
+	<string name="olvid_plus_offer_support_title" state="needs_review" hash="-1272799411">Støtt Olvid</string>
+	<string name="olvid_plus_offer_support_subtitle" state="needs_review" hash="841023374">Fremme en bærekraftig og ærlig modell som ikke utnytter personlige data.</string>
+	<string name="olvid_plus_dialog_multi_device_title" state="needs_review" hash="561167181">Bruk Olvid på alle enhetene dine.</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle" state="needs_review" hash="1178448519">Med Olvid+ kan du synkronisere Olvid-meldingene dine mellom smarttelefoner og datamaskiner. Du er alltid tilgjengelig!</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_1" state="needs_review" hash="155287050">Nyt komforten av et tastatur og en stor skjerm, og send filer enkelt fra datamaskinen din.</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_2" state="needs_review" hash="1858309010">Mister aldri meldingene dine, selv ved enhetsfeil eller tyveri. Din historikk og vedlegg lagres trygt på flere enheter.</string>
+	<string name="olvid_plus_dialog_call_title" state="needs_review" hash="269811560">Utfør ubegrensede samtaler</string>
+	<string name="olvid_plus_dialog_call_subtitle" state="needs_review" hash="-416813149">Med Olvid+ kan du foreta lyd- og videosamtaler, både én-til-én og i grupper.</string>
+	<string name="olvid_plus_dialog_call_subtitle_1" state="needs_review" hash="-608348196">Alle kontaktene dine kan nås, uavhengig av om de har Olvid+ eller ikke.</string>
+	<string name="olvid_plus_dialog_call_subtitle_2" state="needs_review" hash="-1804019862">Opplev optimal samtale kvalitet, med samme sikkerhetsnivå som all din Olvid-kommunikasjon.</string>
+	<string name="olvid_plus_dialog_support_title" state="needs_review" hash="1942452361">Støtt Olvid, den private meldingsappen for alle</string>
+	<string name="olvid_plus_dialog_support_subtitle" state="needs_review" hash="2119917538">Olvid er en virkelig privat meldingsapp, designet for å fungere uten å noen gang få tilgang til din personlige informasjon: ingen telefonnummer, e-postadresse eller navn kreves.</string>
+	<string name="olvid_plus_dialog_support_subtitle_1" state="needs_review" hash="1809563102">Alt du deler, forblir mellom deg og kontaktene dine. Ingen andre.</string>
+	<string name="olvid_plus_dialog_support_subtitle_2" state="needs_review" hash="-118773166">Med åpen kildekode og regelmessige revisjoner trenger du ikke å stole på oss blindt.</string>
+	<string name="olvid_plus_dialog_support_subtitle_3" state="needs_review" hash="-1885036855">Ved å abonnere støtter du et rettferdig og bærekraftig oppdrag for å holde Olvid gratis for alle, helt uten reklame og skjulte kostnader.</string>
+	<string name="label_subscription_offer_save_percent" state="needs_review" hash="479307719">Spar %1$d%%</string>
+	<string name="label_subscription_offer_monthly" state="needs_review" hash="-1602490190">Månedlig</string>
+	<string name="label_subscription_offer_yearly" state="needs_review" hash="1246240165">Årlig</string>
 	<string name="label_subscription_status" state="needs_review" hash="1154002053">Abonnementsstatus</string>
 	<string name="text_feature_initiate_secure_calls" state="needs_review" hash="1414263062">Start sikre samtaler</string>
 	<string name="text_premium_features" state="needs_review" hash="603728806">Premium-funksjoner</string>
@@ -640,7 +674,7 @@
 	<string name="text_premium_features_free_trial" state="needs_review" hash="-1976234715">Gratis prøveperiode for premiumfunksjoner</string>
 	<string name="button_label_start_free_trial" state="needs_review" hash="-508109296">Start gratis prøveperiode</string>
 	<string name="label_free_trial_available" state="needs_review" hash="-995163441">Gratis prøveperiode tilgjengelig</string>
-	<string name="label_free_trial_explanation" state="needs_review" hash="-596460015">Prøv Olvids sikre samtaler gratis i en måned (kun tilgjengelig én gang)</string>
+	<string name="label_free_trial_explanation" state="needs_review" hash="2050354272">Prøv Olvid sine sikre samtaler gratis i en måned (kun tilgjengelig én gang).</string>
 	<string name="toast_message_failed_to_start_free_trial" state="needs_review" hash="-1137706906">Kunne ikke starte gratis prøveperiode</string>
 	<string name="toast_message_free_trial_started" state="needs_review" hash="1357863164">Gratis prøveperiode startet</string>
 	<string name="toast_message_error_launching_in_app_purchase" state="needs_review" hash="-1890004340">Feil ved initiering av kjøp i appen</string>
@@ -648,8 +682,6 @@
 	<string name="toast_message_in_app_purchase_successful" state="needs_review" hash="578109721">In-app-kjøp vellykket</string>
 	<string name="button_label_price_per_month" state="needs_review" hash="-552222952">%1$s per måned</string>
 	<string name="button_label_price_per_year" state="needs_review" hash="1539075788">%1$s per år</string>
-	<string name="button_label_price_per_month_expanded" state="needs_review" hash="173326792">%1$s\nper måned</string>
-	<string name="button_label_price_per_year_expanded" state="needs_review" hash="1947639238">%1$s\nper år</string>
 	<string name="text_awaiting_subscription_payment" state="needs_review" hash="1135205985">Abonnementsbetaling avvist</string>
 	<string name="text_subscription_in_grace_period_until" state="needs_review" hash="-1685522686">Fristperiode til: %1$s</string>
 	<string name="text_subscription_on_hold_since" state="needs_review" hash="-515586151">Abonnementet er satt på vent siden: %1$s</string>
@@ -661,9 +693,8 @@
 	<string name="label_failed_to_query_subscription" state="needs_review" hash="-1677001973">Kunne ikke hente abonnementsplaner</string>
 	<string name="dialog_title_subscription_required" state="needs_review" hash="-2038592214">Abonnement kreves</string>
 	<string name="button_label_check_subscription" state="needs_review" hash="-378220336">Sjekk abonnementsstatus</string>
-	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1662886051">Oppstart av sikre telefonsamtaler med Olvid krever et abonnement.\n\nDu kan sjekke din nåværende abonnementsstatus og se tilgjengelige abonnementsplaner på siden \"Min profil\".</string>
-	<string name="dialog_message_subscription_required_web_client" state="needs_review" hash="-760629168">Tilkobling til Olvid-webklienten krever et abonnement.\n\nDu kan sjekke din nåværende abonnementsstatus og se tilgjengelige abonnementsplaner på siden \"Min profil\".</string>
-	<string name="dialog_message_subscription_required_multi_device" state="needs_review" hash="-1326423501">Bruk av din Olvid-profil på flere enheter samtidig krever et abonnement.\n\nDu kan sjekke din nåværende abonnementsstatus og se tilgjengelige abonnementsplaner på siden «Min profil».</string>
+	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1231676488">For å starte sikre telefon- og videosamtaler med Olvid kreves et abonnement.</string>
+	<string name="dialog_title_subscription_plans" state="needs_review" hash="-456474468">Abonnementsplaner</string>
 	<string name="text_ended_on" state="needs_review" hash="1280012933">Avsluttet den: %1$s</string>
 	<string name="text_free_trial_ended" state="needs_review" hash="-1458860892">Gratis prøveperiode avsluttet</string>
 	<string name="text_free_trial_expired" state="needs_review" hash="-2049452081">Gratis prøvelisens utløpt</string>
@@ -995,13 +1026,13 @@
 	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">Paris TURN-servere</string>
 	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">New York TURN-servere</string>
 	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">Singapore TURN-servere</string>
-	<string name="dialog_title_android_12_bluetooth_access" state="needs_review" hash="-2140389265">Be om tillatelse til å få tilgang til Bluetooth-enheter</string>
-	<string name="dialog_message_android_12_bluetooth_access" state="needs_review" hash="-332888756">Hvis du vil bruke et Bluetooth-headset til Olvid-samtaler, må du tillate Olvid å \"finne og koble til\" enhetene dine i nærheten.</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d kontakter</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">%1$d kontakter i gruppen %2$s</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">Oppdatering kreves</string>
 	<string name="dialog_message_outdated_version" state="needs_review" hash="488074151">Din versjon av Olvid er utdatert og må oppdateres.\n\nDu går sannsynligvis glipp av mange nye funksjoner, og vi kan ikke garantere at versjonen din er kompatibel med nyere versjoner av appen som kontaktene dine kan bruke.</string>
 	<string name="button_label_remind_me_later" state="needs_review" hash="-713293818">Minn meg senere</string>
+	<string name="label_remind_me_tonight" state="needs_review" hash="707009828">Påminn meg i kveld klokken %1$s</string>
+	<string name="label_remind_me_tomorrow" state="needs_review" hash="1904419307">Påminn meg i morgen kl. %1$s</string>
 	<string name="hint_personal_note" state="needs_review" hash="-368244163">Personlig notat</string>
 	<string name="toast_message_unable_to_restore_app_data" state="needs_review" hash="1602628680">ADVARSEL: Noen tilpasninger av applikasjonen kunne ikke gjenopprettes</string>
 	<string name="dialog_title_webrtc_permissions_audio_blocked" state="needs_review" hash="1948829165">Tillatelse til lydopptak nektet</string>
@@ -1108,7 +1139,6 @@
 	<string name="pref_reload_backup_configuration_title" state="needs_review" hash="2000428891">Last inn sikkerhetskopikonfigurasjon på nytt</string>
 	<string name="content_description_back_button" state="needs_review" hash="48196338">Tilbake</string>
 	<string name="content_description_remove_message_reply_to" state="needs_review" hash="-794585802">Slett svar på melding</string>
-	<string name="content_description_remove_link_preview" state="needs_review" hash="-1085272528">Fjern lenkeforvisning</string>
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">Indikator for at varsler er dempet for denne profilen</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">Opprett en profil</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">Identitetsleverandøren til firmaet ditt er konfigurert. Trykk på \"Autentiser\"-knappen nedenfor for å autentisere og hente din personlige informasjon.</string>
@@ -1148,14 +1178,11 @@
 	<string name="dialog_title_neutral_notification_when_hidden" state="needs_review" hash="2013281962">Vis nøytral varsling når profil er skjult</string>
 	<string name="dialog_message_neutral_notification_when_hidden" state="needs_review" hash="-58494752">Når en profil er skjult, mottar du ingen varsler om nye meldinger, med mindre den er åpen i Olvid. Hvis du aktiverer dette alternativet, vises en varsling «Olvid krever din oppmerksomhet». Du kan deretter åpne Olvid og låse opp din skjulte profil for å se nye meldinger.\nAdvarsel: dette kan avsløre at du faktisk har en skjult profil.</string>
 	<string name="toast_message_password_already_used_other_profile" state="needs_review" hash="390904904">Feil: Dette passordet brukes av en annen skjult profil</string>
-	<string name="label_configure_shortcuts" state="needs_review" hash="-857125506">Endre ikonrekkefølge</string>
 	<string name="label_attach_file" state="needs_review" hash="-89285310">Legg ved filer</string>
 	<string name="label_attach_image" state="needs_review" hash="-1185400308">Legg ved bilder</string>
 	<string name="label_attach_timer" state="needs_review" hash="-1527208333">Ephemeral melding</string>
 	<string name="label_attach_camera" state="needs_review" hash="-1123080444">Ta et bilde</string>
 	<string name="label_attach_video" state="needs_review" hash="1626268086">Ta opp en video</string>
-	<string name="dialog_title_choose_icon_order" state="needs_review" hash="856935796">Velg prioriteten for vedleggikoner</string>
-	<string name="label_icons_below_never_shown" state="needs_review" hash="1250704267">Ikoner under denne linjen vises aldri</string>
 	<string name="pref_font_scale" state="needs_review" hash="1773040591">Skriftstørrelse</string>
 	<string name="pref_text_font_scale_0_75" state="needs_review" hash="-1963894407">Liten (75%)</string>
 	<string name="pref_text_font_scale_0_9" state="needs_review" hash="-708054676">Liten (90%)</string>
@@ -1210,7 +1237,6 @@
 	<string name="x_reactions_to" state="needs_review" hash="177752739">%1$d reaksjoner til: %2$s</string>
 	<string name="notification_text_xx_reacted" state="needs_review" hash="647790513">%1$s reagerte på %2$s</string>
 	<string name="label_attach_emoji" state="needs_review" hash="-1842205895">Sett inn en emoji</string>
-	<string name="label_long_press_for_favorite" state="needs_review" hash="1284446174">Trykk og hold for å legge til/fjerne fra favoritter</string>
 	<string name="menu_action_debug_information" state="needs_review" hash="-919213138">Feilsøkingsinformasjon</string>
 	<string name="debug_label_number_of_devices" state="needs_review" hash="1662862352">Antall enheter:</string>
 	<string name="debug_label_number_of_devices_no_channel" state="needs_review" hash="808299225">Uten sikker kanal:</string>
@@ -1283,8 +1309,6 @@
 	<string name="dialog_message_incomplete_attachments" state="needs_review" hash="1179188058">De valgte meldingene inneholder vedlegg som ikke er fullstendig nedlastet. Disse meldingene kan ikke videresendes før nedlastingen er fullført.</string>
 	<string name="dialog_message_incomplete_attachments_partial" state="needs_review" hash="1274554335">Noen av meldingene du har valgt, inneholder vedlegg som ikke er fullstendig nedlastet. Disse meldingene kan ikke videresendes før nedlastingen er fullført.\n\nTrykk på «Fortsett» for å videresende kun meldingene som kan videresendes.</string>
 	<string name="hint_search_message" state="needs_review" hash="1630003450">Søk i meldinger</string>
-	<string name="menu_action_search_prev" state="needs_review" hash="-1639666563">Forrige</string>
-	<string name="menu_action_search_next" state="needs_review" hash="1158639077">Neste</string>
 	<string name="pref_manage_cloud_backups_title" state="needs_review" hash="824115345">Administrer skylagringskopier</string>
 	<string name="pref_manage_cloud_backups_summary" state="needs_review" hash="-161789549">Klikk for å laste ned eller slette skylagrede sikkerhetskopier.</string>
 	<string name="dialog_title_manage_cloud_backups" state="needs_review" hash="-1825078945">Skybaserte sikkerhetskopier</string>
@@ -1485,7 +1509,7 @@
 	<string name="text_you_became_admin" state="needs_review" hash="2137006821">Du er nå en gruppeadministrator.</string>
 	<string name="text_you_are_no_longer_admin" state="needs_review" hash="1766709431">Du er ikke lenger gruppeadministrator</string>
 	<string name="text_you_became_writer" state="needs_review" hash="-1671425999">Du har nå tillatelse til å sende meldinger</string>
-	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-762273585">Du kan ikke lenger sende meldinger her</string>
+	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-930933808">Du kan ikke sende meldinger her.</string>
 	<string name="label_pending" state="needs_review" hash="1975294811">Venter</string>
 	<string name="pref_app_language_title" state="needs_review" hash="-1748962099">Appspråk</string>
 	<string name="pref_text_default_device_language" state="needs_review" hash="-1062620207">Standard enhetsspråk</string>
@@ -1571,6 +1595,7 @@
 	<string name="text_invalid_shortcut" state="needs_review" hash="-1219107750">Ugyldig snarvei</string>
 	<string name="text_feature_initiate_secure_calls_from_another_profile" state="needs_review" hash="271258252">Start sikre samtaler (tilgjengelig via en annen profil)</string>
 	<string name="dialog_title_confirm_open_link" state="needs_review" hash="46935087">Åpne denne lenken i nettleseren din?</string>
+	<string name="label_open_original_link_with_trackers" state="needs_review" hash="-1586932660">Bruk den originale lenken med sporingsparametere</string>
 	<string name="dialog_title_confirm_open_olvid_link" state="needs_review" hash="425949498">Åpne denne lenken i Olvid?</string>
 	<string name="toast_message_unable_to_open_url" state="needs_review" hash="-1486954792">Kunne ikke åpne URL</string>
 	<string name="text_explanation_location_map_provider" state="needs_review" hash="-173394547">Å velge en kartleverandør lar deg nøyaktig velge plasseringen du vil dele på et kart. Dette kan imidlertid avsløre din plassering (eller plasseringen til kontaktene dine) for denne tjenesteleverandøren.</string>
@@ -1581,7 +1606,6 @@
 	<string name="label_no_address_found" state="needs_review" hash="1035554993">Ingen adresse funnet</string>
 	<string name="label_zoom_in_for_address" state="needs_review" hash="902696925">Zoom inn for å finne adressen</string>
 	<string name="label_address_lookup_disabled" state="needs_review" hash="-2140124686">Adresseoppslag deaktivert</string>
-	<string name="content_description_cancel_message_edit" state="needs_review" hash="984163129">Angre redigering av melding</string>
 	<string name="dialog_title_introducing_mentions" state="needs_review" hash="-1741341288">Vi introduserer brukeromtaler!</string>
 	<string name="dialog_message_introducing_mentions" state="needs_review" hash="622739087">Olvid lar deg nå nevne en bruker i en diskusjon 🫵! Bare skriv @ etterfulgt av en bokstav eller navnet deres for å se hvem som kan nevnes. I tillegg kan du, når du demper en diskusjon eller profil 💤, nå velge å kun bli varslet når du eksplisitt nevnes i en melding. Merk at kontaktene dine må oppdatere til den nyeste versjonen av Olvid for å se at du har nevnt dem.</string>
 	<string name="pref_no_notify_certificate_change_for_previews_title" state="needs_review" hash="-434788963">Deaktiver varsler om endring av sertifikat for lenkeforhandsvisninger</string>
@@ -1740,7 +1764,7 @@
 	<string name="troubleshooting_ignored" state="needs_review" hash="816017832">Ignorert</string>
 	<string name="onboarding_transfer_multidevice_purchase_question" state="needs_review" hash="351030441">Ønsker du at alle enhetene dine skal forbli aktive?</string>
 	<string name="onboarding_transfer_multidevice_purchase_hyperlink" state="needs_review" hash="747183939">Hit</string>
-	<string name="button_label_subscribe_now" state="needs_review" hash="1805105542">Abonner nå</string>
+	<string name="button_label_subscribe_with_price" state="needs_review" hash="324675175">Abonner • %1$s</string>
 	<string name="onboarding_transfer_devices_loading_title" state="needs_review" hash="801961341">Henter enhetsliste…</string>
 	<string name="dialog_title_introducing_multi_device" state="needs_review" hash="-310103349">Vi presenterer Olvid Desktop og støtte for flere enheter!</string>
 	<string name="dialog_message_introducing_multi_device" state="needs_review" hash="-153162506">Olvid er nå tilgjengelig for **datamaskinen din** (Windows og macOS). Du kan laste ned den nyeste versjonen fra: https://olvid.io/download/ Med **multienhets**støtte kan du starte en samtale på telefonen og fortsette den på datamaskinen. Det har aldri vært enklere å dele filer mellom enhetene dine og kontaktene dine!</string>
@@ -1930,7 +1954,6 @@
 	<string name="pref_archived_attachments_summary" state="needs_review" hash="1596754073">Når dette er på, vil vedlegg fra arkiverte samtaler automatisk lastes ned i henhold til innstillingen ovenfor.</string>
 	<string name="pref_unarchive_on_notification_title" state="needs_review" hash="-1146947153">Gjenopprett arkiverte samtaler ved varsel</string>
 	<string name="pref_unarchive_on_notification_summary" state="needs_review" hash="778062251">Når dette er på, vil arkiverte samtaler automatisk arkiveres opp når du mottar en varsling om en ny melding.</string>
-	<string name="call_notification_ongoing_call" state="needs_review" hash="1828207822">Pågående samtale</string>
 	<string name="call_notification_incoming_call" state="needs_review" hash="-1223043344">Innkommende samtale</string>
 	<string name="menu_action_copy_text_from_image" state="needs_review" hash="-1072685983">Kopier dette ordet</string>
 	<string name="menu_action_copy_text_block_from_image" state="needs_review" hash="1436026569">Kopier hele blokken</string>
@@ -2121,4 +2144,8 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Enhet for kontaktpersonen er utilgjengelig.</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Opprett alle sikre kanaler på nytt.</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Å gjenskape alle sikre kanaler vil tvinge Olvid til å opprette nye sikre kommunikasjonskanaler med alle enhetene til kontaktene dine. Dette er vanligvis ikke nyttig, men kan løse sjeldne situasjoner der noen av disse kanalene er «ute av synk».\n\n**Advarsel:** Hvis du har mange kontakter, kan denne operasjonen ta noen minutter, og du kan miste noen innkommende meldinger mens den kjører.</string>
+	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Samtalen ble avsluttet.</string>
+	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">Trenger teamet ditt abonnementer?</string>
+	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Besøk Olvid Store</string>
+	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">Påminnelse satt</string>
 </resources>

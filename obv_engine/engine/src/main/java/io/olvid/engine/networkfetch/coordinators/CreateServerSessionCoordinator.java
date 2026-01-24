@@ -49,12 +49,14 @@ public class CreateServerSessionCoordinator implements Operation.OnFinishCallbac
 
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private SolveChallengeDelegate solveChallengeDelegate;
     private NotificationPostingDelegate notificationPostingDelegate;
 
-    public CreateServerSessionCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory) {
+    public CreateServerSessionCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride) {
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.solveChallengeDelegate = null;
 
         scheduler = new ExponentialBackoffRepeatingScheduler<>();
@@ -99,7 +101,7 @@ public class CreateServerSessionCoordinator implements Operation.OnFinishCallbac
     }
 
     public void queueNewQueryApiKeyStatusOperation(final Identity ownedIdentity, final UUID apiKey) {
-        QueryApiKeyStatusOperation op = new QueryApiKeyStatusOperation(sslSocketFactory, ownedIdentity, apiKey, (Operation operation) -> {
+        QueryApiKeyStatusOperation op = new QueryApiKeyStatusOperation(sslSocketFactory, userAgentOverride, ownedIdentity, apiKey, (Operation operation) -> {
             if (notificationPostingDelegate == null) {
                 Logger.e("NotificationPostingDelegate not set onFinishCallback of QueryApiKeyStatusOperation.");
                 return;
@@ -134,7 +136,7 @@ public class CreateServerSessionCoordinator implements Operation.OnFinishCallbac
             Logger.e("The SolveChallengeDelegate is not set in the CreateServerSessionCoordinator. Unable to queue a new CreateServerSessionCompositeOperation.");
             return;
         }
-        CreateServerSessionCompositeOperation op = new CreateServerSessionCompositeOperation(fetchManagerSessionFactory, sslSocketFactory, ownedIdentity, solveChallengeDelegate, this, this);
+        CreateServerSessionCompositeOperation op = new CreateServerSessionCompositeOperation(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity, solveChallengeDelegate, this, this);
         createServerSessionOperationQueue.queue(op);
     }
 

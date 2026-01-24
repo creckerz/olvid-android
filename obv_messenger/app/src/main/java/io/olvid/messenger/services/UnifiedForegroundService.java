@@ -64,7 +64,6 @@ import java.util.concurrent.Executor;
 
 import io.olvid.engine.Logger;
 import io.olvid.engine.datatypes.NoExceptionSingleThreadExecutor;
-import io.olvid.engine.engine.types.EngineAPI;
 import io.olvid.engine.engine.types.ObvPostMessageOutput;
 import io.olvid.messenger.App;
 import io.olvid.messenger.AppSingleton;
@@ -649,9 +648,6 @@ public class UnifiedForegroundService extends Service {
                         break;
                     case INVALID_QR_CODE:
                         notificationTitle = App.getContext().getString(R.string.webclient_error_invalid_qrcode);
-                        break;
-                    case WEB_PERMISSION_DENIED:
-                        App.openAppDialogSubscriptionRequired(bytesOwnedIdentity, EngineAPI.ApiKeyPermission.WEB_CLIENT);
                         break;
                 }
                 if (notificationTitle != null) {

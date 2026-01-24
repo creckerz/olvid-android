@@ -18,7 +18,6 @@
  */
 package io.olvid.messenger.appdialogs
 
-import android.app.Dialog
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.DialogInterface
@@ -39,14 +38,23 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Text
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.core.text.util.LinkifyCompat
 import com.fasterxml.jackson.core.type.TypeReference
-import io.olvid.engine.engine.types.EngineAPI.ApiKeyPermission
 import io.olvid.messenger.App
 import io.olvid.messenger.AppSingleton
 import io.olvid.messenger.R
-import io.olvid.messenger.billing.SubscriptionPurchaseViewModel
+import io.olvid.messenger.billing.FreeTrialView
+import io.olvid.messenger.billing.SubscriptionOfferViewModel
 import io.olvid.messenger.billing.SubscriptionUpdatedDialog
 import io.olvid.messenger.customClasses.LockableActivity
 import io.olvid.messenger.customClasses.SecureAlertDialogBuilder
@@ -54,6 +62,11 @@ import io.olvid.messenger.customClasses.StringUtils
 import io.olvid.messenger.customClasses.formatMarkdown
 import io.olvid.messenger.databases.AppDatabase.Companion.getInstance
 import io.olvid.messenger.databases.entity.OwnedIdentity
+import io.olvid.messenger.designsystem.components.BaseDialogContent
+import io.olvid.messenger.designsystem.components.DialogSecure
+import io.olvid.messenger.designsystem.components.OlvidTextButton
+import io.olvid.messenger.designsystem.showDialog
+import io.olvid.messenger.designsystem.theme.OlvidTypography
 import io.olvid.messenger.fragments.dialog.CloudProviderSignInDialogFragment
 import io.olvid.messenger.fragments.dialog.CloudProviderSignInDialogFragment.OnCloudProviderConfigurationCallback
 import io.olvid.messenger.notifications.AndroidNotificationManager
@@ -115,9 +128,8 @@ class AppDialogShowActivity : LockableActivity() {
 
         when (dialogTag.dialogTag) {
             DIALOG_IDENTITY_DEACTIVATED -> {
-                val ownedIdentityObject = dialogParameters.get(
-                    DIALOG_IDENTITY_DEACTIVATED_OWNED_IDENTITY_KEY
-                )
+                val ownedIdentityObject =
+                    dialogParameters[DIALOG_IDENTITY_DEACTIVATED_OWNED_IDENTITY_KEY]
                 if (ownedIdentityObject !is OwnedIdentity) {
                     continueWithNextDialog()
                 } else {
@@ -127,9 +139,10 @@ class AppDialogShowActivity : LockableActivity() {
                     val spinnerDialog = SecureAlertDialogBuilder(this, R.style.CustomAlertDialog)
                         .setTitle(R.string.dialog_title_identity_deactivated)
                         .setView(spinnerView)
-                        .setNegativeButton(
-                            R.string.button_label_cancel
-                        ) { dialog: DialogInterface?, which: Int -> continueWithNextDialog() }
+                        .setOnDismissListener {
+                            continueWithNextDialog()
+                        }
+                        .setNegativeButton(R.string.button_label_cancel, null)
                         .create()
                     spinnerDialog.show()
 
@@ -140,6 +153,7 @@ class AppDialogShowActivity : LockableActivity() {
                             )
                         runOnUiThread {
                             if (spinnerDialog.isShowing) {
+                                spinnerDialog.setOnDismissListener(null)
                                 spinnerDialog.dismiss()
                                 val dialogFragment = IdentityDeactivatedDialogFragment.newInstance(
                                     ownedIdentityObject,
@@ -166,7 +180,7 @@ class AppDialogShowActivity : LockableActivity() {
                     builder.setMessage(R.string.dialog_message_identity_activated)
                         .setTitle(R.string.dialog_title_identity_activated)
                         .setPositiveButton(R.string.button_label_ok, null)
-                        .setOnDismissListener { dialog: DialogInterface? -> continueWithNextDialog() }
+                        .setOnDismissListener { continueWithNextDialog() }
                     builder.create().show()
                 }
             }
@@ -178,19 +192,15 @@ class AppDialogShowActivity : LockableActivity() {
                 if (ownedIdentityObject !is OwnedIdentity) {
                     continueWithNextDialog()
                 } else {
-                    val ownedIdentity = ownedIdentityObject
-                    if (ownedIdentity.keycloakManaged) {
+                    if (ownedIdentityObject.keycloakManaged) {
                         continueWithNextDialog()
                     } else {
-                        val purchaseViewModel : SubscriptionPurchaseViewModel by viewModels()
-                        purchaseViewModel.updateBytesOwnedIdentity(ownedIdentity.bytesOwnedIdentity)
                         setContentView(
                             ComposeView(this).apply {
                                 setContent {
                                     SubscriptionUpdatedDialog(
                                         onDismissRequest = { continueWithNextDialog() },
-                                        viewModel = purchaseViewModel,
-                                        ownedIdentity = ownedIdentity
+                                        ownedIdentity = ownedIdentityObject
                                     )
                                 }
                             }
@@ -199,38 +209,57 @@ class AppDialogShowActivity : LockableActivity() {
                 }
             }
 
-            DIALOG_SUBSCRIPTION_REQUIRED -> {
-                val featureObject = dialogParameters.get(DIALOG_SUBSCRIPTION_REQUIRED_FEATURE_KEY)
-                if (featureObject !is ApiKeyPermission) {
-                    continueWithNextDialog()
-                } else {
-                    val builder = SecureAlertDialogBuilder(this, R.style.CustomAlertDialog)
-                        .setTitle(R.string.dialog_title_subscription_required)
-                        .setOnDismissListener { dialog: DialogInterface? -> continueWithNextDialog() }
-                    val dialogView = layoutInflater.inflate(
-                        R.layout.dialog_view_subscription_required,
-                        null
-                    )
-                    val subscriptionMessageTextView =
-                        dialogView.findViewById<TextView>(R.id.subscription_required_text_view)
-                    builder.setView(dialogView)
-                    val dialog: Dialog = builder.create()
-                    dialogView.findViewById<View?>(R.id.check_subscription_button)
-                        ?.setOnClickListener { v: View? ->
-                            dialog.dismiss()
-                            startActivity(
-                                Intent(
-                                    this,
-                                    OwnedIdentityDetailsActivity::class.java
-                                )
-                            )
+            DIALOG_CALL_SUBSCRIPTION_REQUIRED -> {
+                this.showDialog { onDismiss ->
+                    val subscriptionOfferViewModel: SubscriptionOfferViewModel by viewModels()
+                    subscriptionOfferViewModel.updateBytesOwnedIdentity(AppSingleton.getBytesCurrentIdentity())
+                    subscriptionOfferViewModel.initiateFreeTrialQuery()
+                    DialogSecure(
+                        onDismissRequest = {
+                            onDismiss()
+                            continueWithNextDialog()
                         }
-                    when (featureObject) {
-                        ApiKeyPermission.CALL -> subscriptionMessageTextView.setText(R.string.dialog_message_subscription_required_call)
-                        ApiKeyPermission.WEB_CLIENT -> subscriptionMessageTextView.setText(R.string.dialog_message_subscription_required_web_client)
-                        ApiKeyPermission.MULTI_DEVICE -> subscriptionMessageTextView.setText(R.string.dialog_message_subscription_required_multi_device)
+                    ) {
+                        BaseDialogContent(
+                            title = stringResource(R.string.dialog_title_subscription_required),
+                            actions = {
+                                Spacer(modifier = Modifier.weight(1f))
+                                OlvidTextButton(
+                                    text = stringResource(R.string.button_label_check_subscription),
+                                    contentColor = colorResource(R.color.olvid_gradient_light)
+                                ) {
+                                    onDismiss()
+                                    continueWithNextDialog()
+                                    startActivity(
+                                        Intent(
+                                            this@AppDialogShowActivity,
+                                            OwnedIdentityDetailsActivity::class.java
+                                        )
+                                    )
+                                }
+                            },
+                            content = {
+                                Text(
+                                    text = stringResource(R.string.dialog_message_subscription_required_call),
+                                    style = OlvidTypography.body1,
+                                    color = colorResource(R.color.greyTint)
+                                )
+                                AnimatedVisibility(subscriptionOfferViewModel.freeTrialResults == true) {
+                                    Column {
+                                        Spacer(modifier = Modifier.height(16.dp))
+                                        FreeTrialView(
+                                            enabled = subscriptionOfferViewModel.freeTrialButtonEnabled,
+                                            onClick = {
+                                                subscriptionOfferViewModel.startFreeTrial()
+                                                onDismiss()
+                                                continueWithNextDialog()
+                                            }
+                                        )
+                                    }
+                                }
+                            }
+                        )
                     }
-                    dialog.show()
                 }
             }
 
@@ -239,7 +268,7 @@ class AppDialogShowActivity : LockableActivity() {
                     .setTitle(R.string.dialog_title_call_initiation_not_supported)
                     .setMessage(R.string.dialog_message_call_initiation_not_supported)
                     .setPositiveButton(R.string.button_label_ok, null)
-                    .setOnDismissListener { dialog: DialogInterface? -> continueWithNextDialog() }
+                    .setOnDismissListener { continueWithNextDialog() }
                 builder.create().show()
             }
 
@@ -298,12 +327,12 @@ class AppDialogShowActivity : LockableActivity() {
                         .setMessage(R.string.dialog_message_keycloak_identity_replacement)
                         .setPositiveButton(R.string.button_label_revoke, null)
                         .setNegativeButton(R.string.button_label_cancel, null)
-                        .setOnDismissListener { dialog: DialogInterface? -> continueWithNextDialog() }
+                        .setOnDismissListener { continueWithNextDialog() }
                     val dialog = builder.create()
 
-                    dialog.setOnShowListener { dialogInterface: DialogInterface? ->
+                    dialog.setOnShowListener {
                         val button = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                        button.setOnClickListener { v: View? ->
+                        button.setOnClickListener {
                             KeycloakManager.uploadOwnIdentity(
                                 bytesOwnedIdentityObject,
                                 object : KeycloakCallback<Void?> {
@@ -388,12 +417,12 @@ class AppDialogShowActivity : LockableActivity() {
                         .setMessage(R.string.dialog_message_keycloak_signature_key_changed)
                         .setPositiveButton(R.string.button_label_update_key, null)
                         .setNegativeButton(R.string.button_label_cancel, null)
-                        .setOnDismissListener { dialog: DialogInterface? -> continueWithNextDialog() }
+                        .setOnDismissListener { continueWithNextDialog() }
                     val dialog = builder.create()
 
-                    dialog.setOnShowListener { dialogInterface: DialogInterface? ->
+                    dialog.setOnShowListener {
                         val button = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                        button.setOnClickListener { v: View? ->
+                        button.setOnClickListener {
                             runCatching {
                                 AppSingleton.getEngine()
                                     .setOwnedIdentityKeycloakSignatureKey(
@@ -430,7 +459,7 @@ class AppDialogShowActivity : LockableActivity() {
                         .setTitle(R.string.dialog_title_keycloak_identity_replacement_forbidden)
                         .setMessage(R.string.dialog_message_keycloak_identity_replacement_forbidden)
                         .setPositiveButton(R.string.button_label_ok, null)
-                        .setOnDismissListener { dialog: DialogInterface? -> continueWithNextDialog() }
+                        .setOnDismissListener { continueWithNextDialog() }
                     builder.create().show()
                 }
             }
@@ -446,7 +475,7 @@ class AppDialogShowActivity : LockableActivity() {
                         .setTitle(R.string.dialog_title_keycloak_identity_was_revoked)
                         .setMessage(R.string.dialog_message_keycloak_identity_was_revoked)
                         .setPositiveButton(R.string.button_label_ok, null)
-                        .setOnDismissListener { dialog: DialogInterface? -> continueWithNextDialog() }
+                        .setOnDismissListener { continueWithNextDialog() }
                     builder.create().show()
                 }
             }
@@ -456,7 +485,7 @@ class AppDialogShowActivity : LockableActivity() {
                     .setTitle(R.string.dialog_title_sd_card_ringtone_bugged_android_9)
                     .setMessage(R.string.dialog_message_sd_card_ringtone_bugged_android_9)
                     .setPositiveButton(R.string.button_label_ok, null)
-                    .setOnDismissListener { dialog: DialogInterface? -> continueWithNextDialog() }
+                    .setOnDismissListener { continueWithNextDialog() }
                 builder.create().show()
             }
 
@@ -465,7 +494,7 @@ class AppDialogShowActivity : LockableActivity() {
                     .setTitle(R.string.dialog_title_available_space_low)
                     .setMessage(R.string.dialog_message_available_space_low)
                     .setPositiveButton(R.string.button_label_ok, null)
-                    .setOnDismissListener { dialog: DialogInterface? ->
+                    .setOnDismissListener {
                         AvailableSpaceHelper.acknowledgeWarning()
                         continueWithNextDialog()
                     }
@@ -473,7 +502,7 @@ class AppDialogShowActivity : LockableActivity() {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
                     builder.setNeutralButton(
                         R.string.button_label_manage_storage
-                    ) { dialog: DialogInterface?, which: Int ->
+                    ) { _, _ ->
                         val storageIntent = Intent()
                         storageIntent.action = StorageManager.ACTION_MANAGE_STORAGE
                         storageManagerLauncher.launch(storageIntent)
@@ -488,7 +517,7 @@ class AppDialogShowActivity : LockableActivity() {
                     .setMessage(R.string.dialog_message_backup_requires_sign_in)
                     .setPositiveButton(
                         R.string.button_label_sign_in
-                    ) { dialog: DialogInterface?, which: Int ->
+                    ) { _, _ ->
                         val cloudProviderSignInDialogFragment =
                             CloudProviderSignInDialogFragment.newInstance()
                         cloudProviderSignInDialogFragment.setSignInContext(
@@ -522,7 +551,7 @@ class AppDialogShowActivity : LockableActivity() {
                     .setNegativeButton(R.string.button_label_cancel, null)
                     .setNeutralButton(
                         R.string.button_label_app_settings
-                    ) { dialog: DialogInterface?, which: Int ->
+                    ) { _, _ ->
                         val intent = Intent(this, SettingsActivity::class.java)
                         intent.putExtra(
                             SettingsActivity.SUB_SETTING_PREF_KEY_TO_OPEN_INTENT_EXTRA,
@@ -530,7 +559,7 @@ class AppDialogShowActivity : LockableActivity() {
                         )
                         startActivity(intent)
                     }
-                    .setOnDismissListener { dialog: DialogInterface? -> continueWithNextDialog() }
+                    .setOnDismissListener { continueWithNextDialog() }
 
                 builder.create().show()
             }
@@ -541,13 +570,13 @@ class AppDialogShowActivity : LockableActivity() {
                     .setMessage(R.string.dialog_message_hidden_profile_but_no_policy)
                     .setPositiveButton(
                         R.string.button_label_ok
-                    ) { dialogInterface: DialogInterface?, which: Int ->
+                    ) { dialogInterface: DialogInterface?, _ ->
                         (dialogInterface as AlertDialog).setOnDismissListener(null)
                         PrivacyPreferenceFragment.showHiddenProfileClosePolicyChooserDialog(
                             this
                         ) { this.continueWithNextDialog() }
                     }
-                    .setOnDismissListener { dialog: DialogInterface? -> continueWithNextDialog() }
+                    .setOnDismissListener { continueWithNextDialog() }
                 builder.create().show()
             }
 
@@ -556,7 +585,7 @@ class AppDialogShowActivity : LockableActivity() {
                     .setTitle(R.string.dialog_title_introducing_multi_profile)
                     .setMessage(R.string.dialog_message_introducing_multi_profile)
                     .setPositiveButton(R.string.button_label_ok, null)
-                    .setOnDismissListener { dialog: DialogInterface? -> continueWithNextDialog() }
+                    .setOnDismissListener { continueWithNextDialog() }
                 builder.create().show()
             }
 
@@ -565,7 +594,7 @@ class AppDialogShowActivity : LockableActivity() {
                     .setTitle(R.string.dialog_title_introducing_groups_v2)
                     .setMessage(R.string.dialog_message_introducing_groups_v2)
                     .setPositiveButton(R.string.button_label_ok, null)
-                    .setOnDismissListener { dialog: DialogInterface? -> continueWithNextDialog() }
+                    .setOnDismissListener { continueWithNextDialog() }
                 builder.create().show()
             }
 
@@ -574,7 +603,7 @@ class AppDialogShowActivity : LockableActivity() {
                     .setTitle(R.string.dialog_title_introducing_mentions)
                     .setMessage(R.string.dialog_message_introducing_mentions)
                     .setPositiveButton(R.string.button_label_ok, null)
-                    .setOnDismissListener { dialog: DialogInterface? -> continueWithNextDialog() }
+                    .setOnDismissListener { continueWithNextDialog() }
                 builder.create().show()
             }
 
@@ -585,9 +614,9 @@ class AppDialogShowActivity : LockableActivity() {
                     .setTitle(R.string.dialog_title_introducing_markdown)
                     .setMessage(message)
                     .setPositiveButton(R.string.button_label_ok, null)
-                    .setOnDismissListener { dialog: DialogInterface? -> continueWithNextDialog() }
+                    .setOnDismissListener { continueWithNextDialog() }
                 val dialog = builder.create()
-                dialog.setOnShowListener { dialogInterface: DialogInterface? ->
+                dialog.setOnShowListener {
                     val messageView = dialog.findViewById<View?>(android.R.id.message)
                     if (messageView is TextView) {
                         messageView.movementMethod = LinkMovementMethod.getInstance()
@@ -605,9 +634,9 @@ class AppDialogShowActivity : LockableActivity() {
                     .setTitle(R.string.dialog_title_introducing_multi_device)
                     .setMessage(formattedMessage)
                     .setPositiveButton(R.string.button_label_ok, null)
-                    .setOnDismissListener { dialog: DialogInterface? -> continueWithNextDialog() }
+                    .setOnDismissListener { continueWithNextDialog() }
                 val dialog = builder.create()
-                dialog.setOnShowListener { dialogInterface: DialogInterface? ->
+                dialog.setOnShowListener {
                     val messageView = dialog.findViewById<View?>(android.R.id.message)
                     if (messageView is TextView) {
                         messageView.movementMethod = LinkMovementMethod.getInstance()
@@ -686,7 +715,7 @@ class AppDialogShowActivity : LockableActivity() {
                             dialogView.findViewById<View?>(R.id.new_cert_group)?.clipToOutline =
                                 true
                             dialogView.findViewById<View?>(R.id.new_cert_group)
-                                ?.setOnClickListener { v: View? ->
+                                ?.setOnClickListener {
                                     val clipboard =
                                         getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                                     val clip = ClipData.newPlainText(
@@ -759,7 +788,7 @@ class AppDialogShowActivity : LockableActivity() {
                                 dialogView.findViewById<View?>(R.id.trusted_cert_group)?.clipToOutline =
                                     true
                                 dialogView.findViewById<View?>(R.id.trusted_cert_group)
-                                    ?.setOnClickListener { v: View? ->
+                                    ?.setOnClickListener {
                                         val clipboard =
                                             getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                                         val clip = ClipData.newPlainText(
@@ -778,14 +807,14 @@ class AppDialogShowActivity : LockableActivity() {
                                 .setView(dialogView)
                                 .setPositiveButton(
                                     R.string.button_label_trust_certificate
-                                ) { dialog: DialogInterface?, which: Int ->
+                                ) { _, _ ->
                                     App.runThread {
                                         AppSingleton.getSslSocketFactory()
                                             .trustCertificateInDb(untrustedCertificate)
                                     }
                                 }
                                 .setNegativeButton(R.string.button_label_do_not_trust_yet, null)
-                                .setOnDismissListener { dialog: DialogInterface? -> continueWithNextDialog() }
+                                .setOnDismissListener { continueWithNextDialog() }
                             runOnUiThread { builder.create().show() }
                         }
                     }
@@ -822,9 +851,7 @@ class AppDialogShowActivity : LockableActivity() {
         const val DIALOG_SUBSCRIPTION_UPDATED_OWNED_IDENTITY_KEY: String =
             "owned_identity" // OwnedIdentity
 
-        const val DIALOG_SUBSCRIPTION_REQUIRED: String = "subscription_required"
-        const val DIALOG_SUBSCRIPTION_REQUIRED_FEATURE_KEY: String =
-            "feature" // EngineAPI.ApiKeyPermission
+        const val DIALOG_CALL_SUBSCRIPTION_REQUIRED: String = "call_subscription_required"
 
         const val DIALOG_CALL_INITIATION_NOT_SUPPORTED: String = "call_initiation_not_supported"
 

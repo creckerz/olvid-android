@@ -27,6 +27,7 @@ import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -38,12 +39,13 @@ import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -55,7 +57,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -82,8 +83,8 @@ import io.olvid.messenger.databases.tasks.UpdateReactionsTask
 import io.olvid.messenger.designsystem.components.SearchBar
 import io.olvid.messenger.designsystem.cutoutHorizontalPadding
 import io.olvid.messenger.designsystem.systemBarsHorizontalPadding
-import io.olvid.messenger.discussion.DiscussionActivity.DiscussionDelegate
 import io.olvid.messenger.discussion.DiscussionViewModel
+import io.olvid.messenger.discussion.compose.MessageEditHandler
 import io.olvid.messenger.discussion.linkpreview.LinkPreviewViewModel
 import io.olvid.messenger.discussion.message.reactions.ReactionBar
 import io.olvid.messenger.discussion.message.reactions.ReactionViewModel
@@ -98,10 +99,11 @@ import kotlinx.coroutines.delay
 @Composable
 fun MessageActionMenu(
     message: Message,
+    fontScale: Float = 1f,
     discussion: Discussion,
-    discussionDelegate: DiscussionDelegate,
-    discussionViewModel: DiscussionViewModel?,
-    linkPreviewViewModel: LinkPreviewViewModel?,
+    discussionViewModel: DiscussionViewModel,
+    messageEditHandler: MessageEditHandler,
+    linkPreviewViewModel: LinkPreviewViewModel,
     onDismiss: () -> Unit,
     sharedTransitionScope: SharedTransitionScope
 ) {
@@ -114,10 +116,6 @@ fun MessageActionMenu(
     val preferredReactions by reactionViewModel.preferredReactions.observeAsState(emptyList())
     val recentReactions by reactionViewModel.recentReactions.observeAsState(emptyList())
 
-
-    val emojiPickerGridState = rememberSaveable(saver = LazyGridState.Saver) {
-        LazyGridState()
-    }
 
     var showEmojiPicker: Boolean? by remember { mutableStateOf(null) }
     LaunchedEffect(message.id) {
@@ -159,9 +157,17 @@ fun MessageActionMenu(
     }
 
     with(sharedTransitionScope) {
+        var visible by remember { mutableStateOf(false) }
+        LaunchedEffect(Unit) {
+            visible = true
+        }
+        val animatedBackgroundColor by animateColorAsState(
+            targetValue = if (visible) colorResource(R.color.blackDarkOverlay) else Color.Transparent
+        )
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .background(animatedBackgroundColor)
                 .clickable(
                     interactionSource = null,
                     indication = null,
@@ -174,96 +180,101 @@ fun MessageActionMenu(
                     }
                 ),
         ) {
-            var visible by remember { mutableStateOf(false) }
-            val animatedBackgroundColor by animateColorAsState(
-                targetValue = if (visible) colorResource(R.color.blackDarkOverlay) else Color.Transparent
-            )
             Surface(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(bottom = 44.dp), // compose_message_edit_text
+                    .safeDrawingPadding(),
                 shape = RectangleShape,
-                color = animatedBackgroundColor,
+                color = Color.Transparent,
                 contentColor = colorResource(R.color.almostBlack)
             ) {
-                LaunchedEffect(Unit) {
-                    visible = true
-                }
                 BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
                     val maxWidthDp = maxWidth
                     val largeScreen =
                         maxWidth > 600.dp && LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
 
-                    val showSender = message.isInbound && discussion.discussionType != Discussion.TYPE_CONTACT
+                    val showSender =
+                        message.isInbound && discussion.discussionType != Discussion.TYPE_CONTACT
                     var minHeight by remember(largeScreen) { mutableIntStateOf(0) }
 
-                    val messageContent: @Composable (((LayoutCoordinates) -> Unit)?) -> Unit = @Composable { onMessageGloballyPositioned ->
-                        Column(
-                            modifier = Modifier.heightIn(max = 280.dp),
-                            horizontalAlignment = if (message.isInbound) Alignment.Start else Alignment.End
-                        ) {
-                            val showReactionBar = remember(minHeight) {
-                                MutableTransitionState(initialState = false).apply {
-                                    targetState = message.isReactable && discussion.isNormalOrReadOnly && minHeight != 0
-                                }
-                            }
-                            AnimatedVisibility(
-                                visibleState = showReactionBar,
-                                enter = fadeIn(),
-                                exit = fadeOut(),
+                    val messageContent: @Composable (((LayoutCoordinates) -> Unit)?) -> Unit =
+                        @Composable { onMessageGloballyPositioned ->
+                            Column(
+                                modifier = Modifier.heightIn(max = 280.dp),
+                                horizontalAlignment = if (message.isInbound) Alignment.Start else Alignment.End
                             ) {
-                                ReactionBar(
+                                val showReactionBar = remember(minHeight) {
+                                    MutableTransitionState(initialState = false).apply {
+                                        targetState =
+                                            message.isReactable && discussion.isNormalOrReadOnly && minHeight != 0
+                                    }
+                                }
+                                Box(
+                                    modifier = Modifier.height(56.dp).fillMaxWidth()
+                                ) {
+                                    @Suppress("RemoveRedundantQualifierName")
+                                    androidx.compose.animation.AnimatedVisibility(
+                                        visibleState = showReactionBar,
+                                        enter = fadeIn(),
+                                        exit = fadeOut(),
+                                    ) {
+                                        ReactionBar(
+                                            modifier = Modifier
+                                                .cutoutHorizontalPadding()
+                                                .systemBarsHorizontalPadding(),
+                                            preferredReactions = preferredReactions,
+                                            currentReaction = currentReaction,
+                                            onReact = onReact,
+                                            onToggleEmojiPicker = {
+                                                showEmojiPicker = !(showEmojiPicker ?: false)
+                                            },
+                                            onToggleFavorite = onToggleFavorite,
+                                            useAnimatedEmojis = remember { useAnimatedEmojis() },
+                                            loopAnimatedEmojis = remember { loopAnimatedEmojis() },
+                                        )
+
+                                    }
+                                }
+                                val messageExpiration by AppDatabase.getInstance()
+                                    .messageExpirationDao().getLive(message.id)
+                                    .observeAsState()
+                                Message(
                                     modifier = Modifier
+                                        .heightIn(max = 200.dp)
+                                        .sharedElementWithCallerManagedVisibility(
+                                            visible = true,
+                                            sharedContentState = rememberSharedContentState(message.id)
+                                        )
+                                        .padding(8.dp)
                                         .cutoutHorizontalPadding()
                                         .systemBarsHorizontalPadding(),
-                                    preferredReactions = preferredReactions,
-                                    currentReaction = currentReaction,
-                                    onReact = onReact,
-                                    onToggleEmojiPicker = {
-                                        showEmojiPicker = !(showEmojiPicker ?: false)
-                                    },
-                                    onToggleFavorite = onToggleFavorite,
+                                    message = message,
+                                    discussionViewModel = discussionViewModel,
+                                    messageExpiration = messageExpiration,
+                                    linkPreviewViewModel = linkPreviewViewModel,
+                                    showSender = showSender,
+                                    scale = fontScale,
+                                    lastFromSender = true,
+                                    openOnClick = false,
+                                    blockSwipe = true,
+                                    blockClicks = true,
+                                    fullWidth = true,
                                     useAnimatedEmojis = remember { useAnimatedEmojis() },
                                     loopAnimatedEmojis = remember { loopAnimatedEmojis() },
+                                    onMessageGloballyPositioned = onMessageGloballyPositioned
                                 )
                             }
-                            val messageExpiration by AppDatabase.getInstance()
-                                .messageExpirationDao().getLive(message.id)
-                                .observeAsState()
-                            Message(
-                                modifier = Modifier
-                                    .heightIn(max = 200.dp)
-                                    .sharedElementWithCallerManagedVisibility(
-                                        visible = true,
-                                        sharedContentState = rememberSharedContentState(message.id)
-                                    )
-                                    .padding(8.dp)
-                                    .cutoutHorizontalPadding()
-                                    .systemBarsHorizontalPadding(),
-                                message = message,
-                                discussionViewModel = discussionViewModel,
-                                messageExpiration = messageExpiration,
-                                linkPreviewViewModel = linkPreviewViewModel,
-                                showSender = showSender,
-                                lastFromSender = true,
-                                openOnClick = false,
-                                blockSwipe = true,
-                                blockClicks = true,
-                                fullWidth = true,
-                                useAnimatedEmojis = remember { useAnimatedEmojis() },
-                                loopAnimatedEmojis = remember { loopAnimatedEmojis() },
-                                onMessageGloballyPositioned = onMessageGloballyPositioned
-                            )
                         }
-                    }
 
                     val actionsAndPicker = @Composable {
                         val density = LocalDensity.current
                         Box(
                             modifier = Modifier
                                 .clipToBounds()
-                                .heightIn(min = (minHeight / density.density)
-                                    .coerceAtLeast(if (message.isReactable) 368f else 0f).dp) // make sure the minHeight is at least the height of the emoji picker
+                                .heightIn(
+                                    min = (minHeight / density.density)
+                                        .coerceAtLeast(if (message.isReactable) 368f else 0f).dp
+                                ) // make sure the minHeight is at least the height of the emoji picker
                                 .cutoutHorizontalPadding()
                                 .systemBarsHorizontalPadding(),
                             contentAlignment = if (message.isInbound) Alignment.TopStart else Alignment.TopEnd
@@ -290,9 +301,15 @@ fun MessageActionMenu(
                                     ),
                                 ) {
                                     val focusState = remember { mutableStateOf(false) }
-                                    Column {
+                                    Card(
+                                        colors = CardDefaults.cardColors(
+                                            containerColor = colorResource(
+                                                R.color.dialogBackground
+                                            ), contentColor = colorResource(R.color.almostBlack)
+                                        )
+                                    ) {
                                         SearchBar(
-                                            modifier = Modifier.padding(8.dp),
+                                            modifier = Modifier.padding(8.dp).height(40.dp),
                                             placeholderText = stringResource(R.string.hint_search_emoji),
                                             searchText = emojiSearchViewModel.searchText,
                                             onSearchTextChanged = {
@@ -310,13 +327,13 @@ fun MessageActionMenu(
                                         )
                                         LaunchedEffect(focusState.value) {
                                             if (focusState.value) {
-                                                emojiSearchViewModel.shownEmojiVariants.value = null
+                                                emojiSearchViewModel.shownEmojiVariants.value =
+                                                    null
                                             }
                                         }
                                         EmojiPicker(
                                             modifier = Modifier
                                                 .height(280.dp),
-                                            gridState = emojiPickerGridState,
                                             onReact = onReact,
                                             onToggleFavorite = onToggleFavorite,
                                             isSearch = emojiSearchViewModel.searchText.isNotEmpty() || focusState.value,
@@ -357,7 +374,8 @@ fun MessageActionMenu(
                                         canEdit = canEdit,
                                         message = message,
                                         discussion = discussion,
-                                        discussionDelegate = discussionDelegate,
+                                        discussionDelegate = discussionViewModel,
+                                        messageEditHandler = messageEditHandler,
                                         onDismiss = onDismiss,
                                     )
                                 }
@@ -376,9 +394,10 @@ fun MessageActionMenu(
                             contentAlignment = if (message.isInbound) Alignment.CenterStart else Alignment.CenterEnd,
                         ) {
                             var messageWidth: Int? by remember { mutableStateOf(null) }
-                            val onMessageGloballyPositioned: ((LayoutCoordinates) -> Unit) = { layout ->
-                                messageWidth = layout.size.width
-                            }
+                            val onMessageGloballyPositioned: ((LayoutCoordinates) -> Unit) =
+                                { layout ->
+                                    messageWidth = layout.size.width
+                                }
                             messageContent(onMessageGloballyPositioned)
                             messageWidth?.let { messageWidth ->
                                 val density = LocalDensity.current.density
@@ -386,9 +405,12 @@ fun MessageActionMenu(
                                         8.dp - // message outer padding
                                         (messageWidth / density + if (showSender) 40 else 0 // account for the initial view
                                                 ).coerceAtLeast(380f).dp - // message width, with a minimum equal to reaction bar width
-                                        WindowInsets.safeDrawing.asPaddingValues().let { // also remove insets
-                                            it.calculateStartPadding(LayoutDirection.Ltr) + it.calculateEndPadding(LayoutDirection.Ltr)
-                                        }
+                                        WindowInsets.safeDrawing.asPaddingValues()
+                                            .let { // also remove insets
+                                                it.calculateStartPadding(LayoutDirection.Ltr) + it.calculateEndPadding(
+                                                    LayoutDirection.Ltr
+                                                )
+                                            }
                                 Box(
                                     modifier = Modifier
                                         .cutoutHorizontalPadding()

@@ -20,7 +20,6 @@
 package io.olvid.messenger.onboarding.flow
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -66,7 +65,6 @@ import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
@@ -84,6 +82,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.olvid.messenger.R
+import io.olvid.messenger.designsystem.icons.OlvidLogo
+import io.olvid.messenger.designsystem.icons.OlvidLogoSize
 import io.olvid.messenger.designsystem.theme.OlvidTypography
 import io.olvid.messenger.onboarding.flow.OnboardingActionType.BUTTON
 import io.olvid.messenger.onboarding.flow.OnboardingActionType.BUTTON_OUTLINED
@@ -290,7 +290,7 @@ fun OnboardingScreen(
 
 @Composable
 private fun OnboardingHeader(title: String, subtitle: String) {
-    OlvidLogo()
+    OlvidLogo(size = OlvidLogoSize.LARGE)
     if (title.isNotEmpty()) {
         Spacer(modifier = Modifier.height(24.dp))
         Text(
@@ -349,31 +349,6 @@ fun OnboardingExplanationSteps(steps: List<String>) {
 }
 
 @Composable
-private fun OlvidLogo() {
-    Box(
-        modifier = Modifier
-            .size(60.dp)
-            .background(
-                shape = RoundedCornerShape(16.dp),
-                brush = Brush.verticalGradient(
-                    listOf(
-                        colorResource(id = R.color.olvid_gradient_light),
-                        colorResource(id = R.color.olvid_gradient_dark)
-                    )
-                )
-            )
-    ) {
-        Image(
-            modifier = Modifier
-                .align(Alignment.Center)
-                .size(56.dp),
-            painter = painterResource(id = R.drawable.icon_olvid_no_padding),
-            contentDescription = "Olvid"
-        )
-    }
-}
-
-@Composable
 private fun OnboardingButton(
     modifier: Modifier = Modifier,
     text: AnnotatedString,
@@ -382,7 +357,7 @@ private fun OnboardingButton(
 ) {
     OutlinedButton(
         modifier = modifier.widthIn(max = 400.dp),
-        border = BorderStroke(1.dp, Color(0x6E111111)),
+        border = BorderStroke(1.dp, colorResource(R.color.mediumGrey)),
         shape = RoundedCornerShape(12.dp),
         colors = ButtonDefaults.outlinedButtonColors(
             contentColor = colorResource(id = R.color.almostBlack),

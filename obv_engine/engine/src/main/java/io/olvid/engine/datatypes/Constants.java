@@ -127,6 +127,8 @@ public abstract class Constants {
     public static final long BASE_RESCHEDULING_TIME = 250L;
     public static final long WEBSOCKET_PING_INTERVAL_MILLIS = 20_000L;
     public static final long WEBSOCKET_RECONNECT_INTERVAL_MILLIS = 6_000_000L ; // 1h40 (the AWS timeout is 2h)
+    public static final long WEBSOCKET_SLEEP_DETECTION_INTERVAL_MILLIS = 5_000L;
+    public static final long WEBSOCKET_SLEEP_DETECTION_THRESHOLD_MILLIS = 10_000L;
 
 
     // Keycloak

@@ -89,9 +89,11 @@ public abstract class ServerMethod {
     protected byte returnStatus;
 
     private SSLSocketFactory sslSocketFactory = null;
+    private String userAgentOverride = null;
 
-    public void setSslSocketFactory(SSLSocketFactory sslSocketFactory) {
+    public void setSslSocketFactory(SSLSocketFactory sslSocketFactory, String userAgentOverride) {
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
     }
 
     public byte execute(boolean ownedIdentityIsActive) {
@@ -137,7 +139,7 @@ public abstract class ServerMethod {
             if (connection instanceof HttpsURLConnection && sslSocketFactory != null) {
                 ((HttpsURLConnection) connection).setSSLSocketFactory(sslSocketFactory);
             }
-            String userAgentProperty = System.getProperty("http.agent");
+            String userAgentProperty = (userAgentOverride != null) ? userAgentOverride : System.getProperty("http.agent");
             if (userAgentProperty != null) {
                 connection.setRequestProperty("User-Agent", userAgentProperty);
             }

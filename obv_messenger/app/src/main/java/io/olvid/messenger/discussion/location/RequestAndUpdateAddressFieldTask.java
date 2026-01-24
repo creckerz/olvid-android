@@ -40,6 +40,7 @@ import javax.net.ssl.HttpsURLConnection;
 import io.olvid.engine.Logger;
 import io.olvid.messenger.AppSingleton;
 import io.olvid.messenger.R;
+import io.olvid.messenger.services.MDMConfigurationSingleton;
 
 public class RequestAndUpdateAddressFieldTask implements Runnable {
     public static final double MIN_ZOOM_FOR_REQUESTS = 15;
@@ -67,7 +68,7 @@ public class RequestAndUpdateAddressFieldTask implements Runnable {
             if (connection instanceof HttpsURLConnection && AppSingleton.getSslSocketFactory() != null) {
                 ((HttpsURLConnection) connection).setSSLSocketFactory(AppSingleton.getSslSocketFactory());
             }
-            String userAgentProperty = System.getProperty("http.agent");
+            String userAgentProperty = (MDMConfigurationSingleton.getUserAgentOverride() != null) ? MDMConfigurationSingleton.getUserAgentOverride() : System.getProperty("http.agent");
             if (userAgentProperty != null) {
                 connection.setRequestProperty("User-Agent", userAgentProperty);
             }

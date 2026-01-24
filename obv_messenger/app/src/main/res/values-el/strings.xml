@@ -101,7 +101,10 @@
 	<string name="format_identity_details_custom_field" state="needs_review" hash="-1073344790">%1$s: %2$s</string>
 	<string name="hint_company" state="needs_review" hash="379200324">Εταιρεία (προαιρετικό)</string>
 	<string name="hint_compose_your_message" state="needs_review" hash="-25761578">Γράψε μήνυμα</string>
+	<string name="hint_compose_your_message_ephemeral" state="needs_review" hash="-1527208333">Προσωρινό μήνυμα</string>
 	<string name="label_edit_your_message" state="needs_review" hash="1091877412">Επεξεργαστείτε το μήνυμά σας</string>
+	<string name="label_reply_to_x" state="needs_review" hash="1941377665">Απάντηση στον/στην %s</string>
+	<string name="label_reply_to_message" state="needs_review" hash="1280949769">Απάντηση στο μήνυμα</string>
 	<string name="label_selection_formatting" state="needs_review" hash="205892951">Μορφοποίηση</string>
 	<string name="label_selection_code" state="needs_review" hash="-803834470">Κωδικός</string>
 	<string name="label_selection_list" state="needs_review" hash="762025321">Λίστα</string>
@@ -467,7 +470,7 @@
 	<string name="menu_action_choose_picture" state="needs_review" hash="-1655172909">Επιλέξτε μια εικόνα</string>
 	<string name="menu_action_take_photo" state="needs_review" hash="-1123080444">Τραβήξτε μια φωτογραφία</string>
 	<string name="menu_action_remove_image" state="needs_review" hash="1094977672">Αφαίρεση εικόνας</string>
-	<string name="dialog_title_create_empty_group" state="needs_review" hash="-2016542453">Δημιουργία κενής ομάδας;</string>
+	<string name="dialog_title_create_empty_group" state="needs_review" hash="-663434464">Δημιουργία κενής ομάδας;</string>
 	<string name="dialog_message_create_empty_group" state="needs_review" hash="-297923005">Δεν έχετε επιλέξει καμία επαφή για να προσθέσετε στην ομάδα σας. Είστε σίγουροι ότι θέλετε να δημιουργήσετε μια άδεια ομάδα;</string>
 	<string name="pref_dark_mode_title" state="needs_review" hash="816474245">Σκοτεινή λειτουργία</string>
 	<string name="pref_dark_mode_summary" state="needs_review" hash="-623740894">Ενεργοποιήστε τη σκοτεινή λειτουργία για να εξοικονομήσετε μπαταρία και να προστατεύσετε τα μάτια σας.</string>
@@ -558,6 +561,37 @@
 	<string name="dialog_title_webrtc_kick_participant" state="needs_review" hash="389469769">Αποκλεισμός επαφής από την κλήση;</string>
 	<string name="webrtc_failed_kicked" state="needs_review" hash="-758835021">Εξαιρέθηκες από αυτήν την κλήση</string>
 	<string name="dialog_title_start_conference_call" state="needs_review" hash="-1418585505">Έναρξη τηλεδιάσκεψης</string>
+	<string name="olvid_plus_discover" state="needs_review" hash="-924831172">Ανακαλύψτε το Olvid+</string>
+	<string name="olvid_plus_upgrade_title" state="needs_review" hash="-1960092784">Αναβαθμίστε σε Olvid+ για την πλήρη εμπειρία της εφαρμογής</string>
+	<string name="olvid_plus_upgrade_renew" state="needs_review" hash="-4149901">Αυτόματη ανανέωση του σχεδίου για %1$s μέχρι να ακυρωθεί.</string>
+	<string name="olvid_plus_tip_multi_device_title" state="needs_review" hash="481576448">Χρησιμοποιήστε το Olvid σε όλες τις συσκευές σας</string>
+	<string name="olvid_plus_tip_multi_device_subtitle" state="needs_review" hash="1352342578">Το Olvid+ σας επιτρέπει να χρησιμοποιείτε το Olvid στα smartphone και τους υπολογιστές σας.\nΤα μηνύματά σας παραμένουν συγχρονισμένα σε όλες τις συσκευές σας, ώστε να είστε πάντα συνδεδεμένοι.</string>
+	<string name="olvid_plus_tip_call_title" state="needs_review" hash="935809736">Κάντε απεριόριστες κλήσεις</string>
+	<string name="olvid_plus_tip_call_subtitle" state="needs_review" hash="1137191310">Το Olvid+ σας επιτρέπει να πραγματοποιείτε φωνητικές και βιντεοκλήσεις με κρυπτογράφηση από άκρο σε άκρο.\nΕπικοινωνήστε με ασφάλεια με οποιονδήποτε χρήστη Olvid+, ανεξάρτητα από το αν έχει Olvid+ ή όχι.</string>
+	<string name="olvid_plus_tip_support_title" state="needs_review" hash="-1930411305">Υποστηρίξτε το όραμά μας</string>
+	<string name="olvid_plus_tip_support_subtitle" state="needs_review" hash="-1404875508">Ξεκλειδώστε τη λειτουργία πολλαπλών συσκευών και τις ασφαλείς κλήσεις με το Olvid+.\nΗ συνδρομή σας υποστηρίζει ένα βιώσιμο και ειλικρινές μοντέλο, διατηρώντας το Olvid δωρεάν για όλους, χωρίς διαφημίσεις ή κρυφές χρεώσεις.</string>
+	<string name="olvid_plus_offer_multi_device_title" state="needs_review" hash="-623969503">Χρησιμοποιήστε το Olvid σε πολλές συσκευές</string>
+	<string name="olvid_plus_offer_multi_device_subtitle" state="needs_review" hash="-123640091">Χρησιμοποιήστε το Olvid στον υπολογιστή σας. Προστατέψτε όλα τα μηνύματά σας.</string>
+	<string name="olvid_plus_offer_call_title" state="needs_review" hash="935809736">Κάντε απεριόριστες κλήσεις</string>
+	<string name="olvid_plus_offer_call_subtitle" state="needs_review" hash="-1827478007">Κάντε φωνητικές και βιντεοκλήσεις με όλες τις επαφές σας.</string>
+	<string name="olvid_plus_offer_support_title" state="needs_review" hash="-1272799411">Υποστηρίξτε το Olvid</string>
+	<string name="olvid_plus_offer_support_subtitle" state="needs_review" hash="841023374">Υποστηρίξτε ένα βιώσιμο και ειλικρινές μοντέλο που δεν εκμεταλλεύεται τα προσωπικά δεδομένα.</string>
+	<string name="olvid_plus_dialog_multi_device_title" state="needs_review" hash="561167181">Χρησιμοποιήστε το Olvid σε όλες τις συσκευές σας</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle" state="needs_review" hash="1178448519">Με το Olvid+, μπορείτε να συγχρονίσετε τα μηνύματά σας Olvid μεταξύ των smartphone και των υπολογιστών σας. Είστε πάντα διαθέσιμοι!</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_1" state="needs_review" hash="155287050">Απολαύστε την άνεση ενός πληκτρολογίου και μιας μεγάλης οθόνης και στείλτε εύκολα αρχεία από τον υπολογιστή σας.</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_2" state="needs_review" hash="1858309010">Μην χάνετε ποτέ τα μηνύματά σας, ακόμη και σε περίπτωση αστοχίας ή κλοπής της συσκευής σας. Το ιστορικό και τα συνημμένα σας αποθηκεύονται με ασφάλεια σε πολλές συσκευές.</string>
+	<string name="olvid_plus_dialog_call_title" state="needs_review" hash="269811560">Κάντε απεριόριστες κλήσεις</string>
+	<string name="olvid_plus_dialog_call_subtitle" state="needs_review" hash="-416813149">Με το Olvid+ μπορείτε να πραγματοποιήσετε ηχητικές και βιντεοκλήσεις, τόσο ατομικές όσο και ομαδικές.</string>
+	<string name="olvid_plus_dialog_call_subtitle_1" state="needs_review" hash="-608348196">Όλες οι επαφές σου είναι προσβάσιμες, είτε έχουν Olvid+ είτε όχι.</string>
+	<string name="olvid_plus_dialog_call_subtitle_2" state="needs_review" hash="-1804019862">Απολαύστε βέλτιστη ποιότητα κλήσεων, με το ίδιο επίπεδο ασφάλειας με όλες τις επικοινωνίες σας Olvid.</string>
+	<string name="olvid_plus_dialog_support_title" state="needs_review" hash="1942452361">Υποστηρίξτε το Olvid, τον ιδιωτικό messenger για όλους</string>
+	<string name="olvid_plus_dialog_support_subtitle" state="needs_review" hash="2119917538">Το Olvid είναι μια πραγματικά ιδιωτική εφαρμογή ανταλλαγής μηνυμάτων, σχεδιασμένη να λειτουργεί χωρίς να αποκτά πρόσβαση στα προσωπικά σας στοιχεία: δεν απαιτείται αριθμός τηλεφώνου, email ή όνομα.</string>
+	<string name="olvid_plus_dialog_support_subtitle_1" state="needs_review" hash="1809563102">Όλα όσα ανταλλάσσετε παραμένουν μεταξύ εσάς και των επαφών σας. Κανένας άλλος.</string>
+	<string name="olvid_plus_dialog_support_subtitle_2" state="needs_review" hash="-118773166">Με ανοιχτό κώδικα και τακτικούς ελέγχους, δεν χρειάζεται να μας πιστεύετε τυφλά.</string>
+	<string name="olvid_plus_dialog_support_subtitle_3" state="needs_review" hash="-1885036855">Συνεγγραφόμενοι, υποστηρίζετε μια δίκαιη και βιώσιμη αποστολή για να διατηρήσετε το Olvid δωρεάν για όλους, εντελώς χωρίς διαφημίσεις και κρυφές χρεώσεις.</string>
+	<string name="label_subscription_offer_save_percent" state="needs_review" hash="479307719">Εξοικονομήστε %1$d%%</string>
+	<string name="label_subscription_offer_monthly" state="needs_review" hash="-1602490190">Μηνιαίος</string>
+	<string name="label_subscription_offer_yearly" state="needs_review" hash="1246240165">Ετήσιο</string>
 	<string name="label_subscription_status" state="needs_review" hash="1154002053">Κατάσταση συνδρομής</string>
 	<string name="text_feature_initiate_secure_calls" state="needs_review" hash="1414263062">Έναρξη ασφαλών κλήσεων</string>
 	<string name="text_premium_features" state="needs_review" hash="603728806">Προηγμένες λειτουργίες</string>
@@ -640,7 +674,7 @@
 	<string name="text_premium_features_free_trial" state="needs_review" hash="-1976234715">Δωρεάν δοκιμαστική περίοδος για τις premium λειτουργίες</string>
 	<string name="button_label_start_free_trial" state="needs_review" hash="-508109296">Ξεκινήστε τη δωρεάν δοκιμή</string>
 	<string name="label_free_trial_available" state="needs_review" hash="-995163441">Διαθέσιμη δωρεάν δοκιμή</string>
-	<string name="label_free_trial_explanation" state="needs_review" hash="-596460015">Δοκιμάστε τις ασφαλείς κλήσεις του Olvid δωρεάν για ένα μήνα (διαθέσιμο μόνο μία φορά)</string>
+	<string name="label_free_trial_explanation" state="needs_review" hash="2050354272">Δοκιμάστε τις ασφαλείς κλήσεις του Olvid δωρεάν για ένα μήνα (διαθέσιμο μόνο μία φορά).</string>
 	<string name="toast_message_failed_to_start_free_trial" state="needs_review" hash="-1137706906">Απέτυχε η έναρξη της δωρεάν δοκιμής</string>
 	<string name="toast_message_free_trial_started" state="needs_review" hash="1357863164">Έναρξη δωρεάν δοκιμής</string>
 	<string name="toast_message_error_launching_in_app_purchase" state="needs_review" hash="-1890004340">Σφάλμα κατά την εκκίνηση της αγοράς εντός της εφαρμογής</string>
@@ -648,8 +682,6 @@
 	<string name="toast_message_in_app_purchase_successful" state="needs_review" hash="578109721">Η αγορά εντός της εφαρμογής ήταν επιτυχής</string>
 	<string name="button_label_price_per_month" state="needs_review" hash="-552222952">%1$s το μήνα</string>
 	<string name="button_label_price_per_year" state="needs_review" hash="1539075788">%1$s ανά έτος</string>
-	<string name="button_label_price_per_month_expanded" state="needs_review" hash="173326792">%1$s\nανά μήνα</string>
-	<string name="button_label_price_per_year_expanded" state="needs_review" hash="1947639238">%1$s\nανά έτος</string>
 	<string name="text_awaiting_subscription_payment" state="needs_review" hash="1135205985">Η πληρωμή της συνδρομής απορρίφθηκε</string>
 	<string name="text_subscription_in_grace_period_until" state="needs_review" hash="-1685522686">Σε περίοδο χάριτος έως: %1$s</string>
 	<string name="text_subscription_on_hold_since" state="needs_review" hash="-515586151">Συνδρομή σε αναμονή από: %1$s</string>
@@ -661,9 +693,8 @@
 	<string name="label_failed_to_query_subscription" state="needs_review" hash="-1677001973">Αδυναμία ανάκτησης των πακέτων συνδρομής</string>
 	<string name="dialog_title_subscription_required" state="needs_review" hash="-2038592214">Απαιτείται συνδρομή</string>
 	<string name="button_label_check_subscription" state="needs_review" hash="-378220336">Έλεγχος κατάστασης συνδρομής</string>
-	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1662886051">Η έναρξη ασφαλών τηλεφωνικών κλήσεων με το Olvid απαιτεί συνδρομή.\n\nΜπορείτε να ελέγξετε την τρέχουσα κατάσταση της συνδρομής σας και να δείτε τα διαθέσιμα προγράμματα συνδρομής στη σελίδα \"Το προφίλ μου\".</string>
-	<string name="dialog_message_subscription_required_web_client" state="needs_review" hash="-760629168">Η σύνδεση στον web client Olvid απαιτεί συνδρομή.\n\nΜπορείτε να ελέγξετε την τρέχουσα κατάσταση της συνδρομής σας και να δείτε τα διαθέσιμα προγράμματα συνδρομής στη σελίδα \"Το προφίλ μου\".</string>
-	<string name="dialog_message_subscription_required_multi_device" state="needs_review" hash="-1326423501">Η χρήση του προφίλ σου Olvid σε πολλές συσκευές ταυτόχρονα απαιτεί συνδρομή.\n\nΜπορείς να ελέγξεις την τρέχουσα κατάσταση της συνδρομής σου και να δεις τα διαθέσιμα προγράμματα συνδρομής στη σελίδα \"Το προφίλ μου\".</string>
+	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1231676488">Η πραγματοποίηση ασφαλών τηλεφωνικών και βιντεοκλήσεων με το Olvid απαιτεί συνδρομή.</string>
+	<string name="dialog_title_subscription_plans" state="needs_review" hash="-456474468">Προγράμματα συνδρομής</string>
 	<string name="text_ended_on" state="needs_review" hash="1280012933">Λήξη: %1$s</string>
 	<string name="text_free_trial_ended" state="needs_review" hash="-1458860892">Έληξε η δωρεάν δοκιμαστική περίοδος</string>
 	<string name="text_free_trial_expired" state="needs_review" hash="-2049452081">Έληξε η δωρεάν δοκιμαστική άδεια</string>
@@ -995,13 +1026,13 @@
 	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">Εξυπηρετές TURN Παρισιού</string>
 	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">Εξυπηρετές TURN στη Νέα Υόρκη</string>
 	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">Εξυπηρετητές TURN της Σιγκαπούρης</string>
-	<string name="dialog_title_android_12_bluetooth_access" state="needs_review" hash="-2140389265">Αίτηση άδειας πρόσβασης σε συσκευές Bluetooth</string>
-	<string name="dialog_message_android_12_bluetooth_access" state="needs_review" hash="-332888756">Εάν θέλετε να χρησιμοποιήσετε μια ασύρματη ακουστική συσκευή Bluetooth για τις κλήσεις Olvid, πρέπει να επιτρέψετε στο Olvid να \"εντοπίσει και να συνδεθεί\" με τις κοντινές σας συσκευές.</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d επαφές</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">%1$d επαφές στην ομάδα %2$s</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">Απαιτείται ενημέρωση</string>
 	<string name="dialog_message_outdated_version" state="needs_review" hash="488074151">Η έκδοσή σας του Olvid είναι παλιά και χρειάζεται ενημέρωση.\n\nΠιθανότατα χάνετε πολλές νέες λειτουργίες και δεν μπορούμε να εγγυηθούμε τη συμβατότητα της έκδοσής σας με νεότερες εκδόσεις της εφαρμογής που μπορεί να χρησιμοποιούν οι επαφές σας.</string>
 	<string name="button_label_remind_me_later" state="needs_review" hash="-713293818">Υπενθύμισέ μου αργότερα</string>
+	<string name="label_remind_me_tonight" state="needs_review" hash="707009828">Υπενθύμισέ μου το απόψε στις %1$s</string>
+	<string name="label_remind_me_tomorrow" state="needs_review" hash="1904419307">Υπενθύμισέ μου αύριο στις %1$s</string>
 	<string name="hint_personal_note" state="needs_review" hash="-368244163">Προσωπική σημείωση</string>
 	<string name="toast_message_unable_to_restore_app_data" state="needs_review" hash="1602628680">ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Ορισμένες προσαρμογές της εφαρμογής δεν μπόρεσαν να αποκατασταθούν</string>
 	<string name="dialog_title_webrtc_permissions_audio_blocked" state="needs_review" hash="1948829165">Άρνηση άδειας εγγραφής ήχου</string>
@@ -1108,7 +1139,6 @@
 	<string name="pref_reload_backup_configuration_title" state="needs_review" hash="2000428891">Επαναφόρτωση διαμόρφωσης αντιγράφων ασφαλείας</string>
 	<string name="content_description_back_button" state="needs_review" hash="48196338">Επιστροφή</string>
 	<string name="content_description_remove_message_reply_to" state="needs_review" hash="-794585802">Διαγραφή απάντησης στο μήνυμα</string>
-	<string name="content_description_remove_link_preview" state="needs_review" hash="-1085272528">Κατάργηση προεπισκόπησης συνδέσμου</string>
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">Δείκτης ότι οι ειδοποιήσεις είναι απενεργοποιημένες για αυτό το προφίλ</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">Δημιουργία προφίλ</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">Ο πάροχος ταυτότητας της εταιρείας σας διαμορφώθηκε με επιτυχία. Πατήστε το κουμπί \"Έλεγχος ταυτότητας\" παρακάτω για να συνδεθείτε και να ανακτήσετε τα προσωπικά σας στοιχεία.</string>
@@ -1148,14 +1178,11 @@
 	<string name="dialog_title_neutral_notification_when_hidden" state="needs_review" hash="2013281962">Εμφάνιση ουδέτερης ειδοποίησης όταν το προφίλ είναι κρυφό</string>
 	<string name="dialog_message_neutral_notification_when_hidden" state="needs_review" hash="-58494752">Όταν ένα προφίλ είναι κρυφό, δεν λαμβάνετε ειδοποιήσεις για νέα μηνύματα, εκτός εάν είναι ανοιχτό στο Olvid. Εάν ενεργοποιήσετε αυτήν την επιλογή, θα εμφανιστεί μια ειδοποίηση «Το Olvid απαιτεί την προσοχή σας». Στη συνέχεια, μπορείτε να ανοίξετε το Olvid και να ξεκλειδώσετε το κρυφό σας προφίλ για να δείτε νέα μηνύματα.\nΠροειδοποίηση: αυτό μπορεί να αποκαλύψει το γεγονός ότι έχετε όντως ένα κρυφό προφίλ.</string>
 	<string name="toast_message_password_already_used_other_profile" state="needs_review" hash="390904904">Σφάλμα: Αυτός ο κωδικός πρόσβασης χρησιμοποιείται από άλλο κρυφό προφίλ</string>
-	<string name="label_configure_shortcuts" state="needs_review" hash="-857125506">Αλλαγή σειράς εικονιδίων</string>
 	<string name="label_attach_file" state="needs_review" hash="-89285310">Συνδέστε αρχεία</string>
 	<string name="label_attach_image" state="needs_review" hash="-1185400308">Επισυνάψτε εικόνες</string>
 	<string name="label_attach_timer" state="needs_review" hash="-1527208333">Εφήμερο μήνυμα</string>
 	<string name="label_attach_camera" state="needs_review" hash="-1123080444">Τραβήξτε μια φωτογραφία</string>
 	<string name="label_attach_video" state="needs_review" hash="1626268086">Εγγραφή βίντεο</string>
-	<string name="dialog_title_choose_icon_order" state="needs_review" hash="856935796">Επιλέξτε την προτεραιότητα των εικονιδίων συνημμένων</string>
-	<string name="label_icons_below_never_shown" state="needs_review" hash="1250704267">Τα εικονίδια κάτω από αυτή τη γραμμή δεν θα εμφανιστούν ποτέ</string>
 	<string name="pref_font_scale" state="needs_review" hash="1773040591">Μέγεθος γραμματοσειράς</string>
 	<string name="pref_text_font_scale_0_75" state="needs_review" hash="-1963894407">Μικρό (75%)</string>
 	<string name="pref_text_font_scale_0_9" state="needs_review" hash="-708054676">Μικρό (90%)</string>
@@ -1210,7 +1237,6 @@
 	<string name="x_reactions_to" state="needs_review" hash="177752739">%1$d αντιδράσεις σε: %2$s</string>
 	<string name="notification_text_xx_reacted" state="needs_review" hash="647790513">Ο/Η %1$s αντέδρασε στο %2$s</string>
 	<string name="label_attach_emoji" state="needs_review" hash="-1842205895">Εισαγωγή emoji</string>
-	<string name="label_long_press_for_favorite" state="needs_review" hash="1284446174">Πατήστε παρατεταμένα για να προσθέσετε/αφαιρέσετε από τα αγαπημένα</string>
 	<string name="menu_action_debug_information" state="needs_review" hash="-919213138">Πληροφορίες εντοπισμού σφαλμάτων</string>
 	<string name="debug_label_number_of_devices" state="needs_review" hash="1662862352">Αριθμός συσκευών:</string>
 	<string name="debug_label_number_of_devices_no_channel" state="needs_review" hash="808299225">Χωρίς ασφαλές κανάλι:</string>
@@ -1283,8 +1309,6 @@
 	<string name="dialog_message_incomplete_attachments" state="needs_review" hash="1179188058">Τα επιλεγμένα μηνύματα περιέχουν συνημμένα που δεν έχουν ληφθεί πλήρως. Αυτά τα μηνύματα δεν μπορούν να προωθηθούν μέχρι να ολοκληρωθεί η λήψη.</string>
 	<string name="dialog_message_incomplete_attachments_partial" state="needs_review" hash="1274554335">Μερικά από τα επιλεγμένα μηνύματα περιέχουν συνημμένα που δεν έχουν ληφθεί πλήρως. Αυτά τα μηνύματα δεν μπορούν να προωθηθούν μέχρι να ολοκληρωθεί η λήψη.\n\nΠατήστε «Συνέχεια» για να προωθήσετε μόνο τα μηνύματα που μπορούν να προωθηθούν.</string>
 	<string name="hint_search_message" state="needs_review" hash="1630003450">Αναζήτηση μηνύματος</string>
-	<string name="menu_action_search_prev" state="needs_review" hash="-1639666563">Προηγούμενο</string>
-	<string name="menu_action_search_next" state="needs_review" hash="1158639077">Επόμενο</string>
 	<string name="pref_manage_cloud_backups_title" state="needs_review" hash="824115345">Διαχείριση αντιγράφων ασφαλείας στο cloud</string>
 	<string name="pref_manage_cloud_backups_summary" state="needs_review" hash="-161789549">Πατήστε για να κατεβάσετε ή να διαγράψετε τα αντίγραφα ασφαλείας στο cloud.</string>
 	<string name="dialog_title_manage_cloud_backups" state="needs_review" hash="-1825078945">Αντίγραφα ασφαλείας στο cloud</string>
@@ -1484,7 +1508,7 @@
 	<string name="text_you_became_admin" state="needs_review" hash="2137006821">Είστε πλέον διαχειριστής της ομάδας</string>
 	<string name="text_you_are_no_longer_admin" state="needs_review" hash="1766709431">Δεν είστε πλέον διαχειριστής της ομάδας</string>
 	<string name="text_you_became_writer" state="needs_review" hash="-1671425999">Τώρα επιτρέπεται να δημοσιεύετε μηνύματα</string>
-	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-762273585">Δεν μπορείτε πλέον να δημοσιεύσετε μηνύματα εδώ</string>
+	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-930933808">Δεν μπορείτε να δημοσιεύσετε μηνύματα εδώ</string>
 	<string name="label_pending" state="needs_review" hash="1975294811">Σε εκκρεμότητα</string>
 	<string name="pref_app_language_title" state="needs_review" hash="-1748962099">Γλώσσα εφαρμογής</string>
 	<string name="pref_text_default_device_language" state="needs_review" hash="-1062620207">Προεπιλεγμένη γλώσσα συσκευής</string>
@@ -1570,6 +1594,7 @@
 	<string name="text_invalid_shortcut" state="needs_review" hash="-1219107750">Μη έγκυρη συντόμευση</string>
 	<string name="text_feature_initiate_secure_calls_from_another_profile" state="needs_review" hash="271258252">Έναρξη ασφαλών κλήσεων (διαθέσιμο μέσω άλλου προφίλ)</string>
 	<string name="dialog_title_confirm_open_link" state="needs_review" hash="46935087">Άνοιγμα αυτού του συνδέσμου στο πρόγραμμα περιήγησής σας;</string>
+	<string name="label_open_original_link_with_trackers" state="needs_review" hash="-1586932660">Χρησιμοποιήστε τον αρχικό σύνδεσμο που περιέχει παραμέτρους παρακολούθησης</string>
 	<string name="dialog_title_confirm_open_olvid_link" state="needs_review" hash="425949498">Άνοιγμα αυτού του συνδέσμου στο Olvid;</string>
 	<string name="toast_message_unable_to_open_url" state="needs_review" hash="-1486954792">Δεν είναι δυνατό το άνοιγμα του URL</string>
 	<string name="text_explanation_location_map_provider" state="needs_review" hash="-173394547">Η επιλογή παρόχου χαρτών σας επιτρέπει να επιλέξετε με ακρίβεια την τοποθεσία που θέλετε να μοιραστείτε σε έναν χάρτη. Ωστόσο, αυτό μπορεί να αποκαλύψει την τοποθεσία σας (ή την τοποθεσία των επαφών σας) σε αυτόν τον πάροχο υπηρεσιών.</string>
@@ -1580,7 +1605,6 @@
 	<string name="label_no_address_found" state="needs_review" hash="1035554993">Δεν βρέθηκε καμία διεύθυνση</string>
 	<string name="label_zoom_in_for_address" state="needs_review" hash="902696925">Μεγέθυνση για αναζήτηση διεύθυνσης</string>
 	<string name="label_address_lookup_disabled" state="needs_review" hash="-2140124686">Αναζήτηση διευθύνσεων απενεργοποιημένη</string>
-	<string name="content_description_cancel_message_edit" state="needs_review" hash="984163129">Ακύρωση επεξεργασίας μηνύματος</string>
 	<string name="dialog_title_introducing_mentions" state="needs_review" hash="-1741341288">Παρουσιάζουμε τις αναφορές χρηστών!</string>
 	<string name="dialog_message_introducing_mentions" state="needs_review" hash="622739087">Το Olvid επιτρέπει πλέον την αναφορά ενός χρήστη σε μια συζήτηση 🫵! Απλώς πληκτρολογήστε @ ακολουθούμενο από ένα γράμμα ή το όνομά του για να δείτε ποιον μπορείτε να αναφέρετε. Επιπλέον, όταν κάνετε σίγαση 💤 μιας συζήτησης ή ενός προφίλ, μπορείτε πλέον να επιλέξετε να λαμβάνετε ειδοποιήσεις μόνο όταν αναφέρεστε ρητά σε ένα μήνυμα. Σημειώστε ότι οι επαφές σας θα πρέπει να ενημερώσουν το Olvid στην τελευταία έκδοση για να δουν ότι τους αναφέρατε.</string>
 	<string name="pref_no_notify_certificate_change_for_previews_title" state="needs_review" hash="-434788963">Απενεργοποίηση ειδοποίησης αλλαγής πιστοποιητικού για προεπισκοπήσεις συνδέσμων</string>
@@ -1739,7 +1763,7 @@
 	<string name="troubleshooting_ignored" state="needs_review" hash="816017832">Αγνοήθηκε</string>
 	<string name="onboarding_transfer_multidevice_purchase_question" state="needs_review" hash="351030441">Θέλετε να παραμείνουν ενεργές όλες οι συσκευές σας;</string>
 	<string name="onboarding_transfer_multidevice_purchase_hyperlink" state="needs_review" hash="747183939">Εδώ</string>
-	<string name="button_label_subscribe_now" state="needs_review" hash="1805105542">Εγγραφείτε τώρα</string>
+	<string name="button_label_subscribe_with_price" state="needs_review" hash="324675175">Εγγραφή • %1$s</string>
 	<string name="onboarding_transfer_devices_loading_title" state="needs_review" hash="801961341">Λήψη λίστας συσκευών…</string>
 	<string name="dialog_title_introducing_multi_device" state="needs_review" hash="-310103349">Παρουσιάζουμε το Olvid Desktop και την υποστήριξη για πολλές συσκευές!</string>
 	<string name="dialog_message_introducing_multi_device" state="needs_review" hash="-153162506">Το Olvid είναι πλέον διαθέσιμο για **τον υπολογιστή σας** (Windows και macOS). Μπορείτε να κατεβάσετε την τελευταία έκδοση από εδώ: https://olvid.io/download/ Με την υποστήριξη **πολλαπλών συσκευών**, ξεκινήστε μια συνομιλία στο τηλέφωνό σας και συνεχίστε την στον υπολογιστή σας. Η κοινή χρήση αρχείων μεταξύ των συσκευών σας και των επαφών σας δεν ήταν ποτέ πιο εύκολη!</string>
@@ -1929,7 +1953,6 @@
 	<string name="pref_archived_attachments_summary" state="needs_review" hash="1596754073">Όταν αυτό είναι ενεργοποιημένο, τα συνημμένα από τις αρχειοθετημένες συνομιλίες θα ληφθούν αυτόματα σύμφωνα με την παραπάνω ρύθμιση.</string>
 	<string name="pref_unarchive_on_notification_title" state="needs_review" hash="-1146947153">Αρχειοθέτηση συνομιλιών κατά τη λήψη ειδοποίησης</string>
 	<string name="pref_unarchive_on_notification_summary" state="needs_review" hash="778062251">Όταν αυτή η λειτουργία είναι ενεργοποιημένη, οι αρχειοθετημένες συνομιλίες αποαρχειοθετούνται αυτόματα όταν λαμβάνεται μια ειδοποίηση για ένα νέο μήνυμα.</string>
-	<string name="call_notification_ongoing_call" state="needs_review" hash="1828207822">Εν εξελίξει κλήση</string>
 	<string name="call_notification_incoming_call" state="needs_review" hash="-1223043344">Εισερχόμενη κλήση</string>
 	<string name="menu_action_copy_text_from_image" state="needs_review" hash="-1072685983">Αντιγράψτε αυτή τη λέξη</string>
 	<string name="menu_action_copy_text_block_from_image" state="needs_review" hash="1436026569">Αντιγραφή ολόκληρου του μπλοκ</string>
@@ -2120,4 +2143,8 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Μη προσβάσιμη συσκευή συνομηλίκου</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Επαναδημιουργία όλων των ασφαλών καναλιών</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Η επαναδημιουργία όλων των ασφαλών καναλιών θα αναγκάσει το Olvid να δημιουργήσει νέους ασφαλείς καναλους επικοινωνίας με όλες τις συσκευές των επαφών σας. Αυτό γενικά δεν είναι χρήσιμο, αλλά μπορεί να επιλύσει σπάνιες καταστάσεις όπου ορισμένοι από αυτούς τους καναλους είναι «εκτός συγχρονισμού».\n\n**Προειδοποίηση:** Εάν έχετε πολλούς επαφές, αυτή η λειτουργία μπορεί να διαρκέσει μερικά λεπτά και ενδέχεται να χάσετε ορισμένα εισερχόμενα μηνύματα κατά τη διάρκεια της εκτέλεσής της.</string>
+	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Έληξε η κλήση</string>
+	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">Χρειάζεστε συνδρομές για την ομάδα σας;</string>
+	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Επισκεφθείτε το Olvid Store</string>
+	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">Ορίστηκε υπενθύμιση</string>
 </resources>

@@ -99,6 +99,8 @@ public class OtherPreferenceFragment extends PreferenceFragmentCompat {
                     editor.remove(SettingsActivity.PREF_KEY_LAST_TROUBLESHOOTING_TIP_TIMESTAMP);
                     editor.remove(SettingsActivity.PREF_KEY_LAST_EXPIRING_DEVICE_TIP_TIMESTAMP);
                     editor.remove(SettingsActivity.PREF_KEY_LAST_OFFLINE_DEVICE_TIP_TIMESTAMP);
+                    editor.remove(SettingsActivity.PREF_KEY_LAST_OLVID_PLUS_TIP_TIMESTAMP);
+                    editor.remove(SettingsActivity.PREF_KEY_OLVID_PLUS_REMINDER_TIMESTAMP);
                     if (SettingsActivity.getLastReadReceiptTipTimestamp() != -1) {
                         editor.remove(SettingsActivity.PREF_KEY_LAST_READ_RECEIPT_TIP_TIMESTAMP);
                     }

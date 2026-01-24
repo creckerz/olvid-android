@@ -101,7 +101,10 @@
 	<string name="format_identity_details_custom_field" state="needs_review" hash="-1073344790">%1$s: %2$s</string>
 	<string name="hint_company" state="needs_review" hash="379200324">Bedrijf (optioneel)</string>
 	<string name="hint_compose_your_message" state="needs_review" hash="-25761578">Bericht schrijven</string>
+	<string name="hint_compose_your_message_ephemeral" state="needs_review" hash="-1527208333">Verwijdervolle bericht</string>
 	<string name="label_edit_your_message" state="needs_review" hash="1091877412">Bewerk je bericht</string>
+	<string name="label_reply_to_x" state="needs_review" hash="1941377665">Antwoord op %s</string>
+	<string name="label_reply_to_message" state="needs_review" hash="1280949769">Antwoord op bericht</string>
 	<string name="label_selection_formatting" state="needs_review" hash="205892951">Opmaak</string>
 	<string name="label_selection_code" state="needs_review" hash="-803834470">Code</string>
 	<string name="label_selection_list" state="needs_review" hash="762025321">Lijst</string>
@@ -467,7 +470,7 @@
 	<string name="menu_action_choose_picture" state="needs_review" hash="-1655172909">Een afbeelding kiezen</string>
 	<string name="menu_action_take_photo" state="needs_review" hash="-1123080444">Maak een foto</string>
 	<string name="menu_action_remove_image" state="needs_review" hash="1094977672">Afbeelding verwijderen</string>
-	<string name="dialog_title_create_empty_group" state="needs_review" hash="-2016542453">Lege groep aanmaken?</string>
+	<string name="dialog_title_create_empty_group" state="needs_review" hash="-663434464">Lege groep aanmaken?</string>
 	<string name="dialog_message_create_empty_group" state="needs_review" hash="-297923005">Je hebt geen contacten geselecteerd om aan je groep toe te voegen. Ben je zeker dat je een lege groep wilt maken?</string>
 	<string name="pref_dark_mode_title" state="needs_review" hash="816474245">Donkere modus</string>
 	<string name="pref_dark_mode_summary" state="needs_review" hash="-623740894">Schakel de donkere modus in om batterij en ogen te sparen.</string>
@@ -558,6 +561,37 @@
 	<string name="dialog_title_webrtc_kick_participant" state="needs_review" hash="389469769">Contact uitsluiten van het gesprek?</string>
 	<string name="webrtc_failed_kicked" state="needs_review" hash="-758835021">Je bent uitgesloten van dit gesprek</string>
 	<string name="dialog_title_start_conference_call" state="needs_review" hash="-1418585505">Conferentiegesprek starten</string>
+	<string name="olvid_plus_discover" state="needs_review" hash="-924831172">Ontdek Olvid+</string>
+	<string name="olvid_plus_upgrade_title" state="needs_review" hash="-1960092784">Upgrade naar Olvid+ voor de volledige app-ervaring.</string>
+	<string name="olvid_plus_upgrade_renew" state="needs_review" hash="-4149901">Automatische verlenging voor %1$s tot annulering.</string>
+	<string name="olvid_plus_tip_multi_device_title" state="needs_review" hash="481576448">Gebruik Olvid op al je apparaten.</string>
+	<string name="olvid_plus_tip_multi_device_subtitle" state="needs_review" hash="1352342578">Met Olvid+ kun je Olvid gebruiken op je smartphones en computers.\nJe berichten blijven gesynchroniseerd op al je apparaten, zodat je altijd verbonden bent.</string>
+	<string name="olvid_plus_tip_call_title" state="needs_review" hash="935809736">Onbeperkt bellen</string>
+	<string name="olvid_plus_tip_call_subtitle" state="needs_review" hash="1137191310">Met Olvid+ kun je end-to-end versleutelde audio- en video-oproepen plaatsen.\nBereik elke Olvid-gebruiker veilig, ongeacht of ze Olvid+ hebben of niet.</string>
+	<string name="olvid_plus_tip_support_title" state="needs_review" hash="-1930411305">Steun onze visie</string>
+	<string name="olvid_plus_tip_support_subtitle" state="needs_review" hash="-1404875508">Ontgrendel multi-device en veilige gesprekken met Olvid+.\nJe abonnement ondersteunt een duurzaam en eerlijk model, waardoor Olvid gratis blijft voor iedereen, zonder advertenties of verborgen kosten.</string>
+	<string name="olvid_plus_offer_multi_device_title" state="needs_review" hash="-623969503">Gebruik Olvid op meerdere apparaten.</string>
+	<string name="olvid_plus_offer_multi_device_subtitle" state="needs_review" hash="-123640091">Gebruik Olvid op je computer. Bewaar al je berichten veilig.</string>
+	<string name="olvid_plus_offer_call_title" state="needs_review" hash="935809736">Onbeperkt bellen</string>
+	<string name="olvid_plus_offer_call_subtitle" state="needs_review" hash="-1827478007">Plaats spraak- en video-oproepen met al je contacten.</string>
+	<string name="olvid_plus_offer_support_title" state="needs_review" hash="-1272799411">Steun Olvid</string>
+	<string name="olvid_plus_offer_support_subtitle" state="needs_review" hash="841023374">Pleidooi voor een duurzaam en eerlijk model dat persoonlijke gegevens niet uitbuit.</string>
+	<string name="olvid_plus_dialog_multi_device_title" state="needs_review" hash="561167181">Gebruik Olvid op al je apparaten.</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle" state="needs_review" hash="1178448519">Met Olvid+ kun je je Olvid-berichten synchroniseren tussen je smartphones en computers. Je bent altijd bereikbaar!</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_1" state="needs_review" hash="155287050">Geniet van het gemak van een toetsenbord en een groot scherm, en stuur eenvoudig bestanden vanaf je computer.</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_2" state="needs_review" hash="1858309010">Verlies nooit je berichten, zelfs niet bij een defect of diefstal van je apparaat. Je gespreksgeschiedenis en bijlagen worden veilig opgeslagen op meerdere apparaten.</string>
+	<string name="olvid_plus_dialog_call_title" state="needs_review" hash="269811560">Maak onbeperkte oproepen</string>
+	<string name="olvid_plus_dialog_call_subtitle" state="needs_review" hash="-416813149">Met Olvid+ kun je audio- en videogesprekken voeren, zowel één-op-één als in groepen.</string>
+	<string name="olvid_plus_dialog_call_subtitle_1" state="needs_review" hash="-608348196">Al je contacten zijn bereikbaar, ongeacht of ze Olvid+ hebben of niet.</string>
+	<string name="olvid_plus_dialog_call_subtitle_2" state="needs_review" hash="-1804019862">Geniet van optimale gesprekskwaliteit, met hetzelfde beveiligingsniveau als al je Olvid-communicatie.</string>
+	<string name="olvid_plus_dialog_support_title" state="needs_review" hash="1942452361">Steun Olvid, de privéberichtenapp voor iedereen</string>
+	<string name="olvid_plus_dialog_support_subtitle" state="needs_review" hash="2119917538">Olvid is een echt privéberichtentoepassing, ontworpen om te werken zonder ooit toegang te krijgen tot uw persoonlijke informatie: geen telefoonnummer, e-mailadres of naam vereist.</string>
+	<string name="olvid_plus_dialog_support_subtitle_1" state="needs_review" hash="1809563102">Alles wat je uitwisselt, blijft tussen jou en je contacten. Niemand anders.</string>
+	<string name="olvid_plus_dialog_support_subtitle_2" state="needs_review" hash="-118773166">Dankzij open-source code en regelmatige audits hoeft u ons niet op ons woord te geloven.</string>
+	<string name="olvid_plus_dialog_support_subtitle_3" state="needs_review" hash="-1885036855">Door een abonnement af te sluiten, steun je een eerlijke en duurzame missie om Olvid gratis te houden voor iedereen, volledig zonder advertenties en verborgen kosten.</string>
+	<string name="label_subscription_offer_save_percent" state="needs_review" hash="479307719">Bespaar %1$d%%</string>
+	<string name="label_subscription_offer_monthly" state="needs_review" hash="-1602490190">Maandelijks</string>
+	<string name="label_subscription_offer_yearly" state="needs_review" hash="1246240165">Jaarlijks</string>
 	<string name="label_subscription_status" state="needs_review" hash="1154002053">Abonnementsstatus</string>
 	<string name="text_feature_initiate_secure_calls" state="needs_review" hash="1414263062">Beveiligde oproepen starten</string>
 	<string name="text_premium_features" state="needs_review" hash="603728806">Premium functies</string>
@@ -640,7 +674,7 @@
 	<string name="text_premium_features_free_trial" state="needs_review" hash="-1976234715">Gratis proefperiode voor premiumfuncties</string>
 	<string name="button_label_start_free_trial" state="needs_review" hash="-508109296">Gratis proefperiode starten</string>
 	<string name="label_free_trial_available" state="needs_review" hash="-995163441">Gratis proefversie beschikbaar</string>
-	<string name="label_free_trial_explanation" state="needs_review" hash="-596460015">Probeer de beveiligde oproepen van Olvid een maand gratis (alleen eenmalig beschikbaar)</string>
+	<string name="label_free_trial_explanation" state="needs_review" hash="2050354272">Probeer Olvid\'s beveiligde gesprekken een maand gratis (slechts één keer beschikbaar).</string>
 	<string name="toast_message_failed_to_start_free_trial" state="needs_review" hash="-1137706906">Gratis proefperiode kon niet worden gestart</string>
 	<string name="toast_message_free_trial_started" state="needs_review" hash="1357863164">Gratis proefperiode gestart</string>
 	<string name="toast_message_error_launching_in_app_purchase" state="needs_review" hash="-1890004340">Fout bij het starten van de in-app aankoop</string>
@@ -648,8 +682,6 @@
 	<string name="toast_message_in_app_purchase_successful" state="needs_review" hash="578109721">In-app aankoop succesvol</string>
 	<string name="button_label_price_per_month" state="needs_review" hash="-552222952">%1$s per maand</string>
 	<string name="button_label_price_per_year" state="needs_review" hash="1539075788">%1$s per jaar</string>
-	<string name="button_label_price_per_month_expanded" state="needs_review" hash="173326792">%1$s\nper maand</string>
-	<string name="button_label_price_per_year_expanded" state="needs_review" hash="1947639238">%1$s\nper jaar</string>
 	<string name="text_awaiting_subscription_payment" state="needs_review" hash="1135205985">Abonnementsbetaling geweigerd</string>
 	<string name="text_subscription_in_grace_period_until" state="needs_review" hash="-1685522686">Genadeperiode tot: %1$s</string>
 	<string name="text_subscription_on_hold_since" state="needs_review" hash="-515586151">Abonnement gepauzeerd sinds: %1$s</string>
@@ -661,9 +693,8 @@
 	<string name="label_failed_to_query_subscription" state="needs_review" hash="-1677001973">Kon abonnementen niet ophalen</string>
 	<string name="dialog_title_subscription_required" state="needs_review" hash="-2038592214">Abonnement vereist</string>
 	<string name="button_label_check_subscription" state="needs_review" hash="-378220336">Abonnementstatus controleren</string>
-	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1662886051">Het initiëren van beveiligde telefoongesprekken met Olvid vereist een abonnement.\n\nU kunt uw huidige abonnementsstatus controleren en beschikbare abonnementen bekijken op de pagina \"Mijn Profiel\".</string>
-	<string name="dialog_message_subscription_required_web_client" state="needs_review" hash="-760629168">Verbinding maken met de Olvid-webclient vereist een abonnement.\n\nU kunt uw huidige abonnementsstatus en beschikbare abonnementen bekijken op de pagina \"Mijn Profiel\".</string>
-	<string name="dialog_message_subscription_required_multi_device" state="needs_review" hash="-1326423501">Het gebruik van je Olvid-profiel op meerdere apparaten tegelijk vereist een abonnement.\n\nJe kunt je huidige abonnementsstatus en beschikbare abonnementen bekijken op de pagina \"Mijn Profiel\".</string>
+	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1231676488">Het starten van beveiligde telefoon- en videogesprekken met Olvid vereist een abonnement.</string>
+	<string name="dialog_title_subscription_plans" state="needs_review" hash="-456474468">Abonnementsplannen</string>
 	<string name="text_ended_on" state="needs_review" hash="1280012933">Eindigde op: %1$s</string>
 	<string name="text_free_trial_ended" state="needs_review" hash="-1458860892">Gratis proefperiode afgelopen</string>
 	<string name="text_free_trial_expired" state="needs_review" hash="-2049452081">Gratis proeflicentie verlopen</string>
@@ -995,13 +1026,13 @@
 	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">Paris TURN-servers</string>
 	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">TURN-servers van New York</string>
 	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">TURN-servers van Singapore</string>
-	<string name="dialog_title_android_12_bluetooth_access" state="needs_review" hash="-2140389265">Toestemming vragen voor toegang tot Bluetooth-apparaten</string>
-	<string name="dialog_message_android_12_bluetooth_access" state="needs_review" hash="-332888756">Als je een Bluetooth-headset wilt gebruiken voor Olvid-gesprekken, moet je Olvid toestaan om \"te zoeken naar en verbinding te maken met\" je nabijgelegen apparaten.</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d contacten</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">%1$d contacten in groep %2$s</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">Update vereist</string>
 	<string name="dialog_message_outdated_version" state="needs_review" hash="488074151">Je versie van Olvid is verouderd en moet worden bijgewerkt.\n\nJe mist waarschijnlijk veel nieuwe functies en we kunnen niet garanderen dat jouw versie compatibel is met nieuwere versies van de app die je contacten mogelijk gebruiken.</string>
 	<string name="button_label_remind_me_later" state="needs_review" hash="-713293818">Herinner me later</string>
+	<string name="label_remind_me_tonight" state="needs_review" hash="707009828">Herinner me vanavond om %1$s</string>
+	<string name="label_remind_me_tomorrow" state="needs_review" hash="1904419307">Herinner me morgen om %1$s</string>
 	<string name="hint_personal_note" state="needs_review" hash="-368244163">Persoonlijke notitie</string>
 	<string name="toast_message_unable_to_restore_app_data" state="needs_review" hash="1602628680">WAARSCHUWING: Sommige aanpassingen van de applicatie konden niet worden hersteld</string>
 	<string name="dialog_title_webrtc_permissions_audio_blocked" state="needs_review" hash="1948829165">Audio-opname toestemming geweigerd</string>
@@ -1108,7 +1139,6 @@
 	<string name="pref_reload_backup_configuration_title" state="needs_review" hash="2000428891">Herlaad de back-upconfiguratie</string>
 	<string name="content_description_back_button" state="needs_review" hash="48196338">Terug</string>
 	<string name="content_description_remove_message_reply_to" state="needs_review" hash="-794585802">Antwoord op bericht wissen</string>
-	<string name="content_description_remove_link_preview" state="needs_review" hash="-1085272528">Linkvoorbeelden wissen</string>
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">Indicator dat meldingen zijn uitgeschakeld voor dit profiel</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">Maak een profiel aan</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">De identiteitsprovider van uw bedrijf is succesvol geconfigureerd. Druk op de knop \"authentiseren\" hieronder om ermee te authenticeren en uw persoonlijke informatie op te halen.</string>
@@ -1147,14 +1177,11 @@
 	<string name="dialog_title_neutral_notification_when_hidden" state="needs_review" hash="2013281962">Toon neutrale melding wanneer profiel verborgen is</string>
 	<string name="dialog_message_neutral_notification_when_hidden" state="needs_review" hash="-58494752">Wanneer een profiel verborgen is, ontvang je geen meldingen voor nieuwe berichten, tenzij het momenteel openstaat in Olvid. Als je deze optie activeert, wordt een melding \"Olvid vereist je aandacht\" weergegeven. Je kunt dan Olvid openen en je verborgen profiel ontgrendelen om nieuwe berichten te zien.\n\nWaarschuwing: dit kan onthullen dat je daadwerkelijk een verborgen profiel hebt.</string>
 	<string name="toast_message_password_already_used_other_profile" state="needs_review" hash="390904904">Fout: dit wachtwoord wordt al gebruikt door een ander verborgen profiel.</string>
-	<string name="label_configure_shortcuts" state="needs_review" hash="-857125506">Icoonvolgorde wijzigen</string>
 	<string name="label_attach_file" state="needs_review" hash="-89285310">Bestanden toevoegen</string>
 	<string name="label_attach_image" state="needs_review" hash="-1185400308">Afbeeldingen toevoegen</string>
 	<string name="label_attach_timer" state="needs_review" hash="-1527208333">Verwisselbare bericht</string>
 	<string name="label_attach_camera" state="needs_review" hash="-1123080444">Maak een foto</string>
 	<string name="label_attach_video" state="needs_review" hash="1626268086">Video opnemen</string>
-	<string name="dialog_title_choose_icon_order" state="needs_review" hash="856935796">Kies de prioriteit van het bijlage-icoon</string>
-	<string name="label_icons_below_never_shown" state="needs_review" hash="1250704267">De pictogrammen onder deze lijn worden nooit weergegeven</string>
 	<string name="pref_font_scale" state="needs_review" hash="1773040591">Lettergrootte</string>
 	<string name="pref_text_font_scale_0_75" state="needs_review" hash="-1963894407">Klein (75%)</string>
 	<string name="pref_text_font_scale_0_9" state="needs_review" hash="-708054676">Klein (90%)</string>
@@ -1209,7 +1236,6 @@
 	<string name="x_reactions_to" state="needs_review" hash="177752739">%1$d reacties op: %2$s</string>
 	<string name="notification_text_xx_reacted" state="needs_review" hash="647790513">%1$s reageerde op %2$s</string>
 	<string name="label_attach_emoji" state="needs_review" hash="-1842205895">Emoji invoegen</string>
-	<string name="label_long_press_for_favorite" state="needs_review" hash="1284446174">Lang indrukken om toe te voegen/te verwijderen uit favorieten</string>
 	<string name="menu_action_debug_information" state="needs_review" hash="-919213138">Debug-informatie</string>
 	<string name="debug_label_number_of_devices" state="needs_review" hash="1662862352">Aantal apparaten:</string>
 	<string name="debug_label_number_of_devices_no_channel" state="needs_review" hash="808299225">Zonder beveiligd kanaal:</string>
@@ -1282,8 +1308,6 @@
 	<string name="dialog_message_incomplete_attachments" state="needs_review" hash="1179188058">De geselecteerde berichten bevatten bijlagen die niet volledig zijn gedownload. Deze berichten kunnen niet worden doorgestuurd totdat de download is voltooid.</string>
 	<string name="dialog_message_incomplete_attachments_partial" state="needs_review" hash="1274554335">Sommige van de geselecteerde berichten bevatten bijlagen die niet volledig zijn gedownload. Deze berichten kunnen niet worden doorgestuurd totdat de download is voltooid.\n\nDruk op \"Doorgaan\" om alleen de berichten door te sturen die kunnen worden doorgestuurd.</string>
 	<string name="hint_search_message" state="needs_review" hash="1630003450">Bericht zoeken</string>
-	<string name="menu_action_search_prev" state="needs_review" hash="-1639666563">Vorige</string>
-	<string name="menu_action_search_next" state="needs_review" hash="1158639077">Volgende</string>
 	<string name="pref_manage_cloud_backups_title" state="needs_review" hash="824115345">Cloudback-ups beheren</string>
 	<string name="pref_manage_cloud_backups_summary" state="needs_review" hash="-161789549">Tik om cloudback-ups te downloaden of te wissen.</string>
 	<string name="dialog_title_manage_cloud_backups" state="needs_review" hash="-1825078945">Cloudback-ups</string>
@@ -1484,7 +1508,7 @@
 	<string name="text_you_became_admin" state="needs_review" hash="2137006821">Je bent nu een groepadministrator.</string>
 	<string name="text_you_are_no_longer_admin" state="needs_review" hash="1766709431">Je bent geen groepsbeheerder meer</string>
 	<string name="text_you_became_writer" state="needs_review" hash="-1671425999">Je mag nu berichten plaatsen</string>
-	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-762273585">Je kunt hier geen berichten meer plaatsen</string>
+	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-930933808">U kunt hier geen berichten plaatsen.</string>
 	<string name="label_pending" state="needs_review" hash="1975294811">In behandeling</string>
 	<string name="pref_app_language_title" state="needs_review" hash="-1748962099">App-taal</string>
 	<string name="pref_text_default_device_language" state="needs_review" hash="-1062620207">Standaardtaal van het apparaat</string>
@@ -1570,6 +1594,7 @@
 	<string name="text_invalid_shortcut" state="needs_review" hash="-1219107750">Ongeldige snelkoppeling</string>
 	<string name="text_feature_initiate_secure_calls_from_another_profile" state="needs_review" hash="271258252">Beveiligde oproepen starten\n(beschikbaar via een ander profiel)</string>
 	<string name="dialog_title_confirm_open_link" state="needs_review" hash="46935087">Open deze link in je browser?</string>
+	<string name="label_open_original_link_with_trackers" state="needs_review" hash="-1586932660">Gebruik de originele link met trackingparameters</string>
 	<string name="dialog_title_confirm_open_olvid_link" state="needs_review" hash="425949498">Open deze link in Olvid?</string>
 	<string name="toast_message_unable_to_open_url" state="needs_review" hash="-1486954792">Kan URL niet openen</string>
 	<string name="text_explanation_location_map_provider" state="needs_review" hash="-173394547">Het kiezen van een kaartprovider stelt je in staat om precies de locatie te kiezen die je op een kaart wilt delen. Dit kan echter je locatie (of die van je contacten) bekendmaken aan deze dienstverlener.</string>
@@ -1580,7 +1605,6 @@
 	<string name="label_no_address_found" state="needs_review" hash="1035554993">Geen adres gevonden</string>
 	<string name="label_zoom_in_for_address" state="needs_review" hash="902696925">Zoom in om het adres te zoeken</string>
 	<string name="label_address_lookup_disabled" state="needs_review" hash="-2140124686">Adreslookup uitgeschakeld</string>
-	<string name="content_description_cancel_message_edit" state="needs_review" hash="984163129">Bewerking van bericht annuleren</string>
 	<string name="dialog_title_introducing_mentions" state="needs_review" hash="-1741341288">We introduceren gebruikersvermeldingen!</string>
 	<string name="dialog_message_introducing_mentions" state="needs_review" hash="622739087">Olvid staat je nu toe om een gebruiker te vermelden in een discussie 🫵! Typ gewoon @ gevolgd door een letter of hun naam om te zien wie vermeld kan worden.\nDaarnaast kun je bij het dempen 💤 van een discussie of profiel nu kiezen om alleen meldingen te ontvangen wanneer je expliciet in een bericht wordt vermeld.\n\nHoud er rekening mee dat je contacten de nieuwste versie van Olvid moeten bijwerken om te zien dat je ze hebt vermeld.</string>
 	<string name="pref_no_notify_certificate_change_for_previews_title" state="needs_review" hash="-434788963">Schakel meldingen over certificaatwijzigingen voor linkvoorbeelden uit</string>
@@ -1739,7 +1763,7 @@
 	<string name="troubleshooting_ignored" state="needs_review" hash="816017832">Genegeerd</string>
 	<string name="onboarding_transfer_multidevice_purchase_question" state="needs_review" hash="351030441">Wil je dat al je apparaten actief blijven?</string>
 	<string name="onboarding_transfer_multidevice_purchase_hyperlink" state="needs_review" hash="747183939">Hiernaartoe</string>
-	<string name="button_label_subscribe_now" state="needs_review" hash="1805105542">Nu abonneren</string>
+	<string name="button_label_subscribe_with_price" state="needs_review" hash="324675175">Abonneren • %1$s</string>
 	<string name="onboarding_transfer_devices_loading_title" state="needs_review" hash="801961341">Apparaatlijst wordt opgehaald…</string>
 	<string name="dialog_title_introducing_multi_device" state="needs_review" hash="-310103349">Maak kennis met Olvid Desktop en multi-device!</string>
 	<string name="dialog_message_introducing_multi_device" state="needs_review" hash="-153162506">Olvid is nu beschikbaar voor **je computer** (Windows en macOS). Je kunt de nieuwste versie downloaden van:\nhttps://olvid.io/download/\n\nMet de **multi-device**-ondersteuning kun je een gesprek op je telefoon beginnen en op je computer voortzetten. Het delen van bestanden tussen je apparaten en met je contacten is nog nooit zo eenvoudig geweest.</string>
@@ -1929,7 +1953,6 @@
 	<string name="pref_archived_attachments_summary" state="needs_review" hash="1596754073">Wanneer dit is ingeschakeld, worden bijlagen van gearchiveerde gesprekken automatisch gedownload volgens de bovenstaande instelling.</string>
 	<string name="pref_unarchive_on_notification_title" state="needs_review" hash="-1146947153">Gearchiveerde gesprekken op notificatie</string>
 	<string name="pref_unarchive_on_notification_summary" state="needs_review" hash="778062251">Wanneer dit is ingeschakeld, worden gearchiveerde gesprekken automatisch weer uit het archief gehaald wanneer er een melding van een nieuw bericht wordt ontvangen.</string>
-	<string name="call_notification_ongoing_call" state="needs_review" hash="1828207822">Lopend gesprek</string>
 	<string name="call_notification_incoming_call" state="needs_review" hash="-1223043344">Inkomend gesprek</string>
 	<string name="menu_action_copy_text_from_image" state="needs_review" hash="-1072685983">Dit woord kopiëren</string>
 	<string name="menu_action_copy_text_block_from_image" state="needs_review" hash="1436026569">Hele blok kopiëren</string>
@@ -2120,4 +2143,8 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Apparaat van de contactpersoon is onbereikbaar.</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Alle beveiligde kanalen opnieuw aanmaken.</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Het opnieuw aanmaken van alle beveiligde kanalen dwingt Olvid om nieuwe beveiligde communicatiekanalen met alle apparaten van je contacten te creëren. Dit is over het algemeen niet nuttig, maar kan zeldzame situaties oplossen waarin sommige van deze kanalen \"niet gesynchroniseerd\" zijn.\n\n**Waarschuwing:** als je veel contacten hebt, kan deze bewerking enkele minuten duren en kun je mogelijk enkele inkomende berichten mislopen tijdens het uitvoeren ervan.</string>
+	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Oproep beëindigd.</string>
+	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">Heeft uw team abonnementen nodig?</string>
+	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Bezoek de Olvid Store</string>
+	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">Herinnering ingesteld</string>
 </resources>

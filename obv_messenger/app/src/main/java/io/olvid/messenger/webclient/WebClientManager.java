@@ -86,7 +86,6 @@ public class WebClientManager {
         CONNECTION_ERROR,
         INTERNAL_ERROR,
         INVALID_QR_CODE,
-        WEB_PERMISSION_DENIED,
     }
 
     // sub-services
@@ -602,19 +601,19 @@ public class WebClientManager {
     // handler called if an error message is received from server
     protected void handlerReceivedErrorMessageFromServer(int errorCode) {
         switch (errorCode) {
-            case (0):
+            case 0:
                 Logger.e("Server sent an internal error error");
                 this.service.stopServiceWithNotification(StopServiceReason.INTERNAL_ERROR);
                 break ;
-            case (1):
+            case 1:
                 Logger.i("Server sent a message not well formatted error");
                 this.service.stopServiceWithNotification(StopServiceReason.INTERNAL_ERROR);
                 break ;
-            case (2):
+            case 2:
                 Logger.i("Server sent a corresponding not found error");
                 this.service.stopServiceWithNotification(StopServiceReason.CONNECTION_ERROR);
                 break ;
-            case (3):
+            case 3:
                 if (this.currentState == State.WAITING_FOR_RECONNECTION) {
                     Logger.d("Unable to relay a message in WAITING_FOR_RECONNECTION state, ignoring");
                 }
@@ -627,9 +626,9 @@ public class WebClientManager {
                     this.service.stopServiceWithNotification(StopServiceReason.CONNECTION_ERROR);
                 }
                 break ;
-            case (4):
+            case 4:
                 Logger.i("Unable to connect, web client authentication required, and no permission");
-                this.service.stopServiceWithNotification(StopServiceReason.WEB_PERMISSION_DENIED);
+                this.service.stopServiceWithNotification(StopServiceReason.INTERNAL_ERROR);
                 break ;
             default:
                 Logger.i("Unrecognized server error code: " + errorCode);

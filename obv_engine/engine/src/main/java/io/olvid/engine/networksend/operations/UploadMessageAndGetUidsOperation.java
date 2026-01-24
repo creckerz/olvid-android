@@ -44,13 +44,15 @@ import io.olvid.engine.networksend.datatypes.SendManagerSessionFactory;
 public class UploadMessageAndGetUidsOperation extends Operation {
     private final SendManagerSessionFactory sendManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final Identity ownedIdentity;
     private final UID messageUid;
 
-    public UploadMessageAndGetUidsOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, Identity ownedIdentity, UID messageUid) {
+    public UploadMessageAndGetUidsOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, Identity ownedIdentity, UID messageUid) {
         super(IdentityAndUid.computeUniqueUid(ownedIdentity, messageUid), null, null);
         this.sendManagerSessionFactory = sendManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.ownedIdentity = ownedIdentity;
         this.messageUid = messageUid;
     }
@@ -100,7 +102,7 @@ public class UploadMessageAndGetUidsOperation extends Operation {
                         outboxMessage.isVoipMessage(),
                         headers,
                         attachments);
-                serverMethod.setSslSocketFactory(sslSocketFactory);
+                serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
 
                 // we need to block sending message for any inactive ownedIdentity, but, if the ownedIdentity was deleted, we should send the message
                 // this is required for the OwnedIdentityDeletion protocol, to inform your contacts

@@ -82,7 +82,7 @@ fun CallNotification(
             }
             .shadow(elevation = 12.dp)
             .background(
-                color = colorResource(id = R.color.almostWhite),
+                color = colorResource(id = R.color.dialogBackground),
                 shape = RoundedCornerShape(12.dp)
             )
             .padding(8.dp)

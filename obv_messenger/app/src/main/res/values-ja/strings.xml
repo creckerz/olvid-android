@@ -101,7 +101,10 @@
 	<string name="format_identity_details_custom_field" state="needs_review" hash="-1073344790">%1$s: %2$s</string>
 	<string name="hint_company" state="needs_review" hash="379200324">会社 (任意)</string>
 	<string name="hint_compose_your_message" state="needs_review" hash="-25761578">メッセージを入力</string>
+	<string name="hint_compose_your_message_ephemeral" state="needs_review" hash="-1527208333">一時的なメッセージ</string>
 	<string name="label_edit_your_message" state="needs_review" hash="1091877412">メッセージを編集する</string>
+	<string name="label_reply_to_x" state="needs_review" hash="1941377665">%sへの返信</string>
+	<string name="label_reply_to_message" state="needs_review" hash="1280949769">メッセージに返信する</string>
 	<string name="label_selection_formatting" state="needs_review" hash="205892951">書式設定</string>
 	<string name="label_selection_code" state="needs_review" hash="-803834470">コード</string>
 	<string name="label_selection_list" state="needs_review" hash="762025321">リスト</string>
@@ -467,7 +470,7 @@
 	<string name="menu_action_choose_picture" state="needs_review" hash="-1655172909">画像を選択</string>
 	<string name="menu_action_take_photo" state="needs_review" hash="-1123080444">写真を撮る</string>
 	<string name="menu_action_remove_image" state="needs_review" hash="1094977672">写真を削除</string>
-	<string name="dialog_title_create_empty_group" state="needs_review" hash="-2016542453">空のグループを作成しますか？</string>
+	<string name="dialog_title_create_empty_group" state="needs_review" hash="-663434464">空のグループを作成しますか？</string>
 	<string name="dialog_message_create_empty_group" state="needs_review" hash="-297923005">グループに追加する連絡先を選択していません。空のグループを作成しますか？</string>
 	<string name="pref_dark_mode_title" state="needs_review" hash="816474245">ダークモード</string>
 	<string name="pref_dark_mode_summary" state="needs_review" hash="-623740894">バッテリーと目を保護するために、ダークモードを有効にしてください。</string>
@@ -558,8 +561,39 @@
 	<string name="dialog_title_webrtc_kick_participant" state="needs_review" hash="389469769">通話から連絡先を除外しますか？</string>
 	<string name="webrtc_failed_kicked" state="needs_review" hash="-758835021">この通話から除外されました</string>
 	<string name="dialog_title_start_conference_call" state="needs_review" hash="-1418585505">会議通話を開始</string>
-	<string name="label_subscription_status" state="needs_review" hash="1154002053">サブスクリプション状況</string>
-	<string name="text_feature_initiate_secure_calls" state="needs_review" hash="1414263062">安全な通話を開始</string>
+	<string name="olvid_plus_discover" state="needs_review" hash="-924831172">Olvid+を発見する</string>
+	<string name="olvid_plus_upgrade_title" state="needs_review" hash="-1960092784">Olvid+にアップグレードして、フルアプリ体験をお楽しみください</string>
+	<string name="olvid_plus_upgrade_renew" state="needs_review" hash="-4149901">%1$sのプランは、キャンセルされるまで自動的に更新されます。</string>
+	<string name="olvid_plus_tip_multi_device_title" state="needs_review" hash="481576448">すべてのデバイスでOlvidを使用してください</string>
+	<string name="olvid_plus_tip_multi_device_subtitle" state="needs_review" hash="1352342578">Olvid+を使用すると、スマートフォンやコンピューターでOlvidをご利用いただけます。\nメッセージはすべてのデバイス間で同期されるため、常に接続を維持できます。</string>
+	<string name="olvid_plus_tip_call_title" state="needs_review" hash="935809736">無制限の通話</string>
+	<string name="olvid_plus_tip_call_subtitle" state="needs_review" hash="1137191310">Olvid+を使用すると、エンドツーエンド暗号化された音声通話とビデオ通話ができます。\nOlvid+を持っているかどうかにかかわらず、すべてのOlvidユーザーに安全にアクセスできます。</string>
+	<string name="olvid_plus_tip_support_title" state="needs_review" hash="-1930411305">私たちのビジョンをサポートしてください</string>
+	<string name="olvid_plus_tip_support_subtitle" state="needs_review" hash="-1404875508">Olvid+でマルチデバイスと安全な通話をアンロックしましょう。\nお客様のサブスクリプションは、持続可能で正直なモデルをサポートし、Olvidを広告や隠れたコストなしで誰でも利用できるようにします。</string>
+	<string name="olvid_plus_offer_multi_device_title" state="needs_review" hash="-623969503">Olvidをマルチデバイスで使用する</string>
+	<string name="olvid_plus_offer_multi_device_subtitle" state="needs_review" hash="-123640091">Olvidをコンピューターで使用してください。すべてのメッセージを安全に保管します。</string>
+	<string name="olvid_plus_offer_call_title" state="needs_review" hash="935809736">無制限の通話</string>
+	<string name="olvid_plus_offer_call_subtitle" state="needs_review" hash="-1827478007">連絡先と音声およびビデオ通話を行います。</string>
+	<string name="olvid_plus_offer_support_title" state="needs_review" hash="-1272799411">Olvidを支援する</string>
+	<string name="olvid_plus_offer_support_subtitle" state="needs_review" hash="841023374">個人データを搾取しない、持続可能で誠実なモデルを提唱しましょう。</string>
+	<string name="olvid_plus_dialog_multi_device_title" state="needs_review" hash="561167181">すべてのデバイスでOlvidを使用してください</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle" state="needs_review" hash="1178448519">Olvid+を使用すると、スマートフォンとコンピューター間でOlvidメッセージを同期できます。いつでも連絡が取れるようになります！</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_1" state="needs_review" hash="155287050">キーボードと大きな画面の快適さを楽しみ、コンピューターから簡単にファイルを送信できます。</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_2" state="needs_review" hash="1858309010">デバイスの故障や盗難が発生した場合でも、メッセージを失うことはありません。あなたの履歴と添付ファイルは、複数のデバイスに安全に保存されます。</string>
+	<string name="olvid_plus_dialog_call_title" state="needs_review" hash="269811560">無制限の通話</string>
+	<string name="olvid_plus_dialog_call_subtitle" state="needs_review" hash="-416813149">Olvid+を使用すると、1対1およびグループでのオーディオ通話とビデオ通話が可能です。</string>
+	<string name="olvid_plus_dialog_call_subtitle_1" state="needs_review" hash="-608348196">Olvid+をお持ちの方でなくても、すべての連絡先にご連絡いただけます。</string>
+	<string name="olvid_plus_dialog_call_subtitle_2" state="needs_review" hash="-1804019862">すべてのOlvidコミュニケーションと同様のセキュリティレベルで、最適な通話品質を体験してください。</string>
+	<string name="olvid_plus_dialog_support_title" state="needs_review" hash="1942452361">Olvidをサポートしてください。すべての人にとってのプライベートメッセンジャーです。</string>
+	<string name="olvid_plus_dialog_support_subtitle" state="needs_review" hash="2119917538">Olvidは、本当にプライベートなメッセージングアプリで、お客様の個人情報にアクセスすることなく動作するように設計されています。電話番号、メールアドレス、名前は必要ありません。</string>
+	<string name="olvid_plus_dialog_support_subtitle_1" state="needs_review" hash="1809563102">あなたと連絡先の間でやり取りする内容は、あなたと連絡先の相手の間でのみ共有されます。他のみんなではありません。</string>
+	<string name="olvid_plus_dialog_support_subtitle_2" state="needs_review" hash="-118773166">オープンソースのコードと定期的な監査により、私たちの言葉を信じる必要はありません。</string>
+	<string name="olvid_plus_dialog_support_subtitle_3" state="needs_review" hash="-1885036855">購読することで、Olvidをすべての人にとって無料で、広告や隠れた料金なしで維持するための公正で持続可能なミッションを支援することになります。</string>
+	<string name="label_subscription_offer_save_percent" state="needs_review" hash="479307719">%1$d%%節約</string>
+	<string name="label_subscription_offer_monthly" state="needs_review" hash="-1602490190">月間</string>
+	<string name="label_subscription_offer_yearly" state="needs_review" hash="1246240165">年間</string>
+	<string name="label_subscription_status" state="needs_review" hash="1154002053">サブスクリプションの状態</string>
+	<string name="text_feature_initiate_secure_calls" state="needs_review" hash="1414263062">安全な通話を始める</string>
 	<string name="text_premium_features" state="needs_review" hash="603728806">プレミアム機能</string>
 	<string name="text_subscription_active" state="needs_review" hash="960106589">サブスクリプションは有効です</string>
 	<string name="text_no_subscription" state="needs_review" hash="1707448212">アクティブなサブスクリプションがありません</string>
@@ -640,7 +674,7 @@
 	<string name="text_premium_features_free_trial" state="needs_review" hash="-1976234715">プレミアム機能の無料トライアル</string>
 	<string name="button_label_start_free_trial" state="needs_review" hash="-508109296">無料トライアルを開始</string>
 	<string name="label_free_trial_available" state="needs_review" hash="-995163441">無料トライアル版あり</string>
-	<string name="label_free_trial_explanation" state="needs_review" hash="-596460015">Olvidの安全な通話を1か月間無料で試してみてください（1回限り）</string>
+	<string name="label_free_trial_explanation" state="needs_review" hash="2050354272">Olvidの安全な通話を1か月間無料でお試しください（1回限り）。</string>
 	<string name="toast_message_failed_to_start_free_trial" state="needs_review" hash="-1137706906">無料トライアルの開始に失敗しました</string>
 	<string name="toast_message_free_trial_started" state="needs_review" hash="1357863164">無料トライアルを開始しました</string>
 	<string name="toast_message_error_launching_in_app_purchase" state="needs_review" hash="-1890004340">アプリ内購入の開始に失敗しました</string>
@@ -648,8 +682,6 @@
 	<string name="toast_message_in_app_purchase_successful" state="needs_review" hash="578109721">アプリ内購入が完了しました</string>
 	<string name="button_label_price_per_month" state="needs_review" hash="-552222952">月額%1$s</string>
 	<string name="button_label_price_per_year" state="needs_review" hash="1539075788">年間%1$s</string>
-	<string name="button_label_price_per_month_expanded" state="needs_review" hash="173326792">%1$s\n月あたり</string>
-	<string name="button_label_price_per_year_expanded" state="needs_review" hash="1947639238">%1$s\n年間</string>
 	<string name="text_awaiting_subscription_payment" state="needs_review" hash="1135205985">サブスクリプションの支払いが拒否されました</string>
 	<string name="text_subscription_in_grace_period_until" state="needs_review" hash="-1685522686">猶予期間: %1$sまで</string>
 	<string name="text_subscription_on_hold_since" state="needs_review" hash="-515586151">サブスクリプションは%1$sから一時停止中です</string>
@@ -661,9 +693,8 @@
 	<string name="label_failed_to_query_subscription" state="needs_review" hash="-1677001973">サブスクリプションプランのクエリに失敗しました</string>
 	<string name="dialog_title_subscription_required" state="needs_review" hash="-2038592214">サブスクリプションが必要です</string>
 	<string name="button_label_check_subscription" state="needs_review" hash="-378220336">サブスクリプション状況を確認する</string>
-	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1662886051">Olvidで安全な電話をかけるにはサブスクリプションが必要です。\n\n現在のサブスクリプション状況と利用可能なサブスクリプションプランは、「マイプロファイル」ページで確認できます。</string>
-	<string name="dialog_message_subscription_required_web_client" state="needs_review" hash="-760629168">Olvidウェブクライアントへの接続にはサブスクリプションが必要です。\n\n現在のサブスクリプション状況を確認したり、利用可能なサブスクリプションプランを「マイプロファイル」ページで確認できます。</string>
-	<string name="dialog_message_subscription_required_multi_device" state="needs_review" hash="-1326423501">Olvidプロファイルを複数のデバイスで同時に使用するには、サブスクリプションが必要です。\n\n現在のサブスクリプション状況と利用可能なサブスクリプションプランは、「マイプロフィール」ページで確認できます。</string>
+	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1231676488">Olvidを使用した安全な電話およびビデオ通話の開始には、サブスクリプションが必要です。</string>
+	<string name="dialog_title_subscription_plans" state="needs_review" hash="-456474468">サブスクリプションプラン</string>
 	<string name="text_ended_on" state="needs_review" hash="1280012933">%1$sに終了</string>
 	<string name="text_free_trial_ended" state="needs_review" hash="-1458860892">無料トライアル期間が終了しました</string>
 	<string name="text_free_trial_expired" state="needs_review" hash="-2049452081">無料トライアルライセンスの有効期限切れ</string>
@@ -995,13 +1026,13 @@
 	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">パリ TURN サーバー</string>
 	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">ニューヨーク TURN サーバー</string>
 	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">シンガポール TURN サーバー</string>
-	<string name="dialog_title_android_12_bluetooth_access" state="needs_review" hash="-2140389265">Bluetoothデバイスへのアクセス許可を要求します</string>
-	<string name="dialog_message_android_12_bluetooth_access" state="needs_review" hash="-332888756">Olvid通話でBluetoothヘッドセットを使用する場合は、Olvidが近くのデバイスを「検索して接続する」ことを許可する必要があります。</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d人の連絡先</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">グループ %2$s には %1$d 件の連絡先があります</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">アップデートが必要です</string>
 	<string name="dialog_message_outdated_version" state="needs_review" hash="488074151">Olvidのバージョンが古くなっています。アップデートが必要です。\n\n多くの新機能を利用できない可能性があります。また、連絡先が使用している最新バージョンとの互換性を保証できません。</string>
 	<string name="button_label_remind_me_later" state="needs_review" hash="-713293818">後でリマインド</string>
+	<string name="label_remind_me_tonight" state="needs_review" hash="707009828">今夜%1$sに思い出させて</string>
+	<string name="label_remind_me_tomorrow" state="needs_review" hash="1904419307">明日%1$sに思い出して</string>
 	<string name="hint_personal_note" state="needs_review" hash="-368244163">個人的なメモ</string>
 	<string name="toast_message_unable_to_restore_app_data" state="needs_review" hash="1602628680">警告：一部のアプリケーション設定を復元できませんでした。</string>
 	<string name="dialog_title_webrtc_permissions_audio_blocked" state="needs_review" hash="1948829165">音声録音の許可が拒否されました</string>
@@ -1108,7 +1139,6 @@
 	<string name="pref_reload_backup_configuration_title" state="needs_review" hash="2000428891">バックアップ設定を再読み込み</string>
 	<string name="content_description_back_button" state="needs_review" hash="48196338">戻る</string>
 	<string name="content_description_remove_message_reply_to" state="needs_review" hash="-794585802">返信メッセージを削除</string>
-	<string name="content_description_remove_link_preview" state="needs_review" hash="-1085272528">リンクプレビューをクリア</string>
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">このプロファイルでは通知がミュートされていることを示す表示</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">プロフィールを作成</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">会社のIDプロバイダーが正常に構成されました。下記にある「認証」ボタンを押して認証し、個人情報を取得してください。</string>
@@ -1147,14 +1177,11 @@
 	<string name="dialog_title_neutral_notification_when_hidden" state="needs_review" hash="2013281962">プロフィールが非表示の場合に中立的な通知を表示</string>
 	<string name="dialog_message_neutral_notification_when_hidden" state="needs_review" hash="-58494752">プロフィールが非表示になっている場合、Olvidで現在開いている場合を除き、新しいメッセージの通知は受信されません。このオプションを有効にすると、「Olvidがあなたの注意を必要としています」という通知が表示されます。その後、Olvidを開いて隠されたプロフィールをロック解除し、新しいメッセージを表示できます。\n\n警告：これにより、実際に隠されたプロフィールを持っていることが明らかになる可能性があります。</string>
 	<string name="toast_message_password_already_used_other_profile" state="needs_review" hash="390904904">エラー：このパスワードは別の隠しプロファイルによって使用されています。</string>
-	<string name="label_configure_shortcuts" state="needs_review" hash="-857125506">アイコンの順序を変更</string>
 	<string name="label_attach_file" state="needs_review" hash="-89285310">ファイルを添付</string>
 	<string name="label_attach_image" state="needs_review" hash="-1185400308">画像を添付</string>
 	<string name="label_attach_timer" state="needs_review" hash="-1527208333">一時的なメッセージ</string>
 	<string name="label_attach_camera" state="needs_review" hash="-1123080444">写真を撮る</string>
 	<string name="label_attach_video" state="needs_review" hash="1626268086">ビデオを録画</string>
-	<string name="dialog_title_choose_icon_order" state="needs_review" hash="856935796">添付ファイルアイコンの優先順位を選択</string>
-	<string name="label_icons_below_never_shown" state="needs_review" hash="1250704267">この行以下のアイコンは表示されません</string>
 	<string name="pref_font_scale" state="needs_review" hash="1773040591">フォントサイズ</string>
 	<string name="pref_text_font_scale_0_75" state="needs_review" hash="-1963894407">非常に小さい (75%)</string>
 	<string name="pref_text_font_scale_0_9" state="needs_review" hash="-708054676">小 (90%)</string>
@@ -1209,7 +1236,6 @@
 	<string name="x_reactions_to" state="needs_review" hash="177752739">%2$sに対する%1$d件のリアクション</string>
 	<string name="notification_text_xx_reacted" state="needs_review" hash="647790513">%1$sが%2$sに反応しました</string>
 	<string name="label_attach_emoji" state="needs_review" hash="-1842205895">絵文字を挿入</string>
-	<string name="label_long_press_for_favorite" state="needs_review" hash="1284446174">お気に入りに追加/削除するには、長押ししてください</string>
 	<string name="menu_action_debug_information" state="needs_review" hash="-919213138">デバッグ情報</string>
 	<string name="debug_label_number_of_devices" state="needs_review" hash="1662862352">デバイス数:</string>
 	<string name="debug_label_number_of_devices_no_channel" state="needs_review" hash="808299225">安全なチャンネルなし:</string>
@@ -1282,8 +1308,6 @@
 	<string name="dialog_message_incomplete_attachments" state="needs_review" hash="1179188058">選択したメッセージには、完全にダウンロードされていない添付ファイルが含まれています。ダウンロードが完了するまで、これらのメッセージを転送することはできません。</string>
 	<string name="dialog_message_incomplete_attachments_partial" state="needs_review" hash="1274554335">選択したメッセージには、完全にダウンロードされていない添付ファイルが含まれています。ダウンロードが完了するまで、これらのメッセージを転送することはできません。\n\n転送可能なメッセージのみを転送するには、「続行」を押してください。</string>
 	<string name="hint_search_message" state="needs_review" hash="1630003450">メッセージを検索</string>
-	<string name="menu_action_search_prev" state="needs_review" hash="-1639666563">前へ</string>
-	<string name="menu_action_search_next" state="needs_review" hash="1158639077">次へ</string>
 	<string name="pref_manage_cloud_backups_title" state="needs_review" hash="824115345">クラウドバックアップの管理</string>
 	<string name="pref_manage_cloud_backups_summary" state="needs_review" hash="-161789549">クラウドバックアップをダウンロードまたは削除するにはクリックしてください。</string>
 	<string name="dialog_title_manage_cloud_backups" state="needs_review" hash="-1825078945">クラウドバックアップ</string>
@@ -1482,7 +1506,7 @@
 	<string name="text_you_became_admin" state="needs_review" hash="2137006821">あなたは現在、グループの管理者です</string>
 	<string name="text_you_are_no_longer_admin" state="needs_review" hash="1766709431">あなたはもうグループ管理者ではありません</string>
 	<string name="text_you_became_writer" state="needs_review" hash="-1671425999">メッセージの投稿が可能になりました</string>
-	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-762273585">これ以上ここでメッセージを投稿することはできません</string>
+	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-930933808">ここでメッセージを投稿できません</string>
 	<string name="label_pending" state="needs_review" hash="1975294811">保留中</string>
 	<string name="pref_app_language_title" state="needs_review" hash="-1748962099">アプリの言語</string>
 	<string name="pref_text_default_device_language" state="needs_review" hash="-1062620207">デバイスのデフォルト言語</string>
@@ -1568,6 +1592,7 @@
 	<string name="text_invalid_shortcut" state="needs_review" hash="-1219107750">無効なショートカット</string>
 	<string name="text_feature_initiate_secure_calls_from_another_profile" state="needs_review" hash="271258252">安全な通話を開始\n(別のプロファイルを通じて利用可能)</string>
 	<string name="dialog_title_confirm_open_link" state="needs_review" hash="46935087">このリンクをブラウザで開きますか？</string>
+	<string name="label_open_original_link_with_trackers" state="needs_review" hash="-1586932660">追跡パラメータを含む元のリンクを使用する</string>
 	<string name="dialog_title_confirm_open_olvid_link" state="needs_review" hash="425949498">このリンクをOlvidで開きますか？</string>
 	<string name="toast_message_unable_to_open_url" state="needs_review" hash="-1486954792">URLを開けませんでした</string>
 	<string name="text_explanation_location_map_provider" state="needs_review" hash="-173394547">地図プロバイダーを選択すると、地図上で共有したい場所を正確に選択できます。ただし、これにより、あなたの位置情報（または連絡先の位置情報）がこのサービスプロバイダーに開示される可能性があります。</string>
@@ -1578,7 +1603,6 @@
 	<string name="label_no_address_found" state="needs_review" hash="1035554993">アドレスが見つかりませんでした</string>
 	<string name="label_zoom_in_for_address" state="needs_review" hash="902696925">住所検索のためにズームイン</string>
 	<string name="label_address_lookup_disabled" state="needs_review" hash="-2140124686">アドレス検索が無効です</string>
-	<string name="content_description_cancel_message_edit" state="needs_review" hash="984163129">メッセージ編集をキャンセル</string>
 	<string name="dialog_title_introducing_mentions" state="needs_review" hash="-1741341288">ユーザーメンションの紹介！</string>
 	<string name="dialog_message_introducing_mentions" state="needs_review" hash="622739087">Olvidでは、今後はディスカッションでユーザーをメンションできるようになりました🫵！@の後に文字または名前を入力するだけで、誰をメンションできるかを確認できます。\nさらに、ディスカッションやプロフィールをミュートする💤場合、メッセージで明示的にメンションされた場合にのみ通知を受け取るように選択できるようになりました。\n\n連絡先があなたをメンションしたことを確認するには、Olvidの最新バージョンにアップデートする必要があります。</string>
 	<string name="pref_no_notify_certificate_change_for_previews_title" state="needs_review" hash="-434788963">リンクプレビューの証明書変更通知を無効にする</string>
@@ -1737,7 +1761,7 @@
 	<string name="troubleshooting_ignored" state="needs_review" hash="816017832">無視された</string>
 	<string name="onboarding_transfer_multidevice_purchase_question" state="needs_review" hash="351030441">すべてのデバイスをアクティブな状態に保ちますか？</string>
 	<string name="onboarding_transfer_multidevice_purchase_hyperlink" state="needs_review" hash="747183939">こちら</string>
-	<string name="button_label_subscribe_now" state="needs_review" hash="1805105542">今すぐ購読</string>
+	<string name="button_label_subscribe_with_price" state="needs_review" hash="324675175">購読する • %1$s</string>
 	<string name="onboarding_transfer_devices_loading_title" state="needs_review" hash="801961341">デバイスリストの取得中…</string>
 	<string name="dialog_title_introducing_multi_device" state="needs_review" hash="-310103349">Olvid Desktopとマルチデバイスの登場！</string>
 	<string name="dialog_message_introducing_multi_device" state="needs_review" hash="-153162506">Olvidが、**あなたのコンピューター**（WindowsとmacOS）で利用可能になりました。最新バージョンは以下からダウンロードできます:\nhttps://olvid.io/download/\n\n**マルチデバイス**対応により、スマートフォンで会話を開始し、コンピューターで続行できます。デバイス間や連絡先とのファイル共有がこれまでになく簡単になりました！</string>
@@ -1927,7 +1951,6 @@
 	<string name="pref_archived_attachments_summary" state="needs_review" hash="1596754073">この設定をオンにすると、アーカイブされたチャットの添付ファイルが上記の設定に従って自動的にダウンロードされます。</string>
 	<string name="pref_unarchive_on_notification_title" state="needs_review" hash="-1146947153">通知時にアーカイブを解除</string>
 	<string name="pref_unarchive_on_notification_summary" state="needs_review" hash="778062251">この設定をオンにすると、アーカイブされたチャットは、新しいメッセージの通知を受信したときに自動的にアーカイブ解除されます。</string>
-	<string name="call_notification_ongoing_call" state="needs_review" hash="1828207822">通話中</string>
 	<string name="call_notification_incoming_call" state="needs_review" hash="-1223043344">着信</string>
 	<string name="menu_action_copy_text_from_image" state="needs_review" hash="-1072685983">この単語をコピーする</string>
 	<string name="menu_action_copy_text_block_from_image" state="needs_review" hash="1436026569">ブロック全体をコピー</string>
@@ -2118,4 +2141,8 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">相手のデバイスに接続できません</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">すべての安全なチャンネルを再作成する</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">すべての安全なチャンネルを再作成すると、Olvidはすべての連絡先のデバイスと新しい安全な通信チャンネルを作成するように強制されます。通常は役に立ちませんが、これらのチャンネルのいくつかが「同期されていない」という珍しい状況を解決できる場合があります。\n\n**警告：** 連絡先が多い場合、この操作には数分かかる可能性があり、実行中に一部の受信メッセージを失う可能性があります。</string>
+	<string name="label_hanged_up" state="needs_review" hash="-1516413384">通話が切断されました</string>
+	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">チーム用のサブスクリプションが必要ですか？</string>
+	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Olvidストアへアクセス</string>
+	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">リマインダー設定</string>
 </resources>

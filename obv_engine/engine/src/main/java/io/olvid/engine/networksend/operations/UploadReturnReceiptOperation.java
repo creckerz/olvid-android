@@ -51,15 +51,17 @@ import io.olvid.engine.networksend.datatypes.SendManagerSessionFactory;
 public class UploadReturnReceiptOperation extends Operation {
     private final SendManagerSessionFactory sendManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final String server;
     private final SendReturnReceiptCoordinator.ReturnReceiptBatchProvider returnReceiptBatchProvider;
     private final List<IdentityAndLong> identityInactiveReturnReceiptIds;
     private IdentityAndLong[] returnReceiptOwnedIdentitiesAndIds;
 
-    public UploadReturnReceiptOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, String server, SendReturnReceiptCoordinator.ReturnReceiptBatchProvider returnReceiptBatchProvider , OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
+    public UploadReturnReceiptOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, String server, SendReturnReceiptCoordinator.ReturnReceiptBatchProvider returnReceiptBatchProvider , OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
         super(computeUniqueUid(server), onFinishCallback, onCancelCallback);
         this.sendManagerSessionFactory = sendManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.server = server;
         this.returnReceiptBatchProvider = returnReceiptBatchProvider;
         this.identityInactiveReturnReceiptIds = new ArrayList<>();
@@ -150,7 +152,7 @@ public class UploadReturnReceiptOperation extends Operation {
 
 
                 UploadReturnReceiptServerMethod serverMethod = new UploadReturnReceiptServerMethod(server, returnReceiptAndEncryptedPayloads);
-                serverMethod.setSslSocketFactory(sslSocketFactory);
+                serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
 
                 byte returnStatus = serverMethod.execute(true);
 

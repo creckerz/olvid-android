@@ -56,6 +56,7 @@ import io.olvid.engine.networkfetch.operations.ServerQueryOperation;
 public class ServerQueryCoordinator implements PendingServerQuery.PendingServerQueryListener, Operation.OnCancelCallback, Operation.OnFinishCallback {
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final PRNGService prng;
     private final CreateServerSessionDelegate createServerSessionDelegate;
 
@@ -75,14 +76,15 @@ public class ServerQueryCoordinator implements PendingServerQuery.PendingServerQ
 
     private ChannelDelegate channelDelegate;
 
-    public ServerQueryCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, PRNGService prng, CreateServerSessionDelegate createServerSessionDelegate, ServerUserDataCoordinator serverUserDataCoordinator, ObjectMapper jsonObjectMapper) {
+    public ServerQueryCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, PRNGService prng, CreateServerSessionDelegate createServerSessionDelegate, ServerUserDataCoordinator serverUserDataCoordinator, ObjectMapper jsonObjectMapper) {
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.prng = prng;
         this.createServerSessionDelegate = createServerSessionDelegate;
         this.serverUserDataCoordinator = serverUserDataCoordinator;
 
-        webSocketModule = new ServerQueryCoordinatorWebSocketModule(fetchManagerSessionFactory, sslSocketFactory, jsonObjectMapper, prng);
+        webSocketModule = new ServerQueryCoordinatorWebSocketModule(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, jsonObjectMapper, prng);
 
         serverQueriesOperationQueue = new NoDuplicateOperationQueue();
 
@@ -196,7 +198,7 @@ public class ServerQueryCoordinator implements PendingServerQuery.PendingServerQ
     }
 
     private void queueNewServerQueryOperation(UID serverQueryUid) {
-        ServerQueryOperation op = new ServerQueryOperation(fetchManagerSessionFactory, sslSocketFactory, serverQueryUid, prng,this, this);
+        ServerQueryOperation op = new ServerQueryOperation(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, serverQueryUid, prng,this, this);
         serverQueriesOperationQueue.queue(op);
     }
 

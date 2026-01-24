@@ -11,6 +11,7 @@
     <color name="almostBlack">#F4F4F4</color>
     <color name="almostBlackOverlay">#77F4F4F4</color>
     <color name="red">#df342a</color>
+    <color name="pink">#fd8e89</color>
     <color name="green">#589549</color>
     <color name="orange">#da8200</color>
     <color name="golden">#dab700</color>
@@ -35,10 +36,16 @@
     <color name="attachmentBorder">#33ffffff</color>
     <color name="locationBorder">#3b3b3b</color>
 
-    <color name="dialogBackground">#303030</color>
+    <color name="dialogBackground">#272727</color>
+    <color name="backgroundOverDialogBackground">#171717</color>
     <color name="itemBackground">#171717</color>
-    <color name="dialogBackgroundOverlay">#99303030</color>
+    <color name="itemBackgroundBorder">#323232</color>
+    <color name="dialogBackgroundOverlay">#99272727</color>
     <color name="inboundMessageBody">#c3d9e6</color>
+
+    <color name="newDialogBackground">#171717</color>
+    <color name="newDialogBorder">#323232</color>
+
 
     <!-- Poll colors-->
     <color name="poll0">#EBBD57</color>

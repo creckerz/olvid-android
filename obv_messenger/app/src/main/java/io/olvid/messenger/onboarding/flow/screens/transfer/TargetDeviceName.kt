@@ -99,7 +99,13 @@ fun NavGraphBuilder.targetDeviceName(onboardingFlowViewModel : OnboardingFlowVie
                     keyboardController?.hide()
                     onDeviceNameValidated.invoke()
                 }),
-                colors = OutlinedTextFieldDefaults.colors(focusedLabelColor = colorResource(id = R.color.olvid_gradient_contrasted), focusedBorderColor = colorResource(id = R.color.olvid_gradient_contrasted), cursorColor = colorResource(id = R.color.olvid_gradient_contrasted))
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedLabelColor = colorResource(id = R.color.olvid_gradient_contrasted),
+                    focusedBorderColor = colorResource(id = R.color.olvid_gradient_contrasted),
+                    cursorColor = colorResource(id = R.color.olvid_gradient_contrasted),
+                    focusedTextColor = colorResource(R.color.almostBlack),
+                    unfocusedTextColor = colorResource(R.color.almostBlack)
+                )
             )
         }
         LaunchedEffect(Unit) {

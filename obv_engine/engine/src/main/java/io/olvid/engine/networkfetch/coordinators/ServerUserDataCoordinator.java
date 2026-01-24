@@ -64,6 +64,7 @@ public class ServerUserDataCoordinator implements Operation.OnCancelCallback, Op
     private final ObjectMapper jsonObjectMapper;
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final CreateServerSessionDelegate createServerSessionDelegate;
     private final PRNGService prng;
 
@@ -79,9 +80,10 @@ public class ServerUserDataCoordinator implements Operation.OnCancelCallback, Op
 
     private NotificationListeningDelegate notificationListeningDelegate;
 
-    public ServerUserDataCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, CreateServerSessionDelegate createServerSessionDelegate, ObjectMapper jsonObjectMapper, PRNGService prng) {
+    public ServerUserDataCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, CreateServerSessionDelegate createServerSessionDelegate, ObjectMapper jsonObjectMapper, PRNGService prng) {
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.createServerSessionDelegate = createServerSessionDelegate;
         this.jsonObjectMapper = jsonObjectMapper;
         this.prng = prng;
@@ -199,7 +201,7 @@ public class ServerUserDataCoordinator implements Operation.OnCancelCallback, Op
     }
 
     private void queueNewRefreshUserDataOperation(Identity ownedIdentity, UID label) {
-        RefreshUserDataOperation op = new RefreshUserDataOperation(fetchManagerSessionFactory, sslSocketFactory, ownedIdentity, label, this, this);
+        RefreshUserDataOperation op = new RefreshUserDataOperation(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity, label, this, this);
         refreshUserDataOperationQueue.queue(op);
     }
 
@@ -209,7 +211,7 @@ public class ServerUserDataCoordinator implements Operation.OnCancelCallback, Op
 
 
     private void queueNewDeleteUserDataOperation(Identity ownedIdentity, UID label) {
-        DeleteUserDataOperation op = new DeleteUserDataOperation(fetchManagerSessionFactory, sslSocketFactory, ownedIdentity, label, this, this);
+        DeleteUserDataOperation op = new DeleteUserDataOperation(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity, label, this, this);
         deleteUserDataOperationQueue.queue(op);
     }
 

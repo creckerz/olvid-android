@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">आप और 1 अन्य अपना स्थान साझा कर रहे हैं</item>
 		<item quantity="other" state="needs_review" hash="1789697147">आप और %1$d अन्य लोग अपना स्थान साझा कर रहे हैं</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d महीने मुफ्त</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d महीने मुफ्त</item>
+	</plurals>
 </resources>

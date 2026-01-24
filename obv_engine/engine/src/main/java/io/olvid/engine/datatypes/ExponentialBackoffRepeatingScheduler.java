@@ -91,6 +91,16 @@ public class ExponentialBackoffRepeatingScheduler<T> {
         }
     }
 
+    // used to repeatedly schedule a task with a given period, independently of failed attempts
+    public void schedulePeriodically(T key, Runnable runnable, String tag, long delay) {
+        synchronized (lock) {
+            if (tag != null) {
+                Logger.d("Scheduling periodically a " + tag + " for " + key.toString() + " at intervals of " + delay + "ms.");
+            }
+            scheduler.scheduleWithFixedDelay(runnable, delay, delay, TimeUnit.MILLISECONDS);
+        }
+    }
+
 
     public void clearFailedCount(T key) {
         failedAttemptCounts.remove(key);

@@ -48,10 +48,12 @@ import io.olvid.engine.networkfetch.operations.StandaloneServerQueryOperation;
 public class DeviceBackupUploadTask {
     private final BackupManagerSessionFactory backupManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
 
-    public DeviceBackupUploadTask(BackupManagerSessionFactory backupManagerSessionFactory, SSLSocketFactory sslSocketFactory) {
+    public DeviceBackupUploadTask(BackupManagerSessionFactory backupManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride) {
         this.backupManagerSessionFactory = backupManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
     }
 
     public BackupTaskStatus execute() {
@@ -64,7 +66,7 @@ public class DeviceBackupUploadTask {
             ////////
             // 0. Check we have at least one owned identity
             if (backupManagerSession.identityDelegate.getOwnedIdentities(backupManagerSession.session).length == 0) {
-                return BackupTaskStatus.PERMANENT_FAILURE;
+                return BackupTaskStatus.SUCCESS;
             }
 
 
@@ -74,7 +76,7 @@ public class DeviceBackupUploadTask {
 
             ////////
             // 1. list existing backups
-            StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2ListBackupsQuery(server, derivedKeysV2.backupKeyUid)), sslSocketFactory);
+            StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2ListBackupsQuery(server, derivedKeysV2.backupKeyUid)), sslSocketFactory, userAgentOverride);
             OperationQueue queue = new OperationQueue();
             queue.queue(standaloneServerQueryOperation);
             queue.execute(1, "Engine-DeviceBackupUploadTask");
@@ -112,7 +114,7 @@ public class DeviceBackupUploadTask {
             ////////
             // 2. if backup UID does not exist yet, create one
             if (version == null) {
-                standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2CreateBackupQuery(server, derivedKeysV2.backupKeyUid, derivedKeysV2.authenticationKeyPair.getPublicKey())), sslSocketFactory);
+                standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2CreateBackupQuery(server, derivedKeysV2.backupKeyUid, derivedKeysV2.authenticationKeyPair.getPublicKey())), sslSocketFactory, userAgentOverride);
                 queue = new OperationQueue();
                 queue.queue(standaloneServerQueryOperation);
                 queue.execute(1, "Engine-DeviceBackupUploadTask");
@@ -181,7 +183,7 @@ public class DeviceBackupUploadTask {
             }
 
             // 3.3 upload the snapshot to the server
-            standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2UploadBackupQuery(server, derivedKeysV2.backupKeyUid, Constants.DEVICE_BACKUP_THREAD_ID, version, encryptedBackup, signature)), sslSocketFactory);
+            standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2UploadBackupQuery(server, derivedKeysV2.backupKeyUid, Constants.DEVICE_BACKUP_THREAD_ID, version, encryptedBackup, signature)), sslSocketFactory, userAgentOverride);
             queue = new OperationQueue();
             queue.queue(standaloneServerQueryOperation);
             queue.execute(1, "Engine-DeviceBackupUploadTask");

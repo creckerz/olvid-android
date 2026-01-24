@@ -52,6 +52,7 @@ public class RegisterServerPushNotificationsCoordinator implements RegisterServe
 
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final CreateServerSessionDelegate createServerSessionDelegate;
     private final DownloadMessagesAndListAttachmentsDelegate downloadMessagesAndListAttachmentsDelegate;
 
@@ -69,10 +70,12 @@ public class RegisterServerPushNotificationsCoordinator implements RegisterServe
 
     public RegisterServerPushNotificationsCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory,
                                                       SSLSocketFactory sslSocketFactory,
+                                                      String userAgentOverride,
                                                       CreateServerSessionDelegate createServerSessionDelegate,
                                                       DownloadMessagesAndListAttachmentsDelegate downloadMessagesAndListAttachmentsDelegate) {
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.createServerSessionDelegate = createServerSessionDelegate;
         this.downloadMessagesAndListAttachmentsDelegate = downloadMessagesAndListAttachmentsDelegate;
 
@@ -137,7 +140,7 @@ public class RegisterServerPushNotificationsCoordinator implements RegisterServe
 
 
     private void queueNewRegisterPushNotificationOperation(Identity ownedIdentity) {
-        RegisterPushNotificationOperation op = new RegisterPushNotificationOperation(fetchManagerSessionFactory, sslSocketFactory, ownedIdentity, this, this);
+        RegisterPushNotificationOperation op = new RegisterPushNotificationOperation(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity, this, this);
         registerPushNotificationOperationQueue.queue(op);
     }
 

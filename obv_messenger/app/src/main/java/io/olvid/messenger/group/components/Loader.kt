@@ -19,7 +19,6 @@
 
 package io.olvid.messenger.group.components
 
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue

@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
@@ -22,7 +21,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import io.olvid.engine.engine.types.EngineAPI
 import io.olvid.messenger.AppSingleton
 import io.olvid.messenger.R
-import io.olvid.messenger.billing.SubscriptionPurchaseViewModel
 import io.olvid.messenger.billing.SubscriptionStatusScreen
 import io.olvid.messenger.customClasses.ConfigurationPojo
 import io.olvid.messenger.designsystem.components.OlvidActionButton
@@ -38,7 +36,6 @@ internal fun LicenseActivationContent(
     onCancel: () -> Unit
 ) {
     val licenseActivationViewModel: LicenseActivationViewModel = viewModel()
-    val purchaseViewModel: SubscriptionPurchaseViewModel = viewModel()
     val context = LocalContext.current
     val ownedIdentity = viewModel.currentIdentity
 
@@ -48,7 +45,6 @@ internal fun LicenseActivationContent(
             return@LaunchedEffect
         }
         licenseActivationViewModel.init(context, ownedIdentity, configurationPojo, onCancel)
-        purchaseViewModel.updateBytesOwnedIdentity(ownedIdentity.bytesOwnedIdentity)
     }
 
 
@@ -71,7 +67,6 @@ internal fun LicenseActivationContent(
             } else if (licenseActivationViewModel.newApiKeyStatus != null) {
                 SubscriptionStatusScreen(
                     contentPadding = 16.dp,
-                    viewModel = purchaseViewModel,
                     apiKeyStatus = licenseActivationViewModel.newApiKeyStatus,
                     apiKeyExpirationTimestamp = licenseActivationViewModel.newApiKeyExpirationTimestamp,
                     apiKeyPermissions = licenseActivationViewModel.newApiKeyPermissions ?: emptyList(),
@@ -125,7 +120,6 @@ internal fun LicenseActivationContent(
             Spacer(modifier = Modifier.height(8.dp))
             SubscriptionStatusScreen(
                 contentPadding = 16.dp,
-                viewModel = purchaseViewModel,
                 apiKeyStatus = ownedIdentity?.getApiKeyStatus(),
                 apiKeyExpirationTimestamp = ownedIdentity?.apiKeyExpirationTimestamp,
                 apiKeyPermissions = ownedIdentity?.getApiKeyPermissions() ?: emptyList(),

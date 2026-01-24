@@ -43,7 +43,7 @@ import io.olvid.engine.engine.types.ObvDialog;
 import io.olvid.engine.engine.types.identities.ObvIdentity;
 import io.olvid.engine.engine.types.identities.ObvKeycloakState;
 import io.olvid.messenger.activities.ShortcutActivity;
-import io.olvid.messenger.billing.BillingUtils;
+import io.olvid.messenger.billing.SubscriptionRepository;
 import io.olvid.messenger.customClasses.BytesKey;
 import io.olvid.messenger.databases.AppDatabase;
 import io.olvid.messenger.databases.ContactCacheSingleton;
@@ -392,7 +392,7 @@ public class EngineNotificationProcessor implements EngineNotificationListener {
                                     if (!appOwnedIdentity.keycloakManaged) {
                                         KeycloakManager.unregisterKeycloakManagedIdentity(appOwnedIdentity.bytesOwnedIdentity);
                                         if (BuildConfig.USE_BILLING_LIB) {
-                                            BillingUtils.newIdentityAvailableForSubscription(appOwnedIdentity.bytesOwnedIdentity);
+                                            SubscriptionRepository.INSTANCE.newIdentityAvailableForSubscription(appOwnedIdentity.bytesOwnedIdentity);
                                         }
                                     }
 

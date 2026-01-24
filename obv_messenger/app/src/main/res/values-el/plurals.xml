@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">Εσείς και 1 άλλος μοιράζεστε την τοποθεσία σας</item>
 		<item quantity="other" state="needs_review" hash="1789697147">Εσείς και άλλοι %1$d μοιράζεστε την τοποθεσία σας</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d μήνες δωρεάν</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d μήνες δωρεάν</item>
+	</plurals>
 </resources>

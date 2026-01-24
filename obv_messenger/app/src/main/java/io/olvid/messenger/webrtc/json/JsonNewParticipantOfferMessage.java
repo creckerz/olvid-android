@@ -33,6 +33,7 @@ public final class JsonNewParticipantOfferMessage extends JsonWebrtcProtocolMess
     public String sessionDescriptionType;
     public byte[] gzippedSessionDescription;
     public Integer rawGatheringPolicy;
+    public boolean batchIceSupported;
 
 
     public JsonNewParticipantOfferMessage() {
@@ -50,6 +51,7 @@ public final class JsonNewParticipantOfferMessage extends JsonWebrtcProtocolMess
                 this.rawGatheringPolicy = 2;
                 break;
         }
+        this.batchIceSupported = true;
     }
 
     @JsonProperty("sdt")
@@ -80,6 +82,16 @@ public final class JsonNewParticipantOfferMessage extends JsonWebrtcProtocolMess
     @JsonProperty("gp")
     public void setRawGatheringPolicy(Integer rawGatheringPolicy) {
         this.rawGatheringPolicy = rawGatheringPolicy;
+    }
+
+    @JsonProperty("bi")
+    public boolean isBatchIceSupported() {
+        return batchIceSupported;
+    }
+
+    @JsonProperty("bi")
+    public void setBatchIceSupported(boolean batchIceSupported) {
+        this.batchIceSupported = batchIceSupported;
     }
 
     @JsonIgnore

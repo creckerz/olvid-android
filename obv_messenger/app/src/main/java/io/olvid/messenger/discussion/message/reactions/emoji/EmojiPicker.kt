@@ -51,7 +51,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -69,6 +68,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -82,8 +82,8 @@ import androidx.compose.ui.unit.dp
 import io.olvid.messenger.R
 import io.olvid.messenger.customClasses.EmojiList
 import io.olvid.messenger.designsystem.components.AnimatedEmoji
+import io.olvid.messenger.designsystem.constantSp
 import io.olvid.messenger.designsystem.theme.OlvidTypography
-import io.olvid.messenger.discussion.message.attachments.constantSp
 import io.olvid.messenger.settings.SettingsActivity
 import kotlinx.coroutines.launch
 
@@ -107,13 +107,16 @@ fun EmojiList.EmojiGroup.getIcon(): Int {
 @Composable
 fun EmojiPicker(
     modifier: Modifier = Modifier,
-    gridState: LazyGridState = rememberLazyGridState(),
+    gridState: LazyGridState = rememberSaveable(saver = LazyGridState.Saver) {
+        LazyGridState()
+    },
     currentReaction: String? = null,
     onReact: (String) -> Unit = {},
     onToggleFavorite: (String) -> Unit = {},
     isSearch: Boolean = false,
     recentEmojis: List<String> = emptyList(),
     emojis: List<List<String>> = EmojiList.EMOJIS,
+    onBackSpace: (() -> Unit)? = null,
     shownEmojiVariants: MutableState<List<String>?> = remember { mutableStateOf(null) },
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -166,6 +169,21 @@ fun EmojiPicker(
                                     .padding(bottom = 4.dp),
                                 painter = painterResource(id = emojiGroup.getIcon()),
                                 contentDescription = null
+                            )
+                        }
+                    }
+                    onBackSpace?.let { onBackSpace ->
+                        Tab(selected = false, onClick = onBackSpace) {
+                            Icon(
+                                modifier = Modifier
+                                    .requiredSize(32.dp)
+                                    .padding(
+                                        start = 4.dp,
+                                        end = 4.dp,
+                                        bottom = 4.dp
+                                    ),
+                                painter = painterResource(id = R.drawable.ic_backspace),
+                                contentDescription = "backspace"
                             )
                         }
                     }
@@ -279,10 +297,10 @@ fun EmojiPicker(
 //                                        ignoreClicks = true
 //                                    )
 //                                } else {
-                                    Text(
-                                        text = emoji.first(),
-                                        fontSize = constantSp(32)
-                                    )
+                                Text(
+                                    text = emoji.first(),
+                                    fontSize = constantSp(32)
+                                )
 //                                }
                                 if (emoji.size > 1) {
                                     Icon(
@@ -315,8 +333,7 @@ fun EmojiPicker(
         ) {
             Box(
                 modifier = Modifier
-                    .fillMaxSize()
-                    ,
+                    .fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
                 Card(
@@ -331,7 +348,7 @@ fun EmojiPicker(
                         verticalArrangement = Arrangement.spacedBy(4.dp),
                         horizontalArrangement = Arrangement.spacedBy(4.dp),
                     ) {
-                        shownEmojiVariants.value?.let{
+                        shownEmojiVariants.value?.let {
                             // for emojis with 25 variants, put the default color at the end for better alignment
                             if (it.size > 6) {
                                 it.subList(1, it.size) + it[0]

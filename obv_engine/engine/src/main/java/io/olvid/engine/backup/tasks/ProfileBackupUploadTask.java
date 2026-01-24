@@ -50,11 +50,13 @@ import io.olvid.engine.networkfetch.operations.StandaloneServerQueryOperation;
 public class ProfileBackupUploadTask {
     private final BackupManagerSessionFactory backupManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final Identity ownedIdentity;
 
-    public ProfileBackupUploadTask(BackupManagerSessionFactory backupManagerSessionFactory, SSLSocketFactory sslSocketFactory, Identity ownedIdentity) {
+    public ProfileBackupUploadTask(BackupManagerSessionFactory backupManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, Identity ownedIdentity) {
         this.backupManagerSessionFactory = backupManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.ownedIdentity = ownedIdentity;
     }
 
@@ -97,7 +99,7 @@ public class ProfileBackupUploadTask {
 
             ////////
             // 1. list existing backups
-            StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2ListBackupsQuery(server, derivedKeysV2.backupKeyUid)), sslSocketFactory);
+            StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2ListBackupsQuery(server, derivedKeysV2.backupKeyUid)), sslSocketFactory, userAgentOverride);
             OperationQueue queue = new OperationQueue();
             queue.queue(standaloneServerQueryOperation);
             queue.execute(1, "Engine-ProfileBackupUploadTask");
@@ -135,7 +137,7 @@ public class ProfileBackupUploadTask {
             ////////
             // 2. if backup UID does not exist yet, create one
             if (version == null) {
-                standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2CreateBackupQuery(server, derivedKeysV2.backupKeyUid, derivedKeysV2.authenticationKeyPair.getPublicKey())), sslSocketFactory);
+                standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2CreateBackupQuery(server, derivedKeysV2.backupKeyUid, derivedKeysV2.authenticationKeyPair.getPublicKey())), sslSocketFactory, userAgentOverride);
                 queue = new OperationQueue();
                 queue.queue(standaloneServerQueryOperation);
                 queue.execute(1, "Engine-ProfileBackupUploadTask");
@@ -205,7 +207,7 @@ public class ProfileBackupUploadTask {
             }
 
             // 3.3 upload the snapshot to the server
-            standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2UploadBackupQuery(server, derivedKeysV2.backupKeyUid, profileBackupThreadId.getThreadId(), version, encryptedBackup, signature)), sslSocketFactory);
+            standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2UploadBackupQuery(server, derivedKeysV2.backupKeyUid, profileBackupThreadId.getThreadId(), version, encryptedBackup, signature)), sslSocketFactory, userAgentOverride);
             queue = new OperationQueue();
             queue.queue(standaloneServerQueryOperation);
             queue.execute(1, "Engine-ProfileBackupUploadTask");

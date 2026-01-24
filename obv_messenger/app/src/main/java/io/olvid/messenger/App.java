@@ -22,8 +22,6 @@ package io.olvid.messenger;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,7 +32,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.Spannable;
-import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,7 +78,6 @@ import coil.decode.SvgDecoder;
 import coil.decode.VideoFrameDecoder;
 import io.olvid.engine.Logger;
 import io.olvid.engine.datatypes.ObvBase64;
-import io.olvid.engine.engine.types.EngineAPI;
 import io.olvid.engine.engine.types.ObvPushNotificationType;
 import io.olvid.engine.engine.types.identities.ObvIdentity;
 import io.olvid.messenger.activities.ContactDetailsActivity;
@@ -92,6 +88,7 @@ import io.olvid.messenger.appdialogs.AppDialogShowActivity;
 import io.olvid.messenger.appdialogs.AppDialogTag;
 import io.olvid.messenger.customClasses.BytesKey;
 import io.olvid.messenger.customClasses.ConfigurationPojo;
+import io.olvid.messenger.customClasses.LinkUtils;
 import io.olvid.messenger.customClasses.Markdown;
 import io.olvid.messenger.customClasses.PdfViewerDialog;
 import io.olvid.messenger.customClasses.PreviewUtils;
@@ -505,7 +502,8 @@ public class App extends Application implements DefaultLifecycleObserver {
         if (messageType == WebrtcCallService.START_CALL_MESSAGE_TYPE
                 || messageType == WebrtcCallService.NEW_ICE_CANDIDATE_MESSAGE_TYPE
                 || messageType == WebrtcCallService.REMOVE_ICE_CANDIDATES_MESSAGE_TYPE
-                || messageType == WebrtcCallService.ANSWERED_OR_REJECTED_ON_OTHER_DEVICE_MESSAGE_TYPE) {
+                || messageType == WebrtcCallService.ANSWERED_OR_REJECTED_ON_OTHER_DEVICE_MESSAGE_TYPE
+                || messageType == WebrtcCallService.BATCH_ICE_CANDIDATES_MESSAGE_TYPE) {
             getContext().startService(intent);
         } else {
             LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
@@ -709,67 +707,11 @@ public class App extends Application implements DefaultLifecycleObserver {
     }
 
     public static void displayText(Context context, String text) {
-        if (context == null || text == null || text.isEmpty()) {
-            return;
-        }
-
-        final AlertDialog.Builder builder = new SecureAlertDialogBuilder(context, R.style.CustomAlertDialog)
-                .setTitle(R.string.label_text_qr_code)
-                .setMessage(text)
-                .setNeutralButton(R.string.button_label_copy, (dialog, which) -> {
-                    ClipboardManager clipboard = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText(text, text);
-                    clipboard.setPrimaryClip(clip);
-                    toast(R.string.toast_message_clipboard_copied, Toast.LENGTH_SHORT);
-                })
-                .setPositiveButton(R.string.button_label_ok, null);
-        builder.create().show();
+        LinkUtils.displayText(context, text);
     }
-   public static void openLink(Context context, Uri uri) {
-        if (context == null || uri == null) {
-            return;
-        }
 
-        // first check if this is an Olvid link
-        boolean olvidLink = ObvLinkActivity.ANY_PATTERN.matcher(uri.toString()).find();
-        final AlertDialog.Builder builder = new SecureAlertDialogBuilder(context, R.style.CustomAlertDialog)
-                .setTitle(olvidLink ? R.string.dialog_title_confirm_open_olvid_link : R.string.dialog_title_confirm_open_link)
-                .setMessage(uri.toString())
-                .setNeutralButton(R.string.button_label_copy, (dialog, which) -> {
-                    ClipboardManager clipboard = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText(uri.toString(), uri.toString());
-                    clipboard.setPrimaryClip(clip);
-                    toast(R.string.toast_message_link_copied, Toast.LENGTH_SHORT);
-                })
-                .setPositiveButton(R.string.button_label_ok, (dialog, which) -> {
-                    if (olvidLink) {
-                        Intent intent = new Intent(context, MainActivity.class);
-                        intent.setAction(MainActivity.LINK_ACTION);
-                        intent.putExtra(MainActivity.LINK_URI_INTENT_EXTRA, uri.toString());
-                        context.startActivity(intent);
-                    } else {
-                        try {
-                            context.startActivity(new Intent(Intent.ACTION_VIEW, uri));
-
-                            int unwraps = 0;
-                            Context baseContext = context;
-                            while (!(baseContext instanceof DiscussionActivity) && baseContext instanceof ContextThemeWrapper) {
-                                baseContext = ((ContextThemeWrapper) baseContext).getBaseContext();
-                                unwraps++;
-                                if (unwraps > 10) {
-                                    break;
-                                }
-                            }
-                            if (baseContext instanceof DiscussionActivity) {
-                                ((DiscussionActivity) baseContext).getDiscussionDelegate().doNotMarkAsReadOnPause();
-                            }
-                        } catch (Exception e) {
-                            App.toast(R.string.toast_message_unable_to_open_url, Toast.LENGTH_SHORT);
-                        }
-                    }
-                })
-                .setNegativeButton(R.string.button_label_cancel, null);
-        builder.create().show();
+    public static void openLink(Context context, Uri uri) {
+        LinkUtils.openLink(context, uri);
     }
 
     @Nullable
@@ -908,13 +850,12 @@ public class App extends Application implements DefaultLifecycleObserver {
         showDialog(ownedIdentity.bytesOwnedIdentity, AppDialogShowActivity.DIALOG_SUBSCRIPTION_UPDATED, dialogParameters);
     }
 
-    public static void openAppDialogSubscriptionRequired(byte[] bytesOwnedIdentity, EngineAPI.ApiKeyPermission permission) {
+    public static void openAppDialogCallSubscriptionRequired(byte[] bytesOwnedIdentity) {
         if (bytesOwnedIdentity == null) {
             return;
         }
         HashMap<String, Object> dialogParameters = new HashMap<>();
-        dialogParameters.put(AppDialogShowActivity.DIALOG_SUBSCRIPTION_REQUIRED_FEATURE_KEY, permission);
-        showDialog(bytesOwnedIdentity, AppDialogShowActivity.DIALOG_SUBSCRIPTION_REQUIRED, dialogParameters);
+        showDialog(bytesOwnedIdentity, AppDialogShowActivity.DIALOG_CALL_SUBSCRIPTION_REQUIRED, dialogParameters);
     }
 
     public static void openAppDialogCallInitiationNotSupported(byte[] bytesOwnedIdentity) {

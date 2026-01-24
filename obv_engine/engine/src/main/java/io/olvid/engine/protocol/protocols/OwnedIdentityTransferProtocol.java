@@ -34,8 +34,6 @@ import java.util.UUID;
 
 import io.olvid.engine.Logger;
 import io.olvid.engine.crypto.Commitment;
-import io.olvid.engine.crypto.Hash;
-import io.olvid.engine.crypto.MAC;
 import io.olvid.engine.crypto.PRNGService;
 import io.olvid.engine.crypto.SAS;
 import io.olvid.engine.crypto.Suite;

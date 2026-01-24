@@ -435,6 +435,7 @@ fun Discussion.getAnnotatedBody(context: Context, message: Message?): AnnotatedS
 
                 Message.TYPE_GROUP_MEMBER_JOINED -> {
                     val byYou = bytesOwnedIdentity.contentEquals(message.senderIdentifier)
+                    val forMe = bytesOwnedIdentity.contentEquals(message.mentions?.firstOrNull()?.userIdentifier)
                     var displayName =
                         ContactCacheSingleton.getContactCustomDisplayName(message.senderIdentifier)
                     var mentionCount = 0
@@ -458,7 +459,9 @@ fun Discussion.getAnnotatedBody(context: Context, message: Message?): AnnotatedS
                         append(
                             if (mention != null) {
                                 if (displayName != null) {
-                                    if (byYou) {
+                                    if (byYou && forMe) {
+                                        context.getString(string.text_group_joined)
+                                    } else if (byYou) {
                                         context.getString(
                                             string.text_joined_the_group_by_you,
                                             displayName,
@@ -494,6 +497,7 @@ fun Discussion.getAnnotatedBody(context: Context, message: Message?): AnnotatedS
                 Message.TYPE_GROUP_MEMBER_LEFT -> {
                     val byYou = bytesOwnedIdentity.contentEquals(message.senderIdentifier)
                     val kicked = bytesOwnedIdentity.contentEquals(message.mentions?.firstOrNull()?.userIdentifier)
+
                     var displayName =
                         ContactCacheSingleton.getContactCustomDisplayName(message.senderIdentifier)
                     var mentionCount = 0
@@ -516,8 +520,12 @@ fun Discussion.getAnnotatedBody(context: Context, message: Message?): AnnotatedS
                     withStyle(SpanStyle(fontStyle = FontStyle.Italic)) {
                         append(
                             if (mention != null) {
-                                if (kicked) {
-                                    if (displayName != null) {
+                                if (kicked && byYou) {
+                                    context.getString(
+                                        string.text_group_left
+                                    )
+                                } else if (kicked) {
+                                     if (displayName != null) {
                                         context.getString(R.string.text_removed_from_group_by, displayName)
                                     } else {
                                         context.getString(R.string.text_removed_from_group)
@@ -671,7 +679,7 @@ fun Discussion.getAnnotatedBody(context: Context, message: Message?): AnnotatedS
                 }
 
                 Message.TYPE_RE_JOINED_GROUP -> {
-                    val inviterName = ContactCacheSingleton.getContactCustomDisplayName(message.senderIdentifier)
+                    val inviterName = ContactCacheSingleton.getContactCustomDisplayName(message.senderIdentifier).takeIf { !message.senderIdentifier.contentEquals(bytesOwnedIdentity) }
                     withStyle(SpanStyle(fontStyle = FontStyle.Italic)) {
                         if (inviterName != null) {
                             append(context.getString(string.text_group_re_joined_by, inviterName))
@@ -682,7 +690,7 @@ fun Discussion.getAnnotatedBody(context: Context, message: Message?): AnnotatedS
                 }
 
                 Message.TYPE_JOINED_GROUP -> {
-                    val inviterName = ContactCacheSingleton.getContactCustomDisplayName(message.senderIdentifier)
+                    val inviterName = ContactCacheSingleton.getContactCustomDisplayName(message.senderIdentifier).takeIf { !message.senderIdentifier.contentEquals(bytesOwnedIdentity) }
                     withStyle(SpanStyle(fontStyle = FontStyle.Italic)) {
                         if (inviterName != null) {
                             append(context.getString(string.text_group_joined_by, inviterName))

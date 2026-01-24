@@ -50,6 +50,7 @@ public class DownloadMessagesExtendedPayloadOperation extends Operation {
 
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final Identity ownedIdentity;
     private final UID messageUid;
 
@@ -61,10 +62,11 @@ public class DownloadMessagesExtendedPayloadOperation extends Operation {
         return messageUid;
     }
 
-    public DownloadMessagesExtendedPayloadOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, Identity ownedIdentity, UID messageUid, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
+    public DownloadMessagesExtendedPayloadOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride,Identity ownedIdentity, UID messageUid, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
         super(ownedIdentity.computeUniqueUid(), onFinishCallback, onCancelCallback);
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.ownedIdentity = ownedIdentity;
         this.messageUid = messageUid;
     }
@@ -104,7 +106,7 @@ public class DownloadMessagesExtendedPayloadOperation extends Operation {
                         serverSessionToken,
                         messageUid
                 );
-                serverMethod.setSslSocketFactory(sslSocketFactory);
+                serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
 
                 byte returnStatus = serverMethod.execute(fetchManagerSession.identityDelegate.isActiveOwnedIdentity(fetchManagerSession.session, ownedIdentity));
 

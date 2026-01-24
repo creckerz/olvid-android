@@ -44,13 +44,15 @@ public class DeleteUserDataOperation extends Operation {
 
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final Identity ownedIdentity;
     private final UID label;
 
-    public DeleteUserDataOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, Identity ownedIdentity, UID label, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
+    public DeleteUserDataOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, Identity ownedIdentity, UID label, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
         super(IdentityAndUid.computeUniqueUid(ownedIdentity, label), onFinishCallback, onCancelCallback);
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.ownedIdentity = ownedIdentity;
         this.label = label;
     }
@@ -94,7 +96,7 @@ public class DeleteUserDataOperation extends Operation {
                         serverSessionToken,
                         label
                 );
-                serverMethod.setSslSocketFactory(sslSocketFactory);
+                serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
 
                 byte returnStatus = serverMethod.execute(fetchManagerSession.identityDelegate.isActiveOwnedIdentity(fetchManagerSession.session, ownedIdentity));
 

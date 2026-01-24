@@ -18,6 +18,7 @@
  */
 package io.olvid.messenger.billing
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -39,7 +40,6 @@ import io.olvid.messenger.designsystem.theme.OlvidTypography
 @Composable
 fun SubscriptionUpdatedDialog(
     onDismissRequest: () -> Unit,
-    viewModel: SubscriptionPurchaseViewModel,
     ownedIdentity: OwnedIdentity,
 ) {
     Dialog(
@@ -48,7 +48,11 @@ fun SubscriptionUpdatedDialog(
     ) {
         Card(
             modifier = Modifier.padding(16.dp),
-            colors = CardDefaults.cardColors(containerColor = colorResource(R.color.dialogBackground))
+            colors = CardDefaults.cardColors(
+                containerColor = colorResource(R.color.newDialogBackground),
+                contentColor = colorResource(R.color.almostBlack),
+            ),
+            border = BorderStroke(1.dp, colorResource(R.color.newDialogBorder))
         ) {
             Text(
                 modifier = Modifier.padding(16.dp),
@@ -60,7 +64,6 @@ fun SubscriptionUpdatedDialog(
             SubscriptionStatusScreen(
                 modifier = Modifier.padding(8.dp),
                 contentPadding = 16.dp,
-                viewModel = viewModel,
                 apiKeyStatus = ownedIdentity.getApiKeyStatus(),
                 apiKeyExpirationTimestamp = ownedIdentity.apiKeyExpirationTimestamp,
                 apiKeyPermissions = ownedIdentity.getApiKeyPermissions(),

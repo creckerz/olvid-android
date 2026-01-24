@@ -103,8 +103,8 @@ import io.olvid.messenger.customClasses.DeviceBackupProfile
 import io.olvid.messenger.customClasses.InitialView
 import io.olvid.messenger.customClasses.ProfileBackupSnapshot
 import io.olvid.messenger.customClasses.StringUtils
+import io.olvid.messenger.designsystem.constantSp
 import io.olvid.messenger.designsystem.theme.OlvidTypography
-import io.olvid.messenger.discussion.message.attachments.constantSp
 import io.olvid.messenger.settings.BackupV2ViewModel
 
 

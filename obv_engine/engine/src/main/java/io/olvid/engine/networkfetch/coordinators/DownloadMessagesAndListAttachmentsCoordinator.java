@@ -57,6 +57,7 @@ import io.olvid.engine.networkfetch.operations.ProcessWebsocketReceivedMessageOp
 public class DownloadMessagesAndListAttachmentsCoordinator implements Operation.OnCancelCallback, DownloadMessagesAndListAttachmentsDelegate, InboxMessage.InboxMessageListener, Operation.OnFinishCallback, NotificationListener {
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final CreateServerSessionDelegate createServerSessionDelegate;
     private RegisterServerPushNotificationDelegate registerServerPushNotificationDelegate;
 
@@ -74,9 +75,11 @@ public class DownloadMessagesAndListAttachmentsCoordinator implements Operation.
 
     public DownloadMessagesAndListAttachmentsCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory,
                                                          SSLSocketFactory sslSocketFactory,
+                                                         String userAgentOverride,
                                                          CreateServerSessionDelegate createServerSessionDelegate) {
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.createServerSessionDelegate = createServerSessionDelegate;
 
         downloadMessagesAndListAttachmentsOperationQueue = new NoDuplicatePriorityOperationQueue();
@@ -153,7 +156,7 @@ public class DownloadMessagesAndListAttachmentsCoordinator implements Operation.
     }
 
     private void queueNewDownloadMessagesAndListAttachmentsOperation(Identity identity, UID deviceUid) {
-        DownloadMessagesAndListAttachmentsOperation op = new DownloadMessagesAndListAttachmentsOperation(fetchManagerSessionFactory, sslSocketFactory, identity, deviceUid, 0, this, this);
+        DownloadMessagesAndListAttachmentsOperation op = new DownloadMessagesAndListAttachmentsOperation(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, identity, deviceUid, 0, this, this);
         downloadMessagesAndListAttachmentsOperationQueue.queue(op);
     }
 
@@ -238,7 +241,7 @@ public class DownloadMessagesAndListAttachmentsCoordinator implements Operation.
         if (timestampOfLastMessageBeforeTruncation != null) {
             // if listing was truncated --> trigger a new list in 10 seconds, once messages are processed and deleted from server
             downloadMessagesAndListAttachmentsOperationQueue.queue(
-                    new DownloadMessagesAndListAttachmentsOperation(fetchManagerSessionFactory, sslSocketFactory, ownedIdentity, deviceUid, timestampOfLastMessageBeforeTruncation, this, this)
+                    new DownloadMessagesAndListAttachmentsOperation(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity, deviceUid, timestampOfLastMessageBeforeTruncation, this, this)
             );
         } else {
             fetchManagerSessionFactory.markOwnedIdentityAsUpToDate(ownedIdentity);

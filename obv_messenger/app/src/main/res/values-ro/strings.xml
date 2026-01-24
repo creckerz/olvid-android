@@ -101,7 +101,10 @@
 	<string name="format_identity_details_custom_field" state="needs_review" hash="-1073344790">%1$s: %2$s</string>
 	<string name="hint_company" state="needs_review" hash="379200324">Companie (opțional)</string>
 	<string name="hint_compose_your_message" state="needs_review" hash="-25761578">Scrie mesaj</string>
+	<string name="hint_compose_your_message_ephemeral" state="needs_review" hash="-1527208333">Mesaj efemer</string>
 	<string name="label_edit_your_message" state="needs_review" hash="1091877412">Editează mesajul</string>
+	<string name="label_reply_to_x" state="needs_review" hash="1941377665">Răspunde la %s</string>
+	<string name="label_reply_to_message" state="needs_review" hash="1280949769">Răspunde la mesaj</string>
 	<string name="label_selection_formatting" state="needs_review" hash="205892951">Formatare</string>
 	<string name="label_selection_code" state="needs_review" hash="-803834470">Cod</string>
 	<string name="label_selection_list" state="needs_review" hash="762025321">Listă</string>
@@ -467,7 +470,7 @@
 	<string name="menu_action_choose_picture" state="needs_review" hash="-1655172909">Alege o imagine</string>
 	<string name="menu_action_take_photo" state="needs_review" hash="-1123080444">Fă o fotografie</string>
 	<string name="menu_action_remove_image" state="needs_review" hash="1094977672">Elimină imaginea</string>
-	<string name="dialog_title_create_empty_group" state="needs_review" hash="-2016542453">Creare grup gol?</string>
+	<string name="dialog_title_create_empty_group" state="needs_review" hash="-663434464">Creați un grup gol?</string>
 	<string name="dialog_message_create_empty_group" state="needs_review" hash="-297923005">Nu ai selectat niciun contact pentru a-l adăuga la grup. Ești sigur că vrei să creezi un grup gol?</string>
 	<string name="pref_dark_mode_title" state="needs_review" hash="816474245">Mod întunecat</string>
 	<string name="pref_dark_mode_summary" state="needs_review" hash="-623740894">Activează modul întunecat pentru a economisi bateria și a-ți proteja ochii.</string>
@@ -558,6 +561,37 @@
 	<string name="dialog_title_webrtc_kick_participant" state="needs_review" hash="389469769">Exclude contactul din apel?</string>
 	<string name="webrtc_failed_kicked" state="needs_review" hash="-758835021">Ai fost exclus din acest apel</string>
 	<string name="dialog_title_start_conference_call" state="needs_review" hash="-1418585505">Inițiază apel conferință</string>
+	<string name="olvid_plus_discover" state="needs_review" hash="-924831172">Descoperă Olvid+</string>
+	<string name="olvid_plus_upgrade_title" state="needs_review" hash="-1960092784">Actualizați la Olvid+ pentru o experiență completă a aplicației</string>
+	<string name="olvid_plus_upgrade_renew" state="needs_review" hash="-4149901">Reînnoirea automată este planificată pentru %1$s până la anulare.</string>
+	<string name="olvid_plus_tip_multi_device_title" state="needs_review" hash="481576448">Utilizați Olvid pe toate dispozitivele dumneavoastră</string>
+	<string name="olvid_plus_tip_multi_device_subtitle" state="needs_review" hash="1352342578">Olvid+ vă permite să utilizați Olvid pe smartphone-urile și computerele dumneavoastră.\nMesajele dumneavoastră rămân sincronizate pe toate dispozitivele, astfel încât să fiți mereu conectat.</string>
+	<string name="olvid_plus_tip_call_title" state="needs_review" hash="935809736">Efectuează apeluri nelimitate</string>
+	<string name="olvid_plus_tip_call_subtitle" state="needs_review" hash="1137191310">Olvid+ vă permite să efectuați apeluri audio și video criptate end-to-end.\nContactați orice utilizator Olvid+ în siguranță, chiar dacă nu are Olvid+.</string>
+	<string name="olvid_plus_tip_support_title" state="needs_review" hash="-1930411305">Susține viziunea noastră</string>
+	<string name="olvid_plus_tip_support_subtitle" state="needs_review" hash="-1404875508">Deblocați funcționalitatea multi-dispozitiv și apelurile securizate cu Olvid+.\nAbonamentul dvs. susține un model sustenabil și onest, menținând Olvid gratuit pentru toți, fără reclame sau costuri ascunse.</string>
+	<string name="olvid_plus_offer_multi_device_title" state="needs_review" hash="-623969503">Utilizați Olvid pe mai multe dispozitive</string>
+	<string name="olvid_plus_offer_multi_device_subtitle" state="needs_review" hash="-123640091">Utilizați Olvid pe computer. Păstrați-vă mesajele în siguranță.</string>
+	<string name="olvid_plus_offer_call_title" state="needs_review" hash="935809736">Efectuează apeluri nelimitate</string>
+	<string name="olvid_plus_offer_call_subtitle" state="needs_review" hash="-1827478007">Efectuează apeluri audio și video cu oricare dintre contactele tale.</string>
+	<string name="olvid_plus_offer_support_title" state="needs_review" hash="-1272799411">Susține Olvid</string>
+	<string name="olvid_plus_offer_support_subtitle" state="needs_review" hash="841023374">Promovați un model sustenabil și onest care nu exploatează datele personale.</string>
+	<string name="olvid_plus_dialog_multi_device_title" state="needs_review" hash="561167181">Utilizați Olvid pe toate dispozitivele dumneavoastră</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle" state="needs_review" hash="1178448519">Cu Olvid+, poți sincroniza mesajele Olvid între smartphone-urile și computerele tale. Ești mereu disponibil!</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_1" state="needs_review" hash="155287050">Bucurați-vă de confortul unei tastaturi și al unui ecran mare și trimiteți cu ușurință fișiere de pe computer.</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_2" state="needs_review" hash="1858309010">Nu pierdeți niciodată mesajele, chiar și în cazul unei defecțiuni sau furtului dispozitivului. Istoricul și atașamentele dumneavoastră sunt stocate în siguranță pe mai multe dispozitive.</string>
+	<string name="olvid_plus_dialog_call_title" state="needs_review" hash="269811560">Efectuează apeluri nelimitate</string>
+	<string name="olvid_plus_dialog_call_subtitle" state="needs_review" hash="-416813149">Cu Olvid+, puteți efectua apeluri audio și video, atât individuale, cât și în grup.</string>
+	<string name="olvid_plus_dialog_call_subtitle_1" state="needs_review" hash="-608348196">Toți contactele tale pot fi contactate, indiferent dacă au Olvid+ sau nu.</string>
+	<string name="olvid_plus_dialog_call_subtitle_2" state="needs_review" hash="-1804019862">Experimentați o calitate optimă a apelurilor, cu același nivel de securitate ca toate comunicațiile dumneavoastră Olvid.</string>
+	<string name="olvid_plus_dialog_support_title" state="needs_review" hash="1942452361">Susține Olvid, aplicația de mesagerie privată pentru toată lumea</string>
+	<string name="olvid_plus_dialog_support_subtitle" state="needs_review" hash="2119917538">Olvid este o aplicație de mesagerie cu adevărat privată, concepută pentru a funcționa fără a accesa vreodată informațiile tale personale: niciun număr de telefon, e-mail sau nume nu este necesar.</string>
+	<string name="olvid_plus_dialog_support_subtitle_1" state="needs_review" hash="1809563102">Tot ce schimbi rămâne între tine și contactele tale. Nimeni altcineva.</string>
+	<string name="olvid_plus_dialog_support_subtitle_2" state="needs_review" hash="-118773166">Cu cod sursă deschis și audituri regulate, nu trebuie să ne credeți pe cuvânt.</string>
+	<string name="olvid_plus_dialog_support_subtitle_3" state="needs_review" hash="-1885036855">Prin abonare, susții o misiune corectă și sustenabilă pentru a menține Olvid gratuit pentru toată lumea, complet fără reclame și fără taxe ascunse.</string>
+	<string name="label_subscription_offer_save_percent" state="needs_review" hash="479307719">Economisiți %1$d%%</string>
+	<string name="label_subscription_offer_monthly" state="needs_review" hash="-1602490190">Lunar</string>
+	<string name="label_subscription_offer_yearly" state="needs_review" hash="1246240165">Anual</string>
 	<string name="label_subscription_status" state="needs_review" hash="1154002053">Starea abonamentului</string>
 	<string name="text_feature_initiate_secure_calls" state="needs_review" hash="1414263062">Inițiază apeluri securizate</string>
 	<string name="text_premium_features" state="needs_review" hash="603728806">Funcții Premium</string>
@@ -640,7 +674,7 @@
 	<string name="text_premium_features_free_trial" state="needs_review" hash="-1976234715">Perioadă de probă gratuită pentru funcțiile premium</string>
 	<string name="button_label_start_free_trial" state="needs_review" hash="-508109296">Începe perioada de probă gratuită</string>
 	<string name="label_free_trial_available" state="needs_review" hash="-995163441">Disponibilă versiunea de încercare gratuită</string>
-	<string name="label_free_trial_explanation" state="needs_review" hash="-596460015">Încearcă apelurile securizate Olvid gratuit timp de o lună (disponibil o singură dată)</string>
+	<string name="label_free_trial_explanation" state="needs_review" hash="2050354272">Încearcă apelurile securizate Olvid gratuit timp de o lună (disponibil o singură dată).</string>
 	<string name="toast_message_failed_to_start_free_trial" state="needs_review" hash="-1137706906">Nu a putut fi inițiată perioada de probă gratuită</string>
 	<string name="toast_message_free_trial_started" state="needs_review" hash="1357863164">Perioadă de încercare gratuită începută</string>
 	<string name="toast_message_error_launching_in_app_purchase" state="needs_review" hash="-1890004340">Eroare la inițierea achiziției în aplicație</string>
@@ -648,8 +682,6 @@
 	<string name="toast_message_in_app_purchase_successful" state="needs_review" hash="578109721">Achiziție în aplicație efectuată cu succes</string>
 	<string name="button_label_price_per_month" state="needs_review" hash="-552222952">%1$s pe lună</string>
 	<string name="button_label_price_per_year" state="needs_review" hash="1539075788">%1$s pe an</string>
-	<string name="button_label_price_per_month_expanded" state="needs_review" hash="173326792">%1$spe lună</string>
-	<string name="button_label_price_per_year_expanded" state="needs_review" hash="1947639238">%1$spe an</string>
 	<string name="text_awaiting_subscription_payment" state="needs_review" hash="1135205985">Plata abonamentului respinsă</string>
 	<string name="text_subscription_in_grace_period_until" state="needs_review" hash="-1685522686">Perioadă de grație până la: %1$s</string>
 	<string name="text_subscription_on_hold_since" state="needs_review" hash="-515586151">Abonamentul este suspendat de la: %1$s</string>
@@ -661,9 +693,8 @@
 	<string name="label_failed_to_query_subscription" state="needs_review" hash="-1677001973">Nu s-au putut prelua planurile de abonament</string>
 	<string name="dialog_title_subscription_required" state="needs_review" hash="-2038592214">Este necesară o abonare</string>
 	<string name="button_label_check_subscription" state="needs_review" hash="-378220336">Verifică starea abonamentului</string>
-	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1662886051">Inițierea apelurilor telefonice securizate cu Olvid necesită un abonament.Puteți verifica starea abonamentului dvs. și puteți vedea planurile de abonament disponibile pe pagina \"Profilul meu\".</string>
-	<string name="dialog_message_subscription_required_web_client" state="needs_review" hash="-760629168">Conectarea la clientul web Olvid necesită un abonament.Puteți verifica starea abonamentului dvs. și puteți vedea planurile de abonament disponibile pe pagina \"Profilul meu\".</string>
-	<string name="dialog_message_subscription_required_multi_device" state="needs_review" hash="-1326423501">Utilizarea profilului tău Olvid pe mai multe dispozitive în același timp necesită un abonament.Poți verifica starea abonamentului tău și poți vedea planurile de abonament disponibile pe pagina \"Profilul meu\".</string>
+	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1231676488">Inițierea apelurilor telefonice și video securizate cu Olvid necesită un abonament.</string>
+	<string name="dialog_title_subscription_plans" state="needs_review" hash="-456474468">Planuri de abonament</string>
 	<string name="text_ended_on" state="needs_review" hash="1280012933">Încheiată pe: %1$s</string>
 	<string name="text_free_trial_ended" state="needs_review" hash="-1458860892">Perioada de încercare gratuită s-a încheiat</string>
 	<string name="text_free_trial_expired" state="needs_review" hash="-2049452081">Licență de încercare gratuită expirată</string>
@@ -995,13 +1026,13 @@
 	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">Servere TURN Paris</string>
 	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">Servere TURN din New York</string>
 	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">Servere TURN din Singapore</string>
-	<string name="dialog_title_android_12_bluetooth_access" state="needs_review" hash="-2140389265">Solicită permisiunea de a accesa dispozitivele Bluetooth</string>
-	<string name="dialog_message_android_12_bluetooth_access" state="needs_review" hash="-332888756">Dacă dorești să utilizezi o căștie Bluetooth pentru apelurile Olvid, trebuie să permiți Olvid să \"găsească și să se conecteze\" la dispozitivele tale din apropiere.</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d contacte</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">%1$d contacte în grupul %2$s</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">Actualizare necesară</string>
 	<string name="dialog_message_outdated_version" state="needs_review" hash="488074151">Versiunea ta Olvid este depășită și trebuie actualizată.Probabil ratezi multe funcții noi și nu putem garanta compatibilitatea versiunii tale cu versiunile mai noi ale aplicației pe care o pot folosi contactele tale.</string>
 	<string name="button_label_remind_me_later" state="needs_review" hash="-713293818">Reamintește-mi mai târziu</string>
+	<string name="label_remind_me_tonight" state="needs_review" hash="707009828">Reamintește-mi la %1$s în această seară</string>
+	<string name="label_remind_me_tomorrow" state="needs_review" hash="1904419307">Reamintește-mi la %1$s mâine</string>
 	<string name="hint_personal_note" state="needs_review" hash="-368244163">Notă personală</string>
 	<string name="toast_message_unable_to_restore_app_data" state="needs_review" hash="1602628680">AVERTISMENT: unele personalizări ale aplicației nu au putut fi restaurate</string>
 	<string name="dialog_title_webrtc_permissions_audio_blocked" state="needs_review" hash="1948829165">Permisiune de înregistrare audio refuzată</string>
@@ -1108,7 +1139,6 @@
 	<string name="pref_reload_backup_configuration_title" state="needs_review" hash="2000428891">Reîncarcă configurația de backup</string>
 	<string name="content_description_back_button" state="needs_review" hash="48196338">Înapoi</string>
 	<string name="content_description_remove_message_reply_to" state="needs_review" hash="-794585802">Șterge răspunsul la mesaj</string>
-	<string name="content_description_remove_link_preview" state="needs_review" hash="-1085272528">Șterge previzualizarea linkului</string>
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">Indicator că notificările sunt dezactivate pentru acest profil</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">Creare un profil</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">Furnizorul de identitate al companiei dumneavoastră a fost configurat cu succes. Apăsați butonul \"Autentificare\" de mai jos pentru a vă autentifica și a prelua informațiile dumneavoastră personale.</string>
@@ -1148,14 +1178,11 @@
 	<string name="dialog_title_neutral_notification_when_hidden" state="needs_review" hash="2013281962">Afișează o notificare neutră atunci când profilul este ascuns</string>
 	<string name="dialog_message_neutral_notification_when_hidden" state="needs_review" hash="-58494752">Când un profil este ascuns, nu vei primi nicio notificare pentru mesajele noi, cu excepția cazului în care este deschis în Olvid. Dacă activezi această opțiune, va fi afișată o notificare „Olvid necesită atenția ta”. Apoi, poți deschide Olvid și debloca profilul tău ascuns pentru a vedea mesajele noi.\nAtenție: acest lucru poate dezvălui faptul că ai într-adevăr un profil ascuns.</string>
 	<string name="toast_message_password_already_used_other_profile" state="needs_review" hash="390904904">Eroare: acestă parolă este folosită de un alt profil ascuns</string>
-	<string name="label_configure_shortcuts" state="needs_review" hash="-857125506">Schimbă ordinea pictogramelor</string>
 	<string name="label_attach_file" state="needs_review" hash="-89285310">Atașați fișiere</string>
 	<string name="label_attach_image" state="needs_review" hash="-1185400308">Atașați imagini</string>
 	<string name="label_attach_timer" state="needs_review" hash="-1527208333">Mesaj efemer</string>
 	<string name="label_attach_camera" state="needs_review" hash="-1123080444">Fă o fotografie</string>
 	<string name="label_attach_video" state="needs_review" hash="1626268086">Înregistrează un videoclip</string>
-	<string name="dialog_title_choose_icon_order" state="needs_review" hash="856935796">Alegeți prioritatea pictogramelor atașamentelor</string>
-	<string name="label_icons_below_never_shown" state="needs_review" hash="1250704267">Pictogramele de sub această linie nu vor fi afișate niciodată</string>
 	<string name="pref_font_scale" state="needs_review" hash="1773040591">Dimensiunea fontului</string>
 	<string name="pref_text_font_scale_0_75" state="needs_review" hash="-1963894407">Minuscul (75%)</string>
 	<string name="pref_text_font_scale_0_9" state="needs_review" hash="-708054676">Mic (90%)</string>
@@ -1210,7 +1237,6 @@
 	<string name="x_reactions_to" state="needs_review" hash="177752739">%1$d reacții la: %2$s</string>
 	<string name="notification_text_xx_reacted" state="needs_review" hash="647790513">%1$s a reacționat la %2$s</string>
 	<string name="label_attach_emoji" state="needs_review" hash="-1842205895">Insere un emoji</string>
-	<string name="label_long_press_for_favorite" state="needs_review" hash="1284446174">Apăsați lung pentru a adăuga/elimina din favorite</string>
 	<string name="menu_action_debug_information" state="needs_review" hash="-919213138">Informații de depanare</string>
 	<string name="debug_label_number_of_devices" state="needs_review" hash="1662862352">Număr de dispozitive:</string>
 	<string name="debug_label_number_of_devices_no_channel" state="needs_review" hash="808299225">Fără canal securizat:</string>
@@ -1283,8 +1309,6 @@
 	<string name="dialog_message_incomplete_attachments" state="needs_review" hash="1179188058">Mesajele selectate conțin atașamente care nu au fost descărcate complet. Aceste mesaje nu pot fi redirecționate până când descărcarea este finalizată.</string>
 	<string name="dialog_message_incomplete_attachments_partial" state="needs_review" hash="1274554335">Unele dintre mesajele selectate conțin atașamente care nu au fost descărcate complet. Aceste mesaje nu pot fi redirecționate până când descărcarea nu este finalizată.\n\nApăsați „Continuă” pentru a redirecționa doar mesajele care pot fi redirecționate.</string>
 	<string name="hint_search_message" state="needs_review" hash="1630003450">Caută mesaj</string>
-	<string name="menu_action_search_prev" state="needs_review" hash="-1639666563">Anterior</string>
-	<string name="menu_action_search_next" state="needs_review" hash="1158639077">Următorul</string>
 	<string name="pref_manage_cloud_backups_title" state="needs_review" hash="824115345">Gestionați copiile de rezervă în cloud</string>
 	<string name="pref_manage_cloud_backups_summary" state="needs_review" hash="-161789549">Atingeți pentru a descărca sau a șterge copiile de rezervă din cloud.</string>
 	<string name="dialog_title_manage_cloud_backups" state="needs_review" hash="-1825078945">Copii de rezervă în cloud</string>
@@ -1485,7 +1509,7 @@
 	<string name="text_you_became_admin" state="needs_review" hash="2137006821">Acum ești administratorul grupului</string>
 	<string name="text_you_are_no_longer_admin" state="needs_review" hash="1766709431">Nu mai sunteți administratorul acestui grup</string>
 	<string name="text_you_became_writer" state="needs_review" hash="-1671425999">Acum aveți permisiunea de a trimite mesaje</string>
-	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-762273585">Nu mai poți trimite mesaje aici</string>
+	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-930933808">Nu puteți posta mesaje aici</string>
 	<string name="label_pending" state="needs_review" hash="1975294811">În așteptare</string>
 	<string name="pref_app_language_title" state="needs_review" hash="-1748962099">Limba aplicației</string>
 	<string name="pref_text_default_device_language" state="needs_review" hash="-1062620207">Limba implicită a dispozitivului</string>
@@ -1571,6 +1595,7 @@
 	<string name="text_invalid_shortcut" state="needs_review" hash="-1219107750">Scurtătură invalidă</string>
 	<string name="text_feature_initiate_secure_calls_from_another_profile" state="needs_review" hash="271258252">Inițiați apeluri securizate (disponibil prin alt profil)</string>
 	<string name="dialog_title_confirm_open_link" state="needs_review" hash="46935087">Deschideți acest link în browser?</string>
+	<string name="label_open_original_link_with_trackers" state="needs_review" hash="-1586932660">Utilizați linkul original care conține parametri de urmărire</string>
 	<string name="dialog_title_confirm_open_olvid_link" state="needs_review" hash="425949498">Deschide acest link în Olvid?</string>
 	<string name="toast_message_unable_to_open_url" state="needs_review" hash="-1486954792">Nu se poate deschide URL</string>
 	<string name="text_explanation_location_map_provider" state="needs_review" hash="-173394547">Alegerea unui furnizor de hărți vă permite să selectați cu precizie locația pe care doriți să o partajați pe o hartă. Cu toate acestea, acest lucru poate dezvălui locația dvs. (sau a contactelor dvs.) acestui furnizor de servicii.</string>
@@ -1581,7 +1606,6 @@
 	<string name="label_no_address_found" state="needs_review" hash="1035554993">Nicio adresă găsită</string>
 	<string name="label_zoom_in_for_address" state="needs_review" hash="902696925">Măriți pentru a căuta adresa</string>
 	<string name="label_address_lookup_disabled" state="needs_review" hash="-2140124686">Căutarea adreselor dezactivată</string>
-	<string name="content_description_cancel_message_edit" state="needs_review" hash="984163129">Anulează editarea mesajului</string>
 	<string name="dialog_title_introducing_mentions" state="needs_review" hash="-1741341288">Introducem mențiunile utilizatorilor!</string>
 	<string name="dialog_message_introducing_mentions" state="needs_review" hash="622739087">Olvid permite acum menționarea unui utilizator într-o discuție 🫵! Pur și simplu tastați @ urmat de o literă sau de numele lor pentru a vedea pe cine puteți menționa. În plus, când dezactivați sunetul 💤 pentru o discuție sau un profil, puteți alege să fiți notificat doar atunci când sunteți menționat explicit într-un mesaj. Rețineți că contactele dvs. vor trebui să actualizeze la ultima versiune a Olvid pentru a vedea că i-ați menționat.</string>
 	<string name="pref_no_notify_certificate_change_for_previews_title" state="needs_review" hash="-434788963">Dezactivați notificările de schimbare a certificatului pentru previzualizările linkurilor</string>
@@ -1740,7 +1764,7 @@
 	<string name="troubleshooting_ignored" state="needs_review" hash="816017832">Ignorat</string>
 	<string name="onboarding_transfer_multidevice_purchase_question" state="needs_review" hash="351030441">Doriți să rămână active toate dispozitivele dumneavoastră?</string>
 	<string name="onboarding_transfer_multidevice_purchase_hyperlink" state="needs_review" hash="747183939">Pe aici</string>
-	<string name="button_label_subscribe_now" state="needs_review" hash="1805105542">Abonati-te acum</string>
+	<string name="button_label_subscribe_with_price" state="needs_review" hash="324675175">Abonare • %1$s</string>
 	<string name="onboarding_transfer_devices_loading_title" state="needs_review" hash="801961341">Se preia lista de dispozitive…</string>
 	<string name="dialog_title_introducing_multi_device" state="needs_review" hash="-310103349">Vă prezentăm Olvid Desktop și suportul multi-dispozitiv!</string>
 	<string name="dialog_message_introducing_multi_device" state="needs_review" hash="-153162506">Olvid este acum disponibil pentru **computerul tău** (Windows și macOS). Poți descărca ultima versiune de aici: https://olvid.io/download/ Cu suport **multi-dispozitiv**, începe o conversație pe telefon și continuă-o pe computer. Partajarea fișierelor între dispozitivele tale și cu contactele tale nu a fost niciodată mai ușoară!</string>
@@ -1930,7 +1954,6 @@
 	<string name="pref_archived_attachments_summary" state="needs_review" hash="1596754073">Când această opțiune este activată, atașamentele din conversațiile arhivate vor fi descărcate automat conform setărilor de mai sus.</string>
 	<string name="pref_unarchive_on_notification_title" state="needs_review" hash="-1146947153">Dezarchivați conversațiile la primirea unei notificări</string>
 	<string name="pref_unarchive_on_notification_summary" state="needs_review" hash="778062251">Când această opțiune este activată, conversațiile arhivate sunt dezarhivate automat la primirea unei notificări pentru un mesaj nou.</string>
-	<string name="call_notification_ongoing_call" state="needs_review" hash="1828207822">Apel în curs</string>
 	<string name="call_notification_incoming_call" state="needs_review" hash="-1223043344">Apel primit</string>
 	<string name="menu_action_copy_text_from_image" state="needs_review" hash="-1072685983">Copiază acest cuvânt</string>
 	<string name="menu_action_copy_text_block_from_image" state="needs_review" hash="1436026569">Copiază întregul bloc</string>
@@ -2121,4 +2144,8 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Dispozitivul contactului este inaccesibil</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Recreează toate canalele securizate</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Recrearea tuturor canalelor securizate va forța Olvid să creeze canale noi de comunicare securizate cu toate dispozitivele contactelor tale. În general, nu este util, dar poate rezolva situații rare în care unele dintre aceste canale sunt \"nesincronizate\".\n\n**Atenție:** dacă ai mulți contacte, această operațiune poate dura câteva minute și este posibil să pierzi unele mesaje primite în timp ce rulează.</string>
+	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Apel închis</string>
+	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">Aveți nevoie de abonamente pentru echipa dumneavoastră?</string>
+	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Vizitați Magazinul Olvid</string>
+	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">Memento stabilit</string>
 </resources>

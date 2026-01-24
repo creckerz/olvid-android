@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">Sinä ja 1 muu henkilö jakavat sijaintinne</item>
 		<item quantity="other" state="needs_review" hash="1789697147">Sinä ja %1$d muuta jaatte sijaintinne</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d kuukautta ilmaiseksi</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d kuukautta ilmaiseksi</item>
+	</plurals>
 </resources>

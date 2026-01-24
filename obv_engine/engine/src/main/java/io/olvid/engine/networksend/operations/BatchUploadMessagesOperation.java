@@ -44,15 +44,17 @@ import io.olvid.engine.networksend.datatypes.SendManagerSessionFactory;
 public class BatchUploadMessagesOperation extends Operation {
     private final SendManagerSessionFactory sendManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final String server;
     private final IdentityAndUid[] messageIdentitiesAndUids;
     private final List<IdentityAndUid> tooManyHeadersUnsentMessageUids;
     private final List<IdentityAndUid> identityInactiveMessageUids;
 
-    public BatchUploadMessagesOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, String server, IdentityAndUid[] messageIdentitiesAndUids) {
+    public BatchUploadMessagesOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, String server, IdentityAndUid[] messageIdentitiesAndUids) {
         super();
         this.sendManagerSessionFactory = sendManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.server = server;
         this.messageIdentitiesAndUids = messageIdentitiesAndUids;
         this.tooManyHeadersUnsentMessageUids = new ArrayList<>();
@@ -123,7 +125,7 @@ public class BatchUploadMessagesOperation extends Operation {
                 }
 
                 BatchUploadMessagesServerMethod serverMethod = new BatchUploadMessagesServerMethod(server, outboxMessageAndHeaders.toArray(new OutboxMessageAndHeaders[0]));
-                serverMethod.setSslSocketFactory(sslSocketFactory);
+                serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
 
                 byte returnStatus = serverMethod.execute(true);
 

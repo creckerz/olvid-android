@@ -101,7 +101,10 @@
 	<string name="format_identity_details_custom_field" state="needs_review" hash="-1073344790">%1$s : %2$s</string>
 	<string name="hint_company" state="needs_review" hash="379200324">Tvrtka (opcionalno)</string>
 	<string name="hint_compose_your_message" state="needs_review" hash="-25761578">Napiši poruku</string>
+	<string name="hint_compose_your_message_ephemeral" state="needs_review" hash="-1527208333">Privatna poruka</string>
 	<string name="label_edit_your_message" state="needs_review" hash="1091877412">Uredi svoju poruku</string>
+	<string name="label_reply_to_x" state="needs_review" hash="1941377665">Odgovor na %s</string>
+	<string name="label_reply_to_message" state="needs_review" hash="1280949769">Odgovori na poruku</string>
 	<string name="label_selection_formatting" state="needs_review" hash="205892951">Oblikovanje</string>
 	<string name="label_selection_code" state="needs_review" hash="-803834470">Kod</string>
 	<string name="label_selection_list" state="needs_review" hash="762025321">Popis</string>
@@ -467,7 +470,7 @@
 	<string name="menu_action_choose_picture" state="needs_review" hash="-1655172909">Odaberite sliku</string>
 	<string name="menu_action_take_photo" state="needs_review" hash="-1123080444">Slikaj sliku</string>
 	<string name="menu_action_remove_image" state="needs_review" hash="1094977672">Ukloni sliku</string>
-	<string name="dialog_title_create_empty_group" state="needs_review" hash="-2016542453">Želite li kreirati praznu grupu?</string>
+	<string name="dialog_title_create_empty_group" state="needs_review" hash="-663434464">Želite stvoriti praznu grupu?</string>
 	<string name="dialog_message_create_empty_group" state="needs_review" hash="-297923005">Niste odabrali nijedan kontakt za dodavanje u grupu. Jeste li sigurni da želite stvoriti praznu grupu?</string>
 	<string name="pref_dark_mode_title" state="needs_review" hash="816474245">Tamni način</string>
 	<string name="pref_dark_mode_summary" state="needs_review" hash="-623740894">Uključite tamni način rada kako biste uštedjeli bateriju i zaštitili svoje oči.</string>
@@ -558,6 +561,37 @@
 	<string name="dialog_title_webrtc_kick_participant" state="needs_review" hash="389469769">Isključiti kontakt iz poziva?</string>
 	<string name="webrtc_failed_kicked" state="needs_review" hash="-758835021">Izbačeni ste iz ovog poziva</string>
 	<string name="dialog_title_start_conference_call" state="needs_review" hash="-1418585505">Pokreni konferencijski poziv</string>
+	<string name="olvid_plus_discover" state="needs_review" hash="-924831172">Otkrijte Olvid+</string>
+	<string name="olvid_plus_upgrade_title" state="needs_review" hash="-1960092784">Nadogradite na Olvid+ za potpuno iskustvo aplikacije</string>
+	<string name="olvid_plus_upgrade_renew" state="needs_review" hash="-4149901">Automatska obnova plana za %1$s dok se ne otkaže.</string>
+	<string name="olvid_plus_tip_multi_device_title" state="needs_review" hash="481576448">Koristite Olvid na svim svojim uređajima</string>
+	<string name="olvid_plus_tip_multi_device_subtitle" state="needs_review" hash="1352342578">Olvid+ vam omogućuje korištenje Olvida na vašim pametnim telefonima i računalima.\nVaše poruke ostaju sinkronizirane na svim vašim uređajima kako biste uvijek bili povezani.</string>
+	<string name="olvid_plus_tip_call_title" state="needs_review" hash="935809736">Neograničeni pozivi</string>
+	<string name="olvid_plus_tip_call_subtitle" state="needs_review" hash="1137191310">Olvid+ vam omogućuje sigurne glasovne i video pozive s end-to-end enkripcijom.\nDostignite bilo kojeg Olvid korisnika sigurno, bez obzira ima li Olvid+ ili ne.</string>
+	<string name="olvid_plus_tip_support_title" state="needs_review" hash="-1930411305">Podržite našu viziju</string>
+	<string name="olvid_plus_tip_support_subtitle" state="needs_review" hash="-1404875508">Otključajte podršku za više uređaja i sigurne pozive uz Olvid+.\nVaša pretplata podržava održiv i iskren model, čime se Olvid ostaje besplatan za sve, bez oglasa ili skrivenih troškova.</string>
+	<string name="olvid_plus_offer_multi_device_title" state="needs_review" hash="-623969503">Koristite Olvid na više uređaja</string>
+	<string name="olvid_plus_offer_multi_device_subtitle" state="needs_review" hash="-123640091">Koristite Olvid na svom računalu. Sigurno pohranite sve svoje poruke.</string>
+	<string name="olvid_plus_offer_call_title" state="needs_review" hash="935809736">Neograničeni pozivi</string>
+	<string name="olvid_plus_offer_call_subtitle" state="needs_review" hash="-1827478007">Uspostavite glasovne i video pozive sa bilo kojim od svojih kontakata.</string>
+	<string name="olvid_plus_offer_support_title" state="needs_review" hash="-1272799411">Podržite Olvid</string>
+	<string name="olvid_plus_offer_support_subtitle" state="needs_review" hash="841023374">Zagovarajte održiv i iskren model koji ne iskorištava osobne podatke.</string>
+	<string name="olvid_plus_dialog_multi_device_title" state="needs_review" hash="561167181">Koristite Olvid na svim svojim uređajima</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle" state="needs_review" hash="1178448519">Uz Olvid+, možete sinkronizirati svoje Olvid poruke između pametnih telefona i računala. Uvijek ste dostupni!</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_1" state="needs_review" hash="155287050">Uživajte udobnost tipkovnice i velikog zaslona te jednostavno šaljite datoteke sa svog računala.</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_2" state="needs_review" hash="1858309010">Nikada ne izgubite svoje poruke, čak ni u slučaju kvara uređaja ili krađe. Vaša povijest i privici sigurno su pohranjeni na više uređaja.</string>
+	<string name="olvid_plus_dialog_call_title" state="needs_review" hash="269811560">Neograničeni pozivi</string>
+	<string name="olvid_plus_dialog_call_subtitle" state="needs_review" hash="-416813149">Uz Olvid+, možete obavljati audio i video pozive, individualne i grupne.</string>
+	<string name="olvid_plus_dialog_call_subtitle_1" state="needs_review" hash="-608348196">Svi vaši kontakti su dostupni, bez obzira imaju li Olvid+ ili ne.</string>
+	<string name="olvid_plus_dialog_call_subtitle_2" state="needs_review" hash="-1804019862">Uživajte u optimalnoj kvaliteti poziva, uz istu razinu sigurnosti kao i sve vaše Olvid komunikacije.</string>
+	<string name="olvid_plus_dialog_support_title" state="needs_review" hash="1942452361">Podržite Olvid, privatni messenger za sve</string>
+	<string name="olvid_plus_dialog_support_subtitle" state="needs_review" hash="2119917538">Olvid je doista privatna aplikacija za slanje poruka, dizajnirana da funkcionira bez pristupa vašim osobnim podacima: nije potreban broj telefona, e-mail adresa ili ime.</string>
+	<string name="olvid_plus_dialog_support_subtitle_1" state="needs_review" hash="1809563102">Sve što razmjenjujete ostaje između vas i vaših kontakata. Nitko drugi.</string>
+	<string name="olvid_plus_dialog_support_subtitle_2" state="needs_review" hash="-118773166">Uz otvoren kod i redovite revizije, ne morate nam vjerovati na riječ.</string>
+	<string name="olvid_plus_dialog_support_subtitle_3" state="needs_review" hash="-1885036855">Pretplatom podržavate pravednu i održivu misiju kako bi Olvid ostao besplatan za sve, potpuno bez oglasa i skrivenih naknada.</string>
+	<string name="label_subscription_offer_save_percent" state="needs_review" hash="479307719">Uštedite %1$d%%</string>
+	<string name="label_subscription_offer_monthly" state="needs_review" hash="-1602490190">Mjesečno</string>
+	<string name="label_subscription_offer_yearly" state="needs_review" hash="1246240165">Godišnje</string>
 	<string name="label_subscription_status" state="needs_review" hash="1154002053">Status pretplate</string>
 	<string name="text_feature_initiate_secure_calls" state="needs_review" hash="1414263062">Pokreni sigurnu vezu</string>
 	<string name="text_premium_features" state="needs_review" hash="603728806">Premium značajke</string>
@@ -640,7 +674,7 @@
 	<string name="text_premium_features_free_trial" state="needs_review" hash="-1976234715">Besplatno isprobavanje premium značajki</string>
 	<string name="button_label_start_free_trial" state="needs_review" hash="-508109296">Pokreni besplatno probno razdoblje</string>
 	<string name="label_free_trial_available" state="needs_review" hash="-995163441">Besplatno probno razdoblje dostupno</string>
-	<string name="label_free_trial_explanation" state="needs_review" hash="-596460015">Isprobajte Olvidove sigurne pozive besplatno tijekom mjesec dana (dostupno samo jednom)</string>
+	<string name="label_free_trial_explanation" state="needs_review" hash="2050354272">Isprobajte Olvidove sigurne pozive besplatno tijekom mjesec dana (dostupno samo jednom).</string>
 	<string name="toast_message_failed_to_start_free_trial" state="needs_review" hash="-1137706906">Nije uspjelo pokretanje besplatnog probnog razdoblja</string>
 	<string name="toast_message_free_trial_started" state="needs_review" hash="1357863164">Besplatno isprobavanje je započelo</string>
 	<string name="toast_message_error_launching_in_app_purchase" state="needs_review" hash="-1890004340">Pogreška pri pokretanju kupnje unutar aplikacije</string>
@@ -648,8 +682,6 @@
 	<string name="toast_message_in_app_purchase_successful" state="needs_review" hash="578109721">Kupnja unutar aplikacije je uspješna</string>
 	<string name="button_label_price_per_month" state="needs_review" hash="-552222952">%1$s mjesečno</string>
 	<string name="button_label_price_per_year" state="needs_review" hash="1539075788">%1$s godišnje</string>
-	<string name="button_label_price_per_month_expanded" state="needs_review" hash="173326792">%1$s\nmjesečno</string>
-	<string name="button_label_price_per_year_expanded" state="needs_review" hash="1947639238">%1$s\ngodišnje</string>
 	<string name="text_awaiting_subscription_payment" state="needs_review" hash="1135205985">Plaćanje pretplate odbijeno</string>
 	<string name="text_subscription_in_grace_period_until" state="needs_review" hash="-1685522686">U razdoblju odgode do: %1$s</string>
 	<string name="text_subscription_on_hold_since" state="needs_review" hash="-515586151">Pretplata je na čekanju od: %1$s</string>
@@ -661,9 +693,8 @@
 	<string name="label_failed_to_query_subscription" state="needs_review" hash="-1677001973">Nije uspjelo dohvaćanje plana pretplate</string>
 	<string name="dialog_title_subscription_required" state="needs_review" hash="-2038592214">Potrebna je pretplata</string>
 	<string name="button_label_check_subscription" state="needs_review" hash="-378220336">Provjerite status pretplate</string>
-	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1662886051">Za pokretanje sigurnih telefonskih poziva s Olvidom potrebna je pretplata.\n\nStatus svoje trenutne pretplate i dostupne planove pretplate možete provjeriti na stranici \"Moj profil\".</string>
-	<string name="dialog_message_subscription_required_web_client" state="needs_review" hash="-760629168">Za povezivanje s Olvid web klijentom potrebna je pretplata.\n\nStatus svoje trenutne pretplate i dostupne planove pretplate možete provjeriti na stranici \"Moj profil\".</string>
-	<string name="dialog_message_subscription_required_multi_device" state="needs_review" hash="-1326423501">Korištenje vašeg Olvid profila na više uređaja istovremeno zahtijeva pretplatu.\n\nMožete provjeriti status svoje trenutne pretplate i dostupne planove pretplate na stranici \"Moj profil\".</string>
+	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1231676488">Pokretanje sigurnih telefonskih i video poziva s Olvidom zahtijeva pretplatu.</string>
+	<string name="dialog_title_subscription_plans" state="needs_review" hash="-456474468">Planovi pretplate</string>
 	<string name="text_ended_on" state="needs_review" hash="1280012933">Završeno: %1$s</string>
 	<string name="text_free_trial_ended" state="needs_review" hash="-1458860892">Besplatno probno razdoblje je isteklo</string>
 	<string name="text_free_trial_expired" state="needs_review" hash="-2049452081">Istekao rok besplatnog probnog razdoblja</string>
@@ -995,13 +1026,13 @@
 	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">Paris TURN poslužitelji</string>
 	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">TURN poslužitelji New Yorka</string>
 	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">TURN poslužitelji Singapura</string>
-	<string name="dialog_title_android_12_bluetooth_access" state="needs_review" hash="-2140389265">Zahtjev za dopuštenje pristupa Bluetooth uređajima</string>
-	<string name="dialog_message_android_12_bluetooth_access" state="needs_review" hash="-332888756">Ako želite koristiti Bluetooth slušalice za Olvid pozive, morate dopustiti Olvidu da \"pronađe i poveže se\" s vašim uređajima u blizini.</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d kontakti</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">%1$d kontakata u grupi %2$s</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">Zahtijeva se ažuriranje</string>
 	<string name="dialog_message_outdated_version" state="needs_review" hash="488074151">Vaša verzija Olvida je zastarjela i potrebno ju je ažurirati.\n\nVjerojatno propuštate mnoge nove značajke i ne možemo jamčiti kompatibilnost vaše verzije s novijim verzijama aplikacije koju vaši kontakti mogu koristiti.</string>
 	<string name="button_label_remind_me_later" state="needs_review" hash="-713293818">Podsjeti me kasnije</string>
+	<string name="label_remind_me_tonight" state="needs_review" hash="707009828">Podsjeti me večeras u %1$s</string>
+	<string name="label_remind_me_tomorrow" state="needs_review" hash="1904419307">Podsjeti me sutra u %1$s</string>
 	<string name="hint_personal_note" state="needs_review" hash="-368244163">Osobna bilješka</string>
 	<string name="toast_message_unable_to_restore_app_data" state="needs_review" hash="1602628680">UPOZORENJE: Neke prilagodbe aplikacije nisu mogle biti vraćene</string>
 	<string name="dialog_title_webrtc_permissions_audio_blocked" state="needs_review" hash="1948829165">Dozvola za snimanje zvuka odbijena</string>
@@ -1108,7 +1139,6 @@
 	<string name="pref_reload_backup_configuration_title" state="needs_review" hash="2000428891">Ponovno učitaj konfiguraciju sigurnosne kopije</string>
 	<string name="content_description_back_button" state="needs_review" hash="48196338">Nazad</string>
 	<string name="content_description_remove_message_reply_to" state="needs_review" hash="-794585802">Izbriši odgovor na poruku</string>
-	<string name="content_description_remove_link_preview" state="needs_review" hash="-1085272528">Ukloni pregled poveznice</string>
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">Indikator da su obavijesti isključene za ovaj profil</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">Kreiraj profil</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">Pružatelj identiteta vaše tvrtke je uspješno konfiguriran. Pritisnite gumb \"autentificiraj\" ispod kako biste se autentificirali s njim i dohvatili svoje osobne podatke.</string>
@@ -1148,14 +1178,11 @@
 	<string name="dialog_title_neutral_notification_when_hidden" state="needs_review" hash="2013281962">Prikaži neutralnu obavijest kada je profil sakriven</string>
 	<string name="dialog_message_neutral_notification_when_hidden" state="needs_review" hash="-58494752">Kada je profil sakriven, osim ako je trenutno otvoren u Olvidu, nećete primati obavijesti o novim porukama. Ako aktivirate ovu opciju, prikazat će se obavijest \"Olvid zahtijeva vašu pažnju\". Tada možete otvoriti Olvid i otključati svoj skriveni profil kako biste vidjeli nove poruke.\n\nUpozorenje: ovo može otkriti činjenicu da imate skriveni profil.</string>
 	<string name="toast_message_password_already_used_other_profile" state="needs_review" hash="390904904">Greška: ovaj se lozinka koristi za drugi skriveni profil.</string>
-	<string name="label_configure_shortcuts" state="needs_review" hash="-857125506">Promijeni redoslijed ikona</string>
 	<string name="label_attach_file" state="needs_review" hash="-89285310">Priložite datoteke</string>
 	<string name="label_attach_image" state="needs_review" hash="-1185400308">Priložite slike</string>
 	<string name="label_attach_timer" state="needs_review" hash="-1527208333">Privatna poruka koja nestaje</string>
 	<string name="label_attach_camera" state="needs_review" hash="-1123080444">Slikaj sliku</string>
 	<string name="label_attach_video" state="needs_review" hash="1626268086">Snimi video</string>
-	<string name="dialog_title_choose_icon_order" state="needs_review" hash="856935796">Odaberite prioritet ikona privitaka</string>
-	<string name="label_icons_below_never_shown" state="needs_review" hash="1250704267">Ikone ispod ove linije se nikada ne prikazuju</string>
 	<string name="pref_font_scale" state="needs_review" hash="1773040591">Veličina fonta</string>
 	<string name="pref_text_font_scale_0_75" state="needs_review" hash="-1963894407">Vrlo malo (75%)</string>
 	<string name="pref_text_font_scale_0_9" state="needs_review" hash="-708054676">Mala (90%)</string>
@@ -1210,7 +1237,6 @@
 	<string name="x_reactions_to" state="needs_review" hash="177752739">%1$d reakcija na: %2$s</string>
 	<string name="notification_text_xx_reacted" state="needs_review" hash="647790513">%1$s je reagirao na %2$s</string>
 	<string name="label_attach_emoji" state="needs_review" hash="-1842205895">Umetni emoji</string>
-	<string name="label_long_press_for_favorite" state="needs_review" hash="1284446174">Dugo pritisnite za dodavanje/uklanjanje iz favorita</string>
 	<string name="menu_action_debug_information" state="needs_review" hash="-919213138">Informacije za otklanjanje pogrešaka</string>
 	<string name="debug_label_number_of_devices" state="needs_review" hash="1662862352">Broj uređaja:</string>
 	<string name="debug_label_number_of_devices_no_channel" state="needs_review" hash="808299225">Bez sigurnog kanala:</string>
@@ -1283,8 +1309,6 @@
 	<string name="dialog_message_incomplete_attachments" state="needs_review" hash="1179188058">Odabrane poruke sadrže priloge koji nisu u potpunosti preuzeti. Ove poruke se ne mogu prosljediti dok se preuzimanje ne dovrši.</string>
 	<string name="dialog_message_incomplete_attachments_partial" state="needs_review" hash="1274554335">Neke od odabranih poruka sadrže priloge koji nisu u potpunosti preuzeti. Te poruke se ne mogu proslijediti dok se preuzimanje ne dovrši.\n\nPritisnite \"Nastavi\" za prosljeđivanje samo onih poruka koje se mogu proslijediti.</string>
 	<string name="hint_search_message" state="needs_review" hash="1630003450">Pretraži poruku</string>
-	<string name="menu_action_search_prev" state="needs_review" hash="-1639666563">Prethodno</string>
-	<string name="menu_action_search_next" state="needs_review" hash="1158639077">Slijedeće</string>
 	<string name="pref_manage_cloud_backups_title" state="needs_review" hash="824115345">Upravljanje sigurnosnim kopijama u oblaku</string>
 	<string name="pref_manage_cloud_backups_summary" state="needs_review" hash="-161789549">Kliknite za preuzimanje ili brisanje sigurnosnih kopija u oblaku.</string>
 	<string name="dialog_title_manage_cloud_backups" state="needs_review" hash="-1825078945">Sigurnosno kopiranje u oblaku</string>
@@ -1485,7 +1509,7 @@
 	<string name="text_you_became_admin" state="needs_review" hash="2137006821">Sada ste administrator grupe</string>
 	<string name="text_you_are_no_longer_admin" state="needs_review" hash="1766709431">Više niste administrator ove grupe</string>
 	<string name="text_you_became_writer" state="needs_review" hash="-1671425999">Sada ste ovlašteni objavljivati poruke</string>
-	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-762273585">Ne možete više objavljivati poruke ovdje</string>
+	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-930933808">Ovdje ne možete objavljivati poruke</string>
 	<string name="label_pending" state="needs_review" hash="1975294811">U tijeku</string>
 	<string name="pref_app_language_title" state="needs_review" hash="-1748962099">Jezik aplikacije</string>
 	<string name="pref_text_default_device_language" state="needs_review" hash="-1062620207">Zadani jezik uređaja</string>
@@ -1571,6 +1595,7 @@
 	<string name="text_invalid_shortcut" state="needs_review" hash="-1219107750">Neispravna prečica</string>
 	<string name="text_feature_initiate_secure_calls_from_another_profile" state="needs_review" hash="271258252">Pokreni sigurne pozive\n(dostupno putem drugog profila)</string>
 	<string name="dialog_title_confirm_open_link" state="needs_review" hash="46935087">Želite li otvoriti ovu poveznicu u pregledniku?</string>
+	<string name="label_open_original_link_with_trackers" state="needs_review" hash="-1586932660">Koristite izvorni link koji sadrži parametre praćenja</string>
 	<string name="dialog_title_confirm_open_olvid_link" state="needs_review" hash="425949498">Želite li otvoriti ovu poveznicu u Olvidu?</string>
 	<string name="toast_message_unable_to_open_url" state="needs_review" hash="-1486954792">Nije moguće otvoriti URL</string>
 	<string name="text_explanation_location_map_provider" state="needs_review" hash="-173394547">Odabir davatelja karata omogućuje vam da precizno odaberete lokaciju koju želite podijeliti na karti. Međutim, to može otkriti vašu lokaciju (ili lokaciju vaših kontakata) ovom pružatelju usluga.</string>
@@ -1581,7 +1606,6 @@
 	<string name="label_no_address_found" state="needs_review" hash="1035554993">Nije pronađena adresa</string>
 	<string name="label_zoom_in_for_address" state="needs_review" hash="902696925">Povećajte za pretraživanje adrese</string>
 	<string name="label_address_lookup_disabled" state="needs_review" hash="-2140124686">Pretraživanje adresa je isključeno</string>
-	<string name="content_description_cancel_message_edit" state="needs_review" hash="984163129">Poništi uređivanje poruke</string>
 	<string name="dialog_title_introducing_mentions" state="needs_review" hash="-1741341288">Predstavljamo korisničke oznake!</string>
 	<string name="dialog_message_introducing_mentions" state="needs_review" hash="622739087">Olvid sada omogućuje spominjanje korisnika u raspravi 🫵! Jednostavno upišite @ nakon čega slijedi slovo ili njegovo ime kako biste vidjeli tko se može spomenuti.\nDodatno, kada utišate 💤 raspravu ili profil, sada možete odabrati da budete obaviješteni samo kada vas se izričito spomene u poruci.\n\nImajte na umu da će vaši kontakti morati ažurirati na najnoviju verziju Olvida kako bi vidjeli da ste ih spomenuli.</string>
 	<string name="pref_no_notify_certificate_change_for_previews_title" state="needs_review" hash="-434788963">Onemogućite obavijest o promjeni certifikata za pregled poveznica</string>
@@ -1740,7 +1764,7 @@
 	<string name="troubleshooting_ignored" state="needs_review" hash="816017832">Ignorirano</string>
 	<string name="onboarding_transfer_multidevice_purchase_question" state="needs_review" hash="351030441">Želite li da svi vaši uređaji ostanu aktivni?</string>
 	<string name="onboarding_transfer_multidevice_purchase_hyperlink" state="needs_review" hash="747183939">Ovdje</string>
-	<string name="button_label_subscribe_now" state="needs_review" hash="1805105542">Preplatite se sada</string>
+	<string name="button_label_subscribe_with_price" state="needs_review" hash="324675175">Pretplati se • %1$s</string>
 	<string name="onboarding_transfer_devices_loading_title" state="needs_review" hash="801961341">Dohvaćanje popisa uređaja…</string>
 	<string name="dialog_title_introducing_multi_device" state="needs_review" hash="-310103349">Predstavljamo Olvid Desktop i podršku za više uređaja!</string>
 	<string name="dialog_message_introducing_multi_device" state="needs_review" hash="-153162506">Olvid je sada dostupan za **vaše računalo** (Windows i macOS). Najnoviju verziju možete preuzeti s:\nhttps://olvid.io/download/\n\nUz podršku za **više uređaja**, započnite razgovor na svom telefonu i nastavite ga na računalu. Dijeljenje datoteka između vaših uređaja i s vašim kontaktima nikada nije bilo lakše!</string>
@@ -1930,7 +1954,6 @@
 	<string name="pref_archived_attachments_summary" state="needs_review" hash="1596754073">Kada je ovo uključeno, privici u arhiviranim razgovorima će se automatski preuzimati prema gore navedenim postavkama.</string>
 	<string name="pref_unarchive_on_notification_title" state="needs_review" hash="-1146947153">Poništi arhiviranje razgovora prilikom obavijesti</string>
 	<string name="pref_unarchive_on_notification_summary" state="needs_review" hash="778062251">Kada je ovo uključeno, arhivirani razgovori se automatski ponovno arhiviraju kada se primi obavijest o novoj poruci.</string>
-	<string name="call_notification_ongoing_call" state="needs_review" hash="1828207822">Aktivan poziv</string>
 	<string name="call_notification_incoming_call" state="needs_review" hash="-1223043344">Dolazni poziv</string>
 	<string name="menu_action_copy_text_from_image" state="needs_review" hash="-1072685983">Kopiraj ovu riječ</string>
 	<string name="menu_action_copy_text_block_from_image" state="needs_review" hash="1436026569">Kopiraj cijeli blok</string>
@@ -2121,4 +2144,8 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Uređaj sugovornika je nedostižan</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Ponovno kreirajte sve sigurne kanale</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Ponovna uspostava svih sigurnih kanala prisilit će Olvid da uspostavi nove sigurne komunikacijske kanale sa svim uređajima vaših kontakata. Ovo obično nije korisno, ali može riješiti rijetke situacije u kojima su neki od ovih kanala \"izvan sinkronizacije\".\n\n**Upozorenje:** ako imate mnogo kontakata, ova operacija može potrajati nekoliko minuta i možete izgubiti neke dolazne poruke dok se izvršava.</string>
+	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Poziv prekinut</string>
+	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">Treba li vam pretplate za vaš tim?</string>
+	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Posjetite Olvid trgovinu</string>
+	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">Podsjetnik postavljen</string>
 </resources>

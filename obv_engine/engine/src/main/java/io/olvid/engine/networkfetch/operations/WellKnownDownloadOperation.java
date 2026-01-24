@@ -52,6 +52,7 @@ public class WellKnownDownloadOperation extends Operation {
 
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final String server;
     private final ObjectMapper objectMapper;
 
@@ -72,10 +73,11 @@ public class WellKnownDownloadOperation extends Operation {
 
 
 
-    public WellKnownDownloadOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String server, ObjectMapper objectMapper, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
+    public WellKnownDownloadOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, String server, ObjectMapper objectMapper, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
         super(computeUniqueUid(server), onFinishCallback, onCancelCallback);
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.server = server;
         this.objectMapper = objectMapper;
     }
@@ -105,7 +107,7 @@ public class WellKnownDownloadOperation extends Operation {
                 if (connection instanceof HttpsURLConnection && sslSocketFactory != null) {
                     ((HttpsURLConnection) connection).setSSLSocketFactory(sslSocketFactory);
                 }
-                String userAgentProperty = System.getProperty("http.agent");
+                String userAgentProperty = (userAgentOverride != null) ? userAgentOverride : System.getProperty("http.agent");
                 if (userAgentProperty != null) {
                     connection.setRequestProperty("User-Agent", userAgentProperty);
                 }

@@ -42,10 +42,13 @@ import io.olvid.messenger.App
 import io.olvid.messenger.AppSingleton
 import io.olvid.messenger.R
 import io.olvid.messenger.activities.ObvLinkActivity
+import io.olvid.messenger.customClasses.ConfigurationPojo
 import io.olvid.messenger.customClasses.StringUtils
 import io.olvid.messenger.databases.AppDatabase
 import io.olvid.messenger.databases.entity.OwnedIdentity
 import io.olvid.messenger.openid.jsons.KeycloakUserDetailsAndStuff
+import io.olvid.messenger.plus_button.configuration.Screen
+import io.olvid.messenger.plus_button.configuration.WebClientUiState
 import io.olvid.messenger.settings.SettingsActivity.Companion.qrCorrectionLevel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -112,6 +115,10 @@ class PlusButtonViewModel : ViewModel() {
 
     private val _scanUiState = MutableStateFlow<ScanUiState>(ScanUiState.IdleScanning)
     val scanUiState = _scanUiState.asStateFlow()
+
+    var webClientUiState by mutableStateOf<WebClientUiState>(WebClientUiState.Connecting)
+    var currentConfigurationScreen by mutableStateOf<Screen>(Screen.ConfigurationScan)
+    var configurationPojo by mutableStateOf<ConfigurationPojo?>(null)
 
     fun updateScanState(newState: ScanUiState) {
         _scanUiState.value = newState
@@ -219,14 +226,14 @@ class PlusButtonViewModel : ViewModel() {
     fun getQrImage(qrCodeData: String) {
         qrImageBitmap = runCatching {
             val hints = HashMap<EncodeHintType?, Any?>()
-            hints.put(EncodeHintType.MARGIN, 0)
+            hints[EncodeHintType.MARGIN] = 0
 
             when (qrCorrectionLevel) {
-                "L" -> hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L)
-                "Q" -> hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.Q)
-                "H" -> hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H)
-                "M" -> hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M)
-                else -> hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M)
+                "L" -> hints[EncodeHintType.ERROR_CORRECTION] = ErrorCorrectionLevel.L
+                "Q" -> hints[EncodeHintType.ERROR_CORRECTION] = ErrorCorrectionLevel.Q
+                "H" -> hints[EncodeHintType.ERROR_CORRECTION] = ErrorCorrectionLevel.H
+                "M" -> hints[EncodeHintType.ERROR_CORRECTION] = ErrorCorrectionLevel.M
+                else -> hints[EncodeHintType.ERROR_CORRECTION] = ErrorCorrectionLevel.M
             }
             val qrcode = MultiFormatWriter().encode(qrCodeData, BarcodeFormat.QR_CODE, 0, 0, hints)
             val w = qrcode.width

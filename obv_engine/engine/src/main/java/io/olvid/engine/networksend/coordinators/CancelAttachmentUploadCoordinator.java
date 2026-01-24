@@ -47,6 +47,7 @@ import io.olvid.engine.networksend.operations.CancelAttachmentUploadCompositeOpe
 public class CancelAttachmentUploadCoordinator implements OutboxAttachment.OutboxAttachmentCancelRequestedListener, Operation.OnCancelCallback, Operation.OnFinishCallback {
     private final SendManagerSessionFactory sendManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
 
     private NotificationListeningDelegate notificationListeningDelegate;
 
@@ -59,9 +60,10 @@ public class CancelAttachmentUploadCoordinator implements OutboxAttachment.Outbo
     private final NotificationListener notificationListener;
 
 
-    public CancelAttachmentUploadCoordinator(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory) {
+    public CancelAttachmentUploadCoordinator(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride) {
         this.sendManagerSessionFactory = sendManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
 
         cancelAttachmentUploadOperationQueue = new NoDuplicateOperationQueue();
 
@@ -95,7 +97,7 @@ public class CancelAttachmentUploadCoordinator implements OutboxAttachment.Outbo
 
     private void queueNewCancelAttachmentUploadCompositeOperation(Identity ownedIdentity, UID messageUid, int attachmentNumber) {
         Logger.d("Queueing new CancelAttachmentUploadCompositeOperation " + messageUid + "-" + attachmentNumber);
-        CancelAttachmentUploadCompositeOperation op = new CancelAttachmentUploadCompositeOperation(sendManagerSessionFactory, sslSocketFactory, ownedIdentity, messageUid, attachmentNumber, this, this);
+        CancelAttachmentUploadCompositeOperation op = new CancelAttachmentUploadCompositeOperation(sendManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity, messageUid, attachmentNumber, this, this);
         cancelAttachmentUploadOperationQueue.queue(op);
     }
 

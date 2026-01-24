@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">Vy a 1á osoba zdieľaľ svoju polohu</item>
 		<item quantity="other" state="needs_review" hash="1789697147">Vy a %1$d ďalší zdieľate svoju polohu</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d mesiacov zadarmo</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d mesiacov zadarmo</item>
+	</plurals>
 </resources>

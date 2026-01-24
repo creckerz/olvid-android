@@ -64,15 +64,14 @@ fun DotAnimation(
 }
 
 private fun getScaleForDot(masterClock: Float, startTime: Int, timeOffset: Int = 0, scaleTo: Float = 1.5f): Float {
-    val currentTime = masterClock
     val animStartTime = (startTime + timeOffset).toFloat()
     val animEndTime = animStartTime + 600 // 300ms up, 300ms down
 
-    if (currentTime < animStartTime || currentTime > animEndTime) {
+    if (masterClock !in animStartTime..animEndTime) {
         return 1f // Not in animation phase
     }
 
-    val progress = (currentTime - animStartTime) / 300f
+    val progress = (masterClock - animStartTime) / 300f
     return if (progress <= 1.0f) {
         // Scaling up
         1f + (scaleTo - 1f) * progress

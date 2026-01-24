@@ -28,6 +28,7 @@ import io.olvid.messenger.App
 import io.olvid.messenger.AppSingleton
 import io.olvid.messenger.customClasses.decodeSampledBitmapFromBytes
 import io.olvid.messenger.databases.entity.Fyle
+import io.olvid.messenger.services.MDMConfigurationSingleton
 import io.olvid.messenger.settings.SettingsActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -70,7 +71,7 @@ class LinkPreviewRepository {
                 }
             }
 
-            System.getProperty("http.agent")?.let { systemUserAgent ->
+            (MDMConfigurationSingleton.getUserAgentOverride() ?: System.getProperty("http.agent"))?.let { systemUserAgent ->
                 this.proxyAuthenticator { route, response ->
                     val request = Authenticator.JAVA_NET_AUTHENTICATOR.authenticate(route, response)
                     request?.newBuilder()?.header("User-Agent", systemUserAgent)?.build()
@@ -89,6 +90,10 @@ class LinkPreviewRepository {
 
     @Suppress("UNUSED_PARAMETER")
     fun userAgentForUrl(url: HttpUrl) : String {
+        // if configured by MDM, use this user agent
+        if (MDMConfigurationSingleton.overrideUserAgentForLinkPreviews()) {
+            return MDMConfigurationSingleton.getUserAgentOverride()
+        }
         // we could use "facebookexternalhit/1.1" for some specific sites
         return "WhatsApp/2"
     }

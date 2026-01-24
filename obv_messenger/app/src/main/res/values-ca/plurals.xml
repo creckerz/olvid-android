@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">Tu i [PLACEHOLDER_1] més esteu compartint la vostra ubicació</item>
 		<item quantity="other" state="needs_review" hash="1789697147">Tu i %1$d més esteu compartint la vostra ubicació</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d mes gratuït</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d mesos gratuïts</item>
+	</plurals>
 </resources>

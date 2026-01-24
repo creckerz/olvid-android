@@ -101,7 +101,10 @@
 	<string name="format_identity_details_custom_field" state="needs_review" hash="-1073344790">%1$s : %2$s</string>
 	<string name="hint_company" state="needs_review" hash="379200324">Şirket (isteğe bağlı)</string>
 	<string name="hint_compose_your_message" state="needs_review" hash="-25761578">Mesaj yaz</string>
+	<string name="hint_compose_your_message_ephemeral" state="needs_review" hash="-1527208333">Geçici mesaj</string>
 	<string name="label_edit_your_message" state="needs_review" hash="1091877412">Mesajını düzenle</string>
+	<string name="label_reply_to_x" state="needs_review" hash="1941377665">%s\'e Yanıt</string>
+	<string name="label_reply_to_message" state="needs_review" hash="1280949769">Mesaja Yanıtla</string>
 	<string name="label_selection_formatting" state="needs_review" hash="205892951">Biçimlendirme</string>
 	<string name="label_selection_code" state="needs_review" hash="-803834470">Kod</string>
 	<string name="label_selection_list" state="needs_review" hash="762025321">Liste</string>
@@ -467,7 +470,7 @@
 	<string name="menu_action_choose_picture" state="needs_review" hash="-1655172909">Bir resim seçin</string>
 	<string name="menu_action_take_photo" state="needs_review" hash="-1123080444">Fotoğraf çek</string>
 	<string name="menu_action_remove_image" state="needs_review" hash="1094977672">Resmi kaldır</string>
-	<string name="dialog_title_create_empty_group" state="needs_review" hash="-2016542453">Boş grup oluşturulsun mu?</string>
+	<string name="dialog_title_create_empty_group" state="needs_review" hash="-663434464">Boş grup oluştur?</string>
 	<string name="dialog_message_create_empty_group" state="needs_review" hash="-297923005">Grubunuza eklemek için hiçbir kişi seçmediniz. Boş bir grup oluşturmak istediğinizden emin misiniz?</string>
 	<string name="pref_dark_mode_title" state="needs_review" hash="816474245">Koyu Mod</string>
 	<string name="pref_dark_mode_summary" state="needs_review" hash="-623740894">Pilinizi ve gözlerinizi korumak için koyu modu etkinleştirin.</string>
@@ -558,6 +561,37 @@
 	<string name="dialog_title_webrtc_kick_participant" state="needs_review" hash="389469769">Kişiyi aramadan hariç tut?</string>
 	<string name="webrtc_failed_kicked" state="needs_review" hash="-758835021">Bu aramadan çıkarıldınız</string>
 	<string name="dialog_title_start_conference_call" state="needs_review" hash="-1418585505">Konferans görüşmesi başlat</string>
+	<string name="olvid_plus_discover" state="needs_review" hash="-924831172">Olvid+\'i Keşfedin</string>
+	<string name="olvid_plus_upgrade_title" state="needs_review" hash="-1960092784">Olvid+\'a yükseltin ve uygulamanın tüm özelliklerinin keyfini çıkarın</string>
+	<string name="olvid_plus_upgrade_renew" state="needs_review" hash="-4149901">%1$s için otomatik yenileme, iptal edilene kadar devam edecektir.</string>
+	<string name="olvid_plus_tip_multi_device_title" state="needs_review" hash="481576448">Olvid\'i tüm cihazlarınızda kullanın</string>
+	<string name="olvid_plus_tip_multi_device_subtitle" state="needs_review" hash="1352342578">Olvid+, Olvid\'i akıllı telefonlarınızda ve bilgisayarlarınızda kullanmanızı sağlar.\nMesajlarınız tüm cihazlarınız arasında senkronize olarak her zaman bağlantıda kalmanızı sağlar.</string>
+	<string name="olvid_plus_tip_call_title" state="needs_review" hash="935809736">Sınırsız çağrı yapın</string>
+	<string name="olvid_plus_tip_call_subtitle" state="needs_review" hash="1137191310">Olvid+ ile uçtan uca şifrelenmiş sesli ve görüntülü aramalar yapabilirsiniz.\nOlvid+ kullanıcısı olsun ya da olmasın, herhangi bir Olvid+ kullanıcısına güvenli bir şekilde ulaşın.</string>
+	<string name="olvid_plus_tip_support_title" state="needs_review" hash="-1930411305">Vizyonumuzu destekleyin</string>
+	<string name="olvid_plus_tip_support_subtitle" state="needs_review" hash="-1404875508">Olvid+ ile çoklu cihazın ve güvenli aramaların kilidini açın.\nAbone üyeliğiniz, sürdürülebilir ve dürüst bir modeli destekleyerek Olvid\'in herkes için ücretsiz kalmasını, reklamsız ve gizli maliyetler olmaksızın sağlar.</string>
+	<string name="olvid_plus_offer_multi_device_title" state="needs_review" hash="-623969503">Olvid\'i çoklu cihazda kullanın</string>
+	<string name="olvid_plus_offer_multi_device_subtitle" state="needs_review" hash="-123640091">Olvid\'i bilgisayarınızda kullanın. Tüm mesajlarınızı güvende tutun.</string>
+	<string name="olvid_plus_offer_call_title" state="needs_review" hash="935809736">Sınırsız çağrı yapın</string>
+	<string name="olvid_plus_offer_call_subtitle" state="needs_review" hash="-1827478007">Tüm kişilerinizle sesli ve görüntülü aramalar yapın.</string>
+	<string name="olvid_plus_offer_support_title" state="needs_review" hash="-1272799411">Olvid\'i Destekleyin</string>
+	<string name="olvid_plus_offer_support_subtitle" state="needs_review" hash="841023374">Kişisel verileri sömürmeyen sürdürülebilir ve dürüst bir modeli destekleyin.</string>
+	<string name="olvid_plus_dialog_multi_device_title" state="needs_review" hash="561167181">Olvid\'i tüm cihazlarınızda kullanın</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle" state="needs_review" hash="1178448519">Olvid+ ile Olvid mesajlarınızı akıllı telefonlarınız ve bilgisayarlarınız arasında senkronize edebilirsiniz. Her zaman ulaşılabilirsiniz!</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_1" state="needs_review" hash="155287050">Bir klavyenin ve büyük ekranın rahatlığının tadını çıkarın ve dosyaları bilgisayarınızdan kolayca gönderin.</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_2" state="needs_review" hash="1858309010">Cihaz arızası veya hırsızlık durumunda bile mesajlarınızı asla kaybetmeyin. Geçmişiniz ve ekleriniz birden fazla cihazda güvenli bir şekilde saklanır.</string>
+	<string name="olvid_plus_dialog_call_title" state="needs_review" hash="269811560">Sınırsız arama yapın</string>
+	<string name="olvid_plus_dialog_call_subtitle" state="needs_review" hash="-416813149">Olvid+ ile sesli ve görüntülü aramalar yapabilir, hem bire bir hem de gruplar halinde iletişim kurabilirsiniz.</string>
+	<string name="olvid_plus_dialog_call_subtitle_1" state="needs_review" hash="-608348196">Tüm kişileriniz, Olvid+\'a sahip olsun ya da olmasın, erişilebilir durumdadır.</string>
+	<string name="olvid_plus_dialog_call_subtitle_2" state="needs_review" hash="-1804019862">Tüm Olvid iletişimlerinizde olduğu gibi aynı güvenlik seviyesiyle optimum çağrı kalitesinin keyfini çıkarın.</string>
+	<string name="olvid_plus_dialog_support_title" state="needs_review" hash="1942452361">Olvid\'i, herkes için özel mesajlaşma uygulamasını destekleyin</string>
+	<string name="olvid_plus_dialog_support_subtitle" state="needs_review" hash="2119917538">Olvid, kişisel bilgilerinize asla erişmeden çalışacak şekilde tasarlanmış, gerçekten özel bir mesajlaşma uygulamasıdır: telefon numarası, e-posta adresi veya adınız gerekmez.</string>
+	<string name="olvid_plus_dialog_support_subtitle_1" state="needs_review" hash="1809563102">Paylaştığınız her şey yalnızca sizin ve kişilerin arasında kalır. Başka kimse değil.</string>
+	<string name="olvid_plus_dialog_support_subtitle_2" state="needs_review" hash="-118773166">Açık kaynak kodumuz ve düzenli denetimlerimiz sayesinde bize güvenmek zorunda değilsiniz.</string>
+	<string name="olvid_plus_dialog_support_subtitle_3" state="needs_review" hash="-1885036855">Abone olarak, Olvid\'in herkes için ücretsiz, tamamen reklamsız ve gizli ücretler olmadan kalmasını sağlayan adil ve sürdürülebilir bir misyonu destekliyorsunuz.</string>
+	<string name="label_subscription_offer_save_percent" state="needs_review" hash="479307719">%1$d%% tasarruf edin</string>
+	<string name="label_subscription_offer_monthly" state="needs_review" hash="-1602490190">Aylık</string>
+	<string name="label_subscription_offer_yearly" state="needs_review" hash="1246240165">Yıllık</string>
 	<string name="label_subscription_status" state="needs_review" hash="1154002053">Abone Durumu</string>
 	<string name="text_feature_initiate_secure_calls" state="needs_review" hash="1414263062">Güvenli aramayı başlat</string>
 	<string name="text_premium_features" state="needs_review" hash="603728806">Premium özellikler</string>
@@ -640,7 +674,7 @@
 	<string name="text_premium_features_free_trial" state="needs_review" hash="-1976234715">Premium özellikler ücretsiz deneme</string>
 	<string name="button_label_start_free_trial" state="needs_review" hash="-508109296">Ücretsiz denemeyi başlat</string>
 	<string name="label_free_trial_available" state="needs_review" hash="-995163441">Ücretsiz deneme sürümü mevcut</string>
-	<string name="label_free_trial_explanation" state="needs_review" hash="-596460015">Olvid\'in güvenli aramalarını bir ay boyunca ücretsiz deneyin (yalnızca bir kez kullanılabilir)</string>
+	<string name="label_free_trial_explanation" state="needs_review" hash="2050354272">Olvid\'in güvenli aramalarını bir ay boyunca ücretsiz deneyin (yalnızca bir kez kullanılabilir).</string>
 	<string name="toast_message_failed_to_start_free_trial" state="needs_review" hash="-1137706906">Ücretsiz deneme başlatılamadı</string>
 	<string name="toast_message_free_trial_started" state="needs_review" hash="1357863164">Ücretsiz deneme başladı</string>
 	<string name="toast_message_error_launching_in_app_purchase" state="needs_review" hash="-1890004340">Uygulama içi satın alma başlatılırken hata oluştu</string>
@@ -648,8 +682,6 @@
 	<string name="toast_message_in_app_purchase_successful" state="needs_review" hash="578109721">Uygulama içi satın alma başarılı</string>
 	<string name="button_label_price_per_month" state="needs_review" hash="-552222952">%1$s aylık</string>
 	<string name="button_label_price_per_year" state="needs_review" hash="1539075788">%1$s yılda</string>
-	<string name="button_label_price_per_month_expanded" state="needs_review" hash="173326792">%1$s\nayda</string>
-	<string name="button_label_price_per_year_expanded" state="needs_review" hash="1947639238">%1$s\nyılda</string>
 	<string name="text_awaiting_subscription_payment" state="needs_review" hash="1135205985">Abonelik ödemesi reddedildi</string>
 	<string name="text_subscription_in_grace_period_until" state="needs_review" hash="-1685522686">Rahat dönemine kadar: %1$s</string>
 	<string name="text_subscription_on_hold_since" state="needs_review" hash="-515586151">Abonelik askıda kalma tarihi: %1$s</string>
@@ -661,9 +693,8 @@
 	<string name="label_failed_to_query_subscription" state="needs_review" hash="-1677001973">Abone planları sorgulanamadı</string>
 	<string name="dialog_title_subscription_required" state="needs_review" hash="-2038592214">Abone olunması gerekiyor</string>
 	<string name="button_label_check_subscription" state="needs_review" hash="-378220336">Abone durumunuzu kontrol edin</string>
-	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1662886051">Olvid ile güvenli telefon görüşmeleri başlatmak için bir abonelik gereklidir.\n\nMevcut abonelik durumunuzu ve mevcut abonelik planlarını \"Profilim\" sayfasında kontrol edebilirsiniz.</string>
-	<string name="dialog_message_subscription_required_web_client" state="needs_review" hash="-760629168">Olvid web istemine bağlanmak için bir abonelik gereklidir.\n\nMevcut abonelik durumunuzu ve mevcut abonelik planlarını \"Profilim\" sayfasında kontrol edebilirsiniz.</string>
-	<string name="dialog_message_subscription_required_multi_device" state="needs_review" hash="-1326423501">Olvid profilinizi aynı anda birden fazla cihazda kullanmak abonelik gerektirir.\n\nMevcut abonelik durumunuzu ve mevcut abonelik planlarını \"Profilim\" sayfasında kontrol edebilirsiniz.</string>
+	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1231676488">Olvid ile güvenli telefon ve video görüşmeleri başlatmak için abonelik gereklidir.</string>
+	<string name="dialog_title_subscription_plans" state="needs_review" hash="-456474468">Abonelik Planları</string>
 	<string name="text_ended_on" state="needs_review" hash="1280012933">Bitti: %1$s</string>
 	<string name="text_free_trial_ended" state="needs_review" hash="-1458860892">Ücretsiz deneme süresi sona erdi</string>
 	<string name="text_free_trial_expired" state="needs_review" hash="-2049452081">Ücretsiz deneme lisansı sona erdi</string>
@@ -995,13 +1026,13 @@
 	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">Paris TURN sunucuları</string>
 	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">New York TURN sunucuları</string>
 	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">Singapur TURN sunucuları</string>
-	<string name="dialog_title_android_12_bluetooth_access" state="needs_review" hash="-2140389265">Bluetooth cihazlarına erişim izni isteği</string>
-	<string name="dialog_message_android_12_bluetooth_access" state="needs_review" hash="-332888756">Olvid aramaları için bir Bluetooth kulaklık kullanmak istiyorsanız, Olvid\'in yakındaki cihazlarınızı \"bulmasına ve bağlanmasına\" izin vermeniz gerekir.</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d kişiler</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">%1$d kişi %2$s grubunda</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">Güncelleme gerekiyor</string>
 	<string name="dialog_message_outdated_version" state="needs_review" hash="488074151">Olvid sürümünüz güncel değil ve güncellenmesi gerekiyor.\n\nMuhtemelen birçok yeni özelliği kaçırıyorsunuz ve sürümünüzün, kişilerin kullandığı daha yeni uygulamalarla uyumluluğunu garanti edemiyoruz.</string>
 	<string name="button_label_remind_me_later" state="needs_review" hash="-713293818">Bana daha sonra hatırlat</string>
+	<string name="label_remind_me_tonight" state="needs_review" hash="707009828">Bana bu akşam %1$s\'de hatırlat</string>
+	<string name="label_remind_me_tomorrow" state="needs_review" hash="1904419307">Bana yarın %1$s\'de hatırlat</string>
 	<string name="hint_personal_note" state="needs_review" hash="-368244163">Kişisel not</string>
 	<string name="toast_message_unable_to_restore_app_data" state="needs_review" hash="1602628680">UYARI: Bazı uygulama özelleştirmeleri geri yüklenemedi</string>
 	<string name="dialog_title_webrtc_permissions_audio_blocked" state="needs_review" hash="1948829165">Ses kaydı izni reddedildi</string>
@@ -1108,7 +1139,6 @@
 	<string name="pref_reload_backup_configuration_title" state="needs_review" hash="2000428891">Yedekleme yapılandırmasını yeniden yükle</string>
 	<string name="content_description_back_button" state="needs_review" hash="48196338">Geri</string>
 	<string name="content_description_remove_message_reply_to" state="needs_review" hash="-794585802">Yanıtı temizle</string>
-	<string name="content_description_remove_link_preview" state="needs_review" hash="-1085272528">Bağlantı önizlemesini kaldır</string>
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">Bu profil için bildirimlerin sessize alındığını gösterge</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">Profil Oluştur</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">Şirketinizin kimlik sağlayıcısı başarıyla yapılandırıldı. Onunla kimlik doğrulamak ve kişisel bilgilerinizi almak için aşağıdaki \"kimlik doğrula\" düğmesine basın.</string>
@@ -1147,14 +1177,11 @@
 	<string name="dialog_title_neutral_notification_when_hidden" state="needs_review" hash="2013281962">Profil gizli olduğunda nötr bildirim göster</string>
 	<string name="dialog_message_neutral_notification_when_hidden" state="needs_review" hash="-58494752">Bir profil gizlendiğinde, Olvid\'de şu anda açık değilse, yeni mesajlar için herhangi bir bildirim almazsınız. Bu seçeneği etkinleştirirseniz, \"Olvid dikkatinizi gerektiriyor\" bildirimi görüntülenecektir. Ardından Olvid\'i açabilir ve gizli profilinizi açarak yeni mesajları görebilirsiniz.\n\nUyarı: bu, gizli bir profiliniz olduğu gerçeğini ortaya çıkarabilir.</string>
 	<string name="toast_message_password_already_used_other_profile" state="needs_review" hash="390904904">Hata: Bu şifre başka bir gizli profil tarafından kullanılıyor.</string>
-	<string name="label_configure_shortcuts" state="needs_review" hash="-857125506">Simge sırasını değiştir</string>
 	<string name="label_attach_file" state="needs_review" hash="-89285310">Dosya Ekle</string>
 	<string name="label_attach_image" state="needs_review" hash="-1185400308">Resimleri ekle</string>
 	<string name="label_attach_timer" state="needs_review" hash="-1527208333">Geçici mesaj</string>
 	<string name="label_attach_camera" state="needs_review" hash="-1123080444">Fotoğraf çek</string>
 	<string name="label_attach_video" state="needs_review" hash="1626268086">Video kaydet</string>
-	<string name="dialog_title_choose_icon_order" state="needs_review" hash="856935796">Ek dosyası simgesi önceliğini seçin</string>
-	<string name="label_icons_below_never_shown" state="needs_review" hash="1250704267">Bu çizginin altındaki simgeler asla gösterilmez</string>
 	<string name="pref_font_scale" state="needs_review" hash="1773040591">Yazı tipi boyutu</string>
 	<string name="pref_text_font_scale_0_75" state="needs_review" hash="-1963894407">Çok küçük (75%)</string>
 	<string name="pref_text_font_scale_0_9" state="needs_review" hash="-708054676">Küçük (%90)</string>
@@ -1209,7 +1236,6 @@
 	<string name="x_reactions_to" state="needs_review" hash="177752739">%1$d, %2$s için tepkiler</string>
 	<string name="notification_text_xx_reacted" state="needs_review" hash="647790513">%1$s, %2$s\'e tepki verdi</string>
 	<string name="label_attach_emoji" state="needs_review" hash="-1842205895">Emoji ekle</string>
-	<string name="label_long_press_for_favorite" state="needs_review" hash="1284446174">Favorilere eklemek/çıkarmak için uzun basın</string>
 	<string name="menu_action_debug_information" state="needs_review" hash="-919213138">Hata ayıklama bilgileri</string>
 	<string name="debug_label_number_of_devices" state="needs_review" hash="1662862352">Cihaz sayısı:</string>
 	<string name="debug_label_number_of_devices_no_channel" state="needs_review" hash="808299225">Güvenli kanal olmadan:</string>
@@ -1282,8 +1308,6 @@
 	<string name="dialog_message_incomplete_attachments" state="needs_review" hash="1179188058">Seçtiğiniz mesajlar, tamamen indirilmemiş ekler içeriyor. Bu mesajlar indirme tamamlanana kadar iletilemez.</string>
 	<string name="dialog_message_incomplete_attachments_partial" state="needs_review" hash="1274554335">Seçtiğiniz bazı mesajlar, tamamen indirilmemiş ekler içeriyor. Bu mesajlar indirme tamamlanana kadar iletilemez.\n\nYalnızca iletilebilen mesajları iletmek için \"Devam\" tuşuna basın.</string>
 	<string name="hint_search_message" state="needs_review" hash="1630003450">Mesajı ara</string>
-	<string name="menu_action_search_prev" state="needs_review" hash="-1639666563">Önceki</string>
-	<string name="menu_action_search_next" state="needs_review" hash="1158639077">Sonraki</string>
 	<string name="pref_manage_cloud_backups_title" state="needs_review" hash="824115345">Bulut yedeklemelerini yönet</string>
 	<string name="pref_manage_cloud_backups_summary" state="needs_review" hash="-161789549">Bulut yedeklerini indirmek veya silmek için tıklayın.</string>
 	<string name="dialog_title_manage_cloud_backups" state="needs_review" hash="-1825078945">Bulut Yedeklemeleri</string>
@@ -1482,7 +1506,7 @@
 	<string name="text_you_became_admin" state="needs_review" hash="2137006821">Şimdi bu grubun yöneticisisiniz</string>
 	<string name="text_you_are_no_longer_admin" state="needs_review" hash="1766709431">Artık bu grubun yöneticisi değilsiniz</string>
 	<string name="text_you_became_writer" state="needs_review" hash="-1671425999">Artık mesaj gönderme yetkiniz var</string>
-	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-762273585">Burada artık mesaj gönderemezsiniz</string>
+	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-930933808">Burada mesaj gönderemezsiniz</string>
 	<string name="label_pending" state="needs_review" hash="1975294811">Beklemede</string>
 	<string name="pref_app_language_title" state="needs_review" hash="-1748962099">Uygulama dili</string>
 	<string name="pref_text_default_device_language" state="needs_review" hash="-1062620207">Varsayılan cihaz dili</string>
@@ -1568,6 +1592,7 @@
 	<string name="text_invalid_shortcut" state="needs_review" hash="-1219107750">Geçersiz kısayol</string>
 	<string name="text_feature_initiate_secure_calls_from_another_profile" state="needs_review" hash="271258252">Güvenli aramaları başlat\n(başka bir profil aracılığıyla kullanılabilir)</string>
 	<string name="dialog_title_confirm_open_link" state="needs_review" hash="46935087">Bu bağlantıyı tarayıcınızda açmak ister misiniz?</string>
+	<string name="label_open_original_link_with_trackers" state="needs_review" hash="-1586932660">İzleme parametreleri içeren orijinal bağlantıyı kullanın</string>
 	<string name="dialog_title_confirm_open_olvid_link" state="needs_review" hash="425949498">Bu bağlantıyı Olvid\'de açmak ister misiniz?</string>
 	<string name="toast_message_unable_to_open_url" state="needs_review" hash="-1486954792">URL açılamıyor</string>
 	<string name="text_explanation_location_map_provider" state="needs_review" hash="-173394547">Bir harita sağlayıcısı seçmek, harita üzerinde paylaşmak istediğiniz konumu hassas bir şekilde seçmenize olanak tanır. Ancak bu, konumunuzu (veya kişilerin konumunu) bu hizmet sağlayıcısına ifşa edebilir.</string>
@@ -1578,7 +1603,6 @@
 	<string name="label_no_address_found" state="needs_review" hash="1035554993">Adres bulunamadı</string>
 	<string name="label_zoom_in_for_address" state="needs_review" hash="902696925">Adres araması için yakınlaştırın</string>
 	<string name="label_address_lookup_disabled" state="needs_review" hash="-2140124686">Adres araması devre dışı bırakıldı</string>
-	<string name="content_description_cancel_message_edit" state="needs_review" hash="984163129">Mesaj düzenlemesini iptal et</string>
 	<string name="dialog_title_introducing_mentions" state="needs_review" hash="-1741341288">Kullanıcı etiketlerini tanıtıyoruz!</string>
 	<string name="dialog_message_introducing_mentions" state="needs_review" hash="622739087">Olvid artık bir tartışmada bir kullanıcıyı etiketlemenize olanak tanıyor 🫵! Sadece @ yazın ve ardından bir harf veya adını yazarak kimin etiketlenebileceğini görün.\nEk olarak, bir tartışmayı veya profili sessize aldığınızda 💤, yalnızca bir mesajda açıkça etiketlendiğinizde bildirim almak için seçim yapabilirsiniz.\n\nKişilerinizin sizi etiketlediğinizi görebilmesi için Olvid\'in en son sürümünü güncellemesi gerektiğini unutmayın.</string>
 	<string name="pref_no_notify_certificate_change_for_previews_title" state="needs_review" hash="-434788963">Bağlantı önizlemeleri için sertifika değişikliği bildirimini devre dışı bırak</string>
@@ -1737,7 +1761,7 @@
 	<string name="troubleshooting_ignored" state="needs_review" hash="816017832">Yoksayılmış</string>
 	<string name="onboarding_transfer_multidevice_purchase_question" state="needs_review" hash="351030441">Tüm cihazlarınızın etkin kalmasını istiyor musunuz?</string>
 	<string name="onboarding_transfer_multidevice_purchase_hyperlink" state="needs_review" hash="747183939">Buraya</string>
-	<string name="button_label_subscribe_now" state="needs_review" hash="1805105542">Hemen abone olun</string>
+	<string name="button_label_subscribe_with_price" state="needs_review" hash="324675175">Abone Ol • %1$s</string>
 	<string name="onboarding_transfer_devices_loading_title" state="needs_review" hash="801961341">Cihaz listesi alınıyor…</string>
 	<string name="dialog_title_introducing_multi_device" state="needs_review" hash="-310103349">Olvid Masaüstü ve çoklu cihaz desteğini tanıtıyoruz!</string>
 	<string name="dialog_message_introducing_multi_device" state="needs_review" hash="-153162506">Olvid artık **bilgisayarınız** (Windows ve macOS) için kullanıma sunuldu. En son sürümü şuradan indirebilirsiniz:\nhttps://olvid.io/download/\n\n**Çoklu cihaz** desteğiyle, telefonunuzda bir konuşma başlatın ve bilgisayarınızda devam ettirin. Cihazlarınız ve kişileriniz arasında dosya paylaşımı hiç bu kadar kolay olmamıştı!</string>
@@ -1927,7 +1951,6 @@
 	<string name="pref_archived_attachments_summary" state="needs_review" hash="1596754073">Bu açık olduğunda, arşivlenmiş sohbetlerin ekleri yukarıdaki ayara göre otomatik olarak indirilecektir.</string>
 	<string name="pref_unarchive_on_notification_title" state="needs_review" hash="-1146947153">Bildirimde tartışmaları arşivden çıkar</string>
 	<string name="pref_unarchive_on_notification_summary" state="needs_review" hash="778062251">Bu özellik açık olduğunda, arşivlenmiş sohbetler yeni bir mesaj bildirimi alındığında otomatik olarak arşivden çıkarılır.</string>
-	<string name="call_notification_ongoing_call" state="needs_review" hash="1828207822">Devam Eden Arama</string>
 	<string name="call_notification_incoming_call" state="needs_review" hash="-1223043344">Gelen çağrı</string>
 	<string name="menu_action_copy_text_from_image" state="needs_review" hash="-1072685983">Bu kelimeyi kopyala</string>
 	<string name="menu_action_copy_text_block_from_image" state="needs_review" hash="1436026569">Tüm bloğu kopyala</string>
@@ -2118,4 +2141,8 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Karşı cihaz erişilemiyor</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Tüm güvenli kanalları yeniden oluştur</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Tüm güvenli kanalları yeniden oluşturmak, Olvid\'i kişilerinize ait tüm cihazlarla yeni güvenli iletişim kanalları oluşturmaya zorlayacaktır. Bu genellikle kullanışlı değildir, ancak bazı kanalların \"senkronizasyon dışı\" olduğu nadir durumlarda sorunu çözebilir.\n\n**Uyarı:** Çok sayıda kişiniz varsa, bu işlem birkaç dakika sürebilir ve bu sırada bazı gelen mesajları kaybedebilirsiniz.</string>
+	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Arama sonlandırıldı</string>
+	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">Ekibiniz için aboneliklere mi ihtiyacınız var?</string>
+	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Olvid Mağazasını Ziyaret Edin</string>
+	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">Hatırlatıcı ayarlandı</string>
 </resources>

@@ -74,7 +74,7 @@ import io.olvid.messenger.App
 import io.olvid.messenger.AppSingleton
 import io.olvid.messenger.BuildConfig
 import io.olvid.messenger.R
-import io.olvid.messenger.billing.BillingUtils
+import io.olvid.messenger.billing.SubscriptionRepository
 import io.olvid.messenger.customClasses.LocationShareQuality
 import io.olvid.messenger.customClasses.LocationShareQuality.QUALITY_BALANCED
 import io.olvid.messenger.customClasses.LockableActivity
@@ -405,7 +405,7 @@ class SettingsActivity : LockableActivity(), OnPreferenceStartFragmentCallback {
             val activity: FragmentActivity = requireActivity()
 
             if (BuildConfig.USE_BILLING_LIB) {
-                BillingUtils.loadSubscriptionSettingsHeader(activity, preferenceScreen)
+                SubscriptionRepository.loadSubscriptionSettingsHeader(activity, preferenceScreen)
             }
 
             App.runThread {
@@ -509,6 +509,9 @@ class SettingsActivity : LockableActivity(), OnPreferenceStartFragmentCallback {
         const val PREF_KEY_LATEST_APP_VERSION: String = "pref_key_latest_app_version"
         const val PREF_KEY_MIN_APP_VERSION: String = "pref_key_min_app_version"
         const val PREF_KEY_UPDATE_AVAILABLE_TIP_DISMISSED: String = "pref_key_update_available_tip_dismissed"
+
+        const val PREF_KEY_LAST_OLVID_PLUS_TIP_TIMESTAMP: String = "pref_key_last_olvid_plus_tip_timestamp"
+        const val PREF_KEY_OLVID_PLUS_REMINDER_TIMESTAMP: String = "pref_key_olvid_plus_reminder_timestamp"
 
         fun isUpdateAvailable(): Boolean {
             val prefs = PreferenceManager.getDefaultSharedPreferences(App.getContext())
@@ -2407,6 +2410,32 @@ class SettingsActivity : LockableActivity(), OnPreferenceStartFragmentCallback {
                     .getDefaultSharedPreferences(App.getContext())
                     .edit {
                         putInt(PREF_KEY_LAST_RATING, rating)
+                    }
+            }
+
+        var lastOlvidPlusTipTimestamp: Long
+            get() {
+                return PreferenceManager.getDefaultSharedPreferences(App.getContext())
+                    .getLong(PREF_KEY_LAST_OLVID_PLUS_TIP_TIMESTAMP, 0)
+            }
+            set(timestamp) {
+                PreferenceManager
+                    .getDefaultSharedPreferences(App.getContext())
+                    .edit {
+                        putLong(PREF_KEY_LAST_OLVID_PLUS_TIP_TIMESTAMP, timestamp)
+                    }
+            }
+
+        var olvidPlusReminderTimestamp: Long
+            get() {
+                return PreferenceManager.getDefaultSharedPreferences(App.getContext())
+                    .getLong(PREF_KEY_OLVID_PLUS_REMINDER_TIMESTAMP, 0)
+            }
+            set(timestamp) {
+                PreferenceManager
+                    .getDefaultSharedPreferences(App.getContext())
+                    .edit {
+                        putLong(PREF_KEY_OLVID_PLUS_REMINDER_TIMESTAMP, timestamp)
                     }
             }
 

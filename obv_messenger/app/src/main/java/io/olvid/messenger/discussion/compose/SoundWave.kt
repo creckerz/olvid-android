@@ -24,15 +24,13 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.material.ripple
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -52,48 +50,56 @@ import io.olvid.messenger.designsystem.theme.OlvidTypography
 
 
 @Composable
-fun SoundWave(sample: SampleAndTicker, stop: () -> Unit) {
-    Surface(
-        modifier = Modifier
-            .fillMaxWidth()
-            .requiredHeight(36.dp)
-    ) {
-        Row(modifier = Modifier.padding(start = 4.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(modifier = Modifier
-                .requiredSize(24.dp)
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = ripple(bounded = false, radius = 16.dp, color = colorResource(R.color.olvid_gradient_light))
-                ) { stop() },
+fun SoundWave(
+    modifier: Modifier = Modifier,
+    sample: SampleAndTicker,
+    showStopButton: Boolean = true,
+    stop: () -> Unit
+) {
+    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
+        if (showStopButton) {
+            Icon(
+                modifier = Modifier
+                    .requiredSize(24.dp)
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = ripple(
+                            bounded = false,
+                            radius = 16.dp,
+                            color = colorResource(R.color.olvid_gradient_light)
+                        )
+                    ) { stop() },
                 tint = colorResource(id = R.color.olvid_gradient_light),
                 painter = painterResource(id = R.drawable.ic_stop),
                 contentDescription = stringResource(
                     id = R.string.button_label_cancel
                 )
             )
-            Text(
-                modifier = Modifier.padding(4.dp),
-                text = AudioAttachmentServiceBinding.timeFromMs(sample.size * VoiceMessageRecorder.SAMPLE_INTERVAL),
-                maxLines = 1,
-                style = OlvidTypography.body1.copy(
-                    color = colorResource(R.color.almostBlack)
-                )
+        }
+        Text(
+            modifier = Modifier.padding(4.dp),
+            text = AudioAttachmentServiceBinding.timeFromMs(sample.size * VoiceMessageRecorder.SAMPLE_INTERVAL),
+            maxLines = 1,
+            style = OlvidTypography.body1.copy(
+                color = colorResource(R.color.almostBlack)
             )
+        )
 
-            Canvas(
-                modifier = Modifier
-                    .weight(1f, true)
-                    .requiredHeight(36.dp)
-            ) {
-                val canvasWidth = size.width
-                val canvasHeight = size.height
+        Canvas(
+            modifier = Modifier
+                .weight(1f, true)
+                .requiredHeight(36.dp)
+        ) {
+            val canvasWidth = size.width
+            val canvasHeight = size.height
 
-                val waveWidth = 3.dp.toPx()
-                val waveHeight = canvasHeight * .75f
-                val cornerRadius = CornerRadius(24.dp.toPx())
+            val waveWidth = 3.dp.toPx()
+            val waveHeight = canvasHeight * .75f
+            val cornerRadius = CornerRadius(24.dp.toPx())
 
-                val offset = (sample.ticker * waveWidth * 2) / SampleAndTicker.TICKS_PER_SAMPLE
-                sample.samples.take((canvasWidth / waveWidth / 2).toInt() + 1).forEachIndexed { index, value ->
+            val offset = (sample.ticker * waveWidth * 2) / SampleAndTicker.TICKS_PER_SAMPLE
+            sample.samples.take((canvasWidth / waveWidth / 2).toInt() + 1)
+                .forEachIndexed { index, value ->
                     val height = (value * waveHeight).coerceAtLeast(waveWidth)
                     drawRoundRect(
                         color = Color.Gray,
@@ -105,9 +111,8 @@ fun SoundWave(sample: SampleAndTicker, stop: () -> Unit) {
                         cornerRadius = cornerRadius
                     )
                 }
-            }
-            Spacer(modifier = Modifier.width(40.dp))
         }
+        Spacer(modifier = Modifier.width(12.dp))
     }
 }
 
@@ -115,5 +120,5 @@ fun SoundWave(sample: SampleAndTicker, stop: () -> Unit) {
 @Preview(widthDp = 400)
 @Composable
 fun SoundWavePreview() {
-    SoundWave(SampleAndTicker(samples = mutableListOf(1f, .5f, 0f, .7f))) {}
+    SoundWave(sample = SampleAndTicker(samples = mutableListOf(1f, .5f, 0f, .7f))) {}
 }

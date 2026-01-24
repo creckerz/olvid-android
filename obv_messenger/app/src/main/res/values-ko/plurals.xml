@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">당신과 [PLACEHOLDER_1]명이 위치를 공유하고 있습니다.</item>
 		<item quantity="other" state="needs_review" hash="1789697147">당신과 %1$d명이 위치를 공유하고 있습니다.</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d개월 무료</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d개월 무료</item>
+	</plurals>
 </resources>

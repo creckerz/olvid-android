@@ -51,7 +51,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.viewinterop.AndroidView
@@ -118,7 +117,7 @@ fun CameraPreview(
         if (paused) {
             cameraProvider.unbindAll()
             // remove any touch listener
-            previewView.setOnTouchListener { v: View?, event: MotionEvent? ->
+            previewView.setOnTouchListener { _: View?, _: MotionEvent? ->
                 return@setOnTouchListener false
             }
         } else {

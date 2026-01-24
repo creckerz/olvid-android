@@ -55,6 +55,7 @@ public class SendMessageCoordinator implements OutboxMessage.NewOutboxMessageLis
 
     private final SendManagerSessionFactory sendManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
 
     @SuppressWarnings("FieldCanBeLocal")
     private NotificationListeningDelegate notificationListeningDelegate;
@@ -74,9 +75,10 @@ public class SendMessageCoordinator implements OutboxMessage.NewOutboxMessageLis
     private final NotificationListener notificationListener;
 
 
-    public SendMessageCoordinator(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory) {
+    public SendMessageCoordinator(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride) {
         this.sendManagerSessionFactory = sendManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
 
         sendMessageWithAttachmentOperationQueue = new OperationQueue(true);
 
@@ -122,7 +124,7 @@ public class SendMessageCoordinator implements OutboxMessage.NewOutboxMessageLis
 
     private void queueNewSendMessageCompositeOperation(String server, Identity ownedIdentity, UID messageUid, boolean hasAttachment, boolean hasUserContent) {
         if (hasAttachment || server == null) {
-            UploadMessageCompositeOperation op = new UploadMessageCompositeOperation(sendManagerSessionFactory, sslSocketFactory, ownedIdentity, messageUid, this::onFinishCallbackWithAttachment, this::onCancelCallbackWithAttachment);
+            UploadMessageCompositeOperation op = new UploadMessageCompositeOperation(sendManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity, messageUid, this::onFinishCallbackWithAttachment, this::onCancelCallbackWithAttachment);
             sendMessageWithAttachmentOperationQueue.queue(op);
         } else if (hasUserContent) {
             if (ownedIdentity != null && messageUid != null) {
@@ -135,7 +137,7 @@ public class SendMessageCoordinator implements OutboxMessage.NewOutboxMessageLis
                     queue.add(new IdentityAndUid(ownedIdentity, messageUid));
                 }
             }
-            BatchUploadMessagesCompositeOperation op = new BatchUploadMessagesCompositeOperation(sendManagerSessionFactory, sslSocketFactory, server, true, () -> {
+            BatchUploadMessagesCompositeOperation op = new BatchUploadMessagesCompositeOperation(sendManagerSessionFactory, sslSocketFactory, userAgentOverride, server, true, () -> {
                 List<IdentityAndUid> messageIdentitiesAndUids = new ArrayList<>();
                 synchronized (userContentMessageUidsByServer) {
                     Queue<IdentityAndUid> queue = userContentMessageUidsByServer.get(server);
@@ -162,7 +164,7 @@ public class SendMessageCoordinator implements OutboxMessage.NewOutboxMessageLis
                     queue.add(new IdentityAndUid(ownedIdentity, messageUid));
                 }
             }
-            BatchUploadMessagesCompositeOperation op = new BatchUploadMessagesCompositeOperation(sendManagerSessionFactory, sslSocketFactory, server, false, () -> {
+            BatchUploadMessagesCompositeOperation op = new BatchUploadMessagesCompositeOperation(sendManagerSessionFactory, sslSocketFactory, userAgentOverride, server, false, () -> {
                 List<IdentityAndUid> messageIdentitiesAndUids = new ArrayList<>();
                 synchronized (protocolMessageUidsByServer) {
                     Queue<IdentityAndUid> queue = protocolMessageUidsByServer.get(server);

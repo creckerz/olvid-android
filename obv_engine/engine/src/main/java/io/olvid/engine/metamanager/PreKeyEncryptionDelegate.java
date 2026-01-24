@@ -20,8 +20,6 @@
 package io.olvid.engine.metamanager;
 
 
-import java.sql.SQLException;
-
 import io.olvid.engine.datatypes.containers.AuthEncKeyAndChannelInfo;
 import io.olvid.engine.crypto.PRNGService;
 import io.olvid.engine.datatypes.EncryptedBytes;

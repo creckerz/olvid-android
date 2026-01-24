@@ -55,6 +55,7 @@ public class RefreshInboxAttachmentSignedUrlCoordinator implements Operation.OnF
 
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private NotificationPostingDelegate notificationPostingDelegate;
 
     private final HashMap<Identity, List<IdentityAndUidAndNumber>> awaitingIdentityReactivationOperations;
@@ -63,9 +64,10 @@ public class RefreshInboxAttachmentSignedUrlCoordinator implements Operation.OnF
 
     private final HashMap<IdentityAndUidAndNumber, Long> lastUrlRefreshTimestamps;
 
-    public RefreshInboxAttachmentSignedUrlCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory) {
+    public RefreshInboxAttachmentSignedUrlCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride) {
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.lastUrlRefreshTimestamps = new HashMap<>();
 
         refreshInboxAttachmentSignedUrlOperationQueue = new NoDuplicateOperationQueue();
@@ -94,7 +96,7 @@ public class RefreshInboxAttachmentSignedUrlCoordinator implements Operation.OnF
         synchronized (lastUrlRefreshTimestamps) {
             lastUrlRefreshTimestamps.put(new IdentityAndUidAndNumber(ownedIdentity, messageUid, attachmentNumber), System.currentTimeMillis());
         }
-        RefreshInboxAttachmentSignedUrlOperation op = new RefreshInboxAttachmentSignedUrlOperation(fetchManagerSessionFactory, sslSocketFactory, ownedIdentity, messageUid, attachmentNumber, this, this);
+        RefreshInboxAttachmentSignedUrlOperation op = new RefreshInboxAttachmentSignedUrlOperation(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity, messageUid, attachmentNumber, this, this);
         refreshInboxAttachmentSignedUrlOperationQueue.queue(op);
     }
 

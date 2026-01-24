@@ -39,14 +39,16 @@ import io.olvid.engine.networksend.datatypes.SendManagerSessionFactory;
 public class CancelAttachmentUploadOperation extends Operation {
     private final SendManagerSessionFactory sendManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final Identity ownedIdentity;
     private final UID messageUid;
     private final int attachmentNumber;
 
-    public CancelAttachmentUploadOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, Identity ownedIdentity, UID messageUid, int attachmentNumber) {
+    public CancelAttachmentUploadOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, Identity ownedIdentity, UID messageUid, int attachmentNumber) {
         super(IdentityAndUid.computeUniqueUid(ownedIdentity, messageUid), null, null);
         this.sendManagerSessionFactory = sendManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.ownedIdentity = ownedIdentity;
         this.messageUid = messageUid;
         this.attachmentNumber = attachmentNumber;
@@ -100,7 +102,7 @@ public class CancelAttachmentUploadOperation extends Operation {
                         outboxMessage.getUidFromServer(),
                         outboxMessage.getNonce(),
                         attachmentNumber);
-                serverMethod.setSslSocketFactory(sslSocketFactory);
+                serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
 
                 byte returnStatus = serverMethod.execute(sendManagerSession.identityDelegate.isActiveOwnedIdentity(sendManagerSession.session, ownedIdentity));
 

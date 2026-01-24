@@ -23,6 +23,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.ComponentActivity
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -32,12 +33,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.olvid.messenger.App
 import io.olvid.messenger.AppSingleton
+import io.olvid.messenger.BuildConfig
 import io.olvid.messenger.customClasses.AccessibilityManager
 import io.olvid.messenger.customClasses.BytesKey
 import io.olvid.messenger.databases.AppDatabase
+import io.olvid.messenger.databases.entity.OwnedIdentity
 import io.olvid.messenger.openid.KeycloakManager
 import io.olvid.messenger.settings.SettingsActivity
 import io.olvid.messenger.troubleshooting.shouldShowTroubleshootingTip
+import java.time.LocalDate
 
 fun installTimestamp() : Long? = runCatching {
     val context = App.getContext()
@@ -60,7 +64,9 @@ class TipsViewModel : ViewModel() {
         private const val EXPIRING_DEVICE_MUTE_DURATION = 2 * 86_400_000L
         private const val OFFLINE_DEVICE_MUTE_DURATION = 30 * 86_400_000L
         private const val RATING_MUTE_DURATION = 180 * 86_400_000L
-        private const val RATING_INSTALL_MIN_AGE = 30 * 86_400_000L
+        private const val RATING_AND_OLVID_PLUS_INSTALL_MIN_AGE = 30 * 86_400_000L
+        private val olvidPlusTips = listOf(Tip.OLVID_PLUS_MULTIDEVICE, Tip.OLVID_PLUS_CALL, Tip.OLVID_PLUS_SUPPORT)
+        private const val OLVID_PLUS_TIP_THRESHOLD = 30 * 86_400_000L
 
         private val OWNED_DEVICE_DISCOVERY_PERFORMED : MutableLiveData<Set<BytesKey>>  = MutableLiveData<Set<BytesKey>>(emptySet())
 
@@ -80,10 +86,16 @@ class TipsViewModel : ViewModel() {
     }
 
     var tipToShow: Tip? by mutableStateOf(null)
+    var autoOpenOlvidPlusDialog: MutableState<Boolean> = mutableStateOf(false)
     var deviceExpirationDays by mutableIntStateOf(0)
     private val firstInstallTimestamp = installTimestamp() ?: 0L
 
     fun refreshTipToShow(activity: ComponentActivity) {
+        if (autoOpenOlvidPlusDialog.value) {
+            showNextOlvidPlusTip()
+            return
+        }
+
         AccessibilityManager.refreshUntrustedAccessibilityServices(activity)?.firstOrNull()?.let {
             tipToShow = Tip.UNTRUSTED_ACCESSIBILITY_SERVICE
             return
@@ -168,7 +180,7 @@ class TipsViewModel : ViewModel() {
         }
 
         if (System.currentTimeMillis() - SettingsActivity.lastRatingTipTimestamp > RATING_MUTE_DURATION
-            && System.currentTimeMillis() - firstInstallTimestamp > RATING_INSTALL_MIN_AGE
+            && System.currentTimeMillis() - firstInstallTimestamp > RATING_AND_OLVID_PLUS_INSTALL_MIN_AGE
             && contactCount > 10
             && AppDatabase.getInstance().messageDao().countOutbound() > 50
         ) {
@@ -186,9 +198,39 @@ class TipsViewModel : ViewModel() {
             tipToShow = Tip.NEW_TRANSLATIONS
             return
         }
+        @Suppress("SimplifyBooleanWithConstants", "KotlinConstantConditions")
+        if (BuildConfig.USE_BILLING_LIB
+            && System.currentTimeMillis() - SettingsActivity.lastOlvidPlusTipTimestamp > OLVID_PLUS_TIP_THRESHOLD
+            && System.currentTimeMillis() > SettingsActivity.olvidPlusReminderTimestamp
+            && System.currentTimeMillis() - firstInstallTimestamp > RATING_AND_OLVID_PLUS_INSTALL_MIN_AGE
+            && contactCount > 0
+        ) {
+            // check that no ownedIdentity already has a licence
+            run {
+                AppDatabase.getInstance().ownedIdentityDao().all.filter { it.active }
+                    .forEach { ownedIdentity ->
+                        when (ownedIdentity.apiKeyStatus) {
+                            OwnedIdentity.API_KEY_STATUS_VALID,
+                            OwnedIdentity.API_KEY_STATUS_OPEN_BETA_KEY,
+                            OwnedIdentity.API_KEY_STATUS_FREE_TRIAL_KEY,
+                            OwnedIdentity.API_KEY_STATUS_AWAITING_PAYMENT_GRACE_PERIOD,
+                            OwnedIdentity.API_KEY_STATUS_AWAITING_PAYMENT_ON_HOLD -> {
+                                return@run
+                            }
+                        }
+                    }
+
+                showNextOlvidPlusTip()
+                return
+            }
+        }
+
         tipToShow = null
     }
 
+    fun showNextOlvidPlusTip() {
+        tipToShow = olvidPlusTips[(LocalDate.now().monthValue - 1) % olvidPlusTips.size]
+    }
 
     enum class Tip {
         CONFIGURE_BACKUPS,
@@ -203,5 +245,8 @@ class TipsViewModel : ViewModel() {
         UPDATE_AVAILABLE,
         VERSION_OUTDATED,
         UNTRUSTED_ACCESSIBILITY_SERVICE,
+        OLVID_PLUS_MULTIDEVICE,
+        OLVID_PLUS_CALL,
+        OLVID_PLUS_SUPPORT,
     }
 }

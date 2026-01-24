@@ -58,7 +58,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.olvid.messenger.R
 import io.olvid.messenger.designsystem.components.AnimatedEmoji
-import io.olvid.messenger.discussion.message.attachments.constantSp
+import io.olvid.messenger.designsystem.constantSp
 
 @Composable
 fun ReactionBar(

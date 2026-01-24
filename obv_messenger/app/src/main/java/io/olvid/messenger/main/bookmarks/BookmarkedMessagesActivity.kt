@@ -75,10 +75,10 @@ import io.olvid.messenger.R
 import io.olvid.messenger.customClasses.LockableActivity
 import io.olvid.messenger.designsystem.components.SelectionTopAppBar
 import io.olvid.messenger.designsystem.cutoutHorizontalPadding
+import io.olvid.messenger.designsystem.scaledDp
 import io.olvid.messenger.designsystem.systemBarsHorizontalPadding
 import io.olvid.messenger.discussion.message.OutboundMessageStatus
 import io.olvid.messenger.discussion.message.SwipeForActionBox
-import io.olvid.messenger.discussion.message.attachments.scaledDp
 import io.olvid.messenger.discussion.message.getOutboundStatusIcon
 import io.olvid.messenger.discussion.message.getOutboundStatusIconAspectRation
 import io.olvid.messenger.main.MainScreenEmptyList
@@ -120,7 +120,8 @@ class BookmarkedMessagesActivity : LockableActivity() {
                     SelectionTopAppBar(
                         title = stringResource(R.string.activity_title_bookmarks),
                         selection = bookmarksViewModel.selection,
-                        actions = listOf(R.drawable.ic_star_off to {
+                        selectedStringResource = R.plurals.action_mode_title_discussion,
+                        selectionActions = listOf(R.drawable.ic_star_off to {
                             bookmarksViewModel.bookmarkMessage(
                                 *bookmarksViewModel.selection.toTypedArray(),
                                 bookmarked = false,

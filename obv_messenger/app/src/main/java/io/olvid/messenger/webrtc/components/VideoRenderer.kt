@@ -68,7 +68,10 @@ fun VideoRenderer(
 
     Box(modifier = modifier) {
         val state = rememberTransformableState { zoomChange, offsetChange, _ ->
-            scaleAndOffsetControl.applyTransformation(zoomChange = zoomChange, offsetChange = offsetChange)
+            scaleAndOffsetControl.applyTransformation(
+                zoomChange = zoomChange,
+                offsetChange = offsetChange
+            )
         }
 
         AndroidView(
@@ -81,7 +84,11 @@ fun VideoRenderer(
                             object : RendererCommon.RendererEvents {
                                 override fun onFirstFrameRendered() = Unit
 
-                                override fun onFrameResolutionChanged(width: Int, height: Int, rotation: Int) {
+                                override fun onFrameResolutionChanged(
+                                    width: Int,
+                                    height: Int,
+                                    rotation: Int
+                                ) {
                                     videoAspectRatio = width / height.toFloat()
                                     pipAspectCallback?.invoke(context, width, height)
                                 }
@@ -106,7 +113,8 @@ fun VideoRenderer(
                     if (matchVideoAspectRatio) {
                         Modifier.aspectRatio(videoAspectRatio)
                     } else Modifier
-                ).then(
+                )
+                .then(
                     if (zoomable) {
                         Modifier.transformable(state = state)
                     } else Modifier
@@ -120,9 +128,9 @@ private fun cleanTrack(
     trackState: MutableState<VideoTrack?>
 ) {
     view?.let {
-        try {
+        runCatching {
             trackState.value?.removeSink(it)
-        } catch (ignored: Throwable) { }
+        }
     }
     trackState.value = null
 }
@@ -139,8 +147,7 @@ private fun setupVideo(
     cleanTrack(renderer, trackState)
 
     trackState.value = track
-    try {
+    runCatching {
         track.addSink(renderer)
-    } catch (ignored: Throwable) {
     }
 }

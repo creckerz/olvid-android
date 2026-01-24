@@ -51,6 +51,7 @@ import io.olvid.engine.networkfetch.operations.WellKnownDownloadOperation;
 public class WellKnownCoordinator implements Operation.OnFinishCallback, Operation.OnCancelCallback, WellKnownCacheDelegate {
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private NotificationPostingDelegate notificationPostingDelegate;
     private final ObjectMapper jsonObjectMapper;
 
@@ -60,9 +61,10 @@ public class WellKnownCoordinator implements Operation.OnFinishCallback, Operati
     private final NoDuplicateOperationQueue wellKnownDownloadOperationQueue;
     private final Timer wellKnownDownloadTimer;
 
-    public WellKnownCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, ObjectMapper jsonObjectMapper) {
+    public WellKnownCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, ObjectMapper jsonObjectMapper) {
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.jsonObjectMapper = jsonObjectMapper;
 
         this.cacheInitialized = false;
@@ -138,7 +140,7 @@ public class WellKnownCoordinator implements Operation.OnFinishCallback, Operati
 
     public void queueNewWellKnownDownloadOperation(String server) {
         Logger.d("Requesting .well-known fetch for " + server);
-        wellKnownDownloadOperationQueue.queue(new WellKnownDownloadOperation(fetchManagerSessionFactory, sslSocketFactory, server, jsonObjectMapper, this, this));
+        wellKnownDownloadOperationQueue.queue(new WellKnownDownloadOperation(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, server, jsonObjectMapper, this, this));
     }
 
 

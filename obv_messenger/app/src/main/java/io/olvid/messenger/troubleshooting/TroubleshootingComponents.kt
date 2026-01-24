@@ -181,6 +181,7 @@ fun RestartAppButton() {
     if (showConfirmationDialog) {
         Dialog(
             onDismissRequest = {
+                @Suppress("AssignedValueIsNeverRead")
                 showConfirmationDialog = false
             }
         ) {
@@ -219,6 +220,7 @@ fun RestartAppButton() {
                         shape = RoundedCornerShape(6.dp),
                         contentPadding = PaddingValues(horizontal = 16.dp),
                         onClick = {
+                            @Suppress("AssignedValueIsNeverRead")
                             showConfirmationDialog = false
                         },
                     ) {
@@ -325,8 +327,8 @@ fun TroubleShootItem(
         mutableStateOf(valid.not())
     }
     val mute: Boolean by checkState?.isMute?.collectAsState(true) ?: remember { mutableStateOf(false) }
-    val borderWidth: Float by animateFloatAsState(targetValue = if (critical && valid.not() && mute == false) 2f else 1f)
-    val borderColor: Color by animateColorAsState(targetValue = if (critical && valid.not() && mute == false) colorResource(id = R.color.red) else Color(0x6E111111))
+    val borderWidth: Float by animateFloatAsState(targetValue = if (critical && valid.not() && !mute) 2f else 1f)
+    val borderColor: Color by animateColorAsState(targetValue = if (critical && valid.not() && !mute) colorResource(id = R.color.red) else colorResource(R.color.itemBackgroundBorder))
     Column(
         modifier = Modifier
             .padding(horizontal = 16.dp)

@@ -52,6 +52,7 @@ import io.olvid.engine.networkfetch.operations.DownloadAttachmentOperation;
 public class DownloadAttachmentCoordinator implements InboxAttachment.InboxAttachmentListener, Operation.OnCancelCallback {
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final RefreshInboxAttachmentSignedUrlDelegate refreshInboxAttachmentSignedUrlDelegate;
 
     private NotificationListeningDelegate notificationListeningDelegate;
@@ -72,9 +73,11 @@ public class DownloadAttachmentCoordinator implements InboxAttachment.InboxAttac
 
     public DownloadAttachmentCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory,
                                          SSLSocketFactory sslSocketFactory,
+                                         String userAgentOverride,
                                          RefreshInboxAttachmentSignedUrlDelegate refreshInboxAttachmentSignedUrlDelegate) {
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.refreshInboxAttachmentSignedUrlDelegate = refreshInboxAttachmentSignedUrlDelegate;
 
         downloadAttachmentOperationWeightQueue = new PriorityOperationQueue();
@@ -128,7 +131,7 @@ public class DownloadAttachmentCoordinator implements InboxAttachment.InboxAttac
 
     private void queueNewDownloadAttachmentOperation(Identity ownedIdentity, UID messageUid, int attachmentNumber, int priorityCategory, long initialPriority) {
         Logger.d("Download attachment coordinator queueing new DownloadAttachmentOperation.");
-        DownloadAttachmentOperation op = new DownloadAttachmentOperation(fetchManagerSessionFactory, sslSocketFactory, ownedIdentity, messageUid, attachmentNumber, priorityCategory, initialPriority, this,null, this);
+        DownloadAttachmentOperation op = new DownloadAttachmentOperation(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity, messageUid, attachmentNumber, priorityCategory, initialPriority, this,null, this);
         switch (priorityCategory) {
             case DownloadAttachmentPriorityCategory.WEIGHT: {
                 downloadAttachmentOperationWeightQueue.queue(op);

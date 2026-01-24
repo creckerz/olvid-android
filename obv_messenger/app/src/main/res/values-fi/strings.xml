@@ -101,7 +101,10 @@
 	<string name="format_identity_details_custom_field" state="needs_review" hash="-1073344790">%1$s: %2$s</string>
 	<string name="hint_company" state="needs_review" hash="379200324">Yritys (valinnainen)</string>
 	<string name="hint_compose_your_message" state="needs_review" hash="-25761578">Kirjoita viesti</string>
+	<string name="hint_compose_your_message_ephemeral" state="needs_review" hash="-1527208333">Lyhytaikainen viesti</string>
 	<string name="label_edit_your_message" state="needs_review" hash="1091877412">Muokkaa viestiäsi</string>
+	<string name="label_reply_to_x" state="needs_review" hash="1941377665">Vastaa %s:lle</string>
+	<string name="label_reply_to_message" state="needs_review" hash="1280949769">Vastaa viestiin</string>
 	<string name="label_selection_formatting" state="needs_review" hash="205892951">Muotoilu</string>
 	<string name="label_selection_code" state="needs_review" hash="-803834470">Koodi</string>
 	<string name="label_selection_list" state="needs_review" hash="762025321">Lista</string>
@@ -467,7 +470,7 @@
 	<string name="menu_action_choose_picture" state="needs_review" hash="-1655172909">Valitse kuva</string>
 	<string name="menu_action_take_photo" state="needs_review" hash="-1123080444">Ota kuva</string>
 	<string name="menu_action_remove_image" state="needs_review" hash="1094977672">Poista kuva</string>
-	<string name="dialog_title_create_empty_group" state="needs_review" hash="-2016542453">Luo tyhjä ryhmä?</string>
+	<string name="dialog_title_create_empty_group" state="needs_review" hash="-663434464">Luo tyhjä ryhmä?</string>
 	<string name="dialog_message_create_empty_group" state="needs_review" hash="-297923005">Et ole valinnut yhtään kontaktia lisättäväksi ryhmääsi. Oletko varma, että haluat luoda tyhjän ryhmän?</string>
 	<string name="pref_dark_mode_title" state="needs_review" hash="816474245">Tumma tila</string>
 	<string name="pref_dark_mode_summary" state="needs_review" hash="-623740894">Ota tumma tila käyttöön säästääksesi akkua ja suojataksesi silmiäsi.</string>
@@ -558,7 +561,38 @@
 	<string name="dialog_title_webrtc_kick_participant" state="needs_review" hash="389469769">Sulje yhteyshenkilö pois puhelusta?</string>
 	<string name="webrtc_failed_kicked" state="needs_review" hash="-758835021">Sinut on suljettu pois tästä puhelusta</string>
 	<string name="dialog_title_start_conference_call" state="needs_review" hash="-1418585505">Aloita neuvottelupuhelu</string>
-	<string name="label_subscription_status" state="needs_review" hash="1154002053">Tilausstatus</string>
+	<string name="olvid_plus_discover" state="needs_review" hash="-924831172">Tutustu Olvid+ -palveluun</string>
+	<string name="olvid_plus_upgrade_title" state="needs_review" hash="-1960092784">Päivitä Olvid+ -versioon saadaksesi täyden sovelluskokemuksen</string>
+	<string name="olvid_plus_upgrade_renew" state="needs_review" hash="-4149901">Suunnitelma uusitaan automaattisesti %1$s asti, kunnes peruutat sen.</string>
+	<string name="olvid_plus_tip_multi_device_title" state="needs_review" hash="481576448">Käytä Olvidia kaikilla laitteillasi</string>
+	<string name="olvid_plus_tip_multi_device_subtitle" state="needs_review" hash="1352342578">Olvid+:n avulla voit käyttää Olvidia älypuhelimissasi ja tietokoneissasi.\nViestisi pysyvät synkronoituina kaikissa laitteissasi, joten pysyt aina yhteydessä.</string>
+	<string name="olvid_plus_tip_call_title" state="needs_review" hash="935809736">Soita rajattomasti</string>
+	<string name="olvid_plus_tip_call_subtitle" state="needs_review" hash="1137191310">Olvid+ mahdollistaa päästä päähän salatut ääni- ja videopuhelut.\nOta yhteyttä mihin tahansa Olvid+-käyttäjään turvallisesti, vaikka hänellä ei olisikaan Olvid+-sovellusta.</string>
+	<string name="olvid_plus_tip_support_title" state="needs_review" hash="-1930411305">Tue visiotamme</string>
+	<string name="olvid_plus_tip_support_subtitle" state="needs_review" hash="-1404875508">Avaa usean laitteen tuki ja suojatut puhelut Olvid+:lla.\nTilauksesi tukee kestävää ja rehellistä mallia, jonka ansiosta Olvid pysyy ilmaisena kaikille ilman mainoksia tai piilokuluja.</string>
+	<string name="olvid_plus_offer_multi_device_title" state="needs_review" hash="-623969503">Käytä Olvidia useilla laitteilla</string>
+	<string name="olvid_plus_offer_multi_device_subtitle" state="needs_review" hash="-123640091">Käytä Olvidia tietokoneellasi. Pidä kaikki viestisi turvassa.</string>
+	<string name="olvid_plus_offer_call_title" state="needs_review" hash="935809736">Soita rajattomasti</string>
+	<string name="olvid_plus_offer_call_subtitle" state="needs_review" hash="-1827478007">Soita äänipuheluita ja videopuheluita kaikille yhteystiedoillesi.</string>
+	<string name="olvid_plus_offer_support_title" state="needs_review" hash="-1272799411">Tue Olvidin tukemista</string>
+	<string name="olvid_plus_offer_support_subtitle" state="needs_review" hash="841023374">Edistä kestävää ja rehellistä mallia, joka ei hyväksikäytä henkilökohtaisia tietoja.</string>
+	<string name="olvid_plus_dialog_multi_device_title" state="needs_review" hash="561167181">Käytä Olvidia kaikilla laitteillasi</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle" state="needs_review" hash="1178448519">Olvid+:n avulla voit synkronoida Olvid-viestisi älypuhelimesi ja tietokoneidesi välillä. Olet aina tavoitettavissa!</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_1" state="needs_review" hash="155287050">Nauti näppäimistön ja suuren näytön mukavuudesta ja lähetä tiedostoja helposti tietokoneeltasi.</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_2" state="needs_review" hash="1858309010">Älä koskaan menetä viestejäsi, edes laitteen rikkoutuessa tai varkaudessa. Viestihistoriasi ja liitteesi tallennetaan turvallisesti useisiin laitteisiin.</string>
+	<string name="olvid_plus_dialog_call_title" state="needs_review" hash="269811560">Soita rajattomasti</string>
+	<string name="olvid_plus_dialog_call_subtitle" state="needs_review" hash="-416813149">Olvid+:n avulla voit soittaa ääni- ja videopuheluita sekä kahdenkeskisesti että ryhmissä.</string>
+	<string name="olvid_plus_dialog_call_subtitle_1" state="needs_review" hash="-608348196">Kaikkiin yhteystietoihisi voidaan ottaa yhteyttä, vaikka heillä ei olisikaan Olvid+-sovellusta.</string>
+	<string name="olvid_plus_dialog_call_subtitle_2" state="needs_review" hash="-1804019862">Nauti optimaalisesta puhelunlaadusta, samalla tietoturvatasolla kuin kaikissa Olvid-viesteissäsi.</string>
+	<string name="olvid_plus_dialog_support_title" state="needs_review" hash="1942452361">Tue Olvid, yksityinen viestintäsovellus kaikille</string>
+	<string name="olvid_plus_dialog_support_subtitle" state="needs_review" hash="2119917538">Olvid on todella yksityinen viestintäsovellus, joka on suunniteltu toimimaan ilman pääsyä henkilökohtaisiin tietoihisi: et tarvitse puhelinnumeroa, sähköpostiosoitetta tai nimeä.</string>
+	<string name="olvid_plus_dialog_support_subtitle_1" state="needs_review" hash="1809563102">Kaikki, mitä jaat, pysyy sinun ja yhteystietojesi välisenä. Kukaan muu ei pääse siihen käsiksi.</string>
+	<string name="olvid_plus_dialog_support_subtitle_2" state="needs_review" hash="-118773166">Koska lähdekoodi on avointa ja sitä tarkastetaan säännöllisesti, sinun ei tarvitse luottaa meihin pelkän puheen perusteella.</string>
+	<string name="olvid_plus_dialog_support_subtitle_3" state="needs_review" hash="-1885036855">Tilaamalla tuet Olvidin reilua ja kestävää toimintaa, jotta se pysyy ilmaisena kaikille, ilman mainoksia ja piilokuluja.</string>
+	<string name="label_subscription_offer_save_percent" state="needs_review" hash="479307719">Tallenna %1$d%%</string>
+	<string name="label_subscription_offer_monthly" state="needs_review" hash="-1602490190">Kuukausittain</string>
+	<string name="label_subscription_offer_yearly" state="needs_review" hash="1246240165">Vuosittain</string>
+	<string name="label_subscription_status" state="needs_review" hash="1154002053">Tilaustila</string>
 	<string name="text_feature_initiate_secure_calls" state="needs_review" hash="1414263062">Aloita suojatut puhelut</string>
 	<string name="text_premium_features" state="needs_review" hash="603728806">Premium-ominaisuudet</string>
 	<string name="text_subscription_active" state="needs_review" hash="960106589">Tilaus on aktiivinen</string>
@@ -640,7 +674,7 @@
 	<string name="text_premium_features_free_trial" state="needs_review" hash="-1976234715">Ilmainen kokeilujakso premium-ominaisuuksille</string>
 	<string name="button_label_start_free_trial" state="needs_review" hash="-508109296">Aloita ilmainen kokeilujakso</string>
 	<string name="label_free_trial_available" state="needs_review" hash="-995163441">Ilmainen kokeilujakso saatavilla</string>
-	<string name="label_free_trial_explanation" state="needs_review" hash="-596460015">Kokeile Olvidin suojattuja puheluita ilmaiseksi kuukauden ajan (käytettävissä vain kerran)</string>
+	<string name="label_free_trial_explanation" state="needs_review" hash="2050354272">Kokeile Olvidin suojattuja puheluita ilmaiseksi kuukauden ajan (käytettävissä vain kerran).</string>
 	<string name="toast_message_failed_to_start_free_trial" state="needs_review" hash="-1137706906">Ilmaisen kokeilujakson käynnistäminen epäonnistui</string>
 	<string name="toast_message_free_trial_started" state="needs_review" hash="1357863164">Ilmainen kokeilujakso aloitettu</string>
 	<string name="toast_message_error_launching_in_app_purchase" state="needs_review" hash="-1890004340">Virhe käynnistäessäsi sovelluksen sisäistä ostosta</string>
@@ -648,8 +682,6 @@
 	<string name="toast_message_in_app_purchase_successful" state="needs_review" hash="578109721">Ostos sovelluksessa onnistui</string>
 	<string name="button_label_price_per_month" state="needs_review" hash="-552222952">%1$s kuukaudessa</string>
 	<string name="button_label_price_per_year" state="needs_review" hash="1539075788">%1$s vuodessa</string>
-	<string name="button_label_price_per_month_expanded" state="needs_review" hash="173326792">%1$s\nkuukaudessa</string>
-	<string name="button_label_price_per_year_expanded" state="needs_review" hash="1947639238">%1$s\nvuodessa</string>
 	<string name="text_awaiting_subscription_payment" state="needs_review" hash="1135205985">Tilauksen maksu hylätty</string>
 	<string name="text_subscription_in_grace_period_until" state="needs_review" hash="-1685522686">Armonaika päättyy: %1$s</string>
 	<string name="text_subscription_on_hold_since" state="needs_review" hash="-515586151">Tilaus on ollut keskeytettynä: %1$s</string>
@@ -661,9 +693,8 @@
 	<string name="label_failed_to_query_subscription" state="needs_review" hash="-1677001973">Tilauksen suunnitelmien hakeminen epäonnistui</string>
 	<string name="dialog_title_subscription_required" state="needs_review" hash="-2038592214">Tilaus vaaditaan</string>
 	<string name="button_label_check_subscription" state="needs_review" hash="-378220336">Tarkista tilauksen tila</string>
-	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1662886051">Turvallisten puheluiden aloittaminen Olvidilla edellyttää tilausta.\n\nVoit tarkistaa nykyisen tilauksesi tilan ja nähdä käytettävissä olevat tilauspaketit sivulla \"Oma profiili\".</string>
-	<string name="dialog_message_subscription_required_web_client" state="needs_review" hash="-760629168">Yhteyden muodostaminen Olvid-web-asiakkaaseen edellyttää tilausta.\n\nVoit tarkistaa nykyisen tilauksesi tilan ja nähdä käytettävissä olevat tilauspaketit sivulla \"Oma profiili\".</string>
-	<string name="dialog_message_subscription_required_multi_device" state="needs_review" hash="-1326423501">Olvid-profiilin käyttäminen useilla laitteilla samanaikaisesti edellyttää tilausta.\n\nVoit tarkistaa nykyisen tilauksesi tilan ja nähdä saatavilla olevat tilauspaketit sivulla ”Oma profiili”.</string>
+	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1231676488">Suojattujen puheluiden ja videopuheluiden aloittaminen Olvidilla edellyttää tilausta.</string>
+	<string name="dialog_title_subscription_plans" state="needs_review" hash="-456474468">Tilauspaketit</string>
 	<string name="text_ended_on" state="needs_review" hash="1280012933">Päättynyt: %1$s</string>
 	<string name="text_free_trial_ended" state="needs_review" hash="-1458860892">Ilmainen kokeilujakso päättynyt</string>
 	<string name="text_free_trial_expired" state="needs_review" hash="-2049452081">Ilmainen kokeilulisenssi on vanhentunut</string>
@@ -995,13 +1026,13 @@
 	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">Paris TURN-palvelimet</string>
 	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">New Yorkin TURN-palvelimet</string>
 	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">Singaporen TURN-palvelimet</string>
-	<string name="dialog_title_android_12_bluetooth_access" state="needs_review" hash="-2140389265">Pyydä lupa Bluetooth-laitteiden käyttöön</string>
-	<string name="dialog_message_android_12_bluetooth_access" state="needs_review" hash="-332888756">Jos haluat käyttää Bluetooth-headsettiä Olvid-puheluihin, sinun on sallittava Olvidin \"etsiä ja muodostaa yhteys\" lähellä oleviin laitteisiisi.</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d kontaktia</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">%1$d kontaktia ryhmässä %2$s</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">Päivitys vaaditaan</string>
 	<string name="dialog_message_outdated_version" state="needs_review" hash="488074151">Olvid-versiosi on vanhentunut ja se on päivitettävä.\n\nMenetät todennäköisesti monia uusia ominaisuuksia, emmekä voi taata, että versiosi on yhteensopiva uusimpien versioiden kanssa, joita yhteystietosi saattavat käyttää.</string>
 	<string name="button_label_remind_me_later" state="needs_review" hash="-713293818">Muistuta myöhemmin</string>
+	<string name="label_remind_me_tonight" state="needs_review" hash="707009828">Muistuta minua tänään illalla klo %1$s</string>
+	<string name="label_remind_me_tomorrow" state="needs_review" hash="1904419307">Muistuta minua huomenna klo %1$s</string>
 	<string name="hint_personal_note" state="needs_review" hash="-368244163">Henkilökohtainen muistiinpano</string>
 	<string name="toast_message_unable_to_restore_app_data" state="needs_review" hash="1602628680">VAROITUS: Joitakin sovelluksen mukautuksia ei voitu palauttaa</string>
 	<string name="dialog_title_webrtc_permissions_audio_blocked" state="needs_review" hash="1948829165">Äänityslupa evätty</string>
@@ -1108,7 +1139,6 @@
 	<string name="pref_reload_backup_configuration_title" state="needs_review" hash="2000428891">Lataa varmuuskopioasetukset uudelleen</string>
 	<string name="content_description_back_button" state="needs_review" hash="48196338">Takaisin</string>
 	<string name="content_description_remove_message_reply_to" state="needs_review" hash="-794585802">Poista vastaus viestiin</string>
-	<string name="content_description_remove_link_preview" state="needs_review" hash="-1085272528">Poista linkin esikatselu</string>
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">Indikaattori siitä, että ilmoitukset ovat mykistettynä tässä profiilissa</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">Luo profiili</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">Yrityksesi tunnistautumistarjoaja on määritetty onnistuneesti. Paina alla olevaa \"Todennus\"-painiketta todennusta varten ja henkilötietojesi hakemiseksi.</string>
@@ -1148,14 +1178,11 @@
 	<string name="dialog_title_neutral_notification_when_hidden" state="needs_review" hash="2013281962">Näytä neutraali ilmoitus, kun profiili on piilotettu</string>
 	<string name="dialog_message_neutral_notification_when_hidden" state="needs_review" hash="-58494752">Kun profiili on piilotettu, et saa ilmoituksia uusista viesteistä, ellei sitä ole avattu Olvidissa. Jos otat tämän vaihtoehdon käyttöön, näytölle tulee ilmoitus ”Olvid vaatii huomiotasi”. Voit sitten avata Olvidin ja avata piilotetun profiilisi nähdäksesi uudet viestit.\nVaroitus: tämä voi paljastaa, että sinulla on todellakin piilotettu profiili.</string>
 	<string name="toast_message_password_already_used_other_profile" state="needs_review" hash="390904904">Virhe: Tätä salasanaa käytetään jo toisessa piilotetussa profiilissa</string>
-	<string name="label_configure_shortcuts" state="needs_review" hash="-857125506">Muuta kuvakkeiden järjestystä</string>
 	<string name="label_attach_file" state="needs_review" hash="-89285310">Liitä tiedostoja</string>
 	<string name="label_attach_image" state="needs_review" hash="-1185400308">Liitä kuvia</string>
 	<string name="label_attach_timer" state="needs_review" hash="-1527208333">Häviävä viesti</string>
 	<string name="label_attach_camera" state="needs_review" hash="-1123080444">Ota kuva</string>
 	<string name="label_attach_video" state="needs_review" hash="1626268086">Tallenna video</string>
-	<string name="dialog_title_choose_icon_order" state="needs_review" hash="856935796">Valitse liitetiedostojen kuvakkeiden prioriteetti</string>
-	<string name="label_icons_below_never_shown" state="needs_review" hash="1250704267">Tämän viivan alapuolella olevia kuvakkeita ei koskaan näytetä</string>
 	<string name="pref_font_scale" state="needs_review" hash="1773040591">Fonttikoko</string>
 	<string name="pref_text_font_scale_0_75" state="needs_review" hash="-1963894407">Pieni (75%)</string>
 	<string name="pref_text_font_scale_0_9" state="needs_review" hash="-708054676">Pieni (90%)</string>
@@ -1210,7 +1237,6 @@
 	<string name="x_reactions_to" state="needs_review" hash="177752739">%1$d reaktiota: %2$s</string>
 	<string name="notification_text_xx_reacted" state="needs_review" hash="647790513">%1$s reagoi %2$s:ään</string>
 	<string name="label_attach_emoji" state="needs_review" hash="-1842205895">Lisää hymiö</string>
-	<string name="label_long_press_for_favorite" state="needs_review" hash="1284446174">Paina pitkään lisätäksesi/poistaaksesi suosikeista</string>
 	<string name="menu_action_debug_information" state="needs_review" hash="-919213138">Virheenkorjaustiedot</string>
 	<string name="debug_label_number_of_devices" state="needs_review" hash="1662862352">Laitteiden määrä:</string>
 	<string name="debug_label_number_of_devices_no_channel" state="needs_review" hash="808299225">Ilman suojattua kanavaa:</string>
@@ -1283,8 +1309,6 @@
 	<string name="dialog_message_incomplete_attachments" state="needs_review" hash="1179188058">Valitsemasi viestit sisältävät liitteitä, joita ei ole ladattu kokonaan. Näitä viestejä ei voi välittää, ennen kuin lataus on valmis.</string>
 	<string name="dialog_message_incomplete_attachments_partial" state="needs_review" hash="1274554335">Joissakin valitsemissasi viesteissä on liitteitä, joita ei ole ladattu kokonaan. Näitä viestejä ei voi välittää, ennen kuin lataus on valmis.\n\nPaina «Jatka» välittääksesi vain ne viestit, jotka voidaan välittää.</string>
 	<string name="hint_search_message" state="needs_review" hash="1630003450">Hae viestejä</string>
-	<string name="menu_action_search_prev" state="needs_review" hash="-1639666563">Edellinen</string>
-	<string name="menu_action_search_next" state="needs_review" hash="1158639077">Seuraava</string>
 	<string name="pref_manage_cloud_backups_title" state="needs_review" hash="824115345">Hallinnoi pilvitallennusvarmuuskopioita</string>
 	<string name="pref_manage_cloud_backups_summary" state="needs_review" hash="-161789549">Napauta ladataksesi tai poistaaksesi pilvitallennukset.</string>
 	<string name="dialog_title_manage_cloud_backups" state="needs_review" hash="-1825078945">Pilvitallennukset</string>
@@ -1485,7 +1509,7 @@
 	<string name="text_you_became_admin" state="needs_review" hash="2137006821">Olet nyt tämän ryhmän ylläpitäjä</string>
 	<string name="text_you_are_no_longer_admin" state="needs_review" hash="1766709431">Et ole enää ryhmän ylläpitäjä</string>
 	<string name="text_you_became_writer" state="needs_review" hash="-1671425999">Sinulla on nyt lupa lähettää viestejä</string>
-	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-762273585">Et voi enää lähettää viestejä täällä</string>
+	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-930933808">Et voi lähettää viestejä täällä</string>
 	<string name="label_pending" state="needs_review" hash="1975294811">Odottaa</string>
 	<string name="pref_app_language_title" state="needs_review" hash="-1748962099">Sovelluksen kieli</string>
 	<string name="pref_text_default_device_language" state="needs_review" hash="-1062620207">Oletuslaitteen kieli</string>
@@ -1571,6 +1595,7 @@
 	<string name="text_invalid_shortcut" state="needs_review" hash="-1219107750">Virheellinen pikakuvake</string>
 	<string name="text_feature_initiate_secure_calls_from_another_profile" state="needs_review" hash="271258252">Aloita suojatut puhelut (saatavilla toisen profiilin kautta)</string>
 	<string name="dialog_title_confirm_open_link" state="needs_review" hash="46935087">Avaa tämä linkki selaimessasi?</string>
+	<string name="label_open_original_link_with_trackers" state="needs_review" hash="-1586932660">Käytä alkuperäistä linkkiä, joka sisältää seurantaparametreja</string>
 	<string name="dialog_title_confirm_open_olvid_link" state="needs_review" hash="425949498">Avaa tämä linkki Olvidissa?</string>
 	<string name="toast_message_unable_to_open_url" state="needs_review" hash="-1486954792">URL:n avaaminen epäonnistui</string>
 	<string name="text_explanation_location_map_provider" state="needs_review" hash="-173394547">Karttapalveluntarjoajan valitseminen antaa sinulle mahdollisuuden valita tarkasti sijainnin, jonka haluat jakaa kartalla. Tämä voi kuitenkin paljastaa sijaintisi (tai yhteystietojesi sijainnin) tälle palveluntarjoajalle.</string>
@@ -1581,7 +1606,6 @@
 	<string name="label_no_address_found" state="needs_review" hash="1035554993">Osoitetta ei löytynyt</string>
 	<string name="label_zoom_in_for_address" state="needs_review" hash="902696925">Lähennä osoitteen etsimistä varten</string>
 	<string name="label_address_lookup_disabled" state="needs_review" hash="-2140124686">Osoitteiden haku poistettu käytöstä</string>
-	<string name="content_description_cancel_message_edit" state="needs_review" hash="984163129">Peruuta viestin muokkaus</string>
 	<string name="dialog_title_introducing_mentions" state="needs_review" hash="-1741341288">Esittelemme käyttäjätunnisteita!</string>
 	<string name="dialog_message_introducing_mentions" state="needs_review" hash="622739087">Olvidin avulla voit nyt mainita käyttäjän keskustelussa 🫵! Kirjoita vain @ ja sen jälkeen kirjain tai nimi nähdäksesi, kenet voit mainita. Lisäksi, kun mykistät keskustelun tai profiilin 💤, voit nyt valita, että saat ilmoituksen vain, kun sinut mainitaan nimenomaisesti viestissä. Huomaa, että yhteystietojesi on päivitettävä Olvidin uusin versio nähdäkseen, että olet maininnut heidät.</string>
 	<string name="pref_no_notify_certificate_change_for_previews_title" state="needs_review" hash="-434788963">Poista käytöstä sertifikaatin muutoksista ilmoittaminen linkkien esikatseluissa</string>
@@ -1740,7 +1764,7 @@
 	<string name="troubleshooting_ignored" state="needs_review" hash="816017832">Ohitettu</string>
 	<string name="onboarding_transfer_multidevice_purchase_question" state="needs_review" hash="351030441">Haluatko, että kaikki laitteesi pysyvät aktiivisina?</string>
 	<string name="onboarding_transfer_multidevice_purchase_hyperlink" state="needs_review" hash="747183939">Täältä</string>
-	<string name="button_label_subscribe_now" state="needs_review" hash="1805105542">Tilaa nyt</string>
+	<string name="button_label_subscribe_with_price" state="needs_review" hash="324675175">Tilaa • %1$s</string>
 	<string name="onboarding_transfer_devices_loading_title" state="needs_review" hash="801961341">Laiteluettelon hakeminen…</string>
 	<string name="dialog_title_introducing_multi_device" state="needs_review" hash="-310103349">Esittelemme Olvid Desktopin ja tuen useille laitteille!</string>
 	<string name="dialog_message_introducing_multi_device" state="needs_review" hash="-153162506">Olvid on nyt saatavilla **tietokoneellesi** (Windows ja macOS). Voit ladata uusimman version osoitteesta: https://olvid.io/download/ **Monilaitetuen** ansiosta voit aloittaa keskustelun puhelimellasi ja jatkaa sitä tietokoneellasi. Tiedostojen jakaminen laitteidesi ja kontaktiesi välillä ei ole koskaan ollut helpompaa!</string>
@@ -1930,7 +1954,6 @@
 	<string name="pref_archived_attachments_summary" state="needs_review" hash="1596754073">Kun tämä on käytössä, arkistoiduista keskusteluista tulevat liitteet ladataan automaattisesti yllä olevien asetusten mukaisesti.</string>
 	<string name="pref_unarchive_on_notification_title" state="needs_review" hash="-1146947153">Arkistoidut keskustelut palautetaan ilmoituksen yhteydessä</string>
 	<string name="pref_unarchive_on_notification_summary" state="needs_review" hash="778062251">Kun tämä on käytössä, arkistoidut keskustelut avataan automaattisesti, kun uusi viestin ilmoitus vastaanotetaan.</string>
-	<string name="call_notification_ongoing_call" state="needs_review" hash="1828207822">Käynnissä oleva puhelu</string>
 	<string name="call_notification_incoming_call" state="needs_review" hash="-1223043344">Saapuva puhelu</string>
 	<string name="menu_action_copy_text_from_image" state="needs_review" hash="-1072685983">Kopioi tämä sana</string>
 	<string name="menu_action_copy_text_block_from_image" state="needs_review" hash="1436026569">Kopioi koko lohko</string>
@@ -2121,4 +2144,8 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Vastapuolen laite on saavuttamaton</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Luo kaikki suojatut kanavat uudelleen</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Kaikkien suojattujen kanavien uudelleenluonti pakottaa Olvidin luomaan uusia suojattuja yhteydenottokanavia kaikkien yhteystietojesi laitteille. Tämä ei yleensä ole hyödyllistä, mutta voi ratkaista harvinaisia tilanteita, joissa jotkin näistä kanavista ovat «synkronoimattomia».\n\n**Varoitus:** Jos sinulla on paljon yhteystietoja, tämä toiminto voi kestää muutaman minuutin ja voit menettää joitain saapuvia viestejä sen aikana.</string>
+	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Puhelu katkaistiin</string>
+	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">Tarvitseeko tiimisi tilauksia?</string>
+	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Vieraile Olvid-kaupassa</string>
+	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">Muistutus asetettu</string>
 </resources>

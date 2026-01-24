@@ -40,6 +40,12 @@ class ComposeMessageViewModel(
     private val discussionIdLiveData: LiveData<Long>,
     discussionCustomization: LiveData<DiscussionCustomization?>
 ) : ViewModel() {
+    var menuExpanded by mutableStateOf(false)
+    var emojiExpanded by mutableStateOf(false)
+    var sending by mutableStateOf(false)
+    var hasText by mutableStateOf(false)
+    var editIsSendable by mutableStateOf(false)
+
     private val db: AppDatabase = AppDatabase.getInstance()
     private val recordingLiveData: MutableLiveData<Boolean> = MutableLiveData(false)
     private val draftMessageFyles: LiveData<List<FyleAndStatus>?> =
@@ -59,7 +65,7 @@ class ComposeMessageViewModel(
     private val draftMessageEditMode = MediatorLiveData<Message?>()
     private val draftMessageReply: LiveData<Message?> = draftMessage.switchMap { draftMessage: Message? ->
         if (draftMessage?.jsonReply == null) {
-            return@switchMap MutableLiveData<Message?>(null)
+            return@switchMap MutableLiveData(null)
         }
         val jsonReply: JsonMessageReference = try {
             AppSingleton.getJsonObjectMapper().readValue(
@@ -77,9 +83,9 @@ class ComposeMessageViewModel(
         )
     }
     private val draftMessageReplyEditMode = MediatorLiveData<Message?>()
-    private val draftMessageEdit = MutableLiveData<Message?>(null)
+    private val messageBeingEdited = MutableLiveData<Message?>(null)
     val ephemeralSettingsChanged: LiveData<Boolean>
-    var rawNewMessageText: CharSequence? = null
+    var rawNewMessageText: CharSequence = ""
         private set
 
     // region take picture from discussion
@@ -89,27 +95,27 @@ class ComposeMessageViewModel(
 
     init {
         draftMessageEditMode.addSource(draftMessage) { draft: Message? ->
-            draftMessageEditMode.value = if (draftMessageEdit.value != null) null else draft
+            draftMessageEditMode.value = if (messageBeingEdited.value != null) null else draft
         }
-        draftMessageEditMode.addSource(draftMessageEdit) { edit: Message? ->
+        draftMessageEditMode.addSource(messageBeingEdited) { edit: Message? ->
             draftMessageEditMode.value = if (edit != null) null else draftMessage.value
         }
         draftMessageFylesEditMode.addSource(draftMessageFyles) { draftFyles: List<FyleAndStatus>? ->
-            draftMessageFylesEditMode.value = if (draftMessageEdit.value != null) null else draftFyles
+            draftMessageFylesEditMode.value = if (messageBeingEdited.value != null) null else draftFyles
         }
-        draftMessageFylesEditMode.addSource(draftMessageEdit) { edit: Message? ->
+        draftMessageFylesEditMode.addSource(messageBeingEdited) { edit: Message? ->
             draftMessageFylesEditMode.value = if (edit != null) null else draftMessageFyles.value
         }
         draftMessageReplyEditMode.addSource(draftMessageReply) { message: Message? ->
-            draftMessageReplyEditMode.value = if (draftMessageEdit.value != null) null else message
+            draftMessageReplyEditMode.value = if (messageBeingEdited.value != null) null else message
         }
-        draftMessageReplyEditMode.addSource(draftMessageEdit) { edit: Message? ->
+        draftMessageReplyEditMode.addSource(messageBeingEdited) { edit: Message? ->
             draftMessageReplyEditMode.value = if (edit != null) null else draftMessageReply.value
         }
         ephemeralSettingsChanged = EphemeralSettingsChangedLiveData(
             draftMessage,
             discussionCustomization,
-            draftMessageEdit
+            messageBeingEdited
         )
     }
 
@@ -121,16 +127,12 @@ class ComposeMessageViewModel(
         return recordingLiveData
     }
 
-    fun setNewMessageText(newMessageText: CharSequence?) {
+    fun setNewMessageText(newMessageText: CharSequence) {
         rawNewMessageText = newMessageText
     }
 
     val trimmedNewMessageText: String?
-        get() = if (rawNewMessageText != null && rawNewMessageText.toString()
-                .trim().isNotEmpty()
-        ) {
-            rawNewMessageText.toString().trim()
-        } else null
+        get() = rawNewMessageText.toString().trim().takeIf { it.isNotEmpty() }
 
     fun getDraftMessageFyles(): LiveData<List<FyleAndStatus>?> {
         return draftMessageFylesEditMode
@@ -144,16 +146,16 @@ class ComposeMessageViewModel(
         return draftMessageReplyEditMode
     }
 
-    fun getDraftMessageEdit(): LiveData<Message?> {
-        return draftMessageEdit
+    fun getMessageBeingEdited(): LiveData<Message?> {
+        return messageBeingEdited
     }
 
-    fun setDraftMessageEdit(message: Message) {
-        draftMessageEdit.value = message
+    fun setMessageBeingEdited(message: Message) {
+        messageBeingEdited.value = message
     }
 
-    fun clearDraftMessageEdit() {
-        draftMessageEdit.value = null
+    fun clearMessageBeingEdited() {
+        messageBeingEdited.value = null
     }
 
     fun hasAttachments(): Boolean {

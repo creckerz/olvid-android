@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">Te és még [PLACEHOLDER_1] másik személy megosztja a helyzetét</item>
 		<item quantity="other" state="needs_review" hash="1789697147">Te és %1$d más személy megosztja a helyzetét</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d hónap ingyen</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d hónap ingyen</item>
+	</plurals>
 </resources>

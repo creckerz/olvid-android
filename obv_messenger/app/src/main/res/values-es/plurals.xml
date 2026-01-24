@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">Tú y [PLACEHOLDER_1] otra persona están compartiendo su ubicación</item>
 		<item quantity="other" state="needs_review" hash="1789697147">Tú y %1$d más están compartiendo su ubicación</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d mes gratis</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d meses gratis</item>
+	</plurals>
 </resources>

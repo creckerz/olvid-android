@@ -47,8 +47,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -81,10 +81,10 @@ fun KeycloakBindScreen(
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
 
-    var binding by remember { mutableStateOf(false) }
-    var warningText by remember { mutableStateOf<String?>(null) }
-    var warningIsError by remember { mutableStateOf(false) }
-    var forceDisabled by remember { mutableStateOf(false) }
+    var binding by rememberSaveable { mutableStateOf(false) }
+    var warningText by rememberSaveable { mutableStateOf<String?>(null) }
+    var warningIsError by rememberSaveable { mutableStateOf(false) }
+    var forceDisabled by rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(viewModel.keycloakUserDetails, viewModel.currentIdentity) {
         val userDetails = viewModel.keycloakUserDetails?.userDetails

@@ -93,6 +93,7 @@ import io.olvid.engine.metamanager.ObvManager;
 public class BackupManager implements BackupDelegate, BackupV2Delegate, BackupManagerSessionFactory, ObvManager, NotificationListener {
     private final ObvBackupAndSyncDelegate appBackupAndSyncDelegates;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final PRNGService prng;
     private final ObjectMapper jsonObjectMapper;
 
@@ -126,9 +127,10 @@ public class BackupManager implements BackupDelegate, BackupV2Delegate, BackupMa
     private final Set<ScheduledBackup> scheduledBackups;
     private Long nextScheduledBackupTimestamp;
 
-    public BackupManager(MetaManager metaManager, ObvBackupAndSyncDelegate appBackupAndSyncDelegates, SSLSocketFactory sslSocketFactory, PRNGService prng, ObjectMapper jsonObjectMapper) {
+    public BackupManager(MetaManager metaManager, ObvBackupAndSyncDelegate appBackupAndSyncDelegates, SSLSocketFactory sslSocketFactory, String userAgentOverride, PRNGService prng, ObjectMapper jsonObjectMapper) {
         this.appBackupAndSyncDelegates = appBackupAndSyncDelegates;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.prng = prng;
         this.jsonObjectMapper = jsonObjectMapper;
         this.executor = new NoExceptionSingleThreadExecutor("BackupManager executor");
@@ -368,7 +370,7 @@ public class BackupManager implements BackupDelegate, BackupV2Delegate, BackupMa
     private void initiateBackup(ScheduledBackup scheduledBackup) {
         executor.execute(() -> {
             if (scheduledBackup.ownedIdentity == null) {
-                DeviceBackupUploadTask deviceBackupUploadTask = new DeviceBackupUploadTask(this, sslSocketFactory);
+                DeviceBackupUploadTask deviceBackupUploadTask = new DeviceBackupUploadTask(this, sslSocketFactory, userAgentOverride);
                 switch (deviceBackupUploadTask.execute()) {
                     case SUCCESS -> {
                         // backup successful --> update nextBackupTimestamp and reschedule
@@ -395,7 +397,7 @@ public class BackupManager implements BackupDelegate, BackupV2Delegate, BackupMa
                     }
                 }
             } else {
-                ProfileBackupUploadTask profileBackupUploadTask = new ProfileBackupUploadTask(this, sslSocketFactory, scheduledBackup.ownedIdentity);
+                ProfileBackupUploadTask profileBackupUploadTask = new ProfileBackupUploadTask(this, sslSocketFactory, userAgentOverride, scheduledBackup.ownedIdentity);
                 switch (profileBackupUploadTask.execute()) {
                     case SUCCESS -> {
                         // backup successful --> update nextBackupTimestamp and reschedule
@@ -428,7 +430,7 @@ public class BackupManager implements BackupDelegate, BackupV2Delegate, BackupMa
 
     private void cleanUpDeviceBackups(BackupSeed backupSeed) {
         executor.execute(() -> {
-            DeviceBackupDeleteTask deviceBackupDeleteTask = new DeviceBackupDeleteTask(this, sslSocketFactory, backupSeed);
+            DeviceBackupDeleteTask deviceBackupDeleteTask = new DeviceBackupDeleteTask(this, sslSocketFactory, userAgentOverride, backupSeed);
             switch (deviceBackupDeleteTask.execute()) {
                 case SUCCESS -> {
                     // delete successful --> delete the DeviceBackupSeed (if indeed inactive !)
@@ -560,7 +562,7 @@ public class BackupManager implements BackupDelegate, BackupV2Delegate, BackupMa
 
     @Override
     public ObvDeviceBackupForRestore fetchDeviceBackup(String server, BackupSeed backupSeed) {
-        DeviceBackupFetchTask deviceBackupFetchTask = new DeviceBackupFetchTask(server, backupSeed, this, sslSocketFactory);
+        DeviceBackupFetchTask deviceBackupFetchTask = new DeviceBackupFetchTask(server, backupSeed, this, sslSocketFactory, userAgentOverride);
         switch (deviceBackupFetchTask.execute()) {
             case SUCCESS -> {
                 // download successful
@@ -585,7 +587,7 @@ public class BackupManager implements BackupDelegate, BackupV2Delegate, BackupMa
 
     @Override
     public ObvProfileBackupsForRestore fetchProfileBackups(String server, BackupSeed backupSeed) {
-        ProfileBackupsFetchTask profileBackupsFetchTask = new ProfileBackupsFetchTask(server, backupSeed, this, sslSocketFactory);
+        ProfileBackupsFetchTask profileBackupsFetchTask = new ProfileBackupsFetchTask(server, backupSeed, this, sslSocketFactory, userAgentOverride);
         switch (profileBackupsFetchTask.execute()) {
             case SUCCESS -> {
                 // download successful
@@ -610,7 +612,7 @@ public class BackupManager implements BackupDelegate, BackupV2Delegate, BackupMa
 
     @Override
     public boolean deleteProfileBackupSnapshot(String server, BackupSeed backupSeed, UID backupThreadId, long version) {
-        ProfileBackupSnapshotDeleteTask profileBackupSnapshotDeleteTask = new ProfileBackupSnapshotDeleteTask(server, backupSeed, backupThreadId, version, prng, sslSocketFactory);
+        ProfileBackupSnapshotDeleteTask profileBackupSnapshotDeleteTask = new ProfileBackupSnapshotDeleteTask(server, backupSeed, backupThreadId, version, prng, sslSocketFactory, userAgentOverride);
         switch (profileBackupSnapshotDeleteTask.execute()) {
             case SUCCESS -> {
                 return true;
@@ -1207,9 +1209,11 @@ public class BackupManager implements BackupDelegate, BackupV2Delegate, BackupMa
                         if (doBackup) {
                             try (BackupManagerSession backupManagerSession = getSession()) {
                                 ProfileBackupThreadId profileBackupThreadId = ProfileBackupThreadId.get(backupManagerSession, ownedIdentity);
-                                if (profileBackupThreadId != null && profileBackupThreadId.getNextBackupTimestamp() > targetTimestamp) {
-                                    profileBackupThreadId.setNextBackupTimestamp(targetTimestamp);
-                                    backupManagerSession.session.commit();
+                                if (profileBackupThreadId == null || profileBackupThreadId.getNextBackupTimestamp() > targetTimestamp) {
+                                    if (profileBackupThreadId != null) {
+                                        profileBackupThreadId.setNextBackupTimestamp(targetTimestamp);
+                                        backupManagerSession.session.commit();
+                                    }
                                     scheduleProfileBackup(ownedIdentity, targetTimestamp);
                                 }
                             } catch (Exception e) {

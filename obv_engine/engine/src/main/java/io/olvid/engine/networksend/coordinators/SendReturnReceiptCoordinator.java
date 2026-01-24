@@ -52,6 +52,7 @@ import io.olvid.engine.networksend.operations.UploadReturnReceiptOperation;
 public class SendReturnReceiptCoordinator implements ReturnReceipt.NewReturnReceiptListener, Operation.OnCancelCallback, Operation.OnFinishCallback {
     private final SendManagerSessionFactory sendManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private NotificationListeningDelegate notificationListeningDelegate;
 
     private final PRNGService prng;
@@ -64,9 +65,10 @@ public class SendReturnReceiptCoordinator implements ReturnReceipt.NewReturnRece
 
     private final NotificationListener notificationListener;
 
-    public SendReturnReceiptCoordinator(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, PRNGService prng) {
+    public SendReturnReceiptCoordinator(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, PRNGService prng) {
         this.sendManagerSessionFactory = sendManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.prng = prng;
 
         returnReceiptOwnedIdentityAndIdByServer = new HashMap<>();
@@ -111,7 +113,7 @@ public class SendReturnReceiptCoordinator implements ReturnReceipt.NewReturnRece
                 queue.add(new IdentityAndLong(ownedIdentity, returnReceiptId));
             }
         }
-        UploadReturnReceiptOperation op = new UploadReturnReceiptOperation(sendManagerSessionFactory, sslSocketFactory, server, () -> {
+        UploadReturnReceiptOperation op = new UploadReturnReceiptOperation(sendManagerSessionFactory, sslSocketFactory, userAgentOverride, server, () -> {
             List<IdentityAndLong> returnReceiptOwnedIdentityAndId = new ArrayList<>();
             synchronized (returnReceiptOwnedIdentityAndIdByServer) {
                 Queue<IdentityAndLong> queue = returnReceiptOwnedIdentityAndIdByServer.get(server);

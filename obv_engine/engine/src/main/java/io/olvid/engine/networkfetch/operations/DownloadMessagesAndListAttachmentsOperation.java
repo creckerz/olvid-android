@@ -58,6 +58,7 @@ public class DownloadMessagesAndListAttachmentsOperation extends PriorityOperati
 
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final Identity ownedIdentity;
     private final UID deviceUid;
     private final long listStartTimestamp;
@@ -80,10 +81,11 @@ public class DownloadMessagesAndListAttachmentsOperation extends PriorityOperati
         return downloadTimestamp;
     }
 
-    public DownloadMessagesAndListAttachmentsOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, Identity ownedIdentity, UID deviceUid, long listStartTimestamp, Operation.OnFinishCallback onFinishCallback, Operation.OnCancelCallback onCancelCallback) {
+    public DownloadMessagesAndListAttachmentsOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, Identity ownedIdentity, UID deviceUid, long listStartTimestamp, Operation.OnFinishCallback onFinishCallback, Operation.OnCancelCallback onCancelCallback) {
         super(computeUniqueUid(ownedIdentity, listStartTimestamp), onFinishCallback, onCancelCallback);
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.ownedIdentity = ownedIdentity;
         this.deviceUid = deviceUid;
         this.listStartTimestamp = listStartTimestamp;
@@ -141,7 +143,7 @@ public class DownloadMessagesAndListAttachmentsOperation extends PriorityOperati
                         deviceUid,
                         listStartTimestamp
                 );
-                serverMethod.setSslSocketFactory(sslSocketFactory);
+                serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
 
                 byte returnStatus = serverMethod.execute(fetchManagerSession.identityDelegate.isActiveOwnedIdentity(fetchManagerSession.session, ownedIdentity));
                 long localDownloadTimestamp = System.currentTimeMillis();

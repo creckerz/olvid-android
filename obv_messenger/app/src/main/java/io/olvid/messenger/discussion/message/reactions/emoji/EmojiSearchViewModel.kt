@@ -33,7 +33,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class EmojiSearchViewModel : ViewModel() {
-    private val emojiDao = EmojiDatabase.Companion.getInstance().emojiDao()
+    private val emojiDao = EmojiDatabase.getInstance().emojiDao()
     private val languageId = LanguageUtils.getCurrentLanguageId()
 
     var searchText by mutableStateOf("")

@@ -57,7 +57,6 @@ import androidx.navigation.compose.composable
 import io.olvid.engine.engine.types.JsonGroupDetails
 import io.olvid.messenger.AppSingleton
 import io.olvid.messenger.R
-import io.olvid.messenger.databases.AppDatabase
 import io.olvid.messenger.databases.entity.Group2
 import io.olvid.messenger.designsystem.components.OlvidActionButton
 import io.olvid.messenger.designsystem.plus

@@ -14,10 +14,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -45,16 +42,15 @@ fun ConfigurationScannedScreen(
     onCancel: () -> Unit
 ) {
     val activity = LocalActivity.current
-    var currentScreen by remember { mutableStateOf<Screen>(Screen.ConfigurationScan) }
     val authenticator = remember { KeycloakAuthenticator(activity as ComponentActivity) }
 
-    when (currentScreen) {
+    when (plusButtonViewModel.currentConfigurationScreen) {
         is Screen.ConfigurationScan -> {
             ConfigurationScanContent(
                 modifier = modifier,
                 plusButtonViewModel = plusButtonViewModel,
                 onCancel = onCancel,
-                onNavigateToKeycloakBind = { currentScreen = Screen.KeycloakBind },
+                onNavigateToKeycloakBind = { plusButtonViewModel.currentConfigurationScreen = Screen.KeycloakBind },
                 authenticator = authenticator
             )
         }
@@ -77,7 +73,6 @@ fun ConfigurationScanContent(
     onNavigateToKeycloakBind: () -> Unit,
     authenticator: KeycloakAuthenticator
 ) {
-    var configurationPojo by remember { mutableStateOf<ConfigurationPojo?>(null) }
 
     LaunchedEffect(plusButtonViewModel.scannedUri) {
         val uri = plusButtonViewModel.scannedUri
@@ -89,7 +84,7 @@ fun ConfigurationScanContent(
         val matcher = ObvLinkActivity.CONFIGURATION_PATTERN.matcher(uri)
         if (matcher.find()) {
             try {
-                configurationPojo = AppSingleton.getJsonObjectMapper().readValue(
+                plusButtonViewModel.configurationPojo = AppSingleton.getJsonObjectMapper().readValue(
                     ObvBase64.decode(matcher.group(2)),
                     ConfigurationPojo::class.java
                 )
@@ -106,7 +101,7 @@ fun ConfigurationScanContent(
         modifier = modifier.verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        configurationPojo?.let { configuration ->
+        plusButtonViewModel.configurationPojo?.let { configuration ->
             when {
                 configuration.server != null && configuration.apikey != null -> {
                     Text(

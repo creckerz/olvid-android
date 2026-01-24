@@ -21,34 +21,24 @@ package io.olvid.messenger.discussion.compose
 import android.Manifest.permission
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.media.MediaRecorder
 import android.media.MediaRecorder.AudioEncoder
 import android.media.MediaRecorder.AudioSource
 import android.media.MediaRecorder.OutputFormat
-import android.os.Build.VERSION
-import android.os.Build.VERSION_CODES
 import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
 import android.os.PowerManager.WakeLock
-import android.view.MotionEvent
-import android.view.View
-import android.view.View.OnTouchListener
 import android.view.WindowManager.LayoutParams
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModelProvider
 import io.olvid.messenger.App
 import io.olvid.messenger.R.string
-import io.olvid.messenger.R.style
-import io.olvid.messenger.customClasses.SecureAlertDialogBuilder
 import io.olvid.messenger.databases.tasks.AddFyleToDraftFromUriTask
 import java.io.File
 import java.text.SimpleDateFormat
@@ -59,13 +49,11 @@ import java.util.TimerTask
 import kotlin.concurrent.schedule
 import kotlin.math.log2
 
-internal class VoiceMessageRecorder(
+class VoiceMessageRecorder(
     private val activity: FragmentActivity,
-    private val requestAudioPermissionDelegate: RequestAudioPermissionDelegate,
-    factory: ViewModelProvider.Factory
-) : OnTouchListener {
+    private val composeMessageViewModel: ComposeMessageViewModel
+) {
     var opened by mutableStateOf(false)
-    private val composeMessageViewModel: ComposeMessageViewModel by activity.viewModels<ComposeMessageViewModel> { factory }
     private var recordPermission: Boolean
     private var mediaRecorder: MediaRecorder? = null
     private var audioFile: File? = null
@@ -122,7 +110,7 @@ internal class VoiceMessageRecorder(
                 )
                 mediaRecorder = MediaRecorder().apply {
                     setAudioSource(AudioSource.DEFAULT)
-                    setOutputFormat(OutputFormat.MPEG_4)
+                    setOutputFormat(OutputFormat.AAC_ADTS)
                     setAudioEncoder(AudioEncoder.AAC)
                     setAudioChannels(1)
                     setAudioEncodingBitRate(48000)
@@ -130,10 +118,10 @@ internal class VoiceMessageRecorder(
                     setOutputFile(audioFile!!.path)
                 }
 
-                try {
+                runCatching {
                     mediaRecorder?.prepare()
                     mediaRecorder?.start()
-                } catch (e: Exception) {
+                }.onFailure {
                     App.toast(
                         string.toast_message_voice_message_recording_failed,
                         Toast.LENGTH_SHORT
@@ -163,13 +151,13 @@ internal class VoiceMessageRecorder(
                         }
                         soundWave = soundWave.inc()
                         if (soundWave.ticker == SampleAndTicker.TICKS_PER_SAMPLE) {
-                            try {
+                            runCatching {
                                 val amplitude = (log2(mediaRecorder!!.maxAmplitude.toDouble()).toFloat() - 9).coerceAtLeast(0f) / 6
                                 if (!started && amplitude > 0) {
                                     started = true
                                 }
                                 soundWave = soundWave.add(amplitude)
-                            } catch (e: Exception) {
+                            }.onFailure {
                                 cancel()
                             }
                         }
@@ -216,7 +204,7 @@ internal class VoiceMessageRecorder(
         setRecording(false)
         opened = false
         mediaRecorder?.apply {
-            try {
+            runCatching {
                 stop()
                 release()
                 mediaRecorder = null
@@ -231,50 +219,8 @@ internal class VoiceMessageRecorder(
                         ).run()
                     }
                 }
-            } catch (e: Exception) {
-                // do nothing
             }
         }
-    }
-
-    override fun onTouch(v: View, event: MotionEvent): Boolean {
-        when (event.actionMasked) {
-            MotionEvent.ACTION_DOWN -> {
-                startRecord()
-            }
-
-            MotionEvent.ACTION_UP -> {
-                if (recording) {
-                    stopRecord(false)
-                } else {
-                    if (!startRecord()) {
-                        if (VERSION.SDK_INT < VERSION_CODES.M || activity.shouldShowRequestPermissionRationale(
-                                permission.RECORD_AUDIO
-                            )
-                        ) {
-                            val builder = SecureAlertDialogBuilder(
-                                activity, style.CustomAlertDialog
-                            )
-                                .setTitle(string.dialog_title_voice_message_explanation)
-                                .setMessage(string.dialog_message_voice_message_explanation)
-                                .setPositiveButton(string.button_label_ok, null)
-                                .setOnDismissListener { dialog: DialogInterface? ->
-                                    requestAudioPermissionDelegate.requestAudioPermission(
-                                        true
-                                    )
-                                }
-                            builder.create().show()
-                        } else {
-                            requestAudioPermissionDelegate.requestAudioPermission(false)
-                        }
-                    } else {
-                        // recording start success
-                        v.performClick()
-                    }
-                }
-            }
-        }
-        return true
     }
 
     fun isRecording(): Boolean {

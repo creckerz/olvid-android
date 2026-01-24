@@ -55,12 +55,14 @@ public class UploadAttachmentOperation extends PriorityOperation {
     private long priority; // will be updated as the attachment is downloaded, so cannot be final
     private final SendManagerSessionFactory sendManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final WeakReference<SendAttachmentCoordinator> coordinatorWeakReference;
 
-    public UploadAttachmentOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, Identity ownedIdentity, UID messageUid, int attachmentNumber, long initialPriority, SendAttachmentCoordinator coordinator) {
+    public UploadAttachmentOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, Identity ownedIdentity, UID messageUid, int attachmentNumber, long initialPriority, SendAttachmentCoordinator coordinator) {
         super(OutboxAttachment.computeUniqueUid(ownedIdentity, messageUid, attachmentNumber), null, null);
         this.sendManagerSessionFactory = sendManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.ownedIdentity = ownedIdentity;
         this.messageUid = messageUid;
         this.attachmentNumber = attachmentNumber;
@@ -153,7 +155,7 @@ public class UploadAttachmentOperation extends PriorityOperation {
                         UploadAttachmentServerMethodForS3 serverMethod = new UploadAttachmentServerMethodForS3(
                                 outboxAttachment.getChunkUploadPrivateUrls()[chunkNumber],
                                 authEnc.encrypt(outboxAttachment.getKey(), Encoded.encodeChunk(chunkNumber, buffer, bufferFullness), prng));
-                        serverMethod.setSslSocketFactory(sslSocketFactory);
+                        serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
 
                         serverMethod.setProgressListener(150, new ServerMethodForS3.ServerMethodForS3ProgressListener() {
                             final HashMap<String, Object> userInfo;

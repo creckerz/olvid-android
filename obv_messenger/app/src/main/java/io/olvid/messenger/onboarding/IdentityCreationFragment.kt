@@ -282,7 +282,7 @@ class IdentityCreationFragment : Fragment() {
 
         val identityDetails = detailsViewModel.jsonIdentityDetails
         val absolutePhotoUrl = detailsViewModel.absolutePhotoUrl
-        if (identityDetails == null || identityDetails.isEmpty) {
+        if (identityDetails.isEmpty) {
             return
         }
 

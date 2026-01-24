@@ -263,4 +263,8 @@
         <item quantity="one">You and 1 other are sharing their location</item>
         <item quantity="other">You and %1$d others are sharing their location</item>
     </plurals>
+    <plurals name="subscription_offer_month_free">
+        <item quantity="one">%1$d month free</item>
+        <item quantity="other">%1$d months free</item>
+    </plurals>
 </resources>

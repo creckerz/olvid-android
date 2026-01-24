@@ -64,6 +64,7 @@ public interface NetworkFetchDelegate {
 
     void retryScheduledNetworkTasks();
     void getTurnCredentials(Identity ownedIdentity, UUID callUuid, String username1, String username2);
+    List<String> getWellKnownTurnServers(Identity ownedIdentity);
     void queryApiKeyStatus(Identity ownedIdentity, UUID apiKey);
     void queryFreeTrial(Identity ownedIdentity);
     void startFreeTrial(Identity ownedIdentity);

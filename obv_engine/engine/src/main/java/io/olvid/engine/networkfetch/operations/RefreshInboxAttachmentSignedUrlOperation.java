@@ -42,14 +42,16 @@ public class RefreshInboxAttachmentSignedUrlOperation extends Operation {
 
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final Identity ownedIdentity;
     private final UID messageUid;
     private final int attachmentNumber;
 
-    public RefreshInboxAttachmentSignedUrlOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, Identity ownedIdentity, UID messageUid, int attachmentNumber, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
+    public RefreshInboxAttachmentSignedUrlOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, Identity ownedIdentity, UID messageUid, int attachmentNumber, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
         super(InboxAttachment.computeUniqueUid(ownedIdentity, messageUid, attachmentNumber), onFinishCallback, onCancelCallback);
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.ownedIdentity = ownedIdentity;
         this.messageUid = messageUid;
         this.attachmentNumber = attachmentNumber;
@@ -94,7 +96,7 @@ public class RefreshInboxAttachmentSignedUrlOperation extends Operation {
                         attachmentNumber,
                         (int) ((inboxAttachment.getExpectedLength()-1)/inboxAttachment.getChunkLength()) + 1
                 );
-                serverMethod.setSslSocketFactory(sslSocketFactory);
+                serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
 
                 byte returnStatus = serverMethod.execute(fetchManagerSession.identityDelegate.isActiveOwnedIdentity(fetchManagerSession.session, ownedIdentity));
 

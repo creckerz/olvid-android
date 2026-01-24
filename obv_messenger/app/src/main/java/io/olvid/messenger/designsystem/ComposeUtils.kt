@@ -19,6 +19,9 @@
 
 package io.olvid.messenger.designsystem
 
+import android.content.Context
+import android.view.ViewGroup
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -29,8 +32,24 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.findViewTreeLifecycleOwner
+import androidx.lifecycle.findViewTreeViewModelStoreOwner
+import androidx.lifecycle.setViewTreeLifecycleOwner
+import androidx.lifecycle.setViewTreeViewModelStoreOwner
+import androidx.savedstate.findViewTreeSavedStateRegistryOwner
+import androidx.savedstate.setViewTreeSavedStateRegistryOwner
+import io.olvid.engine.Logger
+
 
 @Composable
 operator fun PaddingValues.plus(other: PaddingValues): PaddingValues {
@@ -45,12 +64,64 @@ operator fun PaddingValues.plus(other: PaddingValues): PaddingValues {
 
 @Composable
 fun Modifier.cutoutHorizontalPadding() = then(
-    Modifier.Companion.windowInsetsPadding(
-        WindowInsets.Companion.displayCutout.only(
-            WindowInsetsSides.Companion.Horizontal))
+    Modifier.windowInsetsPadding(
+        WindowInsets.displayCutout.only(
+            WindowInsetsSides.Horizontal))
 )
 
 @Composable
 fun Modifier.systemBarsHorizontalPadding() = then(
-    Modifier.Companion.windowInsetsPadding(WindowInsets.Companion.systemBars.only(WindowInsetsSides.Companion.Horizontal))
+    Modifier.windowInsetsPadding(WindowInsets.Companion.systemBars.only(WindowInsetsSides.Companion.Horizontal))
 )
+
+@Composable
+fun constantSp(value: Int): TextUnit = with(LocalDensity.current) { (value / fontScale).sp }
+@Composable
+fun constantSp(value: Float): TextUnit = with(LocalDensity.current) { (value / fontScale).sp }
+@Composable
+fun scaledDp(value: Int): Dp = with(LocalDensity.current) { (value * fontScale).dp }
+
+
+fun Context.showDialog(content: @Composable (onDismiss: () -> Unit) -> Unit) {
+    runCatching {
+        val activity = getActivity(this)
+        if (activity is ComponentActivity) {
+            val decorView = activity.window.decorView as ViewGroup
+            val view = ComposeView(activity)
+
+            if (decorView.findViewTreeLifecycleOwner() == null) {
+                decorView.setViewTreeLifecycleOwner(activity)
+            }
+            if (decorView.findViewTreeViewModelStoreOwner() == null) {
+                decorView.setViewTreeViewModelStoreOwner(activity)
+            }
+            if (decorView.findViewTreeSavedStateRegistryOwner() == null) {
+                decorView.setViewTreeSavedStateRegistryOwner(activity)
+            }
+
+            view.setViewTreeLifecycleOwner(activity)
+            view.setViewTreeViewModelStoreOwner(activity)
+            view.setViewTreeSavedStateRegistryOwner(activity)
+
+            view.setContent {
+                val showDialog = remember { mutableStateOf(true) }
+                if (showDialog.value) {
+                    content {
+                        showDialog.value = false
+                        decorView.removeView(view)
+                    }
+                }
+            }
+            decorView.addView(view)
+        }
+    }.onFailure {
+        Logger.x(it)
+    }
+}
+
+private fun getActivity(context: Context?): Context? {
+    if (context == null) return null
+    if (context is android.app.Activity) return context
+    if (context is android.content.ContextWrapper) return getActivity(context.baseContext)
+    return null
+}

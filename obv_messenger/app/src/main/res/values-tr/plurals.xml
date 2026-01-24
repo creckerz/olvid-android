@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">Sen ve 1 başka kişi konumunu paylaşıyor</item>
 		<item quantity="other" state="needs_review" hash="1789697147">Sen ve %1$d kişi daha konumunuzu paylaşıyor</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d ay ücretsiz</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d ay ücretsiz</item>
+	</plurals>
 </resources>

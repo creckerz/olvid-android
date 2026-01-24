@@ -42,7 +42,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -80,10 +79,7 @@ fun MainScreenEmptyList(
                 .then(
                     if (onClick != null) Modifier
                         .clip(RoundedCornerShape(16.dp))
-                        .dashedBorder(
-                            brush = SolidColor(colorResource(id = R.color.greyTint)),
-                            shape = RoundedCornerShape(size = 16.dp)
-                        )
+                        .dashedBorder()
                         .clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = ripple(

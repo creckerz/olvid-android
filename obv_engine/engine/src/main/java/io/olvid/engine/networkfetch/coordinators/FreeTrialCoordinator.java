@@ -30,11 +30,13 @@ import io.olvid.engine.networkfetch.operations.FreeTrialOperation;
 public class FreeTrialCoordinator {
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final OperationQueue freeTrialOperationQueue;
 
-    public FreeTrialCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory) {
+    public FreeTrialCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride) {
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
 
         freeTrialOperationQueue = new OperationQueue(true);
     }
@@ -44,7 +46,7 @@ public class FreeTrialCoordinator {
     }
 
     private void queueNewFreeTrialOperation(Identity ownedIdentity, boolean retrieveApiKey) {
-        FreeTrialOperation op = new FreeTrialOperation(fetchManagerSessionFactory, sslSocketFactory, ownedIdentity, retrieveApiKey);
+        FreeTrialOperation op = new FreeTrialOperation(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, ownedIdentity, retrieveApiKey);
         freeTrialOperationQueue.queue(op);
     }
 

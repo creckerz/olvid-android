@@ -50,6 +50,7 @@ public abstract class ServerMethodForS3 {
     private static final int BLOCK_SIZE = 32_768;
 
     private SSLSocketFactory sslSocketFactory = null;
+    private String userAgentOverride = null;
     private ServerMethodForS3ProgressListener progressListener = null;
     private long progressListenerIntervalMs;
 
@@ -68,8 +69,9 @@ public abstract class ServerMethodForS3 {
         this.progressListener = progressListener;
     }
 
-    public void setSslSocketFactory(SSLSocketFactory sslSocketFactory) {
+    public void setSslSocketFactory(SSLSocketFactory sslSocketFactory, String userAgentOverride) {
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
     }
 
     public byte execute(boolean ownedIdentityIsActive) {
@@ -87,7 +89,7 @@ public abstract class ServerMethodForS3 {
             if (connection instanceof HttpsURLConnection && sslSocketFactory != null) {
                 ((HttpsURLConnection) connection).setSSLSocketFactory(sslSocketFactory);
             }
-            String userAgentProperty = System.getProperty("http.agent");
+            String userAgentProperty = (userAgentOverride != null) ? userAgentOverride : System.getProperty("http.agent");
             if (userAgentProperty != null) {
                 connection.setRequestProperty("User-Agent", userAgentProperty);
             }

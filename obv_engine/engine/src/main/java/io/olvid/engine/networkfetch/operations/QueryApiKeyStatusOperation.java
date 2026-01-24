@@ -38,13 +38,15 @@ public class QueryApiKeyStatusOperation extends Operation {
     private final UUID apiKey;
 
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private ServerSession.ApiKeyStatus apiKeyStatus;
     private List<ServerSession.Permission> permissions;
     private long apiKeyExpirationTimestamp;
 
-    public QueryApiKeyStatusOperation(SSLSocketFactory sslSocketFactory, Identity ownedIdentity, UUID apiKey, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
+    public QueryApiKeyStatusOperation(SSLSocketFactory sslSocketFactory, String userAgentOverride, Identity ownedIdentity, UUID apiKey, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
         super(null, onFinishCallback, onCancelCallback);
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.ownedIdentity = ownedIdentity;
         this.apiKey = apiKey;
     }
@@ -77,7 +79,7 @@ public class QueryApiKeyStatusOperation extends Operation {
     @Override
     public void doExecute() {
         QueryApiKeyStatusServerMethod serverMethod = new QueryApiKeyStatusServerMethod(ownedIdentity, apiKey);
-        serverMethod.setSslSocketFactory(sslSocketFactory);
+        serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
 
         byte returnStatus = serverMethod.execute(true);
 

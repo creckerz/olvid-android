@@ -50,6 +50,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 
@@ -67,7 +68,7 @@ import io.olvid.engine.engine.types.ObvPushNotificationType;
 import io.olvid.engine.engine.types.RegisterApiKeyResult;
 import io.olvid.engine.engine.types.identities.ObvIdentity;
 import io.olvid.engine.engine.types.identities.ObvKeycloakState;
-import io.olvid.messenger.billing.BillingUtils;
+import io.olvid.messenger.billing.SubscriptionRepository;
 import io.olvid.messenger.customClasses.BytesKey;
 import io.olvid.messenger.customClasses.CustomSSLSocketFactory;
 import io.olvid.messenger.customClasses.DatabaseKey;
@@ -80,10 +81,11 @@ import io.olvid.messenger.databases.tasks.OwnedDevicesSynchronisationWithEngineT
 import io.olvid.messenger.databases.tasks.UpdateAllGroupMembersNames;
 import io.olvid.messenger.databases.tasks.backup.RestoreAppDataFromBackupTask;
 import io.olvid.messenger.databases.tasks.migration.SetContactsAndPendingMembersFirstNamesTask;
-import io.olvid.messenger.discussion.compose.ComposeMessageFragment;
+import io.olvid.messenger.discussion.DiscussionActivity;
 import io.olvid.messenger.notifications.AndroidNotificationManager;
 import io.olvid.messenger.openid.KeycloakManager;
 import io.olvid.messenger.services.BackupCloudProviderService;
+import io.olvid.messenger.services.MDMConfigurationSingleton;
 import io.olvid.messenger.services.PeriodicTasksScheduler;
 import io.olvid.messenger.settings.SettingsActivity;
 
@@ -152,8 +154,8 @@ public class AppSingleton {
         if (lastBuildExecuted < 153) {
             // if the user has customized attach icon order, add the emoji icon so they see it
             List<Integer> icons = SettingsActivity.getComposeMessageIconPreferredOrder();
-            if (icons != null && !icons.contains(ComposeMessageFragment.ICON_EMOJI)) {
-                icons.add(0, ComposeMessageFragment.ICON_EMOJI);
+            if (icons != null && !icons.contains(DiscussionActivity.ICON_EMOJI)) {
+                icons.add(0, DiscussionActivity.ICON_EMOJI);
                 SettingsActivity.setComposeMessageIconPreferredOrder(icons);
             }
         }
@@ -184,8 +186,8 @@ public class AppSingleton {
         if (lastBuildExecuted < 229) {
             // if the user has customized attach icon order, add the send location icon so they see it
             List<Integer> icons = SettingsActivity.getComposeMessageIconPreferredOrder();
-            if (icons != null && !icons.contains(ComposeMessageFragment.ICON_SEND_LOCATION)) {
-                icons.add(0, ComposeMessageFragment.ICON_SEND_LOCATION);
+            if (icons != null && !icons.contains(DiscussionActivity.ICON_SEND_LOCATION)) {
+                icons.add(0, DiscussionActivity.ICON_SEND_LOCATION);
                 SettingsActivity.setComposeMessageIconPreferredOrder(icons);
             }
         }
@@ -193,8 +195,8 @@ public class AppSingleton {
         if (lastBuildExecuted < 257) {
             // if the user has customized attach icon order, add the introduce icon so they see it
             List<Integer> icons = SettingsActivity.getComposeMessageIconPreferredOrder();
-            if (icons != null && !icons.contains(ComposeMessageFragment.ICON_INTRODUCE)) {
-                icons.add(icons.size(), ComposeMessageFragment.ICON_INTRODUCE);
+            if (icons != null && !icons.contains(DiscussionActivity.ICON_INTRODUCE)) {
+                icons.add(icons.size(), DiscussionActivity.ICON_INTRODUCE);
                 SettingsActivity.setComposeMessageIconPreferredOrder(icons);
             }
         }
@@ -211,8 +213,8 @@ public class AppSingleton {
         if (lastBuildExecuted < 278) {
             // if the user has customized attach icon order, add the emoji icon so they see it
             List<Integer> icons = SettingsActivity.getComposeMessageIconPreferredOrder();
-            if (icons != null && !icons.contains(ComposeMessageFragment.ICON_ATTACH_POLL)) {
-                icons.add(0, ComposeMessageFragment.ICON_ATTACH_POLL);
+            if (icons != null && !icons.contains(DiscussionActivity.ICON_ATTACH_POLL)) {
+                icons.add(0, DiscussionActivity.ICON_ATTACH_POLL);
                 SettingsActivity.setComposeMessageIconPreferredOrder(icons);
             }
         }
@@ -256,7 +258,12 @@ public class AppSingleton {
         // initialize Engine
         try {
             System.loadLibrary("crypto_3_0");
-            this.engine = new Engine(App.getContext().getNoBackupFilesDir(), new AppBackupAndSyncDelegate(), DatabaseKey.get(DatabaseKey.ENGINE_DATABASE_SECRET), this.sslSocketFactory,
+            this.engine = new Engine(
+                    App.getContext().getNoBackupFilesDir(),
+                    new AppBackupAndSyncDelegate(),
+                    DatabaseKey.get(DatabaseKey.ENGINE_DATABASE_SECRET),
+                    this.sslSocketFactory,
+                    MDMConfigurationSingleton.getUserAgentOverride(),
                     new Logger.LogOutputter() {
                         @Override
                         public void d(String tag, String message) {
@@ -314,12 +321,17 @@ public class AppSingleton {
         availableIdentities = db.ownedIdentityDao().getAllNotHiddenLiveData();
         aNonHiddenIdentityHasCallsPermission = new MediatorLiveData<>();
         Callable<Boolean> computeOtherIdentityHasCallsPermission = () -> {
-            List<OwnedIdentity> ownedIdentities = availableIdentities.getValue();
-            if (ownedIdentities != null) {
-                for (OwnedIdentity ownedIdentity : ownedIdentities) {
-                    if (!Arrays.equals(ownedIdentity.bytesOwnedIdentity, bytesCurrentIdentityLiveData.getValue())
-                            && ownedIdentity.getApiKeyPermissions().contains(EngineAPI.ApiKeyPermission.CALL)) {
-                        return true;
+            byte[] bytesCurrentIdentity = bytesCurrentIdentityLiveData.getValue();
+            if (bytesCurrentIdentity != null) {
+                List<OwnedIdentity> ownedIdentities = availableIdentities.getValue();
+                if (ownedIdentities != null) {
+                    for (OwnedIdentity ownedIdentity : ownedIdentities) {
+                        if (!Arrays.equals(ownedIdentity.bytesOwnedIdentity, bytesCurrentIdentity)
+                                && ownedIdentity.active
+                                && ownedIdentity.getApiKeyPermissions().contains(EngineAPI.ApiKeyPermission.CALL)
+                                && Objects.equals(engine.getServerOfIdentity(ownedIdentity.bytesOwnedIdentity), engine.getServerOfIdentity(bytesCurrentIdentity))) {
+                            return true;
+                        }
                     }
                 }
             }
@@ -612,7 +624,7 @@ public class AppSingleton {
                     }
                 }
                 if (BuildConfig.USE_BILLING_LIB) {
-                    BillingUtils.newIdentityAvailableForSubscription(ownedIdentity.bytesOwnedIdentity);
+                    SubscriptionRepository.INSTANCE.newIdentityAvailableForSubscription(ownedIdentity.bytesOwnedIdentity);
                 }
             } else {
                 instance.deactivatedIdentities.add(new BytesKey(ownedIdentity.bytesOwnedIdentity));
@@ -687,7 +699,7 @@ public class AppSingleton {
                         } while (result == RegisterApiKeyResult.WAIT_FOR_SERVER_SESSION);
                     });
                 } else if (BuildConfig.USE_BILLING_LIB) {
-                    BillingUtils.newIdentityAvailableForSubscription(ownedIdentity.bytesOwnedIdentity);
+                    SubscriptionRepository.INSTANCE.newIdentityAvailableForSubscription(ownedIdentity.bytesOwnedIdentity);
                 }
 
                 if (absolutePhotoUrl != null) {

@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">أنت و [PLACEHOLDER_1] آخر تشاركان موقعكما</item>
 		<item quantity="other" state="needs_review" hash="1789697147">أنت و %1$d آخرون يشاركون موقعهم</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d شهر مجاني</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d أشهر مجانية</item>
+	</plurals>
 </resources>

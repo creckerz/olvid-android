@@ -48,6 +48,7 @@ import io.olvid.messenger.openid.jsons.JsonSearchResponse
 import io.olvid.messenger.openid.jsons.JsonTransferProofRequest
 import io.olvid.messenger.openid.jsons.KeycloakServerRevocationsAndStuff
 import io.olvid.messenger.openid.jsons.KeycloakUserDetailsAndStuff
+import io.olvid.messenger.services.MDMConfigurationSingleton
 import net.openid.appauth.AppAuthConfiguration
 import net.openid.appauth.AuthState
 import net.openid.appauth.AuthState.AuthStateAction
@@ -673,8 +674,7 @@ object KeycloakTasks {
 
         App.runThread {
             try {
-                val input: MutableMap<String?, String?> = HashMap()
-                input.put("nonce", selfRevocationTestNonce)
+                val input: Map<String?, String?> = mapOf("nonce" to selfRevocationTestNonce)
 
                 val bytes = keycloakApiRequest(
                     keycloakServerUrl,
@@ -752,7 +752,7 @@ object KeycloakTasks {
         if (connection is HttpsURLConnection && AppSingleton.getSslSocketFactory() != null) {
             connection.sslSocketFactory = AppSingleton.getSslSocketFactory()
         }
-        val userAgentProperty = System.getProperty("http.agent")
+        val userAgentProperty = MDMConfigurationSingleton.getUserAgentOverride() ?: System.getProperty("http.agent")
         if (userAgentProperty != null) {
             connection.setRequestProperty("User-Agent", userAgentProperty)
         }

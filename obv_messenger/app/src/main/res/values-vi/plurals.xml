@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">Bạn và [PLACEHOLDER_1] người khác đang chia sẻ vị trí của họ</item>
 		<item quantity="other" state="needs_review" hash="1789697147">Bạn và %1$d người khác đang chia sẻ vị trí của họ</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d tháng miễn phí</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d tháng miễn phí</item>
+	</plurals>
 </resources>

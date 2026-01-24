@@ -102,7 +102,10 @@
     <string name="format_identity_details_custom_field">%1$s : %2$s</string>
     <string name="hint_company">Société (facultatif)</string>
     <string name="hint_compose_your_message">Écrire un message</string>
+    <string name="hint_compose_your_message_ephemeral">Message éphémère</string>
     <string name="label_edit_your_message">Modifiez votre message</string>
+    <string name="label_reply_to_x">Réponse à %s</string>
+    <string name="label_reply_to_message">Réponse au message</string>
     <string name="label_selection_formatting">Mise en forme</string>
     <string name="label_selection_code">Code</string>
     <string name="label_selection_list">Liste</string>
@@ -468,7 +471,7 @@
     <string name="menu_action_choose_picture">Choisir une image</string>
     <string name="menu_action_take_photo">Prendre une photo</string>
     <string name="menu_action_remove_image">Supprimer la photo</string>
-    <string name="dialog_title_create_empty_group">Créer un group vide\u00a0?</string>
+    <string name="dialog_title_create_empty_group">Créer un groupe vide\u00a0?</string>
     <string name="dialog_message_create_empty_group">Vous n\'avez sélectionné aucun contact à ajouter à votre groupe. Souhaitez-vous réellement créer un groupe vide\u00a0?</string>
     <string name="pref_dark_mode_title">Thème sombre</string>
     <string name="pref_dark_mode_summary">Activez le thème sombre afin d\'économiser votre batterie ainsi que vos yeux.</string>
@@ -559,6 +562,37 @@
     <string name="dialog_title_webrtc_kick_participant">Exclure un contact de l\'appel\u00a0?</string>
     <string name="webrtc_failed_kicked">Vous avez été exclu de cet appel</string>
     <string name="dialog_title_start_conference_call">Démarrer une conférence téléphonique</string>
+    <string name="olvid_plus_discover">Découvrir Olvid+</string>
+    <string name="olvid_plus_upgrade_title">Passez à Olvid+ pour profiter de l\'expérience complète</string>
+    <string name="olvid_plus_upgrade_renew">Renouvellement automatique à %1$s jusqu\'à annulation.</string>
+    <string name="olvid_plus_tip_multi_device_title">Utilisez Olvid sur tous vos appareils</string>
+    <string name="olvid_plus_tip_multi_device_subtitle">Olvid+ vous permet d\'utiliser Olvid sur vos smartphones et ordinateurs.\nVos messages sont synchronisés entre tous vos appareils pour rester toujours connecté.</string>
+    <string name="olvid_plus_tip_call_title">Appelez en illimité</string>
+    <string name="olvid_plus_tip_call_subtitle">Olvid+ vous permet de passer des appels audio et vidéo chiffrés de bout en bout.\nCommuniquez en toute sécurité avec vos contacts, qu’ils aient Olvid+ ou non.</string>
+    <string name="olvid_plus_tip_support_title">Apportez votre soutien</string>
+    <string name="olvid_plus_tip_support_subtitle">Débloquez le multi-appareils et les appels sécurisés avec Olvid+.\nVotre abonnement soutient un modèle durable et honnête, permettant à Olvid de rester gratuite pour tous, sans publicité ni coût caché.</string>
+    <string name="olvid_plus_offer_multi_device_title">Profitez du multi-appareils</string>
+    <string name="olvid_plus_offer_multi_device_subtitle">Utilisez Olvid sur votre ordinateur. Conservez vos messages.</string>
+    <string name="olvid_plus_offer_call_title">Appelez en illimité</string>
+    <string name="olvid_plus_offer_call_subtitle">Passez des appels audio &amp; video sécurisés avec tous vos contacts.</string>
+    <string name="olvid_plus_offer_support_title">Apportez votre soutien</string>
+    <string name="olvid_plus_offer_support_subtitle">Défendez un modèle durable et honnête, sans exploitation des données personnelles.</string>
+    <string name="olvid_plus_dialog_multi_device_title">Utilisez Olvid sur tous vos appareils</string>
+    <string name="olvid_plus_dialog_multi_device_subtitle">Avec Olvid+, vous pouvez synchroniser vos messages Olvid entre vos smartphones et ordinateurs. Vous êtes toujours joignable !</string>
+    <string name="olvid_plus_dialog_multi_device_subtitle_1">Profitez du confort d\'un clavier, d\'un grand écran et envoyez facilement des fichiers depuis votre ordinateur.</string>
+    <string name="olvid_plus_dialog_multi_device_subtitle_2">Ne perdez jamais vos messages, même en cas de panne ou de vol. Vos messages et pièces jointes sont conservés sur plusieurs appareils.</string>
+    <string name="olvid_plus_dialog_call_title">Appelez de manière illimitée</string>
+    <string name="olvid_plus_dialog_call_subtitle">Avec Olvid+, vous pouvez passer des appels audio et vidéo, à deux ou à plusieurs.</string>
+    <string name="olvid_plus_dialog_call_subtitle_1">Tous vos contacts sont joignables, qu\'ils aient Olvid+ ou non.</string>
+    <string name="olvid_plus_dialog_call_subtitle_2">Une qualité d\'appel optimale, avec le même niveau de sécurité que tous vos échanges Olvid.</string>
+    <string name="olvid_plus_dialog_support_title">Soutenez Olvid, la messagerie privée pour tous</string>
+    <string name="olvid_plus_dialog_support_subtitle">Olvid est une messagerie réellement privée, conçue pour ne jamais avoir accès à la moindre donnée personnelle : ni numéro de téléphone, ni email, ni nom ou prénom.</string>
+    <string name="olvid_plus_dialog_support_subtitle_1">Tout ce que vous échangez reste entre vous et vos contacts. Personne d\'autre.</string>
+    <string name="olvid_plus_dialog_support_subtitle_2">Notre code est open source et fréquemment audité, vous n\'avez pas besoin de nous croire sur parole.</string>
+    <string name="olvid_plus_dialog_support_subtitle_3">Votre abonnement soutient un modèle durable et honnête, permettant à Olvid de rester gratuite pour tous, sans publicité ni coût caché.</string>
+    <string name="label_subscription_offer_save_percent">Économisez %1$d%%</string>
+    <string name="label_subscription_offer_monthly">Mensuel</string>
+    <string name="label_subscription_offer_yearly">Annuel</string>
     <string name="label_subscription_status">Statut de l\'abonnement</string>
     <string name="text_feature_initiate_secure_calls">Émettre des appels sécurisés</string>
     <string name="text_premium_features">Fonctionnalités premiums</string>
@@ -641,7 +675,7 @@
     <string name="text_premium_features_free_trial">Période d\'essai gratuite des fonctionnalités premiums</string>
     <string name="button_label_start_free_trial">Démarrer l\'essai</string>
     <string name="label_free_trial_available">Essai gratuit disponible</string>
-    <string name="label_free_trial_explanation">Testez les appels sécurisés Olvid gratuitement pendant un mois (disponible une seule fois)</string>
+    <string name="label_free_trial_explanation">Essayez les appels sécurisés Olvid gratuitement pendant un mois (disponible une seule fois).</string>
     <string name="toast_message_failed_to_start_free_trial">Échec d\'activation de l\'essai gratuit</string>
     <string name="toast_message_free_trial_started">Essai gratuit démarré</string>
     <string name="toast_message_error_launching_in_app_purchase">Échec d\'initialisation de l\'achat in-app</string>
@@ -649,8 +683,6 @@
     <string name="toast_message_in_app_purchase_successful">Achat in-app réussi</string>
     <string name="button_label_price_per_month">%1$s par mois</string>
     <string name="button_label_price_per_year">%1$s par an</string>
-    <string name="button_label_price_per_month_expanded">%1$s\npar mois</string>
-    <string name="button_label_price_per_year_expanded">%1$s\npar an</string>
     <string name="text_awaiting_subscription_payment">Paiement de l\'abonnement refusé</string>
     <string name="text_subscription_in_grace_period_until">En période de grâce jusqu\'au\u00a0: %1$s</string>
     <string name="text_subscription_on_hold_since">Abonnement en suspens depuis le\u00a0: %1$s</string>
@@ -662,10 +694,8 @@
     <string name="label_failed_to_query_subscription">Impossible de vérifier les options d\'abonnement</string>
     <string name="dialog_title_subscription_required">Abonnement requis</string>
     <string name="button_label_check_subscription">Vérifier votre abonnement</string>
-    <string name="dialog_message_subscription_required_call">L\'émission d\'appels téléphoniques sécurisés avec Olvid nécessite un abonnement.\n\nVous pouvez vérifier le statut de votre abonnement et les options d\'abonnement disponibles depuis la page «\u00a0Mon Profil\u00a0».</string>
-    <string name="dialog_message_subscription_required_web_client">La connexion au client web Olvid nécessite un abonnement.\n\nVous pouvez vérifier le statut de votre abonnement et les options d\'abonnement disponibles depuis la page «\u00a0Mon Profil\u00a0».</string>
-    <string name="dialog_message_subscription_required_multi_device">L\'utilisation simultanée d\'un profil Olvid sur plusieurs appareils nécessite un abonnement.\n\nVous pouvez vérifier le statut de votre abonnement et les options d\'abonnement disponibles depuis la page «\u00a0Mon Profil\u00a0».</string>
-
+    <string name="dialog_message_subscription_required_call">L\'émission d\'appels téléphoniques et vidéo sécurisés avec Olvid nécessite un abonnement.</string>
+    <string name="dialog_title_subscription_plans">Offres d\'abonnement</string>
     <string name="text_ended_on">Terminée depuis le\u00a0: %1$s</string>
     <string name="text_free_trial_ended">Période d\'essai gratuite terminée</string>
     <string name="text_free_trial_expired">Licence d\'essai gratuit expirée</string>
@@ -997,13 +1027,13 @@
     <string name="pref_text_regional_turn_server_paris">Serveurs TURN de Paris</string>
     <string name="pref_text_regional_turn_server_new_york">Serveurs TURN de New-York</string>
     <string name="pref_text_regional_turn_server_singapore">Serveurs TURN de Singapour</string>
-    <string name="dialog_title_android_12_bluetooth_access">Autorisation d\'accés aux appareils bluetooth</string>
-    <string name="dialog_message_android_12_bluetooth_access">Si vous souhaitez utiliser des écouteurs bluetooth pour vos appels Olvid, vous devez autoriser Olvid à détecter et se connecter aux appareils à proximité.</string>
     <string name="text_count_contacts">%1$d contacts</string>
     <string name="text_count_contacts_from_group">%1$d contacts du groupe %2$s</string>
     <string name="dialog_title_outdated_version">Mise à jour requise</string>
     <string name="dialog_message_outdated_version">Votre version d\'Olvid est dépassée et doit être mise à jour.\n\nVous passez probablement à côté de nombreuses nouvelles fonctionnalités et nous ne pouvons pas vous garantir la compatibilité de votre version avec les versions plus récentes utilisées par vos contacts.</string>
     <string name="button_label_remind_me_later">Me le rappeler plus tard</string>
+    <string name="label_remind_me_tonight">Me le rappeler à %1$s ce soir</string>
+    <string name="label_remind_me_tomorrow">Me le rappeler à %1$s demain</string>
     <string name="hint_personal_note">Note personnelle</string>
     <string name="toast_message_unable_to_restore_app_data">ATTENTION\u00a0: certains paramètres de l\'application n\'ont pas pu être restaurés</string>
     <string name="dialog_title_webrtc_permissions_audio_blocked">Autorisations d\'enregistrement audio</string>
@@ -1110,7 +1140,6 @@
     <string name="pref_reload_backup_configuration_title">Relire la configuration des sauvergardes</string>
     <string name="content_description_back_button">Retour</string>
     <string name="content_description_remove_message_reply_to">Enlever le message en réponse</string>
-    <string name="content_description_remove_link_preview">Enlever la prévisualisation du lien</string>
     <string name="content_description_notification_muted_indicator">Indicateur que les notifications sont désactivées pour ce profil</string>
     <string name="button_label_create_a_profile">Créer un profil</string>
     <string name="text_explanation_onboarding_keycloak_parsed_configuration">Le fournisseur d\'identités de votre société a été configuré avec succès. Appuyez sur «\u00a0s\'authentifier\u00a0» ci-dessous pour vous authentifier auprès de ce dernier et récupérer vos informations personnelles.</string>
@@ -1149,14 +1178,11 @@
     <string name="dialog_title_neutral_notification_when_hidden">Afficher une notification neutre quand le profil est masqué</string>
     <string name="dialog_message_neutral_notification_when_hidden">Quand un profil est masqué, à part s\'il est actuellement ouvert dans Olvid, vous ne recevez aucune notification pour les nouveaux messages. Si vous activez cette option, une notification «\u00a0Olvid requiert votre attention\u00a0» s\'affichera. Vous pourrez alors ouvrir Olvid et déverrouiller votre profil masqué pour voir les nouveaux messages.\n\nAttention\u00a0: cela pourrait dévoiler l\'existence d\'un profil masqué.</string>
     <string name="toast_message_password_already_used_other_profile">Erreur\u00a0: ce mot de passe est déjà utilisé par un autre profil</string>
-    <string name="label_configure_shortcuts">Changer l\'ordre des icônes</string>
     <string name="label_attach_file">Joindre des fichiers</string>
     <string name="label_attach_image">Joindre des images</string>
     <string name="label_attach_timer">Message éphémère</string>
     <string name="label_attach_camera">Prendre une photo</string>
     <string name="label_attach_video">Enregistrer une vidéo</string>
-    <string name="dialog_title_choose_icon_order">Choisissez l\'ordre des icônes</string>
-    <string name="label_icons_below_never_shown">Ne jamais afficher les icônes ci-dessous</string>
     <string name="pref_font_scale">Taille de la police</string>
     <string name="pref_text_font_scale_0_75">Minuscule (75\%)</string>
     <string name="pref_text_font_scale_0_9">Petite (90\%)</string>
@@ -1211,7 +1237,6 @@
     <string name="x_reactions_to">%1$d réactions à\u00a0: %2$s</string>
     <string name="notification_text_xx_reacted">%1$s a réagi %2$s</string>
     <string name="label_attach_emoji">Insérer un émoji</string>
-    <string name="label_long_press_for_favorite">Appui long pour ajouter/retirer des favoris</string>
     <string name="menu_action_debug_information">Informations de debug</string>
     <string name="debug_label_number_of_devices">Nombre d\'appareils :</string>
     <string name="debug_label_number_of_devices_no_channel">Sans canal sécurisé :</string>
@@ -1284,8 +1309,6 @@
     <string name="dialog_message_incomplete_attachments">Les messages sélectionnés contiennent des pièces jointes qui n\'ont pas été entièrement téléchargées. Ces messages ne peuvent pas être transférés en l\'état.</string>
     <string name="dialog_message_incomplete_attachments_partial">Certains messages sélectionnés contiennent des pièces jointes qui n\'ont pas été entièrement téléchargées. Ces messages ne peuvent pas être transférés en l\'état.\n\nAppuyez sur «\u00a0Poursuivre\u00a0» pour transférer uniquement les messages qui peuvent l\'être.</string>
     <string name="hint_search_message">Rechercher un message</string>
-    <string name="menu_action_search_prev">Précédent</string>
-    <string name="menu_action_search_next">Suivant</string>
     <string name="pref_manage_cloud_backups_title">Gérer les sauvegardes cloud</string>
     <string name="pref_manage_cloud_backups_summary">Cliquez pour télécharger ou supprimer des sauvegardes cloud.</string>
     <string name="dialog_title_manage_cloud_backups">Sauvegardes cloud</string>
@@ -1480,7 +1503,7 @@
     <string name="text_you_became_admin">Vous êtes maintenant administrateur de ce groupe</string>
     <string name="text_you_are_no_longer_admin">Vous n\'êtes plus administrateur de ce groupe</string>
     <string name="text_you_became_writer">Vous êtes maintenant autorisé à poster des messages</string>
-    <string name="text_you_are_no_longer_writer">Vous ne pouvez plus poster de messages ici</string>
+    <string name="text_you_are_no_longer_writer">Vous ne pouvez pas poster de messages ici</string>
     <string name="label_pending">En attente</string>
     <string name="pref_app_language_title">Langue de l\'application</string>
     <string name="pref_text_default_device_language">Langue par défaut de l\'appareil</string>
@@ -1566,6 +1589,7 @@
     <string name="text_invalid_shortcut">Raccourci invalide</string>
     <string name="text_feature_initiate_secure_calls_from_another_profile">Émettre des appels sécurisés\n(disponible grâce à un autre profil)</string>
     <string name="dialog_title_confirm_open_link">Ouvrir ce lien dans votre navigateur ?</string>
+    <string name="label_open_original_link_with_trackers">Utiliser le lien original contenant des paramètres de suivi</string>
     <string name="dialog_title_confirm_open_olvid_link">Ouvrir ce lien dans Olvid ?</string>
     <string name="toast_message_unable_to_open_url">Impossible d\'ouvrir l\'URL</string>
     <string name="text_explanation_location_map_provider">Choisir un service de cartographie vous permet de sélectionner précisément la position que vous souhaitez partager sur une carte. Toutefois, cela peut divulguer votre position (ou celle de vos contacts) à ce fournisseur de service.</string>
@@ -1576,7 +1600,6 @@
     <string name="label_no_address_found">Aucune adresse trouvée</string>
     <string name="label_zoom_in_for_address">Zoomez pour chercher l\'adresse</string>
     <string name="label_address_lookup_disabled">Recherche d\'adresse désactivée</string>
-    <string name="content_description_cancel_message_edit">Annuler l\'édition de message</string>
     <string name="dialog_title_introducing_mentions">Découvrez les mentions\u00a0!</string>
     <string name="dialog_message_introducing_mentions">Olvid vous permet maintenant de mentionner une personne dans une discussion\u00a0🫵\u00a0! Saisissez simplement @ suivi d\'une lettre de leur nom pour voir qui peut être mentionné.\nPar ailleurs, quand vous passez une discussion ou un profil en silencieux\u00a0💤, vous pouvez choisir de n\'être notifié que si l\'on vous mentionne explicitement dans un message.\n\nNotez que vos contacts devront avoir la dernière version d\'Olvid pour effectivement voir que vous les avez mentionnés.</string>
     <string name="pref_no_notify_certificate_change_for_previews_title">Désactiver les notifications de changement de certificat pour les aperçus de liens</string>
@@ -1736,7 +1759,7 @@
     <string name="troubleshooting_ignored">Ignoré</string>
     <string name="onboarding_transfer_multidevice_purchase_question">Voulez-vous que tous vos appareils restent actifs ?</string>
     <string name="onboarding_transfer_multidevice_purchase_hyperlink">Par ici</string>
-    <string name="button_label_subscribe_now">S\'abonner maintenant</string>
+    <string name="button_label_subscribe_with_price">M\'abonner • %1$s</string>
     <string name="onboarding_transfer_devices_loading_title">Récupération de la liste d\'appareils…</string>
     <string name="dialog_title_introducing_multi_device">Découvrez Olvid Desktop et le multi-apareils !</string>
     <string name="dialog_message_introducing_multi_device">Olvid est maintenant disponible pour **votre ordinateur** (Windows et macOS). Vous pouvez télécharger la dernière version sur :\nhttps://olvid.io/download/\n\nAvec le support du **multi-appareil**, commencez une conversation sur votre téléphone pour la poursuivre sur votre ordinateur. Partager des fichiers entre vos appareils et avec vos contacts n\'a jamais été aussi simple !</string>
@@ -1926,7 +1949,6 @@
     <string name="pref_archived_attachments_summary">Quand cette option est activée, les pieces jointes des discussions archivées seront téléchargées automatiquement selon la configuration ci-dessus.</string>
     <string name="pref_unarchive_on_notification_title">Désarchiver les discussions lors d\'une notification</string>
     <string name="pref_unarchive_on_notification_summary">Quand cette option est activée, une discussion archivée sera automatiquement désarchivée lors de la notification d\'un nouveau message.</string>
-    <string name="call_notification_ongoing_call">Appel en cours</string>
     <string name="call_notification_incoming_call">Appel entrant</string>
     <string name="menu_action_copy_text_from_image">Copier ce mot</string>
     <string name="menu_action_copy_text_block_from_image">Copier le bloc de texte</string>
@@ -2117,4 +2139,8 @@
     <string name="webrtc_status_start_call_timeout">Appareil du correspondant injoignable</string>
     <string name="recreate_all_secure_channels">Recréer tous les canaux sécurisés</string>
     <string name="recreate_all_secure_channels_explanation">Recréer tous les canaux sécurisés forcera Olvid à créer de nouveaux canaux de communication sécurisés avec tous les appareils de vos contacts. Ceci n\'est généralement pas utile, mais peut débloquer de rares situations où certains de ces canaux sont « désynchronisés ».\n\n**Attention :** si vous avez de nombreux contacts, cette opération peut prendre quelques minutes et vous pourriez perdre certains messages reçus pendant qu\'elle s\'exécute.</string>
+    <string name="label_hanged_up">Appel raccroché</string>
+    <string name="store_link_need_licenses">Besoin d\'abonnements pour votre équipe ?</string>
+    <string name="store_link_olvid_store">Visitez le Store Olvid</string>
+    <string name="toast_message_reminder_set">Rappel programmé</string>
 </resources>

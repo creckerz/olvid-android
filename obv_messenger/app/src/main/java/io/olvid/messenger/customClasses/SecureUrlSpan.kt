@@ -19,16 +19,15 @@
 
 package io.olvid.messenger.customClasses
 
-import android.net.Uri
 import android.text.style.URLSpan
 import android.view.View
+import androidx.core.net.toUri
 import io.olvid.messenger.App
 
 class SecureUrlSpan(val url: String) : URLSpan(null) {
     override fun onClick(widget: View) {
-        try {
-            App.openLink(widget.context, Uri.parse(url))
-        } catch (e: Exception) {
+        runCatching {
+            App.openLink(widget.context, url.toUri())
         }
     }
 }

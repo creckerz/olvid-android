@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">Tu și încă [PLACEHOLDER_1] persoană vă împărtășiți locația</item>
 		<item quantity="other" state="needs_review" hash="1789697147">Tu și încă %1$d persoane vă împărtășiți locația</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d lună gratuită</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d luni gratuite</item>
+	</plurals>
 </resources>

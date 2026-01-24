@@ -79,8 +79,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.olvid.messenger.R
 import io.olvid.messenger.customClasses.ifNull
+import io.olvid.messenger.designsystem.constantSp
 import io.olvid.messenger.designsystem.theme.OlvidTypography
-import io.olvid.messenger.discussion.message.attachments.constantSp
 import io.olvid.messenger.settings.BackupsHeader
 import io.olvid.messenger.settings.SettingsActivity
 import io.olvid.messenger.settings.ShowCurrentSeed

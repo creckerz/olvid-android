@@ -1,3 +1,35 @@
+# Build 286 (4.2)
+2026-01-23
+
+- Another round of small fixes
+
+# ~~Build 285 (4.2)~~
+2026-01-20
+
+- Fix search in discussion.
+- Fix an issue with a draft being saved even though the message was actually sent.
+
+# ~~Build 284 (4.2)~~
+2026-01-19
+
+- Update WebRTC to build 7559.
+- Fix a few bugs the redesigned compose area.
+
+# ~~Build 283 (4.2)~~
+2026-01-18
+
+- Rollback Room update because of SQLCipher crash in production.
+
+# ~~Build 282 (4.2)~~
+2026-01-17
+
+- Complete redesign of the message composition area.
+- Offer to clean links from tracking identifiers before opening them.
+- Fix a few dark mode color problems.
+- Fix microphone staying active for a couple of seconds after hanging up.
+- Change the way TURN servers are selected during a call, in preparation for multi-server.
+- Add new tips to present Olvid+ premium features.
+
 # Build 281 (4.1.2)
 2025-11-21
 

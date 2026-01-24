@@ -101,7 +101,9 @@ fun NavGraphBuilder.backupKeyValidation(
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedLabelColor = colorResource(id = R.color.olvid_gradient_contrasted),
                     focusedBorderColor = colorResource(id = R.color.olvid_gradient_contrasted),
-                    cursorColor = colorResource(id = R.color.olvid_gradient_contrasted)
+                    cursorColor = colorResource(id = R.color.olvid_gradient_contrasted),
+                    focusedTextColor = colorResource(R.color.almostBlack),
+                    unfocusedTextColor = colorResource(R.color.almostBlack)
                 )
             )
         }

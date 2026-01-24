@@ -44,14 +44,16 @@ public class RefreshOutboxAttachmentSignedUrlOperation extends Operation {
 
     private final SendManagerSessionFactory sendManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final Identity ownedIdentity;
     private final UID messageUid;
     private final int attachmentNumber;
 
-    public RefreshOutboxAttachmentSignedUrlOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, Identity ownedIdentity, UID messageUid, int attachmentNumber, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
+    public RefreshOutboxAttachmentSignedUrlOperation(SendManagerSessionFactory sendManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, Identity ownedIdentity, UID messageUid, int attachmentNumber, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
         super(OutboxAttachment.computeUniqueUid(ownedIdentity, messageUid, attachmentNumber), onFinishCallback, onCancelCallback);
         this.sendManagerSessionFactory = sendManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.ownedIdentity = ownedIdentity;
         this.messageUid = messageUid;
         this.attachmentNumber = attachmentNumber;
@@ -104,7 +106,7 @@ public class RefreshOutboxAttachmentSignedUrlOperation extends Operation {
                         attachmentNumber,
                         outboxAttachment.getNumberOfChunks()
                 );
-                serverMethod.setSslSocketFactory(sslSocketFactory);
+                serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
 
                 byte returnStatus = serverMethod.execute(sendManagerSession.identityDelegate.isActiveOwnedIdentity(sendManagerSession.session, ownedIdentity));
 

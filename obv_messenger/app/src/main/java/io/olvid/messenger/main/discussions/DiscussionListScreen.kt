@@ -106,12 +106,12 @@ import io.olvid.messenger.databases.entity.Discussion
 import io.olvid.messenger.databases.tasks.PropagatePinnedDiscussionsChangeTask
 import io.olvid.messenger.designsystem.cutoutHorizontalPadding
 import io.olvid.messenger.designsystem.plus
+import io.olvid.messenger.designsystem.scaledDp
 import io.olvid.messenger.designsystem.systemBarsHorizontalPadding
 import io.olvid.messenger.designsystem.theme.OlvidTypography
 import io.olvid.messenger.discussion.linkpreview.LinkPreviewViewModel
 import io.olvid.messenger.discussion.message.OutboundMessageStatus
 import io.olvid.messenger.discussion.message.SwipeForActionBox
-import io.olvid.messenger.discussion.message.attachments.scaledDp
 import io.olvid.messenger.discussion.message.getOutboundStatusIcon
 import io.olvid.messenger.discussion.message.getOutboundStatusIconAspectRation
 import io.olvid.messenger.main.MainActivity
@@ -439,6 +439,7 @@ fun DiscussionListScreen(
                                                         }
                                                     },
                                                     tipToShow = tip,
+                                                    autoOpenOlvidPlusDialog = tipsViewModel.autoOpenOlvidPlusDialog,
                                                     expirationDays = tipsViewModel.deviceExpirationDays,
                                                 )
                                                 Spacer(
@@ -728,6 +729,7 @@ fun DiscussionListScreen(
                                                 }
                                             },
                                             tipToShow = tip,
+                                            autoOpenOlvidPlusDialog = tipsViewModel.autoOpenOlvidPlusDialog,
                                             expirationDays = tipsViewModel.deviceExpirationDays,
                                         )
                                     }

@@ -108,24 +108,24 @@ public class FetchManager implements FetchManagerSessionFactory, NetworkFetchDel
 
     private final HashSet<Identity> ownedIdentitiesUpToDateRegardingServerListing;
 
-    public FetchManager(MetaManager metaManager, SSLSocketFactory sslSocketFactory, String engineBaseDirectory, PRNGService prng, ObjectMapper jsonObjectMapper) {
+    public FetchManager(MetaManager metaManager, SSLSocketFactory sslSocketFactory, String userAgentOverride, String engineBaseDirectory, PRNGService prng, ObjectMapper jsonObjectMapper) {
         this.engineBaseDirectory = engineBaseDirectory;
         this.prng = prng;
-        this.createServerSessionCoordinator = new CreateServerSessionCoordinator(this, sslSocketFactory);
-        this.refreshInboxAttachmentSignedUrlCoordinator = new RefreshInboxAttachmentSignedUrlCoordinator(this, sslSocketFactory);
-        this.downloadAttachmentCoordinator = new DownloadAttachmentCoordinator(this, sslSocketFactory, this.refreshInboxAttachmentSignedUrlCoordinator);
-        this.downloadMessagesAndListAttachmentsCoordinator = new DownloadMessagesAndListAttachmentsCoordinator(this, sslSocketFactory, createServerSessionCoordinator);
-        this.downloadMessageExtendedPayloadCoordinator = new DownloadMessageExtendedPayloadCoordinator(this, sslSocketFactory, createServerSessionCoordinator);
-        this.deleteMessageAndAttachmentsCoordinator = new DeleteMessageAndAttachmentsCoordinator(this, sslSocketFactory, createServerSessionCoordinator);
-        this.registerServerPushNotificationsCoordinator = new RegisterServerPushNotificationsCoordinator(this, sslSocketFactory, createServerSessionCoordinator, downloadMessagesAndListAttachmentsCoordinator);
+        this.createServerSessionCoordinator = new CreateServerSessionCoordinator(this, sslSocketFactory, userAgentOverride);
+        this.refreshInboxAttachmentSignedUrlCoordinator = new RefreshInboxAttachmentSignedUrlCoordinator(this, sslSocketFactory, userAgentOverride);
+        this.downloadAttachmentCoordinator = new DownloadAttachmentCoordinator(this, sslSocketFactory, userAgentOverride, this.refreshInboxAttachmentSignedUrlCoordinator);
+        this.downloadMessagesAndListAttachmentsCoordinator = new DownloadMessagesAndListAttachmentsCoordinator(this, sslSocketFactory, userAgentOverride, createServerSessionCoordinator);
+        this.downloadMessageExtendedPayloadCoordinator = new DownloadMessageExtendedPayloadCoordinator(this, sslSocketFactory, userAgentOverride, createServerSessionCoordinator);
+        this.deleteMessageAndAttachmentsCoordinator = new DeleteMessageAndAttachmentsCoordinator(this, sslSocketFactory, userAgentOverride, createServerSessionCoordinator);
+        this.registerServerPushNotificationsCoordinator = new RegisterServerPushNotificationsCoordinator(this, sslSocketFactory, userAgentOverride, createServerSessionCoordinator, downloadMessagesAndListAttachmentsCoordinator);
         this.downloadMessagesAndListAttachmentsCoordinator.setRegisterServerPushNotificationDelegate(this.registerServerPushNotificationsCoordinator);
-        this.serverUserDataCoordinator = new ServerUserDataCoordinator(this, sslSocketFactory, createServerSessionCoordinator, jsonObjectMapper, prng);
-        this.serverQueryCoordinator = new ServerQueryCoordinator(this, sslSocketFactory, prng, createServerSessionCoordinator, serverUserDataCoordinator, jsonObjectMapper);
-        this.freeTrialCoordinator = new FreeTrialCoordinator(this, sslSocketFactory);
-        this.verifyReceiptCoordinator = new VerifyReceiptCoordinator(this, sslSocketFactory, createServerSessionCoordinator);
-        this.wellKnownCoordinator = new WellKnownCoordinator(this, sslSocketFactory, jsonObjectMapper);
-        this.websocketCoordinator = new WebsocketCoordinator(this, sslSocketFactory, createServerSessionCoordinator, downloadMessagesAndListAttachmentsCoordinator, wellKnownCoordinator, jsonObjectMapper);
-        this.getTurnCredentialsCoordinator = new GetTurnCredentialsCoordinator(this, sslSocketFactory, createServerSessionCoordinator, wellKnownCoordinator);
+        this.serverUserDataCoordinator = new ServerUserDataCoordinator(this, sslSocketFactory, userAgentOverride, createServerSessionCoordinator, jsonObjectMapper, prng);
+        this.serverQueryCoordinator = new ServerQueryCoordinator(this, sslSocketFactory, userAgentOverride, prng, createServerSessionCoordinator, serverUserDataCoordinator, jsonObjectMapper);
+        this.freeTrialCoordinator = new FreeTrialCoordinator(this, sslSocketFactory, userAgentOverride);
+        this.verifyReceiptCoordinator = new VerifyReceiptCoordinator(this, sslSocketFactory, userAgentOverride, createServerSessionCoordinator);
+        this.wellKnownCoordinator = new WellKnownCoordinator(this, sslSocketFactory, userAgentOverride, jsonObjectMapper);
+        this.websocketCoordinator = new WebsocketCoordinator(this, sslSocketFactory, userAgentOverride, createServerSessionCoordinator, downloadMessagesAndListAttachmentsCoordinator, wellKnownCoordinator, jsonObjectMapper);
+        this.getTurnCredentialsCoordinator = new GetTurnCredentialsCoordinator(this, sslSocketFactory, userAgentOverride, createServerSessionCoordinator, wellKnownCoordinator);
 
         ownedIdentitiesUpToDateRegardingServerListing = new HashSet<>();
 
@@ -660,6 +660,14 @@ public class FetchManager implements FetchManagerSessionFactory, NetworkFetchDel
     @Override
     public void getTurnCredentials(Identity ownedIdentity, UUID callUuid, String username1, String username2) {
         getTurnCredentialsCoordinator.getTurnCredentials(ownedIdentity, callUuid, username1, username2);
+    }
+
+    @Override
+    public List<String> getWellKnownTurnServers(Identity ownedIdentity) {
+        try {
+            return wellKnownCoordinator.getTurnUrls(ownedIdentity.getServer());
+        } catch (WellKnownCoordinator.NotCachedException ignored) { }
+        return null;
     }
 
     @Override

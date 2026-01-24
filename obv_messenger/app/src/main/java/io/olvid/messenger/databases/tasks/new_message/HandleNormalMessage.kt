@@ -148,10 +148,6 @@ fun handleNormalMessage(
                     || !SettingsActivity.retainRemoteDeletedMessages) {
                     // no need to create a "remote deleted message"
                     db.remoteDeleteAndEditRequestDao().delete(remoteDeleteAndEditRequest)
-
-                    if (jsonReturnReceipt != null) {
-                        AppSingleton.getEngine().sendReturnReceipt(messageSender.bytesOwnedIdentity, messageSender.senderIdentity, Message.RETURN_RECEIPT_STATUS_DELIVERED, jsonReturnReceipt.nonce, jsonReturnReceipt.key, null)
-                    }
                 } else {
                     // we create a "remote deleted message"
                     val transactionResult: Pair<Long, Boolean> = db.runInTransaction(Callable {
@@ -218,11 +214,6 @@ fun handleNormalMessage(
                     if (message == null) {
                         Logger.w("Failed to insert new message in db.")
                         return HandleMessageOutput.DO_NOTHING
-                    }
-
-                    if (jsonReturnReceipt != null) {
-                        // send DELIVERED return receipt
-                        message.sendMessageReturnReceipt(discussion, Message.RETURN_RECEIPT_STATUS_DELIVERED)
                     }
                 }
             }

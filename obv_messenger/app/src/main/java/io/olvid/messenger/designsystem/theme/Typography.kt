@@ -63,5 +63,11 @@ val OlvidTypography = Typography(
         fontSize = 12.sp,
         lineHeight = 15.sp,
         textDirection = TextDirection.ContentOrLtr
+    ),
+    caption = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 10.sp,
+        lineHeight = 13.sp,
+        textDirection = TextDirection.ContentOrLtr
     )
 )

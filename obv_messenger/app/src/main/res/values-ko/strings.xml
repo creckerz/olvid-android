@@ -101,7 +101,10 @@
 	<string name="format_identity_details_custom_field" state="needs_review" hash="-1073344790">%1$s: %2$s</string>
 	<string name="hint_company" state="needs_review" hash="379200324">회사 (선택 사항)</string>
 	<string name="hint_compose_your_message" state="needs_review" hash="-25761578">메시지 쓰기</string>
+	<string name="hint_compose_your_message_ephemeral" state="needs_review" hash="-1527208333">일회성 메시지</string>
 	<string name="label_edit_your_message" state="needs_review" hash="1091877412">메시지 수정하기</string>
+	<string name="label_reply_to_x" state="needs_review" hash="1941377665">%s에 답장</string>
+	<string name="label_reply_to_message" state="needs_review" hash="1280949769">메시지에 답장</string>
 	<string name="label_selection_formatting" state="needs_review" hash="205892951">서식 지정</string>
 	<string name="label_selection_code" state="needs_review" hash="-803834470">코드</string>
 	<string name="label_selection_list" state="needs_review" hash="762025321">목록</string>
@@ -467,7 +470,7 @@
 	<string name="menu_action_choose_picture" state="needs_review" hash="-1655172909">이미지 선택</string>
 	<string name="menu_action_take_photo" state="needs_review" hash="-1123080444">사진 찍기</string>
 	<string name="menu_action_remove_image" state="needs_review" hash="1094977672">사진 삭제</string>
-	<string name="dialog_title_create_empty_group" state="needs_review" hash="-2016542453">빈 그룹을 만들까요?</string>
+	<string name="dialog_title_create_empty_group" state="needs_review" hash="-663434464">빈 그룹을 만들까요?</string>
 	<string name="dialog_message_create_empty_group" state="needs_review" hash="-297923005">그룹에 추가할 연락처를 선택하지 않았습니다. 빈 그룹을 만들겠습니까?</string>
 	<string name="pref_dark_mode_title" state="needs_review" hash="816474245">다크 모드</string>
 	<string name="pref_dark_mode_summary" state="needs_review" hash="-623740894">배터리와 눈을 보호하기 위해 다크 모드를 활성화하세요.</string>
@@ -558,6 +561,37 @@
 	<string name="dialog_title_webrtc_kick_participant" state="needs_review" hash="389469769">통화에서 연락처 제외하시겠습니까?</string>
 	<string name="webrtc_failed_kicked" state="needs_review" hash="-758835021">이 통화에서 제외되었습니다.</string>
 	<string name="dialog_title_start_conference_call" state="needs_review" hash="-1418585505">컨퍼런스 콜 시작</string>
+	<string name="olvid_plus_discover" state="needs_review" hash="-924831172">Olvid+를 만나보세요</string>
+	<string name="olvid_plus_upgrade_title" state="needs_review" hash="-1960092784">Olvid+로 업그레이드하여 앱의 모든 기능을 경험하세요.</string>
+	<string name="olvid_plus_upgrade_renew" state="needs_review" hash="-4149901">%1$s이(가) 취소될 때까지 자동 갱신됩니다.</string>
+	<string name="olvid_plus_tip_multi_device_title" state="needs_review" hash="481576448">모든 기기에서 Olvid를 사용하세요.</string>
+	<string name="olvid_plus_tip_multi_device_subtitle" state="needs_review" hash="1352342578">Olvid+를 사용하면 스마트폰과 컴퓨터에서 Olvid를 사용할 수 있습니다.\n모든 기기에서 메시지가 동기화되어 항상 연결 상태를 유지할 수 있습니다.</string>
+	<string name="olvid_plus_tip_call_title" state="needs_review" hash="935809736">무제한 통화하기</string>
+	<string name="olvid_plus_tip_call_subtitle" state="needs_review" hash="1137191310">Olvid+를 사용하면 종단 간 암호화된 음성 및 영상 통화를 할 수 있습니다.\nOlvid+ 사용자든 아니든 안전하게 연락할 수 있습니다.</string>
+	<string name="olvid_plus_tip_support_title" state="needs_review" hash="-1930411305">저희 비전을 지지해주세요</string>
+	<string name="olvid_plus_tip_support_subtitle" state="needs_review" hash="-1404875508">Olvid+로 멀티 디바이스 및 보안 통화를 잠금 해제하세요.\n구독을 통해 지속 가능하고 정직한 모델을 지원하며, Olvid는 광고나 숨겨진 비용 없이 모두에게 무료로 제공됩니다.</string>
+	<string name="olvid_plus_offer_multi_device_title" state="needs_review" hash="-623969503">여러 기기에서 Olvid를 사용하세요.</string>
+	<string name="olvid_plus_offer_multi_device_subtitle" state="needs_review" hash="-123640091">컴퓨터에서 Olvid를 사용하세요. 모든 메시지를 안전하게 보관하세요.</string>
+	<string name="olvid_plus_offer_call_title" state="needs_review" hash="935809736">무제한 통화하기</string>
+	<string name="olvid_plus_offer_call_subtitle" state="needs_review" hash="-1827478007">연락처에 있는 누구든 음성 및 영상 통화를 할 수 있습니다.</string>
+	<string name="olvid_plus_offer_support_title" state="needs_review" hash="-1272799411">Olvid를 지원해주세요</string>
+	<string name="olvid_plus_offer_support_subtitle" state="needs_review" hash="841023374">개인의 데이터를 악용하지 않는 지속 가능하고 정직한 모델을 지지합니다.</string>
+	<string name="olvid_plus_dialog_multi_device_title" state="needs_review" hash="561167181">모든 기기에서 Olvid를 사용하세요.</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle" state="needs_review" hash="1178448519">Olvid+를 사용하면 스마트폰과 컴퓨터 간에 Olvid 메시지를 동기화할 수 있습니다. 언제나 연락이 가능합니다!</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_1" state="needs_review" hash="155287050">키보드와 큰 화면의 편리함을 누리고 컴퓨터에서 파일을 쉽게 보내세요.</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_2" state="needs_review" hash="1858309010">기기 고장이나 분실 시에도 메시지를 잃어버릴 염려가 없습니다. 메시지 기록과 첨부 파일은 여러 기기에 안전하게 저장됩니다.</string>
+	<string name="olvid_plus_dialog_call_title" state="needs_review" hash="269811560">무제한 통화하기</string>
+	<string name="olvid_plus_dialog_call_subtitle" state="needs_review" hash="-416813149">Olvid+를 사용하면 일대일 또는 그룹으로 오디오 및 비디오 통화를 할 수 있습니다.</string>
+	<string name="olvid_plus_dialog_call_subtitle_1" state="needs_review" hash="-608348196">Olvid+를 사용하지 않는 연락처도 모두 연결할 수 있습니다.</string>
+	<string name="olvid_plus_dialog_call_subtitle_2" state="needs_review" hash="-1804019862">모든 Olvid 통신과 동일한 보안 수준으로 최적의 통화 품질을 경험하세요.</string>
+	<string name="olvid_plus_dialog_support_title" state="needs_review" hash="1942452361">모두를 위한 개인 메시징 앱 Olvid를 지원해주세요</string>
+	<string name="olvid_plus_dialog_support_subtitle" state="needs_review" hash="2119917538">Olvid은 개인 정보에 접근하지 않고 작동하도록 설계된 진정으로 개인적인 메시징 앱입니다. 전화번호, 이메일 또는 이름이 필요하지 않습니다.</string>
+	<string name="olvid_plus_dialog_support_subtitle_1" state="needs_review" hash="1809563102">귀하가 주고받는 모든 내용은 귀하와 연락처 사이에만 유지됩니다. 다른 사람은 아무도 알 수 없습니다.</string>
+	<string name="olvid_plus_dialog_support_subtitle_2" state="needs_review" hash="-118773166">오픈 소스 코드와 정기적인 감사를 통해, 저희의 말씀을 굳이 믿으실 필요가 없습니다.</string>
+	<string name="olvid_plus_dialog_support_subtitle_3" state="needs_review" hash="-1885036855">구독하시면 모두에게 무료로, 광고 없이, 숨겨진 비용 없이 Olvid를 유지하기 위한 공정하고 지속 가능한 미션을 지원하게 됩니다.</string>
+	<string name="label_subscription_offer_save_percent" state="needs_review" hash="479307719">%1$d%% 절약</string>
+	<string name="label_subscription_offer_monthly" state="needs_review" hash="-1602490190">월간</string>
+	<string name="label_subscription_offer_yearly" state="needs_review" hash="1246240165">연간</string>
 	<string name="label_subscription_status" state="needs_review" hash="1154002053">구독 상태</string>
 	<string name="text_feature_initiate_secure_calls" state="needs_review" hash="1414263062">안전한 통화 시작</string>
 	<string name="text_premium_features" state="needs_review" hash="603728806">프리미엄 기능</string>
@@ -640,7 +674,7 @@
 	<string name="text_premium_features_free_trial" state="needs_review" hash="-1976234715">프리미엄 기능 무료 체험</string>
 	<string name="button_label_start_free_trial" state="needs_review" hash="-508109296">무료 체험 시작</string>
 	<string name="label_free_trial_available" state="needs_review" hash="-995163441">무료 체험 가능</string>
-	<string name="label_free_trial_explanation" state="needs_review" hash="-596460015">Olvid의 보안 통화를 한 달 동안 무료로 사용해 보세요(1회만 가능)</string>
+	<string name="label_free_trial_explanation" state="needs_review" hash="2050354272">한 달 동안 Olvid의 보안 통화를 무료로 사용해 보세요 (단 한 번만 가능합니다).</string>
 	<string name="toast_message_failed_to_start_free_trial" state="needs_review" hash="-1137706906">무료 체험 시작 실패</string>
 	<string name="toast_message_free_trial_started" state="needs_review" hash="1357863164">무료 체험 시작됨</string>
 	<string name="toast_message_error_launching_in_app_purchase" state="needs_review" hash="-1890004340">앱 내 구매 시작 오류</string>
@@ -648,8 +682,6 @@
 	<string name="toast_message_in_app_purchase_successful" state="needs_review" hash="578109721">앱 내 구매가 완료되었습니다.</string>
 	<string name="button_label_price_per_month" state="needs_review" hash="-552222952">월 %1$s</string>
 	<string name="button_label_price_per_year" state="needs_review" hash="1539075788">연간 %1$s</string>
-	<string name="button_label_price_per_month_expanded" state="needs_review" hash="173326792">%1$s\n월별</string>
-	<string name="button_label_price_per_year_expanded" state="needs_review" hash="1947639238">%1$s\n연간</string>
 	<string name="text_awaiting_subscription_payment" state="needs_review" hash="1135205985">구독 결제 거부됨</string>
 	<string name="text_subscription_in_grace_period_until" state="needs_review" hash="-1685522686">유예 기간: %1$s까지</string>
 	<string name="text_subscription_on_hold_since" state="needs_review" hash="-515586151">구독이 %1$s부터 일시 중단되었습니다.</string>
@@ -661,9 +693,8 @@
 	<string name="label_failed_to_query_subscription" state="needs_review" hash="-1677001973">구독 플랜 쿼리에 실패했습니다.</string>
 	<string name="dialog_title_subscription_required" state="needs_review" hash="-2038592214">구독이 필요합니다</string>
 	<string name="button_label_check_subscription" state="needs_review" hash="-378220336">구독 상태 확인</string>
-	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1662886051">Olvid를 통해 보안 전화 통화를 시작하려면 구독이 필요합니다.\n\n현재 구독 상태와 이용 가능한 구독 플랜은 "내 프로필" 페이지에서 확인할 수 있습니다.</string>
-	<string name="dialog_message_subscription_required_web_client" state="needs_review" hash="-760629168">Olvid 웹 클라이언트에 연결하려면 구독이 필요합니다.\n\n현재 구독 상태를 확인하고 "내 프로필" 페이지에서 사용 가능한 구독 계획을 확인할 수 있습니다.</string>
-	<string name="dialog_message_subscription_required_multi_device" state="needs_review" hash="-1326423501">Olvid 프로필을 여러 기기에서 동시에 사용하려면 구독이 필요합니다.\n\n현재 구독 상태와 이용 가능한 구독 플랜은 "내 프로필" 페이지에서 확인할 수 있습니다.</string>
+	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1231676488">Olvid를 통한 보안 전화 및 영상 통화 시작하려면 구독이 필요합니다.</string>
+	<string name="dialog_title_subscription_plans" state="needs_review" hash="-456474468">구독 요금제</string>
 	<string name="text_ended_on" state="needs_review" hash="1280012933">%1$s에 종료됨</string>
 	<string name="text_free_trial_ended" state="needs_review" hash="-1458860892">무료 체험 기간이 종료되었습니다</string>
 	<string name="text_free_trial_expired" state="needs_review" hash="-2049452081">무료 체험 라이선스 만료</string>
@@ -995,13 +1026,13 @@
 	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">파리 TURN 서버</string>
 	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">뉴욕 TURN 서버</string>
 	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">싱가포르 TURN 서버</string>
-	<string name="dialog_title_android_12_bluetooth_access" state="needs_review" hash="-2140389265">Bluetooth 장치 액세스 권한을 요청합니다.</string>
-	<string name="dialog_message_android_12_bluetooth_access" state="needs_review" hash="-332888756">Olvid 통화에 블루투스 헤드셋을 사용하려면 Olvid가 근처 장치를 "찾고 연결"하도록 허용해야 합니다.</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d개의 연락처</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">그룹 %2$s에는 %1$d개의 연락처가 있습니다.</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">업데이트 필요</string>
 	<string name="dialog_message_outdated_version" state="needs_review" hash="488074151">Olvid 버전이 오래되었습니다. 업데이트가 필요합니다.\n\n많은 새로운 기능을 놓치고 있을 수 있으며, 연락처가 사용하는 최신 버전과의 호환성을 보장할 수 없습니다.</string>
 	<string name="button_label_remind_me_later" state="needs_review" hash="-713293818">나중에 알려줘</string>
+	<string name="label_remind_me_tonight" state="needs_review" hash="707009828">오늘 밤 %1$s에 알려줘</string>
+	<string name="label_remind_me_tomorrow" state="needs_review" hash="1904419307">내일 %1$s에 다시 알려줘</string>
 	<string name="hint_personal_note" state="needs_review" hash="-368244163">개인 메모</string>
 	<string name="toast_message_unable_to_restore_app_data" state="needs_review" hash="1602628680">경고: 일부 애플리케이션 사용자 설정을 복원할 수 없습니다.</string>
 	<string name="dialog_title_webrtc_permissions_audio_blocked" state="needs_review" hash="1948829165">오디오 녹음 권한이 거부되었습니다</string>
@@ -1108,7 +1139,6 @@
 	<string name="pref_reload_backup_configuration_title" state="needs_review" hash="2000428891">백업 구성 다시 로드</string>
 	<string name="content_description_back_button" state="needs_review" hash="48196338">뒤로</string>
 	<string name="content_description_remove_message_reply_to" state="needs_review" hash="-794585802">답장 메시지 삭제</string>
-	<string name="content_description_remove_link_preview" state="needs_review" hash="-1085272528">링크 미리보기를 지우세요</string>
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">이 프로필의 알림이 음소거되었음을 나타내는 표시</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">프로필 만들기</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">귀사의 신원 제공업체가 성공적으로 구성되었습니다. 아래의 "인증" 버튼을 눌러 인증하고 개인 정보를 검색하십시오.</string>
@@ -1148,14 +1178,11 @@
 	<string name="dialog_title_neutral_notification_when_hidden" state="needs_review" hash="2013281962">프로필이 숨겨져 있을 때 중립적인 알림 표시</string>
 	<string name="dialog_message_neutral_notification_when_hidden" state="needs_review" hash="-58494752">프로필이 숨겨져 있는 경우, Olvid에서 현재 열려 있지 않으면 새 메시지에 대한 알림을 받지 않습니다. 이 옵션을 활성화하면 "Olvid에서 주의가 필요합니다" 알림이 표시됩니다. 그런 다음 Olvid를 열고 숨겨진 프로필의 잠금을 해제하여 새 메시지를 볼 수 있습니다.\n\n경고: 이렇게 하면 실제로 숨겨진 프로필이 있다는 사실이 드러날 수 있습니다.</string>
 	<string name="toast_message_password_already_used_other_profile" state="needs_review" hash="390904904">오류: 이 비밀번호는 다른 숨겨진 프로필에서 이미 사용 중입니다.</string>
-	<string name="label_configure_shortcuts" state="needs_review" hash="-857125506">아이콘 순서 변경</string>
 	<string name="label_attach_file" state="needs_review" hash="-89285310">파일 첨부</string>
 	<string name="label_attach_image" state="needs_review" hash="-1185400308">이미지 첨부</string>
 	<string name="label_attach_timer" state="needs_review" hash="-1527208333">일회성 메시지</string>
 	<string name="label_attach_camera" state="needs_review" hash="-1123080444">사진 찍기</string>
 	<string name="label_attach_video" state="needs_review" hash="1626268086">비디오 녹화</string>
-	<string name="dialog_title_choose_icon_order" state="needs_review" hash="856935796">첨부 파일 아이콘 우선순위 선택</string>
-	<string name="label_icons_below_never_shown" state="needs_review" hash="1250704267">이 줄 아래의 아이콘은 절대 표시되지 않습니다.</string>
 	<string name="pref_font_scale" state="needs_review" hash="1773040591">글꼴 크기</string>
 	<string name="pref_text_font_scale_0_75" state="needs_review" hash="-1963894407">아주 작음 (75%)</string>
 	<string name="pref_text_font_scale_0_9" state="needs_review" hash="-708054676">작음 (90%)</string>
@@ -1210,7 +1237,6 @@
 	<string name="x_reactions_to" state="needs_review" hash="177752739">%2$s에 대한 %1$d개의 반응</string>
 	<string name="notification_text_xx_reacted" state="needs_review" hash="647790513">%1$s님이 %2$s에 반응했습니다</string>
 	<string name="label_attach_emoji" state="needs_review" hash="-1842205895">이모지 삽입</string>
-	<string name="label_long_press_for_favorite" state="needs_review" hash="1284446174">즐겨찾기에 추가/제거하려면 길게 누르세요</string>
 	<string name="menu_action_debug_information" state="needs_review" hash="-919213138">디버그 정보</string>
 	<string name="debug_label_number_of_devices" state="needs_review" hash="1662862352">기기 수:</string>
 	<string name="debug_label_number_of_devices_no_channel" state="needs_review" hash="808299225">안전 채널 없이:</string>
@@ -1283,8 +1309,6 @@
 	<string name="dialog_message_incomplete_attachments" state="needs_review" hash="1179188058">선택한 메시지에는 완전히 다운로드되지 않은 첨부 파일이 포함되어 있습니다. 다운로드가 완료될 때까지 이러한 메시지를 전달할 수 없습니다.</string>
 	<string name="dialog_message_incomplete_attachments_partial" state="needs_review" hash="1274554335">선택한 메시지 중에는 완전히 다운로드되지 않은 첨부 파일이 포함되어 있습니다. 다운로드가 완료될 때까지 이러한 메시지를 전달할 수 없습니다.\n\n전달 가능한 메시지만 전달하려면 "계속"을 누르세요.</string>
 	<string name="hint_search_message" state="needs_review" hash="1630003450">메시지 검색</string>
-	<string name="menu_action_search_prev" state="needs_review" hash="-1639666563">이전</string>
-	<string name="menu_action_search_next" state="needs_review" hash="1158639077">다음</string>
 	<string name="pref_manage_cloud_backups_title" state="needs_review" hash="824115345">클라우드 백업 관리</string>
 	<string name="pref_manage_cloud_backups_summary" state="needs_review" hash="-161789549">클라우드 백업을 다운로드하거나 삭제하려면 클릭하세요.</string>
 	<string name="dialog_title_manage_cloud_backups" state="needs_review" hash="-1825078945">클라우드 백업</string>
@@ -1485,7 +1509,7 @@
 	<string name="text_you_became_admin" state="needs_review" hash="2137006821">이제 그룹 관리자가 되었습니다.</string>
 	<string name="text_you_are_no_longer_admin" state="needs_review" hash="1766709431">더 이상 그룹 관리자가 아닙니다</string>
 	<string name="text_you_became_writer" state="needs_review" hash="-1671425999">이제 메시지 게시가 가능합니다</string>
-	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-762273585">더 이상 여기에 메시지를 게시할 수 없습니다</string>
+	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-930933808">여기서는 메시지를 보낼 수 없습니다.</string>
 	<string name="label_pending" state="needs_review" hash="1975294811">보류 중</string>
 	<string name="pref_app_language_title" state="needs_review" hash="-1748962099">앱 언어</string>
 	<string name="pref_text_default_device_language" state="needs_review" hash="-1062620207">기본 장치 언어</string>
@@ -1571,6 +1595,7 @@
 	<string name="text_invalid_shortcut" state="needs_review" hash="-1219107750">잘못된 바로가기</string>
 	<string name="text_feature_initiate_secure_calls_from_another_profile" state="needs_review" hash="271258252">안전한 통화 시작\n(다른 프로필을 통해 가능)</string>
 	<string name="dialog_title_confirm_open_link" state="needs_review" hash="46935087">이 링크를 브라우저에서 열까요?</string>
+	<string name="label_open_original_link_with_trackers" state="needs_review" hash="-1586932660">추적 매개변수가 포함된 원본 링크 사용</string>
 	<string name="dialog_title_confirm_open_olvid_link" state="needs_review" hash="425949498">이 링크를 Olvid에서 열까요?</string>
 	<string name="toast_message_unable_to_open_url" state="needs_review" hash="-1486954792">URL을 열 수 없습니다</string>
 	<string name="text_explanation_location_map_provider" state="needs_review" hash="-173394547">지도 제공업체를 선택하면 지도에서 공유하려는 위치를 정확하게 선택할 수 있습니다. 그러나 이로 인해 귀하의 위치(또는 연락처의 위치)가 해당 서비스 제공업체에 공개될 수 있습니다.</string>
@@ -1581,7 +1606,6 @@
 	<string name="label_no_address_found" state="needs_review" hash="1035554993">주소를 찾을 수 없습니다</string>
 	<string name="label_zoom_in_for_address" state="needs_review" hash="902696925">주소 검색을 위해 확대</string>
 	<string name="label_address_lookup_disabled" state="needs_review" hash="-2140124686">주소 검색 기능이 비활성화되었습니다.</string>
-	<string name="content_description_cancel_message_edit" state="needs_review" hash="984163129">메시지 편집 취소</string>
 	<string name="dialog_title_introducing_mentions" state="needs_review" hash="-1741341288">사용자 멘션 소개!</string>
 	<string name="dialog_message_introducing_mentions" state="needs_review" hash="622739087">이제 Olvid를 사용하면 토론에서 사용자를 멘션할 수 있습니다 🫵! @ 뒤에 문자나 이름을 입력하면 누가 멘션될 수 있는지 확인할 수 있습니다.\n또한 대화나 프로필을 음소거할 때 💤, 메시지에서 명시적으로 멘션될 때만 알림을 받도록 선택할 수 있습니다.\n\n연락처가 귀하를 멘션했는지 확인하려면 최신 버전의 Olvid로 업데이트해야 합니다.</string>
 	<string name="pref_no_notify_certificate_change_for_previews_title" state="needs_review" hash="-434788963">링크 미리보기의 인증서 변경 알림 끄기</string>
@@ -1740,7 +1764,7 @@
 	<string name="troubleshooting_ignored" state="needs_review" hash="816017832">무시됨</string>
 	<string name="onboarding_transfer_multidevice_purchase_question" state="needs_review" hash="351030441">모든 기기를 활성 상태로 유지하시겠습니까?</string>
 	<string name="onboarding_transfer_multidevice_purchase_hyperlink" state="needs_review" hash="747183939">이쪽으로</string>
-	<string name="button_label_subscribe_now" state="needs_review" hash="1805105542">지금 구독하기</string>
+	<string name="button_label_subscribe_with_price" state="needs_review" hash="324675175">구독하기 • %1$s</string>
 	<string name="onboarding_transfer_devices_loading_title" state="needs_review" hash="801961341">기기 목록을 가져오는 중…</string>
 	<string name="dialog_title_introducing_multi_device" state="needs_review" hash="-310103349">Olvid Desktop 및 멀티 디바이스를 소개합니다!</string>
 	<string name="dialog_message_introducing_multi_device" state="needs_review" hash="-153162506">Olvid가 **컴퓨터** (Windows 및 macOS)에서 사용 가능하게 되었습니다. 최신 버전은 다음에서 다운로드할 수 있습니다:\nhttps://olvid.io/download/\n\n**멀티 디바이스** 지원을 통해 휴대폰에서 대화를 시작하고 컴퓨터에서 계속할 수 있습니다. 장치 간 및 연락처와의 파일 공유가 그 어느 때보다 쉬워졌습니다!</string>
@@ -1930,7 +1954,6 @@
 	<string name="pref_archived_attachments_summary" state="needs_review" hash="1596754073">이 옵션을 켜면 보관된 대화의 첨부 파일이 위의 설정에 따라 자동으로 다운로드됩니다.</string>
 	<string name="pref_unarchive_on_notification_title" state="needs_review" hash="-1146947153">알림 시 대화 보관 해제</string>
 	<string name="pref_unarchive_on_notification_summary" state="needs_review" hash="778062251">이 기능이 켜져 있으면 새 메시지 알림을 받으면 보관된 대화가 자동으로 보관 해제됩니다.</string>
-	<string name="call_notification_ongoing_call" state="needs_review" hash="1828207822">통화 중</string>
 	<string name="call_notification_incoming_call" state="needs_review" hash="-1223043344">수신 전화</string>
 	<string name="menu_action_copy_text_from_image" state="needs_review" hash="-1072685983">이 단어를 복사하세요</string>
 	<string name="menu_action_copy_text_block_from_image" state="needs_review" hash="1436026569">전체 블록 복사</string>
@@ -2121,4 +2144,8 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">상대방 기기에 연결할 수 없습니다.</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">모든 보안 채널을 다시 생성합니다.</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">모든 보안 채널을 재구성하면 Olvid가 연락처의 모든 기기와 새로운 보안 통신 채널을 생성하도록 강제합니다. 일반적으로 유용하지 않지만, 일부 채널이 \"동기화되지 않은\" 드문 상황을 해결할 수 있습니다.\n\n**경고:** 연락처가 많을 경우 이 작업은 몇 분이 걸릴 수 있으며, 작업 중 일부 수신 메시지를 놓칠 수 있습니다.</string>
+	<string name="label_hanged_up" state="needs_review" hash="-1516413384">통화가 종료되었습니다.</string>
+	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">팀을 위한 구독이 필요하신가요?</string>
+	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Olvid 스토어 방문하기</string>
+	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">알림 설정 완료</string>
 </resources>

@@ -43,7 +43,7 @@ public final class JsonStartCallMessage extends JsonWebrtcProtocolMessage {
     public byte[] groupId;
     public byte[] groupV2Identifier;
     public Integer rawGatheringPolicy;
-
+    public boolean batchIceSupported;
 
     @SuppressWarnings("unused")
     public JsonStartCallMessage() {
@@ -66,6 +66,7 @@ public final class JsonStartCallMessage extends JsonWebrtcProtocolMessage {
                 this.rawGatheringPolicy = 2;
                 break;
         }
+        this.batchIceSupported = true;
     }
 
     @JsonProperty("sdt")
@@ -166,6 +167,16 @@ public final class JsonStartCallMessage extends JsonWebrtcProtocolMessage {
     @JsonProperty("gp")
     public void setRawGatheringPolicy(Integer rawGatheringPolicy) {
         this.rawGatheringPolicy = rawGatheringPolicy;
+    }
+
+    @JsonProperty("bi")
+    public boolean isBatchIceSupported() {
+        return batchIceSupported;
+    }
+
+    @JsonProperty("bi")
+    public void setBatchIceSupported(boolean batchIceSupported) {
+        this.batchIceSupported = batchIceSupported;
     }
 
     @JsonIgnore

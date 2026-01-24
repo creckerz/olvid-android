@@ -26,7 +26,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.widget.Toast
-import androidx.annotation.ColorInt
+import androidx.activity.compose.LocalActivity
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -41,14 +41,16 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -70,7 +72,6 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.util.fastFirstOrNull
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.core.net.toUri
@@ -80,6 +81,7 @@ import io.olvid.messenger.App
 import io.olvid.messenger.AppSingleton
 import io.olvid.messenger.BuildConfig
 import io.olvid.messenger.R
+import io.olvid.messenger.billing.SubscriptionOfferDialog
 import io.olvid.messenger.customClasses.AccessibilityManager
 import io.olvid.messenger.customClasses.BytesKey
 import io.olvid.messenger.customClasses.formatMarkdown
@@ -99,9 +101,18 @@ import io.olvid.messenger.troubleshooting.TroubleshootingActivity
 fun TipItem(
     refreshTipState: () -> Unit,
     tipToShow: Tip,
+    autoOpenOlvidPlusDialog: MutableState<Boolean> = mutableStateOf(false),
     expirationDays: Int = 0,
 ) {
     val context = LocalContext.current
+    val activity = LocalActivity.current
+    var showOlvidPlus by rememberSaveable { mutableStateOf(autoOpenOlvidPlusDialog.value) }
+
+    LaunchedEffect(autoOpenOlvidPlusDialog.value) {
+        if (autoOpenOlvidPlusDialog.value) {
+            showOlvidPlus = true
+        }
+    }
 
     when (tipToShow) {
         Tip.CONFIGURE_BACKUPS -> {
@@ -130,6 +141,7 @@ fun TipItem(
                 message = R.string.tip_write_backup_key_message,
                 action = R.string.button_label_show_my_backup_key,
                 onAction = {
+                    @Suppress("AssignedValueIsNeverRead")
                     showSeed = true
                 },
             ) {
@@ -137,6 +149,7 @@ fun TipItem(
                     if (showSeed) {
                         Dialog(
                             onDismissRequest = {
+                                @Suppress("AssignedValueIsNeverRead")
                                 showSeed = false
                             },
                             properties = DialogProperties(
@@ -150,6 +163,7 @@ fun TipItem(
                                     .clip(RoundedCornerShape(16.dp))
                                     .background(colorResource(R.color.dialogBackground))
                             ) {
+                                val copiedToClipboardString = stringResource(R.string.label_text_copied_from_olvid)
                                 ShowCurrentSeed(
                                     backupSeed = backupSeed,
                                     savedInPasswordManager = SettingsActivity.useCredentialsManagerForBackups,
@@ -160,7 +174,7 @@ fun TipItem(
                                             val clipboard =
                                                 context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
                                             val clip = ClipData.newPlainText(
-                                                context.getString(R.string.label_text_copied_from_olvid),
+                                                copiedToClipboardString,
                                                 backupSeed
                                             )
                                             if (clipboard != null) {
@@ -175,6 +189,7 @@ fun TipItem(
                                     },
                                     onClose = {
                                         refreshTipState()
+                                        @Suppress("AssignedValueIsNeverRead")
                                         showSeed = false
                                     },
                                 )
@@ -229,7 +244,11 @@ fun TipItem(
             TipBubble(
                 icon = R.drawable.ic_device,
                 title = R.string.tip_expiring_device_title,
-                messageString = pluralStringResource(R.plurals.tip_expiring_device_message, expirationDays, expirationDays),
+                messageString = pluralStringResource(
+                    R.plurals.tip_expiring_device_message,
+                    expirationDays,
+                    expirationDays
+                ),
                 action = R.string.tip_expiring_device_action,
                 onAction = {
                     App.openCurrentOwnedIdentityDetails(context)
@@ -270,6 +289,7 @@ fun TipItem(
                     )
                 refreshTipState()
             }
+
             var rating by rememberSaveable { mutableIntStateOf(-1) }
             TipBubble(
                 icon = R.drawable.ic_star,
@@ -280,9 +300,10 @@ fun TipItem(
                     refreshTipState()
                 }
             ) {
-                StarRatingBar(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 8.dp)
+                StarRatingBar(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp)
                 ) { newRating ->
                     rating = newRating
                 }
@@ -328,6 +349,7 @@ fun TipItem(
                                     style = OlvidTypography.body2,
                                     color = colorResource(R.color.greyTint),
                                 )
+                                val ratingEmailSubject = stringResource(R.string.tip_playstore_email_subject, rating)
                                 OlvidTextButton(
                                     modifier = Modifier
                                         .padding(bottom = 4.dp)
@@ -335,9 +357,9 @@ fun TipItem(
                                     text = stringResource(R.string.button_label_send_us_a_mail),
                                     onClick = {
                                         try {
-                                            val subject = context.getString(R.string.tip_playstore_email_subject, rating)
                                             val intent = Intent(Intent.ACTION_VIEW)
-                                            intent.data = "mailto:feedback@olvid.io?subject=${subject}".toUri()
+                                            intent.data =
+                                                "mailto:feedback@olvid.io?subject=$ratingEmailSubject".toUri()
                                             context.startActivity(intent)
                                         } catch (e: Exception) {
                                             Logger.x(e)
@@ -438,9 +460,19 @@ fun TipItem(
                 action = R.string.menu_check_update,
                 onAction = {
                     try {
-                        context.startActivity(Intent(Intent.ACTION_VIEW, "market://details?id=${context.packageName}".toUri()))
+                        context.startActivity(
+                            Intent(
+                                Intent.ACTION_VIEW,
+                                "market://details?id=${context.packageName}".toUri()
+                            )
+                        )
                     } catch (_: Exception) {
-                        context.startActivity(Intent(Intent.ACTION_VIEW, "https://play.google.com/store/apps/details?id=${context.packageName}".toUri()))
+                        context.startActivity(
+                            Intent(
+                                Intent.ACTION_VIEW,
+                                "https://play.google.com/store/apps/details?id=${context.packageName}".toUri()
+                            )
+                        )
                     }
                 }
             )
@@ -454,9 +486,19 @@ fun TipItem(
                 action = R.string.menu_check_update,
                 onAction = {
                     try {
-                        context.startActivity(Intent(Intent.ACTION_VIEW, "market://details?id=${context.packageName}".toUri()))
+                        context.startActivity(
+                            Intent(
+                                Intent.ACTION_VIEW,
+                                "market://details?id=${context.packageName}".toUri()
+                            )
+                        )
                     } catch (_: Exception) {
-                        context.startActivity(Intent(Intent.ACTION_VIEW, "https://play.google.com/store/apps/details?id=${context.packageName}".toUri()))
+                        context.startActivity(
+                            Intent(
+                                Intent.ACTION_VIEW,
+                                "https://play.google.com/store/apps/details?id=${context.packageName}".toUri()
+                            )
+                        )
                     }
                 },
                 onDismiss = {
@@ -497,6 +539,74 @@ fun TipItem(
                 )
             }
         }
+
+        Tip.OLVID_PLUS_MULTIDEVICE -> {
+            TipBubble(
+                icon = R.drawable.olvid_plus_multi_device,
+                title = R.string.olvid_plus_tip_multi_device_title,
+                messageString = stringResource(R.string.olvid_plus_tip_multi_device_subtitle),
+                backgroundTint = R.color.pink,
+                action = R.string.olvid_plus_discover,
+                onAction = {
+                    showOlvidPlus = true
+                },
+                onDismiss = {
+                    SettingsActivity.lastOlvidPlusTipTimestamp = System.currentTimeMillis()
+                    refreshTipState()
+                }
+            )
+        }
+
+        Tip.OLVID_PLUS_CALL -> {
+            TipBubble(
+                icon = R.drawable.olvid_plus_call,
+                title = R.string.olvid_plus_tip_call_title,
+                messageString = stringResource(R.string.olvid_plus_tip_call_subtitle),
+                action = R.string.olvid_plus_discover,
+                backgroundTint = R.color.orange,
+                onAction = {
+                    showOlvidPlus = true
+                },
+                onDismiss = {
+                    SettingsActivity.lastOlvidPlusTipTimestamp = System.currentTimeMillis()
+                    refreshTipState()
+                }
+            )
+        }
+
+        Tip.OLVID_PLUS_SUPPORT -> {
+            TipBubble(
+                icon = R.drawable.olvid_plus_support,
+                title = R.string.olvid_plus_tip_support_title,
+                messageString = stringResource(R.string.olvid_plus_tip_support_subtitle),
+                action = R.string.olvid_plus_discover,
+                backgroundTint = R.color.red,
+                onAction = {
+                    showOlvidPlus = true
+                },
+                onDismiss = {
+                    SettingsActivity.lastOlvidPlusTipTimestamp = System.currentTimeMillis()
+                    refreshTipState()
+                }
+            )
+        }
+    }
+    if (showOlvidPlus) {
+        SubscriptionOfferDialog(
+            activity = activity,
+            onDismissCallback = {
+                @Suppress("AssignedValueIsNeverRead")
+                showOlvidPlus = false
+                autoOpenOlvidPlusDialog.value = false
+                refreshTipState()
+            },
+            onPurchaseCallback = {
+                @Suppress("AssignedValueIsNeverRead")
+                showOlvidPlus = false
+                autoOpenOlvidPlusDialog.value = false
+                refreshTipState()
+            }
+        )
     }
 }
 
@@ -504,6 +614,7 @@ fun TipItem(
 private fun TipBubble(
     @StringRes title: Int,
     @ColorRes tint: Int = R.color.olvid_gradient_light,
+    @ColorRes backgroundTint: Int? = null,
     @StringRes message: Int? = null,
     messageString: String? = null,
     @StringRes action: Int? = null,
@@ -521,27 +632,35 @@ private fun TipBubble(
             .background(colorResource(R.color.lighterGrey))
             .border(
                 width = 1.dp,
-                brush =  Brush.linearGradient(
+                brush = Brush.linearGradient(
                     colors = listOf(
-                        colorResource(tint),
+                        colorResource(backgroundTint ?: tint),
                         Color.Transparent,
                     ),
-                    end = Offset( 150f, 100f)
+                    end = Offset(150f, 100f)
                 ),
                 shape = RoundedCornerShape(12.dp)
             ),
         horizontalAlignment = Alignment.End,
     ) {
         Row(
-            modifier = Modifier.padding(top = 8.dp, start = 8.dp, end = 8.dp),
             verticalAlignment = Alignment.Top,
             horizontalArrangement = spacedBy(8.dp)
         ) {
             icon?.let {
                 Icon(
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier
+                        .padding(start = 8.dp, top = 8.dp)
+                        .size(24.dp).then(
+                        backgroundTint?.let { tint ->
+                            Modifier.background(
+                                color = colorResource(id = tint),
+                                shape = CircleShape,
+                            )
+                        } ?: Modifier
+                    ),
                     painter = painterResource(it),
-                    tint = colorResource(tint),
+                    tint = colorResource(backgroundTint?.let { R.color.alwaysWhite} ?: tint),
                     contentDescription = null,
                 )
             }
@@ -551,11 +670,10 @@ private fun TipBubble(
             ) {
                 Row(
                     verticalAlignment = Alignment.Top,
-                    horizontalArrangement = spacedBy(8.dp),
                 ) {
                     Text(
                         modifier = Modifier
-                            .padding(top = 2.dp, bottom = 8.dp)
+                            .padding(top = 10.dp, bottom = 8.dp, end = 8.dp)
                             .weight(1f, true),
                         text = stringResource(title),
                         style = OlvidTypography.body1.copy(
@@ -566,8 +684,7 @@ private fun TipBubble(
                     onDismiss?.let {
                         IconButton(
                             modifier = Modifier
-                                .size(40.dp)
-                                .offset(x = 8.dp, y = (-8).dp),
+                                .size(40.dp),
                             onClick = it,
                         ) {
                             Icon(
@@ -581,13 +698,13 @@ private fun TipBubble(
 
                 (message?.let { stringResource(message) } ?: messageString)
                     ?.let {
-                    Text(
-                        modifier = Modifier.padding(bottom = 8.dp),
-                        text = AnnotatedString(it).formatMarkdown(),
-                        style = OlvidTypography.body2,
-                        color = colorResource(R.color.greyTint),
-                    )
-                }
+                        Text(
+                            modifier = Modifier.padding(bottom = 8.dp, end = 8.dp),
+                            text = AnnotatedString(it).formatMarkdown(),
+                            style = OlvidTypography.body2,
+                            color = colorResource(R.color.greyTint),
+                        )
+                    }
             }
         }
         action?.let {
@@ -600,7 +717,7 @@ private fun TipBubble(
                 onClick = { onAction?.invoke() }
             )
         }
-        content?.let{
+        content?.let {
             content()
         }
     }
@@ -638,5 +755,16 @@ private fun TipPreview2() {
 //        TipItem(refreshTipState = {}, tipToShow = Tip.AUTHENTICATION_REQUIRED)
         TipItem(refreshTipState = {}, tipToShow = Tip.PROMPT_FOR_READ_RECEIPTS)
         TipItem(refreshTipState = {}, tipToShow = Tip.PLAY_STORE_REVIEW)
+    }
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun TipPreviewOlvidPlus() {
+    Column {
+        TipItem(refreshTipState = {}, tipToShow = Tip.OLVID_PLUS_MULTIDEVICE)
+        TipItem(refreshTipState = {}, tipToShow = Tip.OLVID_PLUS_CALL)
+        TipItem(refreshTipState = {}, tipToShow = Tip.OLVID_PLUS_SUPPORT)
     }
 }

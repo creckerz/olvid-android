@@ -21,6 +21,7 @@ package io.olvid.messenger.billing
 
 import android.content.Intent
 import android.content.res.Configuration
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -35,6 +36,10 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -48,7 +53,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
-import androidx.lifecycle.viewmodel.compose.viewModel
 import io.olvid.engine.engine.types.EngineAPI
 import io.olvid.messenger.R
 import io.olvid.messenger.customClasses.StringUtils
@@ -59,7 +63,6 @@ import io.olvid.messenger.designsystem.components.OlvidTextButton
 fun SubscriptionStatusScreen(
     modifier: Modifier = Modifier,
     contentPadding: Dp = 0.dp,
-    viewModel: SubscriptionPurchaseViewModel,
     apiKeyStatus: EngineAPI.ApiKeyStatus?,
     apiKeyExpirationTimestamp: Long?,
     apiKeyPermissions: List<EngineAPI.ApiKeyPermission?>,
@@ -68,6 +71,8 @@ fun SubscriptionStatusScreen(
     anotherIdentityHasCallsPermission: Boolean,
 ) {
     val context = LocalContext.current
+    val activity = LocalActivity.current
+    var showSubscriptionPlans by rememberSaveable { mutableStateOf(false) }
     Column(
         modifier = modifier
             .background(
@@ -77,12 +82,13 @@ fun SubscriptionStatusScreen(
             .padding(contentPadding)
     ) {
         SubscriptionStatusHeader(
-            viewModel = viewModel,
             apiKeyStatus = apiKeyStatus,
             apiKeyExpirationTimestamp = apiKeyExpirationTimestamp,
             licenseQuery = licenseQuery,
             showInAppPurchase = showInAppPurchase,
-            onSubscribeClicked = { viewModel.showSubscriptionPlans = true },
+            onSubscribeClicked = {
+                showSubscriptionPlans = true
+            },
             onFixPaymentClicked = {
                 context.startActivity(
                     Intent(
@@ -93,14 +99,12 @@ fun SubscriptionStatusScreen(
             }
         )
 
-        if (viewModel.showSubscriptionPlans) {
-            Spacer(modifier = Modifier.height(4.dp))
-            SubscriptionPurchaseScreen(viewModel = viewModel)
-        }
-
         if (!licenseQuery) {
             FreeFeatures()
-            HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp), color = colorResource(R.color.lightGrey))
+            HorizontalDivider(
+                modifier = Modifier.padding(vertical = 4.dp),
+                color = colorResource(R.color.lightGrey)
+            )
         }
 
 
@@ -109,11 +113,17 @@ fun SubscriptionStatusScreen(
             anotherIdentityHasCallsPermission = anotherIdentityHasCallsPermission
         )
     }
+    if (showSubscriptionPlans) {
+        SubscriptionOfferDialog(
+            activity = activity,
+            onDismissCallback = { showSubscriptionPlans = false },
+            onPurchaseCallback = { showSubscriptionPlans = false },
+        )
+    }
 }
 
 @Composable
 fun SubscriptionStatusHeader(
-    viewModel: SubscriptionPurchaseViewModel,
     apiKeyStatus: EngineAPI.ApiKeyStatus?,
     apiKeyExpirationTimestamp: Long?,
     licenseQuery: Boolean,
@@ -247,8 +257,11 @@ fun SubscriptionStatusHeader(
     expirationText?.let {
         Text(text = it, fontSize = 12.sp, color = colorResource(id = R.color.greyTint))
     }
-    HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp), color = colorResource(R.color.lightGrey))
-    if (showSubscribeButton && viewModel.showSubscriptionPlans.not()) {
+    HorizontalDivider(
+        modifier = Modifier.padding(vertical = 4.dp),
+        color = colorResource(R.color.lightGrey)
+    )
+    if (showSubscribeButton) {
         OlvidActionButton(
             modifier = Modifier
                 .fillMaxWidth()
@@ -267,7 +280,10 @@ fun SubscriptionStatusHeader(
 @Composable
 fun UpdatePaymentMethod(onUpdatePaymentClicked: () -> Unit) {
     Column(modifier = Modifier.padding(top = 4.dp)) {
-        HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp), color = colorResource(R.color.lightGrey))
+        HorizontalDivider(
+            modifier = Modifier.padding(vertical = 4.dp),
+            color = colorResource(R.color.lightGrey)
+        )
         Row(
             modifier = Modifier.padding(top = 4.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -404,7 +420,6 @@ fun FeatureItem(
 @Composable
 private fun SubscriptionStatusScreenPreview() {
     SubscriptionStatusScreen(
-        viewModel = viewModel(),
         apiKeyStatus = EngineAPI.ApiKeyStatus.VALID,
         apiKeyExpirationTimestamp = System.currentTimeMillis(),
         apiKeyPermissions = emptyList(),

@@ -42,15 +42,18 @@ public class StandaloneServerQueryOperation extends Operation {
 
     private final ServerQuery serverQuery;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
+
     private Encoded serverResponse; // will be set if the operation finishes normally
 
     public Encoded getServerResponse() {
         return serverResponse;
     }
 
-    public StandaloneServerQueryOperation(ServerQuery serverQuery, SSLSocketFactory sslSocketFactory) {
+    public StandaloneServerQueryOperation(ServerQuery serverQuery, SSLSocketFactory sslSocketFactory, String userAgentOverride) {
         this.serverQuery = serverQuery;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
     }
 
     @Override
@@ -120,7 +123,7 @@ public class StandaloneServerQueryOperation extends Operation {
                 }
             }
 
-            serverMethod.setSslSocketFactory(sslSocketFactory);
+            serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
             byte returnStatus = serverMethod.execute(true);
             Logger.d("?? Server query return status (after parse): " + returnStatus);
 

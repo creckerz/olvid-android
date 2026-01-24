@@ -48,7 +48,7 @@ fun OlvidDropdownMenu(
     expanded: Boolean,
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
-    offset: DpOffset = DpOffset(0.dp, 0.dp),
+    offset: DpOffset = DpOffset.Zero,
     scrollState: ScrollState = rememberScrollState(),
     shape: Shape = RoundedCornerShape(8.dp),
     containerColor: Color = colorResource(R.color.dialogBackground),

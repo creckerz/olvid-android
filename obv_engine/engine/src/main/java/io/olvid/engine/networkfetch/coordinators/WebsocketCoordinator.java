@@ -82,8 +82,6 @@ import okio.ByteString;
 public class WebsocketCoordinator implements Operation.OnCancelCallback {
 
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
-    @SuppressWarnings({"FieldCanBeLocal", "unused"})
-    private final SSLSocketFactory sslSocketFactory;
     private final CreateServerSessionDelegate createServerSessionDelegate;
     private final DownloadMessagesAndListAttachmentsDelegate downloadMessagesAndListAttachmentsDelegate;
     private final WellKnownCacheDelegate wellKnownCacheDelegate;
@@ -124,12 +122,12 @@ public class WebsocketCoordinator implements Operation.OnCancelCallback {
 
     public WebsocketCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory,
                                 SSLSocketFactory sslSocketFactory,
+                                String userAgentOverride,
                                 CreateServerSessionDelegate createServerSessionDelegate,
                                 DownloadMessagesAndListAttachmentsDelegate downloadMessagesAndListAttachmentsDelegate,
                                 WellKnownCacheDelegate wellKnownCacheDelegate,
                                 ObjectMapper jsonObjectMapper) {
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
-        this.sslSocketFactory = sslSocketFactory;
         this.createServerSessionDelegate = createServerSessionDelegate;
         this.downloadMessagesAndListAttachmentsDelegate = downloadMessagesAndListAttachmentsDelegate;
         this.wellKnownCacheDelegate = wellKnownCacheDelegate;
@@ -162,15 +160,29 @@ public class WebsocketCoordinator implements Operation.OnCancelCallback {
         ownedIdentityServerSessionTokens = new HashMap<>();
         existingWebsockets = new HashMap<>();
 
-        okHttpClient = initializeOkHttpClientForWebSocket(sslSocketFactory);
+        okHttpClient = initializeOkHttpClientForWebSocket(sslSocketFactory, userAgentOverride);
     }
+
+    long lastSleepDetectorTaskTimestamp = 0;
+    Runnable sleepDetectorTask = () -> {
+        long timestamp = System.currentTimeMillis();
+        if (lastSleepDetectorTaskTimestamp != 0) {
+            if (timestamp - lastSleepDetectorTaskTimestamp > Constants.WEBSOCKET_SLEEP_DETECTION_THRESHOLD_MILLIS) {
+                Logger.w("💤 Sleep detected: " + (timestamp - lastSleepDetectorTaskTimestamp) + " -> reconnecting WebSockets.");
+                resetWebsockets();
+            }
+        }
+        lastSleepDetectorTaskTimestamp = timestamp;
+    };
 
     public void startProcessing() {
         websocketCreationOperationQueue.execute(1, "Engine-WebsocketCoordinator-create");
         identityRegistrationOperationQueue.execute(1, "Engine-WebsocketCoordinator-register");
+
+        scheduler.schedulePeriodically("💤 sleep detection",  sleepDetectorTask, "timer task", Constants.WEBSOCKET_SLEEP_DETECTION_INTERVAL_MILLIS);
     }
 
-    public static OkHttpClient initializeOkHttpClientForWebSocket(SSLSocketFactory sslSocketFactory) {
+    public static OkHttpClient initializeOkHttpClientForWebSocket(SSLSocketFactory sslSocketFactory, String userAgentOverride) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         if (sslSocketFactory != null) {
             try {
@@ -190,7 +202,7 @@ public class WebsocketCoordinator implements Operation.OnCancelCallback {
             }
         }
 
-        String userAgentProperty = System.getProperty("http.agent");
+        String userAgentProperty = (userAgentOverride != null) ? userAgentOverride : System.getProperty("http.agent");
         if (userAgentProperty != null) {
             builder.addInterceptor(
                     (Interceptor.Chain chain) -> chain.proceed(chain.request().newBuilder().header("User-Agent", userAgentProperty).build())

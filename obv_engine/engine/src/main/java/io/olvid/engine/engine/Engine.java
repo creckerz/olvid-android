@@ -45,8 +45,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javax.net.ssl.SSLSocketFactory;
@@ -155,6 +155,7 @@ public class Engine implements UserInterfaceDialogListener, EngineSessionFactory
     @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private final String dbKey;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final CreateSessionDelegate createSessionDelegate;
     private final ObvBackupAndSyncDelegate appBackupAndSyncDelegate;
 
@@ -169,11 +170,11 @@ public class Engine implements UserInterfaceDialogListener, EngineSessionFactory
 
     // endregion
 
-    public Engine(File baseDirectory, ObvBackupAndSyncDelegate appBackupAndSyncDelegate, String dbKey, SSLSocketFactory sslSocketFactory, Logger.LogOutputter logOutputter, int logLevel) throws Exception {
+    public Engine(File baseDirectory, ObvBackupAndSyncDelegate appBackupAndSyncDelegate, String dbKey, SSLSocketFactory sslSocketFactory, String userAgentOverride, Logger.LogOutputter logOutputter, int logLevel) throws Exception {
         instanceCounter = 0;
         listeners = new HashMap<>();
         listenersLock = new ReentrantLock();
-        notificationQueue = new ArrayBlockingQueue<>(5_000);
+        notificationQueue = new LinkedBlockingDeque<>(100_000);
         notificationWorker = new NotificationWorker();
 
         Logger.setOutputter(logOutputter);
@@ -192,6 +193,7 @@ public class Engine implements UserInterfaceDialogListener, EngineSessionFactory
         this.dbPath = new File(baseDirectory, Constants.ENGINE_DB_FILENAME).getPath();
         this.dbKey = dbKey;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.appBackupAndSyncDelegate = appBackupAndSyncDelegate;
 
         File inboundAttachmentDirectory = new File(baseDirectory, Constants.INBOUND_ATTACHMENTS_DIRECTORY);
@@ -301,11 +303,11 @@ public class Engine implements UserInterfaceDialogListener, EngineSessionFactory
 
         this.channelManager = new ChannelManager(metaManager);
         this.identityManager = new IdentityManager(metaManager, baseDirectoryPath, jsonObjectMapper, prng);
-        this.fetchManager = new FetchManager(metaManager, sslSocketFactory, baseDirectoryPath, prng, jsonObjectMapper);
-        this.sendManager = new SendManager(metaManager, sslSocketFactory, baseDirectoryPath, prng);
+        this.fetchManager = new FetchManager(metaManager, sslSocketFactory, userAgentOverride, baseDirectoryPath, prng, jsonObjectMapper);
+        this.sendManager = new SendManager(metaManager, sslSocketFactory, userAgentOverride, baseDirectoryPath, prng);
         this.notificationManager = new NotificationManager(metaManager);
         this.protocolManager = new ProtocolManager(metaManager, appBackupAndSyncDelegate, baseDirectoryPath, prng, jsonObjectMapper);
-        this.backupManager = new BackupManager(metaManager, appBackupAndSyncDelegate, sslSocketFactory, prng, jsonObjectMapper);
+        this.backupManager = new BackupManager(metaManager, appBackupAndSyncDelegate, sslSocketFactory, userAgentOverride, prng, jsonObjectMapper);
 
         registerToInternalNotifications();
         initializationComplete();
@@ -817,7 +819,7 @@ public class Engine implements UserInterfaceDialogListener, EngineSessionFactory
                 return RegisterApiKeyResult.WAIT_FOR_SERVER_SESSION;
             }
 
-            StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, ownedIdentity, new ServerQuery.RegisterApiKeyQuery(ownedIdentity, serverSessionToken, Logger.getUuidString(apiKey))), sslSocketFactory);
+            StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, ownedIdentity, new ServerQuery.RegisterApiKeyQuery(ownedIdentity, serverSessionToken, Logger.getUuidString(apiKey))), sslSocketFactory, userAgentOverride);
 
             OperationQueue queue = new OperationQueue();
             queue.queue(standaloneServerQueryOperation);
@@ -1237,7 +1239,7 @@ public class Engine implements UserInterfaceDialogListener, EngineSessionFactory
         try (EngineSession engineSession = getSession()) {
             Identity ownedIdentity = Identity.of(bytesOwnedIdentity);
 
-            StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, ownedIdentity, new ServerQuery.OwnedDeviceDiscoveryQuery(ownedIdentity)), sslSocketFactory);
+            StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, ownedIdentity, new ServerQuery.OwnedDeviceDiscoveryQuery(ownedIdentity)), sslSocketFactory, userAgentOverride);
 
             OperationQueue queue = new OperationQueue();
             queue.queue(standaloneServerQueryOperation);
@@ -2617,7 +2619,7 @@ public class Engine implements UserInterfaceDialogListener, EngineSessionFactory
         UID label = new UID(photoLabel);
         AuthEncKey authEncKey = (AuthEncKey) new Encoded(photoKey).decodeSymmetricKey();
 
-        StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2DownloadProfilePictureQuery(identity, label, authEncKey)), sslSocketFactory);
+        StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2DownloadProfilePictureQuery(identity, label, authEncKey)), sslSocketFactory, userAgentOverride);
 
         OperationQueue queue = new OperationQueue();
         queue.queue(standaloneServerQueryOperation);
@@ -2790,6 +2792,17 @@ public class Engine implements UserInterfaceDialogListener, EngineSessionFactory
         } catch (DecodingException e) {
             Logger.x(e);
         }
+    }
+
+    @Override
+    public List<String> getWellKnownTurnServers(byte[] bytesOwnedIdentity) {
+        try {
+            Identity ownedIdentity = Identity.of(bytesOwnedIdentity);
+            return fetchManager.getWellKnownTurnServers(ownedIdentity);
+        } catch (DecodingException e) {
+            Logger.x(e);
+        }
+        return null;
     }
 
     @Override

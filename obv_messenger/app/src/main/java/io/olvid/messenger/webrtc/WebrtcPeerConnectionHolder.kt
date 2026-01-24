@@ -25,7 +25,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import io.olvid.engine.Logger
 import io.olvid.messenger.App
-import io.olvid.messenger.BuildConfig
 import io.olvid.messenger.services.MDMConfigurationSingleton
 import io.olvid.messenger.settings.SettingsActivity
 import io.olvid.messenger.webrtc.WebrtcCallService.CallParticipant
@@ -96,6 +95,7 @@ import java.nio.ByteBuffer
 import java.nio.charset.StandardCharsets
 import java.util.Timer
 import java.util.regex.Pattern
+import kotlin.concurrent.schedule
 import kotlin.concurrent.timer
 import kotlin.text.RegexOption.MULTILINE
 
@@ -107,10 +107,12 @@ class WebrtcPeerConnectionHolder(
     private val sessionDescriptionObserver = SessionDescriptionObserver()
     private var peerSessionDescriptionType: String? = null
     private var peerSessionDescription: String? = null
+    private var supportsIceBatch: Boolean = false
     private var reconnectOfferCounter = 0
     private var reconnectAnswerCounter = 0
     private var turnUsername: String? = null
     private var turnPassword: String? = null
+    private var turnServers: List<String>? = null
     private var gatheringPolicy: GatheringPolicy
     private var readyToProcessPeerIceCandidates = false
     private val pendingPeerIceCandidates: MutableList<JsonIceCandidate>
@@ -123,9 +125,9 @@ class WebrtcPeerConnectionHolder(
     var dataChannelMessageListener: DataChannelMessageListener? = null
 
     private var audioReceiver: RtpReceiver? = null
-    private var peerAudioLevelListener: Timer? = null
+    private var timer: Timer? = null
 
-    private var renegociationNeededQueued: Boolean = false
+    private var renegotiationNeededQueued: Boolean = false
     var peerAudioLevel by mutableDoubleStateOf(0.0)
         private set
 
@@ -136,19 +138,18 @@ class WebrtcPeerConnectionHolder(
         const val VIDEO_STREAM_ID = "video"
         const val SCREENCAST_STREAM_ID = "screencast"
 
-        private val TURN_SCALED_SERVERS: List<String> = BuildConfig.TURN_SERVERS.toMutableList()
-        private val TURN_SCALED_SERVERS_EU: List<String> = BuildConfig.TURN_SERVERS_EU.toMutableList()
-        private val TURN_SCALED_SERVERS_US: List<String> = BuildConfig.TURN_SERVERS_US.toMutableList()
-        private val TURN_SCALED_SERVERS_AP: List<String> = BuildConfig.TURN_SERVERS_AP.toMutableList()
         private val AUDIO_CODECS: Set<String> =
             HashSet(mutableListOf("opus", "PCMU", "PCMA", "telephone-event", "red"))
         private const val ADDITIONAL_OPUS_OPTIONS =
             ";cbr=1" // by default send and receive are mono, no need to add "stereo=0;sprop-stereo=0"
+
         private const val FIELD_TRIAL_INTEL_VP8 = "WebRTC-IntelVP8/Enabled/"
         private const val FIELD_TRIAL_H264_HIGH_PROFILE = "WebRTC-H264HighProfile/Enabled/"
         private const val FIELD_TRIAL_H264_SIMULCAST = "WebRTC-H264Simulcast/Enabled/"
         private const val FIELD_TRIAL_FLEX_FEC =
             "WebRTC-FlexFEC-03/Enabled/WebRTC-FlexFEC-03-Advertised/Enabled/"
+
+
         var eglBase: EglBase? = null
         var peerConnectionFactory: PeerConnectionFactory? = null
         var audioDeviceModule: AudioDeviceModule? = null
@@ -213,15 +214,8 @@ class WebrtcPeerConnectionHolder(
             screenShareVideoSource = peerConnectionFactory?.createVideoSource(true)
         }
 
-        private fun getIceServer(username: String?, password: String?): IceServer {
-            val servers: List<String> = when (SettingsActivity.scaledTurn) {
-                "par" -> TURN_SCALED_SERVERS_EU
-                "nyc" -> TURN_SCALED_SERVERS_US
-                "sng" -> TURN_SCALED_SERVERS_AP
-                "global" -> TURN_SCALED_SERVERS
-                else -> TURN_SCALED_SERVERS
-            }
-            return IceServer.builder(servers)
+        private fun getIceServer(username: String?, password: String?, turnServers: List<String>): IceServer {
+            return IceServer.builder(turnServers)
                 .setUsername(username)
                 .setPassword(password)
                 // Well, let's encrypt root is not correctly recognized by libwebrtc and there is no way to override the root CAs, so we disable certificate check...
@@ -267,16 +261,22 @@ class WebrtcPeerConnectionHolder(
         }
     }
 
+    init {
+        timer = Timer("PeerConnectionTimer-${Logger.toHexString(callParticipant.bytesContactIdentity).substring(0..<8)}")
+    }
+
     fun setAudioEnabled(enabled: Boolean) {
         audioTrack?.setEnabled(enabled)
     }
 
-    fun setTurnCredentials(turnUsername: String?, turnPassword: String?) {
+    fun setTurnCredentials(turnUsername: String?, turnPassword: String?, turnServers: List<String>) {
         this.turnUsername = turnUsername
         this.turnPassword = turnPassword
+        this.turnServers = turnServers
     }
 
-    fun setPeerSessionDescription(sessionDescriptionType: String?, sessionDescription: String) {
+    fun setPeerSessionDescription(sessionDescriptionType: String?, sessionDescription: String, supportsIceBatch: Boolean) {
+        this.supportsIceBatch = supportsIceBatch
         if (peerConnection == null) {
             Logger.d("☎ Setting peer sdp\n$sessionDescription")
             peerSessionDescriptionType = sessionDescriptionType
@@ -304,8 +304,12 @@ class WebrtcPeerConnectionHolder(
             )
         }
         pendingPeerIceCandidates.clear()
-        for (jsonIceCandidate in pendingIceCandidatesToSend) {
-            webrtcCallService.sendAddIceCandidateMessage(callParticipant, jsonIceCandidate)
+        if (supportsIceBatch && pendingIceCandidatesToSend.isNotEmpty()) {
+            webrtcCallService.sendAddIceCandidateMessage(callParticipant, pendingIceCandidatesToSend.toList())
+        } else {
+            for (jsonIceCandidate in pendingIceCandidatesToSend) {
+                webrtcCallService.sendAddIceCandidateMessage(callParticipant, listOf(jsonIceCandidate))
+            }
         }
         pendingIceCandidatesToSend.clear()
     }
@@ -355,21 +359,19 @@ class WebrtcPeerConnectionHolder(
     }
 
     private fun startPeerAudioLevelListener() {
-        if (peerAudioLevelListener == null) {
-            peerAudioLevelListener = timer(period = 200) {
-                runCatching {
-                    peerConnection?.getStats(
-                        audioReceiver
-                    ) { report ->
-                        (report.statsMap.values.find { it.type == "inbound-rtp" }?.members?.getOrDefault(
-                            "audioLevel",
-                            null
-                        ) as? Double)?.let {
-                            peerAudioLevel = it
-                        }
+        timer?.schedule(delay = 200, period = 200) {
+            runCatching {
+                peerConnection?.getStats(
+                    audioReceiver
+                ) { report ->
+                    (report.statsMap.values.find { it.type == "inbound-rtp" }?.members?.getOrDefault(
+                        "audioLevel",
+                        null
+                    ) as? Double)?.let {
+                        peerAudioLevel = it
                     }
-                }.onFailure { cancel() }
-            }
+                }
+            }.onFailure { timer?.cancel() }
         }
     }
 
@@ -390,7 +392,6 @@ class WebrtcPeerConnectionHolder(
         }
         localVideoTrack?.let {
             try {
-                it.setEnabled(true)
                 if (videoSender != null) {
                     videoSender?.setTrack(localVideoTrack, false)
                 } else {
@@ -421,7 +422,6 @@ class WebrtcPeerConnectionHolder(
         }
         localScreenTrack?.let {
             try {
-                it.setEnabled(true)
                 if (screenSender != null) {
                     screenSender?.setTrack(localScreenTrack, false)
                 } else {
@@ -463,7 +463,7 @@ class WebrtcPeerConnectionHolder(
 
     // returns true if the peer connection was successfully created
     fun createPeerConnection(): Boolean {
-        val iceServer = getIceServer(turnUsername, turnPassword)
+        val iceServer = getIceServer(turnUsername, turnPassword, turnServers ?: emptyList())
         val configuration = RTCConfiguration(mutableListOf(iceServer).apply {
             getMdMIceServer()?.let {
                 add(it)
@@ -592,7 +592,7 @@ class WebrtcPeerConnectionHolder(
                         )
                     )
 
-                    if (shouldCreateLocalDescription && !renegociationNeededQueued) {
+                    if (shouldCreateLocalDescription && !renegotiationNeededQueued) {
                         createLocalDescription("[set remote offer when stable]")
                     }
                 }
@@ -797,8 +797,8 @@ class WebrtcPeerConnectionHolder(
     }
 
     fun cleanUp() {
-        peerAudioLevelListener?.cancel()
-        peerAudioLevelListener = null
+        timer?.cancel()
+        timer = null
         audioTrack?.setEnabled(false)
         dataChannel?.dispose()
         dataChannel = null
@@ -927,7 +927,20 @@ class WebrtcPeerConnectionHolder(
                         )
                         webrtcCallService.execute {
                             if (readyToProcessPeerIceCandidates) {
-                                webrtcCallService.sendAddIceCandidateMessage(callParticipant, jsonIceCandidate)
+                                if (supportsIceBatch) {
+                                    if (pendingIceCandidatesToSend.isEmpty()) {
+                                        // we are starting a new batch, start a timer before sending
+                                        timer?.schedule(delay = 200) {
+                                            webrtcCallService.execute {
+                                                webrtcCallService.sendAddIceCandidateMessage(callParticipant, pendingIceCandidatesToSend.toList())
+                                                pendingIceCandidatesToSend.clear()
+                                            }
+                                        }
+                                    }
+                                    pendingIceCandidatesToSend.add(jsonIceCandidate)
+                                } else {
+                                    webrtcCallService.sendAddIceCandidateMessage(callParticipant, listOf(jsonIceCandidate))
+                                }
                             } else {
                                 pendingIceCandidatesToSend.add(jsonIceCandidate)
                             }
@@ -980,9 +993,9 @@ class WebrtcPeerConnectionHolder(
         override fun onRenegotiationNeeded() {
             // called whenever a peerConnection is created, a track is added, or after a restartICE. May not be called if a negotiation is already in progress
             Logger.d("☎ onRenegotiationNeeded")
-            renegociationNeededQueued = true
+            renegotiationNeededQueued = true
             webrtcCallService.synchronizeOnExecutor {
-                renegociationNeededQueued = false
+                renegotiationNeededQueued = false
                 createLocalDescription("[onRenegotiationNeeded]")
             }
         }

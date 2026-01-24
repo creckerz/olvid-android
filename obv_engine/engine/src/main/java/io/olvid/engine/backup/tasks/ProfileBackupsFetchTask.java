@@ -61,13 +61,16 @@ public class ProfileBackupsFetchTask {
     private final BackupSeed profileBackupSeed;
     private final BackupManagerSessionFactory backupManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
+
     private ObvProfileBackupsForRestore obvProfileBackupsForRestore;
 
-    public ProfileBackupsFetchTask(String server, BackupSeed profileBackupSeed, BackupManagerSessionFactory backupManagerSessionFactory, SSLSocketFactory sslSocketFactory) {
+    public ProfileBackupsFetchTask(String server, BackupSeed profileBackupSeed, BackupManagerSessionFactory backupManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride) {
         this.server = server;
         this.profileBackupSeed = profileBackupSeed;
         this.backupManagerSessionFactory = backupManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
     }
 
     public BackupTaskStatus execute() {
@@ -75,7 +78,7 @@ public class ProfileBackupsFetchTask {
 
         ///////
         // 1. list profile backups
-        StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2ListBackupsQuery(server, derivedKeysV2.backupKeyUid)), sslSocketFactory);
+        StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2ListBackupsQuery(server, derivedKeysV2.backupKeyUid)), sslSocketFactory, userAgentOverride);
         OperationQueue queue = new OperationQueue();
         queue.queue(standaloneServerQueryOperation);
         queue.execute(1, "Engine-ProfileBackupsFetchTask");
@@ -228,7 +231,7 @@ public class ProfileBackupsFetchTask {
                 Identity identity = Identity.of(bytesIdentity);
                 EncryptionPrivateKey privateKey = (EncryptionPrivateKey) new Encoded(privateIdentity.encryption_private_key).decodePrivateKey();
 
-                standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, identity, new ServerQuery.OwnedDeviceDiscoveryQuery(identity)), sslSocketFactory);
+                standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, identity, new ServerQuery.OwnedDeviceDiscoveryQuery(identity)), sslSocketFactory, userAgentOverride);
 
                 queue = new OperationQueue();
                 queue.queue(standaloneServerQueryOperation);

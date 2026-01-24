@@ -21,7 +21,6 @@ package io.olvid.messenger.discussion.message
 
 import android.content.Context
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,7 +31,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -53,16 +51,15 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.themeadapter.appcompat.AppCompatTheme
 import io.olvid.messenger.AppSingleton
 import io.olvid.messenger.R
 import io.olvid.messenger.databases.entity.Message
 import io.olvid.messenger.databases.entity.MessageExpiration
 import io.olvid.messenger.databases.entity.jsons.JsonSharedSettings
+import io.olvid.messenger.designsystem.constantSp
 import io.olvid.messenger.designsystem.theme.OlvidTypography
 import io.olvid.messenger.discussion.compose.EphemeralViewModel.Companion.existenceSetting
 import io.olvid.messenger.discussion.compose.EphemeralViewModel.Companion.visibilitySetting
-import io.olvid.messenger.discussion.message.attachments.constantSp
 import kotlinx.coroutines.delay
 
 @Composable
@@ -181,7 +178,7 @@ fun MessageExpiration?.getTimerResources(
 ): EphemeralState {
     val remaining =
         (((this?.expirationTimestamp ?: 0) - System.currentTimeMillis()) / 1000).coerceAtLeast(0)
-    var color = R.color.lightGrey
+    var color = R.color.mediumGrey
     val icon: Int
     var text: String?
     if (remaining < 60) {

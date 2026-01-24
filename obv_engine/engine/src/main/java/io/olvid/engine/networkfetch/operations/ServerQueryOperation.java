@@ -65,15 +65,17 @@ public class ServerQueryOperation extends Operation {
 
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final UID serverQueryUid;
     private final PRNG prng;
     private ServerQuery serverQuery; // will be set if the operation finishes normally
     private Encoded serverResponse; // will be set if the operation finishes normally
 
-    public ServerQueryOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, UID serverQueryUid, PRNG prng, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
+    public ServerQueryOperation(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, UID serverQueryUid, PRNG prng, OnFinishCallback onFinishCallback, OnCancelCallback onCancelCallback) {
         super(serverQueryUid, onFinishCallback, onCancelCallback);
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.serverQueryUid = serverQueryUid;
         this.prng = prng;
     }
@@ -252,7 +254,7 @@ public class ServerQueryOperation extends Operation {
                         cancel(RFC_BAD_ENCODED_SERVER_QUERY);
                         return;
                 }
-                serverMethod.setSslSocketFactory(sslSocketFactory);
+                serverMethod.setSslSocketFactory(sslSocketFactory, userAgentOverride);
 
                 byte returnStatus = serverMethod.execute(fetchManagerSession.identityDelegate.isActiveOwnedIdentity(fetchManagerSession.session, serverQuery.getOwnedIdentity()));
                 Logger.d("?? Server query return status (after parse): " + returnStatus);

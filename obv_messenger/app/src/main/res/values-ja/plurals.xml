@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">あなたと[PLACEHOLDER_1]さんが位置情報を共有しています</item>
 		<item quantity="other" state="needs_review" hash="1789697147">あなたと%1$d人が位置情報を共有しています</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$dヶ月無料</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$dヶ月無料</item>
+	</plurals>
 </resources>

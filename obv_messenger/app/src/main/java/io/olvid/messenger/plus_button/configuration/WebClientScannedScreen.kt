@@ -50,6 +50,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -85,7 +86,7 @@ import io.olvid.messenger.webclient.WebClientManager
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-private sealed class WebClientUiState {
+sealed class WebClientUiState {
     object Connecting : WebClientUiState()
     object EnterSas : WebClientUiState()
     object SasError : WebClientUiState()
@@ -102,8 +103,7 @@ fun WebClientScannedScreen(
     val context = LocalContext.current
     var webClientService by remember { mutableStateOf<WebClientSubService?>(null) }
     var isBound by remember { mutableStateOf(false) }
-    var uiState by remember { mutableStateOf<WebClientUiState>(WebClientUiState.Connecting) }
-    var sasCode by remember { mutableStateOf("") }
+    var sasCode by rememberSaveable { mutableStateOf("") }
     val coroutineScope = rememberCoroutineScope()
     val focusRequester = remember { FocusRequester() }
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -130,14 +130,14 @@ fun WebClientScannedScreen(
                 if (serviceInstance.isAlreadyRunning && serviceInstance.currentState == WebClientManager.State.WAITING_FOR_RECONNECTION) {
                     serviceInstance.restartService()
                 } else if (serviceInstance.isAlreadyRunning) {
-                    uiState = WebClientUiState.AlreadyRunning
+                    viewModel.webClientUiState = WebClientUiState.AlreadyRunning
                 }
             }
 
             override fun onServiceDisconnected(name: ComponentName) {
                 isBound = false
                 webClientService = null
-                if (uiState != WebClientUiState.Success) {
+                if (viewModel.webClientUiState != WebClientUiState.Success) {
                     onFinish()
                 }
             }
@@ -205,13 +205,13 @@ fun WebClientScannedScreen(
         }
 
         val sasObserver = Observer<String> { sas ->
-            if (sas.isNotEmpty() && uiState != WebClientUiState.AlreadyRunning) {
-                uiState = WebClientUiState.EnterSas
+            if (sas.isNotEmpty() && viewModel.webClientUiState != WebClientUiState.AlreadyRunning) {
+                viewModel.webClientUiState = WebClientUiState.EnterSas
             }
         }
         val closingObserver = Observer<Boolean> { closed ->
             if (closed) {
-                uiState = WebClientUiState.Error
+                viewModel.webClientUiState = WebClientUiState.Error
             }
         }
 
@@ -224,7 +224,7 @@ fun WebClientScannedScreen(
         }
     }
 
-    when (uiState) {
+    when (viewModel.webClientUiState) {
         WebClientUiState.Connecting -> {
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -241,7 +241,7 @@ fun WebClientScannedScreen(
             }
         }
         WebClientUiState.EnterSas, WebClientUiState.SasError -> {
-            if (uiState == WebClientUiState.EnterSas) {
+            if (viewModel.webClientUiState == WebClientUiState.EnterSas) {
                 LaunchedEffect(Unit) {
                     focusRequester.requestFocus()
                 }
@@ -251,7 +251,7 @@ fun WebClientScannedScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp)
-                    .shake(uiState == WebClientUiState.SasError),
+                    .shake(viewModel.webClientUiState == WebClientUiState.SasError),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
@@ -272,28 +272,28 @@ fun WebClientScannedScreen(
                     SasInput(
                         sasCode = sasCode,
                         onSasCodeChange = {
-                            if (uiState == WebClientUiState.SasError) {
-                                uiState = WebClientUiState.EnterSas
+                            if (viewModel.webClientUiState == WebClientUiState.SasError) {
+                                viewModel.webClientUiState = WebClientUiState.EnterSas
                             }
                             if (it.length <= 4) {
                                 sasCode = it
                                 if (it.length == 4) {
                                     if (webClientService?.verifySasCode(it) == true) {
                                         keyboardController?.hide()
-                                        uiState = WebClientUiState.Success
+                                        viewModel.webClientUiState = WebClientUiState.Success
                                     } else {
                                         coroutineScope.launch {
                                             sasCode = ""
-                                            uiState = WebClientUiState.SasError
+                                            viewModel.webClientUiState = WebClientUiState.SasError
                                         }
                                     }
                                 }
                             }
                         },
-                        isError = uiState == WebClientUiState.SasError,
+                        isError = viewModel.webClientUiState == WebClientUiState.SasError,
                         focusRequester = focusRequester
                     )
-                    AnimatedVisibility(visible = uiState == WebClientUiState.SasError) {
+                    AnimatedVisibility(visible = viewModel.webClientUiState == WebClientUiState.SasError) {
                         Text(
                             modifier = Modifier.padding(top = 8.dp),
                             text = stringResource(R.string.webclient_error_sas_incorrect),
@@ -339,7 +339,7 @@ fun WebClientScannedScreen(
                         text = stringResource(R.string.button_label_ok),
                         onClick = {
                             webClientService?.restartService()
-                            uiState = WebClientUiState.Connecting
+                            viewModel.webClientUiState = WebClientUiState.Connecting
                         }
                     )
                 },

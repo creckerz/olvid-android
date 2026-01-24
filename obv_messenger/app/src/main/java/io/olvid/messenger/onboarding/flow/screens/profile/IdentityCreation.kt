@@ -31,7 +31,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -49,6 +48,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
@@ -143,7 +143,13 @@ fun NavGraphBuilder.identityCreation(onboardingFlowViewModel: OnboardingFlowView
                     Text(text = stringResource(id = string.hint_first_name))
                 },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next, capitalization = KeyboardCapitalization.Words),
-                colors = OutlinedTextFieldDefaults.colors(focusedLabelColor = colorResource(id = color.olvid_gradient_contrasted), focusedBorderColor = colorResource(id = color.olvid_gradient_contrasted), cursorColor = colorResource(id = color.olvid_gradient_contrasted))
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedLabelColor = colorResource(id = R.color.olvid_gradient_contrasted),
+                    focusedBorderColor = colorResource(id = R.color.olvid_gradient_contrasted),
+                    cursorColor = colorResource(id = R.color.olvid_gradient_contrasted),
+                    focusedTextColor = colorResource(R.color.almostBlack),
+                    unfocusedTextColor = colorResource(R.color.almostBlack)
+                )
             )
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedTextField(
@@ -160,14 +166,20 @@ fun NavGraphBuilder.identityCreation(onboardingFlowViewModel: OnboardingFlowView
                 keyboardActions = KeyboardActions(
                     onDone = { onboardingFlowViewModel.createSimpleIdentity(onSuccess = { onIdentityCreated.invoke() }) }
                 ),
-                colors = OutlinedTextFieldDefaults.colors(focusedLabelColor = colorResource(id = color.olvid_gradient_contrasted), focusedBorderColor = colorResource(id = color.olvid_gradient_contrasted), cursorColor = colorResource(id = color.olvid_gradient_contrasted))
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedLabelColor = colorResource(id = R.color.olvid_gradient_contrasted),
+                    focusedBorderColor = colorResource(id = R.color.olvid_gradient_contrasted),
+                    cursorColor = colorResource(id = R.color.olvid_gradient_contrasted),
+                    focusedTextColor = colorResource(R.color.almostBlack),
+                    unfocusedTextColor = colorResource(R.color.almostBlack)
+                )
             )
         }
     }
 }
 
 
-@Preview
+@PreviewLightDark
 @Preview(locale = "fr")
 @Composable
 private fun IdentityCreationPreview() {

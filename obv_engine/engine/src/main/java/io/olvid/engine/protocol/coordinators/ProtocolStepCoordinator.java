@@ -28,7 +28,6 @@ import java.util.HashMap;
 import io.olvid.engine.Logger;
 import io.olvid.engine.crypto.PRNGService;
 import io.olvid.engine.datatypes.Identity;
-import io.olvid.engine.datatypes.NoDuplicateOperationQueue;
 import io.olvid.engine.datatypes.NoDuplicatePriorityOperationQueue;
 import io.olvid.engine.datatypes.Operation;
 import io.olvid.engine.datatypes.UID;

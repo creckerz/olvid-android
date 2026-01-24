@@ -263,4 +263,8 @@
         <item quantity="one">Vous et %1$d autre partagez votre position</item>
         <item quantity="other">Vous et %1$d autres partagez votre position</item>
     </plurals>
+    <plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity">
+        <item quantity="one">%1$d mois offert</item>
+        <item quantity="other">%1$d mois offerts</item>
+    </plurals>
 </resources>

@@ -87,9 +87,9 @@ import io.olvid.messenger.databases.entity.jsons.JsonExpiration
 import io.olvid.messenger.databases.tasks.InboundEphemeralMessageClicked
 import io.olvid.messenger.designsystem.components.OlvidDropdownMenu
 import io.olvid.messenger.designsystem.components.OlvidDropdownMenuItem
+import io.olvid.messenger.designsystem.constantSp
 import io.olvid.messenger.designsystem.theme.OlvidTypography
 import io.olvid.messenger.discussion.message.attachments.Attachments
-import io.olvid.messenger.discussion.message.attachments.constantSp
 import io.olvid.messenger.services.UnifiedForegroundService.LocationSharingSubService
 import io.olvid.messenger.settings.SettingsActivity
 

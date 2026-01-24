@@ -40,14 +40,16 @@ public class ProfileBackupSnapshotDeleteTask {
     private final long version;
     private final PRNGService prng;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
 
-    public ProfileBackupSnapshotDeleteTask(String server, BackupSeed profileBackupSeed, UID backupThreadId, long version, PRNGService prng, SSLSocketFactory sslSocketFactory) {
+    public ProfileBackupSnapshotDeleteTask(String server, BackupSeed profileBackupSeed, UID backupThreadId, long version, PRNGService prng, SSLSocketFactory sslSocketFactory, String userAgentOverride) {
         this.server = server;
         this.profileBackupSeed = profileBackupSeed;
         this.backupThreadId = backupThreadId;
         this.version = version;
         this.prng = prng;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
     }
 
     public BackupTaskStatus execute() {
@@ -65,7 +67,7 @@ public class ProfileBackupSnapshotDeleteTask {
                 prng
         );
 
-        StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2DeleteBackupQuery(server, derivedKeysV2.backupKeyUid, backupThreadId, version, signature)), sslSocketFactory);
+        StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, null, new ServerQuery.BackupsV2DeleteBackupQuery(server, derivedKeysV2.backupKeyUid, backupThreadId, version, signature)), sslSocketFactory, userAgentOverride);
         OperationQueue queue = new OperationQueue();
         queue.queue(standaloneServerQueryOperation);
         queue.execute(1, "Engine-ProfileBackupSnapshotDeleteTask");

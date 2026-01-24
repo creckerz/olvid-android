@@ -38,14 +38,16 @@ import io.olvid.engine.networkfetch.operations.GetTurnCredentialsOperation;
 public class GetTurnCredentialsCoordinator implements Operation.OnFinishCallback, Operation.OnCancelCallback {
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final WellKnownCacheDelegate wellKnownCacheDelegate;
     private final CreateServerSessionDelegate createServerSessionDelegate;
     private final OperationQueue getTurnCredentialsOperationQueue;
     private NotificationPostingDelegate notificationPostingDelegate;
 
-    public GetTurnCredentialsCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, CreateServerSessionDelegate createServerSessionDelegate, WellKnownCacheDelegate wellKnownCacheDelegate) {
+    public GetTurnCredentialsCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, CreateServerSessionDelegate createServerSessionDelegate, WellKnownCacheDelegate wellKnownCacheDelegate) {
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.createServerSessionDelegate = createServerSessionDelegate;
         this.wellKnownCacheDelegate = wellKnownCacheDelegate;
 
@@ -61,7 +63,7 @@ public class GetTurnCredentialsCoordinator implements Operation.OnFinishCallback
     }
 
     private void queueNewGetTurnCredentialsOperation(Identity ownedIdentity, UUID callUuid, String username1, String username2) {
-        GetTurnCredentialsOperation op = new GetTurnCredentialsOperation(fetchManagerSessionFactory, sslSocketFactory, wellKnownCacheDelegate, ownedIdentity, callUuid, username1, username2, this, this);
+        GetTurnCredentialsOperation op = new GetTurnCredentialsOperation(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, wellKnownCacheDelegate, ownedIdentity, callUuid, username1, username2, this, this);
         getTurnCredentialsOperationQueue.queue(op);
     }
 

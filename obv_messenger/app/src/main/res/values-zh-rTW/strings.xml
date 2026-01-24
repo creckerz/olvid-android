@@ -101,7 +101,10 @@
 	<string name="format_identity_details_custom_field" state="needs_review" hash="-1073344790">%1$s：%2$s</string>
 	<string name="hint_company" state="needs_review" hash="379200324">公司 (選填)</string>
 	<string name="hint_compose_your_message" state="needs_review" hash="-25761578">輸入訊息</string>
+	<string name="hint_compose_your_message_ephemeral" state="needs_review" hash="-1527208333">臨時訊息</string>
 	<string name="label_edit_your_message" state="needs_review" hash="1091877412">編輯您的訊息</string>
+	<string name="label_reply_to_x" state="needs_review" hash="1941377665">回覆 %s</string>
+	<string name="label_reply_to_message" state="needs_review" hash="1280949769">回覆訊息</string>
 	<string name="label_selection_formatting" state="needs_review" hash="205892951">格式化</string>
 	<string name="label_selection_code" state="needs_review" hash="-803834470">代碼</string>
 	<string name="label_selection_list" state="needs_review" hash="762025321">清單</string>
@@ -467,7 +470,7 @@
 	<string name="menu_action_choose_picture" state="needs_review" hash="-1655172909">選擇圖片</string>
 	<string name="menu_action_take_photo" state="needs_review" hash="-1123080444">拍照</string>
 	<string name="menu_action_remove_image" state="needs_review" hash="1094977672">移除圖片</string>
-	<string name="dialog_title_create_empty_group" state="needs_review" hash="-2016542453">建立空白群組？</string>
+	<string name="dialog_title_create_empty_group" state="needs_review" hash="-663434464">建立空群組？</string>
 	<string name="dialog_message_create_empty_group" state="needs_review" hash="-297923005">您尚未選取任何聯絡人加入群組。您確定要建立一個空的群組嗎？</string>
 	<string name="pref_dark_mode_title" state="needs_review" hash="816474245">深色模式</string>
 	<string name="pref_dark_mode_summary" state="needs_review" hash="-623740894">開啟深色模式以節省您的電池和保護您的眼睛。</string>
@@ -558,6 +561,37 @@
 	<string name="dialog_title_webrtc_kick_participant" state="needs_review" hash="389469769">要排除通話聯絡人嗎？</string>
 	<string name="webrtc_failed_kicked" state="needs_review" hash="-758835021">您已被從此通話中移除</string>
 	<string name="dialog_title_start_conference_call" state="needs_review" hash="-1418585505">開始語音會議</string>
+	<string name="olvid_plus_discover" state="needs_review" hash="-924831172">探索 Olvid+</string>
+	<string name="olvid_plus_upgrade_title" state="needs_review" hash="-1960092784">升級到 Olvid+ 以獲得完整的應用體驗</string>
+	<string name="olvid_plus_upgrade_renew" state="needs_review" hash="-4149901">您的方案將自動續訂至%1$s，直至取消。</string>
+	<string name="olvid_plus_tip_multi_device_title" state="needs_review" hash="481576448">在所有裝置上使用 Olvid</string>
+	<string name="olvid_plus_tip_multi_device_subtitle" state="needs_review" hash="1352342578">Olvid+ 讓您可以在智慧型手機和電腦上使用 Olvid.\n您的訊息會同步到所有裝置，讓您隨時保持聯繫。</string>
+	<string name="olvid_plus_tip_call_title" state="needs_review" hash="935809736">無限通話</string>
+	<string name="olvid_plus_tip_call_subtitle" state="needs_review" hash="1137191310">Olvid+ 讓您可以進行端到端加密的語音和視訊通話。\n安全地聯繫任何 Olvid 用戶，無論他們是否擁有 Olvid+。</string>
+	<string name="olvid_plus_tip_support_title" state="needs_review" hash="-1930411305">支持我們的願景</string>
+	<string name="olvid_plus_tip_support_subtitle" state="needs_review" hash="-1404875508">解鎖多裝置功能和安全通話，盡在 Olvid+.\n您的訂閱支持永續且誠實的服務模式，讓 Olvid 保持免費，沒有廣告或隱藏費用。</string>
+	<string name="olvid_plus_offer_multi_device_title" state="needs_review" hash="-623969503">在多個裝置上使用 Olvid</string>
+	<string name="olvid_plus_offer_multi_device_subtitle" state="needs_review" hash="-123640091">在您的電腦上使用 Olvid。安全保存您的所有訊息。</string>
+	<string name="olvid_plus_offer_call_title" state="needs_review" hash="935809736">無限通話</string>
+	<string name="olvid_plus_offer_call_subtitle" state="needs_review" hash="-1827478007">與您的任何聯絡人進行語音和視訊通話。</string>
+	<string name="olvid_plus_offer_support_title" state="needs_review" hash="-1272799411">支持 Olvid</string>
+	<string name="olvid_plus_offer_support_subtitle" state="needs_review" hash="841023374">倡導一種永續且誠實的模式，不濫用個人資料。</string>
+	<string name="olvid_plus_dialog_multi_device_title" state="needs_review" hash="561167181">在所有裝置上使用 Olvid</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle" state="needs_review" hash="1178448519">有了 Olvid+，您可以同步 Olvid 訊息到您的智慧型手機和電腦。您始終可以聯繫到！</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_1" state="needs_review" hash="155287050">享受鍵盤和大型螢幕的舒適性，並輕鬆從您的電腦發送文件。</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_2" state="needs_review" hash="1858309010">即使裝置發生故障或被盜，您也不會遺失訊息。您的歷史記錄和附件會安全地儲存在多個裝置上。</string>
+	<string name="olvid_plus_dialog_call_title" state="needs_review" hash="269811560">無限通話</string>
+	<string name="olvid_plus_dialog_call_subtitle" state="needs_review" hash="-416813149">有了 Olvid+，您可以進行音訊和視訊通話，包括一對一和群組通話。</string>
+	<string name="olvid_plus_dialog_call_subtitle_1" state="needs_review" hash="-608348196">您的所有聯絡人都可以聯繫到，無論他們是否安裝了 Olvid+。</string>
+	<string name="olvid_plus_dialog_call_subtitle_2" state="needs_review" hash="-1804019862">體驗最佳通話品質，與所有 Olvid 通訊相同的安全等級。</string>
+	<string name="olvid_plus_dialog_support_title" state="needs_review" hash="1942452361">支持 Olvid，為所有人提供的私人訊息應用</string>
+	<string name="olvid_plus_dialog_support_subtitle" state="needs_review" hash="2119917538">Olvid 是一款真正私密的即時通訊應用，旨在無需存取您的個人資訊即可運作：無需電話號碼、電子郵件或姓名。</string>
+	<string name="olvid_plus_dialog_support_subtitle_1" state="needs_review" hash="1809563102">您所交換的一切內容都只在您和您的聯絡人之間。 任何人不得知曉。</string>
+	<string name="olvid_plus_dialog_support_subtitle_2" state="needs_review" hash="-118773166">憑藉開源程式碼和定期審核，您無需相信我們所言。</string>
+	<string name="olvid_plus_dialog_support_subtitle_3" state="needs_review" hash="-1885036855">透過訂閱，您支持一個公平且永續的使命，讓Olvid對所有人免費，完全沒有廣告和隱藏費用。</string>
+	<string name="label_subscription_offer_save_percent" state="needs_review" hash="479307719">儲存 %1$d%%</string>
+	<string name="label_subscription_offer_monthly" state="needs_review" hash="-1602490190">每月</string>
+	<string name="label_subscription_offer_yearly" state="needs_review" hash="1246240165">年度</string>
 	<string name="label_subscription_status" state="needs_review" hash="1154002053">訂閱狀態</string>
 	<string name="text_feature_initiate_secure_calls" state="needs_review" hash="1414263062">啟動安全通話</string>
 	<string name="text_premium_features" state="needs_review" hash="603728806">進階功能</string>
@@ -640,7 +674,7 @@
 	<string name="text_premium_features_free_trial" state="needs_review" hash="-1976234715">高級功能免費試用</string>
 	<string name="button_label_start_free_trial" state="needs_review" hash="-508109296">開始免費試用</string>
 	<string name="label_free_trial_available" state="needs_review" hash="-995163441">提供免費試用</string>
-	<string name="label_free_trial_explanation" state="needs_review" hash="-596460015">免費試用 Olvid 的安全通話一個月（僅限一次）</string>
+	<string name="label_free_trial_explanation" state="needs_review" hash="2050354272">免費試用 Olvid 的安全通話一個月（僅限一次）。</string>
 	<string name="toast_message_failed_to_start_free_trial" state="needs_review" hash="-1137706906">免費試用啟動失敗</string>
 	<string name="toast_message_free_trial_started" state="needs_review" hash="1357863164">免費試用開始</string>
 	<string name="toast_message_error_launching_in_app_purchase" state="needs_review" hash="-1890004340">應用內購買初始化失敗</string>
@@ -648,8 +682,6 @@
 	<string name="toast_message_in_app_purchase_successful" state="needs_review" hash="578109721">應用內購買成功</string>
 	<string name="button_label_price_per_month" state="needs_review" hash="-552222952">每月 %1$s</string>
 	<string name="button_label_price_per_year" state="needs_review" hash="1539075788">每年 %1$s</string>
-	<string name="button_label_price_per_month_expanded" state="needs_review" hash="173326792">%1$s\n每月</string>
-	<string name="button_label_price_per_year_expanded" state="needs_review" hash="1947639238">%1$s\n每年</string>
 	<string name="text_awaiting_subscription_payment" state="needs_review" hash="1135205985">訂閱付款失敗</string>
 	<string name="text_subscription_in_grace_period_until" state="needs_review" hash="-1685522686">寬限期至：%1$s</string>
 	<string name="text_subscription_on_hold_since" state="needs_review" hash="-515586151">訂閱自：%1$s 暫停</string>
@@ -661,9 +693,8 @@
 	<string name="label_failed_to_query_subscription" state="needs_review" hash="-1677001973">無法查詢訂閱方案</string>
 	<string name="dialog_title_subscription_required" state="needs_review" hash="-2038592214">需要訂閱</string>
 	<string name="button_label_check_subscription" state="needs_review" hash="-378220336">檢查訂閱狀態</string>
-	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1662886051">使用 Olvid 撥打安全電話需要訂閱。\n\n您可以在「我的個人資料」頁面查看目前的訂閱狀態和可用的訂閱方案。</string>
-	<string name="dialog_message_subscription_required_web_client" state="needs_review" hash="-760629168">連線至 Olvid 網頁客戶端需要訂閱。\n\n您可以在「我的個人資料」頁面檢查您目前的訂閱狀態和可用的訂閱方案。</string>
-	<string name="dialog_message_subscription_required_multi_device" state="needs_review" hash="-1326423501">要在多個裝置上同時使用您的 Olvid 個人檔案，需要訂閱。\n\n您可以在「我的個人檔案」頁面檢查您目前的訂閱狀態和可用的訂閱方案。</string>
+	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1231676488">使用 Olvid 進行安全的電話和視訊通話需要訂閱。</string>
+	<string name="dialog_title_subscription_plans" state="needs_review" hash="-456474468">訂閱方案</string>
 	<string name="text_ended_on" state="needs_review" hash="1280012933">結束於：%1$s</string>
 	<string name="text_free_trial_ended" state="needs_review" hash="-1458860892">免費試用期已結束</string>
 	<string name="text_free_trial_expired" state="needs_review" hash="-2049452081">免費試用版授權已過期</string>
@@ -995,13 +1026,13 @@
 	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">巴黎 TURN 伺服器</string>
 	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">紐約 TURN 伺服器</string>
 	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">新加坡 TURN 伺服器</string>
-	<string name="dialog_title_android_12_bluetooth_access" state="needs_review" hash="-2140389265">請求存取藍牙裝置的權限</string>
-	<string name="dialog_message_android_12_bluetooth_access" state="needs_review" hash="-332888756">如果您想在 Olvid 通話中使用藍牙耳機，您需要允許 Olvid \"尋找並連接\" 您附近的裝置。</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d 位聯絡人</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">群組 %2$s 中有 %1$d 位聯絡人</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">需要更新</string>
 	<string name="dialog_message_outdated_version" state="needs_review" hash="488074151">您的 Olvid 版本過舊，需要更新。\n\n您可能錯過許多新功能，而且我們無法保證您的版本與聯絡人使用的較新版本相容。</string>
 	<string name="button_label_remind_me_later" state="needs_review" hash="-713293818">稍後提醒我</string>
+	<string name="label_remind_me_tonight" state="needs_review" hash="707009828">今晚 %1$s 提醒我</string>
+	<string name="label_remind_me_tomorrow" state="needs_review" hash="1904419307">明天 %1$s 提醒我</string>
 	<string name="hint_personal_note" state="needs_review" hash="-368244163">個人筆記</string>
 	<string name="toast_message_unable_to_restore_app_data" state="needs_review" hash="1602628680">警告：部分應用程式自訂設定無法還原</string>
 	<string name="dialog_title_webrtc_permissions_audio_blocked" state="needs_review" hash="1948829165">音訊錄音權限被拒</string>
@@ -1108,7 +1139,6 @@
 	<string name="pref_reload_backup_configuration_title" state="needs_review" hash="2000428891">重新載入備份設定</string>
 	<string name="content_description_back_button" state="needs_review" hash="48196338">返回</string>
 	<string name="content_description_remove_message_reply_to" state="needs_review" hash="-794585802">移除回覆訊息</string>
-	<string name="content_description_remove_link_preview" state="needs_review" hash="-1085272528">清除連結預覽</string>
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">此分頁的通知已靜音指示</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">建立個人資料</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">您的公司身分驗證供應商已成功設定。請按下下方的「驗證」按鈕以進行驗證並擷取您的個人資訊。</string>
@@ -1148,14 +1178,11 @@
 	<string name="dialog_title_neutral_notification_when_hidden" state="needs_review" hash="2013281962">當個人資料隱藏時，顯示中性通知</string>
 	<string name="dialog_message_neutral_notification_when_hidden" state="needs_review" hash="-58494752">當設定檔隱藏時，除非目前在Olvid中開啟，否則您不會收到任何新訊息通知。如果您啟用此選項，將顯示「Olvid需要您的關注」通知。您可以開啟Olvid並解鎖您的隱藏設定檔以查看新訊息。\n\n警告：這可能會洩漏您實際上擁有隱藏設定檔的事實。</string>
 	<string name="toast_message_password_already_used_other_profile" state="needs_review" hash="390904904">錯誤：此密碼已為另一個隱藏設定檔使用</string>
-	<string name="label_configure_shortcuts" state="needs_review" hash="-857125506">變更圖示順序</string>
 	<string name="label_attach_file" state="needs_review" hash="-89285310">附加檔案</string>
 	<string name="label_attach_image" state="needs_review" hash="-1185400308">附加圖片</string>
 	<string name="label_attach_timer" state="needs_review" hash="-1527208333">限時訊息</string>
 	<string name="label_attach_camera" state="needs_review" hash="-1123080444">拍照</string>
 	<string name="label_attach_video" state="needs_review" hash="1626268086">錄製影片</string>
-	<string name="dialog_title_choose_icon_order" state="needs_review" hash="856935796">選擇附件圖示優先順序</string>
-	<string name="label_icons_below_never_shown" state="needs_review" hash="1250704267">此線以下的圖示永遠不會顯示</string>
 	<string name="pref_font_scale" state="needs_review" hash="1773040591">字體大小</string>
 	<string name="pref_text_font_scale_0_75" state="needs_review" hash="-1963894407">微小 (75%)</string>
 	<string name="pref_text_font_scale_0_9" state="needs_review" hash="-708054676">小 (90%)</string>
@@ -1210,7 +1237,6 @@
 	<string name="x_reactions_to" state="needs_review" hash="177752739">對 %2$s 的反應：%1$d 個</string>
 	<string name="notification_text_xx_reacted" state="needs_review" hash="647790513">%1$s 回應了 %2$s</string>
 	<string name="label_attach_emoji" state="needs_review" hash="-1842205895">插入表情符號</string>
-	<string name="label_long_press_for_favorite" state="needs_review" hash="1284446174">長按以新增/移除至最愛</string>
 	<string name="menu_action_debug_information" state="needs_review" hash="-919213138">偵錯資訊</string>
 	<string name="debug_label_number_of_devices" state="needs_review" hash="1662862352">裝置數量：</string>
 	<string name="debug_label_number_of_devices_no_channel" state="needs_review" hash="808299225">無安全通道：</string>
@@ -1283,8 +1309,6 @@
 	<string name="dialog_message_incomplete_attachments" state="needs_review" hash="1179188058">您選取的訊息包含尚未完全下載的附件。在下載完成之前，這些訊息無法轉發。</string>
 	<string name="dialog_message_incomplete_attachments_partial" state="needs_review" hash="1274554335">您選取的一些訊息包含尚未完全下載的附件。在下載完成之前，這些訊息無法轉發。\n\n按一下「繼續」僅轉發可以轉發的訊息。</string>
 	<string name="hint_search_message" state="needs_review" hash="1630003450">搜尋訊息</string>
-	<string name="menu_action_search_prev" state="needs_review" hash="-1639666563">上一個</string>
-	<string name="menu_action_search_next" state="needs_review" hash="1158639077">下一步</string>
 	<string name="pref_manage_cloud_backups_title" state="needs_review" hash="824115345">管理雲端備份</string>
 	<string name="pref_manage_cloud_backups_summary" state="needs_review" hash="-161789549">點擊以下選項以下載或刪除雲端備份。</string>
 	<string name="dialog_title_manage_cloud_backups" state="needs_review" hash="-1825078945">雲端備份</string>
@@ -1485,7 +1509,7 @@
 	<string name="text_you_became_admin" state="needs_review" hash="2137006821">您現在是群組管理員</string>
 	<string name="text_you_are_no_longer_admin" state="needs_review" hash="1766709431">您不再是群組管理員</string>
 	<string name="text_you_became_writer" state="needs_review" hash="-1671425999">您現在可以發送訊息了</string>
-	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-762273585">您無法再在此處發送訊息了</string>
+	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-930933808">您無法在此發布訊息</string>
 	<string name="label_pending" state="needs_review" hash="1975294811">待處理</string>
 	<string name="pref_app_language_title" state="needs_review" hash="-1748962099">應用程式語言</string>
 	<string name="pref_text_default_device_language" state="needs_review" hash="-1062620207">預設裝置語言</string>
@@ -1571,6 +1595,7 @@
 	<string name="text_invalid_shortcut" state="needs_review" hash="-1219107750">無效的捷徑</string>
 	<string name="text_feature_initiate_secure_calls_from_another_profile" state="needs_review" hash="271258252">啟動安全通話\n(透過其他個人檔案提供)</string>
 	<string name="dialog_title_confirm_open_link" state="needs_review" hash="46935087">在瀏覽器中開啟這個連結嗎？</string>
+	<string name="label_open_original_link_with_trackers" state="needs_review" hash="-1586932660">使用包含追蹤參數的原始連結</string>
 	<string name="dialog_title_confirm_open_olvid_link" state="needs_review" hash="425949498">在 Olvid 中開啟此連結？</string>
 	<string name="toast_message_unable_to_open_url" state="needs_review" hash="-1486954792">無法開啟網址</string>
 	<string name="text_explanation_location_map_provider" state="needs_review" hash="-173394547">選擇地圖服務提供者可讓您精確挑選想要分享地圖上的位置。然而，這可能會將您的位置（或您聯絡人的位置）洩露給該服務提供者。</string>
@@ -1581,7 +1606,6 @@
 	<string name="label_no_address_found" state="needs_review" hash="1035554993">找不到地址</string>
 	<string name="label_zoom_in_for_address" state="needs_review" hash="902696925">放大以查找地址</string>
 	<string name="label_address_lookup_disabled" state="needs_review" hash="-2140124686">地址查詢已停用</string>
-	<string name="content_description_cancel_message_edit" state="needs_review" hash="984163129">取消編輯訊息</string>
 	<string name="dialog_title_introducing_mentions" state="needs_review" hash="-1741341288">隆重推出使用者標記功能！</string>
 	<string name="dialog_message_introducing_mentions" state="needs_review" hash="622739087">Olvid 現在允許在對話中標記使用者了🫵！只需輸入 @ 後面加上對方的名字或首字母，即可查看可以標記的使用者。\n此外，當您靜音一則對話或個人資料時💤，您現在可以選擇僅在訊息中明確標記您時收到通知。\n\n請注意，您的聯絡人需要更新到最新版本的 Olvid 才能看到您已標記他們。</string>
 	<string name="pref_no_notify_certificate_change_for_previews_title" state="needs_review" hash="-434788963">關閉鏈接預覽的證書變更通知</string>
@@ -1740,7 +1764,7 @@
 	<string name="troubleshooting_ignored" state="needs_review" hash="816017832">已忽略</string>
 	<string name="onboarding_transfer_multidevice_purchase_question" state="needs_review" hash="351030441">您希望所有裝置維持連線狀態嗎？</string>
 	<string name="onboarding_transfer_multidevice_purchase_hyperlink" state="needs_review" hash="747183939">這邊</string>
-	<string name="button_label_subscribe_now" state="needs_review" hash="1805105542">立即訂閱</string>
+	<string name="button_label_subscribe_with_price" state="needs_review" hash="324675175">訂閱 • %1$s</string>
 	<string name="onboarding_transfer_devices_loading_title" state="needs_review" hash="801961341">正在擷取裝置清單…</string>
 	<string name="dialog_title_introducing_multi_device" state="needs_review" hash="-310103349">隆重推出 Olvid 桌面版和多裝置功能！</string>
 	<string name="dialog_message_introducing_multi_device" state="needs_review" hash="-153162506">Olvid 現在已可用於 **您的電腦** (Windows 和 macOS)。您可以從以下連結下載最新版本：\nhttps://olvid.io/download/\n\n有了 **跨裝置** 支援，您可以從手機開始對話，並在電腦上繼續。在您的裝置和聯絡人之間分享檔案從未如此簡單！</string>
@@ -1930,7 +1954,6 @@
 	<string name="pref_archived_attachments_summary" state="needs_review" hash="1596754073">當此功能開啟時，封存的對話附件將會依照上述設定自動下載。</string>
 	<string name="pref_unarchive_on_notification_title" state="needs_review" hash="-1146947153">收到通知時取消封存對話</string>
 	<string name="pref_unarchive_on_notification_summary" state="needs_review" hash="778062251">當此功能開啟時，封存的對話在收到新訊息通知時會自動解除封存。</string>
-	<string name="call_notification_ongoing_call" state="needs_review" hash="1828207822">通話中</string>
 	<string name="call_notification_incoming_call" state="needs_review" hash="-1223043344">來電</string>
 	<string name="menu_action_copy_text_from_image" state="needs_review" hash="-1072685983">複製這個字</string>
 	<string name="menu_action_copy_text_block_from_image" state="needs_review" hash="1436026569">複製整個區塊</string>
@@ -2121,4 +2144,8 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">對端裝置無法連線</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">重新建立所有安全通道</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">重建所有安全通道會強制 Olvid 與您聯絡人的所有裝置建立新的安全通訊管道。 通常情況下這沒有用處，但可以解決一些罕見的情況，即這些管道中的某些管道「不同步」。\n\n**警告：**如果您有很多聯絡人，此操作可能需要幾分鐘，並且您可能會在執行過程中遺失一些傳入訊息。</string>
+	<string name="label_hanged_up" state="needs_review" hash="-1516413384">通話已結束</string>
+	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">需要為您的團隊訂閱嗎？</string>
+	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">訪問 Olvid 商店</string>
+	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">提醒已設定</string>
 </resources>

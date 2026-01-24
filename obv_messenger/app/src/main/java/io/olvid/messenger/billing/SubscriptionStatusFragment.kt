@@ -26,13 +26,11 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import io.olvid.engine.engine.types.EngineAPI
 import io.olvid.messenger.databases.entity.OwnedIdentity
 
 class SubscriptionStatusFragment : Fragment() {
     private lateinit var activity: AppCompatActivity
-    val viewModel: SubscriptionPurchaseViewModel by activityViewModels()
     lateinit var bytesOwnedIdentity: ByteArray
     var apiKeyStatus: EngineAPI.ApiKeyStatus? = null
     var apiKeyPermissions: MutableList<EngineAPI.ApiKeyPermission?>? = null
@@ -64,7 +62,6 @@ class SubscriptionStatusFragment : Fragment() {
                 ANOTHER_IDENTITY_HAS_CALLS_PERMISSION
             )
         }
-        viewModel.updateBytesOwnedIdentity(bytesOwnedIdentity)
     }
 
     override fun onCreateView(
@@ -75,7 +72,6 @@ class SubscriptionStatusFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 SubscriptionStatusScreen(
-                    viewModel = viewModel,
                     apiKeyStatus = apiKeyStatus,
                     apiKeyExpirationTimestamp = apiKeyExpirationTimestamp,
                     apiKeyPermissions = apiKeyPermissions ?: emptyList(),

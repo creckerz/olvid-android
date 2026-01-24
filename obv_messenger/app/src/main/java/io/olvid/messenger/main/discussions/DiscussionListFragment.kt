@@ -19,8 +19,6 @@
 package io.olvid.messenger.main.discussions
 
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -34,12 +32,10 @@ import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.olvid.messenger.App
 import io.olvid.messenger.R
-import io.olvid.messenger.R.string
 import io.olvid.messenger.databases.entity.Discussion
 import io.olvid.messenger.discussion.linkpreview.LinkPreviewViewModel
 import io.olvid.messenger.main.RefreshingFragment

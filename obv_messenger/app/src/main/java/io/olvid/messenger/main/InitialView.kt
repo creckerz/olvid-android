@@ -143,7 +143,7 @@ fun InitialView(
                 .size(maxWidth.times(0.4f))
                 .align(Alignment.BottomEnd)
                 .offset(x = 4.dp, y = 4.dp)
-                .background(color = colorResource(R.color.almostWhite), shape = CircleShape)
+                .background(color = colorResource(R.color.dialogBackground), shape = CircleShape)
                 .padding(2.dp),
                 factory = { context ->
                     ImageView(context).apply {

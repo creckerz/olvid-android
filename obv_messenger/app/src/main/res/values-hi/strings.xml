@@ -101,7 +101,10 @@
 	<string name="format_identity_details_custom_field" state="needs_review" hash="-1073344790">%1$s: %2$s</string>
 	<string name="hint_company" state="needs_review" hash="379200324">कंपनी (वैकल्पिक)</string>
 	<string name="hint_compose_your_message" state="needs_review" hash="-25761578">संदेश लिखें</string>
+	<string name="hint_compose_your_message_ephemeral" state="needs_review" hash="-1527208333">अस्थायी संदेश</string>
 	<string name="label_edit_your_message" state="needs_review" hash="1091877412">अपना संदेश संपादित करें</string>
+	<string name="label_reply_to_x" state="needs_review" hash="1941377665">%s को जवाब दें</string>
+	<string name="label_reply_to_message" state="needs_review" hash="1280949769">संदेश का जवाब दें</string>
 	<string name="label_selection_formatting" state="needs_review" hash="205892951">फ़ॉर्मेटिंग</string>
 	<string name="label_selection_code" state="needs_review" hash="-803834470">कोड</string>
 	<string name="label_selection_list" state="needs_review" hash="762025321">सूची</string>
@@ -467,7 +470,7 @@
 	<string name="menu_action_choose_picture" state="needs_review" hash="-1655172909">एक छवि चुनें</string>
 	<string name="menu_action_take_photo" state="needs_review" hash="-1123080444">तस्वीर लो</string>
 	<string name="menu_action_remove_image" state="needs_review" hash="1094977672">तस्वीर हटाएं</string>
-	<string name="dialog_title_create_empty_group" state="needs_review" hash="-2016542453">खाली समूह बनाएं?</string>
+	<string name="dialog_title_create_empty_group" state="needs_review" hash="-663434464">खाली समूह बनाएं?</string>
 	<string name="dialog_message_create_empty_group" state="needs_review" hash="-297923005">आपने अपने समूह में जोड़ने के लिए कोई संपर्क नहीं चुना है। क्या आप निश्चित हैं कि आप एक खाली समूह बनाना चाहते हैं?</string>
 	<string name="pref_dark_mode_title" state="needs_review" hash="816474245">डार्क मोड</string>
 	<string name="pref_dark_mode_summary" state="needs_review" hash="-623740894">अपनी बैटरी और आंखों को बचाने के लिए डार्क मोड सक्षम करें।</string>
@@ -558,6 +561,37 @@
 	<string name="dialog_title_webrtc_kick_participant" state="needs_review" hash="389469769">कॉल से संपर्क को बाहर करें?</string>
 	<string name="webrtc_failed_kicked" state="needs_review" hash="-758835021">आपको इस कॉल से बाहर कर दिया गया है</string>
 	<string name="dialog_title_start_conference_call" state="needs_review" hash="-1418585505">कॉन्फ्रेंस कॉल शुरू करें</string>
+	<string name="olvid_plus_discover" state="needs_review" hash="-924831172">Olvid+ खोजें</string>
+	<string name="olvid_plus_upgrade_title" state="needs_review" hash="-1960092784">Olvid+ में अपग्रेड करें ताकि आपको ऐप का पूरा अनुभव मिल सके</string>
+	<string name="olvid_plus_upgrade_renew" state="needs_review" hash="-4149901">%1$s तक योजना स्वतः नवीनीकृत होती रहेगी जब तक कि आप इसे रद्द न कर दें।</string>
+	<string name="olvid_plus_tip_multi_device_title" state="needs_review" hash="481576448">अपने सभी डिवाइस पर Olvid का उपयोग करें</string>
+	<string name="olvid_plus_tip_multi_device_subtitle" state="needs_review" hash="1352342578">Olvid+ आपको अपने स्मार्टफ़ोन और कंप्यूटर पर Olvid का उपयोग करने देता है।\nआपके संदेश आपके सभी उपकरणों पर सिंक रहते हैं ताकि आप हमेशा जुड़े रहें।</string>
+	<string name="olvid_plus_tip_call_title" state="needs_review" hash="935809736">असीमित कॉल करें</string>
+	<string name="olvid_plus_tip_call_subtitle" state="needs_review" hash="1137191310">Olvid+ आपको एंड-टू-एंड एन्क्रिप्टेड वॉयस और वीडियो कॉल करने देता है।\nकिसी भी Olvid+ उपयोगकर्ता से सुरक्षित रूप से संपर्क करें, चाहे उनके पास Olvid+ हो या नहीं।</string>
+	<string name="olvid_plus_tip_support_title" state="needs_review" hash="-1930411305">हमारी दृष्टि का समर्थन करें</string>
+	<string name="olvid_plus_tip_support_subtitle" state="needs_review" hash="-1404875508">Olvid+ के साथ मल्टी-डिवाइस और सुरक्षित कॉल अनलॉक करें।\nआपकी सदस्यता एक टिकाऊ और ईमानदार मॉडल का समर्थन करती है, जिससे Olvid सभी के लिए मुफ्त रहता है, बिना किसी विज्ञापन या छिपी लागत के।</string>
+	<string name="olvid_plus_offer_multi_device_title" state="needs_review" hash="-623969503">Olvid को मल्टी-डिवाइस में इस्तेमाल करें</string>
+	<string name="olvid_plus_offer_multi_device_subtitle" state="needs_review" hash="-123640091">अपने कंप्यूटर पर Olvid का उपयोग करें। अपने सभी संदेशों को सुरक्षित रखें।</string>
+	<string name="olvid_plus_offer_call_title" state="needs_review" hash="935809736">असीमित कॉल करें</string>
+	<string name="olvid_plus_offer_call_subtitle" state="needs_review" hash="-1827478007">अपने किसी भी संपर्क को वॉयस और वीडियो कॉल करें।</string>
+	<string name="olvid_plus_offer_support_title" state="needs_review" hash="-1272799411">Olvid का समर्थन करें</string>
+	<string name="olvid_plus_offer_support_subtitle" state="needs_review" hash="841023374">एक टिकाऊ और ईमानदार मॉडल का समर्थन करें जो व्यक्तिगत डेटा का शोषण न करे।</string>
+	<string name="olvid_plus_dialog_multi_device_title" state="needs_review" hash="561167181">अपने सभी डिवाइस पर Olvid का उपयोग करें</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle" state="needs_review" hash="1178448519">Olvid+ के साथ, आप अपने Olvid संदेशों को अपने स्मार्टफ़ोन और कंप्यूटर पर सिंक कर सकते हैं। आप हमेशा उपलब्ध रहते हैं!</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_1" state="needs_review" hash="155287050">कीबोर्ड और बड़ी स्क्रीन के आराम का आनंद लें, और अपने कंप्यूटर से आसानी से फाइलें भेजें।</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_2" state="needs_review" hash="1858309010">अपने संदेश कभी न खोएं, यहां तक कि डिवाइस विफल होने या चोरी होने की स्थिति में भी। आपका इतिहास और अटैचमेंट कई डिवाइसों पर सुरक्षित रूप से संग्रहीत हैं।</string>
+	<string name="olvid_plus_dialog_call_title" state="needs_review" hash="269811560">असीमित कॉल करें</string>
+	<string name="olvid_plus_dialog_call_subtitle" state="needs_review" hash="-416813149">Olvid+ के साथ, आप ऑडियो और वीडियो कॉल कर सकते हैं, चाहे वह एक-से-एक हो या समूह में।</string>
+	<string name="olvid_plus_dialog_call_subtitle_1" state="needs_review" hash="-608348196">आपके सभी संपर्क पहुँचा जा सकते हैं, चाहे उनके पास Olvid+ हो या नहीं।</string>
+	<string name="olvid_plus_dialog_call_subtitle_2" state="needs_review" hash="-1804019862">सभी Olvid संचार की तरह समान सुरक्षा स्तर के साथ, सर्वोत्तम कॉल गुणवत्ता का अनुभव करें।</string>
+	<string name="olvid_plus_dialog_support_title" state="needs_review" hash="1942452361">Olvid का समर्थन करें, सभी के लिए निजी संदेशवाहक</string>
+	<string name="olvid_plus_dialog_support_subtitle" state="needs_review" hash="2119917538">ओलविड एक वास्तव में निजी मैसेजिंग ऐप है, जिसे इस तरह से डिज़ाइन किया गया है कि यह कभी भी आपकी व्यक्तिगत जानकारी तक न पहुंचे: किसी फ़ोन नंबर, ईमेल या नाम की आवश्यकता नहीं है।</string>
+	<string name="olvid_plus_dialog_support_subtitle_1" state="needs_review" hash="1809563102">आप जो कुछ भी साझा करते हैं, वह केवल आप और आपके संपर्कों के बीच ही रहता है। कोई और नहीं।</string>
+	<string name="olvid_plus_dialog_support_subtitle_2" state="needs_review" hash="-118773166">ओपन-सोर्स कोड और नियमित ऑडिट के साथ, आपको हमारी बात पर विश्वास करने की आवश्यकता नहीं है।</string>
+	<string name="olvid_plus_dialog_support_subtitle_3" state="needs_review" hash="-1885036855">सदस्यता लेकर, आप Olvid के एक निष्पक्ष और टिकाऊ मिशन का समर्थन करते हैं ताकि यह सभी के लिए मुफ्त रहे, पूरी तरह से विज्ञापन-मुक्त और बिना किसी छिपे शुल्क के।</string>
+	<string name="label_subscription_offer_save_percent" state="needs_review" hash="479307719">%1$d%% सहेजें</string>
+	<string name="label_subscription_offer_monthly" state="needs_review" hash="-1602490190">मासिक</string>
+	<string name="label_subscription_offer_yearly" state="needs_review" hash="1246240165">वार्षिक</string>
 	<string name="label_subscription_status" state="needs_review" hash="1154002053">सदस्यता स्थिति</string>
 	<string name="text_feature_initiate_secure_calls" state="needs_review" hash="1414263062">सुरक्षित कॉल शुरू करें</string>
 	<string name="text_premium_features" state="needs_review" hash="603728806">प्रीमियम सुविधाएँ</string>
@@ -640,7 +674,7 @@
 	<string name="text_premium_features_free_trial" state="needs_review" hash="-1976234715">प्रीमियम सुविधाओं का मुफ्त परीक्षण</string>
 	<string name="button_label_start_free_trial" state="needs_review" hash="-508109296">मुफ़्त परीक्षण शुरू करें</string>
 	<string name="label_free_trial_available" state="needs_review" hash="-995163441">मुफ़्त परीक्षण उपलब्ध है</string>
-	<string name="label_free_trial_explanation" state="needs_review" hash="-596460015">एक महीने के लिए Olvid के सुरक्षित कॉल मुफ्त में आज़माएं (केवल एक बार उपलब्ध)</string>
+	<string name="label_free_trial_explanation" state="needs_review" hash="2050354272">एक महीने के लिए मुफ्त में Olvid के सुरक्षित कॉल आज़माएं (केवल एक बार उपलब्ध)।</string>
 	<string name="toast_message_failed_to_start_free_trial" state="needs_review" hash="-1137706906">मुफ़्त परीक्षण शुरू करने में विफल</string>
 	<string name="toast_message_free_trial_started" state="needs_review" hash="1357863164">मुफ़्त परीक्षण शुरू हुआ</string>
 	<string name="toast_message_error_launching_in_app_purchase" state="needs_review" hash="-1890004340">इन-ऐप खरीदारी शुरू करने में त्रुटि</string>
@@ -648,8 +682,6 @@
 	<string name="toast_message_in_app_purchase_successful" state="needs_review" hash="578109721">इन-ऐप खरीदारी सफल रही</string>
 	<string name="button_label_price_per_month" state="needs_review" hash="-552222952">%1$s प्रति माह</string>
 	<string name="button_label_price_per_year" state="needs_review" hash="1539075788">%1$s प्रति वर्ष</string>
-	<string name="button_label_price_per_month_expanded" state="needs_review" hash="173326792">%1$s\nप्रति माह</string>
-	<string name="button_label_price_per_year_expanded" state="needs_review" hash="1947639238">%1$s\nप्रति वर्ष</string>
 	<string name="text_awaiting_subscription_payment" state="needs_review" hash="1135205985">सदस्यता भुगतान अस्वीकृत</string>
 	<string name="text_subscription_in_grace_period_until" state="needs_review" hash="-1685522686">अनुग्रह अवधि तक: %1$s</string>
 	<string name="text_subscription_on_hold_since" state="needs_review" hash="-515586151">सदस्यता %1$s से रोक दी गई है</string>
@@ -661,9 +693,8 @@
 	<string name="label_failed_to_query_subscription" state="needs_review" hash="-1677001973">सदस्यता योजनाओं को क्वेरी करने में विफल</string>
 	<string name="dialog_title_subscription_required" state="needs_review" hash="-2038592214">सदस्यता आवश्यक है</string>
 	<string name="button_label_check_subscription" state="needs_review" hash="-378220336">सदस्यता स्थिति जांचें</string>
-	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1662886051">Olvid के साथ सुरक्षित फ़ोन कॉल शुरू करने के लिए सदस्यता की आवश्यकता है।\n\nआप "मेरा प्रोफ़ाइल" पृष्ठ पर अपनी वर्तमान सदस्यता स्थिति और उपलब्ध सदस्यता योजनाओं की जांच कर सकते हैं।</string>
-	<string name="dialog_message_subscription_required_web_client" state="needs_review" hash="-760629168">Olvid वेब क्लाइंट से कनेक्ट होने के लिए सदस्यता की आवश्यकता है।\n\nआप "मेरा प्रोफ़ाइल" पृष्ठ पर अपनी वर्तमान सदस्यता स्थिति की जांच कर सकते हैं और उपलब्ध सदस्यता योजनाओं को देख सकते हैं।</string>
-	<string name="dialog_message_subscription_required_multi_device" state="needs_review" hash="-1326423501">एक ही समय में कई डिवाइस पर अपने Olvid प्रोफाइल का उपयोग करने के लिए सदस्यता की आवश्यकता होती है।\n\nआप "मेरा प्रोफाइल" पृष्ठ पर अपनी वर्तमान सदस्यता स्थिति की जांच कर सकते हैं और उपलब्ध सदस्यता योजनाओं को देख सकते हैं।</string>
+	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1231676488">Olvid के साथ सुरक्षित फ़ोन और वीडियो कॉल शुरू करने के लिए सदस्यता की आवश्यकता है।</string>
+	<string name="dialog_title_subscription_plans" state="needs_review" hash="-456474468">सदस्यता योजनाएं</string>
 	<string name="text_ended_on" state="needs_review" hash="1280012933">%1$s को समाप्त हुआ</string>
 	<string name="text_free_trial_ended" state="needs_review" hash="-1458860892">मुफ़्त परीक्षण अवधि समाप्त हो गई</string>
 	<string name="text_free_trial_expired" state="needs_review" hash="-2049452081">मुफ़्त परीक्षण लाइसेंस समाप्त हो गया</string>
@@ -995,13 +1026,13 @@
 	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">पेरिस TURN सर्वर</string>
 	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">न्यूयॉर्क TURN सर्वर</string>
 	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">सिंगापुर TURN सर्वर</string>
-	<string name="dialog_title_android_12_bluetooth_access" state="needs_review" hash="-2140389265">ब्लूटूथ डिवाइस तक पहुंचने की अनुमति का अनुरोध करें</string>
-	<string name="dialog_message_android_12_bluetooth_access" state="needs_review" hash="-332888756">यदि आप Olvid कॉल के लिए ब्लूटूथ हेडसेट का उपयोग करना चाहते हैं, तो आपको Olvid को अपने आस-पास के उपकरणों को "खोजने और कनेक्ट करने" की अनुमति देनी होगी।</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d संपर्क</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">%1$d संपर्क समूह %2$s में</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">अपडेट आवश्यक है</string>
 	<string name="dialog_message_outdated_version" state="needs_review" hash="488074151">आपके Olvid का संस्करण पुराना है और इसे अपडेट करने की आवश्यकता है।\n\nआप शायद कई नई सुविधाओं से चूक रहे हैं और हम आपके संस्करण की नवीनतम संस्करणों के साथ संगतता की गारंटी नहीं दे सकते हैं जिनका आपके संपर्क उपयोग कर सकते हैं।</string>
 	<string name="button_label_remind_me_later" state="needs_review" hash="-713293818">मुझे बाद में याद दिलाएं</string>
+	<string name="label_remind_me_tonight" state="needs_review" hash="707009828">आज रात %1$s पर मुझे याद दिलाएं</string>
+	<string name="label_remind_me_tomorrow" state="needs_review" hash="1904419307">कल %1$s पर मुझे याद दिलाएं</string>
 	<string name="hint_personal_note" state="needs_review" hash="-368244163">व्यक्तिगत नोट</string>
 	<string name="toast_message_unable_to_restore_app_data" state="needs_review" hash="1602628680">चेतावनी: कुछ एप्लिकेशन अनुकूलन पुनर्स्थापित नहीं किए जा सके।</string>
 	<string name="dialog_title_webrtc_permissions_audio_blocked" state="needs_review" hash="1948829165">ऑडियो रिकॉर्डिंग अनुमति अस्वीकृत</string>
@@ -1108,7 +1139,6 @@
 	<string name="pref_reload_backup_configuration_title" state="needs_review" hash="2000428891">बैकअप कॉन्फ़िगरेशन पुनः लोड करें</string>
 	<string name="content_description_back_button" state="needs_review" hash="48196338">वापस</string>
 	<string name="content_description_remove_message_reply_to" state="needs_review" hash="-794585802">संदेश का जवाब हटाएं</string>
-	<string name="content_description_remove_link_preview" state="needs_review" hash="-1085272528">लिंक प्रीव्यू साफ़ करें</string>
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">यह संकेत है कि इस प्रोफ़ाइल के लिए सूचनाएं म्यूट कर दी गई हैं</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">प्रोफ़ाइल बनाएं</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">आपके संगठन का पहचान प्रदाता सफलतापूर्वक कॉन्फ़िगर किया गया है। इसके साथ प्रमाणित करने और अपनी व्यक्तिगत जानकारी प्राप्त करने के लिए नीचे दिए गए "प्रमाणित करें" बटन पर दबाएं।</string>
@@ -1147,14 +1177,11 @@
 	<string name="dialog_title_neutral_notification_when_hidden" state="needs_review" hash="2013281962">जब प्रोफ़ाइल छिपी हो तो तटस्थ सूचना दिखाएं</string>
 	<string name="dialog_message_neutral_notification_when_hidden" state="needs_review" hash="-58494752">जब कोई प्रोफ़ाइल छिपी हुई हो, तो जब तक वह Olvid में वर्तमान में खुली न हो, आपको नए संदेशों के लिए कोई सूचना नहीं मिलेगी। यदि आप यह विकल्प सक्रिय करते हैं, तो एक "Olvid को आपके ध्यान की आवश्यकता है" सूचना प्रदर्शित की जाएगी। फिर आप Olvid खोल सकते हैं और नए संदेश देखने के लिए अपनी छिपी हुई प्रोफ़ाइल को अनलॉक कर सकते हैं।\n\nचेतावनी: इससे यह पता चल सकता है कि आपके पास वास्तव में एक छिपी हुई प्रोफ़ाइल है।</string>
 	<string name="toast_message_password_already_used_other_profile" state="needs_review" hash="390904904">त्रुटि: यह पासवर्ड किसी अन्य छिपे हुए प्रोफ़ाइल द्वारा उपयोग किया जा रहा है।</string>
-	<string name="label_configure_shortcuts" state="needs_review" hash="-857125506">आइकन क्रम बदलें</string>
 	<string name="label_attach_file" state="needs_review" hash="-89285310">फ़ाइलें संलग्न करें</string>
 	<string name="label_attach_image" state="needs_review" hash="-1185400308">तस्वीरें संलग्न करें</string>
 	<string name="label_attach_timer" state="needs_review" hash="-1527208333">अस्थायी संदेश</string>
 	<string name="label_attach_camera" state="needs_review" hash="-1123080444">तस्वीर लो</string>
 	<string name="label_attach_video" state="needs_review" hash="1626268086">वीडियो रिकॉर्ड करें</string>
-	<string name="dialog_title_choose_icon_order" state="needs_review" hash="856935796">अटैचमेंट आइकन प्राथमिकता चुनें</string>
-	<string name="label_icons_below_never_shown" state="needs_review" hash="1250704267">इस रेखा के नीचे दिए गए आइकन कभी नहीं दिखाए जाएंगे</string>
 	<string name="pref_font_scale" state="needs_review" hash="1773040591">फ़ॉन्ट आकार</string>
 	<string name="pref_text_font_scale_0_75" state="needs_review" hash="-1963894407">बहुत छोटा (75%)</string>
 	<string name="pref_text_font_scale_0_9" state="needs_review" hash="-708054676">छोटा (90%)</string>
@@ -1209,7 +1236,6 @@
 	<string name="x_reactions_to" state="needs_review" hash="177752739">%1$d प्रतिक्रियाएँ: %2$s</string>
 	<string name="notification_text_xx_reacted" state="needs_review" hash="647790513">%1$s ने %2$s पर प्रतिक्रिया दी</string>
 	<string name="label_attach_emoji" state="needs_review" hash="-1842205895">एक इमोजी डालें</string>
-	<string name="label_long_press_for_favorite" state="needs_review" hash="1284446174">पसंदीदा में जोड़ने/निकालने के लिए लंबे समय तक दबाएं</string>
 	<string name="menu_action_debug_information" state="needs_review" hash="-919213138">डीबग जानकारी</string>
 	<string name="debug_label_number_of_devices" state="needs_review" hash="1662862352">उपकरणों की संख्या:</string>
 	<string name="debug_label_number_of_devices_no_channel" state="needs_review" hash="808299225">सुरक्षित चैनल के बिना:</string>
@@ -1282,8 +1308,6 @@
 	<string name="dialog_message_incomplete_attachments" state="needs_review" hash="1179188058">आपके द्वारा चुने गए संदेशों में अटैचमेंट हैं जो पूरी तरह से डाउनलोड नहीं हुए हैं। डाउनलोड पूरा होने तक इन संदेशों को अग्रेषित नहीं किया जा सकता है।</string>
 	<string name="dialog_message_incomplete_attachments_partial" state="needs_review" hash="1274554335">आपके द्वारा चुने गए कुछ संदेशों में अटैचमेंट हैं जो पूरी तरह से डाउनलोड नहीं हुए हैं. इन संदेशों को डाउनलोड पूरा होने तक आगे नहीं बढ़ाया जा सकता है.\n\nकेवल उन संदेशों को आगे बढ़ाने के लिए "जारी रखें" दबाएं जिन्हें आगे बढ़ाया जा सकता है.</string>
 	<string name="hint_search_message" state="needs_review" hash="1630003450">संदेश खोजें</string>
-	<string name="menu_action_search_prev" state="needs_review" hash="-1639666563">पिछला</string>
-	<string name="menu_action_search_next" state="needs_review" hash="1158639077">अगला</string>
 	<string name="pref_manage_cloud_backups_title" state="needs_review" hash="824115345">क्लाउड बैकअप प्रबंधित करें</string>
 	<string name="pref_manage_cloud_backups_summary" state="needs_review" hash="-161789549">क्लाउड बैकअप डाउनलोड या मिटाने के लिए क्लिक करें।</string>
 	<string name="dialog_title_manage_cloud_backups" state="needs_review" hash="-1825078945">क्लाउड बैकअप</string>
@@ -1484,7 +1508,7 @@
 	<string name="text_you_became_admin" state="needs_review" hash="2137006821">आप अब इस समूह के व्यवस्थापक हैं</string>
 	<string name="text_you_are_no_longer_admin" state="needs_review" hash="1766709431">आप अब समूह व्यवस्थापक नहीं हैं</string>
 	<string name="text_you_became_writer" state="needs_review" hash="-1671425999">अब आपको संदेश पोस्ट करने की अनुमति है</string>
-	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-762273585">आप अब यहां संदेश पोस्ट नहीं कर सकते</string>
+	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-930933808">आप यहाँ संदेश पोस्ट नहीं कर सकते</string>
 	<string name="label_pending" state="needs_review" hash="1975294811">लंबित</string>
 	<string name="pref_app_language_title" state="needs_review" hash="-1748962099">ऐप भाषा</string>
 	<string name="pref_text_default_device_language" state="needs_review" hash="-1062620207">डिफ़ॉल्ट डिवाइस भाषा</string>
@@ -1570,6 +1594,7 @@
 	<string name="text_invalid_shortcut" state="needs_review" hash="-1219107750">अमान्य शॉर्टकट</string>
 	<string name="text_feature_initiate_secure_calls_from_another_profile" state="needs_review" hash="271258252">सुरक्षित कॉल शुरू करें\n(किसी अन्य प्रोफ़ाइल के माध्यम से उपलब्ध)</string>
 	<string name="dialog_title_confirm_open_link" state="needs_review" hash="46935087">क्या आप यह लिंक अपने ब्राउज़र में खोलना चाहेंगे?</string>
+	<string name="label_open_original_link_with_trackers" state="needs_review" hash="-1586932660">ट्रैकिंग पैरामीटर युक्त मूल लिंक का उपयोग करें</string>
 	<string name="dialog_title_confirm_open_olvid_link" state="needs_review" hash="425949498">क्या आप यह लिंक ओलविड में खोलना चाहेंगे?</string>
 	<string name="toast_message_unable_to_open_url" state="needs_review" hash="-1486954792">URL खोलने में असमर्थ</string>
 	<string name="text_explanation_location_map_provider" state="needs_review" hash="-173394547">मानचित्र प्रदाता का चयन आपको मानचित्र पर साझा करने के लिए सटीक स्थान चुनने की अनुमति देता है। हालाँकि, इससे आपका स्थान (या आपके संपर्कों का स्थान) इस सेवा प्रदाता को प्रकट हो सकता है।</string>
@@ -1580,7 +1605,6 @@
 	<string name="label_no_address_found" state="needs_review" hash="1035554993">कोई पता नहीं मिला</string>
 	<string name="label_zoom_in_for_address" state="needs_review" hash="902696925">पते की तलाश के लिए ज़ूम इन करें</string>
 	<string name="label_address_lookup_disabled" state="needs_review" hash="-2140124686">एड्रेस लुकअप अक्षम</string>
-	<string name="content_description_cancel_message_edit" state="needs_review" hash="984163129">संदेश संपादन रद्द करें</string>
 	<string name="dialog_title_introducing_mentions" state="needs_review" hash="-1741341288">उपयोगकर्ता उल्लेख पेश करते हैं!</string>
 	<string name="dialog_message_introducing_mentions" state="needs_review" hash="622739087">अब Olvid आपको किसी चर्चा में उपयोगकर्ता को टैग करने की अनुमति देता है 🫵! बस @ के बाद एक अक्षर या उनका नाम टाइप करें ताकि यह देखा जा सके कि किसे टैग किया जा सकता है।\nइसके अतिरिक्त, जब आप किसी चर्चा या प्रोफ़ाइल को म्यूट करते हैं 💤, तो आप अब केवल तभी सूचना प्राप्त करने का विकल्प चुन सकते हैं जब आपको किसी संदेश में स्पष्ट रूप से टैग किया गया हो।\n\nध्यान दें कि आपके संपर्कों को आपको टैग किया हुआ देखने के लिए Olvid के नवीनतम संस्करण में अपडेट करने की आवश्यकता होगी।</string>
 	<string name="pref_no_notify_certificate_change_for_previews_title" state="needs_review" hash="-434788963">लिंक प्रीव्यू के लिए प्रमाणपत्र परिवर्तन सूचना बंद करें</string>
@@ -1739,7 +1763,7 @@
 	<string name="troubleshooting_ignored" state="needs_review" hash="816017832">अनदेखा किया गया</string>
 	<string name="onboarding_transfer_multidevice_purchase_question" state="needs_review" hash="351030441">क्या आप चाहते हैं कि आपके सभी डिवाइस सक्रिय रहें?</string>
 	<string name="onboarding_transfer_multidevice_purchase_hyperlink" state="needs_review" hash="747183939">इस तरह</string>
-	<string name="button_label_subscribe_now" state="needs_review" hash="1805105542">अभी सदस्यता लें</string>
+	<string name="button_label_subscribe_with_price" state="needs_review" hash="324675175">सदस्यता लें • %1$s</string>
 	<string name="onboarding_transfer_devices_loading_title" state="needs_review" hash="801961341">डिवाइस सूची प्राप्त की जा रही है…</string>
 	<string name="dialog_title_introducing_multi_device" state="needs_review" hash="-310103349">पेश है Olvid Desktop और मल्टी-डिवाइस सपोर्ट!</string>
 	<string name="dialog_message_introducing_multi_device" state="needs_review" hash="-153162506">Olvid अब आपके **कंप्यूटर** (Windows और macOS) के लिए उपलब्ध है। आप नवीनतम संस्करण यहां से डाउनलोड कर सकते हैं:\nhttps://olvid.io/download/\n\n**मल्टी-डिवाइस** सपोर्ट के साथ, अपने फोन पर बातचीत शुरू करें और उसे अपने कंप्यूटर पर जारी रखें। अपने डिवाइस और संपर्कों के बीच फ़ाइलें साझा करना कभी आसान नहीं रहा!</string>
@@ -1929,7 +1953,6 @@
 	<string name="pref_archived_attachments_summary" state="needs_review" hash="1596754073">जब यह चालू है, तो संग्रहित वार्तालापों के अटैचमेंट उपरोक्त सेटिंग के अनुसार स्वचालित रूप से डाउनलोड किए जाएंगे।</string>
 	<string name="pref_unarchive_on_notification_title" state="needs_review" hash="-1146947153">नोटिफिकेशन पर चर्चाओं को अनआर्काइव करें</string>
 	<string name="pref_unarchive_on_notification_summary" state="needs_review" hash="778062251">जब यह चालू है, तो संग्रहित वार्तालाप एक नया संदेश सूचना प्राप्त होने पर स्वचालित रूप से अनार्काइव हो जाएंगे।</string>
-	<string name="call_notification_ongoing_call" state="needs_review" hash="1828207822">चल रही कॉल</string>
 	<string name="call_notification_incoming_call" state="needs_review" hash="-1223043344">आने वाला कॉल</string>
 	<string name="menu_action_copy_text_from_image" state="needs_review" hash="-1072685983">इस शब्द को कॉपी करें</string>
 	<string name="menu_action_copy_text_block_from_image" state="needs_review" hash="1436026569">पूरा ब्लॉक कॉपी करें</string>
@@ -2120,4 +2143,8 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">पीयर डिवाइस अनुपलब्ध है</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">सभी सुरक्षित चैनलों को फिर से बनाएँ</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">सभी सुरक्षित चैनलों को फिर से बनाने से Olvid आपके संपर्कों के सभी उपकरणों के साथ नए सुरक्षित संचार चैनल बनाने के लिए मजबूर हो जाएगा। यह आमतौर पर उपयोगी नहीं है, लेकिन दुर्लभ स्थितियों को हल कर सकता है जहां ये चैनल «सिंक से बाहर» हैं।\n\n**चेतावनी:** यदि आपके पास बहुत सारे संपर्क हैं, तो इस ऑपरेशन में कुछ मिनट लग सकते हैं और आप इसके चलने के दौरान कुछ आने वाले संदेश खो सकते हैं।</string>
+	<string name="label_hanged_up" state="needs_review" hash="-1516413384">कॉल कट हो गई</string>
+	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">क्या आपको अपनी टीम के लिए सब्सक्रिप्शन की आवश्यकता है?</string>
+	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Olvid स्टोर पर जाएं</string>
+	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">रिमाइंडर सेट हो गया</string>
 </resources>

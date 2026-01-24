@@ -1484,6 +1484,7 @@ public class Message {
 
         // when computing the message status, do not take the recipient info of my other owned devices into account, unless this is the only recipient info (discussion with myself)
         boolean ignoreOwnRecipientInfo = messageRecipientInfos.size() > 1;
+        int unsentCount = 0;
         int recipientsCount = 0;
         int processingCount = 0;
         int deliveredCount = 0;
@@ -1497,6 +1498,7 @@ public class Message {
             recipientsCount++;
 
             if (messageRecipientInfo.engineMessageIdentifier == null) {
+                unsentCount++;
                 continue;
             }
 
@@ -1513,7 +1515,7 @@ public class Message {
 
 
         final int newStatus;
-        if (processingCount != 0) {
+        if (processingCount != 0 || unsentCount == recipientsCount) {
             newStatus = STATUS_PROCESSING;
         } else if (deliveredCount == 0) {
             newStatus = STATUS_SENT;

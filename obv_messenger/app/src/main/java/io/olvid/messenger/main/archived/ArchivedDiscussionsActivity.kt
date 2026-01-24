@@ -86,7 +86,6 @@ import io.olvid.messenger.main.discussions.getAnnotatedTitle
 import io.olvid.messenger.main.invitations.InvitationListViewModel
 import io.olvid.messenger.notifications.NotificationActionService
 import kotlinx.coroutines.launch
-import kotlin.getValue
 
 class ArchivedDiscussionsActivity : LockableActivity() {
 
@@ -120,7 +119,7 @@ class ArchivedDiscussionsActivity : LockableActivity() {
                     SelectionTopAppBar(
                         title = stringResource(R.string.activity_title_archived_discussions),
                         selection = discussionListViewModel.selection,
-                        actions = buildList {
+                        selectionActions = buildList {
                             add(R.drawable.ic_delete_outline to {
                                 discussionListViewModel.deleteDiscussions(
                                     discussions = discussionListViewModel.selection.map { it.discussion },

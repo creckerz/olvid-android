@@ -2171,6 +2171,39 @@ public class AndroidNotificationManager {
         return (int) (0xfffffff & messageId) | 0xa0000000;
     }
 
+    private static int getSubscriptionReminderNotificationId() {
+        return 0xb000000;
+    }
+
+    @SuppressLint("MissingPermission")
+    public static void displaySubscriptionReminderNotification() {
+        executor.execute(() -> {
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(App.getContext(), MESSAGE_NOTIFICATION_CHANNEL_ID + getCurrentMessageChannelVersion())
+                    .setSmallIcon(R.drawable.ic_o)
+                    .setColor(ContextCompat.getColor(App.getContext(), R.color.olvid_gradient_dark))
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setCategory(NotificationCompat.CATEGORY_REMINDER)
+                    .setContentTitle(App.getContext().getString(R.string.olvid_plus_discover))
+                    .setContentText(App.getContext().getString(R.string.olvid_plus_upgrade_title))
+                    .setVibrate(new long[0]);
+
+            int notificationId = getSubscriptionReminderNotificationId();
+
+            Intent contentIntent = new Intent(App.getContext(), MainActivity.class);
+            contentIntent.setAction(MainActivity.OLVID_PLUS_ACTION);
+            PendingIntent contentPendingIntent = PendingIntent.getActivity(App.getContext(), notificationId, contentIntent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+            builder.setContentIntent(contentPendingIntent);
+            builder.setAutoCancel(true);
+
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(App.getContext());
+            notificationManager.notify(notificationId, builder.build());
+
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+                vibrate(null);
+            }
+        });
+    }
+
     private static void vibrate(@Nullable DiscussionCustomization discussionCustomization) {
         Vibrator v = (Vibrator) App.getContext().getSystemService(Context.VIBRATOR_SERVICE);
         if (v != null) {

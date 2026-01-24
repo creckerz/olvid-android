@@ -50,6 +50,7 @@ import io.olvid.engine.networkfetch.operations.DownloadMessagesExtendedPayloadOp
 public class DownloadMessageExtendedPayloadCoordinator implements Operation.OnCancelCallback, Operation.OnFinishCallback, InboxMessage.ExtendedPayloadListener {
     private final FetchManagerSessionFactory fetchManagerSessionFactory;
     private final SSLSocketFactory sslSocketFactory;
+    private final String userAgentOverride;
     private final CreateServerSessionDelegate createServerSessionDelegate;
 
     private final ExponentialBackoffRepeatingScheduler<Identity> scheduler;
@@ -66,9 +67,10 @@ public class DownloadMessageExtendedPayloadCoordinator implements Operation.OnCa
     private NotificationListeningDelegate notificationListeningDelegate;
     private NotificationPostingDelegate notificationPostingDelegate;
 
-    public DownloadMessageExtendedPayloadCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, CreateServerSessionDelegate createServerSessionDelegate) {
+    public DownloadMessageExtendedPayloadCoordinator(FetchManagerSessionFactory fetchManagerSessionFactory, SSLSocketFactory sslSocketFactory, String userAgentOverride, CreateServerSessionDelegate createServerSessionDelegate) {
         this.fetchManagerSessionFactory = fetchManagerSessionFactory;
         this.sslSocketFactory = sslSocketFactory;
+        this.userAgentOverride = userAgentOverride;
         this.createServerSessionDelegate = createServerSessionDelegate;
 
         downloadMessagesExtendedPayloadOperationQueue = new NoDuplicateOperationQueue();
@@ -135,7 +137,7 @@ public class DownloadMessageExtendedPayloadCoordinator implements Operation.OnCa
 
 
     private void queueNewDownloadMessagesExtendedPayloadOperation(Identity identity, UID messageUid) {
-        DownloadMessagesExtendedPayloadOperation op = new DownloadMessagesExtendedPayloadOperation(fetchManagerSessionFactory, sslSocketFactory, identity, messageUid, this, this);
+        DownloadMessagesExtendedPayloadOperation op = new DownloadMessagesExtendedPayloadOperation(fetchManagerSessionFactory, sslSocketFactory, userAgentOverride, identity, messageUid, this, this);
         downloadMessagesExtendedPayloadOperationQueue.queue(op);
     }
 

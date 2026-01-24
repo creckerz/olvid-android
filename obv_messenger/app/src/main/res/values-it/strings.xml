@@ -101,7 +101,10 @@
 	<string name="format_identity_details_custom_field" state="needs_review" hash="-1073344790">%1$s: %2$s</string>
 	<string name="hint_company" state="needs_review" hash="379200324">Azienda (facoltativo)</string>
 	<string name="hint_compose_your_message" state="needs_review" hash="-25761578">Scrivi un messaggio</string>
+	<string name="hint_compose_your_message_ephemeral" state="needs_review" hash="-1527208333">Messaggio effimero</string>
 	<string name="label_edit_your_message" state="needs_review" hash="1091877412">Modifica il tuo messaggio</string>
+	<string name="label_reply_to_x" state="needs_review" hash="1941377665">Risposta a %s</string>
+	<string name="label_reply_to_message" state="needs_review" hash="1280949769">Rispondi al messaggio</string>
 	<string name="label_selection_formatting" state="needs_review" hash="205892951">Formattazione</string>
 	<string name="label_selection_code" state="needs_review" hash="-803834470">Codice</string>
 	<string name="label_selection_list" state="needs_review" hash="762025321">Lista</string>
@@ -467,7 +470,7 @@
 	<string name="menu_action_choose_picture" state="needs_review" hash="-1655172909">Scegli un\'immagine</string>
 	<string name="menu_action_take_photo" state="needs_review" hash="-1123080444">Scatta una foto</string>
 	<string name="menu_action_remove_image" state="needs_review" hash="1094977672">Rimuovi immagine</string>
-	<string name="dialog_title_create_empty_group" state="needs_review" hash="-2016542453">Creare gruppo vuoto?</string>
+	<string name="dialog_title_create_empty_group" state="needs_review" hash="-663434464">Creare un gruppo vuoto?</string>
 	<string name="dialog_message_create_empty_group" state="needs_review" hash="-297923005">Non hai selezionato alcun contatto da aggiungere al tuo gruppo. Sei sicuro di voler creare un gruppo vuoto?</string>
 	<string name="pref_dark_mode_title" state="needs_review" hash="816474245">Modalità scura</string>
 	<string name="pref_dark_mode_summary" state="needs_review" hash="-623740894">Attiva la modalità scura per risparmiare batteria e proteggere i tuoi occhi.</string>
@@ -558,6 +561,37 @@
 	<string name="dialog_title_webrtc_kick_participant" state="needs_review" hash="389469769">Escludi il contatto dalla chiamata?</string>
 	<string name="webrtc_failed_kicked" state="needs_review" hash="-758835021">Sei stato escluso da questa chiamata</string>
 	<string name="dialog_title_start_conference_call" state="needs_review" hash="-1418585505">Avvia una conferenza</string>
+	<string name="olvid_plus_discover" state="needs_review" hash="-924831172">Scopri Olvid+</string>
+	<string name="olvid_plus_upgrade_title" state="needs_review" hash="-1960092784">Passa a Olvid+ per l\'esperienza completa dell\'app</string>
+	<string name="olvid_plus_upgrade_renew" state="needs_review" hash="-4149901">Il piano si rinnova automaticamente per %1$s fino all\'annullamento.</string>
+	<string name="olvid_plus_tip_multi_device_title" state="needs_review" hash="481576448">Utilizza Olvid su tutti i tuoi dispositivi</string>
+	<string name="olvid_plus_tip_multi_device_subtitle" state="needs_review" hash="1352342578">Olvid+ ti permette di utilizzare Olvid sui tuoi smartphone e computer.\nI tuoi messaggi rimangono sincronizzati su tutti i tuoi dispositivi per essere sempre connesso.</string>
+	<string name="olvid_plus_tip_call_title" state="needs_review" hash="935809736">Chiamate illimitate</string>
+	<string name="olvid_plus_tip_call_subtitle" state="needs_review" hash="1137191310">Olvid+ ti permette di effettuare chiamate vocali e video crittografate end-to-end.\nRaggiungi qualsiasi utente Olvid in modo sicuro, anche se non ha Olvid+.</string>
+	<string name="olvid_plus_tip_support_title" state="needs_review" hash="-1930411305">Sostieni la nostra visione</string>
+	<string name="olvid_plus_tip_support_subtitle" state="needs_review" hash="-1404875508">Sblocca il supporto multi-dispositivo e le chiamate sicure con Olvid+.\nIl tuo abbonamento supporta un modello sostenibile e onesto, mantenendo Olvid gratuito per tutti, senza pubblicità o costi nascosti.</string>
+	<string name="olvid_plus_offer_multi_device_title" state="needs_review" hash="-623969503">Usa Olvid su più dispositivi</string>
+	<string name="olvid_plus_offer_multi_device_subtitle" state="needs_review" hash="-123640091">Usa Olvid sul tuo computer. Proteggi tutti i tuoi messaggi.</string>
+	<string name="olvid_plus_offer_call_title" state="needs_review" hash="935809736">Chiamate illimitate</string>
+	<string name="olvid_plus_offer_call_subtitle" state="needs_review" hash="-1827478007">Effettua chiamate vocali e video con qualsiasi dei tuoi contatti.</string>
+	<string name="olvid_plus_offer_support_title" state="needs_review" hash="-1272799411">Supporta Olvid</string>
+	<string name="olvid_plus_offer_support_subtitle" state="needs_review" hash="841023374">Promuovi un modello sostenibile e onesto che non sfrutti i dati personali.</string>
+	<string name="olvid_plus_dialog_multi_device_title" state="needs_review" hash="561167181">Usa Olvid su tutti i tuoi dispositivi</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle" state="needs_review" hash="1178448519">Con Olvid+, puoi sincronizzare i tuoi messaggi Olvid tra smartphone e computer. Sei sempre raggiungibile!</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_1" state="needs_review" hash="155287050">Goditi del comfort di una tastiera e di uno schermo ampio e inviare facilmente file dal tuo computer.</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_2" state="needs_review" hash="1858309010">Non perdere mai i tuoi messaggi, nemmeno in caso di guasto o furto del dispositivo. La tua cronologia e gli allegati sono archiviati in modo sicuro su più dispositivi.</string>
+	<string name="olvid_plus_dialog_call_title" state="needs_review" hash="269811560">Chiamate illimitate</string>
+	<string name="olvid_plus_dialog_call_subtitle" state="needs_review" hash="-416813149">Con Olvid+, puoi effettuare chiamate audio e video, sia individuali che di gruppo.</string>
+	<string name="olvid_plus_dialog_call_subtitle_1" state="needs_review" hash="-608348196">Tutti i tuoi contatti sono raggiungibili, che abbiano o meno Olvid+.</string>
+	<string name="olvid_plus_dialog_call_subtitle_2" state="needs_review" hash="-1804019862">Goditi di una qualità delle chiamate ottimale, con lo stesso livello di sicurezza di tutte le tue comunicazioni Olvid.</string>
+	<string name="olvid_plus_dialog_support_title" state="needs_review" hash="1942452361">Supporta Olvid, il messenger privato per tutti</string>
+	<string name="olvid_plus_dialog_support_subtitle" state="needs_review" hash="2119917538">Olvid è una vera e propria app di messaggistica privata, progettata per funzionare senza mai accedere alle tue informazioni personali: non è richiesto numero di telefono, email o nome.</string>
+	<string name="olvid_plus_dialog_support_subtitle_1" state="needs_review" hash="1809563102">Tutto ciò che scambi rimane tra te e i tuoi contatti. Nessun altro.</string>
+	<string name="olvid_plus_dialog_support_subtitle_2" state="needs_review" hash="-118773166">Con codice open source e audit regolari, non devi prenderci per fede.</string>
+	<string name="olvid_plus_dialog_support_subtitle_3" state="needs_review" hash="-1885036855">Abbonandoti, supporti una missione equa e sostenibile per mantenere Olvid gratuito per tutti, completamente senza pubblicità e costi nascosti.</string>
+	<string name="label_subscription_offer_save_percent" state="needs_review" hash="479307719">Risparmia %1$d%%</string>
+	<string name="label_subscription_offer_monthly" state="needs_review" hash="-1602490190">Mensile</string>
+	<string name="label_subscription_offer_yearly" state="needs_review" hash="1246240165">Annuale</string>
 	<string name="label_subscription_status" state="needs_review" hash="1154002053">Stato dell\'abbonamento</string>
 	<string name="text_feature_initiate_secure_calls" state="needs_review" hash="1414263062">Avvia chiamate sicure</string>
 	<string name="text_premium_features" state="needs_review" hash="603728806">Funzionalità Premium</string>
@@ -640,7 +674,7 @@
 	<string name="text_premium_features_free_trial" state="needs_review" hash="-1976234715">Prova gratuita delle funzionalità premium</string>
 	<string name="button_label_start_free_trial" state="needs_review" hash="-508109296">Inizia la prova gratuita</string>
 	<string name="label_free_trial_available" state="needs_review" hash="-995163441">Prova gratuita disponibile</string>
-	<string name="label_free_trial_explanation" state="needs_review" hash="-596460015">Prova le chiamate sicure di Olvid gratuitamente per un mese (disponibile solo una volta)</string>
+	<string name="label_free_trial_explanation" state="needs_review" hash="2050354272">Prova le chiamate sicure di Olvid gratuitamente per un mese (disponibile solo una volta).</string>
 	<string name="toast_message_failed_to_start_free_trial" state="needs_review" hash="-1137706906">Impossibile avviare la prova gratuita</string>
 	<string name="toast_message_free_trial_started" state="needs_review" hash="1357863164">Prova gratuita avviata</string>
 	<string name="toast_message_error_launching_in_app_purchase" state="needs_review" hash="-1890004340">Errore nell\'iniziare l\'acquisto in-app</string>
@@ -648,8 +682,6 @@
 	<string name="toast_message_in_app_purchase_successful" state="needs_review" hash="578109721">Acquisto in-app riuscito</string>
 	<string name="button_label_price_per_month" state="needs_review" hash="-552222952">%1$s al mese</string>
 	<string name="button_label_price_per_year" state="needs_review" hash="1539075788">%1$s all\'anno</string>
-	<string name="button_label_price_per_month_expanded" state="needs_review" hash="173326792">%1$s\nal mese</string>
-	<string name="button_label_price_per_year_expanded" state="needs_review" hash="1947639238">%1$s\nal anno</string>
 	<string name="text_awaiting_subscription_payment" state="needs_review" hash="1135205985">Pagamento dell\'abbonamento rifiutato</string>
 	<string name="text_subscription_in_grace_period_until" state="needs_review" hash="-1685522686">In periodo di grazia fino a: %1$s</string>
 	<string name="text_subscription_on_hold_since" state="needs_review" hash="-515586151">Abbonamento sospeso dal: %1$s</string>
@@ -661,9 +693,8 @@
 	<string name="label_failed_to_query_subscription" state="needs_review" hash="-1677001973">Impossibile recuperare i piani di abbonamento</string>
 	<string name="dialog_title_subscription_required" state="needs_review" hash="-2038592214">È richiesto un abbonamento</string>
 	<string name="button_label_check_subscription" state="needs_review" hash="-378220336">Verifica lo stato dell\'abbonamento</string>
-	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1662886051">Avviare chiamate telefoniche sicure con Olvid richiede un abbonamento.\n\nPuoi controllare lo stato del tuo abbonamento e visualizzare i piani di abbonamento disponibili nella pagina \"Il mio profilo\".</string>
-	<string name="dialog_message_subscription_required_web_client" state="needs_review" hash="-760629168">Connettersi al client web di Olvid richiede un abbonamento.\n\nPuoi controllare lo stato del tuo abbonamento e visualizzare i piani di abbonamento disponibili nella pagina \"Il mio profilo\".</string>
-	<string name="dialog_message_subscription_required_multi_device" state="needs_review" hash="-1326423501">Utilizzare il tuo profilo Olvid su più dispositivi contemporaneamente richiede un abbonamento.\n\nPuoi controllare lo stato del tuo abbonamento e visualizzare i piani di abbonamento disponibili nella pagina \"Il mio profilo\".</string>
+	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1231676488">Avviare chiamate vocali e video sicure con Olvid richiede un abbonamento.</string>
+	<string name="dialog_title_subscription_plans" state="needs_review" hash="-456474468">Piani di abbonamento</string>
 	<string name="text_ended_on" state="needs_review" hash="1280012933">Terminata il: %1$s</string>
 	<string name="text_free_trial_ended" state="needs_review" hash="-1458860892">Periodo di prova gratuito terminato</string>
 	<string name="text_free_trial_expired" state="needs_review" hash="-2049452081">Licenza di prova gratuita scaduta</string>
@@ -995,13 +1026,13 @@
 	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">Server TURN di Parigi</string>
 	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">Server TURN di New York</string>
 	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">Server TURN di Singapore</string>
-	<string name="dialog_title_android_12_bluetooth_access" state="needs_review" hash="-2140389265">Richiedi il permesso di accedere ai dispositivi Bluetooth</string>
-	<string name="dialog_message_android_12_bluetooth_access" state="needs_review" hash="-332888756">Se vuoi utilizzare un auricolare Bluetooth per le chiamate Olvid, devi consentire a Olvid di \"trovare e connettersi\" ai tuoi dispositivi nelle vicinanze.</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d contatti</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">%1$d contatti nel gruppo %2$s</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">Aggiornamento richiesto</string>
 	<string name="dialog_message_outdated_version" state="needs_review" hash="488074151">La tua versione di Olvid è obsoleta e deve essere aggiornata.\n\nProbabilmente ti stai perdendo molte nuove funzionalità e non possiamo garantire la compatibilità della tua versione con le versioni più recenti dell\'app che potrebbero utilizzare i tuoi contatti.</string>
 	<string name="button_label_remind_me_later" state="needs_review" hash="-713293818">Ricordamelo più tardi</string>
+	<string name="label_remind_me_tonight" state="needs_review" hash="707009828">Ricordami stasera alle %1$s</string>
+	<string name="label_remind_me_tomorrow" state="needs_review" hash="1904419307">Ricordami domani alle %1$s</string>
 	<string name="hint_personal_note" state="needs_review" hash="-368244163">Nota personale</string>
 	<string name="toast_message_unable_to_restore_app_data" state="needs_review" hash="1602628680">ATTENZIONE: alcune personalizzazioni dell\'applicazione non sono state ripristinate</string>
 	<string name="dialog_title_webrtc_permissions_audio_blocked" state="needs_review" hash="1948829165">Autorizzazione alla registrazione audio negata</string>
@@ -1108,7 +1139,6 @@
 	<string name="pref_reload_backup_configuration_title" state="needs_review" hash="2000428891">Ricarica la configurazione del backup</string>
 	<string name="content_description_back_button" state="needs_review" hash="48196338">Indietro</string>
 	<string name="content_description_remove_message_reply_to" state="needs_review" hash="-794585802">Elimina risposta al messaggio</string>
-	<string name="content_description_remove_link_preview" state="needs_review" hash="-1085272528">Rimuovi l\'anteprima del link</string>
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">Indicatore che le notifiche sono disattivate per questo profilo</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">Crea un profilo</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">Il provider di identità della tua azienda è stato configurato correttamente. Premi il pulsante \"autentica\" qui sotto per autenticarti con esso e recuperare le tue informazioni personali.</string>
@@ -1148,14 +1178,11 @@
 	<string name="dialog_title_neutral_notification_when_hidden" state="needs_review" hash="2013281962">Mostra una notifica neutra quando il profilo è nascosto</string>
 	<string name="dialog_message_neutral_notification_when_hidden" state="needs_review" hash="-58494752">Quando un profilo è nascosto, a meno che non sia attualmente aperto in Olvid, non riceverai alcuna notifica per i nuovi messaggi. Se attivi questa opzione, verrà visualizzata una notifica \"Olvid richiede la tua attenzione\". Potrai quindi aprire Olvid e sbloccare il tuo profilo nascosto per vedere i nuovi messaggi.\n\nAvviso: questo potrebbe rivelare il fatto che hai un profilo nascosto.</string>
 	<string name="toast_message_password_already_used_other_profile" state="needs_review" hash="390904904">Errore: questa password è già utilizzata da un altro profilo nascosto</string>
-	<string name="label_configure_shortcuts" state="needs_review" hash="-857125506">Modifica l\'ordine delle icone</string>
 	<string name="label_attach_file" state="needs_review" hash="-89285310">Allega file</string>
 	<string name="label_attach_image" state="needs_review" hash="-1185400308">Allega immagini</string>
 	<string name="label_attach_timer" state="needs_review" hash="-1527208333">Messaggio effimero</string>
 	<string name="label_attach_camera" state="needs_review" hash="-1123080444">Scatta una foto</string>
 	<string name="label_attach_video" state="needs_review" hash="1626268086">Registra un video</string>
-	<string name="dialog_title_choose_icon_order" state="needs_review" hash="856935796">Scegli la priorità dell\'icona allegato</string>
-	<string name="label_icons_below_never_shown" state="needs_review" hash="1250704267">Le icone sotto questa linea non verranno mai visualizzate</string>
 	<string name="pref_font_scale" state="needs_review" hash="1773040591">Dimensione del carattere</string>
 	<string name="pref_text_font_scale_0_75" state="needs_review" hash="-1963894407">Piccolo (75%)</string>
 	<string name="pref_text_font_scale_0_9" state="needs_review" hash="-708054676">Piccola (90%)</string>
@@ -1210,7 +1237,6 @@
 	<string name="x_reactions_to" state="needs_review" hash="177752739">%1$d reazioni a: %2$s</string>
 	<string name="notification_text_xx_reacted" state="needs_review" hash="647790513">%1$s ha reagito a %2$s</string>
 	<string name="label_attach_emoji" state="needs_review" hash="-1842205895">Inserisci un emoji</string>
-	<string name="label_long_press_for_favorite" state="needs_review" hash="1284446174">Tieni premuto per aggiungere/rimuovere dai preferiti</string>
 	<string name="menu_action_debug_information" state="needs_review" hash="-919213138">Informazioni di debug</string>
 	<string name="debug_label_number_of_devices" state="needs_review" hash="1662862352">Numero di dispositivi:</string>
 	<string name="debug_label_number_of_devices_no_channel" state="needs_review" hash="808299225">Senza canale sicuro:</string>
@@ -1283,8 +1309,6 @@
 	<string name="dialog_message_incomplete_attachments" state="needs_review" hash="1179188058">I messaggi che hai selezionato contengono allegati che non sono stati scaricati completamente. Questi messaggi non possono essere inoltrati finché il download non è completo.</string>
 	<string name="dialog_message_incomplete_attachments_partial" state="needs_review" hash="1274554335">Alcuni dei messaggi che hai selezionato contengono allegati che non sono stati scaricati completamente. Questi messaggi non possono essere inoltrati finché il download non è completo.\n\nPremi \"Continua\" per inoltrare solo i messaggi che possono essere inoltrati.</string>
 	<string name="hint_search_message" state="needs_review" hash="1630003450">Cerca messaggio</string>
-	<string name="menu_action_search_prev" state="needs_review" hash="-1639666563">Precedente</string>
-	<string name="menu_action_search_next" state="needs_review" hash="1158639077">Avanti</string>
 	<string name="pref_manage_cloud_backups_title" state="needs_review" hash="824115345">Gestisci i backup nel cloud</string>
 	<string name="pref_manage_cloud_backups_summary" state="needs_review" hash="-161789549">Tocca per scaricare o eliminare i backup nel cloud.</string>
 	<string name="dialog_title_manage_cloud_backups" state="needs_review" hash="-1825078945">Backup nel cloud</string>
@@ -1485,7 +1509,7 @@
 	<string name="text_you_became_admin" state="needs_review" hash="2137006821">Ora sei un amministratore del gruppo</string>
 	<string name="text_you_are_no_longer_admin" state="needs_review" hash="1766709431">Non sei più un amministratore del gruppo</string>
 	<string name="text_you_became_writer" state="needs_review" hash="-1671425999">Ora puoi inviare messaggi</string>
-	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-762273585">Non puoi più inviare messaggi qui</string>
+	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-930933808">Non puoi inviare messaggi qui</string>
 	<string name="label_pending" state="needs_review" hash="1975294811">In sospeso</string>
 	<string name="pref_app_language_title" state="needs_review" hash="-1748962099">Lingua dell\'app</string>
 	<string name="pref_text_default_device_language" state="needs_review" hash="-1062620207">Lingua predefinita del dispositivo</string>
@@ -1571,6 +1595,7 @@
 	<string name="text_invalid_shortcut" state="needs_review" hash="-1219107750">Scorciatoia non valida</string>
 	<string name="text_feature_initiate_secure_calls_from_another_profile" state="needs_review" hash="271258252">Avvia chiamate sicure\n(disponibile tramite un altro profilo)</string>
 	<string name="dialog_title_confirm_open_link" state="needs_review" hash="46935087">Apri questo link nel tuo browser?</string>
+	<string name="label_open_original_link_with_trackers" state="needs_review" hash="-1586932660">Utilizza il link originale contenente i parametri di tracciamento</string>
 	<string name="dialog_title_confirm_open_olvid_link" state="needs_review" hash="425949498">Apri questo link in Olvid?</string>
 	<string name="toast_message_unable_to_open_url" state="needs_review" hash="-1486954792">Impossibile aprire l\'URL</string>
 	<string name="text_explanation_location_map_provider" state="needs_review" hash="-173394547">Scegliere un fornitore di mappe consente di selezionare con precisione la posizione che desideri condividere su una mappa. Tuttavia, ciò potrebbe rivelare la tua posizione (o quella dei tuoi contatti) a questo fornitore di servizi.</string>
@@ -1581,7 +1606,6 @@
 	<string name="label_no_address_found" state="needs_review" hash="1035554993">Nessun indirizzo trovato</string>
 	<string name="label_zoom_in_for_address" state="needs_review" hash="902696925">Zoom per cercare l\'indirizzo</string>
 	<string name="label_address_lookup_disabled" state="needs_review" hash="-2140124686">Ricerca indirizzi disabilitata</string>
-	<string name="content_description_cancel_message_edit" state="needs_review" hash="984163129">Annulla modifica messaggio</string>
 	<string name="dialog_title_introducing_mentions" state="needs_review" hash="-1741341288">Presentiamo le menzioni utente!</string>
 	<string name="dialog_message_introducing_mentions" state="needs_review" hash="622739087">Olvid ora consente di menzionare un utente in una discussione 🫵! Basta digitare @ seguito da una lettera o dal suo nome per vedere chi può essere menzionato.\nInoltre, quando metti in silenzio 💤 una discussione o un profilo, ora puoi scegliere di essere avvisato solo quando vieni menzionato esplicitamente in un messaggio.\n\nNota che i tuoi contatti dovranno aggiornare all\'ultima versione di Olvid per vedere che li hai menzionati.</string>
 	<string name="pref_no_notify_certificate_change_for_previews_title" state="needs_review" hash="-434788963">Disabilita la notifica di modifica del certificato per le anteprime dei link</string>
@@ -1740,7 +1764,7 @@
 	<string name="troubleshooting_ignored" state="needs_review" hash="816017832">Ignorato</string>
 	<string name="onboarding_transfer_multidevice_purchase_question" state="needs_review" hash="351030441">Vuoi che tutti i tuoi dispositivi rimangano attivi?</string>
 	<string name="onboarding_transfer_multidevice_purchase_hyperlink" state="needs_review" hash="747183939">Da questa parte</string>
-	<string name="button_label_subscribe_now" state="needs_review" hash="1805105542">Iscriviti ora</string>
+	<string name="button_label_subscribe_with_price" state="needs_review" hash="324675175">Iscriviti • %1$s</string>
 	<string name="onboarding_transfer_devices_loading_title" state="needs_review" hash="801961341">Recupero elenco dispositivi…</string>
 	<string name="dialog_title_introducing_multi_device" state="needs_review" hash="-310103349">Presentiamo Olvid Desktop e multi-dispositivo!</string>
 	<string name="dialog_message_introducing_multi_device" state="needs_review" hash="-153162506">Olvid è ora disponibile per **il tuo computer** (Windows e macOS). Puoi scaricare l\'ultima versione da:\nhttps://olvid.io/download/\n\nGrazie al supporto **multi-dispositivo**, inizia una conversazione sul tuo telefono e continua sul tuo computer. Condividere file tra i tuoi dispositivi e con i tuoi contatti non è mai stato così facile.</string>
@@ -1930,7 +1954,6 @@
 	<string name="pref_archived_attachments_summary" state="needs_review" hash="1596754073">Quando attivata, le allegati delle conversazioni archiviate verranno scaricati automaticamente in base alle impostazioni sopra indicate.</string>
 	<string name="pref_unarchive_on_notification_title" state="needs_review" hash="-1146947153">Disarchiviare le conversazioni sulla notifica</string>
 	<string name="pref_unarchive_on_notification_summary" state="needs_review" hash="778062251">Quando è attivo, le conversazioni archiviate vengono automaticamente ripristinate quando si riceve una notifica di nuovo messaggio.</string>
-	<string name="call_notification_ongoing_call" state="needs_review" hash="1828207822">Chiamata in corso</string>
 	<string name="call_notification_incoming_call" state="needs_review" hash="-1223043344">Chiamata in arrivo</string>
 	<string name="menu_action_copy_text_from_image" state="needs_review" hash="-1072685983">Copia questa parola</string>
 	<string name="menu_action_copy_text_block_from_image" state="needs_review" hash="1436026569">Copia l\'intero blocco</string>
@@ -2121,4 +2144,8 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Dispositivo del peer irraggiungibile</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Ricrea tutti i canali sicuri</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Ricreare tutti i canali sicuri forzerà Olvid a creare nuovi canali di comunicazione sicuri con tutti i dispositivi dei tuoi contatti. Questo generalmente non è utile, ma può risolvere rare situazioni in cui alcuni di questi canali sono \"fuori sincronia\".\n\n**Attenzione:** se hai molti contatti, questa operazione potrebbe richiedere alcuni minuti e potresti perdere alcuni messaggi in arrivo durante la sua esecuzione.</string>
+	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Chiamata terminata</string>
+	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">Hai bisogno di abbonamenti per il tuo team?</string>
+	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Visita il negozio Olvid</string>
+	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">Promemoria impostato</string>
 </resources>

@@ -262,4 +262,8 @@
 		<item quantity="one" state="needs_review" hash="-1602016664">شما و یک نفر دیگر موقعیت مکانی خود را به اشتراک گذاشته‌اید</item>
 		<item quantity="other" state="needs_review" hash="1789697147">شما و %1$d نفر دیگر موقعیت مکانی خود را به اشتراک گذاشته‌اید</item>
 	</plurals>
+	<plurals name="subscription_offer_month_free" tools:ignore="MissingQuantity,UnusedQuantity">
+		<item quantity="one" state="needs_review" hash="-1966265224">%1$d ماه رایگان</item>
+		<item quantity="other" state="needs_review" hash="-599634154">%1$d ماه رایگان</item>
+	</plurals>
 </resources>

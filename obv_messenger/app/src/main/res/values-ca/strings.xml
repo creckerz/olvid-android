@@ -101,7 +101,10 @@
 	<string name="format_identity_details_custom_field" state="needs_review" hash="-1073344790">%1$s: %2$s</string>
 	<string name="hint_company" state="needs_review" hash="379200324">Empresa (opcional)</string>
 	<string name="hint_compose_your_message" state="needs_review" hash="-25761578">Escriu un missatge</string>
+	<string name="hint_compose_your_message_ephemeral" state="needs_review" hash="-1527208333">Missatge efímer</string>
 	<string name="label_edit_your_message" state="needs_review" hash="1091877412">Edita el teu missatge</string>
+	<string name="label_reply_to_x" state="needs_review" hash="1941377665">Resposta a %s</string>
+	<string name="label_reply_to_message" state="needs_review" hash="1280949769">Resposta al missatge</string>
 	<string name="label_selection_formatting" state="needs_review" hash="205892951">Format</string>
 	<string name="label_selection_code" state="needs_review" hash="-803834470">Codi</string>
 	<string name="label_selection_list" state="needs_review" hash="762025321">Llista</string>
@@ -467,7 +470,7 @@
 	<string name="menu_action_choose_picture" state="needs_review" hash="-1655172909">Trieu una imatge</string>
 	<string name="menu_action_take_photo" state="needs_review" hash="-1123080444">Fer una foto</string>
 	<string name="menu_action_remove_image" state="needs_review" hash="1094977672">Eliminar imatge</string>
-	<string name="dialog_title_create_empty_group" state="needs_review" hash="-2016542453">Crear grup buit?</string>
+	<string name="dialog_title_create_empty_group" state="needs_review" hash="-663434464">Crear grup buit?</string>
 	<string name="dialog_message_create_empty_group" state="needs_review" hash="-297923005">No has seleccionat cap contacte per afegir al teu grup. Estàs segur que vols crear un grup buit?</string>
 	<string name="pref_dark_mode_title" state="needs_review" hash="816474245">Mode fosc</string>
 	<string name="pref_dark_mode_summary" state="needs_review" hash="-623740894">Activa el mode fosc per estalviar bateria i protegir els teus ulls.</string>
@@ -558,6 +561,37 @@
 	<string name="dialog_title_webrtc_kick_participant" state="needs_review" hash="389469769">Excloure el contacte de la trucada?</string>
 	<string name="webrtc_failed_kicked" state="needs_review" hash="-758835021">Has estat exclòs d\'aquesta trucada</string>
 	<string name="dialog_title_start_conference_call" state="needs_review" hash="-1418585505">Iniciar conferència</string>
+	<string name="olvid_plus_discover" state="needs_review" hash="-924831172">Descobreix Olvid+</string>
+	<string name="olvid_plus_upgrade_title" state="needs_review" hash="-1960092784">Actualitza a Olvid+ per a l\'experiència completa de l\'aplicació</string>
+	<string name="olvid_plus_upgrade_renew" state="needs_review" hash="-4149901">El pla es renovarà automàticament per a %1$s fins que es cancel·li.</string>
+	<string name="olvid_plus_tip_multi_device_title" state="needs_review" hash="481576448">Utilitza Olvid a tots els teus dispositius</string>
+	<string name="olvid_plus_tip_multi_device_subtitle" state="needs_review" hash="1352342578">Olvid+ et permet utilitzar Olvid als teus telèfons intel·ligents i ordinadors.\nEls teus missatges es mantenen sincronitzats entre tots els teus dispositius perquè estiguis sempre connectat.</string>
+	<string name="olvid_plus_tip_call_title" state="needs_review" hash="935809736">Fes crides il·limitades</string>
+	<string name="olvid_plus_tip_call_subtitle" state="needs_review" hash="1137191310">Olvid+ et permet fer trucades de veu i vídeo xifrades d\'extrem a extrem.\nPosa\'t en contact amb qualsevol usuari d\'Olvid de manera segura, independentment de si té Olvid+ o no.</string>
+	<string name="olvid_plus_tip_support_title" state="needs_review" hash="-1930411305">Dona suport a la nostra visió</string>
+	<string name="olvid_plus_tip_support_subtitle" state="needs_review" hash="-1404875508">Desbloqueja el multi-dispositiu i les trucades segures amb Olvid+.\nLa teva subscripció dona suport a un model sostenible i honest, mantenint Olvid gratuïta per a tothom, sense anuncis ni costos ocults.</string>
+	<string name="olvid_plus_offer_multi_device_title" state="needs_review" hash="-623969503">Utilitza Olvid en multi-dispositiu</string>
+	<string name="olvid_plus_offer_multi_device_subtitle" state="needs_review" hash="-123640091">Utilitza Olvid al teu ordinador. Mantén segures totes les teves missatges.</string>
+	<string name="olvid_plus_offer_call_title" state="needs_review" hash="935809736">Fes crides il·limitades</string>
+	<string name="olvid_plus_offer_call_subtitle" state="needs_review" hash="-1827478007">Fes trucades de veu i vídeo amb qualsevol dels teus contactes.</string>
+	<string name="olvid_plus_offer_support_title" state="needs_review" hash="-1272799411">Suporta Olvid</string>
+	<string name="olvid_plus_offer_support_subtitle" state="needs_review" hash="841023374">Defensa un model sostenible i honest que no exploti les dades personals.</string>
+	<string name="olvid_plus_dialog_multi_device_title" state="needs_review" hash="561167181">Utilitza Olvid a tots els teus dispositius.</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle" state="needs_review" hash="1178448519">Amb Olvid+, pots sincronitzar els teus missatges Olvid entre els teus telèfons intel·ligents i ordinadors. Sempre et podran contactar!</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_1" state="needs_review" hash="155287050">Gaudeix de la comoditat d\'un teclat i una pantalla gran, i envia fàcilment fitxers des del teu ordinador.</string>
+	<string name="olvid_plus_dialog_multi_device_subtitle_2" state="needs_review" hash="1858309010">No perdis mai els teus missatges, ni tan sols en cas de fallada o robatori del dispositiu. El teu historial i els arxius adjunts es guarden de manera segura a diversos dispositius.</string>
+	<string name="olvid_plus_dialog_call_title" state="needs_review" hash="269811560">Fes crides il·limitades</string>
+	<string name="olvid_plus_dialog_call_subtitle" state="needs_review" hash="-416813149">Amb Olvid+, pots fer trucades d\'àudio i de vídeo, tant individuals com en grup.</string>
+	<string name="olvid_plus_dialog_call_subtitle_1" state="needs_review" hash="-608348196">Podeu contactar amb tots els vostres contactes, independentment de si tenen Olvid+ o no.</string>
+	<string name="olvid_plus_dialog_call_subtitle_2" state="needs_review" hash="-1804019862">Gaudeix d\'una qualitat de trucada òptima, amb el mateix nivell de seguretat que totes les teves comunicacions Olvid.</string>
+	<string name="olvid_plus_dialog_support_title" state="needs_review" hash="1942452361">Suporta Olvid, el missatger privat per a tothom</string>
+	<string name="olvid_plus_dialog_support_subtitle" state="needs_review" hash="2119917538">Olvid és una aplicació de missatgeria realment privada, dissenyada per funcionar sense accedir mai a la teva informació personal: sense número de telèfon, correu electrònic ni nom necessari.</string>
+	<string name="olvid_plus_dialog_support_subtitle_1" state="needs_review" hash="1809563102">Tot el que comparteixis es mantindrà entre tu i els teus contactes. Ningú més.</string>
+	<string name="olvid_plus_dialog_support_subtitle_2" state="needs_review" hash="-118773166">Amb codi obert i auditories regulars, no cal confiar en nosaltres.</string>
+	<string name="olvid_plus_dialog_support_subtitle_3" state="needs_review" hash="-1885036855">En subscriure-te, donaràs suport a una missió justa i sostenible per mantenir Olvid gratuïta per a tothom, completament sense anuncis i sense despeses ocultes.</string>
+	<string name="label_subscription_offer_save_percent" state="needs_review" hash="479307719">Estalvia %1$d%%</string>
+	<string name="label_subscription_offer_monthly" state="needs_review" hash="-1602490190">Mensual</string>
+	<string name="label_subscription_offer_yearly" state="needs_review" hash="1246240165">Anual</string>
 	<string name="label_subscription_status" state="needs_review" hash="1154002053">Estatut de la subscripció</string>
 	<string name="text_feature_initiate_secure_calls" state="needs_review" hash="1414263062">Iniciar trucades segures</string>
 	<string name="text_premium_features" state="needs_review" hash="603728806">Funcions Premium</string>
@@ -640,7 +674,7 @@
 	<string name="text_premium_features_free_trial" state="needs_review" hash="-1976234715">Prova gratuïta de funcions premium</string>
 	<string name="button_label_start_free_trial" state="needs_review" hash="-508109296">Començar prova gratuïta</string>
 	<string name="label_free_trial_available" state="needs_review" hash="-995163441">Prova gratuïta disponible</string>
-	<string name="label_free_trial_explanation" state="needs_review" hash="-596460015">Prova les trucades segures d\'Olvid gratis durant un mes (només disponible una vegada)</string>
+	<string name="label_free_trial_explanation" state="needs_review" hash="2050354272">Prova les trucades segures d\'Olvid gratuïtes durant un mes (disponible només una vegada).</string>
 	<string name="toast_message_failed_to_start_free_trial" state="needs_review" hash="-1137706906">No s\'ha pogut iniciar la prova gratuïta</string>
 	<string name="toast_message_free_trial_started" state="needs_review" hash="1357863164">Prova gratuïta iniciada</string>
 	<string name="toast_message_error_launching_in_app_purchase" state="needs_review" hash="-1890004340">Error a l\'iniciar la compra dins de l\'aplicació</string>
@@ -648,8 +682,6 @@
 	<string name="toast_message_in_app_purchase_successful" state="needs_review" hash="578109721">Compra a l\'aplicació completada</string>
 	<string name="button_label_price_per_month" state="needs_review" hash="-552222952">%1$s al mes</string>
 	<string name="button_label_price_per_year" state="needs_review" hash="1539075788">%1$s a l\'any</string>
-	<string name="button_label_price_per_month_expanded" state="needs_review" hash="173326792">%1$s\nal mes</string>
-	<string name="button_label_price_per_year_expanded" state="needs_review" hash="1947639238">%1$s\nanual</string>
 	<string name="text_awaiting_subscription_payment" state="needs_review" hash="1135205985">Pagament de la subscripció rebutjat</string>
 	<string name="text_subscription_in_grace_period_until" state="needs_review" hash="-1685522686">En període de gràcia fins a: %1$s</string>
 	<string name="text_subscription_on_hold_since" state="needs_review" hash="-515586151">Subscripció en espera des de: %1$s</string>
@@ -661,9 +693,8 @@
 	<string name="label_failed_to_query_subscription" state="needs_review" hash="-1677001973">No s\'han pogut consultar els plans de subscripció</string>
 	<string name="dialog_title_subscription_required" state="needs_review" hash="-2038592214">Es requereix una subscripció</string>
 	<string name="button_label_check_subscription" state="needs_review" hash="-378220336">Comprova l\'estat de la subscripció</string>
-	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1662886051">Iniciar trucades telefòniques segures amb Olvid requereix una subscripció.\n\nPots verificar l\'estat de la teva subscripció i veure els plans de subscripció disponibles a la pàgina \"El meu perfil\".</string>
-	<string name="dialog_message_subscription_required_web_client" state="needs_review" hash="-760629168">Connectar-se al client web d\'Olvid requereix una subscripció.\n\nPots verificar l\'estat de la teva subscripció i veure els plans de subscripció disponibles a la pàgina \"El meu perfil\".</string>
-	<string name="dialog_message_subscription_required_multi_device" state="needs_review" hash="-1326423501">Utilitzar el teu perfil d\'Olvid en diversos dispositius al mateix temps requereix una subscripció.\n\nPots verificar l\'estat de la teva subscripció i veure els plans de subscripció disponibles a la pàgina \"El meu perfil\".</string>
+	<string name="dialog_message_subscription_required_call" state="needs_review" hash="1231676488">Per iniciar trucades telefòniques i de vídeo segures amb Olvid, es requereix una subscripció.</string>
+	<string name="dialog_title_subscription_plans" state="needs_review" hash="-456474468">Plans de subscripció</string>
 	<string name="text_ended_on" state="needs_review" hash="1280012933">Finalitzada el: %1$s</string>
 	<string name="text_free_trial_ended" state="needs_review" hash="-1458860892">Període de prova gratuït finalitzat</string>
 	<string name="text_free_trial_expired" state="needs_review" hash="-2049452081">Llicència de prova gratuïta caducada</string>
@@ -995,13 +1026,13 @@
 	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">Servidors TURN de París</string>
 	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">Servidors TURN de Nova York</string>
 	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">Servidors TURN de Singapur</string>
-	<string name="dialog_title_android_12_bluetooth_access" state="needs_review" hash="-2140389265">Sol·licitar permís per accedir als dispositius Bluetooth</string>
-	<string name="dialog_message_android_12_bluetooth_access" state="needs_review" hash="-332888756">Si vols utilitzar un auricular Bluetooth per a les trucades d\'Olvid, has d\'autoritzar Olvid a \"trobar i connectar-se\" als teus dispositius propers.</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d contactes</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">%1$d contactes al grup %2$s</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">S\'actualització necessària</string>
 	<string name="dialog_message_outdated_version" state="needs_review" hash="488074151">La teva versió d\'Olvid està desactualitzada i necessita ser actualitzada.\n\nProbablement t\'estiguis perdent moltes funcions noves i no podem garantir la compatibilitat de la teva versió amb versions més recents de l\'aplicació que puguin utilitzar els teus contactes.</string>
 	<string name="button_label_remind_me_later" state="needs_review" hash="-713293818">Recorda\'m més tard</string>
+	<string name="label_remind_me_tonight" state="needs_review" hash="707009828">Recorda\'m a les %1$s d\'avui</string>
+	<string name="label_remind_me_tomorrow" state="needs_review" hash="1904419307">Recorda\'m a %1$s demà</string>
 	<string name="hint_personal_note" state="needs_review" hash="-368244163">Nota personal</string>
 	<string name="toast_message_unable_to_restore_app_data" state="needs_review" hash="1602628680">ADVERTÈNCIA: no s\'han pogut restaurar algunes personalitzacions de l\'aplicació</string>
 	<string name="dialog_title_webrtc_permissions_audio_blocked" state="needs_review" hash="1948829165">Permís de gravació d\'àudio denegat</string>
@@ -1108,7 +1139,6 @@
 	<string name="pref_reload_backup_configuration_title" state="needs_review" hash="2000428891">Recarrega la configuració de còpia de seguretat</string>
 	<string name="content_description_back_button" state="needs_review" hash="48196338">Enrere</string>
 	<string name="content_description_remove_message_reply_to" state="needs_review" hash="-794585802">Eliminar resposta del missatge</string>
-	<string name="content_description_remove_link_preview" state="needs_review" hash="-1085272528">Eliminar la previsualització de l\'enllaç</string>
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">Indicador que les notificacions estan silenciades per a aquest perfil</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">Crea un perfil</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">El proveïdor d\'identitat de la vostra empresa s\'ha configurat correctament. Premeu el botó \"autenticar\" que apareix a continuació per autenticar-vos amb ell i obtenir la vostra informació personal.</string>
@@ -1148,14 +1178,11 @@
 	<string name="dialog_title_neutral_notification_when_hidden" state="needs_review" hash="2013281962">Mostrar una notificació neutral quan el perfil estigui ocult</string>
 	<string name="dialog_message_neutral_notification_when_hidden" state="needs_review" hash="-58494752">Quan un perfil està ocult, tret que estigui actualment obert a Olvid, no rebràs cap notificació per a nous missatges. Si actives aquesta opció, es mostrarà una notificació \"Olvid requereix la teva atenció\". Llavors podràs obrir Olvid i desbloquejar el teu perfil ocult per veure els nous missatges.\n\nAdvertència: això podria revelar el fet que tens un perfil ocult.</string>
 	<string name="toast_message_password_already_used_other_profile" state="needs_review" hash="390904904">Error: aquesta contrasenya ja està sent utilitzada per un altre perfil ocult</string>
-	<string name="label_configure_shortcuts" state="needs_review" hash="-857125506">Canviar l\'ordre de les icones</string>
 	<string name="label_attach_file" state="needs_review" hash="-89285310">Adjuntar fitxers</string>
 	<string name="label_attach_image" state="needs_review" hash="-1185400308">Adjuntar imatges</string>
 	<string name="label_attach_timer" state="needs_review" hash="-1527208333">Missatge efímer</string>
 	<string name="label_attach_camera" state="needs_review" hash="-1123080444">Fer una foto</string>
 	<string name="label_attach_video" state="needs_review" hash="1626268086">Gravar un vídeo</string>
-	<string name="dialog_title_choose_icon_order" state="needs_review" hash="856935796">Tria la prioritat de la icona d\'adjunt</string>
-	<string name="label_icons_below_never_shown" state="needs_review" hash="1250704267">Les icones per sota d\'aquesta línia mai no es mostraran</string>
 	<string name="pref_font_scale" state="needs_review" hash="1773040591">Mida de la font</string>
 	<string name="pref_text_font_scale_0_75" state="needs_review" hash="-1963894407">Petit (75%)</string>
 	<string name="pref_text_font_scale_0_9" state="needs_review" hash="-708054676">Petita (90%)</string>
@@ -1210,7 +1237,6 @@
 	<string name="x_reactions_to" state="needs_review" hash="177752739">%1$d reaccions a: %2$s</string>
 	<string name="notification_text_xx_reacted" state="needs_review" hash="647790513">%1$s va reaccionar a %2$s</string>
 	<string name="label_attach_emoji" state="needs_review" hash="-1842205895">Insere un emoji</string>
-	<string name="label_long_press_for_favorite" state="needs_review" hash="1284446174">Mantén premut per afegir/eliminar dels favorits</string>
 	<string name="menu_action_debug_information" state="needs_review" hash="-919213138">Informació de depuració</string>
 	<string name="debug_label_number_of_devices" state="needs_review" hash="1662862352">Nombre de dispositius:</string>
 	<string name="debug_label_number_of_devices_no_channel" state="needs_review" hash="808299225">Sense un canal segur:</string>
@@ -1283,8 +1309,6 @@
 	<string name="dialog_message_incomplete_attachments" state="needs_review" hash="1179188058">Els missatges que has seleccionat contenen adjunts que no s\'han descarregat completament. Aquests missatges no es poden reenviar fins que la descàrrega estigui completa.</string>
 	<string name="dialog_message_incomplete_attachments_partial" state="needs_review" hash="1274554335">Alguns dels missatges que has seleccionat contenen adjunts que no s\'han descarregat per complet. Aquests missatges no es poden reenviar fins que la descàrrega estigui completa.\n\nPrem \"Continua\" per reenviar només els missatges que es poden reenviar.</string>
 	<string name="hint_search_message" state="needs_review" hash="1630003450">Buscar missatge</string>
-	<string name="menu_action_search_prev" state="needs_review" hash="-1639666563">Anterior</string>
-	<string name="menu_action_search_next" state="needs_review" hash="1158639077">Següent</string>
 	<string name="pref_manage_cloud_backups_title" state="needs_review" hash="824115345">Gestionar les còpies de seguretat al núvol</string>
 	<string name="pref_manage_cloud_backups_summary" state="needs_review" hash="-161789549">Toca per baixar o eliminar les còpies de seguretat al núvol.</string>
 	<string name="dialog_title_manage_cloud_backups" state="needs_review" hash="-1825078945">Còpies de seguretat al núvol</string>
@@ -1484,7 +1508,7 @@
 	<string name="text_you_became_admin" state="needs_review" hash="2137006821">Ara ets administrador del grup.</string>
 	<string name="text_you_are_no_longer_admin" state="needs_review" hash="1766709431">Ja no ets administrador del grup</string>
 	<string name="text_you_became_writer" state="needs_review" hash="-1671425999">Ara pots enviar missatges</string>
-	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-762273585">Ja no pots enviar missatges aquí</string>
+	<string name="text_you_are_no_longer_writer" state="needs_review" hash="-930933808">No pots publicar missatges aquí</string>
 	<string name="label_pending" state="needs_review" hash="1975294811">Pendent</string>
 	<string name="pref_app_language_title" state="needs_review" hash="-1748962099">Idioma de l\'aplicació</string>
 	<string name="pref_text_default_device_language" state="needs_review" hash="-1062620207">Idioma per defecte del dispositiu</string>
@@ -1570,6 +1594,7 @@
 	<string name="text_invalid_shortcut" state="needs_review" hash="-1219107750">Accés d\'entrada no vàlid</string>
 	<string name="text_feature_initiate_secure_calls_from_another_profile" state="needs_review" hash="271258252">Iniciar trucades segures\n(disponible a través d\'un altre perfil)</string>
 	<string name="dialog_title_confirm_open_link" state="needs_review" hash="46935087">Obrir aquest enllaç al teu navegador?</string>
+	<string name="label_open_original_link_with_trackers" state="needs_review" hash="-1586932660">Utilitza l\'enllaç original que conté paràmetres de seguiment</string>
 	<string name="dialog_title_confirm_open_olvid_link" state="needs_review" hash="425949498">Obrir aquest enllaç a Olvid?</string>
 	<string name="toast_message_unable_to_open_url" state="needs_review" hash="-1486954792">No s\'ha pogut obrir l\'URL</string>
 	<string name="text_explanation_location_map_provider" state="needs_review" hash="-173394547">Triar un proveïdor de mapes permet seleccionar amb precisió la ubicació que vols compartir en un mapa. No obstant això, això podria revelar la teva ubicació (o la dels teus contactes) a aquest proveïdor de serveis.</string>
@@ -1580,7 +1605,6 @@
 	<string name="label_no_address_found" state="needs_review" hash="1035554993">No s\'ha trobat cap adreça</string>
 	<string name="label_zoom_in_for_address" state="needs_review" hash="902696925">Apropament per buscar l\'adreça</string>
 	<string name="label_address_lookup_disabled" state="needs_review" hash="-2140124686">Cerca d\'adreces desactivada</string>
-	<string name="content_description_cancel_message_edit" state="needs_review" hash="984163129">Cancel·lar l\'edició del missatge</string>
 	<string name="dialog_title_introducing_mentions" state="needs_review" hash="-1741341288">Presentem les mencions d\'usuari!</string>
 	<string name="dialog_message_introducing_mentions" state="needs_review" hash="622739087">Olvid ara permet mencionar un usuari en una conversa 🫵. Simplement escriu @ seguit d\'una lletra o el seu nom per veure a qui pots mencionar.\nA més, quan silencies 💤 una conversa o un perfil, ara pots triar rebre notificacions només quan se\'t mencioni explícitament en un missatge.\n\nNota que els teus contactes hauran d\'actualitzar a l\'última versió d\'Olvid per veure que els has mencionat.</string>
 	<string name="pref_no_notify_certificate_change_for_previews_title" state="needs_review" hash="-434788963">Desactivar la notificació de canvi de certificat per a les previsualitzacions d\'enllaços</string>
@@ -1739,7 +1763,7 @@
 	<string name="troubleshooting_ignored" state="needs_review" hash="816017832">Ignorat</string>
 	<string name="onboarding_transfer_multidevice_purchase_question" state="needs_review" hash="351030441">Vols que tots els teus dispositius romanguin actius?</string>
 	<string name="onboarding_transfer_multidevice_purchase_hyperlink" state="needs_review" hash="747183939">Per aquí</string>
-	<string name="button_label_subscribe_now" state="needs_review" hash="1805105542">Subscriu-te ara</string>
+	<string name="button_label_subscribe_with_price" state="needs_review" hash="324675175">Subscriu-te • %1$s</string>
 	<string name="onboarding_transfer_devices_loading_title" state="needs_review" hash="801961341">Recuperant llista de dispositius…</string>
 	<string name="dialog_title_introducing_multi_device" state="needs_review" hash="-310103349">Presentem Olvid Desktop i multi-dispositiu!</string>
 	<string name="dialog_message_introducing_multi_device" state="needs_review" hash="-153162506">Olvid ja està disponible per a **el teu ordinador** (Windows i macOS). Pots descarregar l\'última versió des de:\nhttps://olvid.io/download/\n\nAmb el suport de **multi-dispositiu**, comença una conversa al teu telèfon i continua-la al teu ordinador. Compartir fitxers entre els teus dispositius i amb els teus contactes mai ha estat tan fàcil.</string>
@@ -1929,7 +1953,6 @@
 	<string name="pref_archived_attachments_summary" state="needs_review" hash="1596754073">Quan estigui activat, els adjunts de les converses arxivades es baixaran automàticament segons la configuració anterior.</string>
 	<string name="pref_unarchive_on_notification_title" state="needs_review" hash="-1146947153">Desarxivar converses a la notificació</string>
 	<string name="pref_unarchive_on_notification_summary" state="needs_review" hash="778062251">Quan s\'activa, les converses arxivades es desarxivaran automàticament quan es rebi una notificació de missatge nou.</string>
-	<string name="call_notification_ongoing_call" state="needs_review" hash="1828207822">Trucada en curs</string>
 	<string name="call_notification_incoming_call" state="needs_review" hash="-1223043344">Trucada entrant</string>
 	<string name="menu_action_copy_text_from_image" state="needs_review" hash="-1072685983">Copia aquesta paraula</string>
 	<string name="menu_action_copy_text_block_from_image" state="needs_review" hash="1436026569">Copia tot el bloc</string>
@@ -2120,4 +2143,8 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Dispositiu del destinatari inassolible</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Recrea tots els canals segurs</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Recrear tots els canals segurs forçarà Olvid a crear nous canals de comunicació segura amb tots els dispositius dels teus contactes. Això generalment no és útil, però pot resoldre situacions rares on alguns d\'aquests canals estan \"desincronitzats\".\n\n**Advertència:** si tens molts contactes, aquesta operació pot trigar uns minuts i podries perdre alguns missatges entrants mentre s\'executa.</string>
+	<string name="label_hanged_up" state="needs_review" hash="-1516413384">S\'ha penjat la trucada</string>
+	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">Necessites subscripcions per al teu equip?</string>
+	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Visita la botiga Olvid</string>
+	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">Recordatori establert</string>
 </resources>

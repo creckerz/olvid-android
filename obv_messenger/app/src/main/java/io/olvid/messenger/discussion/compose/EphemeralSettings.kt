@@ -22,6 +22,7 @@ package io.olvid.messenger.discussion.compose
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -34,6 +35,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
@@ -46,12 +48,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.Surface
-import androidx.compose.material.Switch
-import androidx.compose.material.SwitchDefaults
-import androidx.compose.material.Text
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
+import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -85,7 +88,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
-import com.google.accompanist.themeadapter.appcompat.AppCompatTheme
 import io.olvid.messenger.R
 import io.olvid.messenger.customClasses.StringUtils
 import io.olvid.messenger.designsystem.theme.OlvidTypography
@@ -127,351 +129,375 @@ private fun getSettings(choices: Map<Int, Long?>, maxValue: Long?): List<Setting
 
 @Composable
 fun EphemeralSettingsGroup(
+    modifier: Modifier = Modifier,
     ephemeralViewModel: EphemeralViewModel,
     expanded: Boolean?, // set to null to have the preference layout
     locked: Boolean = false,
     dismiss: (() -> Unit)? = null,
 ) {
-    AppCompatTheme {
-        val discussionJsonExpiration by ephemeralViewModel.discussionJsonExpirationLiveData.observeAsState()
-        val isValid by ephemeralViewModel.getValid().observeAsState()
+    val discussionJsonExpiration by ephemeralViewModel.discussionJsonExpirationLiveData.observeAsState()
+    val isValid by ephemeralViewModel.getValid().observeAsState()
 
-        val draftLoaded by ephemeralViewModel.getDraftLoaded()
-            .observeAsState()
-        val defaultsLoaded by ephemeralViewModel.getDefaultsLoaded()
-            .observeAsState()
+    val draftLoaded by ephemeralViewModel.getDraftLoaded()
+        .observeAsState()
+    val defaultsLoaded by ephemeralViewModel.getDefaultsLoaded()
+        .observeAsState()
 
-        LaunchedEffect(draftLoaded) {
-            if (ephemeralViewModel.configuringDiscussionCustomization.not() && draftLoaded == true) {
-                ephemeralViewModel.draftJsonExpiration?.apply {
-                    ephemeralViewModel.setReadOnce(readOnce ?: false)
-                    ephemeralViewModel.setVisibility(visibilityDuration)
-                    ephemeralViewModel.setExistence(existenceDuration)
-                }
+    LaunchedEffect(draftLoaded) {
+        if (ephemeralViewModel.configuringDiscussionCustomization.not() && draftLoaded == true) {
+            ephemeralViewModel.draftJsonExpiration?.apply {
+                ephemeralViewModel.setReadOnce(readOnce ?: false)
+                ephemeralViewModel.setVisibility(visibilityDuration)
+                ephemeralViewModel.setExistence(existenceDuration)
             }
         }
+    }
 
-        LaunchedEffect(defaultsLoaded) {
-            if (ephemeralViewModel.configuringDiscussionCustomization && defaultsLoaded == true) {
-                discussionJsonExpiration?.apply {
-                    ephemeralViewModel.setReadOnce(readOnce ?: false)
-                    ephemeralViewModel.setVisibility(visibilityDuration)
-                    ephemeralViewModel.setExistence(existenceDuration)
-                }
+    LaunchedEffect(defaultsLoaded) {
+        if (ephemeralViewModel.configuringDiscussionCustomization && defaultsLoaded == true) {
+            discussionJsonExpiration?.apply {
+                ephemeralViewModel.setReadOnce(readOnce ?: false)
+                ephemeralViewModel.setVisibility(visibilityDuration)
+                ephemeralViewModel.setExistence(existenceDuration)
             }
         }
+    }
 
-        Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = modifier.fillMaxSize()) {
 
-            var expandVisibility by rememberSaveable {
-                mutableStateOf(false)
-            }
-            var expandExistence by rememberSaveable {
-                mutableStateOf(false)
-            }
-            var expandCustom by rememberSaveable {
-                mutableStateOf(false)
-            }
-            var expandCustomIsExistence by rememberSaveable {
-                mutableStateOf(false)
-            }
-            var expandTimeUnit by rememberSaveable {
-                mutableStateOf(false)
-            }
-            val baseOffset = if (expanded == null) IntOffset(0, -24) else IntOffset(-32, -40)
+        var expandVisibility by rememberSaveable {
+            mutableStateOf(false)
+        }
+        var expandExistence by rememberSaveable {
+            mutableStateOf(false)
+        }
+        var expandCustom by rememberSaveable {
+            mutableStateOf(false)
+        }
+        var expandCustomIsExistence by rememberSaveable {
+            mutableStateOf(false)
+        }
+        var expandTimeUnit by rememberSaveable {
+            mutableStateOf(false)
+        }
+        val baseOffset = if (expanded == null) IntOffset(0, -24) else IntOffset(-32, -40)
 
-
-            if (expanded == true) {
-                Popup(
-                    alignment = Alignment.BottomEnd,
-                    offset = with(LocalDensity.current) {
-                        IntOffset(x = baseOffset.x.dp.roundToPx(), y = baseOffset.y.dp.roundToPx())
-                    },
-                    properties = PopupProperties(focusable = true),
-                    onDismissRequest = dismiss
-                ) {
-                    EphemeralSettingsPopupLayout(
-                        ephemeralViewModel = ephemeralViewModel,
-                        onVisibilityClick = { expandVisibility = true },
-                        onExistenceClick = { expandExistence = true },
-                        readOnceDisabled = ephemeralViewModel.configuringDiscussionCustomization.not() && discussionJsonExpiration?.readOnce == true
-                    )
-                }
-            } else if (expanded == null) {
-                EphemeralSettingsPreferenceLayout(
+        if (expanded == true) {
+            Popup(
+                alignment = Alignment.BottomEnd,
+                offset = with(LocalDensity.current) {
+                    IntOffset(x = baseOffset.x.dp.roundToPx(), y = baseOffset.y.dp.roundToPx())
+                },
+                properties = PopupProperties(focusable = true),
+                onDismissRequest = dismiss
+            ) {
+                EphemeralSettingsPopupLayout(
                     ephemeralViewModel = ephemeralViewModel,
                     onVisibilityClick = { expandVisibility = true },
                     onExistenceClick = { expandExistence = true },
-                    locked = locked,
+                    readOnceDisabled = ephemeralViewModel.configuringDiscussionCustomization.not() && discussionJsonExpiration?.readOnce == true
                 )
             }
+        } else if (expanded == null) {
+            EphemeralSettingsPreferenceLayout(
+                ephemeralViewModel = ephemeralViewModel,
+                onVisibilityClick = { expandVisibility = true },
+                onExistenceClick = { expandExistence = true },
+                locked = locked,
+            )
+        }
 
-            if (expandVisibility) {
-                EphemeralSetting(
-                    settings = getSettings(choices = presetVisibilityChoices, maxValue = discussionJsonExpiration?.visibilityDuration?.takeIf { ephemeralViewModel.configuringDiscussionCustomization.not() }),
-                    selected = ephemeralViewModel.getVisibility(),
-                    offset = with(LocalDensity.current) {
-                        IntOffset(baseOffset.x.dp.roundToPx(), (baseOffset.y - 88).dp.roundToPx())
-                    },
-                    applySetting = {
-                        ephemeralViewModel.setVisibility(it)
-                        expandVisibility = false
-                    },
-                    onCustomClick = {
-                        expandVisibility = false
-                        expandCustomIsExistence = false
-                        expandCustom = true
-                    },
-                    dismiss = {
-                        expandVisibility = false
-                    })
-            }
-            if (expandExistence) {
-                EphemeralSetting(
-                    settings = getSettings(choices = presetExistenceChoices, maxValue = discussionJsonExpiration?.existenceDuration?.takeIf { ephemeralViewModel.configuringDiscussionCustomization.not() }),
-                    selected = ephemeralViewModel.getExistence(),
-                    offset = with(LocalDensity.current) {
-                        IntOffset(baseOffset.x.dp.roundToPx(), (baseOffset.y - 32).dp.roundToPx())
-                    },
-                    applySetting = {
-                        ephemeralViewModel.setExistence(it)
-                        expandExistence = false
-                    },
-                    onCustomClick = {
-                        expandExistence = false
-                        expandCustomIsExistence = true
-                        expandCustom = true
-                    },
-                    dismiss = {
-                        expandExistence = false
-                    })
-            }
+        if (expandVisibility) {
+            EphemeralSetting(
+                settings = getSettings(
+                    choices = presetVisibilityChoices,
+                    maxValue = discussionJsonExpiration?.visibilityDuration?.takeIf { ephemeralViewModel.configuringDiscussionCustomization.not() }),
+                selected = ephemeralViewModel.getVisibility(),
+                offset = with(LocalDensity.current) {
+                    IntOffset(baseOffset.x.dp.roundToPx(), (baseOffset.y - 88).dp.roundToPx())
+                },
+                applySetting = {
+                    ephemeralViewModel.setVisibility(it)
+                    expandVisibility = false
+                },
+                onCustomClick = {
+                    expandVisibility = false
+                    expandCustomIsExistence = false
+                    expandCustom = true
+                },
+                dismiss = {
+                    expandVisibility = false
+                })
+        }
+        if (expandExistence) {
+            EphemeralSetting(
+                settings = getSettings(
+                    choices = presetExistenceChoices,
+                    maxValue = discussionJsonExpiration?.existenceDuration?.takeIf { ephemeralViewModel.configuringDiscussionCustomization.not() }),
+                selected = ephemeralViewModel.getExistence(),
+                offset = with(LocalDensity.current) {
+                    IntOffset(baseOffset.x.dp.roundToPx(), (baseOffset.y - 32).dp.roundToPx())
+                },
+                applySetting = {
+                    ephemeralViewModel.setExistence(it)
+                    expandExistence = false
+                },
+                onCustomClick = {
+                    expandExistence = false
+                    expandCustomIsExistence = true
+                    expandCustom = true
+                },
+                dismiss = {
+                    expandExistence = false
+                })
+        }
 
-            var customInput by remember {
-                mutableStateOf(TextFieldValue(""))
-            }
-            var customValue by rememberSaveable {
-                mutableStateOf<Long?>(null)
-            }
-            var customValueInSecs by rememberSaveable {
-                mutableStateOf<Long?>(null)
-            }
-            var customTooMuch by rememberSaveable {
-                mutableStateOf(false)
-            }
-            var customValid by rememberSaveable {
-                mutableStateOf(true)
-            }
-            var visibilityUnit by rememberSaveable {
-                mutableIntStateOf(timeUnits.keys.toList()[1])
-            }
-            var existenceUnit by rememberSaveable {
-                mutableIntStateOf(timeUnits.keys.toList()[3])
-            }
-            var additionalTimeUnitPopupOffset by remember {
-                mutableIntStateOf(0)
-            }
-            fun checkValidCustom() {
-                customValue = customInput.text.toLongOrNull().takeIf { (it ?: 1) > 0 }
-                val unit = if (expandCustomIsExistence) existenceUnit else visibilityUnit
-                customValueInSecs = customValue?.times(timeUnits[unit] ?: 1L)
-                customTooMuch = customValueInSecs?.let {
-                    when (unit) {
-                        R.string.text_unit_s -> it > 60L
-                        R.string.text_unit_m -> it > 3_600L
-                        R.string.text_unit_h -> it > 86_400L
-                        R.string.text_unit_d -> it > 31_536_000L
-                        else -> it > 31_536_000_000L
-                    }
-                } ?: false
-                customValid = (customValueInSecs ?: -1) <= (
-                        (if (expandCustomIsExistence) discussionJsonExpiration?.existenceDuration else discussionJsonExpiration?.visibilityDuration)
-                            .takeIf { ephemeralViewModel.configuringDiscussionCustomization.not() }
-                            ?: Long.MAX_VALUE)
-            }
+        var customInput by remember {
+            mutableStateOf(TextFieldValue(""))
+        }
+        var customValue by rememberSaveable {
+            mutableStateOf<Long?>(null)
+        }
+        var customValueInSecs by rememberSaveable {
+            mutableStateOf<Long?>(null)
+        }
+        var customTooMuch by rememberSaveable {
+            mutableStateOf(false)
+        }
+        var customValid by rememberSaveable {
+            mutableStateOf(true)
+        }
+        var visibilityUnit by rememberSaveable {
+            mutableIntStateOf(timeUnits.keys.toList()[1])
+        }
+        var existenceUnit by rememberSaveable {
+            mutableIntStateOf(timeUnits.keys.toList()[3])
+        }
+        var additionalTimeUnitPopupOffset by remember {
+            mutableIntStateOf(0)
+        }
 
-            LaunchedEffect(expandCustom) {
-                if (expandCustom) {
-                    // after opening custom, set the unit and value to match the current setting
-                    val timeInSeconds = if (expandCustomIsExistence) ephemeralViewModel.getExistence() else ephemeralViewModel.getVisibility()
-                    customValueInSecs = timeInSeconds
-                    if (timeInSeconds == null || timeInSeconds <= 0) {
-                        customValue = null
-                    } else {
-                        // timeInSeconds > 0 so we know last will find something
-                        timeUnits.entries.last {
-                            it.value <= timeInSeconds
-                        }.run {
-                            if (expandCustomIsExistence) {
-                                existenceUnit = key
-                            } else {
-                                visibilityUnit = key
-                            }
-                            customValue = timeInSeconds / value
-                        }
-                    }
-
-                    customInput = customValue?.let {
-                        TextFieldValue(it.toString()).run {
-                            copy(selection = TextRange(0, text.length))
-                        }
-                    } ?: TextFieldValue("")
-                    checkValidCustom()
+        fun checkValidCustom() {
+            customValue = customInput.text.toLongOrNull().takeIf { (it ?: 1) > 0 }
+            val unit = if (expandCustomIsExistence) existenceUnit else visibilityUnit
+            customValueInSecs = customValue?.times(timeUnits[unit] ?: 1L)
+            customTooMuch = customValueInSecs?.let {
+                when (unit) {
+                    R.string.text_unit_s -> it > 60L
+                    R.string.text_unit_m -> it > 3_600L
+                    R.string.text_unit_h -> it > 86_400L
+                    R.string.text_unit_d -> it > 31_536_000L
+                    else -> it > 31_536_000_000L
                 }
-            }
+            } ?: false
+            customValid = (customValueInSecs ?: -1) <= (
+                    (if (expandCustomIsExistence) discussionJsonExpiration?.existenceDuration else discussionJsonExpiration?.visibilityDuration)
+                        .takeIf { ephemeralViewModel.configuringDiscussionCustomization.not() }
+                        ?: Long.MAX_VALUE)
+        }
 
+        LaunchedEffect(expandCustom) {
             if (expandCustom) {
-                fun dismissCustom() {
-                    if (customValid && customTooMuch.not()) {
+                // after opening custom, set the unit and value to match the current setting
+                val timeInSeconds =
+                    if (expandCustomIsExistence) ephemeralViewModel.getExistence() else ephemeralViewModel.getVisibility()
+                customValueInSecs = timeInSeconds
+                if (timeInSeconds == null || timeInSeconds <= 0) {
+                    customValue = null
+                } else {
+                    // timeInSeconds > 0 so we know last will find something
+                    timeUnits.entries.last {
+                        it.value <= timeInSeconds
+                    }.run {
                         if (expandCustomIsExistence) {
-                            ephemeralViewModel.setExistence(customValueInSecs)
+                            existenceUnit = key
                         } else {
-                            ephemeralViewModel.setVisibility(customValueInSecs)
+                            visibilityUnit = key
                         }
+                        customValue = timeInSeconds / value
                     }
-                    expandCustom = false
                 }
 
-                Popup(
-                    alignment = Alignment.BottomEnd,
-                    offset = with(LocalDensity.current) {
-                        IntOffset(
-                            x = (baseOffset.x - 4).dp.roundToPx(),
-                            y = (baseOffset.y - if (expandCustomIsExistence) 44 else 100).dp.roundToPx()
-                        )
-                    },
-                    properties = PopupProperties(focusable = true),
-                    onDismissRequest = {
-                        dismissCustom()
-                    }) {
+                customInput = customValue?.let {
+                    TextFieldValue(it.toString()).run {
+                        copy(selection = TextRange(0, text.length))
+                    }
+                } ?: TextFieldValue("")
+                checkValidCustom()
+            }
+        }
 
-                    Surface(
-                        elevation = 8.dp, shape = RoundedCornerShape(12.dp)
+        if (expandCustom) {
+            fun dismissCustom() {
+                if (customValid && customTooMuch.not()) {
+                    if (expandCustomIsExistence) {
+                        ephemeralViewModel.setExistence(customValueInSecs)
+                    } else {
+                        ephemeralViewModel.setVisibility(customValueInSecs)
+                    }
+                }
+                expandCustom = false
+            }
+
+            Popup(
+                alignment = Alignment.BottomEnd,
+                offset = with(LocalDensity.current) {
+                    IntOffset(
+                        x = (baseOffset.x - 4).dp.roundToPx(),
+                        y = (baseOffset.y - if (expandCustomIsExistence) 44 else 100).dp.roundToPx()
+                    )
+                },
+                properties = PopupProperties(focusable = true),
+                onDismissRequest = {
+                    dismissCustom()
+                }) {
+
+                Surface(
+                    shadowElevation = 8.dp,
+                    color = colorResource(R.color.dialogBackground),
+                    contentColor = colorResource(R.color.almostBlack),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .padding(
+                                top = 16.dp,
+                                bottom = 16.dp,
+                                start = 16.dp,
+                                end = 10.dp
+                            )
                     ) {
-                        Column(
-                            modifier = Modifier
-                                .padding(
-                                    top = 16.dp,
-                                    bottom = 16.dp,
-                                    start = 16.dp,
-                                    end = 10.dp
-                                )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
+                            val focusRequester = remember {
+                                FocusRequester()
+                            }
+                            LaunchedEffect(Unit) {
+                                focusRequester.requestFocus()
+                            }
+                            Text(text = stringResource(id = if (expandCustomIsExistence) R.string.preset_ephemeral_existence_duration else R.string.preset_ephemeral_visibility_duration))
+                            Spacer(modifier = Modifier.width(8.dp))
+                            BasicTextField(
+                                modifier = Modifier
+                                    .focusRequester(focusRequester)
+                                    .size(width = 60.dp, height = 32.dp)
+                                    .border(
+                                        width = 1.dp,
+                                        color = if (customTooMuch.not() && customValid) Color(
+                                            0xFFE1E2E9
+                                        ) else Color(
+                                            0xFFE2594E
+                                        ),
+                                        shape = RoundedCornerShape(size = 6.dp)
+                                    )
+                                    .wrapContentHeight(align = Alignment.CenterVertically),
+                                textStyle = TextStyle(
+                                    fontSize = 14.sp,
+                                    lineHeight = 16.sp,
+                                    color = if (customTooMuch.not() && customValid) colorResource(id = R.color.almostBlack) else Color(
+                                        0xFFE2594E
+                                    ),
+                                    textAlign = TextAlign.Center
+                                ),
+                                keyboardActions = KeyboardActions(onDone = {
+                                    dismissCustom()
+                                }),
+                                singleLine = true,
+                                cursorBrush = SolidColor(colorResource(id = R.color.almostBlack)),
+                                value = customInput,
+                                onValueChange = { inputValue ->
+                                    customInput = inputValue
+                                    checkValidCustom()
+                                },
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                            )
+                            Spacer(modifier = Modifier.width(4.dp))
                             Row(
+                                modifier = Modifier
+                                    .requiredHeight(33.dp)
+                                    .border(
+                                        width = 1.dp,
+                                        color = Color(0xFFE1E2E9),
+                                        shape = RoundedCornerShape(size = 6.dp)
+                                    )
+                                    .clip(RoundedCornerShape(size = 6.dp))
+                                    .clickable(
+                                        indication = ripple(),
+                                        interactionSource = remember { MutableInteractionSource() }
+                                    ) {
+                                        expandTimeUnit = true
+                                    }
+                                    .padding(
+                                        start = 12.dp,
+                                        top = 4.dp,
+                                        end = 8.dp,
+                                        bottom = 4.dp
+                                    ),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                val focusRequester = remember {
-                                    FocusRequester()
-                                }
-                                LaunchedEffect(Unit) {
-                                    focusRequester.requestFocus()
-                                }
-                                Text(text = stringResource(id = if (expandCustomIsExistence) R.string.preset_ephemeral_existence_duration else R.string.preset_ephemeral_visibility_duration))
-                                Spacer(modifier = Modifier.width(8.dp))
-                                BasicTextField(
-                                    modifier = Modifier
-                                        .focusRequester(focusRequester)
-                                        .size(width = 60.dp, height = 32.dp)
-                                        .border(
-                                            width = 1.dp,
-                                            color = if (customTooMuch.not() && customValid) Color(0xFFE1E2E9) else Color(
-                                                0xFFE2594E
-                                            ),
-                                            shape = RoundedCornerShape(size = 6.dp)
-                                        )
-                                        .wrapContentHeight(align = Alignment.CenterVertically),
-                                    textStyle = TextStyle(
-                                        fontSize = 14.sp,
-                                        lineHeight = 16.sp,
-                                        color = if (customTooMuch.not() && customValid) colorResource(id = R.color.almostBlack) else Color(0xFFE2594E),
-                                        textAlign = TextAlign.Center
-                                    ),
-                                    keyboardActions = KeyboardActions(onDone = {
-                                        dismissCustom()
-                                    }),
-                                    singleLine = true,
-                                    cursorBrush = SolidColor(colorResource(id = R.color.almostBlack)),
-                                    value = customInput,
-                                    onValueChange = { inputValue ->
-                                        customInput = inputValue
-                                        checkValidCustom()
-                                    },
-                                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                                )
-                                Spacer(modifier = Modifier.width(4.dp))
-                                Row(
-                                    modifier = Modifier
-                                        .requiredHeight(33.dp)
-                                        .border(
-                                            width = 1.dp,
-                                            color = Color(0xFFE1E2E9),
-                                            shape = RoundedCornerShape(size = 6.dp)
-                                        )
-                                        .clip(RoundedCornerShape(size = 6.dp))
-                                        .clickable {
-                                            expandTimeUnit = true
-                                        }
-                                        .padding(
-                                            start = 12.dp,
-                                            top = 4.dp,
-                                            end = 8.dp,
-                                            bottom = 4.dp
-                                        ),
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Text(
-                                        text = stringResource(id = if (expandCustomIsExistence.not()) visibilityUnit else existenceUnit)
-                                    )
-                                    Spacer(modifier = Modifier.requiredWidth(4.dp))
-                                    Icon(
-                                        modifier = Modifier
-                                            .padding(top = 4.dp)
-                                            .requiredSize(18.dp),
-                                        painter = painterResource(id = R.drawable.ic_chevron_down),
-                                        contentDescription = ""
-                                    )
-                                }
-                            }
-                            AnimatedVisibility(visible = customValid.not()) {
                                 Text(
+                                    text = stringResource(id = if (expandCustomIsExistence.not()) visibilityUnit else existenceUnit)
+                                )
+                                Spacer(modifier = Modifier.requiredWidth(4.dp))
+                                Icon(
                                     modifier = Modifier
                                         .padding(top = 4.dp)
-                                        .widthIn(max = 240.dp),
-                                    text = stringResource(id = R.string.ephemeral_settings_invalid),
-                                    style = OlvidTypography.body2,
-                                    color = Color(0xFFE2594E),
-                                    onTextLayout = {
-                                       additionalTimeUnitPopupOffset = it.size.height
-                                    }
+                                        .requiredSize(18.dp),
+                                    painter = painterResource(id = R.drawable.ic_chevron_down),
+                                    contentDescription = ""
                                 )
                             }
+                        }
+                        AnimatedVisibility(visible = customValid.not()) {
+                            Text(
+                                modifier = Modifier
+                                    .padding(top = 4.dp)
+                                    .widthIn(max = 240.dp),
+                                text = stringResource(id = R.string.ephemeral_settings_invalid),
+                                style = OlvidTypography.body2,
+                                color = Color(0xFFE2594E),
+                                onTextLayout = {
+                                    additionalTimeUnitPopupOffset = it.size.height
+                                }
+                            )
                         }
                     }
                 }
             }
+        }
 
-            if (expandTimeUnit) {
-                val additionalOffset = if (isValid == false) additionalTimeUnitPopupOffset else 0
-                Popup(alignment = Alignment.BottomEnd,
-                    offset = with(LocalDensity.current) {
-                        IntOffset(
-                            x = (baseOffset.x + 16).dp.roundToPx(),
-                            y = (baseOffset.y - if (expandCustomIsExistence) 96 else 152).dp.roundToPx() - additionalOffset
-                        )
-                    },
-                    properties = PopupProperties(focusable = true),
-                    onDismissRequest = {
-                        expandTimeUnit = false
-                    }
+        if (expandTimeUnit) {
+            val additionalOffset = if (isValid == false) additionalTimeUnitPopupOffset else 0
+            Popup(
+                alignment = Alignment.BottomEnd,
+                offset = with(LocalDensity.current) {
+                    IntOffset(
+                        x = (baseOffset.x + 16).dp.roundToPx(),
+                        y = (baseOffset.y - if (expandCustomIsExistence) 96 else 152).dp.roundToPx() - additionalOffset
+                    )
+                },
+                properties = PopupProperties(focusable = true),
+                onDismissRequest = {
+                    expandTimeUnit = false
+                }
+            ) {
+
+                Surface(
+                    shadowElevation = 8.dp,
+                    color = colorResource(R.color.dialogBackground),
+                    contentColor = colorResource(R.color.almostBlack),
+                    shape = RoundedCornerShape(12.dp)
                 ) {
-
-                    Surface(
-                        elevation = 8.dp, shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Column(modifier = Modifier.width(Min)) {
-                            timeUnits.keys.forEachIndexed { index, textId ->
-                                Row(modifier = Modifier
-                                    .clickable {
+                    Column(modifier = Modifier.width(Min)) {
+                        timeUnits.keys.forEachIndexed { index, textId ->
+                            Row(
+                                modifier = Modifier
+                                    .heightIn(min = 48.dp)
+                                    .clickable(
+                                        indication = ripple(),
+                                        interactionSource = remember { MutableInteractionSource() }
+                                    ) {
                                         if (expandCustomIsExistence.not()) {
                                             visibilityUnit = textId
                                         } else {
@@ -479,17 +505,17 @@ fun EphemeralSettingsGroup(
                                         }
                                         checkValidCustom()
                                         expandTimeUnit = false
-                                    }
-                                ) {
-                                    Text(
-                                        modifier = Modifier
-                                            .padding(horizontal = 16.dp, vertical = 8.dp)
-                                            .weight(1f, true),
-                                        text = stringResource(id = textId)
-                                    )
-                                }
-                                Divider(color = Color(0x1F111111)).takeIf { index < 4 }
+                                    },
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Text(
+                                    modifier = Modifier
+                                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                                        .weight(1f, true),
+                                    text = stringResource(id = textId)
+                                )
                             }
+                            HorizontalDivider(color = colorResource(R.color.lightGrey)).takeIf { index < 4 }
                         }
                     }
                 }
@@ -509,8 +535,10 @@ fun EphemeralSettingsPopupLayout(
     Surface(
         modifier = modifier
             .padding(horizontal = 8.dp)
-            .widthIn(max = 300.dp),
-        elevation = 8.dp,
+            .widthIn(max = 340.dp),
+        shadowElevation = 8.dp,
+        color = colorResource(R.color.dialogBackground),
+        contentColor = colorResource(R.color.almostBlack),
         shape = RoundedCornerShape(12.dp)
     ) {
         Column {
@@ -527,7 +555,7 @@ fun EphemeralSettingsPopupLayout(
                         else Modifier
                             .clickable(
                                 interactionSource = interactionSource,
-                                indication = LocalIndication.current
+                                indication = ripple()
                             ) {
                                 ephemeralViewModel.setReadOnce(!ephemeralViewModel.getReadOnce())
                             }
@@ -552,15 +580,18 @@ fun EphemeralSettingsPopupLayout(
                     checked = ephemeralViewModel.getReadOnce(),
                     onCheckedChange = { ephemeralViewModel.setReadOnce(it) },
                     colors = SwitchDefaults.colors(
-                        uncheckedThumbColor = colorResource(id = R.color.alwaysLightGrey),
-                        checkedThumbColor = colorResource(id = R.color.olvid_gradient_light),
+                        checkedTrackColor = colorResource(id = R.color.olvid_gradient_light),
+                        disabledCheckedTrackColor = colorResource(id = R.color.olvid_gradient_light).copy(alpha = .5f)
                     )
                 )
             }
-            Divider(color = Color(0x1F111111))
+            HorizontalDivider(color = colorResource(R.color.lightGrey))
             Row(
                 modifier = Modifier
-                    .clickable {
+                    .clickable(
+                        indication = ripple(),
+                        interactionSource = remember { MutableInteractionSource() }
+                    ) {
                         onVisibilityClick()
                     }
                     .padding(horizontal = 16.dp)
@@ -596,10 +627,13 @@ fun EphemeralSettingsPopupLayout(
                     contentDescription = ""
                 )
             }
-            Divider(color = Color(0x1F111111))
+            HorizontalDivider(color = colorResource(R.color.lightGrey))
             Row(
                 modifier = Modifier
-                    .clickable {
+                    .clickable(
+                        indication = ripple(),
+                        interactionSource = remember { MutableInteractionSource() }
+                    ) {
                         onExistenceClick()
                     }
                     .padding(horizontal = 16.dp)
@@ -640,7 +674,6 @@ fun EphemeralSettingsPopupLayout(
 }
 
 
-
 @Composable
 fun EphemeralSettingsPreferenceLayout(
     modifier: Modifier = Modifier,
@@ -650,7 +683,7 @@ fun EphemeralSettingsPreferenceLayout(
     locked: Boolean,
 ) {
 
-    Column (
+    Column(
         modifier = modifier.fillMaxWidth()
     ) {
         val interactionSource = remember {
@@ -684,6 +717,7 @@ fun EphemeralSettingsPreferenceLayout(
             ) {
                 Text(
                     text = stringResource(id = R.string.preset_ephemeral_read_once),
+                    color = colorResource(R.color.almostBlack),
                     style = OlvidTypography.body1
                 )
                 Text(
@@ -697,8 +731,8 @@ fun EphemeralSettingsPreferenceLayout(
                 checked = ephemeralViewModel.getReadOnce(),
                 onCheckedChange = { ephemeralViewModel.setReadOnce(it) },
                 colors = SwitchDefaults.colors(
-                    uncheckedThumbColor = colorResource(id = R.color.alwaysLightGrey),
-                    checkedThumbColor = colorResource(id = R.color.olvid_gradient_light),
+                    checkedTrackColor = colorResource(id = R.color.olvid_gradient_light),
+                    disabledCheckedTrackColor = colorResource(id = R.color.olvid_gradient_light).copy(alpha = .5f)
                 )
             )
         }
@@ -708,7 +742,10 @@ fun EphemeralSettingsPreferenceLayout(
                     if (locked) Modifier
                         .alpha(0.5f)
                     else Modifier
-                        .clickable {
+                        .clickable(
+                            indication = ripple(),
+                            interactionSource = remember { MutableInteractionSource() }
+                        ) {
                             onVisibilityClick()
                         }
                 )
@@ -725,10 +762,11 @@ fun EphemeralSettingsPreferenceLayout(
             Column(
                 modifier = Modifier.weight(1f)
             ) {
-                Row (verticalAlignment = Alignment.CenterVertically) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         modifier = Modifier.weight(1f),
                         text = stringResource(id = R.string.preset_ephemeral_visibility_duration),
+                        color = colorResource(R.color.almostBlack),
                         style = OlvidTypography.body1
                     )
                     Spacer(modifier = Modifier.width(8.dp))
@@ -738,7 +776,8 @@ fun EphemeralSettingsPreferenceLayout(
                                 LocalContext.current, it
                             )
                         } ?: stringResource(id = R.string.pref_text_duration_null),
-                        style = OlvidTypography.body1.copy(color = if (locked) Color.Unspecified else Color(0xFF8B8D97))
+                        color = if (locked) colorResource(R.color.greyTint) else colorResource(R.color.almostBlack),
+                        style = OlvidTypography.body1
                     )
                     Icon(
                         modifier = Modifier
@@ -764,7 +803,10 @@ fun EphemeralSettingsPreferenceLayout(
                     if (locked)
                         Modifier.alpha(0.5f)
                     else Modifier
-                        .clickable {
+                        .clickable(
+                            indication = ripple(),
+                            interactionSource = remember { MutableInteractionSource() }
+                        ) {
                             onExistenceClick()
                         }
                 )
@@ -781,10 +823,11 @@ fun EphemeralSettingsPreferenceLayout(
             Column(
                 modifier = Modifier.weight(1f)
             ) {
-                Row (verticalAlignment = Alignment.CenterVertically) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         modifier = Modifier.weight(1f),
                         text = stringResource(id = R.string.preset_ephemeral_existence_duration),
+                        color = colorResource(R.color.almostBlack),
                         style = OlvidTypography.body1
                     )
                     Spacer(modifier = Modifier.width(8.dp))
@@ -794,9 +837,8 @@ fun EphemeralSettingsPreferenceLayout(
                                 LocalContext.current, it
                             )
                         } ?: stringResource(id = R.string.pref_text_duration_null),
-                        style = OlvidTypography.body1.copy(
-                            color = if (locked) Color.Unspecified else Color(0xFF8B8D97),
-                        )
+                        color = if (locked) colorResource(R.color.greyTint) else colorResource(R.color.almostBlack),
+                        style = OlvidTypography.body1
                     )
                     Icon(
                         modifier = Modifier
@@ -819,17 +861,25 @@ fun EphemeralSettingsPreferenceLayout(
 }
 
 
-
-
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO or Configuration.UI_MODE_TYPE_NORMAL)
 @Composable
 private fun EphemeralSettingsPreview() {
-    val ephemeralViewModel = remember { EphemeralViewModel() }
-    Column (
+    val ephemeralViewModel = remember { EphemeralViewModel().apply {
+        setReadOnce(true)
+    } }
+    Column(
+        modifier = Modifier.background(colorResource(R.color.almostWhite)),
         verticalArrangement = spacedBy(32.dp)
     ) {
-        EphemeralSettingsPopupLayout(modifier = Modifier.fillMaxWidth(), ephemeralViewModel, {}, {}, false)
-        
+        EphemeralSettingsPopupLayout(
+            modifier = Modifier.fillMaxWidth(),
+            ephemeralViewModel,
+            {},
+            {},
+            false
+        )
+
         EphemeralSettingsGroup(
             ephemeralViewModel = ephemeralViewModel,
             expanded = null,
@@ -858,41 +908,55 @@ private fun EphemeralSetting(
     ) {
 
         Surface(
-            elevation = 8.dp, shape = RoundedCornerShape(12.dp)
+            shadowElevation = 8.dp,
+            color = colorResource(R.color.dialogBackground),
+            contentColor = colorResource(R.color.almostBlack),
+            shape = RoundedCornerShape(12.dp)
         ) {
             Column(modifier = Modifier.width(Min)) {
                 settings.forEach { setting ->
-                    Row(modifier = Modifier
-                        .then(
-                            if (setting.enabled) {
-                                Modifier.clickable {
-                                    applySetting(setting.value)
-                                }
-                            } else {
-                                Modifier.alpha(0.4f)
-                            })
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    Row(
+                        modifier = Modifier
+                            .then(
+                                if (setting.enabled) {
+                                    Modifier.clickable(
+                                        indication = ripple(),
+                                        interactionSource = remember { MutableInteractionSource() }
+                                    ) {
+                                        applySetting(setting.value)
+                                    }
+                                } else {
+                                    Modifier.alpha(0.4f)
+                                })
+                            .fillMaxWidth()
+                            .heightIn(min = 48.dp)
+                            .padding(horizontal = 16.dp, vertical = 8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text( text = setting.label)
+                        Text(text = setting.label)
                         if (selected == setting.value) {
                             Spacer(modifier = Modifier.width(8.dp))
                             Icon(
                                 modifier = Modifier.requiredSize(20.dp),
                                 painter = painterResource(id = R.drawable.ic_ok),
                                 tint = colorResource(id = R.color.olvid_gradient_light),
-                                contentDescription = null)
+                                contentDescription = null
+                            )
                         }
                     }
-                    Divider(color = Color(0x1F111111))
+                    HorizontalDivider(color = colorResource(R.color.lightGrey))
                 }
-                Row(modifier = Modifier
-                    .clickable {
-                        onCustomClick()
-                    }
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                Row(
+                    modifier = Modifier
+                        .clickable(
+                            indication = ripple(),
+                            interactionSource = remember { MutableInteractionSource() }
+                        ) {
+                            onCustomClick()
+                        }
+                        .fillMaxWidth()
+                        .heightIn(min = 48.dp)
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
@@ -904,7 +968,8 @@ private fun EphemeralSetting(
                             modifier = Modifier.requiredSize(20.dp),
                             painter = painterResource(id = R.drawable.ic_ok),
                             tint = colorResource(id = R.color.olvid_gradient_light),
-                            contentDescription = null)
+                            contentDescription = null
+                        )
                     }
                 }
             }

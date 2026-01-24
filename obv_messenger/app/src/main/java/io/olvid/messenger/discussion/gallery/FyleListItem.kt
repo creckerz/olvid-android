@@ -58,9 +58,9 @@ import io.olvid.messenger.customClasses.PreviewUtils
 import io.olvid.messenger.databases.dao.FyleMessageJoinWithStatusDao.FyleAndStatus
 import io.olvid.messenger.databases.entity.Fyle
 import io.olvid.messenger.databases.entity.FyleMessageJoinWithStatus
+import io.olvid.messenger.designsystem.constantSp
 import io.olvid.messenger.designsystem.theme.OlvidTypography
 import io.olvid.messenger.discussion.linkpreview.OpenGraph
-import io.olvid.messenger.discussion.message.attachments.constantSp
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
