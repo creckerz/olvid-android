@@ -62,6 +62,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -79,6 +80,7 @@ import io.olvid.messenger.designsystem.components.OlvidDropdownMenuItem
 import io.olvid.messenger.designsystem.constantSp
 import io.olvid.messenger.designsystem.theme.OlvidTypography
 import io.olvid.messenger.discussion.gallery.DiscussionMediaGalleryActivity.AudioServiceBindable
+import io.olvid.messenger.discussion.search.DiscussionSearchViewModel
 import io.olvid.messenger.services.MediaPlayerService.AudioOutput
 import io.olvid.messenger.services.MediaPlayerService.AudioOutput.PHONE
 import kotlin.math.roundToInt
@@ -89,6 +91,7 @@ fun AudioListItem(
     modifier: Modifier = Modifier,
     fyleAndStatus: FyleAndStatus,
     activity: Activity?,
+    discussionSearchViewModel: DiscussionSearchViewModel? = null,
     onEnableMessageSwipe: ((Boolean) -> Unit)? = null,
     audioAttachmentServiceBinding: AudioAttachmentServiceBinding?,
     discussionId: Long,
@@ -259,7 +262,7 @@ fun AudioListItem(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(end = 4.dp),
-                        text = fyleAndStatus.fyleMessageJoinWithStatus.fileName,
+                        text = AnnotatedString( fyleAndStatus.fyleMessageJoinWithStatus.fileName).let { discussionSearchViewModel?.highlight(context, it) ?: it},
                         fontSize = constantSp(value = 14),
                         lineHeight = constantSp(value = 16),
                         maxLines = 2,

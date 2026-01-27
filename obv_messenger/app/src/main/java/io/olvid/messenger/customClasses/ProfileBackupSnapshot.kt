@@ -20,6 +20,7 @@
 package io.olvid.messenger.customClasses
 
 import io.olvid.engine.engine.types.ObvProfileBackupsForRestore
+import io.olvid.engine.engine.types.identities.ObvKeycloakAuthType
 import io.olvid.engine.engine.types.sync.ObvSyncSnapshot
 
 
@@ -72,4 +73,4 @@ data class ProfileBackupSnapshot(
 
 }
 
-data class KeycloakInfo(val serverUrl: String, val clientId: String, val clientSecret: String?)
+data class KeycloakInfo(val serverUrl: String, val supportedAuthenticationMethods: List<ObvKeycloakAuthType>)

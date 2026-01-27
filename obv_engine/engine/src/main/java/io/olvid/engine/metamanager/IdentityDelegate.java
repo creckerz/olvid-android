@@ -93,6 +93,7 @@ public interface IdentityDelegate {
     ObvKeycloakState getOwnedIdentityKeycloakState(Session session, Identity ownedIdentity) throws SQLException;
     JsonWebKey getOwnedIdentityKeycloakSignatureKey(Session session, Identity ownedIdentity) throws SQLException;
     void setOwnedIdentityKeycloakSignatureKey(Session session, Identity ownedIdentity, JsonWebKey signatureKey) throws SQLException;
+    void setOwnedIdentityKeycloakSupportsIdBasedAuth(Session session, Identity ownedIdentity, boolean supportsIdBasedAuth) throws SQLException;
     void setKeycloakLatestRevocationListTimestamp(Session session, Identity ownedIdentity, long latestRevocationListTimestamp) throws SQLException;
     void unCertifyExpiredSignedContactDetails(Session session, Identity ownedIdentity, long latestRevocationListTimestamp);
     List<String> getKeycloakPushTopics(Session session, Identity ownedIdentity) throws SQLException;

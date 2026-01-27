@@ -139,6 +139,7 @@ fun ConfigurationScanContent(
                     KeycloakContent(
                         viewModel = plusButtonViewModel,
                         keycloakPojo = configuration.keycloak,
+                        keycloakMagic = configuration.magic,
                         onCancel = onCancel,
                         onNavigateToKeycloakBind = onNavigateToKeycloakBind,
                         authenticator = authenticator

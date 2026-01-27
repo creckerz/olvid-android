@@ -854,7 +854,7 @@
 	<string name="dialog_title_update_available" state="needs_review" hash="-1893271535">Päivitys saatavilla</string>
 	<string name="dialog_message_update_available" state="needs_review" hash="259838609">Uudempi versio Olvidista on saatavilla Google Playssa.\n\nPäivitä, jotta voit hyödyntää uusimpia ominaisuuksia.</string>
 	<string name="dialog_title_call_initiation_not_supported" state="needs_review" hash="-2088021831">Puhelun aloitus epäonnistui</string>
-	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="-1087657662">Näyttää siltä, että Olvid-palvelimesi ei tue suojattujen puheluiden aloittamista.\n\nOta yhteyttä järjestelmänvalvojaan saadaksesi lisätietoja.</string>
+	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="1760333819">Näyttää siltä, että Olvid-palvelimesi ei tue suojattujen puheluiden aloittamista.\n\nOta yhteyttä järjestelmänvalvojaan saadaksesi lisätietoja.</string>
 	<string name="label_identity_creation_options" state="needs_review" hash="1180456032">ID:n luontivaihtoehdot</string>
 	<string name="text_option_server" state="needs_review" hash="-1130676431">Palvelin: %1$s</string>
 	<string name="text_option_license_code" state="needs_review" hash="1222068504">Lisenssi: %1$s</string>
@@ -882,7 +882,7 @@
 	<string name="toast_message_unable_to_keycloak_revoke" state="needs_review" hash="-1368037130">Vanhan Olvid ID:n korvaaminen epäonnistui, yritä uudelleen</string>
 	<string name="toast_message_keycloak_revoke_successful" state="needs_review" hash="-1216369809">Aiempi Olvid ID on korvattu onnistuneesti</string>
 	<string name="dialog_title_keycloak_authentication_required_user_id_changed" state="needs_review" hash="-896407029">Käyttäjän muutos havaittu</string>
-	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="1319874532">Olvid ID:täsi hallinnoi yrityksesi identiteetintarjoaja. Näyttää siltä, että olet todennettu eri käyttäjänä kuin tavallisesti. Tätä ei tueta.\n\nOta yhteyttä järjestelmänvalvojaan tai todenna itsesi uudelleen oikeana käyttäjänä.</string>
+	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="876252686">Profiiliasi hallinnoi tällä hetkellä organisaatiosi. Näyttää siltä, että olet kirjautunut sisään eri käyttäjätunnuksella kuin tavallisesti. Tätä ei tueta.\n\nOta yhteyttä järjestelmänvalvojaan tai kirjaudu uudelleen sisään oikealla käyttäjätunnuksella.</string>
 	<string name="dialog_title_add_keycloak_user" state="needs_review" hash="-1050193239">Lisää yhteyshenkilö</string>
 	<string name="dialog_message_add_keycloak_user" state="needs_review" hash="-1755937035">Olet valinnut lisätä %1$s yhteystietoihisi. Haluatko jatkaa?</string>
 	<string name="explanation_keycloak_update_new" state="needs_review" hash="1136733528">Olet asettamassa yrityksesi identiteetintarjoajaa Olvidissa. Kun se on määritetty, voit todentaa itsesi tällä palvelimella ja Olvid antaa sinun lisätä muita työntekijöitä saumattomasti yhteystietoihisi.\nOta yhteyttä järjestelmänvalvojaan saadaksesi lisätietoja.</string>
@@ -890,7 +890,7 @@
 	<string name="explanation_keycloak_update_same_server" state="needs_review" hash="1886762594">Olvid on jo määritetty yrityksesi identiteetintarjoajalla.\nOta yhteyttä järjestelmänvalvojaan saadaksesi lisätietoja.</string>
 	<string name="explanation_keycloak_unable_to_contact_server" state="needs_review" hash="2123517499">Yhteyttä yrityksesi tunnistautumistarjoajaan ei voitu muodostaa. Tarkista Internet-yhteytesi tai ota yhteyttä järjestelmänvalvojaan saadaksesi lisätietoja.</string>
 	<string name="explanation_keycloak_update_bad_server" state="needs_review" hash="546492417">Yrityksesi tunnistautumistietopalvelun määrittäminen nykyisellä Olvid-tunnuksellasi ei onnistunut. Tunnuksesi luotiin toisella Olvid-palvelimella.\nOta yhteyttä järjestelmänvalvojaan saadaksesi lisätietoja.</string>
-	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-317755135">Yrityksesi tunnistautumistarjoajan määrittäminen epäonnistui. Olvid-versiosi on vanhentunut eikä ole yhteensopiva yrityksesi tunnistautumistarjoajan kanssa.\nOle hyvä ja päivitä Olvid ja yritä uudelleen tai ota yhteyttä järjestelmänvalvojaan saadaksesi lisätietoja.</string>
+	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-1487678865">Olvid-versiosi on vanhentunut, eikä se ole yhteensopiva yrityksesi tunnistautumisen tarjoajan kanssa. Päivitä Olvid ja yritä uudelleen tai ota yhteyttä järjestelmänvalvojaan saadaksesi lisätietoja.</string>
 	<string name="explanation_keycloak_bind" state="needs_review" hash="445359846">Alla oleva nimi on haettu yrityksesi identiteetintarjoajalta.\nKun tämä tarjoaja hallinnoi Olvid-tunnustasi, yhteystietosi näkevät sinut tällä tavalla Olvidissa.</string>
 	<string name="button_label_manage_keycloak" state="needs_review" hash="-1323644699">Vaihda hallittuun ID:hen</string>
 	<string name="toast_message_keycloak_bind_successful" state="needs_review" hash="749864054">Vaihdetiin onnistuneesti hallittuun ID:hen</string>
@@ -898,7 +898,7 @@
 	<string name="menu_action_unbind_from_keycloak" state="needs_review" hash="549323804">Poista identiteetintarjoaja</string>
 	<string name="dialog_title_unbind_from_keycloak" state="needs_review" hash="549323804">Poista identiteetintarjoaja</string>
 	<string name="dialog_title_unbind_from_keycloak_restricted" state="needs_review" hash="1941011536">Identiteetintarjoajaa ei voitu poistaa</string>
-	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="915111540">Olvid-tunnuksesi hallinnoi tällä hetkellä yrityksesi identiteetintarjoaja. Olet siirtymässä normaaliin, hallinnoimattomaan Olvid-tunnukseen.\n\nJos jatkat, et voi enää lisätä yrityksesi yhteystietoja Olvidiin saumattomasti. Ota yhteyttä järjestelmänvalvojaan saadaksesi lisätietoja.\n\nHaluatko jatkaa?</string>
+	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="861158628">Olvid-tunnuksesi on tällä hetkellä yrityksesi identiteetintarjoajan hallinnassa. Olet siirtymässä tavalliseen, hallinnoimattomaan Olvid-tunnukseen.\n\nJos jatkat, et voi enää lisätä yrityksesi yhteystietoja saumattomasti Olvidiin. Ota yhteyttä järjestelmänvalvojaan saadaksesi lisätietoja.\n\nHaluatko jatkaa?</string>
 	<string name="dialog_message_unbind_from_keycloak_restricted" state="needs_review" hash="-155299318">Olvid-tunnuksesi hallinnoi tällä hetkellä yrityksesi identiteetintarjoaja, mikä rajoittaa siirtoja. Sitä ei voi poistaa omasta aloitteestasi.\n\nOta yhteyttä järjestelmänvalvojaan saadaksesi lisätietoja.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_needed" state="needs_review" hash="-1740408397">Identiteetintarjoajasi ilmoittaa, että Olvid-tunnus on jo liitetty käyttäjään, jolla kirjauduit sisään. Jos jatkat, tämä Olvid-tunnus peruutetaan ja uusi tunnuksesi liitetään tähän käyttäjään.\nOta yhteyttä järjestelmänvalvojaan saadaksesi lisätietoja.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_impossible" state="needs_review" hash="-734813550">Identiteetintarjoajasi ilmoittaa, että Olvid-tunnus on jo liitetty käyttäjään, jolla kirjauduit sisään. Et voi jatkaa tunnuksesi luomista.\n\nOta yhteyttä järjestelmänvalvojaan saadaksesi lisätietoja.</string>
@@ -1142,6 +1142,7 @@
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">Indikaattori siitä, että ilmoitukset ovat mykistettynä tässä profiilissa</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">Luo profiili</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">Yrityksesi tunnistautumistarjoaja on määritetty onnistuneesti. Paina alla olevaa \"Todennus\"-painiketta todennusta varten ja henkilötietojesi hakemiseksi.</string>
+	<string name="text_explanation_onboarding_keycloak_parsed_configuration_magic" state="needs_review" hash="1823898406">Yrityksesi tunnistetietojen tarjoaja on määritetty onnistuneesti. Paina alla olevaa painiketta ”Käytä taikalinkkiä” saadaksesi henkilökohtaiset tietosi.</string>
 	<string name="text_explanation_onboarding_keycloak_mdm" state="needs_review" hash="1340457300">Tervetuloa Olvidin.\n\nTämän asennuksen hallinnoi yrityksesi ja se on määritetty käyttämään tunnistautumistietopalvelua. Paina alla olevaa ”Todennus”-painiketta todennusta varten ja henkilökohtaisten tietojen hakemiseksi.\n\nJos olet jo käyttänyt Olvidia ja haluat palauttaa avaimet ja yhteystiedot varmuuskopiosta, paina ”Palauta varmuuskopiosta”.</string>
 	<string name="button_label_see_details" state="needs_review" hash="238834473">Katso tiedot</string>
 	<string name="link_label_invitation_url" state="needs_review" hash="744905192">Lisää yhteyshenkilö</string>
@@ -2144,8 +2145,13 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Vastapuolen laite on saavuttamaton</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Luo kaikki suojatut kanavat uudelleen</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Kaikkien suojattujen kanavien uudelleenluonti pakottaa Olvidin luomaan uusia suojattuja yhteydenottokanavia kaikkien yhteystietojesi laitteille. Tämä ei yleensä ole hyödyllistä, mutta voi ratkaista harvinaisia tilanteita, joissa jotkin näistä kanavista ovat «synkronoimattomia».\n\n**Varoitus:** Jos sinulla on paljon yhteystietoja, tämä toiminto voi kestää muutaman minuutin ja voit menettää joitain saapuvia viestejä sen aikana.</string>
+	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">Käytä \"taikalinkkiä\"</string>
+	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">Virheellinen taikalinkki</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Puhelu katkaistiin</string>
 	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">Tarvitseeko tiimisi tilauksia?</string>
 	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Vieraile Olvid-kaupassa</string>
 	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">Muistutus asetettu</string>
+	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">Todentaminen epäonnistui</string>
+	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">Profiiliasi hallinnoi tällä hetkellä organisaatiosi, ja uudelleen tunnistautuminen on tarpeen. Kuitenkaan mitään tuettua tunnistautumismenetelmää ei näytä olevan saatavilla.\n\nOta yhteyttä järjestelmänvalvojaan saadaksesi lisätietoja.</string>
+	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">Yhtään tuettua todennusmenetelmää ei näytä olevan saatavilla.</string>
 </resources>

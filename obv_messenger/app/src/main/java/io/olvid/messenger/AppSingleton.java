@@ -67,6 +67,7 @@ import io.olvid.engine.engine.types.ObvCapability;
 import io.olvid.engine.engine.types.ObvPushNotificationType;
 import io.olvid.engine.engine.types.RegisterApiKeyResult;
 import io.olvid.engine.engine.types.identities.ObvIdentity;
+import io.olvid.engine.engine.types.identities.ObvKeycloakAuthType;
 import io.olvid.engine.engine.types.identities.ObvKeycloakState;
 import io.olvid.messenger.billing.SubscriptionRepository;
 import io.olvid.messenger.customClasses.BytesKey;
@@ -411,8 +412,7 @@ public class AppSingleton {
                             KeycloakManager.registerKeycloakManagedIdentity(
                                     ownedIdentity,
                                     keycloakState.keycloakServer,
-                                    keycloakState.clientId,
-                                    keycloakState.clientSecret,
+                                    keycloakState.supportedAuthenticationMethods,
                                     keycloakState.jwks,
                                     keycloakState.signatureKey,
                                     keycloakState.serializedAuthState,
@@ -607,8 +607,7 @@ public class AppSingleton {
                                     KeycloakManager.registerKeycloakManagedIdentity(
                                             obvIdentity,
                                             keycloakState.keycloakServer,
-                                            keycloakState.clientId,
-                                            keycloakState.clientSecret,
+                                            keycloakState.supportedAuthenticationMethods,
                                             keycloakState.jwks,
                                             keycloakState.signatureKey,
                                             keycloakState.serializedAuthState,
@@ -646,8 +645,7 @@ public class AppSingleton {
                                  @Nullable final byte[] unlockPassword,
                                  @Nullable final byte[] unlockSalt,
                                  @Nullable final String keycloakServer,
-                                 @Nullable final String clientId,
-                                 @Nullable final String clientSecret,
+                                 @Nullable List<ObvKeycloakAuthType> supportedAuthenticationMethods,
                                  @Nullable final JsonWebKeySet jwks,
                                  @Nullable final JsonWebKey signatureKey,
                                  @Nullable final String serializedKeycloakState,
@@ -656,14 +654,14 @@ public class AppSingleton {
                                  @Nullable final Runnable failureCallback) {
         App.runThread(() -> {
             ObvKeycloakState keycloakState = null;
-            if (keycloakServer != null && serializedKeycloakState != null && jwks != null && clientId != null && signatureKey != null) {
-                keycloakState = new ObvKeycloakState(keycloakServer, clientId, clientSecret, jwks, signatureKey, serializedKeycloakState, keycloakTransferRestricted, null,0, 0);
+            if (keycloakServer != null && serializedKeycloakState != null && (supportedAuthenticationMethods != null && !supportedAuthenticationMethods.isEmpty()) && signatureKey != null) {
+                keycloakState = new ObvKeycloakState(keycloakServer, supportedAuthenticationMethods, jwks, signatureKey, serializedKeycloakState, keycloakTransferRestricted, null,0, 0);
             }
             ObvIdentity obvOwnedIdentity = engine.generateOwnedIdentity(server, identityDetails, keycloakState, DEFAULT_DEVICE_DISPLAY_NAME);
 
             if (obvOwnedIdentity != null) {
                 if (keycloakState != null) {
-                    KeycloakManager.registerKeycloakManagedIdentity(obvOwnedIdentity, keycloakServer, clientId, clientSecret, jwks, signatureKey, serializedKeycloakState, keycloakTransferRestricted, null, 0, 0, true);
+                    KeycloakManager.registerKeycloakManagedIdentity(obvOwnedIdentity, keycloakServer, supportedAuthenticationMethods, jwks, signatureKey, serializedKeycloakState, keycloakTransferRestricted, null, 0, 0, true);
                 }
 
                 OwnedIdentity ownedIdentity;
@@ -793,8 +791,7 @@ public class AppSingleton {
                                         KeycloakManager.registerKeycloakManagedIdentity(
                                                 obvOwnedIdentity,
                                                 keycloakState.keycloakServer,
-                                                keycloakState.clientId,
-                                                keycloakState.clientSecret,
+                                                keycloakState.supportedAuthenticationMethods,
                                                 keycloakState.jwks,
                                                 keycloakState.signatureKey,
                                                 keycloakState.serializedAuthState,

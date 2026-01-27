@@ -48,6 +48,7 @@ import io.olvid.messenger.openid.KeycloakAuthenticationStartFragment;
 import io.olvid.messenger.openid.KeycloakBrowserChooserDialog;
 import io.olvid.messenger.openid.KeycloakManager;
 import io.olvid.messenger.openid.KeycloakTasks;
+import io.olvid.messenger.openid.jsons.OlvidWellKnownJson;
 import io.olvid.messenger.settings.SettingsActivity;
 
 public class KeycloakAuthenticationRequiredDialogFragment extends DialogFragment {
@@ -173,16 +174,12 @@ public class KeycloakAuthenticationRequiredDialogFragment extends DialogFragment
 
     private void authenticate() {
         if (keycloakAuthenticationStartFragment != null) {
-            if (keycloakAuthenticationStartFragment.authenticationSpinnerGroup != null) {
-                keycloakAuthenticationStartFragment.authenticationSpinnerGroup.setVisibility(View.VISIBLE);
-            }
-            if (keycloakAuthenticationStartFragment.authenticationSpinnerText != null) {
-                keycloakAuthenticationStartFragment.authenticationSpinnerText.setText(R.string.label_checking_server);
-            }
+            keycloakAuthenticationStartFragment.authenticationSpinnerGroup.setVisibility(View.VISIBLE);
+            keycloakAuthenticationStartFragment.authenticationSpinnerText.setText(R.string.label_checking_server);
 
-            KeycloakTasks.discoverKeycloakServer(serverUrl, new KeycloakTasks.DiscoverKeycloakServerCallback() {
+            KeycloakTasks.discoverKeycloakServerOpenidConfiguration(serverUrl, new KeycloakTasks.DiscoverKeycloakServerCallback() {
                 @Override
-                public void success(@NonNull String serverUrl, @NonNull AuthState authState, @NonNull JsonWebKeySet jwks) {
+                public void success(@NonNull String serverUrl, @NonNull AuthState authState, @NonNull JsonWebKeySet jwks, @Nullable OlvidWellKnownJson olvidWellKnown) {
                     new Handler(Looper.getMainLooper()).post(() -> keycloakAuthenticationStartFragment.authenticate(authState.jsonSerializeString(), clientId, clientSecret, new KeycloakTasks.AuthenticateCallback() {
                         @Override
                         public void success(@NonNull AuthState authState) {
@@ -200,11 +197,7 @@ public class KeycloakAuthenticationRequiredDialogFragment extends DialogFragment
                 @Override
                 public void failed() {
                     Logger.d("Authentication failed: unable to discover keycloak");
-                    new Handler(Looper.getMainLooper()).post(() -> {
-                        if (keycloakAuthenticationStartFragment.authenticationSpinnerGroup != null) {
-                            keycloakAuthenticationStartFragment.authenticationSpinnerGroup.setVisibility(View.GONE);
-                        }
-                    });
+                    new Handler(Looper.getMainLooper()).post(() -> keycloakAuthenticationStartFragment.authenticationSpinnerGroup.setVisibility(View.GONE));
                 }
             });
         }

@@ -38,6 +38,7 @@ public class StandaloneServerQueryOperation extends Operation {
     public static final int RFC_UNKNOWN_BACKUP_UID = 7;
     public static final int RFC_UNKNOWN_BACKUP_THREAD_ID = 8;
     public static final int RFC_UNKNOWN_BACKUP_VERSION = 9;
+
     public static final int RFC_SERVER_PARSING_ERROR = 100;
 
     private final ServerQuery serverQuery;
@@ -94,6 +95,16 @@ public class StandaloneServerQueryOperation extends Operation {
                 case BACKUPS_V2_DOWNLOAD_PROFILE_PICTURE_QUERY_ID: {
                     ServerQuery.BackupsV2DownloadProfilePictureQuery backupsV2DownloadProfilePictureQuery = (ServerQuery.BackupsV2DownloadProfilePictureQuery) serverQuery.getType();
                     serverMethod = new BackupsV2DownloadProfilePictureServerMethod(backupsV2DownloadProfilePictureQuery.identity, backupsV2DownloadProfilePictureQuery.photoLabel, backupsV2DownloadProfilePictureQuery.photoKey);
+                    break;
+                }
+                case KEYCLOAK_ID_BASED_AUTH_REQUEST_CHALLENGE: {
+                    ServerQuery.KeycloakIdBasedAuthRequestChallengeQuery keycloakIdBasedAuthRequestChallengeQuery = (ServerQuery.KeycloakIdBasedAuthRequestChallengeQuery) serverQuery.getType();
+                    serverMethod = new KeycloakIdBasedAuthRequestChallengeServerMethod(keycloakIdBasedAuthRequestChallengeQuery.keycloakServerUrl, keycloakIdBasedAuthRequestChallengeQuery.keycloakUserId, keycloakIdBasedAuthRequestChallengeQuery.nonce);
+                    break;
+                }
+                case KEYCLOAK_ID_BASED_AUTH_GET_SESSION: {
+                    ServerQuery.KeycloakIdBasedAuthGetSessionQuery keycloakIdBasedAuthGetSessionQuery = (ServerQuery.KeycloakIdBasedAuthGetSessionQuery) serverQuery.getType();
+                    serverMethod = new KeycloakIdBasedAuthGetSessionServerMethod(keycloakIdBasedAuthGetSessionQuery.keycloakServerUrl, keycloakIdBasedAuthGetSessionQuery.challengeResponse, keycloakIdBasedAuthGetSessionQuery.nonce);
                     break;
                 }
 

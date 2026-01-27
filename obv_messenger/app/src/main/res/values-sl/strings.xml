@@ -854,7 +854,7 @@
 	<string name="dialog_title_update_available" state="needs_review" hash="-1893271535">Na voljo posodobitev</string>
 	<string name="dialog_message_update_available" state="needs_review" hash="259838609">Novejša različica Olvid je na voljo v storitvi Google Play.\n\nPosodobite, da boste lahko izkoristili najnovejše funkcije.</string>
 	<string name="dialog_title_call_initiation_not_supported" state="needs_review" hash="-2088021831">Klic ni mogel sprožiti</string>
-	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="-1087657662">Zdi se, da vaš strežnik Olvid ne podpira sprožitve varnih klicev.\n\nZa več informacij se obrnite na svojega skrbnika.</string>
+	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="1760333819">Zdi se, da vaš strežnik Olvid ne podpira varnega vzpostavljanja klicev.\n\nZa več informacij se obrnite na svojega skrbnika.</string>
 	<string name="label_identity_creation_options" state="needs_review" hash="1180456032">Možnosti ustvarjanja ID</string>
 	<string name="text_option_server" state="needs_review" hash="-1130676431">Strežnik: %1$s</string>
 	<string name="text_option_license_code" state="needs_review" hash="1222068504">Licenca: %1$s</string>
@@ -882,7 +882,7 @@
 	<string name="toast_message_unable_to_keycloak_revoke" state="needs_review" hash="-1368037130">Ni uspelo zamenjati prejšnjega Olvid ID, poskusite znova</string>
 	<string name="toast_message_keycloak_revoke_successful" state="needs_review" hash="-1216369809">Prejšnji Olvid ID je bil uspešno zamenjan</string>
 	<string name="dialog_title_keycloak_authentication_required_user_id_changed" state="needs_review" hash="-896407029">Zaznana sprememba uporabnika</string>
-	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="1319874532">Vaš Olvid ID upravlja ponudnik identitete vaše družbe. Zdi se, da ste se prijavili kot drug uporabnik kot običajno. To ni podprto.\n\nProsimo, kontaktirajte svojega skrbnika ali se ponovno prijavite kot pravi uporabnik.</string>
+	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="876252686">Vaš profil trenutno upravlja vaša organizacija. Zdi se, da ste se prijavili z drugim uporabniškim računom, kot običajno. To ni podprto.\n\nProsimo, kontaktirajte svojega skrbnika ali se ponovno prijavite s pravilnim uporabniškim računom.</string>
 	<string name="dialog_title_add_keycloak_user" state="needs_review" hash="-1050193239">Dodaj stik</string>
 	<string name="dialog_message_add_keycloak_user" state="needs_review" hash="-1755937035">Izbrali ste, da dodate %1$s med svoje stike. Želite nadaljevati?</string>
 	<string name="explanation_keycloak_update_new" state="needs_review" hash="1136733528">Pripravljaš se na konfiguracijo ponudnika identitete tvojega podjetja v Olvid. Ko bo konfigurirano, se boš lahko preveril s tem strežnikom in Olvid ti bo omogočil, da brez težav dodaš druge zaposlene med svoje stike.\nZa več informacij se obrni na svojega skrbnika.</string>
@@ -890,7 +890,7 @@
 	<string name="explanation_keycloak_update_same_server" state="needs_review" hash="1886762594">Olvid je že konfiguriran z identitetnim ponudnikom vaše podjetja.\nZa več informacij se obrnite na svojega skrbnika.</string>
 	<string name="explanation_keycloak_unable_to_contact_server" state="needs_review" hash="2123517499">Ni bilo mogoče vzpostaviti povezavo s ponudnikom identitete vaše družbe. Preverite svojo internetno povezavo ali se obrnite na skrbnika za več informacij.</string>
 	<string name="explanation_keycloak_update_bad_server" state="needs_review" hash="546492417">Ni bilo mogoče konfigurirati ponudnika identitete vaše družbe z vašim trenutnim ID-jem Olvid. Vaš ID je bil ustvarjen na drugem strežniku Olvid.\nZa več informacij se obrnite na svojega skrbnika.</string>
-	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-317755135">Ni bilo mogoče konfigurirati ponudnika identitete vašega podjetja. Vaša različica Olvid je zastarela in ni združljiva s ponudnikom identitete vašega podjetja.\nPosodobite Olvid in poskusite znova ali se obrnite na skrbnika za več informacij.</string>
+	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-1487678865">Vaša različica Olvida je zastarela in ni združljiva s ponudnikom identitet vaše družbe.\nPosodobite Olvid in poskusite znova ali se obrnite na svojega skrbnika za več informacij.</string>
 	<string name="explanation_keycloak_bind" state="needs_review" hash="445359846">Ime spodaj je bilo pridobljeno od ponudnika identitete vaše družbe.\nKo bo vaš Olvid ID upravljal ta ponudnik, bodo vaši stiki videli vas tako v Olvid.</string>
 	<string name="button_label_manage_keycloak" state="needs_review" hash="-1323644699">Preklopi na upravljano ID</string>
 	<string name="toast_message_keycloak_bind_successful" state="needs_review" hash="749864054">Uspešen prehod na upravljani ID</string>
@@ -898,7 +898,7 @@
 	<string name="menu_action_unbind_from_keycloak" state="needs_review" hash="549323804">Odstrani ponudnika identitete</string>
 	<string name="dialog_title_unbind_from_keycloak" state="needs_review" hash="549323804">Odstrani ponudnika identitete</string>
 	<string name="dialog_title_unbind_from_keycloak_restricted" state="needs_review" hash="1941011536">Ni bilo mogoče odstraniti ponudnika identitete</string>
-	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="915111540">Tvoja Olvid ID je trenutno v upravljanju ponudnika identitete tvojega podjetja. Preklapljaš na običajen, neupravljan Olvid ID.\n\nČe boš nadaljeval, ne boš več mogel brez težav dodajati stikov iz svojega podjetja v Olvid. Se obrni na skrbnika za več informacij.\n\nŽeliš nadaljevati?</string>
+	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="861158628">Vaš Olvid ID trenutno upravlja ponudnik identitet vaše družbe. Zdaj boste prešli na običajen, neupravljan Olvid ID.\n\nČe boste nadaljevali, ne boste več mogli enostavno dodajati stikov iz vaše družbe v Olvid. Za več informacij se obrnite na svojega skrbnika.\n\nAli želite nadaljevati?</string>
 	<string name="dialog_message_unbind_from_keycloak_restricted" state="needs_review" hash="-155299318">Vaš Olvid ID trenutno upravlja ponudnik identitete vaše družbe, kar omejuje prenose. Ne morete ga odstraniti po lastni pobudi.\n\nZa več informacij se obrnite na svojega skrbnika.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_needed" state="needs_review" hash="-1740408397">Vaš ponudnik identitete sporoča, da je ID Olvid že povezan z uporabnikom, s katerim ste se prijavili. Če nadaljujete, bo ta ID Olvid preklican in vaš novi ID bo povezan s tem uporabnikom.\nZa več informacij se obrnite na svojega skrbnika.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_impossible" state="needs_review" hash="-734813550">Vaš ponudnik identitete sporoča, da je ID Olvid že povezan z uporabnikom, s katerim ste se prijavili. Ne morete nadaljevati z ustvarjanjem svojega ID-ja.\n\nZa več informacij se obrnite na svojega skrbnika.</string>
@@ -1142,6 +1142,7 @@
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">Indikator, da so obvestila utišana za ta profil</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">Ustvari profil</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">Ponudnik identitete vašega podjetja je bil uspešno konfiguriran. Pritisnite gumb »Preveri« spodaj, da se preverite in pridobite svoje osebne podatke.</string>
+	<string name="text_explanation_onboarding_keycloak_parsed_configuration_magic" state="needs_review" hash="1823898406">Ponudnik identitet vaše družbe je bil uspešno konfiguriran. Pritisnite gumb »Uporabi čarobno povezavo« spodaj, da pridobite svoje osebne podatke.</string>
 	<string name="text_explanation_onboarding_keycloak_mdm" state="needs_review" hash="1340457300">Dobrodošli v Olvid.\n\nTo namestitev upravlja vaše podjetje in je bila konfigurirana za uporabo ponudnika identitete. Pritisnite gumb »preveri identiteto« spodaj, da se preverite in pridobite svoje osebne podatke.\n\nČe ste že uporabljali Olvid in želite obnoviti svoje ključe in stike iz varnostne kopije, pritisnite »obnovi varnostno kopijo«.</string>
 	<string name="button_label_see_details" state="needs_review" hash="238834473">Poglej podrobnosti</string>
 	<string name="link_label_invitation_url" state="needs_review" hash="744905192">Dodaj stik</string>
@@ -2143,8 +2144,13 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Naprava sogovornika je nedostopna</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Ponovno ustvari vse varne kanale</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Ponovna ustvaritev vseh varnih kanalov bo Olvidu naložila, da ustvari nove varne komunikacijske kanale z vsemi napravami vaših kontaktov. To na splošno ni koristno, vendar lahko reši redke situacije, ko so nekateri od teh kanalov »nesinkronizirani«.\n\n**Opozorilo:** če imate veliko kontaktov, lahko ta operacija traja nekaj minut in med izvajanjem lahko izgubite nekaj dohodnih sporočil.</string>
+	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">Uporabite „magično povezavo“</string>
+	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">Neveljaven magični povezava</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Klic je prekinjen</string>
 	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">Potrebujete naročnine za vašo ekipo?</string>
 	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Obiščite trgovino Olvid</string>
 	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">Opomnik nastavljen</string>
+	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">Preverjanje ni mogoče</string>
+	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">Vaš profil trenutno upravlja vaša organizacija in potrebna je ponovna avtentikacija. Vendar se zdi, da nobena od podprtih metod avtentikacije ni na voljo.\n\nZa več informacij se obrnite na svojega skrbnika.</string>
+	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">Zdi se, da ni na voljo nobena podprta metoda preverjanja pristnosti.</string>
 </resources>

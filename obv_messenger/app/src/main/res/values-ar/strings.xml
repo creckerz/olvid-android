@@ -854,7 +854,7 @@
 	<string name="dialog_title_update_available" state="needs_review" hash="-1893271535">تحديث متاح</string>
 	<string name="dialog_message_update_available" state="needs_review" hash="259838609">يتوفر إصدار أحدث من Olvid على Google Play.\n\nيرجى التحديث للاستفادة من أحدث الميزات.</string>
 	<string name="dialog_title_call_initiation_not_supported" state="needs_review" hash="-2088021831">تعذر بدء المكالمة</string>
-	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="-1087657662">يبدو أن خادم Olvid الخاص بك لا يدعم بدء المكالمات الآمنة.\n\nيرجى الاتصال بالمسؤول الخاص بك للحصول على مزيد من المعلومات.</string>
+	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="1760333819">يبدو أن خادم Olvid الخاص بك لا يدعم بدء المكالمات الآمنة.\n\nيرجى الاتصال بالمسؤول الخاص بك للحصول على مزيد من التفاصيل.</string>
 	<string name="label_identity_creation_options" state="needs_review" hash="1180456032">خيارات إنشاء المعرّف</string>
 	<string name="text_option_server" state="needs_review" hash="-1130676431">الخادم: %1$s</string>
 	<string name="text_option_license_code" state="needs_review" hash="1222068504">الترخيص: %1$s</string>
@@ -882,7 +882,7 @@
 	<string name="toast_message_unable_to_keycloak_revoke" state="needs_review" hash="-1368037130">فشل استبدال مُعرّف Olvid السابق، يرجى المحاولة مرة أخرى.</string>
 	<string name="toast_message_keycloak_revoke_successful" state="needs_review" hash="-1216369809">تم استبدال مُعرّف Olvid السابق بنجاح</string>
 	<string name="dialog_title_keycloak_authentication_required_user_id_changed" state="needs_review" hash="-896407029">تم اكتشاف تغيير في المستخدم</string>
-	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="1319874532">معرّف Olvid الخاص بك مُدار من قِبل مزود الهوية الخاص بشركتك. يبدو أنك قمت بالمصادقة كمستخدم مختلف عن المعتاد. هذا غير مدعوم.\n\nيرجى الاتصال بالمسؤول الخاص بك أو إعادة المصادقة كالمستخدم الصحيح.</string>
+	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="876252686">يتم حاليًا إدارة ملفك الشخصي بواسطة مؤسستك. يبدو أنك قمت بتسجيل الدخول كمستخدم مختلف عن المعتاد. هذا غير مدعوم.\n\nيرجى الاتصال بمسؤول النظام أو إعادة تسجيل الدخول كمستخدم صحيح.</string>
 	<string name="dialog_title_add_keycloak_user" state="needs_review" hash="-1050193239">إضافة جهة اتصال</string>
 	<string name="dialog_message_add_keycloak_user" state="needs_review" hash="-1755937035">لقد اخترت إضافة %1$s إلى جهات الاتصال الخاصة بك. هل تريد المتابعة؟</string>
 	<string name="explanation_keycloak_update_new" state="needs_review" hash="1136733528">أنت على وشك إعداد موفر الهوية الخاص بشركتك في Olvid. بمجرد الإعداد، يمكنك المصادقة مع هذا الخادم وسيسمح لك Olvid بإضافة الموظفين الآخرين إلى جهات الاتصال الخاصة بك بسلاسة.\nيرجى الاتصال بالمسؤول الخاص بك للحصول على مزيد من التفاصيل.</string>
@@ -890,7 +890,7 @@
 	<string name="explanation_keycloak_update_same_server" state="needs_review" hash="1886762594">تم بالفعل تهيئة Olvid مع موفر الهوية الخاص بشركتك.\nيرجى الاتصال بالمسؤول الخاص بك للحصول على مزيد من التفاصيل.</string>
 	<string name="explanation_keycloak_unable_to_contact_server" state="needs_review" hash="2123517499">تعذر الاتصال بمزود الهوية الخاص بشركتك. يرجى التحقق من اتصالك بالإنترنت أو الاتصال بالمسؤول للحصول على مزيد من التفاصيل.</string>
 	<string name="explanation_keycloak_update_bad_server" state="needs_review" hash="546492417">تعذر تكوين موفر هوية شركتك باستخدام مُعرّف Olvid الحالي الخاص بك. تم إنشاء مُعرّفك على خادم Olvid مختلف.\nيرجى الاتصال بالمسؤول الخاص بك للحصول على مزيد من التفاصيل.</string>
-	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-317755135">تعذر تكوين موفر هوية شركتك. إصدار Olvid الخاص بك قديم وغير متوافق مع موفر هوية شركتك.\nيرجى تحديث Olvid والمحاولة مرة أخرى، أو الاتصال بالمسؤول للحصول على مزيد من التفاصيل.</string>
+	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-1487678865">إصدار Olvid الخاص بك قديم وغير متوافق مع مزود الهوية الخاص بشركتك.\nيرجى تحديث Olvid والمحاولة مرة أخرى، أو الاتصال بالمسؤول للحصول على مزيد من التفاصيل.</string>
 	<string name="explanation_keycloak_bind" state="needs_review" hash="445359846">تم استرداد الاسم أدناه من مزود الهوية الخاص بشركتك.\nبمجرد إدارة مُعرّف Olvid الخاص بك بواسطة هذا المزود، سيظهر هذا الاسم لجهات الاتصال الخاصة بك في Olvid.</string>
 	<string name="button_label_manage_keycloak" state="needs_review" hash="-1323644699">التبديل إلى مُعرّف مُدار</string>
 	<string name="toast_message_keycloak_bind_successful" state="needs_review" hash="749864054">تم التبديل بنجاح إلى مُعرّف مُدار</string>
@@ -898,7 +898,7 @@
 	<string name="menu_action_unbind_from_keycloak" state="needs_review" hash="549323804">إزالة مزود الهوية</string>
 	<string name="dialog_title_unbind_from_keycloak" state="needs_review" hash="549323804">إزالة مزود الهوية</string>
 	<string name="dialog_title_unbind_from_keycloak_restricted" state="needs_review" hash="1941011536">تعذر إزالة مزود الهوية</string>
-	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="915111540">معرّف Olvid الخاص بك مُدار حاليًا بواسطة مزود الهوية الخاص بشركتك. أنت على وشك الانتقال إلى معرّف Olvid عادي وغير مُدار.\n\nإذا استمررت، فلن تتمكن بعد الآن من إضافة جهات الاتصال من شركتك إلى Olvid بسلاسة. يرجى الاتصال بالمسؤول الخاص بك للحصول على مزيد من التفاصيل.\n\nهل ترغب في المتابعة؟</string>
+	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="861158628">يتم إدارة مُعرّف Olvid الخاص بك حاليًا بواسطة مزود الهوية الخاص بشركتك. أنت على وشك التبديل إلى مُعرّف Olvid عادي وغير مُدار.\n\nإذا واصلت، فلن تتمكن بعد الآن من إضافة جهات الاتصال من شركتك إلى Olvid بسهولة. يرجى الاتصال بالمسؤول الخاص بك للحصول على مزيد من التفاصيل.\n\nهل ترغب في المتابعة؟</string>
 	<string name="dialog_message_unbind_from_keycloak_restricted" state="needs_review" hash="-155299318">معرّف Olvid الخاص بك مُدار حاليًا بواسطة مزود الهوية الخاص بشركتك، مما يقيّد عمليات النقل. لا يمكن إزالته بمبادرتك.\n\nيرجى الاتصال بالمسؤول الخاص بك للحصول على مزيد من التفاصيل.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_needed" state="needs_review" hash="-1740408397">يشير مزود الهوية الخاص بك إلى أن مُعرّف Olvid مرتبط بالفعل بالمستخدم الذي قمت بتسجيل الدخول به. إذا استمررت، فسيتم إبطال مُعرّف Olvid هذا وسيتم ربط مُعرّفك الجديد بهذا المستخدم.\nيرجى الاتصال بمسؤول النظام لمزيد من التفاصيل.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_impossible" state="needs_review" hash="-734813550">يشير مزود الهوية الخاص بك إلى أن مُعرّف Olvid مرتبط بالفعل بالمستخدم الذي قمت بتسجيل الدخول به. لا يمكنك المتابعة في إنشاء مُعرّفك.\n\nيرجى الاتصال بالمسؤول الخاص بك للحصول على مزيد من التفاصيل.</string>
@@ -1142,6 +1142,7 @@
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">مؤشر على أن الإشعارات مكتومة لهذا الملف الشخصي</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">إنشاء ملف شخصي</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">تم تكوين موفر الهوية الخاص بشركتك بنجاح. اضغط على زر "المصادقة" أدناه للمصادقة معه واسترداد معلوماتك الشخصية.</string>
+	<string name="text_explanation_onboarding_keycloak_parsed_configuration_magic" state="needs_review" hash="1823898406">تم تكوين موفر الهوية الخاص بشركتك بنجاح. اضغط على زر \"استخدام الرابط السحري\" أدناه لاسترداد معلوماتك الشخصية.</string>
 	<string name="text_explanation_onboarding_keycloak_mdm" state="needs_review" hash="1340457300">أهلاً بك في Olvid.\n\nيتم إدارة هذا التثبيت من قبل شركتك وتم تكوينه لاستخدام موفر للهوية. اضغط على زر "المصادقة" أدناه للمصادقة معه واسترداد معلوماتك الشخصية.\n\nإذا كنت قد استخدمت Olvid بالفعل وتريد استعادة مفاتيحك وجهات الاتصال الخاصة بك من نسخة احتياطية، فاضغط على "استعادة نسخة احتياطية".</string>
 	<string name="button_label_see_details" state="needs_review" hash="238834473">رؤية التفاصيل</string>
 	<string name="link_label_invitation_url" state="needs_review" hash="744905192">إضافة جهة اتصال</string>
@@ -2143,8 +2144,13 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">الجهاز المقابل غير قابل للوصول</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">إعادة إنشاء جميع القنوات الآمنة</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">سيؤدي إعادة إنشاء جميع القنوات الآمنة إلى إجبار Olvid على إنشاء قنوات اتصال آمنة جديدة مع جميع أجهزة جهات الاتصال الخاصة بك. هذا ليس مفيدًا بشكل عام، ولكنه يمكن أن يحل حالات نادرة حيث تكون بعض هذه القنوات \"غير متزامنة\".\n\n**تحذير:** إذا كان لديك العديد من جهات الاتصال، فقد تستغرق هذه العملية بضع دقائق وقد تفقد بعض الرسائل الواردة أثناء تشغيلها.</string>
+	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">استخدم \"الرابط السحري\"</string>
+	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">رابط سحري غير صالح</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">تم إنهاء المكالمة</string>
 	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">هل تحتاج اشتراكات لفريقك؟</string>
 	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">تفضل بزيارة متجر Olvid</string>
 	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">تم تعيين تذكير</string>
+	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">تعذر التحقق</string>
+	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">يتم حاليًا إدارة ملفك الشخصي بواسطة مؤسستك ويتطلب إعادة المصادقة. ومع ذلك، لا يبدو أن أي طريقة مصادقة مدعومة متاحة.\n\nيرجى الاتصال بالمسؤول الخاص بك للحصول على مزيد من التفاصيل.</string>
+	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">لا يبدو أن أيًا من طرق المصادقة المدعومة متاحة.</string>
 </resources>

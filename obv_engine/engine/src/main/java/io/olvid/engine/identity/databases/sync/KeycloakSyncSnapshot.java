@@ -45,7 +45,8 @@ public class KeycloakSyncSnapshot implements ObvSyncSnapshotNode {
     public static final String SIGNATURE_KEY = "signature_key";
     public static final String SELF_REVOCATION_TEST_NONCE = "self_revocation_test_nonce";
     public static final String TRANSFER_RESTRICTED = "transfer_restricted";
-    static HashSet<String> DEFAULT_DOMAIN = new HashSet<>(Arrays.asList(SERVER_URL, CLIENT_ID, CLIENT_SECRET, KEYCLOAK_USER_ID, JWKS, SIGNATURE_KEY, SELF_REVOCATION_TEST_NONCE, TRANSFER_RESTRICTED));
+    public static final String SUPPORTS_ID_BASED_AUTH = "supports_id_based_auth";
+    static HashSet<String> DEFAULT_DOMAIN = new HashSet<>(Arrays.asList(SERVER_URL, CLIENT_ID, CLIENT_SECRET, KEYCLOAK_USER_ID, JWKS, SIGNATURE_KEY, SELF_REVOCATION_TEST_NONCE, TRANSFER_RESTRICTED, SUPPORTS_ID_BASED_AUTH));
 
 
     public String server_url;
@@ -56,6 +57,7 @@ public class KeycloakSyncSnapshot implements ObvSyncSnapshotNode {
     public String signature_key;
     public String self_revocation_test_nonce;
     public boolean transfer_restricted;
+    public boolean supports_id_based_auth;
     public HashSet<String> domain;
 
 
@@ -69,6 +71,7 @@ public class KeycloakSyncSnapshot implements ObvSyncSnapshotNode {
         keycloakSyncSnapshot.signature_key = keycloakServer.getSerializedSignatureKey();
         keycloakSyncSnapshot.self_revocation_test_nonce = keycloakServer.getSelfRevocationTestNonce();
         keycloakSyncSnapshot.transfer_restricted = keycloakServer.isTransferRestricted();
+        keycloakSyncSnapshot.supports_id_based_auth = keycloakServer.isIdBasedAuthSupported();
         keycloakSyncSnapshot.domain = DEFAULT_DOMAIN;
         return keycloakSyncSnapshot;
     }
@@ -79,12 +82,12 @@ public class KeycloakSyncSnapshot implements ObvSyncSnapshotNode {
             Logger.e("Trying to restore an incomplete KeycloakSyncSnapshot. Domain: " + domain);
             throw new Exception();
         }
-        if (keycloak.server_url == null || keycloak.client_id == null || keycloak.keycloak_user_id == null || keycloak.jwks == null) {
+        if (keycloak.server_url == null || keycloak.jwks == null) {
             return null;
         }
 
         try {
-            KeycloakServer keycloakServer = new KeycloakServer(identityManagerSession, server_url, ownedIdentity, jwks, domain.contains(SIGNATURE_KEY) ? signature_key : null, client_id, client_secret, domain.contains(TRANSFER_RESTRICTED) && transfer_restricted);
+            KeycloakServer keycloakServer = new KeycloakServer(identityManagerSession, server_url, ownedIdentity, jwks, domain.contains(SIGNATURE_KEY) ? signature_key : null, client_id, client_secret, domain.contains(TRANSFER_RESTRICTED) && transfer_restricted, domain.contains(SUPPORTS_ID_BASED_AUTH) && supports_id_based_auth);
             keycloakServer.insert();
             keycloakServer.setKeycloakUserId(keycloak_user_id);
             keycloakServer.setSelfRevocationTestNonce(self_revocation_test_nonce);
@@ -154,6 +157,12 @@ public class KeycloakSyncSnapshot implements ObvSyncSnapshotNode {
                 }
                 case TRANSFER_RESTRICTED: {
                     if (transfer_restricted ^ other.transfer_restricted) {
+                        return false;
+                    }
+                    break;
+                }
+                case SUPPORTS_ID_BASED_AUTH: {
+                    if (supports_id_based_auth ^ other.supports_id_based_auth) {
                         return false;
                     }
                     break;

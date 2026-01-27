@@ -25,6 +25,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -250,6 +251,8 @@ public class ServerQueryOperation extends Operation {
                     case BACKUPS_V2_DELETE_BACKUP_QUERY_ID:
                     case BACKUPS_V2_LIST_BACKUPS_QUERY_ID:
                     case BACKUPS_V2_DOWNLOAD_PROFILE_PICTURE_QUERY_ID:
+                    case KEYCLOAK_ID_BASED_AUTH_REQUEST_CHALLENGE:
+                    case KEYCLOAK_ID_BASED_AUTH_GET_SESSION:
                     default:
                         cancel(RFC_BAD_ENCODED_SERVER_QUERY);
                         return;
@@ -337,6 +340,8 @@ public class ServerQueryOperation extends Operation {
                                 case BACKUPS_V2_DELETE_BACKUP_QUERY_ID:
                                 case BACKUPS_V2_LIST_BACKUPS_QUERY_ID:
                                 case BACKUPS_V2_DOWNLOAD_PROFILE_PICTURE_QUERY_ID:
+                                case KEYCLOAK_ID_BASED_AUTH_REQUEST_CHALLENGE:
+                                case KEYCLOAK_ID_BASED_AUTH_GET_SESSION:
                                 default:
                                     // do nothing for these
                                     break;
@@ -1492,4 +1497,118 @@ class BackupsV2DownloadProfilePictureServerMethod extends GetUserDataServerMetho
     }
 }
 
+class KeycloakIdBasedAuthRequestChallengeServerMethod extends ServerQueryServerMethod {
+    private static final String SERVER_METHOD_PATH = "olvid-rest/requestChallenge";
+
+    public final String server;
+    public final String path;
+    public final String keycloakUserId;
+    public final byte[] nonce;
+    private Encoded serverResponse;
+
+    public KeycloakIdBasedAuthRequestChallengeServerMethod(String keycloakServerUrl, String keycloakUserId, byte[] nonce) {
+        String url = keycloakServerUrl + SERVER_METHOD_PATH;
+        int pos = url.indexOf('/', 8);
+        this.server = url.substring(0, pos);
+        this.path = url.substring(pos);
+
+        this.keycloakUserId = keycloakUserId;
+        this.nonce = nonce;
+    }
+
+    @Override
+    protected String getServer() {
+        return server;
+    }
+
+    @Override
+    protected String getServerMethod() {
+        return path;
+    }
+
+    @Override
+    protected byte[] getDataToSend() {
+        return Encoded.of(new Encoded[]{
+                Encoded.of(keycloakUserId),
+                Encoded.of(nonce),
+        }).getBytes();
+    }
+
+    @Override
+    protected void parseReceivedData(Encoded[] receivedData) {
+        super.parseReceivedData(receivedData);
+        if (returnStatus == ServerMethod.OK) {
+            try {
+                // check the nonce matches and only return the challenge
+                if (receivedData.length == 2 && Arrays.equals(receivedData[1].decodeBytes(), nonce)) {
+                    serverResponse = receivedData[0];
+                } else {
+                    returnStatus = ServerMethod.MALFORMED_SERVER_RESPONSE;
+                }
+            } catch (Exception e) {
+                returnStatus = ServerMethod.MALFORMED_SERVER_RESPONSE;
+            }
+        }
+    }
+
+    @Override
+    public Encoded getServerResponse() {
+        return serverResponse;
+    }
+}
+
+class KeycloakIdBasedAuthGetSessionServerMethod extends ServerQueryServerMethod {
+    private static final String SERVER_METHOD_PATH = "olvid-rest/getSession";
+
+    public final String server;
+    public final String path;
+    public final byte[] challengeResponse;
+    public final byte[] nonce;
+    private Encoded serverResponse;
+
+    public KeycloakIdBasedAuthGetSessionServerMethod(String keycloakServerUrl, byte[] challengeResponse, byte[] nonce) {
+        String url = keycloakServerUrl + SERVER_METHOD_PATH;
+        int pos = url.indexOf('/', 8);
+        this.server = url.substring(0, pos);
+        this.path = url.substring(pos);
+
+        this.challengeResponse = challengeResponse;
+        this.nonce = nonce;
+    }
+
+    @Override
+    protected String getServer() {
+        return server;
+    }
+
+    @Override
+    protected String getServerMethod() {
+        return path;
+    }
+
+    @Override
+    protected byte[] getDataToSend() {
+        return Encoded.of(new Encoded[]{
+                Encoded.of(challengeResponse),
+                Encoded.of(nonce),
+        }).getBytes();
+    }
+
+    @Override
+    protected void parseReceivedData(Encoded[] receivedData) {
+        super.parseReceivedData(receivedData);
+        if (returnStatus == ServerMethod.OK) {
+            if (receivedData.length == 1) {
+                serverResponse = receivedData[0];
+            } else {
+                returnStatus = ServerMethod.MALFORMED_SERVER_RESPONSE;
+            }
+        }
+    }
+
+    @Override
+    public Encoded getServerResponse() {
+        return serverResponse;
+    }
+}
 // endregion

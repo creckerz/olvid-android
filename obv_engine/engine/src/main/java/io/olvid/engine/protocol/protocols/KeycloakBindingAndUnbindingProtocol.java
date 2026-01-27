@@ -26,7 +26,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jose4j.jwk.JsonWebKey;
 import org.jose4j.jwk.JsonWebKeySet;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 import io.olvid.engine.Logger;
 import io.olvid.engine.crypto.PRNGService;
@@ -38,6 +41,7 @@ import io.olvid.engine.datatypes.containers.ReceptionChannelInfo;
 import io.olvid.engine.datatypes.containers.SendChannelInfo;
 import io.olvid.engine.datatypes.notifications.ProtocolNotifications;
 import io.olvid.engine.encoder.Encoded;
+import io.olvid.engine.engine.types.identities.ObvKeycloakAuthType;
 import io.olvid.engine.engine.types.identities.ObvKeycloakState;
 import io.olvid.engine.protocol.databases.ReceivedMessage;
 import io.olvid.engine.protocol.datatypes.CoreProtocolMessage;
@@ -192,7 +196,7 @@ public class KeycloakBindingAndUnbindingProtocol extends ConcreteProtocol {
     public static class PropagateKeycloakBindingMessage extends ConcreteProtocolMessage {
         public final String keycloakUserId;
         public final String keycloakServer;
-        public final String clientId;
+        public final String clientId; // may be null --> encoded as an empty String in this case
         public final String clientSecret; // may be null --> encoded as an empty String in this case
         public final String jwks;
         public final String signatureKey;
@@ -201,8 +205,21 @@ public class KeycloakBindingAndUnbindingProtocol extends ConcreteProtocol {
             super(coreProtocolMessage);
             this.keycloakUserId = keycloakUserId;
             this.keycloakServer = keycloakState.keycloakServer;
-            this.clientId = keycloakState.clientId;
-            this.clientSecret = keycloakState.clientSecret;
+
+            ObvKeycloakAuthType.OpenIdConnect oidc = null;
+            for (ObvKeycloakAuthType authType : keycloakState.supportedAuthenticationMethods) {
+                if (authType instanceof ObvKeycloakAuthType.OpenIdConnect) {
+                    oidc = (ObvKeycloakAuthType.OpenIdConnect) authType;
+                    break;
+                }
+            }
+            if (oidc != null) {
+                this.clientId = oidc.clientId();
+                this.clientSecret = oidc.clientSecret();
+            } else {
+                this.clientId = null;
+                this.clientSecret = null;
+            }
             this.jwks = keycloakState.jwks.toJson();
             this.signatureKey = keycloakState.signatureKey.toJson();
         }
@@ -215,7 +232,8 @@ public class KeycloakBindingAndUnbindingProtocol extends ConcreteProtocol {
             }
             this.keycloakUserId = receivedMessage.getInputs()[0].decodeString();
             this.keycloakServer = receivedMessage.getInputs()[1].decodeString();
-            this.clientId = receivedMessage.getInputs()[2].decodeString();
+            String clientId = receivedMessage.getInputs()[2].decodeString();
+            this.clientId = clientId.isEmpty() ? null : clientId;
             String clientSecret = receivedMessage.getInputs()[3].decodeString();
             this.clientSecret = clientSecret.isEmpty() ? null : clientSecret;
             this.jwks = receivedMessage.getInputs()[4].decodeString();
@@ -232,7 +250,7 @@ public class KeycloakBindingAndUnbindingProtocol extends ConcreteProtocol {
             return new Encoded[]{
                     Encoded.of(keycloakUserId),
                     Encoded.of(keycloakServer),
-                    Encoded.of(clientId),
+                    Encoded.of(clientId == null ? "" : clientId),
                     Encoded.of(clientSecret == null ? "" : clientSecret),
                     Encoded.of(jwks),
                     Encoded.of(signatureKey),
@@ -299,10 +317,13 @@ public class KeycloakBindingAndUnbindingProtocol extends ConcreteProtocol {
             super(ReceptionChannelInfo.createAnyObliviousChannelOrPreKeyWithOwnedDeviceInfo(), receivedMessage, protocol);
             this.startState = startState;
             this.keycloakUserId = receivedMessage.keycloakUserId;
+            List<ObvKeycloakAuthType> supportedAuthTypes = new ArrayList<>();
+            if (receivedMessage.clientId != null) {
+                supportedAuthTypes.add(new ObvKeycloakAuthType.OpenIdConnect(receivedMessage.clientId, receivedMessage.clientSecret));
+            }
             this.keycloakState = new ObvKeycloakState(
                     receivedMessage.keycloakServer,
-                    receivedMessage.clientId,
-                    receivedMessage.clientSecret,
+                    supportedAuthTypes,
                     new JsonWebKeySet(receivedMessage.jwks),
                     JsonWebKey.Factory.newJwk(receivedMessage.signatureKey),
                     null,

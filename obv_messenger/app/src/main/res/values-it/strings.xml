@@ -854,7 +854,7 @@
 	<string name="dialog_title_update_available" state="needs_review" hash="-1893271535">Aggiornamento disponibile</string>
 	<string name="dialog_message_update_available" state="needs_review" hash="259838609">È disponibile una nuova versione di Olvid su Google Play.\n\nSi prega di aggiornare per usufruire delle ultime funzionalità.</string>
 	<string name="dialog_title_call_initiation_not_supported" state="needs_review" hash="-2088021831">Impossibile avviare la chiamata</string>
-	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="-1087657662">Sembra che il tuo server Olvid non supporti l\'avvio di chiamate sicure.\n\nContatta il tuo amministratore per maggiori informazioni.</string>
+	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="1760333819">Sembra che il tuo server Olvid non supporti l\'avvio di chiamate sicure.\n\nContatta il tuo amministratore per maggiori dettagli.</string>
 	<string name="label_identity_creation_options" state="needs_review" hash="1180456032">Opzioni di creazione ID</string>
 	<string name="text_option_server" state="needs_review" hash="-1130676431">Server: %1$s</string>
 	<string name="text_option_license_code" state="needs_review" hash="1222068504">Licenza: %1$s</string>
@@ -882,7 +882,7 @@
 	<string name="toast_message_unable_to_keycloak_revoke" state="needs_review" hash="-1368037130">Impossibile sostituire il precedente ID Olvid, riprova</string>
 	<string name="toast_message_keycloak_revoke_successful" state="needs_review" hash="-1216369809">ID Olvid precedente sostituito con successo</string>
 	<string name="dialog_title_keycloak_authentication_required_user_id_changed" state="needs_review" hash="-896407029">Rilevato cambio utente</string>
-	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="1319874532">Il tuo ID Olvid è gestito dal provider di identità della tua azienda. Sembra che tu ti sia autenticato con un utente diverso dal solito. Questo non è supportato.\n\nContatta il tuo amministratore o riautenticati con l\'utente corretto.</string>
+	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="876252686">Il tuo profilo è attualmente gestito dalla tua organizzazione. Sembra che tu ti sia autenticato con un utente diverso dal solito. Questa operazione non è supportata.\n\nContatta il tuo amministratore o riautenticati con l\'utente corretto.</string>
 	<string name="dialog_title_add_keycloak_user" state="needs_review" hash="-1050193239">Aggiungi un contatto</string>
 	<string name="dialog_message_add_keycloak_user" state="needs_review" hash="-1755937035">Hai selezionato di aggiungere %1$s ai tuoi contatti. Vuoi procedere?</string>
 	<string name="explanation_keycloak_update_new" state="needs_review" hash="1136733528">Stai per configurare il provider di identità della tua azienda in Olvid. Una volta configurato, potrai autenticarti con questo server e Olvid ti permetterà di aggiungere facilmente altri dipendenti ai tuoi contatti.\nContatta il tuo amministratore per maggiori dettagli.</string>
@@ -890,7 +890,7 @@
 	<string name="explanation_keycloak_update_same_server" state="needs_review" hash="1886762594">Olvid è già configurato con il provider di identità della tua azienda.\nContatta il tuo amministratore per maggiori dettagli.</string>
 	<string name="explanation_keycloak_unable_to_contact_server" state="needs_review" hash="2123517499">Impossibile connettersi al provider di identità della tua azienda. Verifica la tua connessione internet o contatta il tuo amministratore per maggiori dettagli.</string>
 	<string name="explanation_keycloak_update_bad_server" state="needs_review" hash="546492417">Impossibile configurare il provider di identità della tua azienda con il tuo attuale ID Olvid. Il tuo ID è stato generato su un server Olvid diverso.\nContatta il tuo amministratore per maggiori dettagli.</string>
-	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-317755135">Impossibile configurare il provider di identità della tua azienda. La tua versione di Olvid è obsoleta e non è compatibile con il provider di identità della tua azienda.\nSi prega di aggiornare Olvid e riprovare, oppure contattare il proprio amministratore per maggiori dettagli.</string>
+	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-1487678865">La tua versione di Olvid è obsoleta e non è compatibile con il provider di identità della tua azienda.\nSi prega di aggiornare Olvid e riprovare, oppure contattare l\'amministratore per maggiori dettagli.</string>
 	<string name="explanation_keycloak_bind" state="needs_review" hash="445359846">Il nome qui sotto è stato recuperato dal provider di identità della tua azienda.\nUna volta che il tuo ID Olvid sarà gestito da questo provider, è così che i tuoi contatti ti vedranno in Olvid.</string>
 	<string name="button_label_manage_keycloak" state="needs_review" hash="-1323644699">Passa a un ID gestito</string>
 	<string name="toast_message_keycloak_bind_successful" state="needs_review" hash="749864054">Passaggio a un ID gestito riuscito</string>
@@ -898,7 +898,7 @@
 	<string name="menu_action_unbind_from_keycloak" state="needs_review" hash="549323804">Rimuovi fornitore di identità</string>
 	<string name="dialog_title_unbind_from_keycloak" state="needs_review" hash="549323804">Rimuovi fornitore di identità</string>
 	<string name="dialog_title_unbind_from_keycloak_restricted" state="needs_review" hash="1941011536">Impossibile rimuovere il provider di identità</string>
-	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="915111540">Il tuo ID Olvid è attualmente gestito dal provider di identità della tua azienda. Stai per passare a un ID Olvid normale, non gestito.\n\nSe prosegui, non potrai più aggiungere automaticamente i contatti della tua azienda a Olvid. Contatta il tuo amministratore per maggiori dettagli.\n\nVuoi procedere?</string>
+	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="861158628">Il tuo ID Olvid è attualmente gestito dal provider di identità della tua azienda. Stai per passare a un ID Olvid standard, non gestito.\n\nSe continui, non potrai più aggiungere facilmente i contatti della tua azienda a Olvid. Contatta il tuo amministratore per maggiori dettagli.\n\nVuoi continuare?</string>
 	<string name="dialog_message_unbind_from_keycloak_restricted" state="needs_review" hash="-155299318">Il tuo ID Olvid è attualmente gestito dal provider di identità della tua azienda, il che limita i trasferimenti. Non può essere rimosso di tua iniziativa.\n\nContatta il tuo amministratore per maggiori dettagli.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_needed" state="needs_review" hash="-1740408397">Il tuo provider di identità indica che un ID Olvid è già associato all\'utente con cui hai effettuato l\'accesso. Se procedi, questo ID Olvid verrà revocato e il tuo nuovo ID sarà associato a questo utente.\nContatta il tuo amministratore per maggiori dettagli.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_impossible" state="needs_review" hash="-734813550">Il tuo provider di identità indica che un ID Olvid è già associato all\'utente con cui hai effettuato l\'accesso. Non puoi procedere con la creazione del tuo ID.\n\nContatta il tuo amministratore per maggiori dettagli.</string>
@@ -1142,6 +1142,7 @@
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">Indicatore che le notifiche sono disattivate per questo profilo</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">Crea un profilo</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">Il provider di identità della tua azienda è stato configurato correttamente. Premi il pulsante \"autentica\" qui sotto per autenticarti con esso e recuperare le tue informazioni personali.</string>
+	<string name="text_explanation_onboarding_keycloak_parsed_configuration_magic" state="needs_review" hash="1823898406">Il provider di identità della tua azienda è stato configurato correttamente. Premi il pulsante \"utilizza il link magico\" qui sotto per recuperare le tue informazioni personali.</string>
 	<string name="text_explanation_onboarding_keycloak_mdm" state="needs_review" hash="1340457300">Benvenuto in Olvid.\n\nQuesta installazione è gestita dalla tua azienda ed è stata configurata per utilizzare un provider di identità. Premi il pulsante \"autentica\" qui sotto per autenticarti con esso e recuperare le tue informazioni personali.\n\nSe hai già utilizzato Olvid e desideri ripristinare le tue chiavi e i tuoi contatti da un backup, premi \"ripristina un backup\".</string>
 	<string name="button_label_see_details" state="needs_review" hash="238834473">Vedi dettagli</string>
 	<string name="link_label_invitation_url" state="needs_review" hash="744905192">Aggiungi contatto</string>
@@ -2144,8 +2145,13 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Dispositivo del peer irraggiungibile</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Ricrea tutti i canali sicuri</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Ricreare tutti i canali sicuri forzerà Olvid a creare nuovi canali di comunicazione sicuri con tutti i dispositivi dei tuoi contatti. Questo generalmente non è utile, ma può risolvere rare situazioni in cui alcuni di questi canali sono \"fuori sincronia\".\n\n**Attenzione:** se hai molti contatti, questa operazione potrebbe richiedere alcuni minuti e potresti perdere alcuni messaggi in arrivo durante la sua esecuzione.</string>
+	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">Utilizza il \"link magico\"</string>
+	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">Link magico non valido</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Chiamata terminata</string>
 	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">Hai bisogno di abbonamenti per il tuo team?</string>
 	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Visita il negozio Olvid</string>
 	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">Promemoria impostato</string>
+	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">Autenticazione impossibile</string>
+	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">Il tuo profilo è attualmente gestito dalla tua organizzazione ed è necessaria una nuova autenticazione. Tuttavia, sembra che non sia disponibile alcun metodo di autenticazione supportato.\n\nContatta il tuo amministratore per maggiori dettagli.</string>
+	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">Sembra che nessuna delle metodologie di autenticazione supportate sia disponibile.</string>
 </resources>

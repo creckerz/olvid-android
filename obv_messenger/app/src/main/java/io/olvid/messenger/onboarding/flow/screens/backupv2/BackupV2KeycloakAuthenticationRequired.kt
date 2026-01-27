@@ -58,6 +58,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import io.olvid.engine.engine.types.identities.ObvKeycloakAuthType
 import io.olvid.messenger.R
 import io.olvid.messenger.customClasses.KeycloakInfo
 import io.olvid.messenger.designsystem.theme.OlvidTypography
@@ -67,6 +68,7 @@ import io.olvid.messenger.onboarding.flow.OnboardingStep
 import io.olvid.messenger.openid.KeycloakAuthenticationStartFragment
 import io.olvid.messenger.openid.KeycloakBrowserChooserDialog
 import io.olvid.messenger.openid.KeycloakTasks
+import io.olvid.messenger.openid.jsons.OlvidWellKnownJson
 import net.openid.appauth.AuthState
 import org.jose4j.jwk.JsonWebKeySet
 
@@ -113,6 +115,7 @@ fun NavGraphBuilder.backupV2KeycloakAuthenticationRequired(
                     fragment = frag
                 }
 
+                @Suppress("RemoveRedundantQualifierName")
                 androidx.compose.animation.AnimatedVisibility(visible = !clicked) {
                     Text(
                         modifier = Modifier
@@ -147,6 +150,7 @@ fun NavGraphBuilder.backupV2KeycloakAuthenticationRequired(
                     .padding(top = 16.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
+                val context = LocalContext.current
                 Button(
                     modifier = Modifier.weight(1f, true),
                     elevation = null,
@@ -161,41 +165,46 @@ fun NavGraphBuilder.backupV2KeycloakAuthenticationRequired(
                         clicked = true
                         errorMessage = null
                         keycloakInfo.value?.let { info ->
-                            KeycloakTasks.discoverKeycloakServer(
-                                info.serverUrl,
-                                object : KeycloakTasks.DiscoverKeycloakServerCallback {
-                                    override fun success(
-                                        serverUrl: String,
-                                        discoveryAuthState: AuthState,
-                                        jwks: JsonWebKeySet
-                                    ) {
-                                        Handler(Looper.getMainLooper()).run {
-                                            fragment?.authenticate(
-                                                discoveryAuthState.jsonSerializeString(),
-                                                info.clientId,
-                                                info.clientSecret,
-                                                object :
-                                                    KeycloakTasks.AuthenticateCallback {
-                                                    override fun success(authState: AuthState) {
-                                                        onAuthenticationSuccess.invoke(authState)
-                                                    }
+                            (info.supportedAuthenticationMethods.find { it is ObvKeycloakAuthType.OpenIdConnect } as? ObvKeycloakAuthType.OpenIdConnect)?.also { oidc ->
+                                KeycloakTasks.discoverKeycloakServerOpenidConfiguration(
+                                    info.serverUrl,
+                                    object : KeycloakTasks.DiscoverKeycloakServerCallback {
+                                        override fun success(
+                                            serverUrl: String,
+                                            discoveryAuthState: AuthState,
+                                            jwks: JsonWebKeySet,
+                                            olvidWellKnown: OlvidWellKnownJson?
+                                        ) {
+                                            Handler(Looper.getMainLooper()).run {
+                                                fragment?.authenticate(
+                                                    discoveryAuthState.jsonSerializeString(),
+                                                    oidc.clientId,
+                                                    oidc.clientSecret,
+                                                    object :
+                                                        KeycloakTasks.AuthenticateCallback {
+                                                        override fun success(authState: AuthState) {
+                                                            onAuthenticationSuccess.invoke(authState)
+                                                        }
 
-                                                    override fun failed(rfc: Int) {
-                                                        errorMessage =
-                                                            R.string.onboarding_transfer_keycloak_error_message_authentication_failed
-                                                        clicked = false
+                                                        override fun failed(rfc: Int) {
+                                                            errorMessage =
+                                                                R.string.onboarding_transfer_keycloak_error_message_authentication_failed
+                                                            clicked = false
+                                                        }
                                                     }
-                                                }
-                                            )
+                                                )
+                                            }
                                         }
-                                    }
 
-                                    override fun failed() {
-                                        errorMessage =
-                                            R.string.onboarding_transfer_keycloak_error_message_unreachable
-                                        clicked = false
-                                    }
-                                })
+                                        override fun failed() {
+                                            errorMessage =
+                                                R.string.onboarding_transfer_keycloak_error_message_unreachable
+                                            clicked = false
+                                        }
+                                    })
+                            } ?: run {
+                                errorMessage = R.string.onboarding_transfer_keycloak_error_message_authentication_impossible
+                            }
                         }
                     },
                 ) {
@@ -204,7 +213,6 @@ fun NavGraphBuilder.backupV2KeycloakAuthenticationRequired(
                     )
                 }
 
-                val context = LocalContext.current
                 Button(
                     elevation = null,
                     enabled = !clicked,
@@ -236,6 +244,6 @@ fun KeycloakAuthenticationRequiredPreview() {
         navController = rememberNavController(),
         startDestination = OnboardingRoutes.BACKUP_V2_KEYCLOAK_AUTHENTICATION_REQUIRED,
     ) {
-        backupV2KeycloakAuthenticationRequired(mutableStateOf(KeycloakInfo("", "", null)), {}, {},{})
+        backupV2KeycloakAuthenticationRequired(mutableStateOf(KeycloakInfo("", emptyList())), {}, {},{})
     }
 }

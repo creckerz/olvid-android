@@ -276,6 +276,7 @@ class IdentityCreationFragment : Fragment() {
             return
         }
         var apiKey = viewModel.apiKey
+        @Suppress("SENSELESS_COMPARISON")
         if (apiKey == null && BuildConfig.HARDCODED_API_KEY != null) {
             apiKey = UUID.fromString(BuildConfig.HARDCODED_API_KEY)
         }
@@ -297,8 +298,7 @@ class IdentityCreationFragment : Fragment() {
                 detailsViewModel.password,
                 detailsViewModel.salt,
                 viewModel.keycloakServer,
-                viewModel.keycloakClientId,
-                viewModel.keycloakClientSecret,
+                viewModel.getSupportedKeycloakAuthMethods(),
                 viewModel.keycloakJwks,
                 viewModel.keycloakSignatureKey,
                 viewModel.keycloakSerializedAuthState,

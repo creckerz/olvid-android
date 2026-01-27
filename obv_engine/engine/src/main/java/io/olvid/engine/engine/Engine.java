@@ -108,6 +108,7 @@ import io.olvid.engine.engine.types.ObvDeviceBackupForRestore;
 import io.olvid.engine.engine.types.ObvDeviceList;
 import io.olvid.engine.engine.types.ObvDeviceManagementRequest;
 import io.olvid.engine.engine.types.ObvDialog;
+import io.olvid.engine.engine.types.ObvKeycloakIdBasedAuthResult;
 import io.olvid.engine.engine.types.ObvMessage;
 import io.olvid.engine.engine.types.ObvOutboundAttachment;
 import io.olvid.engine.engine.types.ObvPostMessageOutput;
@@ -119,6 +120,7 @@ import io.olvid.engine.engine.types.identities.ObvContactActiveOrInactiveReason;
 import io.olvid.engine.engine.types.identities.ObvGroup;
 import io.olvid.engine.engine.types.identities.ObvGroupV2;
 import io.olvid.engine.engine.types.identities.ObvIdentity;
+import io.olvid.engine.engine.types.identities.ObvKeycloakAuthType;
 import io.olvid.engine.engine.types.identities.ObvKeycloakState;
 import io.olvid.engine.engine.types.identities.ObvMutualScanUrl;
 import io.olvid.engine.engine.types.identities.ObvOwnedDevice;
@@ -948,6 +950,74 @@ public class Engine implements UserInterfaceDialogListener, EngineSessionFactory
     }
 
     @Override
+    public ObvKeycloakIdBasedAuthResult performKeycloakIdBasedAuth(byte[] bytesOwnedIdentity) {
+        try (EngineSession engineSession = getSession()) {
+            Logger.i("Initiating Keycloak ID-based authentication");
+            Identity ownedIdentity = Identity.of(bytesOwnedIdentity);
+            ObvKeycloakState keycloakState = identityManager.getOwnedIdentityKeycloakState(engineSession.session, ownedIdentity);
+            String keycloakUsedId = identityManager.getOwnedIdentityKeycloakUserId(engineSession.session, ownedIdentity);
+
+            if (keycloakState == null
+                    || keycloakState.supportedAuthenticationMethods.stream().noneMatch(authType -> authType instanceof ObvKeycloakAuthType.IdBased)
+                    || keycloakUsedId == null) {
+                Logger.w("ID-based authentication failed: PERMANENT_ERROR");
+                return new ObvKeycloakIdBasedAuthResult(ObvKeycloakIdBasedAuthResult.Status.PERMANENT_ERROR, null, null);
+            }
+            byte[] nonce = prng.bytes(Constants.SERVER_SESSION_NONCE_LENGTH);
+            StandaloneServerQueryOperation standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, ownedIdentity, new ServerQuery.KeycloakIdBasedAuthRequestChallengeQuery(keycloakState.keycloakServer, keycloakUsedId, nonce)), sslSocketFactory, userAgentOverride);
+
+            OperationQueue queue = new OperationQueue();
+            queue.queue(standaloneServerQueryOperation);
+            queue.execute(1, "Engine-queryKeycloakIdBasedAuthRequestChallengeQuery");
+            queue.join();
+
+            if (standaloneServerQueryOperation.isCancelled() || standaloneServerQueryOperation.getServerResponse() == null) {
+                if (standaloneServerQueryOperation.getReasonForCancel() != null && standaloneServerQueryOperation.getReasonForCancel() == StandaloneServerQueryOperation.RFC_NETWORK_ERROR) {
+                    Logger.w("ID-based authentication failed: NETWORK_ERROR");
+                    return new ObvKeycloakIdBasedAuthResult(ObvKeycloakIdBasedAuthResult.Status.NETWORK_ERROR, null, null);
+                }
+                Logger.w("ID-based authentication failed: ERROR");
+                return new ObvKeycloakIdBasedAuthResult(ObvKeycloakIdBasedAuthResult.Status.ERROR, null, null);
+            }
+
+            byte[] challenge = standaloneServerQueryOperation.getServerResponse().decodeBytes();
+
+            byte[] challengeResponse = identityManager.signBlock(engineSession.session, Constants.SignatureContext.KEYCLOAK_ID_BASED_AUTH, challenge, ownedIdentity, prng);
+
+            standaloneServerQueryOperation = new StandaloneServerQueryOperation(new ServerQuery(null, ownedIdentity, new ServerQuery.KeycloakIdBasedAuthGetSessionQuery(keycloakState.keycloakServer, challengeResponse, nonce)), sslSocketFactory, userAgentOverride);
+
+            queue = new OperationQueue();
+            queue.queue(standaloneServerQueryOperation);
+            queue.execute(1, "Engine-queryKeycloakIdBasedAuthGetSessionQuery");
+            queue.join();
+
+            if (standaloneServerQueryOperation.isCancelled() || standaloneServerQueryOperation.getServerResponse() == null) {
+                if (standaloneServerQueryOperation.getReasonForCancel() != null) {
+                    switch (standaloneServerQueryOperation.getReasonForCancel()) {
+                        case StandaloneServerQueryOperation.RFC_NETWORK_ERROR:
+                            return new ObvKeycloakIdBasedAuthResult(ObvKeycloakIdBasedAuthResult.Status.NETWORK_ERROR, null, null);
+                        case StandaloneServerQueryOperation.RFC_SERVER_PARSING_ERROR:
+                        case StandaloneServerQueryOperation.RFC_INVALID_SERVER_SESSION:
+                            break;
+                    }
+                }
+                Logger.w("ID-based authentication failed: ERROR");
+                return new ObvKeycloakIdBasedAuthResult(ObvKeycloakIdBasedAuthResult.Status.ERROR, null, null);
+            }
+
+            byte[] serializedAuthSession = standaloneServerQueryOperation.getServerResponse().decodeBytes();
+            ObvKeycloakIdBasedAuthResult.GetSessionResponse getSessionResponse = jsonObjectMapper.readValue(serializedAuthSession, ObvKeycloakIdBasedAuthResult.GetSessionResponse.class);
+
+            Logger.i("ID-based authentication success");
+            return new ObvKeycloakIdBasedAuthResult(ObvKeycloakIdBasedAuthResult.Status.SUCCESS, getSessionResponse.accessToken, getSessionResponse.refreshToken);
+        } catch (Exception e) {
+            Logger.x(e);
+        }
+        Logger.w("ID-based authentication failed: ERROR");
+        return new ObvKeycloakIdBasedAuthResult(ObvKeycloakIdBasedAuthResult.Status.ERROR, null, null);
+    }
+
+    @Override
     public void recreateServerSession(byte[] bytesOwnedIdentity) {
         try (EngineSession engineSession = getSession()) {
             Identity ownedIdentity = Identity.of(bytesOwnedIdentity);
@@ -1058,6 +1128,14 @@ public class Engine implements UserInterfaceDialogListener, EngineSessionFactory
             identityManager.setOwnedIdentityKeycloakSignatureKey(engineSession.session, ownedIdentity, signatureKey);
             identityManager.reCheckAllCertifiedByOwnKeycloakContacts(engineSession.session, ownedIdentity);
             engineSession.session.commit();
+        }
+    }
+
+    @Override
+    public void setOwnedIdentityKeycloakSupportsIdBasedAuth(byte[] bytesOwnedIdentity, boolean supportsIdBasedAuth) throws Exception {
+        try (EngineSession engineSession = getSession()) {
+            Identity ownedIdentity = Identity.of(bytesOwnedIdentity);
+            identityManager.setOwnedIdentityKeycloakSupportsIdBasedAuth(engineSession.session, ownedIdentity, supportsIdBasedAuth);
         }
     }
 

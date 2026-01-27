@@ -110,7 +110,7 @@ class VoiceMessageRecorder(
                 )
                 mediaRecorder = MediaRecorder().apply {
                     setAudioSource(AudioSource.DEFAULT)
-                    setOutputFormat(OutputFormat.AAC_ADTS)
+                    setOutputFormat(OutputFormat.MPEG_4)
                     setAudioEncoder(AudioEncoder.AAC)
                     setAudioChannels(1)
                     setAudioEncodingBitRate(48000)

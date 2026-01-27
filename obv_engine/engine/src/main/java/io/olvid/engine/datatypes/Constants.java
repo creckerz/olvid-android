@@ -23,7 +23,7 @@ package io.olvid.engine.datatypes;
 import java.nio.charset.StandardCharsets;
 
 public abstract class Constants {
-    public static final int CURRENT_ENGINE_DB_SCHEMA_VERSION = 48;
+    public static final int CURRENT_ENGINE_DB_SCHEMA_VERSION = 49;
     public static final int SERVER_API_VERSION = 20;
     public static final int CURRENT_BACKUP_JSON_VERSION = 0;
 
@@ -157,6 +157,7 @@ public abstract class Constants {
         ENCRYPTION_WITH_PRE_KEY,
         BACKUP_UPLOAD,
         BACKUP_DELETE,
+        KEYCLOAK_ID_BASED_AUTH,
     }
 
 
@@ -177,6 +178,7 @@ public abstract class Constants {
     public static final byte[] ENCRYPTION_WITH_PRE_KEY_SIGNATURE_CHALLENGE_PREFIX = "encryptionWithPreKey".getBytes(StandardCharsets.UTF_8);
     public static final byte[] BACKUP_UPLOAD_SIGNATURE_CHALLENGE_PREFIX = "backupUpload".getBytes(StandardCharsets.UTF_8);
     public static final byte[] BACKUP_DELETE_SIGNATURE_CHALLENGE_PREFIX = "backupDelete".getBytes(StandardCharsets.UTF_8);
+    public static final byte[] KEYCLOAK_ID_BASED_AUTH_CHALLENGE_PREFIX = "keycloakChallenge".getBytes(StandardCharsets.UTF_8);
 
     public static byte[] getSignatureChallengePrefix(SignatureContext signatureContext) {
         switch (signatureContext) {
@@ -214,6 +216,8 @@ public abstract class Constants {
                 return BACKUP_UPLOAD_SIGNATURE_CHALLENGE_PREFIX;
             case BACKUP_DELETE:
                 return BACKUP_DELETE_SIGNATURE_CHALLENGE_PREFIX;
+            case KEYCLOAK_ID_BASED_AUTH:
+                return KEYCLOAK_ID_BASED_AUTH_CHALLENGE_PREFIX;
             default:
                 return null;
         }

@@ -211,7 +211,6 @@ class OnboardingFlowViewModel : ViewModel() {
             null,
             null,
             null,
-            null,
             false,
             onSuccess
         ) { creatingSimpleIdentity = false }

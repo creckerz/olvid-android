@@ -21,6 +21,7 @@ package io.olvid.engine.backup.tasks;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +49,7 @@ import io.olvid.engine.datatypes.key.asymmetric.EncryptionPrivateKey;
 import io.olvid.engine.encoder.Encoded;
 import io.olvid.engine.engine.types.ObvDeviceList;
 import io.olvid.engine.engine.types.ObvProfileBackupsForRestore;
+import io.olvid.engine.engine.types.identities.ObvKeycloakAuthType;
 import io.olvid.engine.engine.types.sync.ObvBackupAndSyncDelegate;
 import io.olvid.engine.engine.types.sync.ObvProfileBackupSnapshot;
 import io.olvid.engine.engine.types.sync.ObvSyncSnapshotNode;
@@ -207,13 +209,17 @@ public class ProfileBackupsFetchTask {
                         obvProfileBackupForRestore.keycloakStatus = ObvProfileBackupsForRestore.KeycloakStatus.MANAGED;
                     }
                     obvProfileBackupForRestore.keycloakServerUrl = ownedIdentityNode.keycloak.server_url;
-                    obvProfileBackupForRestore.keycloakClientId = ownedIdentityNode.keycloak.client_id;
-                    obvProfileBackupForRestore.keycloakClientSecret = ownedIdentityNode.keycloak.client_secret;
+                    obvProfileBackupForRestore.supportedAuthenticationMethods = new ArrayList<>();
+                    if (ownedIdentityNode.keycloak.client_id != null) {
+                        obvProfileBackupForRestore.supportedAuthenticationMethods.add(new ObvKeycloakAuthType.OpenIdConnect(ownedIdentityNode.keycloak.client_id, ownedIdentityNode.keycloak.client_secret));
+                    }
+                    if (ownedIdentityNode.keycloak.supports_id_based_auth) {
+                        obvProfileBackupForRestore.supportedAuthenticationMethods.add(new ObvKeycloakAuthType.IdBased());
+                    }
                 } else {
                     obvProfileBackupForRestore.keycloakStatus = ObvProfileBackupsForRestore.KeycloakStatus.UNMANAGED;
                     obvProfileBackupForRestore.keycloakServerUrl = null;
-                    obvProfileBackupForRestore.keycloakClientId = null;
-                    obvProfileBackupForRestore.keycloakClientSecret = null;
+                    obvProfileBackupForRestore.supportedAuthenticationMethods = Collections.emptyList();
                 }
             } else {
                 truncated = true;

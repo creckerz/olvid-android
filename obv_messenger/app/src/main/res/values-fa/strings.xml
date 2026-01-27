@@ -854,7 +854,7 @@
 	<string name="dialog_title_update_available" state="needs_review" hash="-1893271535">به‌روزرسانی موجود است</string>
 	<string name="dialog_message_update_available" state="needs_review" hash="259838609">نسخه جدید Olvid در Google Play موجود است.\n\nلطفاً برای بهره‌مندی از جدیدترین ویژگی‌ها، آن را به‌روزرسانی کنید.</string>
 	<string name="dialog_title_call_initiation_not_supported" state="needs_review" hash="-2088021831">برقراری تماس پشتیبانی نمی‌شود</string>
-	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="-1087657662">به نظر می‌رسد سرور Olvid شما از برقراری تماس امن پشتیبانی نمی‌کند.\n\nلطفاً برای کسب اطلاعات بیشتر با مدیر سیستم خود تماس بگیرید.</string>
+	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="1760333819">به نظر می‌رسد سرور Olvid شما از برقراری تماس امن پشتیبانی نمی‌کند.\n\nلطفاً برای اطلاعات بیشتر با مدیر سیستم خود تماس بگیرید.</string>
 	<string name="label_identity_creation_options" state="needs_review" hash="1180456032">گزینه‌های ایجاد شناسه</string>
 	<string name="text_option_server" state="needs_review" hash="-1130676431">سرور: %1$s</string>
 	<string name="text_option_license_code" state="needs_review" hash="1222068504">مجوز: %1$s</string>
@@ -882,7 +882,7 @@
 	<string name="toast_message_unable_to_keycloak_revoke" state="needs_review" hash="-1368037130">نتوانستیم شناسه Olvid قبلی را جایگزین کنیم، لطفاً دوباره تلاش کنید</string>
 	<string name="toast_message_keycloak_revoke_successful" state="needs_review" hash="-1216369809">شناسه قدیمی Olvid با موفقیت جایگزین شد</string>
 	<string name="dialog_title_keycloak_authentication_required_user_id_changed" state="needs_review" hash="-896407029">تغییر کاربر شناسایی شد</string>
-	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="1319874532">شناسه Olvid شما توسط ارائه‌دهنده هویت شرکت شما مدیریت می‌شود. به نظر می‌رسد که شما با کاربری متفاوت از معمول احراز هویت کرده‌اید. این پشتیبانی نمی‌شود.\n\nلطفاً با مدیر سیستم خود تماس بگیرید یا با کاربر صحیح دوباره احراز هویت کنید.</string>
+	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="876252686">پروفایل شما در حال حاضر توسط سازمان شما مدیریت می‌شود. به نظر می‌رسد که شما با یک حساب کاربری متفاوت از معمول، احراز هویت کرده‌اید. این کار پشتیبانی نمی‌شود.\n\nلطفاً با مدیر سیستم خود تماس بگیرید یا با حساب کاربری صحیح، دوباره احراز هویت کنید.</string>
 	<string name="dialog_title_add_keycloak_user" state="needs_review" hash="-1050193239">افزودن مخاطب</string>
 	<string name="dialog_message_add_keycloak_user" state="needs_review" hash="-1755937035">شما انتخاب کردید که %1$s را به مخاطبین خود اضافه کنید. آیا می‌خواهید ادامه دهید؟</string>
 	<string name="explanation_keycloak_update_new" state="needs_review" hash="1136733528">در حال پیکربندی ارائه‌دهنده هویت شرکت خود در Olvid هستید. پس از پیکربندی، می‌توانید با این سرور احراز هویت کنید و Olvid به شما امکان می‌دهد تا سایر کارمندان را به طور یکپارچه به مخاطبین خود اضافه کنید.\nلطفاً برای کسب اطلاعات بیشتر با مدیر سیستم خود تماس بگیرید.</string>
@@ -890,7 +890,7 @@
 	<string name="explanation_keycloak_update_same_server" state="needs_review" hash="1886762594">Olvid قبلاً با ارائه‌دهنده هویت شرکت شما پیکربندی شده است.\nلطفاً برای کسب اطلاعات بیشتر با مدیر سیستم خود تماس بگیرید.</string>
 	<string name="explanation_keycloak_unable_to_contact_server" state="needs_review" hash="2123517499">امکان اتصال به ارائه‌دهنده هویت شرکت شما وجود ندارد. لطفاً اتصال اینترنت خود را بررسی کنید یا برای کسب اطلاعات بیشتر با مدیر سیستم خود تماس بگیرید.</string>
 	<string name="explanation_keycloak_update_bad_server" state="needs_review" hash="546492417">امکان پیکربندی ارائه‌دهنده هویت شرکت شما با شناسه Olvid فعلی شما وجود ندارد. شناسه شما در یک سرور Olvid متفاوت ایجاد شده است.\nلطفاً برای کسب اطلاعات بیشتر با مدیر سیستم خود تماس بگیرید.</string>
-	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-317755135">امکان پیکربندی ارائه‌دهنده هویت شرکت شما وجود ندارد. نسخه Olvid شما قدیمی است و با ارائه‌دهنده هویت شرکت شما سازگار نیست.\nلطفاً Olvid را به‌روزرسانی کنید و دوباره تلاش کنید، یا برای کسب اطلاعات بیشتر با مدیر سیستم خود تماس بگیرید.</string>
+	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-1487678865">نسخه Olvid شما قدیمی است و با ارائه دهنده هویت شرکت شما سازگار نیست. لطفاً Olvid را به روز کنید و دوباره امتحان کنید، یا برای اطلاعات بیشتر با مدیر سیستم خود تماس بگیرید.</string>
 	<string name="explanation_keycloak_bind" state="needs_review" hash="445359846">نام زیر از ارائه‌دهنده هویت شرکت شما دریافت شده است.\nهنگامی که شناسه Olvid شما توسط این ارائه‌دهنده مدیریت شود، مخاطبین شما شما را به این شکل در Olvid مشاهده خواهند کرد.</string>
 	<string name="button_label_manage_keycloak" state="needs_review" hash="-1323644699">به شناسه مدیریت‌شده تغییر دهید</string>
 	<string name="toast_message_keycloak_bind_successful" state="needs_review" hash="749864054">تغییر به شناسه مدیریت‌شده با موفقیت انجام شد</string>
@@ -898,7 +898,7 @@
 	<string name="menu_action_unbind_from_keycloak" state="needs_review" hash="549323804">حذف ارائه‌دهنده هویت</string>
 	<string name="dialog_title_unbind_from_keycloak" state="needs_review" hash="549323804">حذف ارائه‌دهنده هویت</string>
 	<string name="dialog_title_unbind_from_keycloak_restricted" state="needs_review" hash="1941011536">امکان حذف ارائه‌دهنده هویت وجود ندارد</string>
-	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="915111540">شناسه Olvid شما در حال حاضر توسط ارائه‌دهنده هویت شرکت شما مدیریت می‌شود. شما در حال تغییر به یک شناسه Olvid معمولی و غیرمدیریت‌شده هستید.\n\nاگر ادامه دهید، دیگر نمی‌توانید مخاطبین شرکت خود را به راحتی به Olvid اضافه کنید. لطفاً برای کسب اطلاعات بیشتر با مدیر سیستم خود تماس بگیرید.\n\nآیا می‌خواهید ادامه دهید؟</string>
+	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="861158628">شناسه Olvid شما در حال حاضر توسط ارائه‌دهنده هویت شرکت شما مدیریت می‌شود. شما در حال تغییر به یک شناسه Olvid معمولی و غیرمدیریت‌شده هستید.\n\nاگر ادامه دهید، دیگر نمی‌توانید به راحتی مخاطبین شرکت خود را به Olvid اضافه کنید. لطفاً برای اطلاعات بیشتر با مدیر سیستم خود تماس بگیرید.\n\nآیا می‌خواهید ادامه دهید؟</string>
 	<string name="dialog_message_unbind_from_keycloak_restricted" state="needs_review" hash="-155299318">شناسه Olvid شما در حال حاضر توسط ارائه‌دهنده هویت شرکت شما مدیریت می‌شود که انتقال آن را محدود می‌کند. نمی‌توانید آن را به ابتکار عمل خود حذف کنید.\n\nلطفاً برای کسب اطلاعات بیشتر با مدیر سیستم خود تماس بگیرید.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_needed" state="needs_review" hash="-1740408397">ارائه‌دهنده هویت شما نشان می‌دهد که یک شناسه Olvid از قبل به کاربری که با آن وارد شدید مرتبط است. اگر ادامه دهید، این شناسه Olvid لغو شده و شناسه جدید شما به این کاربر مرتبط خواهد شد.\nلطفاً برای کسب اطلاعات بیشتر با مدیر سیستم خود تماس بگیرید.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_impossible" state="needs_review" hash="-734813550">ارائه‌دهنده هویت شما نشان می‌دهد که یک شناسه Olvid از قبل به کاربری که با آن وارد شده‌اید مرتبط است. شما نمی‌توانید مراحل ایجاد شناسه خود را ادامه دهید.\n\nلطفاً برای کسب اطلاعات بیشتر با مدیر سیستم خود تماس بگیرید.</string>
@@ -1142,6 +1142,7 @@
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">نشانگر بی‌صدا بودن اعلان‌ها برای این پروفایل</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">ایجاد پروفایل</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">ارائه‌دهنده هویت شرکت شما با موفقیت پیکربندی شد. برای احراز هویت با آن و دریافت اطلاعات شخصی خود، دکمه \"احراز هویت\" زیر را فشار دهید.</string>
+	<string name="text_explanation_onboarding_keycloak_parsed_configuration_magic" state="needs_review" hash="1823898406">ارائه‌دهنده هویت شرکت شما با موفقیت پیکربندی شد. برای دریافت اطلاعات شخصی خود، روی دکمه «استفاده از لینک جادویی» در زیر کلیک کنید.</string>
 	<string name="text_explanation_onboarding_keycloak_mdm" state="needs_review" hash="1340457300">به Olvid خوش آمدید.\n\nاین نصب توسط شرکت شما مدیریت می‌شود و برای استفاده از یک ارائه‌دهنده هویت پیکربندی شده است. برای احراز هویت با آن و دریافت اطلاعات شخصی خود، دکمه \"احراز هویت\" را در زیر فشار دهید.\n\nاگر قبلاً از Olvid استفاده کرده‌اید و می‌خواهید کلیدها و مخاطبین خود را از یک نسخه پشتیبان بازیابی کنید، دکمه \"بازیابی از نسخه پشتیبان\" را فشار دهید.</string>
 	<string name="button_label_see_details" state="needs_review" hash="238834473">مشاهده جزئیات</string>
 	<string name="link_label_invitation_url" state="needs_review" hash="744905192">افزودن مخاطب</string>
@@ -2145,8 +2146,13 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">دستگاه همتا در دسترس نیست</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">بازسازی همه کانال‌های امن</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">بازسازی تمام کانال‌های امن، اولوید را مجبور می‌کند تا کانال‌های ارتباطی امن جدیدی با تمام دستگاه‌های مخاطبین شما ایجاد کند. این کار معمولاً مفید نیست، اما می‌تواند موقعیت‌های نادری را که در آن برخی از این کانال‌ها «همگام‌سازی نشده‌اند» حل کند.\n\n**هشدار:** اگر مخاطبین زیادی دارید، این عملیات ممکن است چند دقیقه طول بکشد و ممکن است در حین انجام آن برخی از پیام‌های دریافتی را از دست بدهید.</string>
+	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">از «پیوند جادویی» استفاده کنید</string>
+	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">پیوند جادویی نامعتبر است</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">تماس قطع شد</string>
 	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">آیا به اشتراک برای تیم خود نیاز دارید؟</string>
 	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">از فروشگاه Olvid دیدن کنید</string>
 	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">یادآوری تنظیم شد</string>
+	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">احراز هویت امکان پذیر نیست</string>
+	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">در حال حاضر، پروفایل شما توسط سازمان شما مدیریت می‌شود و برای ادامه کار، نیاز به احراز هویت مجدد است. با این حال، به نظر می‌رسد هیچ روش احراز هویت معتبری در دسترس نباشد.\n\nلطفاً برای اطلاعات بیشتر با مدیر سیستم خود تماس بگیرید.</string>
+	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">هیچ روش احراز هویت پشتیبانی شده‌ای در دسترس نیست.</string>
 </resources>

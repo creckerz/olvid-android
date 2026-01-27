@@ -36,6 +36,7 @@ import com.google.zxing.EncodeHintType
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import io.olvid.engine.engine.types.JsonIdentityDetails
+import io.olvid.engine.engine.types.identities.ObvKeycloakAuthType
 import io.olvid.engine.engine.types.identities.ObvMutualScanUrl
 import io.olvid.engine.engine.types.identities.ObvUrlIdentity
 import io.olvid.messenger.App
@@ -100,6 +101,9 @@ class PlusButtonViewModel : ViewModel() {
         private set
     var keycloakClientSecret: String? = null
         private set
+    var keycloakMagic: ConfigurationPojo.KeycloakMagic? = null
+        private set
+    private var supportsIdBasedAuth: Boolean? = null
 
     @JvmField
     var keycloakUserDetails: KeycloakUserDetailsAndStuff? = null
@@ -214,13 +218,29 @@ class PlusButtonViewModel : ViewModel() {
         serializedAuthState: String?,
         jwks: JsonWebKeySet?,
         clientId: String?,
-        clientSecret: String?
+        clientSecret: String?,
+        magic: ConfigurationPojo.KeycloakMagic?,
+        supportsIdBasedAuth: Boolean?,
     ) {
         this.keycloakServerUrl = serverUrl
         this.keycloakSerializedAuthState = serializedAuthState
         this.keycloakJwks = jwks
         this.keycloakClientId = clientId
         this.keycloakClientSecret = clientSecret
+        this.keycloakMagic = magic
+        this.supportsIdBasedAuth = supportsIdBasedAuth
+    }
+
+    fun getSupportedKeycloakAuthMethods(): List<ObvKeycloakAuthType> {
+        return buildList {
+            keycloakClientId?.let {
+                add(ObvKeycloakAuthType.OpenIdConnect(keycloakClientId, keycloakClientSecret))
+            }
+
+            if (supportsIdBasedAuth == true) {
+                add(ObvKeycloakAuthType.IdBased())
+            }
+        }
     }
 
     fun getQrImage(qrCodeData: String) {

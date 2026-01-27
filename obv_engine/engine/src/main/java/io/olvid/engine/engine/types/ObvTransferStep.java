@@ -156,7 +156,10 @@ public abstract class ObvTransferStep {
         public static final int FAIL_REASON_NETWORK_ERROR = 1;
         public static final int FAIL_REASON_TRANSFERRED_IDENTITY_ALREADY_EXISTS = 2;
         public static final int FAIL_REASON_INVALID_RESPONSE = 3;
+        public static final int FAIL_REASON_TRANSFER_RESTRICTED_AND_NO_OIDC = 4;
+
         public final int failReason;
+
         public Fail(int failReason) {
             this.failReason = failReason;
         }

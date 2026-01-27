@@ -128,12 +128,13 @@ fun KeycloakBindScreen(
                 AppSingleton.getEngine().getOwnedIdentity(ownedIdentity.bytesOwnedIdentity)
             }.getOrNull()
 
-            if (obvIdentity != null && viewModel.keycloakClientId != null && viewModel.keycloakServerUrl != null) {
+            val supportedKeycloakAuthMethods = viewModel.getSupportedKeycloakAuthMethods()
+
+            if (obvIdentity != null && supportedKeycloakAuthMethods.isNotEmpty() && viewModel.keycloakServerUrl != null) {
                 KeycloakManager.registerKeycloakManagedIdentity(
                     obvIdentity,
                     viewModel.keycloakServerUrl!!,
-                    viewModel.keycloakClientId!!,
-                    viewModel.keycloakClientSecret,
+                    supportedKeycloakAuthMethods,
                     viewModel.keycloakJwks,
                     viewModel.keycloakUserDetails?.signatureKey,
                     viewModel.keycloakSerializedAuthState,
@@ -152,8 +153,7 @@ fun KeycloakBindScreen(
                                     ownedIdentity.bytesOwnedIdentity,
                                     ObvKeycloakState(
                                         viewModel.keycloakServerUrl,
-                                        viewModel.keycloakClientId,
-                                        viewModel.keycloakClientSecret,
+                                        supportedKeycloakAuthMethods,
                                         viewModel.keycloakJwks,
                                         viewModel.keycloakUserDetails?.signatureKey,
                                         viewModel.keycloakSerializedAuthState,

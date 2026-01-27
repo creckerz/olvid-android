@@ -164,8 +164,8 @@ class BackupsV2ViewModel : ViewModel() {
                             contactCount = obvProfileBackupForRestore.contactCount,
                             groupCount = obvProfileBackupForRestore.groupCount,
                             keycloakStatus = obvProfileBackupForRestore.keycloakStatus,
-                            keycloakInfo = if (obvProfileBackupForRestore.keycloakServerUrl != null && obvProfileBackupForRestore.keycloakClientId != null) {
-                                KeycloakInfo(obvProfileBackupForRestore.keycloakServerUrl, obvProfileBackupForRestore.keycloakClientId, obvProfileBackupForRestore.keycloakClientSecret)
+                            keycloakInfo = if (obvProfileBackupForRestore.keycloakServerUrl != null && obvProfileBackupForRestore.supportedAuthenticationMethods != null) {
+                                KeycloakInfo(obvProfileBackupForRestore.keycloakServerUrl, obvProfileBackupForRestore.supportedAuthenticationMethods)
                             } else {
                                 null
                             },

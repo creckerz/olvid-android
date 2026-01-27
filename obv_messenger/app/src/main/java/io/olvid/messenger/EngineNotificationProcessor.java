@@ -534,8 +534,7 @@ public class EngineNotificationProcessor implements EngineNotificationListener {
                         KeycloakManager.registerKeycloakManagedIdentity(
                                 obvIdentity,
                                 keycloakState.keycloakServer,
-                                keycloakState.clientId,
-                                keycloakState.clientSecret,
+                                keycloakState.supportedAuthenticationMethods,
                                 keycloakState.jwks,
                                 keycloakState.signatureKey,
                                 keycloakState.serializedAuthState,

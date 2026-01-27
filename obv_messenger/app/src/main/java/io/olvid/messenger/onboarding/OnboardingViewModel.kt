@@ -24,6 +24,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.olvid.engine.datatypes.ObvBase64
 import io.olvid.engine.engine.types.JsonKeycloakUserDetails
+import io.olvid.engine.engine.types.identities.ObvKeycloakAuthType
 import io.olvid.messenger.AppSingleton
 import io.olvid.messenger.BuildConfig
 import io.olvid.messenger.customClasses.ConfigurationPojo
@@ -56,8 +57,7 @@ class OnboardingViewModel : ViewModel() {
     private var currentlyCheckingApiKey: UUID? = null
     private val queriedUnformattedApiKeys = HashMap<UUID, String>()
 
-    var keycloakSerializedAuthState: String? =
-        null // Not null means there is a keycloak server configured
+    var keycloakSerializedAuthState: String? = null // Not null means there is a keycloak server configured
     var keycloakServer: String? = null
         set(value) {
             field = value
@@ -65,6 +65,7 @@ class OnboardingViewModel : ViewModel() {
                 keycloakSerializedAuthState = null
                 keycloakClientId = null
                 keycloakClientSecret = null
+                keycloakMagic = null
                 keycloakJwks = null
                 keycloakUserDetails = null
                 keycloakSignatureKey = null
@@ -74,6 +75,8 @@ class OnboardingViewModel : ViewModel() {
 
     var keycloakClientId: String? = null
     var keycloakClientSecret: String? = null
+    var keycloakMagic: ConfigurationPojo.KeycloakMagic? = null
+    private var supportsIdBasedAuth: Boolean? = null
     var keycloakJwks: JsonWebKeySet? = null
         private set
     var keycloakUserDetails: JsonKeycloakUserDetails? = null
@@ -147,7 +150,8 @@ class OnboardingViewModel : ViewModel() {
         keycloak: String,
         normalizedKeycloak: String,
         serializedAuthState: String,
-        jwks: JsonWebKeySet
+        jwks: JsonWebKeySet,
+        supportsIdBasedAuth: Boolean?,
     ) {
         if (keycloak == currentlyCheckingKeycloak) {
             currentlyCheckingKeycloak = null
@@ -158,6 +162,7 @@ class OnboardingViewModel : ViewModel() {
         }
         this.keycloakServer = normalizedKeycloak
         this.keycloakSerializedAuthState = serializedAuthState
+        this.supportsIdBasedAuth = supportsIdBasedAuth
         this.keycloakJwks = jwks
 
         updateKeycloakValidatedStatus()
@@ -172,6 +177,18 @@ class OnboardingViewModel : ViewModel() {
             lastValidatedKeycloak = null
         }
         updateKeycloakValidatedStatus()
+    }
+
+    fun getSupportedKeycloakAuthMethods(): List<ObvKeycloakAuthType> {
+        return buildList {
+            keycloakClientId?.let {
+                add(ObvKeycloakAuthType.OpenIdConnect(keycloakClientId, keycloakClientSecret))
+            }
+
+            if (supportsIdBasedAuth == true) {
+                add(ObvKeycloakAuthType.IdBased())
+            }
+        }
     }
 
     fun parseScannedConfigurationUri(base64configuration: String?): Boolean {
@@ -193,6 +210,10 @@ class OnboardingViewModel : ViewModel() {
                     keycloakServer = keycloakPojo.server
                     keycloakClientId = keycloakPojo.clientId
                     keycloakClientSecret = keycloakPojo.clientSecret
+
+                    if (configurationPojo.magic != null) {
+                        keycloakMagic = configurationPojo.magic
+                    }
                 } else {
                     keycloakServer = null
                 }

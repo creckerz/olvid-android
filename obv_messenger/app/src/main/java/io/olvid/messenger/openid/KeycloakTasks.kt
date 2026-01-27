@@ -34,13 +34,17 @@ import androidx.lifecycle.LifecycleOwner
 import com.fasterxml.jackson.core.type.TypeReference
 import io.olvid.engine.Logger
 import io.olvid.engine.engine.types.JsonKeycloakUserDetails
+import io.olvid.engine.engine.types.ObvKeycloakIdBasedAuthResult
+import io.olvid.engine.engine.types.identities.ObvKeycloakAuthType
 import io.olvid.messenger.App
 import io.olvid.messenger.AppSingleton
+import io.olvid.messenger.customClasses.ConfigurationPojo
 import io.olvid.messenger.customClasses.NoExceptionConnectionBuilder
 import io.olvid.messenger.openid.KeycloakManager.KeycloakCallback
 import io.olvid.messenger.openid.KeycloakManager.KeycloakCallbackWrapper
 import io.olvid.messenger.openid.jsons.JsonGroupsRequest
 import io.olvid.messenger.openid.jsons.JsonGroupsResponse
+import io.olvid.messenger.openid.jsons.JsonMagicResponse
 import io.olvid.messenger.openid.jsons.JsonMeRequest
 import io.olvid.messenger.openid.jsons.JsonMeResponse
 import io.olvid.messenger.openid.jsons.JsonSearchRequest
@@ -48,6 +52,7 @@ import io.olvid.messenger.openid.jsons.JsonSearchResponse
 import io.olvid.messenger.openid.jsons.JsonTransferProofRequest
 import io.olvid.messenger.openid.jsons.KeycloakServerRevocationsAndStuff
 import io.olvid.messenger.openid.jsons.KeycloakUserDetailsAndStuff
+import io.olvid.messenger.openid.jsons.OlvidWellKnownJson
 import io.olvid.messenger.services.MDMConfigurationSingleton
 import net.openid.appauth.AppAuthConfiguration
 import net.openid.appauth.AuthState
@@ -56,6 +61,8 @@ import net.openid.appauth.AuthorizationException
 import net.openid.appauth.AuthorizationService
 import net.openid.appauth.AuthorizationServiceConfiguration
 import net.openid.appauth.ClientSecretPost
+import net.openid.appauth.TokenRequest
+import net.openid.appauth.TokenResponse
 import org.jose4j.jwk.JsonWebKey
 import org.jose4j.jwk.JsonWebKeySet
 import org.jose4j.jwk.VerificationJwkSelector
@@ -81,6 +88,7 @@ object KeycloakTasks {
     private const val REVOCATION_TEST_PATH = "olvid-rest/revocationTest"
     private const val GROUPS_PATH = "olvid-rest/groups"
     private const val TRANSFER_PROOF = "olvid-rest/transferProof"
+    private const val MAGIC_PATH = "olvid-rest/getMagicSession"
 
     const val RFC_UNKNOWN_ERROR: Int = 0
     const val RFC_INVALID_AUTH_STATE: Int = 1
@@ -106,7 +114,7 @@ object KeycloakTasks {
 
 
     @JvmStatic
-    fun discoverKeycloakServer(
+    fun discoverKeycloakServerOpenidConfiguration(
         keycloakServerUrl: String,
         callback: DiscoverKeycloakServerCallback
     ) {
@@ -134,7 +142,11 @@ object KeycloakTasks {
                             jwks = null
                         }
                         if (jwks != null) {
-                            callback.success(finalServerUrl, authState, jwks)
+                            val olvidWellKnown = discoverKeycloakServerOlvidWellKnown(keycloakServerUrl)
+
+                            callback.success(finalServerUrl, authState, jwks, olvidWellKnown)
+                        } else {
+                            callback.failed()
                         }
                         return@runThread
                     }
@@ -146,12 +158,84 @@ object KeycloakTasks {
         )
     }
 
+    fun discoverKeycloakServerOlvidWellKnown(keycloakServerUrl: String): OlvidWellKnownJson? {
+        Logger.d("Fetching Keycloak Olvid well-known at: $keycloakServerUrl")
+
+        var keycloakServerUrl = keycloakServerUrl.trim { it <= ' ' }
+        if (!keycloakServerUrl.endsWith("/")) {
+            keycloakServerUrl += "/"
+        }
+
+        var connection: HttpURLConnection? = null
+        try {
+            connection = NoExceptionConnectionBuilder().openConnection("$keycloakServerUrl.well-known/olvid".toUri())
+            val response = connection.getResponseCode()
+            if (response == HttpURLConnection.HTTP_OK) {
+                BufferedReader(InputStreamReader(connection.getInputStream())).use { reader ->
+                    val sb = StringBuilder()
+                    var line: String?
+                    while ((reader.readLine().also { line = it }) != null) {
+                        sb.append(line)
+                    }
+                    return AppSingleton.getJsonObjectMapper().readValue(sb.toString(), OlvidWellKnownJson::class.java)
+                }
+            }
+        } catch (e: Exception) {
+            Logger.x(e)
+        } finally {
+            connection?.disconnect()
+        }
+        return null
+    }
+
+    fun useMagicLink(
+        keycloakServerUrl: String,
+        keycloakMagic: ConfigurationPojo.KeycloakMagic,
+        authState: AuthState,
+        callback: AuthenticateCallback
+    ) {
+        Logger.d("Using magic link")
+
+        App.runThread {
+            val dataToSend = AppSingleton.getJsonObjectMapper().writeValueAsBytes(keycloakMagic)
+
+            val bytes = keycloakApiRequest(
+                keycloakServerUrl,
+                MAGIC_PATH,
+                null,
+                dataToSend
+            )
+
+            val output = AppSingleton.getJsonObjectMapper()
+                .readValue<MutableMap<String?, Any?>>(
+                    bytes,
+                    object : TypeReference<MutableMap<String?, Any?>?>() {})
+            val error = output["error"] as Int?
+            if (error != null) {
+                callback.failed(RFC_INVALID_SIGNATURE)
+                return@runThread
+            }
+
+            val response = AppSingleton.getJsonObjectMapper()
+                .readValue(bytes, JsonMagicResponse::class.java)
+
+            response.accessToken?.let {
+                authState.update(it, response.refreshToken)
+                callback.success(authState)
+            } ?: run {
+                callback.failed(RFC_INVALID_SIGNATURE)
+            }
+        }
+    }
+
+
 
     fun getOwnDetails(
         context: Context,
         keycloakServerUrl: String,
         authState: AuthState,
-        clientSecret: String?,
+        supportedAuthenticationMethods: List<ObvKeycloakAuthType>,
+        bytesOwnedIdentity: ByteArray?,
         jwks: JsonWebKeySet,
         latestRevocationListTimestamp: Long?,
         callback: KeycloakCallback<Pair<KeycloakUserDetailsAndStuff, KeycloakServerRevocationsAndStuff>?>
@@ -163,107 +247,102 @@ object KeycloakTasks {
                 .setConnectionBuilder(NoExceptionConnectionBuilder())
                 .build()
         )
-        val action =
-            AuthStateAction { accessToken: String?, idToken: String?, ex: AuthorizationException? ->
-                authorizationService.dispose()
-                if (ex != null || accessToken == null) {
-                    if (ex != null) {
-                        ex.printStackTrace()
-                        if (ex.code == 3) {
-                            callback.failed(RFC_NETWORK_ERROR)
-                            return@AuthStateAction
-                        }
+
+        authState.performActionWithFreshTokens(
+            bytesOwnedIdentity,
+            authorizationService,
+            supportedAuthenticationMethods
+        ) { accessToken: String?, _: String?, ex: AuthorizationException? ->
+            authorizationService.dispose()
+            if (ex != null || accessToken == null) {
+                if (ex != null) {
+                    ex.printStackTrace()
+                    if (ex.code == 3) {
+                        callback.failed(RFC_NETWORK_ERROR)
+                        return@performActionWithFreshTokens
                     }
-                    // by default, assume an authentication is required
-                    callback.failed(RFC_AUTHENTICATION_REQUIRED)
-                } else {
-                    App.runThread {
-                        try {
-                            val dataToSend: ByteArray? = if (latestRevocationListTimestamp == null) {
-                                null
+                }
+                // by default, assume an authentication is required
+                callback.failed(RFC_AUTHENTICATION_REQUIRED)
+            } else {
+                App.runThread {
+                    try {
+                        val dataToSend: ByteArray? = if (latestRevocationListTimestamp == null) {
+                            null
+                        } else {
+                            AppSingleton.getJsonObjectMapper()
+                                .writeValueAsBytes(JsonMeRequest(latestRevocationListTimestamp))
+                        }
+
+                        val bytes = keycloakApiRequest(
+                            keycloakServerUrl,
+                            ME_PATH,
+                            accessToken,
+                            dataToSend
+                        )
+
+                        val output = AppSingleton.getJsonObjectMapper()
+                            .readValue<MutableMap<String?, Any?>>(
+                                bytes,
+                                object : TypeReference<MutableMap<String?, Any?>?>() {})
+                        val error = output["error"] as Int?
+                        if (error != null) {
+                            if (error == ERROR_CODE_PERMISSION_DENIED) {
+                                callback.failed(RFC_AUTHENTICATION_REQUIRED)
                             } else {
-                                AppSingleton.getJsonObjectMapper()
-                                    .writeValueAsBytes(JsonMeRequest(latestRevocationListTimestamp))
+                                callback.failed(RFC_SERVER_ERROR)
                             }
+                            return@runThread
+                        }
+                        val response = AppSingleton.getJsonObjectMapper()
+                            .readValue(bytes, JsonMeResponse::class.java)
+                        response.signature?.let { signature ->
+                            val detailsJsonStringAndSignatureKey =
+                                verifySignature(signature, jwks, null)
 
-                            val bytes = keycloakApiRequest(
-                                keycloakServerUrl,
-                                ME_PATH,
-                                accessToken,
-                                dataToSend
-                            )
-
-                            val output = AppSingleton.getJsonObjectMapper()
-                                .readValue<MutableMap<String?, Any?>>(
-                                    bytes,
-                                    object : TypeReference<MutableMap<String?, Any?>?>() {})
-                            val error = output["error"] as Int?
-                            if (error != null) {
-                                if (error == ERROR_CODE_PERMISSION_DENIED) {
-                                    callback.failed(RFC_AUTHENTICATION_REQUIRED)
-                                } else {
-                                    callback.failed(RFC_SERVER_ERROR)
-                                }
-                                return@runThread
-                            }
-                            val response = AppSingleton.getJsonObjectMapper()
-                                .readValue(bytes, JsonMeResponse::class.java)
-                            response.signature?.let { signature ->
-                                val detailsJsonStringAndSignatureKey =
-                                    verifySignature(signature, jwks, null)
-
-                                if (detailsJsonStringAndSignatureKey != null) {
-                                    // signature verification successful, but the signing key might not be the right one --> this is checked in the success callback
-                                    val userDetails = AppSingleton.getJsonObjectMapper()
-                                        .readValue(
-                                            detailsJsonStringAndSignatureKey.first,
-                                            JsonKeycloakUserDetails::class.java
-                                        )
-                                    callback.success(
-                                        Pair<KeycloakUserDetailsAndStuff, KeycloakServerRevocationsAndStuff>(
-                                            KeycloakUserDetailsAndStuff(
-                                                userDetails,
-                                                signature,
-                                                detailsJsonStringAndSignatureKey.second,
-                                                response.server,
-                                                response.apiKey,
-                                                response.pushTopics,
-                                                response.selfRevocationTestNonce
-                                            ),
-                                            KeycloakServerRevocationsAndStuff(
-                                                response.revocationAllowed != null && response.revocationAllowed == true,
-                                                response.transferRestricted != null && response.transferRestricted == true,
-                                                response.currentTimestamp,
-                                                response.signedRevocations,
-                                                response.minimumBuildVersions
-                                            )
+                            if (detailsJsonStringAndSignatureKey != null) {
+                                // signature verification successful, but the signing key might not be the right one --> this is checked in the success callback
+                                val userDetails = AppSingleton.getJsonObjectMapper()
+                                    .readValue(
+                                        detailsJsonStringAndSignatureKey.first,
+                                        JsonKeycloakUserDetails::class.java
+                                    )
+                                callback.success(
+                                    Pair<KeycloakUserDetailsAndStuff, KeycloakServerRevocationsAndStuff>(
+                                        KeycloakUserDetailsAndStuff(
+                                            userDetails,
+                                            signature,
+                                            detailsJsonStringAndSignatureKey.second,
+                                            response.server,
+                                            response.apiKey,
+                                            response.pushTopics,
+                                            response.selfRevocationTestNonce
+                                        ),
+                                        KeycloakServerRevocationsAndStuff(
+                                            response.revocationAllowed != null && response.revocationAllowed == true,
+                                            response.transferRestricted != null && response.transferRestricted == true,
+                                            response.currentTimestamp,
+                                            response.signedRevocations,
+                                            response.minimumBuildVersions
                                         )
                                     )
-                                } else {
-                                    callback.failed(RFC_INVALID_SIGNATURE)
-                                }
-
-                            } ?: run {
-                                callback.failed(RFC_BAD_RESPONSE)
+                                )
+                            } else {
+                                callback.failed(RFC_INVALID_SIGNATURE)
                             }
-                        } catch (e: IOException) {
-                            e.printStackTrace()
-                            callback.failed(RFC_NETWORK_ERROR)
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                            callback.failed(RFC_UNKNOWN_ERROR)
+
+                        } ?: run {
+                            callback.failed(RFC_BAD_RESPONSE)
                         }
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                        callback.failed(RFC_NETWORK_ERROR)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        callback.failed(RFC_UNKNOWN_ERROR)
                     }
                 }
             }
-        if (clientSecret == null) {
-            authState.performActionWithFreshTokens(authorizationService, action)
-        } else {
-            authState.performActionWithFreshTokens(
-                authorizationService,
-                ClientSecretPost(clientSecret),
-                action
-            )
         }
     }
 
@@ -272,82 +351,78 @@ object KeycloakTasks {
         context: Context,
         keycloakServerUrl: String,
         authState: AuthState,
-        clientSecret: String?,
+        supportedAuthenticationMethods: List<ObvKeycloakAuthType>,
         bytesOwnedIdentity: ByteArray,
         callback: KeycloakCallback<Void?>
     ) {
         Logger.d("Uploading Olvid ID to keycloak")
 
         val authorizationService = AuthorizationService(
-            context, AppAuthConfiguration.Builder()
+            context,
+            AppAuthConfiguration.Builder()
                 .setConnectionBuilder(NoExceptionConnectionBuilder())
                 .build()
         )
-        val action =
-            AuthStateAction { accessToken: String?, idToken: String?, ex: AuthorizationException? ->
-                authorizationService.dispose()
-                if (ex != null || accessToken == null) {
-                    if (ex != null) {
-                        ex.printStackTrace()
-                        if (ex.code == 3) {
-                            callback.failed(RFC_NETWORK_ERROR)
-                            return@AuthStateAction
-                        }
+
+        authState.performActionWithFreshTokens(
+            bytesOwnedIdentity,
+            authorizationService,
+            supportedAuthenticationMethods
+        ) { accessToken: String?, _: String?, ex: AuthorizationException? ->
+            authorizationService.dispose()
+            if (ex != null || accessToken == null) {
+                if (ex != null) {
+                    ex.printStackTrace()
+                    if (ex.code == 3) {
+                        callback.failed(RFC_NETWORK_ERROR)
+                        return@performActionWithFreshTokens
                     }
-                    // by default, assume an authentication is required
-                    callback.failed(RFC_AUTHENTICATION_REQUIRED)
-                } else {
-                    App.runThread {
-                        try {
-                            val input: MutableMap<String?, Any?> = HashMap()
-                            input.put("identity", bytesOwnedIdentity)
+                }
+                // by default, assume an authentication is required
+                callback.failed(RFC_AUTHENTICATION_REQUIRED)
+            } else {
+                App.runThread {
+                    try {
+                        val input: MutableMap<String?, Any?> = HashMap()
+                        input["identity"] = bytesOwnedIdentity
 
-                            val bytes = keycloakApiRequest(
-                                keycloakServerUrl,
-                                PUT_KEY_PATH,
-                                accessToken,
-                                AppSingleton.getJsonObjectMapper().writeValueAsBytes(input)
-                            )
+                        val bytes = keycloakApiRequest(
+                            keycloakServerUrl,
+                            PUT_KEY_PATH,
+                            accessToken,
+                            AppSingleton.getJsonObjectMapper().writeValueAsBytes(input)
+                        )
 
-                            val output = AppSingleton.getJsonObjectMapper()
-                                .readValue<MutableMap<String?, Any?>>(
-                                    bytes,
-                                    object : TypeReference<MutableMap<String?, Any?>?>() {})
-                            val error = output["error"] as Int?
-                            if (error != null) {
-                                when (error) {
-                                    ERROR_CODE_INTERNAL_ERROR, ERROR_CODE_INVALID_REQUEST -> callback.failed(
-                                        RFC_SERVER_ERROR
-                                    )
+                        val output = AppSingleton.getJsonObjectMapper()
+                            .readValue<MutableMap<String?, Any?>>(
+                                bytes,
+                                object : TypeReference<MutableMap<String?, Any?>?>() {})
+                        val error = output["error"] as Int?
+                        if (error != null) {
+                            when (error) {
+                                ERROR_CODE_INTERNAL_ERROR, ERROR_CODE_INVALID_REQUEST -> callback.failed(
+                                    RFC_SERVER_ERROR
+                                )
 
-                                    ERROR_CODE_IDENTITY_ALREADY_UPLOADED -> callback.failed(
-                                        RFC_IDENTITY_ALREADY_UPLOADED
-                                    )
+                                ERROR_CODE_IDENTITY_ALREADY_UPLOADED -> callback.failed(
+                                    RFC_IDENTITY_ALREADY_UPLOADED
+                                )
 
-                                    ERROR_CODE_IDENTITY_WAS_REVOKED -> callback.failed(
-                                        RFC_IDENTITY_REVOKED
-                                    )
-                                }
-                            } else {
-                                callback.success(null)
+                                ERROR_CODE_IDENTITY_WAS_REVOKED -> callback.failed(
+                                    RFC_IDENTITY_REVOKED
+                                )
                             }
-                        } catch (_: IOException) {
-                            callback.failed(RFC_NETWORK_ERROR)
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                            callback.failed(RFC_UNKNOWN_ERROR)
+                        } else {
+                            callback.success(null)
                         }
+                    } catch (_: IOException) {
+                        callback.failed(RFC_NETWORK_ERROR)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        callback.failed(RFC_UNKNOWN_ERROR)
                     }
                 }
             }
-        if (clientSecret == null) {
-            authState.performActionWithFreshTokens(authorizationService, action)
-        } else {
-            authState.performActionWithFreshTokens(
-                authorizationService,
-                ClientSecretPost(clientSecret),
-                action
-            )
         }
     }
 
@@ -356,90 +431,86 @@ object KeycloakTasks {
     fun getGroups(
         context: Context,
         keycloakServerUrl: String,
-        authState: AuthState?,
-        clientSecret: String?,
-        bytesOwnedIdentity: ByteArray?,
+        authState: AuthState,
+        supportedAuthenticationMethods: List<ObvKeycloakAuthType>,
+        bytesOwnedIdentity: ByteArray,
         latestGetGroupsTimestamp: Long?,
         callback: KeycloakCallbackWrapper<Long?>
     ) {
         Logger.d("Fetching keycloak groups")
 
         val authorizationService = AuthorizationService(
-            context, AppAuthConfiguration.Builder()
+            context,
+            AppAuthConfiguration.Builder()
                 .setConnectionBuilder(NoExceptionConnectionBuilder())
                 .build()
         )
-        val action =
-            AuthStateAction { accessToken: String?, idToken: String?, ex: AuthorizationException? ->
-                authorizationService.dispose()
-                if (ex != null || accessToken == null) {
-                    if (ex != null) {
-                        ex.printStackTrace()
-                        if (ex.code == 3) {
-                            callback.failed(RFC_NETWORK_ERROR)
-                            return@AuthStateAction
-                        }
-                    }
-                    // by default, assume an authentication is required
-                    callback.failed(RFC_AUTHENTICATION_REQUIRED)
-                } else {
-                    App.runThread {
-                        try {
-                            val request = JsonGroupsRequest(latestGetGroupsTimestamp)
-                            val bytes: ByteArray?
-                            try {
-                                bytes = keycloakApiRequest(
-                                    keycloakServerUrl,
-                                    GROUPS_PATH,
-                                    accessToken,
-                                    AppSingleton.getJsonObjectMapper().writeValueAsBytes(request)
-                                )
-                            } catch (_: IOException) {
-                                callback.failed(RFC_NETWORK_ERROR)
-                                return@runThread
-                            }
 
-                            val output = AppSingleton.getJsonObjectMapper()
-                                .readValue<MutableMap<String?, Any?>>(
-                                    bytes,
-                                    object : TypeReference<MutableMap<String?, Any?>?>() {})
-                            val error = output["error"] as Int?
-                            if (error != null) {
-                                callback.failed(RFC_SERVER_ERROR)
-                            } else {
-                                val response = AppSingleton.getJsonObjectMapper()
-                                    .readValue(
-                                        bytes,
-                                        JsonGroupsResponse::class.java
-                                    )
-                                if (AppSingleton.getEngine().updateKeycloakGroups(
-                                        bytesOwnedIdentity,
-                                        response.signedGroupBlobs,
-                                        response.signedGroupDeletions,
-                                        response.signedGroupKicks,
-                                        response.currentTimestamp
-                                    )
-                                ) {
-                                    callback.success(response.currentTimestamp)
-                                } else {
-                                    callback.failed(RFC_UNKNOWN_ERROR)
-                                }
-                            }
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                            callback.failed(RFC_UNKNOWN_ERROR)
+        authState.performActionWithFreshTokens(
+            bytesOwnedIdentity,
+            authorizationService,
+            supportedAuthenticationMethods
+        ) { accessToken: String?, _: String?, ex: AuthorizationException? ->
+            authorizationService.dispose()
+            if (ex != null || accessToken == null) {
+                if (ex != null) {
+                    ex.printStackTrace()
+                    if (ex.code == 3) {
+                        callback.failed(RFC_NETWORK_ERROR)
+                        return@performActionWithFreshTokens
+                    }
+                }
+                // by default, assume an authentication is required
+                callback.failed(RFC_AUTHENTICATION_REQUIRED)
+            } else {
+                App.runThread {
+                    try {
+                        val request = JsonGroupsRequest(latestGetGroupsTimestamp)
+                        val bytes: ByteArray?
+                        try {
+                            bytes = keycloakApiRequest(
+                                keycloakServerUrl,
+                                GROUPS_PATH,
+                                accessToken,
+                                AppSingleton.getJsonObjectMapper().writeValueAsBytes(request)
+                            )
+                        } catch (_: IOException) {
+                            callback.failed(RFC_NETWORK_ERROR)
+                            return@runThread
                         }
+
+                        val output = AppSingleton.getJsonObjectMapper()
+                            .readValue<MutableMap<String?, Any?>>(
+                                bytes,
+                                object : TypeReference<MutableMap<String?, Any?>?>() {})
+                        val error = output["error"] as Int?
+                        if (error != null) {
+                            callback.failed(RFC_SERVER_ERROR)
+                        } else {
+                            val response = AppSingleton.getJsonObjectMapper()
+                                .readValue(
+                                    bytes,
+                                    JsonGroupsResponse::class.java
+                                )
+                            if (AppSingleton.getEngine().updateKeycloakGroups(
+                                    bytesOwnedIdentity,
+                                    response.signedGroupBlobs,
+                                    response.signedGroupDeletions,
+                                    response.signedGroupKicks,
+                                    response.currentTimestamp
+                                )
+                            ) {
+                                callback.success(response.currentTimestamp)
+                            } else {
+                                callback.failed(RFC_UNKNOWN_ERROR)
+                            }
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        callback.failed(RFC_UNKNOWN_ERROR)
                     }
                 }
             }
-        if (clientSecret == null) {
-            authState?.performActionWithFreshTokens(authorizationService, action)
-        } else {
-            authState?.performActionWithFreshTokens(
-                authorizationService,
-                ClientSecretPost(clientSecret),
-                action
-            )
         }
     }
 
@@ -448,100 +519,97 @@ object KeycloakTasks {
         context: Context,
         keycloakServerUrl: String,
         authState: AuthState,
-        clientSecret: String?,
+        supportedAuthenticationMethods: List<ObvKeycloakAuthType>,
+        bytesOwnedIdentity: ByteArray,
         searchQuery: String?,
         callback: KeycloakCallback<Pair<List<JsonKeycloakUserDetails>, Int>?>
     ) {
         Logger.d("Performing search on keycloak")
 
         val authorizationService = AuthorizationService(
-            context, AppAuthConfiguration.Builder()
+            context,
+            AppAuthConfiguration.Builder()
                 .setConnectionBuilder(NoExceptionConnectionBuilder())
                 .build()
         )
-        val action =
-            AuthStateAction { accessToken: String?, idToken: String?, ex: AuthorizationException? ->
-                authorizationService.dispose()
-                if (ex != null || accessToken == null) {
-                    if (ex != null) {
-                        ex.printStackTrace()
-                        if (ex.code == 3) {
-                            callback.failed(RFC_NETWORK_ERROR)
-                            return@AuthStateAction
-                        }
+
+        authState.performActionWithFreshTokens(
+            bytesOwnedIdentity,
+            authorizationService,
+            supportedAuthenticationMethods
+        ) { accessToken: String?, _: String?, ex: AuthorizationException? ->
+            authorizationService.dispose()
+            if (ex != null || accessToken == null) {
+                if (ex != null) {
+                    ex.printStackTrace()
+                    if (ex.code == 3) {
+                        callback.failed(RFC_NETWORK_ERROR)
+                        return@performActionWithFreshTokens
                     }
-                    // by default, assume an authentication is required
-                    callback.failed(RFC_AUTHENTICATION_REQUIRED)
-                } else {
-                    App.runThread {
-                        try {
-                            val query = JsonSearchRequest()
-                            if (searchQuery == null || searchQuery.isBlank()) {
-                                query.filter = null
-                            } else {
-                                query.filter =
-                                    searchQuery.trim { it <= ' ' }.split("\\s+".toRegex())
-                                        .dropLastWhile { it.isEmpty() }.toTypedArray()
-                            }
-
-                            val bytes = keycloakApiRequest(
-                                keycloakServerUrl,
-                                SEARCH_PATH,
-                                accessToken,
-                                AppSingleton.getJsonObjectMapper().writeValueAsBytes(query)
-                            )
-
-                            try {
-                                val output = AppSingleton.getJsonObjectMapper()
-                                    .readValue<MutableMap<String?, Any?>>(
-                                        bytes,
-                                        object : TypeReference<MutableMap<String?, Any?>?>() {})
-                                val error = output["error"] as Int?
-                                if (error != null) {
-                                    when (error) {
-                                        ERROR_CODE_PERMISSION_DENIED -> callback.failed(
-                                            RFC_AUTHENTICATION_REQUIRED
-                                        )
-
-                                        ERROR_CODE_INTERNAL_ERROR -> callback.failed(
-                                            RFC_SERVER_ERROR
-                                        )
-
-                                        else -> callback.failed(RFC_SERVER_ERROR)
-                                    }
-                                    return@runThread
-                                }
-                            } catch (_: Exception) {
-                                // an exception is normal if there was no error in the server response
-                            }
-                            val response = AppSingleton.getJsonObjectMapper()
-                                .readValue(
-                                    bytes,
-                                    JsonSearchResponse::class.java
-                                )
-                            callback.success(
-                                Pair<List<JsonKeycloakUserDetails>, Int>(
-                                    response.results,
-                                    response.count
-                                )
-                            )
-                        } catch (_: IOException) {
-                            callback.failed(RFC_NETWORK_ERROR)
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                            callback.failed(RFC_UNKNOWN_ERROR)
+                }
+                // by default, assume an authentication is required
+                callback.failed(RFC_AUTHENTICATION_REQUIRED)
+            } else {
+                App.runThread {
+                    try {
+                        val query = JsonSearchRequest()
+                        if (searchQuery == null || searchQuery.isBlank()) {
+                            query.filter = null
+                        } else {
+                            query.filter =
+                                searchQuery.trim { it <= ' ' }.split("\\s+".toRegex())
+                                    .dropLastWhile { it.isEmpty() }.toTypedArray()
                         }
+
+                        val bytes = keycloakApiRequest(
+                            keycloakServerUrl,
+                            SEARCH_PATH,
+                            accessToken,
+                            AppSingleton.getJsonObjectMapper().writeValueAsBytes(query)
+                        )
+
+                        try {
+                            val output = AppSingleton.getJsonObjectMapper()
+                                .readValue<MutableMap<String?, Any?>>(
+                                    bytes,
+                                    object : TypeReference<MutableMap<String?, Any?>?>() {})
+                            val error = output["error"] as Int?
+                            if (error != null) {
+                                when (error) {
+                                    ERROR_CODE_PERMISSION_DENIED -> callback.failed(
+                                        RFC_AUTHENTICATION_REQUIRED
+                                    )
+
+                                    ERROR_CODE_INTERNAL_ERROR -> callback.failed(
+                                        RFC_SERVER_ERROR
+                                    )
+
+                                    else -> callback.failed(RFC_SERVER_ERROR)
+                                }
+                                return@runThread
+                            }
+                        } catch (_: Exception) {
+                            // an exception is normal if there was no error in the server response
+                        }
+                        val response = AppSingleton.getJsonObjectMapper()
+                            .readValue(
+                                bytes,
+                                JsonSearchResponse::class.java
+                            )
+                        callback.success(
+                            Pair<List<JsonKeycloakUserDetails>, Int>(
+                                response.results,
+                                response.count
+                            )
+                        )
+                    } catch (_: IOException) {
+                        callback.failed(RFC_NETWORK_ERROR)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        callback.failed(RFC_UNKNOWN_ERROR)
                     }
                 }
             }
-        if (clientSecret == null) {
-            authState.performActionWithFreshTokens(authorizationService, action)
-        } else {
-            authState.performActionWithFreshTokens(
-                authorizationService,
-                ClientSecretPost(clientSecret),
-                action
-            )
         }
     }
 
@@ -550,7 +618,7 @@ object KeycloakTasks {
         context: Context,
         keycloakServerUrl: String,
         authState: AuthState,
-        clientSecret: String?,
+        supportedAuthenticationMethods: List<ObvKeycloakAuthType>,
         jwks: JsonWebKeySet,
         signatureKey: JsonWebKey?,
         bytesOwnedIdentity: ByteArray,
@@ -561,105 +629,101 @@ object KeycloakTasks {
         Logger.d("Retrieving signed contact details")
 
         val authorizationService = AuthorizationService(
-            context, AppAuthConfiguration.Builder()
+            context,
+            AppAuthConfiguration.Builder()
                 .setConnectionBuilder(NoExceptionConnectionBuilder())
                 .build()
         )
-        val action =
-            AuthStateAction { accessToken: String?, idToken: String?, ex: AuthorizationException? ->
-                authorizationService.dispose()
-                if (ex != null || accessToken == null) {
-                    if (ex != null) {
-                        ex.printStackTrace()
-                        if (ex.code == 3) {
-                            callback.failed(RFC_NETWORK_ERROR)
-                            return@AuthStateAction
-                        }
+
+        authState.performActionWithFreshTokens(
+            bytesOwnedIdentity,
+            authorizationService,
+            supportedAuthenticationMethods
+        ) { accessToken: String?, _: String?, ex: AuthorizationException? ->
+            authorizationService.dispose()
+            if (ex != null || accessToken == null) {
+                if (ex != null) {
+                    ex.printStackTrace()
+                    if (ex.code == 3) {
+                        callback.failed(RFC_NETWORK_ERROR)
+                        return@performActionWithFreshTokens
                     }
-                    // by default, assume an authentication is required
-                    callback.failed(RFC_AUTHENTICATION_REQUIRED)
-                } else {
-                    App.runThread {
-                        try {
-                            val query: MutableMap<String?, String?> = HashMap()
-                            query.put("user-id", contactUserId)
+                }
+                // by default, assume an authentication is required
+                callback.failed(RFC_AUTHENTICATION_REQUIRED)
+            } else {
+                App.runThread {
+                    try {
+                        val query: MutableMap<String?, String?> = HashMap()
+                        query["user-id"] = contactUserId
 
-                            val bytes = keycloakApiRequest(
-                                keycloakServerUrl,
-                                GET_KEY_PATH,
-                                accessToken,
-                                AppSingleton.getJsonObjectMapper().writeValueAsBytes(query)
-                            )
+                        val bytes = keycloakApiRequest(
+                            keycloakServerUrl,
+                            GET_KEY_PATH,
+                            accessToken,
+                            AppSingleton.getJsonObjectMapper().writeValueAsBytes(query)
+                        )
 
-                            val output = AppSingleton.getJsonObjectMapper()
-                                .readValue<MutableMap<String?, Any?>>(
-                                    bytes,
-                                    object : TypeReference<MutableMap<String?, Any?>?>() {
-                                    })
-                            val error = output["error"] as Int?
-                            if (error != null) {
-                                when (error) {
-                                    ERROR_CODE_PERMISSION_DENIED -> callback.failed(
-                                        RFC_AUTHENTICATION_REQUIRED
-                                    )
+                        val output = AppSingleton.getJsonObjectMapper()
+                            .readValue<MutableMap<String?, Any?>>(
+                                bytes,
+                                object : TypeReference<MutableMap<String?, Any?>?>() {
+                                })
+                        val error = output["error"] as Int?
+                        if (error != null) {
+                            when (error) {
+                                ERROR_CODE_PERMISSION_DENIED -> callback.failed(
+                                    RFC_AUTHENTICATION_REQUIRED
+                                )
 
-                                    ERROR_CODE_INTERNAL_ERROR, ERROR_CODE_INVALID_REQUEST -> callback.failed(
-                                        RFC_SERVER_ERROR
-                                    )
+                                ERROR_CODE_INTERNAL_ERROR, ERROR_CODE_INVALID_REQUEST -> callback.failed(
+                                    RFC_SERVER_ERROR
+                                )
 
-                                    else -> callback.failed(RFC_SERVER_ERROR)
-                                }
-                                return@runThread
+                                else -> callback.failed(RFC_SERVER_ERROR)
                             }
-                            val signature = output["signature"] as String?
-                            if (signature != null) {
-                                val detailsJsonStringAndSignatureKey =
-                                    verifySignature(signature, jwks, signatureKey)
-
-                                if (detailsJsonStringAndSignatureKey != null) {
-                                    // signature verification successful, with the right signature key
-                                    val userDetails = AppSingleton.getJsonObjectMapper()
-                                        .readValue(
-                                            detailsJsonStringAndSignatureKey.first,
-                                            JsonKeycloakUserDetails::class.java
-                                        )
-
-                                    if (userDetails.getIdentity()
-                                            .contentEquals(bytesContactIdentity)
-                                    ) {
-                                        AppSingleton.getEngine().addKeycloakContact(
-                                            bytesOwnedIdentity,
-                                            bytesContactIdentity,
-                                            signature
-                                        )
-                                        callback.success(null)
-                                        return@runThread
-                                    }
-                                } else if (verifySignature(signature, jwks, null) != null) {
-                                    // signature is valid but with the wrong signature key --> force a resync to detect key change and prompt user with standard dialog
-                                    KeycloakManager.forceSyncManagedIdentity(
-                                        bytesOwnedIdentity
-                                    )
-                                }
-                            }
-                            callback.failed(RFC_INVALID_SIGNATURE)
-                        } catch (_: IOException) {
-                            callback.failed(RFC_NETWORK_ERROR)
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                            callback.failed(RFC_UNKNOWN_ERROR)
+                            return@runThread
                         }
+                        val signature = output["signature"] as String?
+                        if (signature != null) {
+                            val detailsJsonStringAndSignatureKey =
+                                verifySignature(signature, jwks, signatureKey)
+
+                            if (detailsJsonStringAndSignatureKey != null) {
+                                // signature verification successful, with the right signature key
+                                val userDetails = AppSingleton.getJsonObjectMapper()
+                                    .readValue(
+                                        detailsJsonStringAndSignatureKey.first,
+                                        JsonKeycloakUserDetails::class.java
+                                    )
+
+                                if (userDetails.getIdentity()
+                                        .contentEquals(bytesContactIdentity)
+                                ) {
+                                    AppSingleton.getEngine().addKeycloakContact(
+                                        bytesOwnedIdentity,
+                                        bytesContactIdentity,
+                                        signature
+                                    )
+                                    callback.success(null)
+                                    return@runThread
+                                }
+                            } else if (verifySignature(signature, jwks, null) != null) {
+                                // signature is valid but with the wrong signature key --> force a resync to detect key change and prompt user with standard dialog
+                                KeycloakManager.forceSyncManagedIdentity(
+                                    bytesOwnedIdentity
+                                )
+                            }
+                        }
+                        callback.failed(RFC_INVALID_SIGNATURE)
+                    } catch (_: IOException) {
+                        callback.failed(RFC_NETWORK_ERROR)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        callback.failed(RFC_UNKNOWN_ERROR)
                     }
                 }
             }
-        if (clientSecret == null) {
-            authState.performActionWithFreshTokens(authorizationService, action)
-        } else {
-            authState.performActionWithFreshTokens(
-                authorizationService,
-                ClientSecretPost(clientSecret),
-                action
-            )
         }
     }
 
@@ -843,13 +907,14 @@ object KeycloakTasks {
                     }
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
+                Logger.x(e)
             } finally {
                 connection?.disconnect()
             }
         }
         return null
     }
+
 
     internal class AuthenticationLifecycleObserver(activity: ComponentActivity) :
         DefaultLifecycleObserver {
@@ -870,7 +935,7 @@ object KeycloakTasks {
                     val intent = result.data
                     if (intent != null) {
                         val updatedSerializedAuthState =
-                            intent.getStringExtra(KeycloakAuthenticationActivity.Companion.AUTH_STATE_JSON_INTENT_EXTRA)
+                            intent.getStringExtra(KeycloakAuthenticationActivity.AUTH_STATE_JSON_INTENT_EXTRA)
                         if (updatedSerializedAuthState != null) {
                             try {
                                 val authState =
@@ -894,7 +959,7 @@ object KeycloakTasks {
                             return@register
                         }
                     }
-                } else if (result.resultCode == KeycloakAuthenticationActivity.Companion.RESULT_CODE_TIME_OFFSET) {
+                } else if (result.resultCode == KeycloakAuthenticationActivity.RESULT_CODE_TIME_OFFSET) {
                     Logger.w("Keycloak authentication failed because of a phone time offset")
                     if (callback != null) {
                         callback!!.failed(RFC_AUTHENTICATION_ERROR_TIME_OFFSET)
@@ -915,12 +980,70 @@ object KeycloakTasks {
     }
 
     interface DiscoverKeycloakServerCallback {
-        fun success(serverUrl: String, authState: AuthState, jwks: JsonWebKeySet)
+        fun success(serverUrl: String, authState: AuthState, jwks: JsonWebKeySet, olvidWellKnown: OlvidWellKnownJson?)
         fun failed()
     }
 
     interface AuthenticateCallback {
         fun success(authState: AuthState)
         fun failed(rfc: Int)
+    }
+}
+
+fun AuthState.update(accessToken: String, refreshToken: String?) {
+    update(
+        TokenResponse.Builder(
+            TokenRequest.Builder(
+                authorizationServiceConfiguration!!,
+                "fake"
+            )
+                .setGrantType("fake")
+                .build()
+        )
+            .setAccessToken(accessToken)
+            .setRefreshToken(refreshToken)
+            .setTokenType(TokenResponse.TOKEN_TYPE_BEARER)
+            .build(),
+        null
+    )
+}
+
+fun AuthState.performActionWithFreshTokens(bytesOwnedIdentity: ByteArray?, authorizationService: AuthorizationService, supportedAuthenticationMethods: List<ObvKeycloakAuthType>, action: AuthStateAction) {
+
+    val wrappedAction = if (bytesOwnedIdentity != null // only try ID-based auth if we already have an ID
+        && supportedAuthenticationMethods.any { it is ObvKeycloakAuthType.IdBased }) {
+        // if Id-based authentication is supported, wrap the action into another action that attempts to re-authenticates with ID in case of failure
+        AuthStateAction { accessToken, idToken, ex ->
+            when (ex?.code) {
+                // if no exception, or network error, pass the result to the original action
+                null, 3 -> action.execute(accessToken, idToken, ex)
+                // if another error occurred and we would prompt the user for re-authentication, first try to re-authenticate with ID
+                else -> {
+                    val idBasedAuthResult = AppSingleton.getEngine().performKeycloakIdBasedAuth(bytesOwnedIdentity)
+                    if (idBasedAuthResult.status == ObvKeycloakIdBasedAuthResult.Status.SUCCESS) {
+                        // if id-based reauthentication worked, update the current AuthState
+                        update(idBasedAuthResult.accessToken, idBasedAuthResult.refreshToken)
+                        // then perform the action with the fresh token
+                        action.execute(idBasedAuthResult.accessToken, idToken, null)
+                    } else {
+                        // if id-based reauthentication did not work, performed the wrapped action and let it prompt the user for re-authentication
+                        action.execute(accessToken, idToken, ex)
+                    }
+                }
+            }
+        }
+    } else {
+        action
+    }
+
+    val clientSecret = (supportedAuthenticationMethods.find { it is ObvKeycloakAuthType.OpenIdConnect } as? ObvKeycloakAuthType.OpenIdConnect)?.clientSecret
+    if (clientSecret == null) {
+        performActionWithFreshTokens(authorizationService, wrappedAction)
+    } else {
+        performActionWithFreshTokens(
+            authorizationService,
+            ClientSecretPost(clientSecret),
+            wrappedAction
+        )
     }
 }

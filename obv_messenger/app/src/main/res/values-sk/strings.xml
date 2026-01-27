@@ -854,7 +854,7 @@
 	<string name="dialog_title_update_available" state="needs_review" hash="-1893271535">Dostupná aktualizácia</string>
 	<string name="dialog_message_update_available" state="needs_review" hash="259838609">Novejšia verzia Olvid je dostupná v službe Google Play.\n\nAktualizujte si ju, aby ste mohli využívať najnovšie funkcie.</string>
 	<string name="dialog_title_call_initiation_not_supported" state="needs_review" hash="-2088021831">Nepodarilo sa iniciovať hovor</string>
-	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="-1087657662">Zdá sa, že váš server Olvid nepodporuje iniciovanie bezpečných hovorov.\n\nKontaktujte svojho správcu pre viac informácií.</string>
+	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="1760333819">Zdá sa, že váš server Olvid nepodporuje zabezpečené nadväzovanie hovorov.\n\nKontaktujte svojho správcu, ak potrebujete ďalšie informácie.</string>
 	<string name="label_identity_creation_options" state="needs_review" hash="1180456032">Možnosti vytvorenia ID</string>
 	<string name="text_option_server" state="needs_review" hash="-1130676431">Server: %1$s</string>
 	<string name="text_option_license_code" state="needs_review" hash="1222068504">Licencia: %1$s</string>
@@ -882,7 +882,7 @@
 	<string name="toast_message_unable_to_keycloak_revoke" state="needs_review" hash="-1368037130">Nepodarilo sa nahradiť predchádzajúci Olvid ID, skúste to znova</string>
 	<string name="toast_message_keycloak_revoke_successful" state="needs_review" hash="-1216369809">Predchádzajúci Olvid ID bol úspešne nahradený</string>
 	<string name="dialog_title_keycloak_authentication_required_user_id_changed" state="needs_review" hash="-896407029">Zistená zmena používateľa</string>
-	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="1319874532">Vaše Olvid ID spravuje poskytovateľ identity vašej spoločnosti. Zdá sa, že ste sa autentifikovali ako iný používateľ, než zvyčajne. To nie je podporované.\n\nKontaktujte svojho správcu alebo sa znova autentifikujte ako správny používateľ.</string>
+	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="876252686">Váš profil aktuálne spravuje vaša organizácia. Zdá sa, že ste sa prihlásili s iným používateľským účtom, než zvyčajne. Toto nie je podporované.\n\nKontaktujte prosím svojho správcu alebo sa prihláste so správnym používateľským účtom.</string>
 	<string name="dialog_title_add_keycloak_user" state="needs_review" hash="-1050193239">Pridať kontakt</string>
 	<string name="dialog_message_add_keycloak_user" state="needs_review" hash="-1755937035">Vybral/a si možnosť pridať %1$s do svojich kontaktov. Chceš pokračovať?</string>
 	<string name="explanation_keycloak_update_new" state="needs_review" hash="1136733528">Práve konfiguruješ poskytovateľa identity tvojej spoločnosti v Olvid. Po konfigurácii sa budeš môcť autentifikovať pomocou tohto servera a Olvid ti umožní bezproblémovo pridať ďalších zamestnancov do tvojich kontaktov.\nKontaktuj svojho administrátora pre viac informácií.</string>
@@ -890,7 +890,7 @@
 	<string name="explanation_keycloak_update_same_server" state="needs_review" hash="1886762594">Olvid je už nakonfigurovaný s poskytovateľom identity vašej spoločnosti.\nKontaktujte svojho správcu pre viac informácií.</string>
 	<string name="explanation_keycloak_unable_to_contact_server" state="needs_review" hash="2123517499">Nepodarilo sa pripojiť k poskytovateľovi identity vašej spoločnosti. Skontrolujte svoje internetové pripojenie alebo kontaktujte svojho správcu pre viac informácií.</string>
 	<string name="explanation_keycloak_update_bad_server" state="needs_review" hash="546492417">Nepodarilo sa nakonfigurovať poskytovateľa identity vašej spoločnosti s vaším aktuálnym ID Olvid. Vaše ID bolo vygenerované na inom serveri Olvid.\nKontaktujte svojho správcu pre viac informácií.</string>
-	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-317755135">Nepodarilo sa nakonfigurovať poskytovateľa identity vašej spoločnosti. Vaša verzia Olvid je zastaraná a nie je kompatibilná s poskytovateľom identity vašej spoločnosti.\nAktualizujte Olvid a skúste to znova alebo kontaktujte svojho správcu pre viac informácií.</string>
+	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-1487678865">Vaša verzia Olvidu je zastaraná a nie je kompatibilná s poskytovateľom identít vašej spoločnosti.\nAktualizujte Olvid a skúste to znova, alebo kontaktujte svojho správcu pre viac informácií.</string>
 	<string name="explanation_keycloak_bind" state="needs_review" hash="445359846">Meno uvedené nižšie bolo získané od poskytovateľa identity vašej spoločnosti.\nKeď bude váš Olvid ID spravovaný týmto poskytovateľom, vaše kontakty vás uvidia takto v Olvid.</string>
 	<string name="button_label_manage_keycloak" state="needs_review" hash="-1323644699">Prepnúť na spravované ID</string>
 	<string name="toast_message_keycloak_bind_successful" state="needs_review" hash="749864054">Úspešný prechod na spravované ID</string>
@@ -898,7 +898,7 @@
 	<string name="menu_action_unbind_from_keycloak" state="needs_review" hash="549323804">Odstrániť poskytovateľa identity</string>
 	<string name="dialog_title_unbind_from_keycloak" state="needs_review" hash="549323804">Odstrániť poskytovateľa identity</string>
 	<string name="dialog_title_unbind_from_keycloak_restricted" state="needs_review" hash="1941011536">Nepodarilo sa odstrániť poskytovateľa identity</string>
-	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="915111540">Váš Olvid ID je momentálne spravovaný poskytovateľom identity vašej spoločnosti. Chystáte sa prejsť na štandardný, nesprávyvaný Olvid ID.\n\nAk tak urobíte, nebudete môcť už jednoducho pridávať kontakty z vašej spoločnosti do Olvid. Pre viac informácií kontaktujte vášho administrátora.\n\nChcete pokračovať?</string>
+	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="861158628">Vaše Olvid ID je momentálne spravované identifikačným systémom vašej spoločnosti. Chystáte sa prejsť na štandardné, nespravované Olvid ID.\n\nAk budete pokračovať, už nebudete môcť jednoducho pridávať kontakty z vašej spoločnosti do Olvid. Pre viac informácií kontaktujte svojho správcu.\n\nChcete pokračovať?</string>
 	<string name="dialog_message_unbind_from_keycloak_restricted" state="needs_review" hash="-155299318">Tvoj Olvid ID je v súčasnosti spravovaný poskytovateľom identity tvojej spoločnosti, čo obmedzuje prevody. Nedá sa odstrániť na tvoju iniciatívu.\n\nKontaktuj svojho správcu pre viac informácií.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_needed" state="needs_review" hash="-1740408397">Váš poskytovateľ identity signalizuje, že ID Olvid je už priradené k používateľovi, s ktorým ste sa prihlásili. Ak budete pokračovať, toto ID Olvid bude zrušené a vaše nové ID bude priradené tomuto používateľovi.\nKontaktujte svojho správcu pre viac informácií.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_impossible" state="needs_review" hash="-734813550">Váš poskytovateľ identity indikuje, že ID Olvid je už priradené používateľovi, s ktorým ste sa prihlásili. Nemôžete pokračovať vo vytváraní svojho ID.\n\nKontaktujte svojho správcu pre viac informácií.</string>
@@ -1142,6 +1142,7 @@
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">Indikátor, že upozornenia sú stlmené pre tento profil</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">Vytvoriť profil</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">Poskytovateľ identity vašej spoločnosti bol úspešne nakonfigurovaný. Stlačte tlačidlo „Overiť“ nižšie a overte sa s ním a získajte svoje osobné údaje.</string>
+	<string name="text_explanation_onboarding_keycloak_parsed_configuration_magic" state="needs_review" hash="1823898406">Poskytovateľ identity vašej spoločnosti bol úspešne nakonfigurovaný. Stlačte tlačidlo „použiť magický odkaz“ nižšie, aby ste získali svoje osobné údaje.</string>
 	<string name="text_explanation_onboarding_keycloak_mdm" state="needs_review" hash="1340457300">Vitajte v Olvid.\n\nTáto inštalácia je spravovaná vašou spoločnosťou a bola nakonfigurovaná na používanie poskytovateľa identity. Stlačte tlačidlo „Overiť“ nižšie, aby ste sa overili a načítali svoje osobné údaje.\n\nAk ste Olvid už používali a chcete obnoviť svoje kľúče a kontakty zo zálohy, stlačte „Obnoviť zo zálohy“.</string>
 	<string name="button_label_see_details" state="needs_review" hash="238834473">Zobraziť podrobnosti</string>
 	<string name="link_label_invitation_url" state="needs_review" hash="744905192">Pridať kontakt</string>
@@ -2143,8 +2144,13 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Nedostupné zariadenie kontaktu</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Znovu vytvoriť všetky zabezpečené kanály</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Znovuvytvorenie všetkých zabezpečených kanálov prinúti Olvid vytvoriť nové zabezpečené komunikačné kanály so všetkými zariadeniami vašich kontaktov. Vo všeobecnosti to nie je užitočné, ale môže vyriešiť zriedkavé situácie, keď sú niektoré z týchto kanálov „nesynchronizované“.\n\n**Upozornenie:** ak máte veľa kontaktov, táto operácia môže trvať niekoľko minút a počas jej trvania môžete stratiť niektoré prichádzajúce správy.</string>
+	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">Použite „magický odkaz“</string>
+	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">Neplatný magický odkaz</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Hovor ukončený</string>
 	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">Potrebujete predplatné pre váš tím?</string>
 	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Navštívte obchod Olvid</string>
 	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">Pripomenutie nastavené</string>
+	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">Overenie nie je možné</string>
+	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">Váš profil aktuálne spravuje vaša organizácia a vyžaduje sa opätovná autentifikácia. Zdá sa však, že žiadna z podporovaných metód autentifikácie nie je k dispozícii.\n\nPre viac informácií kontaktujte svojho správcu.</string>
+	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">Zdá sa, že nie je k dispozícii žiadna podporovaná metóda overovania.</string>
 </resources>

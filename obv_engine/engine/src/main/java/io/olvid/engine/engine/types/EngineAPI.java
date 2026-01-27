@@ -98,6 +98,7 @@ public interface EngineAPI {
     void setOwnedIdentityKeycloakUserId(byte[] bytesOwnedIdentity, String id) throws Exception;
     JsonWebKey getOwnedIdentityKeycloakSignatureKey(byte[] bytesOwnedIdentity) throws Exception;
     void setOwnedIdentityKeycloakSignatureKey(byte[] bytesOwnedIdentity, JsonWebKey signatureKey) throws Exception;
+    void setOwnedIdentityKeycloakSupportsIdBasedAuth(byte[] bytesOwnedIdentity, boolean supportsIdBasedAuth) throws Exception;
     ObvIdentity bindOwnedIdentityToKeycloak(byte[] bytesOwnedIdentity, ObvKeycloakState keycloakState, String keycloakUserId);
     void unbindOwnedIdentityFromKeycloak(byte[] bytesOwnedIdentity);
     void updateKeycloakTransferRestrictedIfNeeded(byte[] bytesOwnedIdentity, String serverUrl, boolean transferRestricted);
@@ -106,6 +107,7 @@ public interface EngineAPI {
     void setOwnedIdentityKeycloakSelfRevocationTestNonce(byte[] bytesOwnedIdentity, String serverUrl, String nonce);
     String getOwnedIdentityKeycloakSelfRevocationTestNonce(byte[] bytesOwnedIdentity, String serverUrl);
     boolean updateKeycloakGroups(byte[] bytesOwnedIdentity, List<String> signedGroupBlobs, List<String> signedGroupDeletions, List<String> signedGroupKicks, long keycloakCurrentTimestamp);
+    ObvKeycloakIdBasedAuthResult performKeycloakIdBasedAuth(byte[] bytesOwnedIdentity);
 
     void registerToPushNotification(byte[] bytesOwnedIdentity, ObvPushNotificationType pushNotificationType, boolean reactivateCurrentDevice, byte[] bytesDeviceUidToReplace) throws Exception;
     void processAndroidPushNotification(String maskingUidString);

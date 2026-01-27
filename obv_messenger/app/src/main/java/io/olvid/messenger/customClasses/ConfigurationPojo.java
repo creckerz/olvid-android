@@ -27,6 +27,18 @@ public class ConfigurationPojo {
     public String apikey;
     public ConfigurationKeycloakPojo keycloak;
     public ConfigurationSettingsPojo settings;
+    public KeycloakMagic magic;
+
+
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class KeycloakMagic {
+        public String username;
+        public String token;
+
+        public KeycloakMagic() {
+        }
+    }
 }
 
 

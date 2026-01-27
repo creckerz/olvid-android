@@ -854,7 +854,7 @@
 	<string name="dialog_title_update_available" state="needs_review" hash="-1893271535">アップデートが利用可能です</string>
 	<string name="dialog_message_update_available" state="needs_review" hash="259838609">Olvidの新しいバージョンがGoogle Playで利用可能です。\n\n最新機能を利用するには、アップデートしてください。</string>
 	<string name="dialog_title_call_initiation_not_supported" state="needs_review" hash="-2088021831">通話の開始がサポートされていません</string>
-	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="-1087657662">Olvidサーバーが安全な通話の開始をサポートしていないようです。\n\n詳細については、管理者にお問い合わせください。</string>
+	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="1760333819">Olvidサーバーがセキュアな通話の開始をサポートしていないようです。\n\n詳細については、管理者にお問い合わせください。</string>
 	<string name="label_identity_creation_options" state="needs_review" hash="1180456032">ID作成オプション</string>
 	<string name="text_option_server" state="needs_review" hash="-1130676431">サーバー：%1$s</string>
 	<string name="text_option_license_code" state="needs_review" hash="1222068504">ライセンス: %1$s</string>
@@ -882,7 +882,7 @@
 	<string name="toast_message_unable_to_keycloak_revoke" state="needs_review" hash="-1368037130">以前のOlvid IDの置き換えに失敗しました。もう一度お試しください。</string>
 	<string name="toast_message_keycloak_revoke_successful" state="needs_review" hash="-1216369809">以前のOlvid IDが正常に置き換えられました</string>
 	<string name="dialog_title_keycloak_authentication_required_user_id_changed" state="needs_review" hash="-896407029">ユーザー変更を検出しました</string>
-	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="1319874532">あなたのOlvid IDは、会社のIDプロバイダーによって管理されています。普段とは異なるユーザーとして認証されたようです。これはサポートされていません。\n\n管理者に連絡するか、正しいユーザーとして再認証してください。</string>
+	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="876252686">あなたのプロフィールは現在、組織によって管理されています。通常とは異なるユーザーとして認証されたようです。これはサポートされていません。\n\n管理者に連絡するか、正しいユーザーとして再認証してください。</string>
 	<string name="dialog_title_add_keycloak_user" state="needs_review" hash="-1050193239">連絡先を追加</string>
 	<string name="dialog_message_add_keycloak_user" state="needs_review" hash="-1755937035">%1$sを連絡先に追加することを選択しました。続行しますか？</string>
 	<string name="explanation_keycloak_update_new" state="needs_review" hash="1136733528">Olvidで会社のIDプロバイダーを設定しようとしています。設定が完了すると、このサーバーで認証できるようになり、Olvidを使用すると、他の従業員を連絡先にシームレスに追加できます。\n詳細については、管理者にお問い合わせください。</string>
@@ -890,7 +890,7 @@
 	<string name="explanation_keycloak_update_same_server" state="needs_review" hash="1886762594">Olvidはすでに、お客様の会社のIDプロバイダーで設定されています。\n詳細については、管理者にお問い合わせください。</string>
 	<string name="explanation_keycloak_unable_to_contact_server" state="needs_review" hash="2123517499">会社のIDプロバイダーに接続できませんでした。インターネット接続を確認するか、詳細については管理者に連絡してください。</string>
 	<string name="explanation_keycloak_update_bad_server" state="needs_review" hash="546492417">現在のOlvid IDで会社のIDプロバイダーを構成できません。IDは別のOlvidサーバーで生成されました.\n詳細については、管理者にお問い合わせください。</string>
-	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-317755135">会社のIDプロバイダーを構成できません。Olvidのバージョンが古く、会社のIDプロバイダーと互換性がありません。\nOlvidをアップデートして再試行するか、詳細については管理者に連絡してください。</string>
+	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-1487678865">Olvidのバージョンが古く、会社のIDプロバイダーと互換性がありません。\nOlvidを更新して再度お試しいただくか、詳細については管理者にお問い合わせください。</string>
 	<string name="explanation_keycloak_bind" state="needs_review" hash="445359846">以下の名前は、お客様の会社のIDプロバイダーから取得されました。\nこのプロバイダーによってOlvid IDが管理されると、連絡先はOlvidであなたをこの名前で表示します。</string>
 	<string name="button_label_manage_keycloak" state="needs_review" hash="-1323644699">管理されたIDに切り替える</string>
 	<string name="toast_message_keycloak_bind_successful" state="needs_review" hash="749864054">管理されたIDに正常に切り替えました</string>
@@ -898,7 +898,7 @@
 	<string name="menu_action_unbind_from_keycloak" state="needs_review" hash="549323804">IDプロバイダーを削除</string>
 	<string name="dialog_title_unbind_from_keycloak" state="needs_review" hash="549323804">IDプロバイダーを削除</string>
 	<string name="dialog_title_unbind_from_keycloak_restricted" state="needs_review" hash="1941011536">IDプロバイダーを削除できません</string>
-	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="915111540">あなたのOlvid IDは現在、会社のIDプロバイダーによって管理されています。通常の、管理されていないOlvid IDに切り替える予定です。\n\n続行すると、会社の連絡先をOlvidにシームレスに追加できなくなります。詳細については、管理者に連絡してください。\n\n続行しますか？</string>
+	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="861158628">現在、あなたのOlvid IDは、会社のIDプロバイダーによって管理されています。通常の、管理されていないOlvid IDに切り替えることになります。\n\n続行すると、会社の連絡先をOlvidにシームレスに追加できなくなります。詳細については、管理者にお問い合わせください。\n\n続行しますか？</string>
 	<string name="dialog_message_unbind_from_keycloak_restricted" state="needs_review" hash="-155299318">あなたのOlvid IDは現在、会社のIDプロバイダーによって管理されており、転送が制限されています。ご自身の判断で削除することはできません。\n\n詳細については、管理者にお問い合わせください。</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_needed" state="needs_review" hash="-1740408397">お客様のIDプロバイダーは、Olvid IDがすでにログインされたユーザーに関連付けられていることを示しています。続行すると、このOlvid IDは取り消され、新しいIDがこのユーザーに関連付けられます。\n詳細については、管理者にお問い合わせください。</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_impossible" state="needs_review" hash="-734813550">お客様のIDプロバイダーは、Olvid IDがすでにログインされたユーザーに関連付けられていることを示しています。IDの作成を続けることはできません。\n\n詳細については、管理者にお問い合わせください。</string>
@@ -1142,6 +1142,7 @@
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">このプロファイルでは通知がミュートされていることを示す表示</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">プロフィールを作成</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">会社のIDプロバイダーが正常に構成されました。下記にある「認証」ボタンを押して認証し、個人情報を取得してください。</string>
+	<string name="text_explanation_onboarding_keycloak_parsed_configuration_magic" state="needs_review" hash="1823898406">お客様の会社のIDプロバイダーは正常に設定されました。以下の「マジックリンクを使用」ボタンを押して、個人情報を取得してください。</string>
 	<string name="text_explanation_onboarding_keycloak_mdm" state="needs_review" hash="1340457300">Olvidへようこそ。\n\nこのインストールはあなたの会社によって管理されており、IDプロバイダーを使用するように設定されています。個人情報を認証および取得するには、以下の「認証」ボタンを押してください。\n\nすでにOlvidを使用しており、バックアップからキーと連絡先を復元したい場合は、「バックアップを復元」を押してください。</string>
 	<string name="button_label_see_details" state="needs_review" hash="238834473">詳細を見る</string>
 	<string name="link_label_invitation_url" state="needs_review" hash="744905192">連絡先を追加</string>
@@ -2141,8 +2142,13 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">相手のデバイスに接続できません</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">すべての安全なチャンネルを再作成する</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">すべての安全なチャンネルを再作成すると、Olvidはすべての連絡先のデバイスと新しい安全な通信チャンネルを作成するように強制されます。通常は役に立ちませんが、これらのチャンネルのいくつかが「同期されていない」という珍しい状況を解決できる場合があります。\n\n**警告：** 連絡先が多い場合、この操作には数分かかる可能性があり、実行中に一部の受信メッセージを失う可能性があります。</string>
+	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">「マジックリンク」を使用する</string>
+	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">無効なマジックリンク</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">通話が切断されました</string>
 	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">チーム用のサブスクリプションが必要ですか？</string>
 	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Olvidストアへアクセス</string>
 	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">リマインダー設定</string>
+	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">認証できません</string>
+	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">お客様のプロファイルは現在、お客様の組織によって管理されており、再認証が必要です。ただし、利用可能な認証方法がないようです。\n\n詳細については、管理者にお問い合わせください。</string>
+	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">利用可能な認証方法が見つかりません。</string>
 </resources>

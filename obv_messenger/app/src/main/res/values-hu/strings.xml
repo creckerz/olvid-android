@@ -854,7 +854,7 @@
 	<string name="dialog_title_update_available" state="needs_review" hash="-1893271535">Frissítés elérhető</string>
 	<string name="dialog_message_update_available" state="needs_review" hash="259838609">Az Olvid újabb verziója elérhető a Google Playen.\n\nKérjük, frissítsen, hogy kihasználhassa a legújabb funkciókat.</string>
 	<string name="dialog_title_call_initiation_not_supported" state="needs_review" hash="-2088021831">A hívás indítása nem sikerült</string>
-	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="-1087657662">Úgy tűnik, hogy az Olvid szervere nem támogatja a biztonságos hívások indítását.\n\nKérjük, vegye fel a kapcsolatot a rendszergazdájával további információkért.</string>
+	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="1760333819">Úgy tűnik, hogy az Olvid-szerver nem támogatja a biztonságos hívások kezdeményezését.\n\nTovábbi részletekért forduljon a rendszergazdához.</string>
 	<string name="label_identity_creation_options" state="needs_review" hash="1180456032">ID létrehozási lehetőségek</string>
 	<string name="text_option_server" state="needs_review" hash="-1130676431">Szerver: %1$s</string>
 	<string name="text_option_license_code" state="needs_review" hash="1222068504">Licenc: %1$s</string>
@@ -882,7 +882,7 @@
 	<string name="toast_message_unable_to_keycloak_revoke" state="needs_review" hash="-1368037130">Sikertelen az előző Olvid ID lecserélése, próbálja meg újra</string>
 	<string name="toast_message_keycloak_revoke_successful" state="needs_review" hash="-1216369809">A korábbi Olvid ID sikeresen lecserélve</string>
 	<string name="dialog_title_keycloak_authentication_required_user_id_changed" state="needs_review" hash="-896407029">Felhasználóváltás észlelve</string>
-	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="1319874532">Az Olvid ID-d a vállalatod identitásszolgáltatója által kezelik. Úgy tűnik, hogy más felhasználóként hitelesítettél be, mint általában. Ezt nem támogatjuk.\n\nKérjük, vedd fel a kapcsolatot a rendszergazdával, vagy hitelesítsd magad újra a megfelelő felhasználóval.</string>
+	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="876252686">A profilodat jelenleg a szervezeted kezeli. Úgy tűnik, hogy egy másik felhasználóként hitelesítetted magad, mint általában. Ezt nem támogatjuk.\n\nKérjük, vedd fel a kapcsolatot a rendszergazdával, vagy hitelesítsd magad újra a megfelelő felhasználóként.</string>
 	<string name="dialog_title_add_keycloak_user" state="needs_review" hash="-1050193239">Kapcsolat hozzáadása</string>
 	<string name="dialog_message_add_keycloak_user" state="needs_review" hash="-1755937035">Kiválasztottad, hogy hozzáadd %1$s a kapcsolataidhoz. Szeretnéd folytatni?</string>
 	<string name="explanation_keycloak_update_new" state="needs_review" hash="1136733528">Éppen a vállalatod identitásszolgáltatójának konfigurálásához láttasz Olvidban. A konfiguráció után hitelesítheted magad ezen a szerveren, és az Olvid lehetővé teszi, hogy zökkenőmentesen hozzáadd más munkatársakat a kapcsolataidhoz.\nVedd fel a kapcsolatot a rendszergazdával a részletekért.</string>
@@ -890,7 +890,7 @@
 	<string name="explanation_keycloak_update_same_server" state="needs_review" hash="1886762594">Az Olvid már be van állítva a vállalat identitásszolgáltatójával.\nKérjük, vegye fel a kapcsolatot a rendszergazdával további részletekért.</string>
 	<string name="explanation_keycloak_unable_to_contact_server" state="needs_review" hash="2123517499">Nem lehetett kapcsolódni a vállalat identitásszolgáltatójához. Kérjük, ellenőrizze az internetkapcsolatot, vagy forduljon rendszergazdájához további információkért.</string>
 	<string name="explanation_keycloak_update_bad_server" state="needs_review" hash="546492417">Nem sikerült konfigurálni a vállalat identitásszolgáltatóját az aktuális Olvid azonosítójával. Az azonosítója egy másik Olvid szerveren lett generálva.\nKérjük, vegye fel a kapcsolatot a rendszergazdával a részletekért.</string>
-	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-317755135">Nem sikerült konfigurálni a vállalat identitásszolgáltatóját. Az Olvid verziója elavult és nem kompatibilis a vállalat identitásszolgáltatójával.\nKérjük, frissítse az Olvid-ot, és próbálja meg újra, vagy vegye fel a kapcsolatot a rendszergazdával a részletekért.</string>
+	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-1487678865">Az Olvid verziód elavult, és nem kompatibilis a vállalatod identitásszolgáltatójával. Kérjük, frissítsd az Olvidot, és próbáld újra, vagy további információkért fordulj a rendszergazdához.</string>
 	<string name="explanation_keycloak_bind" state="needs_review" hash="445359846">Az alábbi név a vállalat identitásszolgáltatójától származik.\nMiután az Olvid azonosítóját ez a szolgáltató kezeli, a kontaktjai így látják Önt az Olvidban.</string>
 	<string name="button_label_manage_keycloak" state="needs_review" hash="-1323644699">Váltás egy felügyelt azonosítóra</string>
 	<string name="toast_message_keycloak_bind_successful" state="needs_review" hash="749864054">Sikeresen átváltott egy felügyelt azonosítóra</string>
@@ -898,7 +898,7 @@
 	<string name="menu_action_unbind_from_keycloak" state="needs_review" hash="549323804">Identitásszolgáltató eltávolítása</string>
 	<string name="dialog_title_unbind_from_keycloak" state="needs_review" hash="549323804">Identitásszolgáltató eltávolítása</string>
 	<string name="dialog_title_unbind_from_keycloak_restricted" state="needs_review" hash="1941011536">Nem sikerült eltávolítani az identitásszolgáltatót</string>
-	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="915111540">Az Olvid ID-d jelenleg a vállalatod identitásszolgáltatója által kezelik. Hamarosan egy normál, nem kezelt Olvid ID-re váltasz.\n\nHa folytatod, többé nem tudod zökkenőmentesen hozzáadni a céges kapcsolataidat az Olvidhoz. Kérlek, vedd fel a kapcsolatot a rendszergazdával a részletekért.\n\nSzeretnél folytatni?</string>
+	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="861158628">Az Olvid-azonosítóját jelenleg a vállalat identitásszolgáltatója kezeli. Hamarosan egy normál, nem felügyelt Olvid-azonosítóra vált. \n\nHa folytatja, többé nem tudja zökkenőmentesen hozzáadni a vállalatában dolgozókat az Olvid-kontaktlistájához. További részletekért forduljon a rendszergazdájához. \n\nSzeretné folytatni?</string>
 	<string name="dialog_message_unbind_from_keycloak_restricted" state="needs_review" hash="-155299318">Az Olvid ID-d jelenleg a vállalatod identitásszolgáltatója által kezelik, ami korlátozza az átutalásokat. Saját kezdeményezéseddel nem távolítható el.\n\nVedd fel a kapcsolatot az adminisztrátoroddal a részletekért.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_needed" state="needs_review" hash="-1740408397">Az identitásszolgáltatója jelzi, hogy egy Olvid azonosító már hozzá van rendelve a bejelentkezéshez használt felhasználóhoz. Ha folytatja, ez az Olvid azonosító visszavonásra kerül, és az új azonosítója ehhez a felhasználóhoz kerül társításra.\nKérjük, vegye fel a kapcsolatot a rendszergazdával a részletekért.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_impossible" state="needs_review" hash="-734813550">Az identitásszolgáltatója jelzi, hogy egy Olvid azonosító már hozzá van rendelve a bejelentkezett felhasználóhoz. Nem folytathatja az azonosító létrehozását.\n\nVesse fel a kérdést rendszergazdájával a részletekért.</string>
@@ -1142,6 +1142,7 @@
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">Jelző, hogy a profilhoz tartozó értesítések némítva vannak</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">Profil létrehozása</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">A vállalatának identitásszolgáltatója sikeresen konfigurálva lett. Nyomja meg az \"Hitelesítés\" gombot alul, hogy hitelesítse magát és lekérje személyes adatait.</string>
+	<string name="text_explanation_onboarding_keycloak_parsed_configuration_magic" state="needs_review" hash="1823898406">A vállalatának identitásszolgáltatója sikeresen konfigurálva lett. Nyomja meg az alábbi „varázslatos link használata” gombot, hogy lekérje személyes adatait.</string>
 	<string name="text_explanation_onboarding_keycloak_mdm" state="needs_review" hash="1340457300">Üdvözöljük az Olvidben.\n\nEzt az installációt az Ön cége kezeli, és úgy lett konfigurálva, hogy identitásszolgáltatót használjon. Nyomja meg az „Hitelesítés” gombot alul, hogy hitelesítse magát és lekérje személyes adatait.\n\nHa már használta az Olvidot, és szeretné visszaállítani a kulcsait és kontaktusait egy biztonsági másolatból, nyomja meg a „Biztonsági másolat visszaállítása” gombot.</string>
 	<string name="button_label_see_details" state="needs_review" hash="238834473">Részletek</string>
 	<string name="link_label_invitation_url" state="needs_review" hash="744905192">Kapcsolat hozzáadása</string>
@@ -2143,8 +2144,13 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">A társ eszköz nem elérhető</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Biztonságos csatornák újjáalkotása</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Az összes biztonságos csatorna újra létrehozása arra kényszeríti az Olvidot, hogy új biztonságos kommunikációs csatornákat hozzon létre a kapcsolataid minden eszközével. Ez általában nem hasznos, de megoldhatja azokat a ritka helyzeteket, amikor ezek a csatornák «szinkronizálatlanok».\n\n**Figyelem:** Ha sok a kapcsolatod, ez a művelet néhány percet is igénybe vehet, és ezalatt elveszíthetsz néhány beérkező üzenetet.</string>
+	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">Használja a \"varázslinket\"</string>
+	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">Érvénytelen varázslat link</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">A hívás megszakadt</string>
 	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">Szükség van előfizetésekre a csapatodnak?</string>
 	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Látogassa meg az Olvid boltot</string>
 	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">Emlékeztető beállítva</string>
+	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">A hitelesítés sikertelen</string>
+	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">A profilodat jelenleg a szervezeted kezeli, és újrahitelesítésre van szükség. Azonban úgy tűnik, hogy nincs elérhető támogatott hitelesítési módszer.\n\nTovábbi részletekért kérjük, vedd fel a kapcsolatot a rendszergazdával.</string>
+	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">Úgy tűnik, hogy nincs elérhető támogatott hitelesítési módszer.</string>
 </resources>

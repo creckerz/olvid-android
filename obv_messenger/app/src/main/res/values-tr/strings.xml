@@ -854,7 +854,7 @@
 	<string name="dialog_title_update_available" state="needs_review" hash="-1893271535">Güncelleme mevcut</string>
 	<string name="dialog_message_update_available" state="needs_review" hash="259838609">Olvid\'in yeni bir sürümü Google Play\'de mevcut.\n\nEn son özelliklerden yararlanmak için lütfen güncelleyin.</string>
 	<string name="dialog_title_call_initiation_not_supported" state="needs_review" hash="-2088021831">Çağrı başlatma desteklenmiyor</string>
-	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="-1087657662">Olvid sunucunuzun güvenli çağrı başlatmayı desteklemiyor gibi görünüyor.\n\nLütfen daha fazla bilgi için yöneticinizle iletişime geçin.</string>
+	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="1760333819">Olvid sunucunuzun güvenli çağrı başlatmayı desteklemediği görülüyor.\n\nLütfen daha fazla bilgi için yöneticinizle iletişime geçin.</string>
 	<string name="label_identity_creation_options" state="needs_review" hash="1180456032">Kimlik Oluşturma Seçenekleri</string>
 	<string name="text_option_server" state="needs_review" hash="-1130676431">Sunucu: %1$s</string>
 	<string name="text_option_license_code" state="needs_review" hash="1222068504">Lisans: %1$s</string>
@@ -882,7 +882,7 @@
 	<string name="toast_message_unable_to_keycloak_revoke" state="needs_review" hash="-1368037130">Önceki Olvid ID\'si değiştirilemedi, lütfen tekrar deneyin</string>
 	<string name="toast_message_keycloak_revoke_successful" state="needs_review" hash="-1216369809">Eski Olvid ID\'si başarıyla değiştirildi</string>
 	<string name="dialog_title_keycloak_authentication_required_user_id_changed" state="needs_review" hash="-896407029">Kullanıcı değişikliği algılandı</string>
-	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="1319874532">Olvid ID\'niz şirketinizin kimlik sağlayıcısı tarafından yönetilir. Normalde kullandığınızdan farklı bir kullanıcı olarak kimlik doğruladığınız görünüyor. Bu desteklenmiyor.\n\nLütfen yöneticinizle iletişime geçin veya doğru kullanıcı olarak yeniden kimlik doğrulayın.</string>
+	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="876252686">Profiliniz şu anda kuruluşunuz tarafından yönetiliyor. Normalde kullandığınızdan farklı bir kullanıcı olarak kimlik doğrulaması yaptığınız anlaşılıyor. Bu desteklenmiyor.\n\nLütfen yöneticinizle iletişime geçin veya doğru kullanıcı olarak yeniden kimlik doğrulayın.</string>
 	<string name="dialog_title_add_keycloak_user" state="needs_review" hash="-1050193239">Kişi ekle</string>
 	<string name="dialog_message_add_keycloak_user" state="needs_review" hash="-1755937035">%1$s\'i kişilerinize eklemeyi seçtiniz. Devam etmek istiyor musunuz?</string>
 	<string name="explanation_keycloak_update_new" state="needs_review" hash="1136733528">Olvid\'de şirketinizin kimlik sağlayıcısını yapılandırmak üzeresiniz. Yapılandırıldıktan sonra, bu sunucuyla kimlik doğrulaması yapabilir ve Olvid\'in diğer çalışanları kişilerinize sorunsuz bir şekilde eklemesine izin verebilirsiniz.\nLütfen daha fazla ayrıntı için yöneticinizle iletişime geçin.</string>
@@ -890,7 +890,7 @@
 	<string name="explanation_keycloak_update_same_server" state="needs_review" hash="1886762594">Olvid zaten şirketinizin kimlik sağlayıcısıyla yapılandırılmıştır.\nLütfen daha fazla bilgi için yöneticinizle iletişime geçin.</string>
 	<string name="explanation_keycloak_unable_to_contact_server" state="needs_review" hash="2123517499">Şirketinizin kimlik sağlayıcısına bağlanılamıyor. Lütfen internet bağlantınızı kontrol edin veya daha fazla bilgi için yöneticinizle iletişime geçin.</string>
 	<string name="explanation_keycloak_update_bad_server" state="needs_review" hash="546492417">Şirketinizin kimlik sağlayıcısını mevcut Olvid ID\'nizle yapılandırmak mümkün değil. ID\'niz farklı bir Olvid sunucusunda oluşturulmuştur.\nLütfen daha fazla bilgi için yöneticinizle iletişime geçin.</string>
-	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-317755135">Şirketinizin kimlik sağlayıcısını yapılandırmak mümkün değil. Olvid sürümünüz güncel değil ve şirketinizin kimlik sağlayıcısıyla uyumlu değil.\nLütfen Olvid\'i güncelleyin ve tekrar deneyin veya daha fazla bilgi için yöneticinizle iletişime geçin.</string>
+	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-1487678865">Olvid sürümünüz güncel değil ve şirketinizin kimlik sağlayıcısıyla uyumlu değil.\nLütfen Olvid\'i güncelleyin ve tekrar deneyin veya daha fazla bilgi için yöneticinizle iletişime geçin.</string>
 	<string name="explanation_keycloak_bind" state="needs_review" hash="445359846">Aşağıdaki ad, şirketinizin kimlik sağlayıcısından alınmıştır.\nOlvid kimliğiniz bu sağlayıcı tarafından yönetildiğinde, kişiler sizi Olvid\'de bu şekilde görecektir.</string>
 	<string name="button_label_manage_keycloak" state="needs_review" hash="-1323644699">Yönetilen bir ID\'ye geç</string>
 	<string name="toast_message_keycloak_bind_successful" state="needs_review" hash="749864054">Yönetilen kimliğe başarıyla geçildi</string>
@@ -898,7 +898,7 @@
 	<string name="menu_action_unbind_from_keycloak" state="needs_review" hash="549323804">Kimlik sağlayıcısını kaldır</string>
 	<string name="dialog_title_unbind_from_keycloak" state="needs_review" hash="549323804">Kimlik sağlayıcısını kaldır</string>
 	<string name="dialog_title_unbind_from_keycloak_restricted" state="needs_review" hash="1941011536">Kimlik sağlayıcısı kaldırılamadı</string>
-	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="915111540">Olvid kimliğiniz şu anda şirketinizin kimlik sağlayıcısı tarafından yönetiliyor. Normal, yönetilmeyen bir Olvid kimliğine geçmek üzeresiniz.\n\nDevam ederseniz, şirketinizdeki kişileri Olvid\'e sorunsuz bir şekilde ekleyemeyeceksiniz. Daha fazla bilgi için yöneticinizle iletişime geçin.\n\nDevam etmek istiyor musunuz?</string>
+	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="861158628">Olvid kimliğiniz şu anda şirketinizin kimlik sağlayıcısı tarafından yönetiliyor. Normal, yönetilmeyen bir Olvid kimliğine geçmek üzeresiniz.\n\nDevam ederseniz, şirketinizdeki kişileri Olvid\'e sorunsuz bir şekilde ekleyemeyeceksiniz. Lütfen daha fazla bilgi için yöneticinizle iletişime geçin.\n\nDevam etmek ister misiniz?</string>
 	<string name="dialog_message_unbind_from_keycloak_restricted" state="needs_review" hash="-155299318">Olvid ID\'niz şu anda şirketinizin kimlik sağlayıcısı tarafından yönetiliyor ve bu da aktarımları kısıtlıyor. Bunu kendi inisiyatifinizle kaldıramazsınız.\n\nLütfen daha fazla bilgi için yöneticinizle iletişime geçin.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_needed" state="needs_review" hash="-1740408397">Kimlik sağlayıcınız, giriş yaptığınız kullanıcının zaten bir Olvid ID\'sine sahip olduğunu gösteriyor. Devam ederseniz, bu Olvid ID iptal edilecek ve yenisi bu kullanıcıyla ilişkilendirilecektir.\nLütfen daha fazla bilgi için yöneticinizle iletişime geçin.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_impossible" state="needs_review" hash="-734813550">Kimlik sağlayıcınız, giriş yaptığınız kullanıcının zaten bir Olvid ID\'sine sahip olduğunu gösteriyor. Kimliğinizi oluşturmaya devam edemezsiniz.\n\nLütfen daha fazla bilgi için yöneticinizle iletişime geçin.</string>
@@ -1142,6 +1142,7 @@
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">Bu profil için bildirimlerin sessize alındığını gösterge</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">Profil Oluştur</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">Şirketinizin kimlik sağlayıcısı başarıyla yapılandırıldı. Onunla kimlik doğrulamak ve kişisel bilgilerinizi almak için aşağıdaki \"kimlik doğrula\" düğmesine basın.</string>
+	<string name="text_explanation_onboarding_keycloak_parsed_configuration_magic" state="needs_review" hash="1823898406">Şirketinizin kimlik sağlayıcısı başarıyla yapılandırıldı. Kişisel bilgilerinizi almak için aşağıdaki \"büyülü bağlantıyı kullan\" düğmesine basın.</string>
 	<string name="text_explanation_onboarding_keycloak_mdm" state="needs_review" hash="1340457300">Olvid\'e hoş geldiniz.\n\nBu kurulum şirketiniz tarafından yönetilmektedir ve bir kimlik sağlayıcısı kullanacak şekilde yapılandırılmıştır. Kişisel bilgilerinizi almak için kimlik doğrulaması yapmak için aşağıdaki \"kimlik doğrula\" düğmesine basın.\n\nZaten Olvid kullanıyorsanız ve anahtarlarınızı ve kişilerinizi bir yedeklemeden geri yüklemek istiyorsanız, \"yedeklemeyi geri yükle\"ye basın.</string>
 	<string name="button_label_see_details" state="needs_review" hash="238834473">Detayları Gör</string>
 	<string name="link_label_invitation_url" state="needs_review" hash="744905192">Kişi ekle</string>
@@ -2141,8 +2142,13 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Karşı cihaz erişilemiyor</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Tüm güvenli kanalları yeniden oluştur</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Tüm güvenli kanalları yeniden oluşturmak, Olvid\'i kişilerinize ait tüm cihazlarla yeni güvenli iletişim kanalları oluşturmaya zorlayacaktır. Bu genellikle kullanışlı değildir, ancak bazı kanalların \"senkronizasyon dışı\" olduğu nadir durumlarda sorunu çözebilir.\n\n**Uyarı:** Çok sayıda kişiniz varsa, bu işlem birkaç dakika sürebilir ve bu sırada bazı gelen mesajları kaybedebilirsiniz.</string>
+	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">\"Sihirli bağlantı\"yı kullanın</string>
+	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">Geçersiz sihirli bağlantı</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Arama sonlandırıldı</string>
 	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">Ekibiniz için aboneliklere mi ihtiyacınız var?</string>
 	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Olvid Mağazasını Ziyaret Edin</string>
 	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">Hatırlatıcı ayarlandı</string>
+	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">Kimlik doğrulama başarısız</string>
+	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">Profiliniz şu anda kuruluşunuz tarafından yönetiliyor ve yeniden kimlik doğrulaması gerekiyor. Ancak, görünüşe göre hiçbir desteklenen kimlik doğrulama yöntemi mevcut değil.\n\nLütfen daha fazla bilgi için yöneticinizle iletişime geçin.</string>
+	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">Desteklenen hiçbir kimlik doğrulama yönteminin mevcut görünmüyor.</string>
 </resources>

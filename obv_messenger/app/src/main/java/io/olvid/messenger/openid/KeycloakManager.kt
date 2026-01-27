@@ -45,6 +45,9 @@ import java.util.TimerTask
 import java.util.UUID
 import kotlin.math.max
 import androidx.core.content.edit
+import io.olvid.engine.engine.types.ObvKeycloakIdBasedAuthResult
+import io.olvid.engine.engine.types.identities.ObvKeycloakAuthType
+import io.olvid.messenger.openid.jsons.OlvidWellKnownJson
 
 object KeycloakManager {
     private val ownedIdentityStates: HashMap<BytesKey, KeycloakManagerState?>
@@ -67,8 +70,7 @@ object KeycloakManager {
     fun registerKeycloakManagedIdentity(
         obvIdentity: ObvIdentity,
         keycloakServerUrl: String,
-        clientId: String,
-        clientSecret: String?,
+        supportedAuthenticationMethods: List<ObvKeycloakAuthType>,
         jwks: JsonWebKeySet?,
         signatureKey: JsonWebKey?,
         serializedKeycloakState: String?,
@@ -90,8 +92,7 @@ object KeycloakManager {
             val keycloakManagerState = KeycloakManagerState(
                 obvIdentity,
                 keycloakServerUrl,
-                clientId,
-                clientSecret,
+                supportedAuthenticationMethods,
                 jwks,
                 signatureKey,
                 authState,
@@ -125,7 +126,7 @@ object KeycloakManager {
     @JvmStatic
     fun reAuthenticationSuccessful(
         bytesOwnedIdentity: ByteArray?,
-        jwks: JsonWebKeySet,
+        jwks: JsonWebKeySet?, // if jwks is null, do not update kms.jwks (this is the case after an id-based authentication)
         authState: AuthState
     ) {
         executor.execute {
@@ -139,11 +140,13 @@ object KeycloakManager {
                 ?: return@execute
             // reset the synchronization time to force a full re-sync
             kms.lastSynchronization = 0
-            kms.jwks = jwks
+            jwks?.let {
+                kms.jwks = it
+            }
             kms.authState = authState
 
             try {
-                AppSingleton.getEngine().saveKeycloakJwks(bytesOwnedIdentity, jwks.toJson())
+                jwks?.let { AppSingleton.getEngine().saveKeycloakJwks(bytesOwnedIdentity, it.toJson()) }
                 AppSingleton.getEngine()
                     .saveKeycloakAuthState(bytesOwnedIdentity, authState.jsonSerializeString())
             } catch (_: Exception) {
@@ -179,7 +182,7 @@ object KeycloakManager {
                 App.getContext(),
                 kms.serverUrl,
                 kms.authState!!,
-                kms.clientSecret,
+                kms.supportedAuthenticationMethods,
                 bytesOwnedIdentity,
                 KeycloakCallbackWrapper<Void?>(identityBytesKey, object : KeycloakCallback<Void?> {
                     override fun success(result: Void?) {
@@ -248,7 +251,8 @@ object KeycloakManager {
                 App.getContext(),
                 kms.serverUrl,
                 kms.authState!!,
-                kms.clientSecret,
+                kms.supportedAuthenticationMethods,
+                kms.bytesOwnedIdentity,
                 searchQuery,
                 KeycloakCallbackWrapper<Pair<List<JsonKeycloakUserDetails>, Int>?>(
                     identityBytesKey,
@@ -295,7 +299,7 @@ object KeycloakManager {
                 App.getContext(),
                 kms.serverUrl,
                 kms.authState!!,
-                kms.clientSecret,
+                kms.supportedAuthenticationMethods,
                 kms.jwks!!,
                 kms.signatureKey,
                 bytesOwnedIdentity,
@@ -347,17 +351,71 @@ object KeycloakManager {
                                     .unbindOwnedIdentityFromKeycloak(kms.bytesOwnedIdentity)
                                 App.openAppDialogKeycloakIdentityRevoked(kms.bytesOwnedIdentity)
                             } else {
+                                // first try id-based auth if it is supported
+                                if (kms.supportedAuthenticationMethods.any { it is ObvKeycloakAuthType.IdBased }) {
+                                    for (i in 0..< 5) {
+                                        val authResult = AppSingleton.getEngine()
+                                            .performKeycloakIdBasedAuth(kms.bytesOwnedIdentity)
+                                        when (authResult.status) {
+                                            ObvKeycloakIdBasedAuthResult.Status.SUCCESS -> {
+                                                authResult.accessToken?.let {
+                                                    // if successful, update the authState
+                                                    kms.authState?.apply {
+                                                        update(authResult.accessToken, authResult.refreshToken)
+                                                        reAuthenticationSuccessful(kms.bytesOwnedIdentity, null, this)
+                                                    } ?: run {
+                                                        // if authState is null (this is the case after a transfer or backup restore), we need to rediscover
+                                                        KeycloakTasks.discoverKeycloakServerOpenidConfiguration(kms.serverUrl, object : KeycloakTasks.DiscoverKeycloakServerCallback {
+                                                            override fun success(
+                                                                serverUrl: String,
+                                                                authState: AuthState,
+                                                                jwks: JsonWebKeySet,
+                                                                olvidWellKnown: OlvidWellKnownJson?
+                                                            ) {
+                                                                authState.update(authResult.accessToken, authResult.refreshToken)
+                                                                reAuthenticationSuccessful(kms.bytesOwnedIdentity, jwks, authState)
+                                                            }
+
+                                                            override fun failed() {
+                                                                Logger.e("Successful ID-based auth, but unable to recreate AuthState due to failed discovery")
+                                                            }
+                                                        })
+                                                    }
+                                                    return
+                                                }
+                                            }
+
+                                            ObvKeycloakIdBasedAuthResult.Status.NETWORK_ERROR -> {
+                                                // in case of network failure, we do nothing --> it will be tried again
+                                                return
+                                            }
+
+                                            ObvKeycloakIdBasedAuthResult.Status.ERROR -> {
+                                                // for standard ERROR, we do up to 5 attempts at authenticating
+                                                continue
+                                            }
+                                            ObvKeycloakIdBasedAuthResult.Status.PERMANENT_ERROR -> {
+                                                // no need to retry using id-based auth and prompt for authentication if such an option is available
+                                                break
+                                            }
+                                        }
+                                    }
+                                }
                                 // require an authentication: either nonce still exists, or nonce is null
-                                authenticationRequiredOwnedIdentities.add(identityBytesKey)
-                                AndroidNotificationManager.displayKeycloakAuthenticationRequiredNotification(
-                                    identityBytesKey.bytes
-                                )
-                                App.openAppDialogKeycloakAuthenticationRequired(
-                                    kms.bytesOwnedIdentity,
-                                    kms.clientId,
-                                    kms.clientSecret,
-                                    kms.serverUrl
-                                )
+                                (kms.supportedAuthenticationMethods.find { it is ObvKeycloakAuthType.OpenIdConnect } as? ObvKeycloakAuthType.OpenIdConnect)?.also { oidc ->
+                                    authenticationRequiredOwnedIdentities.add(identityBytesKey)
+                                    AndroidNotificationManager.displayKeycloakAuthenticationRequiredNotification(
+                                        identityBytesKey.bytes
+                                    )
+                                    App.openAppDialogKeycloakAuthenticationRequired(
+                                        kms.bytesOwnedIdentity,
+                                        oidc.clientId,
+                                        oidc.clientSecret,
+                                        kms.serverUrl
+                                    )
+                                } ?: run {
+                                    App.openAppDialogKeycloakAuthenticationImpossible(kms.bytesOwnedIdentity)
+                                }
                             }
                         }
 
@@ -395,6 +453,45 @@ object KeycloakManager {
                 return@execute
             }
 
+            KeycloakTasks.discoverKeycloakServerOlvidWellKnown(kms.serverUrl)?.let { olvidWellKnownJson ->
+                // check the minimum android version imposed by keycloak to show a tip
+                val minimumBuildVersion = olvidWellKnownJson.minBuildVersions?.android
+                if (minimumBuildVersion != null && minimumBuildVersion > BuildConfig.VERSION_CODE) {
+                    PreferenceManager.getDefaultSharedPreferences(App.getContext()).takeIf {
+                        // only update the min version if Keycloak imposes a greater version number than the server
+                        it.getInt(
+                            SettingsActivity.PREF_KEY_MIN_APP_VERSION,
+                            -1
+                        ) < minimumBuildVersion
+                    }?.edit {
+                        putInt(
+                            SettingsActivity.PREF_KEY_MIN_APP_VERSION,
+                            minimumBuildVersion
+                        )
+                    }
+                }
+
+                // check if ID-based auth support changed
+                val keycloakSupportsIdBasedAuth = olvidWellKnownJson.supportIdentityAuthentication == true
+                if (kms.supportedAuthenticationMethods.any { it is ObvKeycloakAuthType.IdBased } != keycloakSupportsIdBasedAuth) {
+                    try {
+                        AppSingleton.getEngine().setOwnedIdentityKeycloakSupportsIdBasedAuth(
+                            kms.bytesOwnedIdentity,
+                            keycloakSupportsIdBasedAuth
+                        )
+                        // only update the kms if the engine call did not throw
+                        if (keycloakSupportsIdBasedAuth) {
+                            kms.supportedAuthenticationMethods += ObvKeycloakAuthType.IdBased()
+                        } else {
+                            kms.supportedAuthenticationMethods =
+                                kms.supportedAuthenticationMethods.filter { it !is ObvKeycloakAuthType.IdBased }
+                        }
+                    } catch (e: Exception) {
+                        Logger.x(e)
+                    }
+                }
+            }
+
             if (kms.jwks == null || kms.authState == null || !kms.authState!!.isAuthorized) {
                 // if jwks is null, or if we are not authenticated --> full authentication round
                 currentlySyncingOwnedIdentities.remove(identityBytesKey)
@@ -407,7 +504,8 @@ object KeycloakManager {
                 App.getContext(),
                 kms.serverUrl,
                 kms.authState!!,
-                kms.clientSecret,
+                kms.supportedAuthenticationMethods,
+                kms.bytesOwnedIdentity,
                 kms.jwks!!,
                 max(
                     0,
@@ -498,7 +596,7 @@ object KeycloakManager {
                                         )
                                     } else if (previousId != userDetails.getId()) {
                                         // user Id changed on keycloak --> probably an authentication with the wrong login
-                                        // check the identity and only update id locally if the identity is the same
+                                        // check the identity and only update keycloakUserId locally if the identity is the same
                                         if (userDetails.getIdentity()
                                                 .contentEquals(kms.bytesOwnedIdentity)
                                         ) {
@@ -507,12 +605,16 @@ object KeycloakManager {
                                                 userDetails.getId()
                                             )
                                         } else {
-                                            App.openAppDialogKeycloakUserIdChanged(
-                                                kms.bytesOwnedIdentity,
-                                                kms.clientId,
-                                                kms.clientSecret,
-                                                kms.serverUrl
-                                            )
+                                            (kms.supportedAuthenticationMethods.find { it is ObvKeycloakAuthType.OpenIdConnect } as? ObvKeycloakAuthType.OpenIdConnect)?.also { oidc ->
+                                                App.openAppDialogKeycloakUserIdChanged(
+                                                    kms.bytesOwnedIdentity,
+                                                    oidc.clientId,
+                                                    oidc.clientSecret,
+                                                    kms.serverUrl
+                                                )
+                                            } ?: run {
+                                                App.openAppDialogKeycloakAuthenticationImpossible(kms.bytesOwnedIdentity)
+                                            }
                                             return@execute
                                         }
                                     }
@@ -533,7 +635,7 @@ object KeycloakManager {
                                         App.getContext(),
                                         kms.serverUrl,
                                         kms.authState!!,
-                                        kms.clientSecret,
+                                        kms.supportedAuthenticationMethods,
                                         identityBytesKey.bytes,
                                         object : KeycloakCallback<Void?> {
                                             override fun success(result: Void?) {
@@ -577,12 +679,7 @@ object KeycloakManager {
                                         .contentEquals(identityBytesKey.bytes) && keycloakServerRevocationsAndStuff.revocationAllowed
                                 ) {
                                     // revocation is possible but was not requested
-                                    App.openAppDialogKeycloakIdentityReplacement(
-                                        identityBytesKey.bytes,
-                                        kms.serverUrl,
-                                        kms.clientSecret,
-                                        kms.authState!!.jsonSerializeString()
-                                    )
+                                    App.openAppDialogKeycloakIdentityReplacement(identityBytesKey.bytes)
                                     return@execute
                                 } else if (!userDetails.getIdentity()
                                         .contentEquals(identityBytesKey.bytes)
@@ -689,8 +786,8 @@ object KeycloakManager {
                                 KeycloakTasks.getGroups(
                                     App.getContext(),
                                     kms.serverUrl,
-                                    kms.authState,
-                                    kms.clientSecret,
+                                    kms.authState!!,
+                                    kms.supportedAuthenticationMethods,
                                     kms.bytesOwnedIdentity,
                                     max(
                                         0,
@@ -753,8 +850,7 @@ object KeycloakManager {
     private class KeycloakManagerState(
         obvIdentity: ObvIdentity,
         serverUrl: String,
-        clientId: String,
-        clientSecret: String?,
+        supportedAuthenticationMethods: List<ObvKeycloakAuthType>,
         jwks: JsonWebKeySet?,
         signatureKey: JsonWebKey?,
         authState: AuthState?,
@@ -767,8 +863,7 @@ object KeycloakManager {
         var identityDetails: JsonIdentityDetails = obvIdentity.getIdentityDetails()
         var ownDetailsSignatureTimestamp: Long? = null
         val serverUrl: String
-        val clientId: String
-        val clientSecret: String?
+        var supportedAuthenticationMethods: List<ObvKeycloakAuthType>
         var jwks: JsonWebKeySet?
         var signatureKey: JsonWebKey?
         var authState: AuthState?
@@ -803,8 +898,7 @@ object KeycloakManager {
             }
 
             this.serverUrl = serverUrl
-            this.clientId = clientId
-            this.clientSecret = clientSecret
+            this.supportedAuthenticationMethods = supportedAuthenticationMethods
             this.jwks = jwks
             this.signatureKey = signatureKey
             this.authState = authState
@@ -883,6 +977,13 @@ object KeycloakManager {
         val kms: KeycloakManagerState? =
             ownedIdentityStates[BytesKey(bytesOwnedIdentity)]
         return kms != null && kms.transferRestricted
+    }
+
+    @JvmStatic
+    fun ownedIdentityDoesNotSupportOidcAuthentication(bytesOwnedIdentity: ByteArray): Boolean {
+        val kms: KeycloakManagerState? =
+            ownedIdentityStates[BytesKey(bytesOwnedIdentity)]
+        return kms != null && kms.supportedAuthenticationMethods.none { it is ObvKeycloakAuthType.OpenIdConnect }
     }
 
     @JvmStatic

@@ -39,10 +39,15 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.colorResource
@@ -304,22 +309,48 @@ class AppDialogShowActivity : LockableActivity() {
                 }
             }
 
+            DIALOG_KEYCLOAK_AUTHENTICATION_IMPOSSIBLE -> {
+                // We do not use the bytesOwnedIdentity yet, but might need it if we add an "unbind" button to the dialog
+                (dialogParameters.get(DIALOG_KEYCLOAK_AUTHENTICATION_IMPOSSIBLE_BYTES_OWNED_IDENTITY_KEY) as? ByteArray)?.let { _ ->
+                    showDialog { onDismiss ->
+                        DialogSecure(
+                            onDismissRequest = {
+                                onDismiss()
+                                continueWithNextDialog()
+                            }
+                        ) {
+                            BaseDialogContent(
+                                title = stringResource(id = R.string.dialog_title_keycloak_authentication_impossible),
+                                actions = {
+                                    Spacer(modifier = Modifier.weight(1f))
+                                    OlvidTextButton(
+                                        text = stringResource(R.string.button_label_ok),
+                                        contentColor = colorResource(R.color.olvid_gradient_light)
+                                    ) {
+                                        onDismiss()
+                                        continueWithNextDialog()
+                                    }
+                                },
+                                content = {
+                                    Text(
+                                        text = stringResource(R.string.dialog_message_keycloak_authentication_impossible),
+                                        style = OlvidTypography.body1,
+                                        color = colorResource(R.color.greyTint)
+                                    )
+                                }
+                            )
+                        }
+                    }
+                    return
+                }
+                continueWithNextDialog()
+            }
+
             DIALOG_KEYCLOAK_IDENTITY_REPLACEMENT -> {
                 val bytesOwnedIdentityObject = dialogParameters.get(
                     DIALOG_KEYCLOAK_IDENTITY_REPLACEMENT_BYTES_OWNED_IDENTITY_KEY
                 )
-                val serverUrlObject = dialogParameters.get(
-                    DIALOG_KEYCLOAK_IDENTITY_REPLACEMENT_SERVER_URL_KEY
-                )
-                val clientSecretObject = dialogParameters.get(
-                    DIALOG_KEYCLOAK_IDENTITY_REPLACEMENT_CLIENT_SECRET_KEY
-                )
-                val serializedAuthStateObject = dialogParameters.get(
-                    DIALOG_KEYCLOAK_IDENTITY_REPLACEMENT_SERIALIZED_AUTH_STATE_KEY
-                )
-                if ((bytesOwnedIdentityObject !is ByteArray) || (serverUrlObject !is String) || (clientSecretObject != null && clientSecretObject !is String)
-                    || (serializedAuthStateObject !is String)
-                ) {
+                if (bytesOwnedIdentityObject !is ByteArray) {
                     continueWithNextDialog()
                 } else {
                     val builder = SecureAlertDialogBuilder(this, R.style.CustomAlertDialog)
@@ -866,15 +897,12 @@ class AppDialogShowActivity : LockableActivity() {
         const val DIALOG_KEYCLOAK_AUTHENTICATION_REQUIRED_SERVER_URL_KEY: String =
             "server_url" // String
 
+        const val DIALOG_KEYCLOAK_AUTHENTICATION_IMPOSSIBLE = "keycloak_authentication_impossible"
+        const val DIALOG_KEYCLOAK_AUTHENTICATION_IMPOSSIBLE_BYTES_OWNED_IDENTITY_KEY = "owned_identity" // ByteArray
+
         const val DIALOG_KEYCLOAK_IDENTITY_REPLACEMENT: String = "keycloak_identity_replacement"
         const val DIALOG_KEYCLOAK_IDENTITY_REPLACEMENT_BYTES_OWNED_IDENTITY_KEY: String =
             "owned_identity" // byte[]
-        const val DIALOG_KEYCLOAK_IDENTITY_REPLACEMENT_SERVER_URL_KEY: String =
-            "server_url" // String
-        const val DIALOG_KEYCLOAK_IDENTITY_REPLACEMENT_CLIENT_SECRET_KEY: String =
-            "client_secret" // String (nullable)
-        const val DIALOG_KEYCLOAK_IDENTITY_REPLACEMENT_SERIALIZED_AUTH_STATE_KEY: String =
-            "serialized_auth_state" // String
 
         const val DIALOG_KEYCLOAK_USER_ID_CHANGED: String = "keycloak_user_id_changed"
         const val DIALOG_KEYCLOAK_USER_ID_CHANGED_BYTES_OWNED_IDENTITY_KEY: String =

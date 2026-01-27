@@ -133,6 +133,7 @@ class OnboardingFlowActivity : AppCompatActivity() {
     companion object {
         const val TRANSFER_SOURCE_INTENT_EXTRA = "transfer_source"
         const val TRANSFER_RESTRICTED_INTENT_EXTRA = "transfer_restricted"
+        const val KEYCLOAK_WITHOUT_OIDC_INTENT_EXTRA = "keycloak_without_oidc"
         const val TRANSFER_TARGET_INTENT_EXTRA = "transfer_target"
         const val NEW_PROFILE_INTENT_EXTRA = "new_profile"
         const val RESTORE_BACKUP_INTENT_EXTRA = "restore_backup"
@@ -173,6 +174,7 @@ class OnboardingFlowActivity : AppCompatActivity() {
 
         val transferSource = intent.getBooleanExtra(TRANSFER_SOURCE_INTENT_EXTRA, false)
         val transferRestricted = intent.getBooleanExtra(TRANSFER_RESTRICTED_INTENT_EXTRA, false)
+        val keycloakWithoutOidcAuthentication = intent.getBooleanExtra(KEYCLOAK_WITHOUT_OIDC_INTENT_EXTRA, false)
         val transferTarget = intent.getBooleanExtra(TRANSFER_TARGET_INTENT_EXTRA, false)
         val newProfile = intent.getBooleanExtra(NEW_PROFILE_INTENT_EXTRA, false)
         val restoreBackup = intent.getBooleanExtra(RESTORE_BACKUP_INTENT_EXTRA, false)
@@ -371,8 +373,7 @@ class OnboardingFlowActivity : AppCompatActivity() {
                         if (profileBackupSnapshot.keycloakStatus == ObvProfileBackupsForRestore.KeycloakStatus.TRANSFER_RESTRICTED) {
                             navController.navigate(OnboardingRoutes.BACKUP_V2_KEYCLOAK_AUTHENTICATION_REQUIRED)
                         } else if (backupsV2ViewModel.selectedProfileDeviceList.value?.multiDevice != true
-                            && !backupsV2ViewModel.selectedProfileDeviceList.value?.deviceUidsAndServerInfo.isNullOrEmpty()
-                        ) {
+                            && !backupsV2ViewModel.selectedProfileDeviceList.value?.deviceUidsAndServerInfo.isNullOrEmpty()) {
                             navController.navigate(OnboardingRoutes.BACKUP_V2_EXPIRING_DEVICES_EXPLANATION)
                         } else {
                             backupsV2ViewModel.restoreSelectedSnapshot()
@@ -490,6 +491,7 @@ class OnboardingFlowActivity : AppCompatActivity() {
                     onClose = { finish() })
 
                 sourceTransferRestrictedWarning(
+                    keycloakWithoutOidcAuthentication = keycloakWithoutOidcAuthentication,
                     onContinue = {
                         onboardingFlowViewModel.updateTransferRestricted(true)
                         navController.navigate(OnboardingRoutes.TRANSFER_SOURCE_SESSION)
@@ -627,6 +629,8 @@ class OnboardingFlowActivity : AppCompatActivity() {
                     when (dialog.category.obvTransferStep.step) {
                         FAIL -> {
                             onboardingFlowViewModel.updateValidationInProgress(false)
+                            // TODO show a different message depending on the fail reason
+                            // val failedReason = (dialog.category?.obvTransferStep as? ObvTransferStep.Fail)?.failReason ?: -1
                             App.toast(getString(R.string.toast_message_profile_activation_failed), Toast.LENGTH_SHORT, Gravity.BOTTOM)
                         }
 

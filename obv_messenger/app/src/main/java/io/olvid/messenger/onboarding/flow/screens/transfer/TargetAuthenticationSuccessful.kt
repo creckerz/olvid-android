@@ -72,14 +72,12 @@ fun NavGraphBuilder.targetAuthenticationSuccessful(onClose: () -> Unit) {
 private fun Preview() {
     val navController = rememberNavController()
 
-    AppCompatTheme {
-        NavHost(
-            navController = navController,
-            startDestination = OnboardingRoutes.TRANSFER_TARGET_AUTHENTICATION_SUCCESSFUL
-        ) {
-            targetAuthenticationSuccessful(
-                onClose = {}
-            )
-        }
+    NavHost(
+        navController = navController,
+        startDestination = OnboardingRoutes.TRANSFER_TARGET_AUTHENTICATION_SUCCESSFUL
+    ) {
+        targetAuthenticationSuccessful(
+            onClose = {}
+        )
     }
 }

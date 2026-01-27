@@ -17,19 +17,16 @@
  *  along with Olvid.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.olvid.messenger.customClasses;
+package io.olvid.messenger.openid.jsons
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
+
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ConfigurationKeycloakPojo {
-    public String server;
-    @JsonProperty("cid")
-    public String clientId;
-    @JsonProperty("secret")
-    public String clientSecret;
-
-    public ConfigurationKeycloakPojo() {
-    }
+class JsonMagicResponse {
+    @JsonProperty("access_token")
+    var accessToken: String? = null
+    @JsonProperty("refresh_token")
+    var refreshToken: String? = null
 }

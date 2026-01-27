@@ -117,7 +117,10 @@ public class ServerQuery {
         BACKUPS_V2_UPLOAD_BACKUP_QUERY_ID(2001),
         BACKUPS_V2_DELETE_BACKUP_QUERY_ID(2002),
         BACKUPS_V2_LIST_BACKUPS_QUERY_ID(2003),
-        BACKUPS_V2_DOWNLOAD_PROFILE_PICTURE_QUERY_ID(2004);
+        BACKUPS_V2_DOWNLOAD_PROFILE_PICTURE_QUERY_ID(2004),
+
+        KEYCLOAK_ID_BASED_AUTH_REQUEST_CHALLENGE(3000),
+        KEYCLOAK_ID_BASED_AUTH_GET_SESSION(3001);
 
         private static final Map<Integer, TypeId> valueMap = new HashMap<>();
         static {
@@ -211,6 +214,9 @@ public class ServerQuery {
                 case BACKUPS_V2_UPLOAD_BACKUP_QUERY_ID:
                 case BACKUPS_V2_DELETE_BACKUP_QUERY_ID:
                 case BACKUPS_V2_DOWNLOAD_PROFILE_PICTURE_QUERY_ID:
+                // keycloak id-based auth queries are never serialized (only used un standalone queries)
+                case KEYCLOAK_ID_BASED_AUTH_REQUEST_CHALLENGE:
+                case KEYCLOAK_ID_BASED_AUTH_GET_SESSION:
                 default:
                     throw new DecodingException();
             }
@@ -1383,6 +1389,70 @@ public class ServerQuery {
         @Override
         Encoded[] getEncodedParts() {
             throw new RuntimeException("BackupsV2 server queries cannot be encoded.");
+        }
+
+        @Override
+        boolean isWebSocket() {
+            return false;
+        }
+    }
+
+    public static class KeycloakIdBasedAuthRequestChallengeQuery extends Type {
+        public final String keycloakServerUrl;
+        public final String keycloakUserId;
+        public final byte[] nonce;
+
+        public KeycloakIdBasedAuthRequestChallengeQuery(String keycloakServerUrl, String keycloakUserId, byte[] nonce) {
+            this.keycloakServerUrl = keycloakServerUrl;
+            this.keycloakUserId = keycloakUserId;
+            this.nonce = nonce;
+        }
+
+        @Override
+        public TypeId getId() {
+            return TypeId.KEYCLOAK_ID_BASED_AUTH_REQUEST_CHALLENGE;
+        }
+
+        @Override
+        String getServer() {
+            return keycloakServerUrl;
+        }
+
+        @Override
+        Encoded[] getEncodedParts() {
+            throw new RuntimeException("KeycloakIdBasedAuth server queries cannot be encoded.");
+        }
+
+        @Override
+        boolean isWebSocket() {
+            return false;
+        }
+    }
+
+    public static class KeycloakIdBasedAuthGetSessionQuery extends Type {
+        public final String keycloakServerUrl;
+        public final byte[] challengeResponse;
+        public final byte[] nonce;
+
+        public KeycloakIdBasedAuthGetSessionQuery(String keycloakServerUrl, byte[] challengeResponse, byte[] nonce) {
+            this.keycloakServerUrl = keycloakServerUrl;
+            this.nonce = nonce;
+            this.challengeResponse = challengeResponse;
+        }
+
+        @Override
+        public TypeId getId() {
+            return TypeId.KEYCLOAK_ID_BASED_AUTH_GET_SESSION;
+        }
+
+        @Override
+        String getServer() {
+            return keycloakServerUrl;
+        }
+
+        @Override
+        Encoded[] getEncodedParts() {
+            throw new RuntimeException("KeycloakIdBasedAuth server queries cannot be encoded.");
         }
 
         @Override

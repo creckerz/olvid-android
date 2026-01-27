@@ -24,7 +24,9 @@ import org.jose4j.jwk.JsonWebKey;
 import org.jose4j.jwk.JsonWebKeySet;
 import org.jose4j.lang.JoseException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import io.olvid.engine.datatypes.DictionaryKey;
 import io.olvid.engine.encoder.DecodingException;
@@ -32,8 +34,7 @@ import io.olvid.engine.encoder.Encoded;
 
 public class ObvKeycloakState {
     public final String keycloakServer; // non-null
-    public final String clientId; // non-null
-    public final String clientSecret;  // may be null if keycloak is not configured with confidential access
+    public final List<ObvKeycloakAuthType> supportedAuthenticationMethods;
     public final JsonWebKeySet jwks; // non-null --> only set to null when sending to app and deserialization failed
     public final JsonWebKey signatureKey; // non-null --> only set to null when sending to app and deserialization failed
     public final String serializedAuthState; // device dependant --> do not share with other devices
@@ -42,10 +43,9 @@ public class ObvKeycloakState {
     public final long latestRevocationListTimestamp; // not included in the serialized version
     public final long latestGroupUpdateTimestamp; // not included in the serialized version
 
-    public ObvKeycloakState(String keycloakServer, String clientId, String clientSecret, JsonWebKeySet jwks, JsonWebKey signatureKey, String serializedAuthState, boolean transferRestricted, String ownApiKey, long latestRevocationListTimestamp, long latestGroupUpdateTimestamp) {
+    public ObvKeycloakState(String keycloakServer, List<ObvKeycloakAuthType> supportedAuthenticationMethods, JsonWebKeySet jwks, JsonWebKey signatureKey, String serializedAuthState, boolean transferRestricted, String ownApiKey, long latestRevocationListTimestamp, long latestGroupUpdateTimestamp) {
         this.keycloakServer = keycloakServer;
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;
+        this.supportedAuthenticationMethods = supportedAuthenticationMethods;
         this.jwks = jwks;
         this.signatureKey = signatureKey;
         this.serializedAuthState = serializedAuthState;
@@ -60,11 +60,17 @@ public class ObvKeycloakState {
         if (keycloakServer != null) {
             dict.put(new DictionaryKey("ks"), Encoded.of(keycloakServer));
         }
-        if (clientId != null) {
-            dict.put(new DictionaryKey("ci"), Encoded.of(clientId));
-        }
-        if (clientSecret != null) {
-            dict.put(new DictionaryKey("cs"), Encoded.of(clientSecret));
+        for (ObvKeycloakAuthType authType : supportedAuthenticationMethods) {
+            if (authType instanceof ObvKeycloakAuthType.IdBased idBased) {
+                dict.put(new DictionaryKey("ida"), Encoded.of(true));
+            } else if (authType instanceof ObvKeycloakAuthType.OpenIdConnect oidc) {
+                if (oidc.clientId() != null) {
+                    dict.put(new DictionaryKey("ci"), Encoded.of(oidc.clientId()));
+                }
+                if (oidc.clientSecret() != null) {
+                    dict.put(new DictionaryKey("cs"), Encoded.of(oidc.clientSecret()));
+                }
+            }
         }
         if (jwks != null) {
             dict.put(new DictionaryKey("jwks"), Encoded.of(jwks.toJson()));
@@ -83,8 +89,7 @@ public class ObvKeycloakState {
 
     public static ObvKeycloakState of(Encoded encoded) throws DecodingException {
         final String keycloakServer;
-        final String clientId;
-        final String clientSecret;
+        final List<ObvKeycloakAuthType> supportedAuthenticationMethods = new ArrayList<>();
         JsonWebKeySet jwks;
         JsonWebKey signatureKey;
         final String serializedAuthState;
@@ -101,16 +106,18 @@ public class ObvKeycloakState {
         key = new DictionaryKey("ci");
         encodedValue = dict.get(key);
         if (encodedValue != null) {
-            clientId = encodedValue.decodeString();
-        } else {
-            clientId = null;
+            String clientId = encodedValue.decodeString();
+
+            key = new DictionaryKey("cs");
+            encodedValue = dict.get(key);
+            String clientSecret = (encodedValue != null) ? encodedValue.decodeString() : null;
+
+            supportedAuthenticationMethods.add(new ObvKeycloakAuthType.OpenIdConnect(clientId, clientSecret));
         }
-        key = new DictionaryKey("cs");
+        key = new DictionaryKey("ida");
         encodedValue = dict.get(key);
-        if (encodedValue != null) {
-            clientSecret = encodedValue.decodeString();
-        } else {
-            clientSecret = null;
+        if (encodedValue != null && encodedValue.decodeBoolean()) {
+            supportedAuthenticationMethods.add(new ObvKeycloakAuthType.IdBased());
         }
         key = new DictionaryKey("jwks");
         encodedValue = dict.get(key);
@@ -148,6 +155,7 @@ public class ObvKeycloakState {
         } else {
             transferRestricted = false;
         }
-        return new ObvKeycloakState(keycloakServer, clientId, clientSecret, jwks, signatureKey, serializedAuthState, transferRestricted, null, 0, 0);
+        return new ObvKeycloakState(keycloakServer, supportedAuthenticationMethods, jwks, signatureKey, serializedAuthState, transferRestricted, null, 0, 0);
     }
+
 }

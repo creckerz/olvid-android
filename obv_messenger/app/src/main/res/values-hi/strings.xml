@@ -854,7 +854,7 @@
 	<string name="dialog_title_update_available" state="needs_review" hash="-1893271535">अपडेट उपलब्ध है</string>
 	<string name="dialog_message_update_available" state="needs_review" hash="259838609">Olvid का एक नया संस्करण Google Play पर उपलब्ध है।\n\nनवीनतम सुविधाओं का लाभ उठाने के लिए कृपया अपडेट करें।</string>
 	<string name="dialog_title_call_initiation_not_supported" state="needs_review" hash="-2088021831">कॉल शुरू करना समर्थित नहीं है</string>
-	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="-1087657662">ऐसा प्रतीत होता है कि आपका Olvid सर्वर सुरक्षित कॉल शुरू करने का समर्थन नहीं करता है।\n\nअधिक जानकारी के लिए कृपया अपने व्यवस्थापक से संपर्क करें।</string>
+	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="1760333819">ऐसा लगता है कि आपका Olvid सर्वर सुरक्षित कॉल शुरू करने का समर्थन नहीं करता है।\n\nअधिक जानकारी के लिए कृपया अपने व्यवस्थापक से संपर्क करें।</string>
 	<string name="label_identity_creation_options" state="needs_review" hash="1180456032">आईडी बनाने के विकल्प</string>
 	<string name="text_option_server" state="needs_review" hash="-1130676431">सर्वर: %1$s</string>
 	<string name="text_option_license_code" state="needs_review" hash="1222068504">लाइसेंस: %1$s</string>
@@ -882,7 +882,7 @@
 	<string name="toast_message_unable_to_keycloak_revoke" state="needs_review" hash="-1368037130">पिछली Olvid ID बदलने में विफल, कृपया पुनः प्रयास करें।</string>
 	<string name="toast_message_keycloak_revoke_successful" state="needs_review" hash="-1216369809">पिछला Olvid ID सफलतापूर्वक बदल दिया गया</string>
 	<string name="dialog_title_keycloak_authentication_required_user_id_changed" state="needs_review" hash="-896407029">उपयोगकर्ता परिवर्तन का पता चला</string>
-	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="1319874532">आपकी Olvid ID आपकी कंपनी के पहचान प्रदाता द्वारा प्रबंधित की जाती है। ऐसा लगता है कि आपने सामान्य से अलग उपयोगकर्ता के रूप में प्रमाणित किया है। यह समर्थित नहीं है।\n\nकृपया अपने व्यवस्थापक से संपर्क करें या सही उपयोगकर्ता के रूप में फिर से प्रमाणित करें।</string>
+	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="876252686">आपका प्रोफ़ाइल वर्तमान में आपके संगठन द्वारा प्रबंधित किया जा रहा है। ऐसा लगता है कि आपने सामान्य से अलग उपयोगकर्ता के रूप में प्रमाणित किया है। यह समर्थित नहीं है।\n\nकृपया अपने व्यवस्थापक से संपर्क करें या सही उपयोगकर्ता के रूप में फिर से प्रमाणित करें।</string>
 	<string name="dialog_title_add_keycloak_user" state="needs_review" hash="-1050193239">संपर्क जोड़ें</string>
 	<string name="dialog_message_add_keycloak_user" state="needs_review" hash="-1755937035">आपने %1$s को अपने संपर्कों में जोड़ने के लिए चुना है। क्या आप आगे बढ़ना चाहते हैं?</string>
 	<string name="explanation_keycloak_update_new" state="needs_review" hash="1136733528">आप Olvid में अपनी कंपनी के पहचान प्रदाता को कॉन्फ़िगर करने वाले हैं। एक बार कॉन्फ़िगर हो जाने के बाद, आप इस सर्वर के साथ प्रमाणित कर सकते हैं और Olvid आपको अपने संपर्कों में अन्य कर्मचारियों को आसानी से जोड़ने देगा।\nअधिक जानकारी के लिए कृपया अपने व्यवस्थापक से संपर्क करें।</string>
@@ -890,7 +890,7 @@
 	<string name="explanation_keycloak_update_same_server" state="needs_review" hash="1886762594">Olvid पहले से ही आपकी कंपनी के पहचान प्रदाता के साथ कॉन्फ़िगर किया गया है।\nअधिक जानकारी के लिए कृपया अपने व्यवस्थापक से संपर्क करें।</string>
 	<string name="explanation_keycloak_unable_to_contact_server" state="needs_review" hash="2123517499">आपकी कंपनी के पहचान प्रदाता से कनेक्ट करने में असमर्थ। कृपया अपने इंटरनेट कनेक्शन की जांच करें या अधिक जानकारी के लिए अपने व्यवस्थापक से संपर्क करें।</string>
 	<string name="explanation_keycloak_update_bad_server" state="needs_review" hash="546492417">आपकी वर्तमान Olvid ID के साथ अपनी कंपनी के पहचान प्रदाता को कॉन्फ़िगर करने में असमर्थ। आपकी ID एक अलग Olvid सर्वर पर उत्पन्न हुई थी.\nअधिक जानकारी के लिए कृपया अपने व्यवस्थापक से संपर्क करें।</string>
-	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-317755135">आपकी कंपनी के पहचान प्रदाता को कॉन्फ़िगर करने में असमर्थ। Olvid का आपका संस्करण पुराना है और आपकी कंपनी के पहचान प्रदाता के साथ संगत नहीं है।\nकृपया Olvid को अपडेट करें और फिर से प्रयास करें, या अधिक जानकारी के लिए अपने व्यवस्थापक से संपर्क करें।</string>
+	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-1487678865">आपके Olvid का संस्करण पुराना है और यह आपके संगठन के पहचान प्रदाता के साथ संगत नहीं है। कृपया Olvid को अपडेट करें और फिर से प्रयास करें, या अधिक जानकारी के लिए अपने व्यवस्थापक से संपर्क करें।</string>
 	<string name="explanation_keycloak_bind" state="needs_review" hash="445359846">नीचे दिया गया नाम आपकी कंपनी के पहचान प्रदाता से प्राप्त किया गया है।\nएक बार जब आपकी Olvid ID इस प्रदाता द्वारा प्रबंधित की जाती है, तो आपके संपर्क आपको Olvid में इसी रूप में देखेंगे।</string>
 	<string name="button_label_manage_keycloak" state="needs_review" hash="-1323644699">प्रबंधित आईडी पर स्विच करें</string>
 	<string name="toast_message_keycloak_bind_successful" state="needs_review" hash="749864054">सफलतापूर्वक प्रबंधित आईडी पर स्विच किया गया</string>
@@ -898,7 +898,7 @@
 	<string name="menu_action_unbind_from_keycloak" state="needs_review" hash="549323804">पहचान प्रदाता हटाएं</string>
 	<string name="dialog_title_unbind_from_keycloak" state="needs_review" hash="549323804">पहचान प्रदाता हटाएं</string>
 	<string name="dialog_title_unbind_from_keycloak_restricted" state="needs_review" hash="1941011536">पहचान प्रदाता को हटाने में असमर्थ</string>
-	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="915111540">आपकी Olvid ID वर्तमान में आपकी कंपनी के पहचान प्रदाता द्वारा प्रबंधित की जा रही है। आप एक सामान्य, गैर-प्रबंधित Olvid ID पर स्विच करने वाले हैं।\n\nयदि आप आगे बढ़ते हैं, तो आप अब अपनी कंपनी के संपर्कों को Olvid में आसानी से जोड़ने में सक्षम नहीं होंगे। कृपया अधिक जानकारी के लिए अपने व्यवस्थापक से संपर्क करें।\n\nक्या आप आगे बढ़ना चाहते हैं?</string>
+	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="861158628">आपका Olvid ID वर्तमान में आपकी कंपनी के पहचान प्रदाता द्वारा प्रबंधित किया जा रहा है। आप एक सामान्य, गैर-प्रबंधित Olvid ID पर स्विच करने वाले हैं।\n\nयदि आप आगे बढ़ते हैं, तो आप अब अपनी कंपनी से Olvid में संपर्कों को आसानी से जोड़ने में सक्षम नहीं होंगे। कृपया अधिक जानकारी के लिए अपने व्यवस्थापक से संपर्क करें।\n\nक्या आप आगे बढ़ना चाहेंगे?</string>
 	<string name="dialog_message_unbind_from_keycloak_restricted" state="needs_review" hash="-155299318">आपकी Olvid ID वर्तमान में आपकी कंपनी के पहचान प्रदाता द्वारा प्रबंधित की जा रही है जो हस्तांतरण को प्रतिबंधित करती है। इसे आपकी पहल पर हटाया नहीं जा सकता।\n\nअधिक जानकारी के लिए कृपया अपने व्यवस्थापक से संपर्क करें।</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_needed" state="needs_review" hash="-1740408397">आपका पहचान प्रदाता इंगित करता है कि एक Olvid ID पहले से ही उस उपयोगकर्ता से जुड़ा हुआ है जिसके रूप में आपने साइन इन किया है। यदि आप आगे बढ़ते हैं, तो यह Olvid ID रद्द कर दिया जाएगा और आपका नया एक इस उपयोगकर्ता से जुड़ा होगा।\nअधिक जानकारी के लिए कृपया अपने व्यवस्थापक से संपर्क करें।</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_impossible" state="needs_review" hash="-734813550">आपका पहचान प्रदाता इंगित करता है कि एक Olvid ID पहले से ही उस उपयोगकर्ता से जुड़ा हुआ है जिसके रूप में आपने साइन इन किया है। आप अपनी ID बनाने के साथ आगे नहीं बढ़ सकते हैं।\n\nअधिक जानकारी के लिए कृपया अपने व्यवस्थापक से संपर्क करें।</string>
@@ -1142,6 +1142,7 @@
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">यह संकेत है कि इस प्रोफ़ाइल के लिए सूचनाएं म्यूट कर दी गई हैं</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">प्रोफ़ाइल बनाएं</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">आपके संगठन का पहचान प्रदाता सफलतापूर्वक कॉन्फ़िगर किया गया है। इसके साथ प्रमाणित करने और अपनी व्यक्तिगत जानकारी प्राप्त करने के लिए नीचे दिए गए "प्रमाणित करें" बटन पर दबाएं।</string>
+	<string name="text_explanation_onboarding_keycloak_parsed_configuration_magic" state="needs_review" hash="1823898406">आपकी कंपनी के पहचान प्रदाता को सफलतापूर्वक कॉन्फ़िगर किया गया है। अपनी व्यक्तिगत जानकारी प्राप्त करने के लिए नीचे दिए गए \"जादुई लिंक का उपयोग करें\" बटन पर क्लिक करें।</string>
 	<string name="text_explanation_onboarding_keycloak_mdm" state="needs_review" hash="1340457300">Olvid में आपका स्वागत है।\n\nयह इंस्टॉलेशन आपकी कंपनी द्वारा प्रबंधित किया जाता है और इसे पहचान प्रदाता का उपयोग करने के लिए कॉन्फ़िगर किया गया है। इसके साथ प्रमाणित करने और अपनी व्यक्तिगत जानकारी प्राप्त करने के लिए नीचे दिए गए "प्रमाणित करें" बटन पर दबाएं।\n\nयदि आपने पहले से ही Olvid का उपयोग किया है और बैकअप से अपनी कुंजियों और संपर्कों को पुनर्स्थापित करना चाहते हैं, तो "बैकअप पुनर्स्थापित करें" दबाएं।</string>
 	<string name="button_label_see_details" state="needs_review" hash="238834473">विवरण देखें</string>
 	<string name="link_label_invitation_url" state="needs_review" hash="744905192">संपर्क जोड़ें</string>
@@ -2143,8 +2144,13 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">पीयर डिवाइस अनुपलब्ध है</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">सभी सुरक्षित चैनलों को फिर से बनाएँ</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">सभी सुरक्षित चैनलों को फिर से बनाने से Olvid आपके संपर्कों के सभी उपकरणों के साथ नए सुरक्षित संचार चैनल बनाने के लिए मजबूर हो जाएगा। यह आमतौर पर उपयोगी नहीं है, लेकिन दुर्लभ स्थितियों को हल कर सकता है जहां ये चैनल «सिंक से बाहर» हैं।\n\n**चेतावनी:** यदि आपके पास बहुत सारे संपर्क हैं, तो इस ऑपरेशन में कुछ मिनट लग सकते हैं और आप इसके चलने के दौरान कुछ आने वाले संदेश खो सकते हैं।</string>
+	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">\"जादुई लिंक\" का उपयोग करें</string>
+	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">अमान्य मैजिक लिंक</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">कॉल कट हो गई</string>
 	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">क्या आपको अपनी टीम के लिए सब्सक्रिप्शन की आवश्यकता है?</string>
 	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Olvid स्टोर पर जाएं</string>
 	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">रिमाइंडर सेट हो गया</string>
+	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">प्रमाणीकरण संभव नहीं है</string>
+	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">आपका प्रोफ़ाइल वर्तमान में आपके संगठन द्वारा प्रबंधित किया जा रहा है और पुन: प्रमाणीकरण की आवश्यकता है। हालाँकि, ऐसा लगता है कि कोई भी समर्थित प्रमाणीकरण विधि उपलब्ध नहीं है।\n\nअधिक जानकारी के लिए कृपया अपने व्यवस्थापक से संपर्क करें।</string>
+	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">कोई भी समर्थित प्रमाणीकरण विधि उपलब्ध नहीं है।</string>
 </resources>

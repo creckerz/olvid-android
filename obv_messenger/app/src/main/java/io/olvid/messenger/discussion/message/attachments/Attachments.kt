@@ -579,13 +579,14 @@ fun Attachments(
                                 } == true) {
                             Text(
                                 modifier = Modifier
-                                    .padding(2.dp)
+                                    .widthIn(max = if (wide || imageCount == 1) maxWidth else (maxWidth / 2 - 2.dp))
+                                    .padding(3.dp)
                                     .background(
                                         shape = RoundedCornerShape(4.dp),
-                                        color = Color.White.copy(alpha = .4f)
+                                        color = colorResource(R.color.whiteOpaqueOverlay)
                                     )
-                                    .padding(2.dp)
-                                    .width(if (wide || imageCount == 1) maxWidth else (maxWidth / 2 - 10.dp)),
+                                    .padding(horizontal = 4.dp, vertical = 2.dp),
+                                color = colorResource(R.color.almostBlack),
                                 text = discussionSearchViewModel.highlight(
                                     context,
                                     AnnotatedString(attachment.fyleMessageJoinWithStatus.fileName)
@@ -736,6 +737,7 @@ fun Attachments(
                                     .background(color = colorResource(id = R.color.almostWhite)),
                                 fyleAndStatus = attachment.fyleAndStatus,
                                 activity = context as AppCompatActivity,
+                                discussionSearchViewModel = discussionSearchViewModel,
                                 onEnableMessageSwipe = onEnableMessageSwipe,
                                 audioAttachmentServiceBinding = audioAttachmentServiceBinding,
                                 discussionId = message.discussionId,
@@ -772,11 +774,9 @@ fun Attachments(
                                 modifier = Modifier
                                     .background(colorResource(id = R.color.almostWhite)),
                                 fyleAndStatus = attachment.fyleAndStatus,
-                                fileName = discussionSearchViewModel?.highlight(
-                                    context,
-                                    AnnotatedString(attachment.fyleMessageJoinWithStatus.fileName)
-                                )
-                                    ?: AnnotatedString(attachment.fyleMessageJoinWithStatus.fileName),
+                                fileName = AnnotatedString(attachment.fyleMessageJoinWithStatus.fileName).let {
+                                    discussionSearchViewModel?.highlight(context, it) ?: it
+                                },
                                 onClick = {
                                     if (blockClicks.not()) {
                                         downloadAwareClick {

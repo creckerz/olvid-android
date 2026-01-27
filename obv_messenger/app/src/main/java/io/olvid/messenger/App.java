@@ -671,6 +671,13 @@ public class App extends Application implements DefaultLifecycleObserver {
             return;
         }
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        Intent intent = new  Intent(
+                context,
+                OnboardingFlowActivity.class);
+        intent.putExtra(OnboardingFlowActivity.TRANSFER_SOURCE_INTENT_EXTRA, true);
+        intent.putExtra(OnboardingFlowActivity.TRANSFER_RESTRICTED_INTENT_EXTRA, KeycloakManager.isOwnedIdentityTransferRestricted(bytesOwnedIdentity));
+        intent.putExtra(OnboardingFlowActivity.KEYCLOAK_WITHOUT_OIDC_INTENT_EXTRA, KeycloakManager.ownedIdentityDoesNotSupportOidcAuthentication(bytesOwnedIdentity));
+
         if (!prefs.getBoolean(SettingsActivity.USER_DIALOG_HIDE_ADD_DEVICE_EXPLANATION, false)) {
             View dialogView = LayoutInflater.from(context)
                     .inflate(R.layout.dialog_view_message_and_checkbox, null);
@@ -688,20 +695,10 @@ public class App extends Application implements DefaultLifecycleObserver {
                     .setView(dialogView)
                     .setNegativeButton(R.string.button_label_cancel, null)
                     .setPositiveButton(R.string.button_label_proceed, (a, b) -> {
-                        Intent intent = new  Intent(
-                                context,
-                                OnboardingFlowActivity.class);
-                        intent.putExtra(OnboardingFlowActivity.TRANSFER_SOURCE_INTENT_EXTRA, true);
-                        intent.putExtra(OnboardingFlowActivity.TRANSFER_RESTRICTED_INTENT_EXTRA, KeycloakManager.isOwnedIdentityTransferRestricted(bytesOwnedIdentity));
                         context.startActivity(intent);
                     });
             builder.create().show();
         } else {
-            Intent intent = new  Intent(
-                    context,
-                    OnboardingFlowActivity.class);
-            intent.putExtra(OnboardingFlowActivity.TRANSFER_SOURCE_INTENT_EXTRA, true);
-            intent.putExtra(OnboardingFlowActivity.TRANSFER_RESTRICTED_INTENT_EXTRA, KeycloakManager.isOwnedIdentityTransferRestricted(bytesOwnedIdentity));
             context.startActivity(intent);
         }
     }
@@ -876,14 +873,15 @@ public class App extends Application implements DefaultLifecycleObserver {
         showDialog(bytesOwnedIdentity, AppDialogShowActivity.DIALOG_KEYCLOAK_AUTHENTICATION_REQUIRED, dialogParameters);
     }
 
-    public static void openAppDialogKeycloakIdentityReplacement(@NonNull byte[] bytesOwnedIdentity, @NonNull String serverUrl, @Nullable String clientSecret, @NonNull String serializedAuthState) {
+    public static void openAppDialogKeycloakAuthenticationImpossible(@NonNull byte[] bytesOwnedIdentity) {
+        HashMap<String, Object> dialogParameters = new HashMap<>();
+        dialogParameters.put(AppDialogShowActivity.DIALOG_KEYCLOAK_AUTHENTICATION_IMPOSSIBLE_BYTES_OWNED_IDENTITY_KEY, bytesOwnedIdentity);
+        showDialog(bytesOwnedIdentity, AppDialogShowActivity.DIALOG_KEYCLOAK_AUTHENTICATION_IMPOSSIBLE, dialogParameters);
+    }
+
+    public static void openAppDialogKeycloakIdentityReplacement(@NonNull byte[] bytesOwnedIdentity) {
         HashMap<String, Object> dialogParameters = new HashMap<>();
         dialogParameters.put(AppDialogShowActivity.DIALOG_KEYCLOAK_IDENTITY_REPLACEMENT_BYTES_OWNED_IDENTITY_KEY, bytesOwnedIdentity);
-        dialogParameters.put(AppDialogShowActivity.DIALOG_KEYCLOAK_IDENTITY_REPLACEMENT_SERVER_URL_KEY, serverUrl);
-        if (clientSecret != null) {
-            dialogParameters.put(AppDialogShowActivity.DIALOG_KEYCLOAK_IDENTITY_REPLACEMENT_CLIENT_SECRET_KEY, clientSecret);
-        }
-        dialogParameters.put(AppDialogShowActivity.DIALOG_KEYCLOAK_IDENTITY_REPLACEMENT_SERIALIZED_AUTH_STATE_KEY, serializedAuthState);
         showDialog(bytesOwnedIdentity, AppDialogShowActivity.DIALOG_KEYCLOAK_IDENTITY_REPLACEMENT, dialogParameters);
     }
 

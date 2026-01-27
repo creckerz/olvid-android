@@ -59,6 +59,7 @@ import io.olvid.engine.encoder.Encoded;
 import io.olvid.engine.engine.types.ObvDeviceManagementRequest;
 import io.olvid.engine.engine.types.ObvTransferStep;
 import io.olvid.engine.engine.types.identities.ObvIdentity;
+import io.olvid.engine.engine.types.identities.ObvKeycloakAuthType;
 import io.olvid.engine.engine.types.identities.ObvKeycloakState;
 import io.olvid.engine.engine.types.sync.ObvBackupAndSyncDelegate;
 import io.olvid.engine.engine.types.sync.ObvSyncSnapshot;
@@ -1642,10 +1643,23 @@ public class OwnedIdentityTransferProtocol extends ConcreteProtocol {
             ObvKeycloakState keycloakState = protocolManagerSession.identityDelegate.getOwnedIdentityKeycloakState(protocolManagerSession.session, getOwnedIdentity());
             if (keycloakState != null && keycloakState.transferRestricted) {
                 // sas is correct --> send keycloak parameters so the target device can authenticate and respond with a transferProof
+
+                ObvKeycloakAuthType.OpenIdConnect oidc = null;
+                for (ObvKeycloakAuthType authType : keycloakState.supportedAuthenticationMethods) {
+                    if (authType instanceof ObvKeycloakAuthType.OpenIdConnect) {
+                        oidc = (ObvKeycloakAuthType.OpenIdConnect) authType;
+                        break;
+                    }
+                }
+                if (oidc == null) {
+                    Logger.e("ID is bound to a Keycloak server that forces transferRestricted but does not support OpenId Connect authentification. This is not supported!!!");
+                    return failProtocol(this, startState.dialogUuid, ObvTransferStep.Fail.FAIL_REASON_TRANSFER_RESTRICTED_AND_NO_OIDC);
+                }
+
                 JsonKeycloakConfiguration configuration = new JsonKeycloakConfiguration();
                 configuration.server = keycloakState.keycloakServer;
-                configuration.cid = keycloakState.clientId;
-                configuration.secret = keycloakState.clientSecret;
+                configuration.cid = oidc.clientId();
+                configuration.secret = oidc.clientSecret();
 
                 byte[] dataToSend = getJsonObjectMapper().writeValueAsBytes(configuration);
                 EncryptedBytes payload = Suite.getPublicKeyEncryption(startState.ephemeralIdentity.getEncryptionPublicKey()).encrypt(startState.ephemeralIdentity.getEncryptionPublicKey(), dataToSend, getPrng());

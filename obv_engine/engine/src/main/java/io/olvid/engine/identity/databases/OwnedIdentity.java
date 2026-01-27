@@ -68,6 +68,7 @@ import io.olvid.engine.engine.types.JsonIdentityDetails;
 import io.olvid.engine.engine.types.JsonIdentityDetailsWithVersionAndPhoto;
 import io.olvid.engine.engine.types.ObvCapability;
 import io.olvid.engine.engine.types.identities.ObvIdentity;
+import io.olvid.engine.engine.types.identities.ObvKeycloakAuthType;
 import io.olvid.engine.engine.types.identities.ObvKeycloakState;
 import io.olvid.engine.identity.datatypes.IdentityManagerSession;
 
@@ -189,16 +190,26 @@ public class OwnedIdentity implements ObvDatabase {
             KeycloakServer keycloakServer = KeycloakServer.get(identityManagerSession, keycloakServerUrl, ownedIdentity);
             if (keycloakServer != null) {
                 JsonWebKeySet jwks;
-                JsonWebKey signatureKey;
                 try {
                     jwks = keycloakServer.getJwks();
-                    signatureKey = keycloakServer.getSignatureKey();
                 } catch (Exception e) {
                     jwks = null;
+                }
+                JsonWebKey signatureKey;
+                try {
+                    signatureKey = keycloakServer.getSignatureKey();
+                } catch (Exception e) {
                     signatureKey = null;
                 }
-                return new ObvKeycloakState(keycloakServer.getServerUrl(), keycloakServer.getClientId(), keycloakServer.getClientSecret(), jwks, signatureKey, keycloakServer.getSerializedAuthState(), keycloakServer.isTransferRestricted(), keycloakServer.getOwnApiKey(), keycloakServer.getLatestRevocationListTimestamp(), keycloakServer.getLatestGroupUpdateTimestamp());
 
+                List<ObvKeycloakAuthType> supportedAuthTypes = new ArrayList<>();
+                if (keycloakServer.getClientId() != null) {
+                    supportedAuthTypes.add(new ObvKeycloakAuthType.OpenIdConnect(keycloakServer.getClientId(), keycloakServer.getClientSecret()));
+                }
+                if (keycloakServer.isIdBasedAuthSupported()) {
+                    supportedAuthTypes.add(new ObvKeycloakAuthType.IdBased());
+                }
+                return new ObvKeycloakState(keycloakServer.getServerUrl(), supportedAuthTypes, jwks, signatureKey, keycloakServer.getSerializedAuthState(), keycloakServer.isTransferRestricted(), keycloakServer.getOwnApiKey(), keycloakServer.getLatestRevocationListTimestamp(), keycloakServer.getLatestGroupUpdateTimestamp());
             }
         }
         return null;

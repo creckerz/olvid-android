@@ -854,7 +854,7 @@
 	<string name="dialog_title_update_available" state="needs_review" hash="-1893271535">Uppdatering tillgänglig</string>
 	<string name="dialog_message_update_available" state="needs_review" hash="259838609">En nyare version av Olvid finns tillgänglig på Google Play.\n\nVänligen uppdatera för att dra nytta av de senaste funktionerna.</string>
 	<string name="dialog_title_call_initiation_not_supported" state="needs_review" hash="-2088021831">Samtal kunde inte initieras</string>
-	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="-1087657662">Det verkar som att din Olvid-server inte stöder initiering av säkra samtal.\n\nVänligen kontakta din administratör för mer information.</string>
+	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="1760333819">Det verkar som att din Olvid-server inte stöder säker uppringning.\n\nVänligen kontakta din administratör för mer information.</string>
 	<string name="label_identity_creation_options" state="needs_review" hash="1180456032">ID-skapandealternativ</string>
 	<string name="text_option_server" state="needs_review" hash="-1130676431">Server: %1$s</string>
 	<string name="text_option_license_code" state="needs_review" hash="1222068504">Licens: %1$s</string>
@@ -882,7 +882,7 @@
 	<string name="toast_message_unable_to_keycloak_revoke" state="needs_review" hash="-1368037130">Kunde inte ersätta tidigare Olvid ID, försök igen</string>
 	<string name="toast_message_keycloak_revoke_successful" state="needs_review" hash="-1216369809">Tidigare Olvid ID har ersatts framgångsrikt</string>
 	<string name="dialog_title_keycloak_authentication_required_user_id_changed" state="needs_review" hash="-896407029">Användarändring upptäckt</string>
-	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="1319874532">Ditt Olvid ID hanteras av din organisations identitetsleverantör. Det verkar som att du har autentiserat dig som en annan användare än vanligt. Detta stöds inte.\n\nVänligen kontakta din administratör eller autentisera dig igen som rätt användare.</string>
+	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="876252686">Din profil hanteras för närvarande av din organisation. Det verkar som att du har autentiserat dig med ett annat användarkonto än vanligt. Detta stöds inte.\n\nVänligen kontakta din administratör eller autentisera dig igen med rätt användarkonto.</string>
 	<string name="dialog_title_add_keycloak_user" state="needs_review" hash="-1050193239">Lägg till en kontakt</string>
 	<string name="dialog_message_add_keycloak_user" state="needs_review" hash="-1755937035">Du har valt att lägga till %1$s i dina kontakter. Vill du fortsätta?</string>
 	<string name="explanation_keycloak_update_new" state="needs_review" hash="1136733528">Du är på väg att konfigurera din organisations identitetsprovider i Olvid. När det är konfigurerat kan du autentisera dig med den här servern och Olvid låter dig sömlöst lägga till andra anställda till dina kontakter.\nVänligen kontakta din administratör för mer information.</string>
@@ -890,7 +890,7 @@
 	<string name="explanation_keycloak_update_same_server" state="needs_review" hash="1886762594">Olvid är redan konfigurerat med din organisations identitetsleverantör.\nVänligen kontakta din administratör för mer information.</string>
 	<string name="explanation_keycloak_unable_to_contact_server" state="needs_review" hash="2123517499">Kunde inte ansluta till din organisations identitetsleverantör. Kontrollera din internetanslutning eller kontakta din administratör för mer information.</string>
 	<string name="explanation_keycloak_update_bad_server" state="needs_review" hash="546492417">Det gick inte att konfigurera din organisations identitetsleverantör med ditt nuvarande Olvid-ID. Ditt ID genererades på en annan Olvid-server.\nVänligen kontakta din administratör för mer information.</string>
-	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-317755135">Det gick inte att konfigurera din organisations identitetsleverantör. Din version av Olvid är föråldrad och är inte kompatibel med din organisations identitetsleverantör.\nVänligen uppdatera Olvid och försök igen, eller kontakta din administratör för mer information.</string>
+	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-1487678865">Din Olvid-version är föråldrad och är inte kompatibel med din organisations identitetsprovider.\nUppdatera Olvid och försök igen, eller kontakta din administratör för mer information.</string>
 	<string name="explanation_keycloak_bind" state="needs_review" hash="445359846">Namnet nedan hämtades från din organisations identitetsleverantör.\nNär ditt Olvid-ID hanteras av denna leverantör kommer dina kontakter att se dig så här i Olvid.</string>
 	<string name="button_label_manage_keycloak" state="needs_review" hash="-1323644699">Byt till ett hanterat ID</string>
 	<string name="toast_message_keycloak_bind_successful" state="needs_review" hash="749864054">Växling till ett hanterat ID lyckades</string>
@@ -898,7 +898,7 @@
 	<string name="menu_action_unbind_from_keycloak" state="needs_review" hash="549323804">Ta bort identitetsleverantör</string>
 	<string name="dialog_title_unbind_from_keycloak" state="needs_review" hash="549323804">Ta bort identitetsleverantör</string>
 	<string name="dialog_title_unbind_from_keycloak_restricted" state="needs_review" hash="1941011536">Kunde inte ta bort identitetsleverantören</string>
-	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="915111540">Ditt Olvid-ID hanteras för närvarande av din organisations identitetsleverantör. Du är på väg att byta till ett normalt, ohanterat Olvid-ID.\n\nOm du fortsätter kommer du inte längre att kunna lägga till kontakter från ditt företag till Olvid sömlöst. Kontakta din administratör för mer information.\n\nVill du fortsätta?</string>
+	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="861158628">Ditt Olvid-ID hanteras för närvarande av din organisations identitetsprovider. Du kommer nu att byta till ett vanligt, ohanterat Olvid-ID.\n\nOm du fortsätter kommer du inte längre att kunna lägga till kontakter från ditt företag i Olvid på ett smidigt sätt. Kontakta din administratör för mer information.\n\nVill du fortsätta?</string>
 	<string name="dialog_message_unbind_from_keycloak_restricted" state="needs_review" hash="-155299318">Ditt Olvid-ID hanteras för närvarande av din organisations identitetsleverantör, vilket begränsar överföringar. Det kan inte tas bort på eget initiativ.\n\nVänligen kontakta din administratör för mer information.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_needed" state="needs_review" hash="-1740408397">Din identitetsleverantör indikerar att ett Olvid-ID redan är kopplat till användaren du loggade in som. Om du fortsätter kommer detta Olvid-ID att återkallas och ditt nya ID kommer att kopplas till denna användare.\nVänligen kontakta din administratör för mer information.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_impossible" state="needs_review" hash="-734813550">Din identitetsleverantör indikerar att ett Olvid-ID redan är kopplat till användaren du loggade in som. Du kan inte fortsätta med att skapa ditt ID.\n\nVänligen kontakta din administratör för mer information.</string>
@@ -1142,6 +1142,7 @@
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">Indikator att aviseringar är tysta för den här profilen</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">Skapa en profil</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">Företagets identitetsleverantör har konfigurerats korrekt. Tryck på knappen \"autentisera\" nedan för att autentisera dig med den och hämta din personliga information.</string>
+	<string name="text_explanation_onboarding_keycloak_parsed_configuration_magic" state="needs_review" hash="1823898406">Företagets identitetsprovider har konfigurerats korrekt. Tryck på knappen \"använd magisk länk\" nedan för att hämta din personliga information.</string>
 	<string name="text_explanation_onboarding_keycloak_mdm" state="needs_review" hash="1340457300">Välkommen till Olvid.\n\nDenna installation hanteras av ditt företag och har konfigurerats för att använda en identitetsleverantör. Tryck på knappen \"autentisera\" nedan för att autentisera dig med den och hämta din personliga information.\n\nOm du redan har använt Olvid och vill återställa dina nycklar och kontakter från en säkerhetskopia, tryck på \"återställ en säkerhetskopia\".</string>
 	<string name="button_label_see_details" state="needs_review" hash="238834473">Visa detaljer</string>
 	<string name="link_label_invitation_url" state="needs_review" hash="744905192">Lägg till kontakt</string>
@@ -2144,8 +2145,13 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Mottagarens enhet är otillgänglig</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Återskapa alla säkra kanaler</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Att återskapa alla säkra kanaler kommer att tvinga Olvid att skapa nya säkra kommunikationskanaler med alla enheter tillhörande dina kontakter. Detta är generellt sett inte användbart, men kan lösa sällsynta situationer där vissa av dessa kanaler är ”ur synk”.\n\n**Varning:** om du har många kontakter kan den här operationen ta några minuter och du kan förlora vissa inkommande meddelanden under tiden den körs.</string>
+	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">Använd \"magisk länk\"</string>
+	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">Ogiltig magisk länk</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Samtalet avslutad</string>
 	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">Behöver du prenumerationer för ditt team?</string>
 	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Besök Olvid Store</string>
 	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">Påminnelse inställd</string>
+	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">Autentisering misslyckades</string>
+	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">Din profil hanteras för närvarande av din organisation och en ny autentisering krävs. Det verkar dock inte finnas någon tillgänglig autentiseringsmetod som stöds.\n\nKontakta din administratör för mer information.</string>
+	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">Ingen av de tillgängliga autentiseringsmetoderna verkar vara kompatibel.</string>
 </resources>

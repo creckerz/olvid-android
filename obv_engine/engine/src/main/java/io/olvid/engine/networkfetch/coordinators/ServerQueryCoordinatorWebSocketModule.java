@@ -241,6 +241,8 @@ public class ServerQueryCoordinatorWebSocketModule {
                     case BACKUPS_V2_DELETE_BACKUP_QUERY_ID:
                     case BACKUPS_V2_LIST_BACKUPS_QUERY_ID:
                     case BACKUPS_V2_DOWNLOAD_PROFILE_PICTURE_QUERY_ID:
+                    case KEYCLOAK_ID_BASED_AUTH_REQUEST_CHALLENGE:
+                    case KEYCLOAK_ID_BASED_AUTH_GET_SESSION:
                     default: {
                         Logger.e("ServerQueryCoordinatorWebSocketModule.handlePendingServerQuery() received serverQuery with type " + serverQuery.getType().getId());
                         failProtocol(protocolInstanceUid);

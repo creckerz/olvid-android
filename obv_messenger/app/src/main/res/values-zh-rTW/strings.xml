@@ -854,7 +854,7 @@
 	<string name="dialog_title_update_available" state="needs_review" hash="-1893271535">有新的更新可用</string>
 	<string name="dialog_message_update_available" state="needs_review" hash="259838609">Olvid 在 Google Play 上有新版本可用。\n\n請更新以享受最新功能。</string>
 	<string name="dialog_title_call_initiation_not_supported" state="needs_review" hash="-2088021831">無法發起通話</string>
-	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="-1087657662">您的 Olvid 伺服器似乎不支援安全的通話發起。\n\n請聯絡您的管理員以獲取更多資訊。</string>
+	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="1760333819">您的 Olvid 伺服器似乎不支持安全通話的啟動。\n請聯繫您的管理員以獲取更多詳細信息。</string>
 	<string name="label_identity_creation_options" state="needs_review" hash="1180456032">ID建立選項</string>
 	<string name="text_option_server" state="needs_review" hash="-1130676431">伺服器： %1$s</string>
 	<string name="text_option_license_code" state="needs_review" hash="1222068504">授權： %1$s</string>
@@ -882,7 +882,7 @@
 	<string name="toast_message_unable_to_keycloak_revoke" state="needs_review" hash="-1368037130">無法取代先前的 Olvid ID，請再試一次</string>
 	<string name="toast_message_keycloak_revoke_successful" state="needs_review" hash="-1216369809">已成功取代先前的 Olvid ID</string>
 	<string name="dialog_title_keycloak_authentication_required_user_id_changed" state="needs_review" hash="-896407029">偵測到使用者變更</string>
-	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="1319874532">您的 Olvid ID 由您的公司身分驗證供應商管理。您似乎是以與平常不同的使用者身分驗證。這不支援。\n\n請聯絡您的管理員或重新以正確的使用者身分驗證。</string>
+	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="876252686">您的個人資料目前由您的組織管理。 似乎您使用了與平時不同的使用者帳戶進行驗證。 這不支援。\n\n請聯繫您的管理員或使用正確的使用者帳戶重新驗證。</string>
 	<string name="dialog_title_add_keycloak_user" state="needs_review" hash="-1050193239">新增聯絡人</string>
 	<string name="dialog_message_add_keycloak_user" state="needs_review" hash="-1755937035">您已選擇將 %1$s 新增至您的聯絡人。您要繼續嗎？</string>
 	<string name="explanation_keycloak_update_new" state="needs_review" hash="1136733528">您即將在 Olvid 中設定貴公司的身分識別提供者。設定完成後，您就可以使用此伺服器進行驗證，Olvid 也會讓您能無縫地將其他員工新增到您的聯絡人。\n請聯絡您的管理員以獲取更多詳細資訊。</string>
@@ -890,7 +890,7 @@
 	<string name="explanation_keycloak_update_same_server" state="needs_review" hash="1886762594">Olvid 已經設定好與貴公司的身分驗證供應商連動。\n請聯絡您的管理員以獲取更多詳細資訊。</string>
 	<string name="explanation_keycloak_unable_to_contact_server" state="needs_review" hash="2123517499">無法連線至貴公司的身分驗證供應商。請檢查您的網路連線或洽詢您的管理員以獲取更多詳細資訊。</string>
 	<string name="explanation_keycloak_update_bad_server" state="needs_review" hash="546492417">無法使用您目前的 Olvid ID 設定您公司的身分提供者。您的 ID 是在不同的 Olvid 伺服器上產生的。\n請聯絡您的管理員以獲取更多詳細資訊。</string>
-	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-317755135">無法設定貴公司的身分驗證供應商。您的 Olvid 版本過舊，與貴公司的身分驗證供應商不相容。\n請更新 Olvid 並重試，或聯絡您的管理員以獲取更多詳細資訊。</string>
+	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-1487678865">您的 Olvid 版本已過時，且與您公司的身分識別提供者不相容。\n請更新 Olvid 並重試，或聯繫您的管理員以獲取更多詳細資訊。</string>
 	<string name="explanation_keycloak_bind" state="needs_review" hash="445359846">以下姓名是從您的公司身分識別提供者取得的。\n一旦您的 Olvid ID 由此提供者管理，您的聯絡人將在 Olvid 中看到您的顯示名稱。</string>
 	<string name="button_label_manage_keycloak" state="needs_review" hash="-1323644699">切換至受控 ID</string>
 	<string name="toast_message_keycloak_bind_successful" state="needs_review" hash="749864054">已成功切換至受控 ID</string>
@@ -898,7 +898,7 @@
 	<string name="menu_action_unbind_from_keycloak" state="needs_review" hash="549323804">移除身分驗證供應商</string>
 	<string name="dialog_title_unbind_from_keycloak" state="needs_review" hash="549323804">移除身分驗證供應商</string>
 	<string name="dialog_title_unbind_from_keycloak_restricted" state="needs_review" hash="1941011536">無法移除身分驗證供應商</string>
-	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="915111540">您的 Olvid ID 目前由您的公司身分驗證供應商管理。您即將切換至一般、未受管理的 Olvid ID。\n\n如果您繼續，您將無法再無縫地將公司聯絡人新增至 Olvid。請聯絡您的管理員以獲取更多詳細資訊。\n\n您是否要繼續？</string>
+	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="861158628">您的 Olvid ID 目前由您公司的身分識別提供者管理。您即將切換到一般的、未管理的 Olvid ID。\n\n如果您繼續，您將無法再無縫地將公司中的聯絡人新增到 Olvid 中。請聯繫您的管理員以獲取更多詳細資訊。\n\n您是否希望繼續？</string>
 	<string name="dialog_message_unbind_from_keycloak_restricted" state="needs_review" hash="-155299318">您的 Olvid ID 目前由貴公司的身分驗證供應商管理，這限制了轉移。您無法主動移除它。\n\n請聯絡您的管理員以獲取更多詳細資訊。</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_needed" state="needs_review" hash="-1740408397">您的身分驗證供應商顯示，目前登入的使用者已與一個 Olvid ID 關聯。如果您繼續，這個 Olvid ID 將會被撤銷，並且您的新 ID 會與該使用者關聯。\n請聯絡您的管理員以獲取更多詳細資訊。</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_impossible" state="needs_review" hash="-734813550">您的身分驗證供應商顯示，您登入的使用者帳戶已與 Olvid ID 關聯。您無法繼續建立您的 ID。\n\n請聯絡您的管理員以獲取更多詳細資訊。</string>
@@ -1142,6 +1142,7 @@
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">此分頁的通知已靜音指示</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">建立個人資料</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">您的公司身分驗證供應商已成功設定。請按下下方的「驗證」按鈕以進行驗證並擷取您的個人資訊。</string>
+	<string name="text_explanation_onboarding_keycloak_parsed_configuration_magic" state="needs_review" hash="1823898406">貴公司的身分驗證提供者已成功設定。請點擊下方的「使用魔法連結」按鈕以檢索您的個人資訊。</string>
 	<string name="text_explanation_onboarding_keycloak_mdm" state="needs_review" hash="1340457300">歡迎來到 Olvid.\n\n此安裝由您的公司管理，並已設定使用身分識別提供者。請按下下方的「驗證」按鈕以進行驗證並擷取您的個人資訊。\n\n如果您已經使用過 Olvid，並想從備份還原您的金鑰和聯絡人，請按下「還原備份」。</string>
 	<string name="button_label_see_details" state="needs_review" hash="238834473">查看詳情</string>
 	<string name="link_label_invitation_url" state="needs_review" hash="744905192">新增聯絡人</string>
@@ -2144,8 +2145,13 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">對端裝置無法連線</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">重新建立所有安全通道</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">重建所有安全通道會強制 Olvid 與您聯絡人的所有裝置建立新的安全通訊管道。 通常情況下這沒有用處，但可以解決一些罕見的情況，即這些管道中的某些管道「不同步」。\n\n**警告：**如果您有很多聯絡人，此操作可能需要幾分鐘，並且您可能會在執行過程中遺失一些傳入訊息。</string>
+	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">使用“魔術連結”</string>
+	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">無效的魔法連結</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">通話已結束</string>
 	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">需要為您的團隊訂閱嗎？</string>
 	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">訪問 Olvid 商店</string>
 	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">提醒已設定</string>
+	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">身份驗證失敗</string>
+	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">您的個人資料目前由您的組織管理，需要重新進行身份驗證。但是，似乎沒有可用的受支援的身份驗證方法。\n\n請聯繫您的管理員以獲取更多詳細資訊。</string>
+	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">似乎沒有可用的受支援的驗證方法。</string>
 </resources>

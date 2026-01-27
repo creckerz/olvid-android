@@ -855,7 +855,7 @@
     <string name="dialog_title_update_available">Mise à jour disponible</string>
     <string name="dialog_message_update_available">Une nouvelle version d\'Olvid est disponible sur Google Play.\n\nVeuillez mettre à jour pour profiter des dernières fonctionnalités.</string>
     <string name="dialog_title_call_initiation_not_supported">Émission d\'appels impossible</string>
-    <string name="dialog_message_call_initiation_not_supported">Il semble que votre serveur Olvid ne permette pas l\'émission d\'appels sécurisés.\n\nVeuillez contacter votre administrateur pour plus d\'informations.</string>
+    <string name="dialog_message_call_initiation_not_supported">Il semble que votre serveur Olvid ne permette pas l\'émission d\'appels sécurisés.\n\nVeuillez contacter votre administrateur pour plus de détails.</string>
     <string name="label_identity_creation_options">Options de création d\'ID</string>
     <string name="text_option_server">Serveur\u00a0: %1$s</string>
     <string name="text_option_license_code">Licence\u00a0: %1$s</string>
@@ -891,7 +891,7 @@
     <string name="explanation_keycloak_update_same_server">Olvid est déjà configuré pour utiliser le fournisseur d\'identités de votre société.\nVeuillez contacter votre administrateur pour plus de détails.</string>
     <string name="explanation_keycloak_unable_to_contact_server">Échec de connexion au fournisseur d\'identités de votre société. Veuillez vérifier l\'état de votre connexion internet ou contacter votre administrateur pour plus de détails.</string>
     <string name="explanation_keycloak_update_bad_server">Impossible de configurer le fournisseur d\'identités de votre société avec votre ID Olvid actuel. Votre ID a été généré sur un serveur Olvid différent.\nVeuillez contacter votre administrateur pour plus de détails.</string>
-    <string name="explanation_keycloak_olvid_version_outdated">Impossible de configurer le fournisseur d\'identités de votre société. Votre version d\'Olvid est dépassée et n\'est pas compatible avec le fournisseur d\'identités de votre société.\nVeuillez mettre à jour Olvid et réessayer, ou contacter votre administrateur pour plus de détails.</string>
+    <string name="explanation_keycloak_olvid_version_outdated">Votre version d\'Olvid est dépassée et n\'est pas compatible avec le fournisseur d\'identités de votre société.\nVeuillez mettre à jour Olvid et réessayer, ou contacter votre administrateur pour plus de détails.</string>
     <string name="explanation_keycloak_bind">Le nom ci-dessous a été récupéré depuis le fournisseur d\'identités de votre société.\nUne fois votre ID Olvid géré par ce fournisseur, c\'est comme cela que vos contacts vous verront dans Olvid.</string>
     <string name="button_label_manage_keycloak">Passer à un ID géré</string>
     <string name="toast_message_keycloak_bind_successful">Passage à un ID géré réussi</string>
@@ -899,7 +899,7 @@
     <string name="menu_action_unbind_from_keycloak">Retirer le fournisseur d\'identités</string>
     <string name="dialog_title_unbind_from_keycloak">Retirer le fournisseur d\'identités</string>
     <string name="dialog_title_unbind_from_keycloak_restricted">Impossible de retirer le fournisseur d\'identités</string>
-    <string name="dialog_message_unbind_from_keycloak">Votre ID Olvid est actuellement géré par le fournisseur d\'identités de votre société. Vous êtes sur le point de passer à un ID Olvid normal, non-géré.\n\nSi vous continuez, vous ne pourrez plus ajouter automatiquement d\'autres employés à vos contacts. Veuillez contacter votre administrateur pour plus de détails.\n\nSouhaitez-vous continuer\u00a0?</string>
+    <string name="dialog_message_unbind_from_keycloak">Votre profil est actuellement géré par votre organisation. Vous êtes sur le point de passer à un ID Olvid normal, non-géré.\n\nSi vous continuez, vous ne pourrez plus ajouter automatiquement d\'autres employés à vos contacts. Veuillez contacter votre administrateur pour plus de détails.\n\nSouhaitez-vous continuer\u00a0?</string>
     <string name="dialog_message_unbind_from_keycloak_restricted">Votre ID Olvid est actuellement géré par le fournisseur d\'identités de votre société qui restreint les trasnferts. Il ne peut pas être retiré à votre initiative.\n\n Veuillez contacter votre administrateur pour plus de détails.</string>
     <string name="text_explanation_warning_identity_creation_keycloak_revocation_needed">Votre fournisseur d\'identités indique qu\'un ID Olvid est déjà associé à l\'utilisateur sous lequel vous vous êtes connecté. Si vous continuez, cet ID Olvid sera révoqué et votre nouvel ID sera associé à l\'utilisateur.\nVeuillez contacter votre administrateur pour plus de détails.</string>
     <string name="text_explanation_warning_identity_creation_keycloak_revocation_impossible">Votre fournisseur d\'identités indique qu\'un ID Olvid est déjà associé à l\'utilisateur sous lequel vous vous êtes connecté. Vous ne pouvez pas poursuivre la création de votre ID Olvid.\n\nVeuillez contacter votre administrateur pour plus de détails.</string>
@@ -1143,6 +1143,7 @@
     <string name="content_description_notification_muted_indicator">Indicateur que les notifications sont désactivées pour ce profil</string>
     <string name="button_label_create_a_profile">Créer un profil</string>
     <string name="text_explanation_onboarding_keycloak_parsed_configuration">Le fournisseur d\'identités de votre société a été configuré avec succès. Appuyez sur «\u00a0s\'authentifier\u00a0» ci-dessous pour vous authentifier auprès de ce dernier et récupérer vos informations personnelles.</string>
+    <string name="text_explanation_onboarding_keycloak_parsed_configuration_magic">Le fournisseur d\'identités de votre société a été configuré avec succès. Appuyez sur «\u00a0utiliser le lien magique\u00a0» ci-dessous pour récupérer vos informations personnelles.</string>
     <string name="text_explanation_onboarding_keycloak_mdm">Bienvenue dans Olvid.\n\nCette installation est gérée par votre société et a été configurée pour utiliser un fournisseur d\'identités. Appuyez sur «\u00a0s\'authentifier\u00a0» ci-dessous pour vous authentifier auprès de ce dernier et récupérer vos informations personnelles.\n\nSi vous avez déjà utilisé Olvid et souhaitez restaurer vos clés et contacts à partir d\'une sauvegarde, appuyez sur «\u00a0restaurer une sauvegarde\u00a0».</string>
     <string name="button_label_see_details">Détails</string>
     <string name="link_label_invitation_url">Ajouter un contact</string>
@@ -2139,8 +2140,13 @@
     <string name="webrtc_status_start_call_timeout">Appareil du correspondant injoignable</string>
     <string name="recreate_all_secure_channels">Recréer tous les canaux sécurisés</string>
     <string name="recreate_all_secure_channels_explanation">Recréer tous les canaux sécurisés forcera Olvid à créer de nouveaux canaux de communication sécurisés avec tous les appareils de vos contacts. Ceci n\'est généralement pas utile, mais peut débloquer de rares situations où certains de ces canaux sont « désynchronisés ».\n\n**Attention :** si vous avez de nombreux contacts, cette opération peut prendre quelques minutes et vous pourriez perdre certains messages reçus pendant qu\'elle s\'exécute.</string>
+    <string name="button_label_use_magic_link">Utiliser le « lien magique »</string>
+    <string name="toast_message_magic_link_failed">« Lien magique » invalide</string>
     <string name="label_hanged_up">Appel raccroché</string>
     <string name="store_link_need_licenses">Besoin d\'abonnements pour votre équipe ?</string>
     <string name="store_link_olvid_store">Visitez le Store Olvid</string>
     <string name="toast_message_reminder_set">Rappel programmé</string>
+    <string name="dialog_title_keycloak_authentication_impossible">Authentification impossible</string>
+    <string name="dialog_message_keycloak_authentication_impossible">Votre profil est actuellement géré par votre organisation et une ré-authentification est nécessaire. Cependant, aucune méthode d\'authentification compatible ne semble disponible.\n\nVeuillez contacter votre administrateur pour plus de détails.</string>
+    <string name="onboarding_transfer_keycloak_error_message_authentication_impossible">Aucune méthode d\'authentification compatible ne semble disponible.</string>
 </resources>

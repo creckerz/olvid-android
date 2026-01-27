@@ -865,7 +865,7 @@
     <string name="dialog_title_update_available">Update available</string>
     <string name="dialog_message_update_available">A newer version of Olvid is available from Google Play.\n\nPlease update to take advantage of the newest features.</string>
     <string name="dialog_title_call_initiation_not_supported">Call initiation not supported</string>
-    <string name="dialog_message_call_initiation_not_supported">It seems your Olvid server does not support secure call initiation.\n\nPlease contact your administrator for more information.</string>
+    <string name="dialog_message_call_initiation_not_supported">It seems your Olvid server does not support secure call initiation.\n\nPlease contact your administrator for more details.</string>
     <string name="label_identity_creation_options">ID creation options</string>
     <string name="text_option_server">Server: %1$s</string>
     <string name="text_option_license_code">License: %1$s</string>
@@ -893,7 +893,7 @@
     <string name="toast_message_unable_to_keycloak_revoke">Failed to replace previous Olvid ID, please try again</string>
     <string name="toast_message_keycloak_revoke_successful">Successfully replaced previous Olvid ID</string>
     <string name="dialog_title_keycloak_authentication_required_user_id_changed">User change detected</string>
-    <string name="dialog_message_keycloak_authentication_required_user_id_changed">You Olvid ID is managed by your company\'s identity provider. It seems you authenticated as a different user than usual. This is not supported.\n\nPlease contact your administrator or re-authenticate as the correct user.</string>
+    <string name="dialog_message_keycloak_authentication_required_user_id_changed">You profile is currently managed by your organisation. It seems you authenticated as a different user than usual. This is not supported.\n\nPlease contact your administrator or re-authenticate as the correct user.</string>
     <string name="dialog_title_add_keycloak_user">Add a contact</string>
     <string name="dialog_message_add_keycloak_user">You selected to add %1$s to your contacts. Do you want to proceed?</string>
     <string name="explanation_keycloak_update_new">You are about to configure your company\'s identity provider in Olvid. Once configured, you can authenticate with this server and Olvid will let you to seamlessly add other employees to your contacts.\nPlease contact your administrator for more details.</string>
@@ -901,7 +901,7 @@
     <string name="explanation_keycloak_update_same_server">Olvid is already configured with your company\'s identity provider.\nPlease contact your administrator for more details.</string>
     <string name="explanation_keycloak_unable_to_contact_server">Unable to connect to your company\'s identity provider. Please check your internet connection or contact your administrator for more details.</string>
     <string name="explanation_keycloak_update_bad_server">Unable to configure your company\'s identity provider with your current Olvid ID. Your ID was generated on a different Olvid server.\nPlease contact your administrator for more details.</string>
-    <string name="explanation_keycloak_olvid_version_outdated">Unable to configure your company\'s identity provider. Your version of Olvid is outdated and is not compatible with your company\'s identity provider.\nPlease update Olvid and try again, or contact your administrator for more details.</string>
+    <string name="explanation_keycloak_olvid_version_outdated">Your version of Olvid is outdated and is not compatible with your company\'s identity provider.\nPlease update Olvid and try again, or contact your administrator for more details.</string>
     <string name="explanation_keycloak_bind">The name below was retrieved from your company\'s identity provider.\nOnce your Olvid ID is managed by your this provider, this is how your contacts will see you in Olvid.</string>
     <string name="button_label_manage_keycloak">Switch to a managed ID</string>
     <string name="toast_message_keycloak_bind_successful">Successfully switched to a managed ID</string>
@@ -1159,6 +1159,7 @@
     <string name="content_description_notification_muted_indicator">Indicator that notifications are muted for this profile</string>
     <string name="button_label_create_a_profile">Create a profile</string>
     <string name="text_explanation_onboarding_keycloak_parsed_configuration">The identity provider of your company was successfully configured. Press the \"authenticate\" button below to authenticate with it and retrieve your personal information.</string>
+    <string name="text_explanation_onboarding_keycloak_parsed_configuration_magic">The identity provider of your company was successfully configured. Press the \"use magic link\" button below to retrieve your personal information.</string>
     <string name="text_explanation_onboarding_keycloak_mdm">Welcome to Olvid.\n\nThis installation is managed by your company and was configured to use an identity provider. Press the \"authenticate\" button below to authenticate with it and retrieve your personal information.\n\nIf you already used Olvid and want to restore your keys and contacts from a backup, press \"restore a backup\".</string>
     <string name="button_label_see_details">See details</string>
     <string name="link_label_invitation_url">Add contact</string>
@@ -1928,7 +1929,7 @@
     <string name="restriction_user_agent_override_title" translatable="false">User-Agent override</string>
     <string name="restriction_user_agent_override_description" translatable="false">A user-agent to be presented by Olvid when doing HTTP/HTTPS requests. This will override the user-agent system property.</string>
     <string name="restriction_user_agent_override_for_link_previews_title" translatable="false">Override User-Agent for link previews</string>
-    <string name="restriction_user_agent_override_for_link_previews_description" translatable="false">If a user-agent override is set, setting this to true will also apply this override to link previews, in place of the default \"WhatsApp/2\" user-agent. This may impact the quality of link previews.</string>
+    <string name="restriction_user_agent_override_for_link_previews_description" translatable="false">If a user-agent override is set, setting this to true will also apply this override to link previews, instead of the default \"WhatsApp/2\" user-agent. This may impact the quality of link previews.</string>
     <string name="onboarding_transfer_restricted_title">Profile transfer restriction</string>
     <string name="explanation_transfer_restriction_title_1">Important</string>
     <string name="explanation_transfer_restriction_text_1">Your company requires you to authenticate with their identity provider on your new device to access your profile.</string>
@@ -2180,8 +2181,13 @@
     <string name="webrtc_status_start_call_timeout">Peer device unreachable</string>
     <string name="recreate_all_secure_channels">Recreate all secure channels</string>
     <string name="recreate_all_secure_channels_explanation">Recreating all secure channels will force Olvid to create new secure communication channels with all the devices of your contacts. This is generally not useful, but can solve rare situations where some of these channels are \"out of sync\".\n\n**Warning:** if you have many contacts, this operation can take a few minutes and you could lose some incoming messages while it is running.</string>
+    <string name="button_label_use_magic_link">Use "magic link"</string>
+    <string name="toast_message_magic_link_failed">Invalid magic link</string>
     <string name="label_hanged_up">Call hanged up</string>
     <string name="store_link_need_licenses">Need subscriptions for your team?</string>
     <string name="store_link_olvid_store">Visit the Olvid Store</string>
     <string name="toast_message_reminder_set">Reminder set</string>
+    <string name="dialog_title_keycloak_authentication_impossible">Authentication impossible</string>
+    <string name="dialog_message_keycloak_authentication_impossible">Your profile is currently managed by your organisation and re-authentication is required. However, no supported authentication method seems to be available.\n\nPlease contact your administrator for more details.</string>
+    <string name="onboarding_transfer_keycloak_error_message_authentication_impossible">No supported authentication method seems to be available.</string>
 </resources>

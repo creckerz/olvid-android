@@ -1,3 +1,9 @@
+# Build 287 (4.2.1)
+2026-01-27
+
+- Fix an issue with voice messages not readable on iOS.
+- Support Olvid ID-based authentication on Keycloak.
+
 # Build 286 (4.2)
 2026-01-23
 

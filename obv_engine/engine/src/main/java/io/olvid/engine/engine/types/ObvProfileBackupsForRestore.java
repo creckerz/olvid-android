@@ -23,6 +23,7 @@ package io.olvid.engine.engine.types;
 import java.util.List;
 import java.util.Map;
 
+import io.olvid.engine.engine.types.identities.ObvKeycloakAuthType;
 import io.olvid.engine.engine.types.sync.ObvSyncSnapshot;
 
 
@@ -47,8 +48,7 @@ public class ObvProfileBackupsForRestore {
         public int groupCount;
         public KeycloakStatus keycloakStatus;
         public String keycloakServerUrl;
-        public String keycloakClientId;
-        public String keycloakClientSecret;
+        public List<ObvKeycloakAuthType> supportedAuthenticationMethods;
         public ObvSyncSnapshot snapshot;
     }
 

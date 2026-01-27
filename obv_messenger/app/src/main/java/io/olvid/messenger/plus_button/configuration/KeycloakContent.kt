@@ -1,5 +1,6 @@
 package io.olvid.messenger.plus_button.configuration
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.provider.Settings
 import android.widget.Toast
@@ -38,6 +39,7 @@ import io.olvid.messenger.AppSingleton
 import io.olvid.messenger.BuildConfig
 import io.olvid.messenger.R
 import io.olvid.messenger.customClasses.ConfigurationKeycloakPojo
+import io.olvid.messenger.customClasses.ConfigurationPojo
 import io.olvid.messenger.designsystem.components.OlvidActionButton
 import io.olvid.messenger.designsystem.components.OlvidCircularProgress
 import io.olvid.messenger.designsystem.components.OlvidTextButton
@@ -48,6 +50,7 @@ import io.olvid.messenger.openid.KeycloakManager
 import io.olvid.messenger.openid.KeycloakTasks
 import io.olvid.messenger.openid.jsons.KeycloakServerRevocationsAndStuff
 import io.olvid.messenger.openid.jsons.KeycloakUserDetailsAndStuff
+import io.olvid.messenger.openid.jsons.OlvidWellKnownJson
 import io.olvid.messenger.plus_button.PlusButtonViewModel
 import net.openid.appauth.AuthState
 import net.openid.appauth.browser.BrowserSelector
@@ -57,6 +60,7 @@ import org.jose4j.jwk.JsonWebKeySet
 internal fun KeycloakContent(
     viewModel: PlusButtonViewModel,
     keycloakPojo: ConfigurationKeycloakPojo,
+    keycloakMagic: ConfigurationPojo.KeycloakMagic?,
     onCancel: () -> Unit,
     onNavigateToKeycloakBind: () -> Unit,
     authenticator: KeycloakAuthenticator
@@ -77,12 +81,18 @@ internal fun KeycloakContent(
 
     if (showTransferRestrictedDialog) {
         AlertDialog(
-            onDismissRequest = { showTransferRestrictedDialog = false },
+            onDismissRequest = {
+                @Suppress("AssignedValueIsNeverRead")
+                showTransferRestrictedDialog = false
+            },
             title = { Text(stringResource(R.string.dialog_title_rebind_keycloak_restricted)) },
             text = { Text(stringResource(R.string.dialog_message_rebind_keycloak_restricted)) },
             confirmButton = {
                 OlvidTextButton(
-                    onClick = { showTransferRestrictedDialog = false },
+                    onClick = {
+                        @Suppress("AssignedValueIsNeverRead")
+                        showTransferRestrictedDialog = false
+                    },
                     text = stringResource(R.string.button_label_ok)
                 )
             }
@@ -91,7 +101,10 @@ internal fun KeycloakContent(
 
     if (showTimeErrorDialog) {
         AlertDialog(
-            onDismissRequest = { showTimeErrorDialog = false },
+            onDismissRequest = {
+                @Suppress("AssignedValueIsNeverRead")
+                showTimeErrorDialog = false
+            },
             title = { Text(stringResource(R.string.dialog_title_authentication_failed_time_offset)) },
             text = { Text(stringResource(R.string.dialog_message_authentication_failed_time_offset)) },
             confirmButton = {
@@ -100,12 +113,16 @@ internal fun KeycloakContent(
                         val intent = Intent(Settings.ACTION_DATE_SETTINGS)
                         context.startActivity(intent)
                     } catch (_: Exception) { }
+                    @Suppress("AssignedValueIsNeverRead")
                     showTimeErrorDialog = false
                 }, text = stringResource(R.string.button_label_clock_settings))
             },
             dismissButton = {
                 OlvidTextButton(
-                    onClick = { showTimeErrorDialog = false },
+                    onClick = {
+                        @Suppress("AssignedValueIsNeverRead")
+                        showTimeErrorDialog = false
+                    },
                     text = stringResource(R.string.button_label_ok)
                 )
             }
@@ -114,12 +131,18 @@ internal fun KeycloakContent(
 
     if (showNoBrowserDialog) {
         AlertDialog(
-            onDismissRequest = { showNoBrowserDialog = false },
+            onDismissRequest = {
+                @Suppress("AssignedValueIsNeverRead")
+                showNoBrowserDialog = false
+            },
             title = { Text(stringResource(R.string.dialog_title_no_browser_found)) },
             text = { Text(stringResource(R.string.dialog_message_no_browser_found)) },
             confirmButton = {
                 OlvidTextButton(
-                    onClick = { showNoBrowserDialog = false },
+                    onClick = {
+                        @Suppress("AssignedValueIsNeverRead")
+                        showNoBrowserDialog = false
+                    },
                     text = stringResource(R.string.button_label_ok)
                 )
             }
@@ -127,7 +150,7 @@ internal fun KeycloakContent(
     }
 
 
-    LaunchedEffect(keycloakPojo, viewModel.currentIdentity) {
+    LaunchedEffect(keycloakPojo, keycloakMagic,viewModel.currentIdentity) {
         val identity = viewModel.currentIdentity
         if (identity == null) {
             onCancel()
@@ -153,24 +176,36 @@ internal fun KeycloakContent(
 
         if (!alreadyBoundOnSameServer) {
             discovering = true
-            KeycloakTasks.discoverKeycloakServer(
+            KeycloakTasks.discoverKeycloakServerOpenidConfiguration(
                 keycloakPojo.server,
                 object : KeycloakTasks.DiscoverKeycloakServerCallback {
+                    @SuppressLint("LocalContextGetResourceValueCall")
                     override fun success(
                         serverUrl: String,
                         authState: AuthState,
-                        jwks: JsonWebKeySet
+                        jwks: JsonWebKeySet,
+                        olvidWellKnown: OlvidWellKnownJson?,
                     ) {
                         discovering = false
-                        viewModel.setKeycloakData(
-                            serverUrl,
-                            authState.jsonSerializeString(),
-                            jwks,
-                            keycloakPojo.clientId,
-                            keycloakPojo.clientSecret
-                        )
+
+                        val minimumBuildVersion = olvidWellKnown?.minBuildVersions?.android
+                        if (minimumBuildVersion != null && minimumBuildVersion > BuildConfig.VERSION_CODE) {
+                            errorMessage =
+                                context.getString(R.string.explanation_keycloak_olvid_version_outdated)
+                        } else {
+                            viewModel.setKeycloakData(
+                                serverUrl,
+                                authState.jsonSerializeString(),
+                                jwks,
+                                keycloakPojo.clientId,
+                                keycloakPojo.clientSecret,
+                                keycloakMagic,
+                                olvidWellKnown?.supportIdentityAuthentication
+                            )
+                        }
                     }
 
+                    @SuppressLint("LocalContextGetResourceValueCall")
                     override fun failed() {
                         discovering = false
                         errorMessage =
@@ -179,6 +214,7 @@ internal fun KeycloakContent(
                 }
             )
         } else {
+            @SuppressLint("LocalContextGetResourceValueCall")
             errorMessage = context.getString(R.string.explanation_keycloak_update_same_server)
         }
     }
@@ -230,7 +266,7 @@ internal fun KeycloakContent(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = context.getString(
+                    text = stringResource(
                         R.string.text_option_identity_provider,
                         keycloakPojo.server
                     ),
@@ -254,112 +290,183 @@ internal fun KeycloakContent(
                     }
                 }
 
-                OlvidTextButton(
-                    modifier = Modifier.align(Alignment.Start),
-                    contentPadding = PaddingValues(horizontal = 0.dp, vertical = 8.dp),
-                    text = stringResource(R.string.content_description_authentication_browser_choice),
-                    icon = R.drawable.ic_settings,
-                    onClick = { KeycloakBrowserChooserDialog.openBrowserChoiceDialog(context) },
-                    contentColor = colorResource(R.color.olvid_gradient_light),
-                )
-                Spacer(modifier = Modifier.height(32.dp))
-                Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()) {
-                    OlvidTextButton(
-                        text = stringResource(R.string.button_label_cancel),
-                        contentColor = colorResource(R.color.greyTint),
-                        onClick = onCancel,
-                        large = true,
-                    )
-                    Spacer(modifier = Modifier.width(16.dp))
-                    OlvidActionButton(
-                        text = stringResource(R.string.button_label_authenticate),
-                        onClick = {
-                            if (viewModel.currentIdentity?.let {
-                                    KeycloakManager.isOwnedIdentityTransferRestricted(
-                                        it.bytesOwnedIdentity
+                val authenticationSuccess = { authState: AuthState ->
+                    viewModel.keycloakSerializedAuthState =
+                        authState.jsonSerializeString()
+                    authenticating = false
+                    retrievingDetails = true
+
+                    viewModel.currentIdentity?.let { currentIdentity ->
+                        KeycloakTasks.getOwnDetails(
+                            activity,
+                            viewModel.keycloakServerUrl!!,
+                            authState,
+                            viewModel.getSupportedKeycloakAuthMethods(),
+                            currentIdentity.bytesOwnedIdentity,
+                            viewModel.keycloakJwks!!,
+                            null,
+                            object :
+                                KeycloakManager.KeycloakCallback<Pair<KeycloakUserDetailsAndStuff, KeycloakServerRevocationsAndStuff>?> {
+                                @SuppressLint("LocalContextGetResourceValueCall")
+                                override fun success(result: Pair<KeycloakUserDetailsAndStuff, KeycloakServerRevocationsAndStuff>?) {
+                                    val keycloakUserDetailsAndStuff =
+                                        result?.first
+                                    val revocationAllowed =
+                                        result?.second?.revocationAllowed == true
+                                    val minimumBuildVersion =
+                                        result?.second?.minimumBuildVersions?.get(
+                                            "android"
+                                        )
+
+                                    if (keycloakUserDetailsAndStuff == null || keycloakUserDetailsAndStuff.server != viewModel.currentIdentityServer) {
+                                        errorMessage =
+                                            context.getString(R.string.explanation_keycloak_update_bad_server)
+                                        retrievingDetails = false
+                                        return
+                                    } else if (minimumBuildVersion != null && minimumBuildVersion > BuildConfig.VERSION_CODE) {
+                                        errorMessage =
+                                            context.getString(R.string.explanation_keycloak_olvid_version_outdated)
+                                        retrievingDetails = false
+                                        return
+                                    }
+                                    viewModel.keycloakUserDetails =
+                                        keycloakUserDetailsAndStuff
+                                    viewModel.isKeycloakRevocationAllowed =
+                                        revocationAllowed
+                                    retrievingDetails = false
+                                    onNavigateToKeycloakBind()
+                                }
+
+                                override fun failed(rfc: Int) {
+                                    retrievingDetails = false
+                                    App.toast(
+                                        R.string.toast_message_unable_to_retrieve_details,
+                                        Toast.LENGTH_SHORT
                                     )
-                                } == true) {
-                                showTransferRestrictedDialog = true
-                                return@OlvidActionButton
-                            }
+                                }
+                            })
 
-                            if (viewModel.keycloakSerializedAuthState != null && viewModel.keycloakClientId != null) {
-                                authenticating = true
-                                authenticator.authenticate(
-                                    viewModel.keycloakSerializedAuthState!!,
-                                    viewModel.keycloakClientId!!,
-                                    viewModel.keycloakClientSecret,
-                                    object : KeycloakTasks.AuthenticateCallback {
-                                        override fun success(authState: AuthState) {
-                                            viewModel.keycloakSerializedAuthState =
-                                                authState.jsonSerializeString()
-                                            authenticating = false
-                                            retrievingDetails = true
+                    }
+                }
 
-                                            KeycloakTasks.getOwnDetails(
-                                                activity,
-                                                viewModel.keycloakServerUrl!!,
-                                                authState,
-                                                viewModel.keycloakClientSecret,
-                                                viewModel.keycloakJwks!!,
-                                                null,
-                                                object :
-                                                    KeycloakManager.KeycloakCallback<Pair<KeycloakUserDetailsAndStuff, KeycloakServerRevocationsAndStuff>?> {
-                                                    override fun success(result: Pair<KeycloakUserDetailsAndStuff, KeycloakServerRevocationsAndStuff>?) {
-                                                        val keycloakUserDetailsAndStuff = result?.first
-                                                        val revocationAllowed = result?.second?.revocationAllowed == true
-                                                        val minimumBuildVersion = result?.second?.minimumBuildVersions?.get("android")
 
-                                                        if (keycloakUserDetailsAndStuff == null || keycloakUserDetailsAndStuff.server != viewModel.currentIdentityServer) {
-                                                            errorMessage =
-                                                                context.getString(R.string.explanation_keycloak_update_bad_server)
-                                                            retrievingDetails = false
-                                                            return
-                                                        } else if (minimumBuildVersion != null && minimumBuildVersion > BuildConfig.VERSION_CODE) {
-                                                            errorMessage =
-                                                                context.getString(R.string.explanation_keycloak_olvid_version_outdated)
-                                                            retrievingDetails = false
-                                                            return
-                                                        }
-                                                        viewModel.keycloakUserDetails =
-                                                            keycloakUserDetailsAndStuff
-                                                        viewModel.isKeycloakRevocationAllowed =
-                                                            revocationAllowed
-                                                        retrievingDetails = false
-                                                        onNavigateToKeycloakBind()
-                                                    }
+                if (keycloakMagic != null) {
+                    Row(
+                        horizontalArrangement = Arrangement.End,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        OlvidTextButton(
+                            text = stringResource(R.string.button_label_cancel),
+                            contentColor = colorResource(R.color.greyTint),
+                            onClick = onCancel,
+                            large = true,
+                        )
+                        Spacer(modifier = Modifier.width(16.dp))
+                        OlvidActionButton(
+                            text = stringResource(R.string.button_label_use_magic_link),
+                            onClick = {
+                                if (viewModel.currentIdentity?.let {
+                                        KeycloakManager.isOwnedIdentityTransferRestricted(it.bytesOwnedIdentity)
+                                    } == true) {
+                                    @Suppress("AssignedValueIsNeverRead")
+                                    showTransferRestrictedDialog = true
+                                    return@OlvidActionButton
+                                }
 
-                                                    override fun failed(rfc: Int) {
-                                                        retrievingDetails = false
-                                                        App.toast(
-                                                            R.string.toast_message_unable_to_retrieve_details,
-                                                            Toast.LENGTH_SHORT
-                                                        )
-                                                    }
-                                                })
-                                        }
+                                if (viewModel.keycloakSerializedAuthState != null && viewModel.keycloakServerUrl != null && viewModel.keycloakMagic != null) {
+                                    authenticating = true
 
-                                        override fun failed(rfc: Int) {
-                                            authenticating = false
-                                            if (rfc == KeycloakTasks.RFC_AUTHENTICATION_ERROR_TIME_OFFSET) {
-                                                showTimeErrorDialog = true
-                                            } else if (BrowserSelector.getAllBrowsers(activity)
-                                                    .isEmpty()
-                                            ) {
-                                                showNoBrowserDialog = true
-                                            } else {
+                                    KeycloakTasks.useMagicLink(
+                                        viewModel.keycloakServerUrl!!,
+                                        viewModel.keycloakMagic!!,
+                                        AuthState.jsonDeserialize(viewModel.keycloakSerializedAuthState!!),
+                                        object : KeycloakTasks.AuthenticateCallback {
+                                            override fun success(authState: AuthState) {
+                                                authenticationSuccess(authState)
+                                            }
+
+                                            override fun failed(rfc: Int) {
+                                                authenticating = false
                                                 App.toast(
-                                                    R.string.toast_message_authentication_failed,
+                                                    R.string.toast_message_magic_link_failed,
                                                     Toast.LENGTH_SHORT
                                                 )
                                             }
                                         }
-                                    }
-                                )
+                                    )
+                                }
                             }
-                        },
-                        enabled = viewModel.keycloakSerializedAuthState != null && !authenticating && !retrievingDetails
+                        )
+                    }
+                } else {
+                    OlvidTextButton(
+                        modifier = Modifier.align(Alignment.Start),
+                        contentPadding = PaddingValues(horizontal = 0.dp, vertical = 8.dp),
+                        text = stringResource(R.string.content_description_authentication_browser_choice),
+                        icon = R.drawable.ic_settings,
+                        onClick = { KeycloakBrowserChooserDialog.openBrowserChoiceDialog(context) },
+                        contentColor = colorResource(R.color.olvid_gradient_light),
                     )
+                    Spacer(modifier = Modifier.height(32.dp))
+                    Row(
+                        horizontalArrangement = Arrangement.End,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        OlvidTextButton(
+                            text = stringResource(R.string.button_label_cancel),
+                            contentColor = colorResource(R.color.greyTint),
+                            onClick = onCancel,
+                            large = true,
+                        )
+                        Spacer(modifier = Modifier.width(16.dp))
+                        OlvidActionButton(
+                            text = stringResource(R.string.button_label_authenticate),
+                            onClick = {
+                                if (viewModel.currentIdentity?.let {
+                                        KeycloakManager.isOwnedIdentityTransferRestricted(
+                                            it.bytesOwnedIdentity
+                                        )
+                                    } == true) {
+                                    @Suppress("AssignedValueIsNeverRead")
+                                    showTransferRestrictedDialog = true
+                                    return@OlvidActionButton
+                                }
+
+                                if (viewModel.keycloakSerializedAuthState != null && viewModel.keycloakClientId != null) {
+                                    authenticating = true
+                                    authenticator.authenticate(
+                                        viewModel.keycloakSerializedAuthState!!,
+                                        viewModel.keycloakClientId!!,
+                                        viewModel.keycloakClientSecret,
+                                        object : KeycloakTasks.AuthenticateCallback {
+                                            override fun success(authState: AuthState) {
+                                                authenticationSuccess(authState)
+                                            }
+
+                                            override fun failed(rfc: Int) {
+                                                authenticating = false
+                                                if (rfc == KeycloakTasks.RFC_AUTHENTICATION_ERROR_TIME_OFFSET) {
+                                                    @Suppress("AssignedValueIsNeverRead")
+                                                    showTimeErrorDialog = true
+                                                } else if (BrowserSelector.getAllBrowsers(activity)
+                                                        .isEmpty()
+                                                ) {
+                                                    @Suppress("AssignedValueIsNeverRead")
+                                                    showNoBrowserDialog = true
+                                                } else {
+                                                    App.toast(
+                                                        R.string.toast_message_authentication_failed,
+                                                        Toast.LENGTH_SHORT
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    )
+                                }
+                            },
+                            enabled = viewModel.keycloakSerializedAuthState != null && !authenticating && !retrievingDetails
+                        )
+                    }
                 }
             }
         }

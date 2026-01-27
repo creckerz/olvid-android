@@ -21,14 +21,20 @@ package io.olvid.messenger.onboarding.flow.screens.transfer
 
 import androidx.compose.animation.AnimatedContentTransitionScope.SlideDirection
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -37,9 +43,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import io.olvid.messenger.R
 import io.olvid.messenger.designsystem.theme.OlvidTypography
 import io.olvid.messenger.onboarding.flow.OnboardingAction
@@ -50,6 +59,7 @@ import io.olvid.messenger.onboarding.flow.OnboardingScreen
 import io.olvid.messenger.onboarding.flow.OnboardingStep
 
 fun NavGraphBuilder.sourceTransferRestrictedWarning(
+    keycloakWithoutOidcAuthentication: Boolean,
     onContinue: () -> Unit,
     onClose: () -> Unit,
     ) {
@@ -72,7 +82,8 @@ fun NavGraphBuilder.sourceTransferRestrictedWarning(
                     OnboardingAction(
                         label = AnnotatedString(stringResource(id = R.string.button_label_ok)),
                         type = BUTTON,
-                        onClick = onContinue
+                        onClick = onContinue,
+                        enabled = keycloakWithoutOidcAuthentication.not()
                     )
                 )
             ),
@@ -149,7 +160,60 @@ fun NavGraphBuilder.sourceTransferRestrictedWarning(
                         )
                     }
                 }
+
+                if (keycloakWithoutOidcAuthentication) {
+                    Box(modifier = Modifier.padding(vertical = 16.dp).size(64.dp, 1.dp).background(colorResource(R.color.greyTint)))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Image(
+                            modifier = Modifier
+                                .padding(end = 16.dp)
+                                .size(32.dp),
+                            painter = painterResource(id = R.drawable.ic_error_outline),
+                            colorFilter = ColorFilter.tint(color = colorResource(R.color.red)),
+                            contentDescription = ""
+                        )
+                        Column(
+                            modifier = Modifier.weight(1f, true)
+                        ) {
+                            Text(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(bottom = 8.dp),
+                                style = OlvidTypography.body1,
+                                fontWeight = FontWeight.Bold,
+                                text = stringResource(R.string.dialog_title_keycloak_authentication_impossible)
+                            )
+                            Text(
+                                modifier = Modifier.fillMaxWidth(),
+                                style = OlvidTypography.body1.copy(
+                                    color = colorResource(R.color.greyTint)
+                                ),
+                                text = stringResource(R.string.onboarding_transfer_keycloak_error_message_authentication_impossible)
+                            )
+                        }
+                    }
+                }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+private fun Preview() {
+    val navController = rememberNavController()
+
+    NavHost(
+        navController = navController,
+        startDestination = OnboardingRoutes.TRANSFER_RESTRICTED_WARNING
+    ) {
+        sourceTransferRestrictedWarning(
+            keycloakWithoutOidcAuthentication = true,
+            onContinue =  {},
+            onClose = {}
+        )
     }
 }

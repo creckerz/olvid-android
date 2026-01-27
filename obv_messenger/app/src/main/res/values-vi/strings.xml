@@ -854,7 +854,7 @@
 	<string name="dialog_title_update_available" state="needs_review" hash="-1893271535">Có bản cập nhật</string>
 	<string name="dialog_message_update_available" state="needs_review" hash="259838609">Một phiên bản mới của Olvid đã có trên Google Play.\n\nVui lòng cập nhật để tận hưởng các tính năng mới nhất.</string>
 	<string name="dialog_title_call_initiation_not_supported" state="needs_review" hash="-2088021831">Không hỗ trợ bắt đầu cuộc gọi</string>
-	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="-1087657662">Có vẻ như máy chủ Olvid của bạn không hỗ trợ khởi tạo cuộc gọi bảo mật.\n\nVui lòng liên hệ với quản trị viên của bạn để biết thêm thông tin.</string>
+	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="1760333819">Có vẻ như máy chủ Olvid của bạn không hỗ trợ khởi tạo cuộc gọi bảo mật.\nVui lòng liên hệ với quản trị viên của bạn để biết thêm chi tiết.</string>
 	<string name="label_identity_creation_options" state="needs_review" hash="1180456032">Tùy chọn tạo ID</string>
 	<string name="text_option_server" state="needs_review" hash="-1130676431">Máy chủ: %1$s</string>
 	<string name="text_option_license_code" state="needs_review" hash="1222068504">Giấy phép: %1$s</string>
@@ -882,7 +882,7 @@
 	<string name="toast_message_unable_to_keycloak_revoke" state="needs_review" hash="-1368037130">Không thể thay thế ID Olvid trước đó, vui lòng thử lại</string>
 	<string name="toast_message_keycloak_revoke_successful" state="needs_review" hash="-1216369809">ID Olvid cũ đã được thay thế thành công</string>
 	<string name="dialog_title_keycloak_authentication_required_user_id_changed" state="needs_review" hash="-896407029">Thay đổi người dùng được phát hiện</string>
-	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="1319874532">ID Olvid của bạn được quản lý bởi nhà cung cấp danh tính của công ty bạn. Có vẻ như bạn đã xác thực với một người dùng khác thường. Điều này không được hỗ trợ.\n\nVui lòng liên hệ với quản trị viên của bạn hoặc xác thực lại với người dùng chính xác.</string>
+	<string name="dialog_message_keycloak_authentication_required_user_id_changed" state="needs_review" hash="876252686">Hiện tại, hồ sơ của bạn đang được quản lý bởi tổ chức của bạn. Có vẻ như bạn đã xác thực bằng một tài khoản khác với tài khoản bạn thường sử dụng. Điều này không được hỗ trợ.\n\nVui lòng liên hệ với quản trị viên của bạn hoặc xác thực lại bằng tài khoản chính xác.</string>
 	<string name="dialog_title_add_keycloak_user" state="needs_review" hash="-1050193239">Thêm liên hệ</string>
 	<string name="dialog_message_add_keycloak_user" state="needs_review" hash="-1755937035">Bạn đã chọn thêm %1$s vào danh bạ của mình. Bạn có muốn tiếp tục không?</string>
 	<string name="explanation_keycloak_update_new" state="needs_review" hash="1136733528">Bạn đang chuẩn bị cấu hình nhà cung cấp danh tính của công ty bạn trong Olvid. Sau khi cấu hình, bạn có thể xác thực với máy chủ này và Olvid sẽ cho phép bạn thêm liền mạch các nhân viên khác vào danh bạ của mình.\nVui lòng liên hệ với quản trị viên của bạn để biết thêm chi tiết.</string>
@@ -890,7 +890,7 @@
 	<string name="explanation_keycloak_update_same_server" state="needs_review" hash="1886762594">Olvid đã được cấu hình với nhà cung cấp danh tính của công ty bạn.\nVui lòng liên hệ với quản trị viên để biết thêm chi tiết.</string>
 	<string name="explanation_keycloak_unable_to_contact_server" state="needs_review" hash="2123517499">Không thể kết nối với nhà cung cấp danh tính của công ty bạn. Vui lòng kiểm tra kết nối internet của bạn hoặc liên hệ với quản trị viên để biết thêm chi tiết.</string>
 	<string name="explanation_keycloak_update_bad_server" state="needs_review" hash="546492417">Không thể cấu hình nhà cung cấp danh tính của công ty bạn với ID Olvid hiện tại của bạn. ID của bạn đã được tạo trên một máy chủ Olvid khác.\nVui lòng liên hệ với quản trị viên của bạn để biết thêm chi tiết.</string>
-	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-317755135">Không thể cấu hình nhà cung cấp danh tính của công ty bạn. Phiên bản Olvid của bạn đã lỗi thời và không tương thích với nhà cung cấp danh tính của công ty bạn.\nVui lòng cập nhật Olvid và thử lại, hoặc liên hệ với quản trị viên để biết thêm chi tiết.</string>
+	<string name="explanation_keycloak_olvid_version_outdated" state="needs_review" hash="-1487678865">Phiên bản Olvid của bạn đã lỗi thời và không tương thích với nhà cung cấp dịch vụ xác thực của công ty bạn.\nVui lòng cập nhật Olvid và thử lại, hoặc liên hệ với quản trị viên để biết thêm chi tiết.</string>
 	<string name="explanation_keycloak_bind" state="needs_review" hash="445359846">Tên bên dưới được truy xuất từ nhà cung cấp danh tính của công ty bạn.\nKhi ID Olvid của bạn được quản lý bởi nhà cung cấp này, danh bạ của bạn sẽ thấy bạn như thế này trong Olvid.</string>
 	<string name="button_label_manage_keycloak" state="needs_review" hash="-1323644699">Chuyển sang ID được quản lý</string>
 	<string name="toast_message_keycloak_bind_successful" state="needs_review" hash="749864054">Chuyển sang ID được quản lý thành công</string>
@@ -898,7 +898,7 @@
 	<string name="menu_action_unbind_from_keycloak" state="needs_review" hash="549323804">Xóa nhà cung cấp danh tính</string>
 	<string name="dialog_title_unbind_from_keycloak" state="needs_review" hash="549323804">Xóa nhà cung cấp danh tính</string>
 	<string name="dialog_title_unbind_from_keycloak_restricted" state="needs_review" hash="1941011536">Không thể xóa nhà cung cấp danh tính</string>
-	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="915111540">ID Olvid của bạn hiện đang được quản lý bởi nhà cung cấp danh tính của công ty bạn. Bạn sắp chuyển sang ID Olvid thông thường, không được quản lý.\n\nNếu bạn tiếp tục, bạn sẽ không còn có thể dễ dàng thêm liên hệ từ công ty của mình vào Olvid nữa. Vui lòng liên hệ với quản trị viên của bạn để biết thêm chi tiết.\n\nBạn có muốn tiếp tục không?</string>
+	<string name="dialog_message_unbind_from_keycloak" state="needs_review" hash="861158628">ID Olvid của bạn hiện đang được quản lý bởi nhà cung cấp danh tính của công ty bạn. Bạn sắp chuyển sang ID Olvid thông thường, không được quản lý.\n\nNếu bạn tiếp tục, bạn sẽ không thể dễ dàng thêm danh bạ từ công ty của mình vào Olvid. Vui lòng liên hệ với quản trị viên của bạn để biết thêm chi tiết.\n\nBạn có muốn tiếp tục không?</string>
 	<string name="dialog_message_unbind_from_keycloak_restricted" state="needs_review" hash="-155299318">ID Olvid của bạn hiện đang được quản lý bởi nhà cung cấp danh tính của công ty bạn, điều này hạn chế việc chuyển giao. Bạn không thể xóa nó theo sáng kiến của mình.\n\nVui lòng liên hệ với quản trị viên của bạn để biết thêm chi tiết.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_needed" state="needs_review" hash="-1740408397">Nhà cung cấp danh tính của bạn cho biết một ID Olvid đã được liên kết với người dùng bạn đã đăng nhập. Nếu bạn tiếp tục, ID Olvid này sẽ bị thu hồi và ID mới của bạn sẽ được liên kết với người dùng này.\nVui lòng liên hệ với quản trị viên của bạn để biết thêm chi tiết.</string>
 	<string name="text_explanation_warning_identity_creation_keycloak_revocation_impossible" state="needs_review" hash="-734813550">Nhà cung cấp danh tính của bạn cho biết một ID Olvid đã được liên kết với người dùng bạn đã đăng nhập. Bạn không thể tiếp tục tạo ID của mình.\n\nVui lòng liên hệ với quản trị viên của bạn để biết thêm chi tiết.</string>
@@ -1142,6 +1142,7 @@
 	<string name="content_description_notification_muted_indicator" state="needs_review" hash="1618439334">Chỉ báo rằng thông báo đã bị tắt tiếng cho hồ sơ này</string>
 	<string name="button_label_create_a_profile" state="needs_review" hash="-1568207484">Tạo hồ sơ</string>
 	<string name="text_explanation_onboarding_keycloak_parsed_configuration" state="needs_review" hash="1428471064">Nhà cung cấp danh tính của công ty bạn đã được cấu hình thành công. Nhấn nút \"xác thực\" bên dưới để xác thực với nhà cung cấp này và truy xuất thông tin cá nhân của bạn.</string>
+	<string name="text_explanation_onboarding_keycloak_parsed_configuration_magic" state="needs_review" hash="1823898406">Nhà cung cấp dịch vụ xác thực của công ty bạn đã được cấu hình thành công. Nhấn vào nút \"Sử dụng liên kết ma thuật\" bên dưới để truy xuất thông tin cá nhân của bạn.</string>
 	<string name="text_explanation_onboarding_keycloak_mdm" state="needs_review" hash="1340457300">Chào mừng bạn đến với Olvid.\n\nCài đặt này được quản lý bởi công ty của bạn và được cấu hình để sử dụng nhà cung cấp danh tính. Nhấn nút \"xác thực\" bên dưới để xác thực với nhà cung cấp này và truy xuất thông tin cá nhân của bạn.\n\nNếu bạn đã sử dụng Olvid và muốn khôi phục khóa và danh bạ của mình từ bản sao lưu, hãy nhấn \"khôi phục bản sao lưu\".</string>
 	<string name="button_label_see_details" state="needs_review" hash="238834473">Xem chi tiết</string>
 	<string name="link_label_invitation_url" state="needs_review" hash="744905192">Thêm liên hệ</string>
@@ -2144,8 +2145,13 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Thiết bị của người liên hệ không khả dụng</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Tạo lại tất cả các kênh bảo mật</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Tạo lại tất cả các kênh bảo mật sẽ buộc Olvid tạo các kênh liên lạc bảo mật mới với tất cả các thiết bị của danh bạ của bạn. Điều này thường không hữu ích, nhưng có thể giải quyết các tình huống hiếm gặp khi một số kênh này bị \"mất đồng bộ\".\n\n**Cảnh báo:** nếu bạn có nhiều liên hệ, thao tác này có thể mất vài phút và bạn có thể bỏ lỡ một số tin nhắn đến trong khi nó đang chạy.</string>
+	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">Sử dụng \"liên kết ma thuật\"</string>
+	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">Liên kết ma thuật không hợp lệ</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Cuộc gọi đã kết thúc</string>
 	<string name="store_link_need_licenses" state="needs_review" hash="-1212508527">Bạn có cần đăng ký cho nhóm của mình không?</string>
 	<string name="store_link_olvid_store" state="needs_review" hash="-1825630369">Truy cập Cửa hàng Olvid</string>
 	<string name="toast_message_reminder_set" state="needs_review" hash="-961055414">Nhắc nhở đã được đặt</string>
+	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">Không thể xác thực</string>
+	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">Hiện tại, hồ sơ của bạn đang được quản lý bởi tổ chức của bạn và cần phải xác thực lại. Tuy nhiên, có vẻ như không có phương thức xác thực nào được hỗ trợ.\n\nVui lòng liên hệ với quản trị viên của bạn để biết thêm chi tiết.</string>
+	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">Không có phương thức xác thực nào được hỗ trợ.</string>
 </resources>

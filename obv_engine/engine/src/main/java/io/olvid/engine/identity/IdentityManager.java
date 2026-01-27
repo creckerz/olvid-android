@@ -108,6 +108,7 @@ import io.olvid.engine.engine.types.ObvDeviceBackupForRestore;
 import io.olvid.engine.engine.types.identities.ObvContactActiveOrInactiveReason;
 import io.olvid.engine.engine.types.identities.ObvGroupV2;
 import io.olvid.engine.engine.types.identities.ObvIdentity;
+import io.olvid.engine.engine.types.identities.ObvKeycloakAuthType;
 import io.olvid.engine.engine.types.identities.ObvKeycloakState;
 import io.olvid.engine.engine.types.identities.ObvOwnedDevice;
 import io.olvid.engine.engine.types.sync.ObvBackupAndSyncDelegate;
@@ -573,7 +574,18 @@ public class IdentityManager implements IdentityDelegate, SolveChallengeDelegate
         }
 
         if (keycloakState != null) {
-            KeycloakServer keycloakServer = KeycloakServer.create(wrapSession(session), keycloakState.keycloakServer, ownedIdentity.getOwnedIdentity(), keycloakState.jwks.toJson(), keycloakState.signatureKey == null ? null : keycloakState.signatureKey.toJson(), keycloakState.clientId, keycloakState.clientSecret, keycloakState.transferRestricted);
+            String clientId = null;
+            String clientSecret = null;
+            boolean supportsIdBasedAuth = false;
+            for (ObvKeycloakAuthType authType : keycloakState.supportedAuthenticationMethods) {
+                if (authType instanceof ObvKeycloakAuthType.OpenIdConnect oidc) {
+                    clientId = oidc.clientId();
+                    clientSecret = oidc.clientSecret();
+                } else if (authType instanceof ObvKeycloakAuthType.IdBased) {
+                    supportsIdBasedAuth = true;
+                }
+            }
+            KeycloakServer keycloakServer = KeycloakServer.create(wrapSession(session), keycloakState.keycloakServer, ownedIdentity.getOwnedIdentity(), keycloakState.jwks.toJson(), keycloakState.signatureKey == null ? null : keycloakState.signatureKey.toJson(), clientId, clientSecret, keycloakState.transferRestricted, supportsIdBasedAuth);
             if (keycloakServer == null) {
                 return null;
             }
@@ -778,6 +790,16 @@ public class IdentityManager implements IdentityDelegate, SolveChallengeDelegate
             if (signatureKey == null) {
                 ContactGroupV2.deleteAllKeycloakGroupsForOwnedIdentity(wrapSession(session), ownedIdentity);
             }
+            session.addSessionCommitListener(backupNeededSessionCommitListener);
+            session.addSessionCommitListener(getSessionCommitListenerForProfileBackup(ownedIdentity));
+        }
+    }
+
+    @Override
+    public void setOwnedIdentityKeycloakSupportsIdBasedAuth(Session session, Identity ownedIdentity, boolean supportsIdBasedAuth) throws SQLException {
+        OwnedIdentity ownedIdentityObject = OwnedIdentity.get(wrapSession(session), ownedIdentity);
+        if (ownedIdentityObject != null && ownedIdentityObject.isKeycloakManaged()) {
+            KeycloakServer.setSupportsIdBasedAuth(wrapSession(session), ownedIdentityObject.getKeycloakServerUrl(), ownedIdentity, supportsIdBasedAuth);
             session.addSessionCommitListener(backupNeededSessionCommitListener);
             session.addSessionCommitListener(getSessionCommitListenerForProfileBackup(ownedIdentity));
         }
@@ -1086,13 +1108,25 @@ public class IdentityManager implements IdentityDelegate, SolveChallengeDelegate
             Logger.e("Owned identity not found in bindOwnedIdentityToKeycloak");
             throw new Exception();
         }
+        String clientId = null;
+        String clientSecret = null;
+        boolean supportsIdBasedAuth = false;
+        for (ObvKeycloakAuthType authType : keycloakState.supportedAuthenticationMethods) {
+            if (authType instanceof ObvKeycloakAuthType.OpenIdConnect oidc) {
+                clientId = oidc.clientId();
+                clientSecret = oidc.clientSecret();
+            } else if (authType instanceof ObvKeycloakAuthType.IdBased) {
+                supportsIdBasedAuth = true;
+            }
+        }
+
         if (ownedIdentityObject.isKeycloakManaged()) {
             // identity already managed --> unbind from previous keycloak (if it is different)
             KeycloakServer keycloakServer = KeycloakServer.get(wrapSession(session), ownedIdentityObject.getKeycloakServerUrl(), ownedIdentity);
             if (keycloakServer != null) {
                 if (Objects.equals(keycloakServer.getServerUrl(), keycloakState.keycloakServer)
-                        && Objects.equals(keycloakServer.getClientId(), keycloakState.clientId)
-                        && Objects.equals(keycloakServer.getClientSecret(), keycloakState.clientSecret)) {
+                        && Objects.equals(keycloakServer.getClientId(), clientId)
+                        && Objects.equals(keycloakServer.getClientSecret(), clientSecret)) {
                     // the content of the keycloak QR code is the same, so no need to unbind and rebind
                     return;
                 }
@@ -1109,7 +1143,7 @@ public class IdentityManager implements IdentityDelegate, SolveChallengeDelegate
         session.addSessionCommitListener(getSessionCommitListenerForDeviceBackup());
         session.addSessionCommitListener(getSessionCommitListenerForProfileBackup(ownedIdentity));
 
-        KeycloakServer keycloakServer = KeycloakServer.create(wrapSession(session), keycloakState.keycloakServer, ownedIdentity, keycloakState.jwks.toJson(), keycloakState.signatureKey == null ? null : keycloakState.signatureKey.toJson(), keycloakState.clientId, keycloakState.clientSecret, keycloakState.transferRestricted);
+        KeycloakServer keycloakServer = KeycloakServer.create(wrapSession(session), keycloakState.keycloakServer, ownedIdentity, keycloakState.jwks.toJson(), keycloakState.signatureKey == null ? null : keycloakState.signatureKey.toJson(), clientId, clientSecret, keycloakState.transferRestricted, supportsIdBasedAuth);
         if (keycloakServer == null) {
             Logger.e("Unable to create new KeycloakServer db entry");
             throw new Exception();

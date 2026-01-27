@@ -105,8 +105,7 @@ public class AppBackupAndSyncDelegate implements ObvBackupAndSyncDelegate {
                                 KeycloakManager.registerKeycloakManagedIdentity(
                                         obvOwnedIdentity,
                                         keycloakState.keycloakServer,
-                                        keycloakState.clientId,
-                                        keycloakState.clientSecret,
+                                        keycloakState.supportedAuthenticationMethods,
                                         keycloakState.jwks,
                                         keycloakState.signatureKey,
                                         keycloakState.serializedAuthState,
