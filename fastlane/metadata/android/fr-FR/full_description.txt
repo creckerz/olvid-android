@@ -1,0 +1,27 @@
+Olvid est la première messagerie privée pour tous. Échangez des messages, des photos, des fichiers et passez des appels audio et vidéo sécurisés.
+
+
+# Qu’est-ce qu’une messagerie « privée » ?
+
+C’est une messagerie :
+- Qui ne vous impose pas de nouveaux contacts : vous seuls décidez avec qui vous désirez discuter. Olvid offre plusieurs façons d’entrer en contact avec d’autres utilisateurs, en face-à-face ou à distance.
+- Qui ne requiert aucune donnée personnelle pour fonctionner. Olvid ne vous demande pas votre numéro de téléphone, ni votre adresse e-mail. Contrairement à votre messagerie précédente, Olvid ne demandera jamais l’accès à votre carnet d’adresses.
+- Sur laquelle vous ne recevrez jamais de message non sollicité ou provenant d’une source inconnue.
+- Dont tous les échanges profitent de la même sécurité qu’une discussion réelle à huis-clos : Olvid garantit le chiffrement bout en bout et l’authentification de bout en bout, toujours, pour tout ce que vous envoyez et recevez.
+
+Olvid vous garantit des espaces de confiance, hermétiques aux agressions externes, qui vous isolent du bruit numérique et de la violence des autres réseaux sociaux. Constituez des groupes avec votre famille, vos proches, vos collaborateurs clés. Pas de spam, pas de pub. Vous reprenez enfin le contrôle total de vos communications.
+
+Olvid a été conçue pour être le meilleur endroit où échanger sur les sujets qui importent, avec ceux qui comptent pour vous.
+
+
+# Olvid - Technologie
+
+Au cœur d'Olvid, un « moteur cryptographique », issu de plusieurs années de R&D, qui permet de prouver mathématiquement l'intégrité, la confidentialité et l'anonymat de vos communications.
+
+
+# Distinctions
+
+- Olvid est la première messagerie instantanée certifiée CSPN par l'ANSSI.
+- Olvid est lauréate du programme FRENCH TECH DEEPNUM20 qui accompagne des champions technologiques dans les secteurs stratégiques de l’économie.
+- Olvid a remporté le Prix de l'Innovation 2020 des Assises de la Sécurité.
+- Olvid est prix de la Startup FIC 2020.
