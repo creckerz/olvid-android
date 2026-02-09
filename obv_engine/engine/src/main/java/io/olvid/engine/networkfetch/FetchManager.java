@@ -671,6 +671,14 @@ public class FetchManager implements FetchManagerSessionFactory, NetworkFetchDel
     }
 
     @Override
+    public List<String> getWellKnownAltTurnServers(Identity ownedIdentity) {
+        try {
+            return wellKnownCoordinator.getAltTurnUrls(ownedIdentity.getServer());
+        } catch (WellKnownCoordinator.NotCachedException ignored) { }
+        return null;
+    }
+
+    @Override
     public void queryApiKeyStatus(Identity ownedIdentity, UUID apiKey) {
         createServerSessionCoordinator.queueNewQueryApiKeyStatusOperation(ownedIdentity, apiKey);
     }

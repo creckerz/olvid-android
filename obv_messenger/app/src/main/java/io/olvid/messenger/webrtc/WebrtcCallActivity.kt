@@ -50,15 +50,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -70,15 +63,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.accompanist.themeadapter.appcompat.AppCompatTheme
 import io.olvid.engine.Logger
 import io.olvid.messenger.App
 import io.olvid.messenger.R
 import io.olvid.messenger.databases.entity.Contact
 import io.olvid.messenger.databases.entity.Discussion
+import io.olvid.messenger.designsystem.components.BaseDialogContent
+import io.olvid.messenger.designsystem.components.DialogSecure
+import io.olvid.messenger.designsystem.components.OlvidTextButton
+import io.olvid.messenger.designsystem.theme.OlvidTypography
 import io.olvid.messenger.discussion.DiscussionActivity
 import io.olvid.messenger.main.MainActivity
 import io.olvid.messenger.main.contacts.ContactListViewModel
@@ -200,141 +195,150 @@ class WebrtcCallActivity : AppCompatActivity() {
         delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
         setContent {
             LaunchedEffect(webrtcCallService?.selectedAudioOutput) {
-                webrtcCallService?.selectedAudioOutput?.let {
-                    audioOutput ->
+                webrtcCallService?.selectedAudioOutput?.let { audioOutput ->
                     if (audioOutput == LOUDSPEAKER != loudSpeakerOn) {
                         loudSpeakerOn = audioOutput == LOUDSPEAKER
                         refreshProximityLockStatus()
                     }
                 }
             }
-            AppCompatTheme {
-                var addingParticipant by remember {
-                    mutableStateOf(false)
+            var addingParticipant by remember {
+                mutableStateOf(false)
+            }
+            BackHandler {
+                if (addingParticipant) {
+                    addingParticipant = false
                 }
-                BackHandler {
-                    if (addingParticipant) {
-                        addingParticipant = false
-                    }
-                }
-                CallScreen(
-                    webrtcCallService = webrtcCallService,
-                    contactListViewModel = contactListViewModel,
-                    addingParticipant = addingParticipant,
-                    onCallAction = { callAction ->
-                        when (callAction) {
-                            EndCall -> {
-                                webrtcCallService?.hangUpCall() ?: run { finishAndRemoveTask() }
+            }
+            CallScreen(
+                webrtcCallService = webrtcCallService,
+                contactListViewModel = contactListViewModel,
+                addingParticipant = addingParticipant,
+                onCallAction = { callAction ->
+                    when (callAction) {
+                        EndCall -> {
+                            webrtcCallService?.hangUpCall() ?: run { finishAndRemoveTask() }
+                        }
+
+                        FlipCamera -> {
+                            webrtcCallService?.flipCamera()
+                        }
+
+                        ToggleCamera -> {
+                            if ((webrtcCallService?.getCallParticipantsLiveData()?.value?.size
+                                    ?: 0) > WebrtcPeerConnectionHolder.MAXIMUM_OTHER_PARTICIPANTS_FOR_VIDEO
+                            ) {
+                                App.toast(
+                                    getString(
+                                        R.string.toast_message_video_calls_xxx_participants,
+                                        WebrtcPeerConnectionHolder.MAXIMUM_OTHER_PARTICIPANTS_FOR_VIDEO + 1
+                                    ), Toast.LENGTH_SHORT, Gravity.BOTTOM
+                                )
+                                return@CallScreen
                             }
 
-                            FlipCamera -> {
-                                webrtcCallService?.flipCamera()
-                            }
-
-                            ToggleCamera -> {
-                                if ((webrtcCallService?.getCallParticipantsLiveData()?.value?.size ?: 0) > WebrtcPeerConnectionHolder.MAXIMUM_OTHER_PARTICIPANTS_FOR_VIDEO) {
-                                    App.toast(getString(R.string.toast_message_video_calls_xxx_participants, WebrtcPeerConnectionHolder.MAXIMUM_OTHER_PARTICIPANTS_FOR_VIDEO + 1), Toast.LENGTH_SHORT, Gravity.BOTTOM)
-                                    return@CallScreen
-                                }
-
-                                if (
-                                    ContextCompat.checkSelfPermission(
-                                        this,
-                                        permission.CAMERA
-                                    ) != PackageManager.PERMISSION_GRANTED
-                                ) {
-                                    ActivityCompat.requestPermissions(
-                                        this,
-                                        arrayOf(permission.CAMERA),
-                                        PERMISSIONS_REQUEST_CODE
-                                    )
-                                } else {
-                                    webrtcCallService?.toggleCamera()
-                                    refreshProximityLockStatus()
-                                }
-                            }
-
-                            is ToggleMicrophone -> {
-                                webrtcCallService?.toggleMuteMicrophone()
-                            }
-
-                            is GoToDiscussion -> {
-                                openDiscussion()
-                            }
-
-                            ShareScreen -> {
-                                if ((webrtcCallService?.getCallParticipantsLiveData()?.value?.size ?: 0) > WebrtcPeerConnectionHolder.MAXIMUM_OTHER_PARTICIPANTS_FOR_VIDEO) {
-                                    App.toast(getString(R.string.toast_message_video_calls_xxx_participants, WebrtcPeerConnectionHolder.MAXIMUM_OTHER_PARTICIPANTS_FOR_VIDEO + 1), Toast.LENGTH_SHORT, Gravity.BOTTOM)
-                                    return@CallScreen
-                                }
-
-                                val width: Int
-                                val height: Int
-                                if (VERSION.SDK_INT >= VERSION_CODES.R) {
-                                    windowManager.currentWindowMetrics.bounds.let {
-                                        width = it.width()
-                                        height = it.height()
-                                    }
-                                } else {
-                                    val point = Point()
-                                    @Suppress("DEPRECATION")
-                                    windowManager.defaultDisplay.getRealSize(point)
-                                    width = point.x
-                                    height = point.y
-                                }
-
-                                webrtcCallService?.setScreenSize(width, height)
-                                if (webrtcCallService?.screenShareActive == false) {
-                                    webrtcCallService?.requestingScreenCast = true
-                                    @Suppress("DEPRECATION")
-                                    startActivityForResult(
-                                        screenCaptureIntent,
-                                        REQUEST_MEDIA_PROJECTION
-                                    )
-                                } else {
-                                    webrtcCallService?.toggleScreenShare()
-                                }
-                            }
-
-                            ToggleSpeaker -> {}
-                            is AddParticipant -> {
-                                addingParticipant = callAction.open
+                            if (
+                                ContextCompat.checkSelfPermission(
+                                    this,
+                                    permission.CAMERA
+                                ) != PackageManager.PERMISSION_GRANTED
+                            ) {
+                                ActivityCompat.requestPermissions(
+                                    this,
+                                    arrayOf(permission.CAMERA),
+                                    PERMISSIONS_REQUEST_CODE
+                                )
+                            } else {
+                                webrtcCallService?.toggleCamera()
+                                refreshProximityLockStatus()
                             }
                         }
-                    }
-                )
 
-                // permission request dialog to show if some permissions were denied
-                permissionDialogToShow?.let { dialog ->
-                    val onDismiss = {
-                        dialog.dismissCallback?.invoke()
-                        permissionDialogToShow = null
-                    }
+                        is ToggleMicrophone -> {
+                            webrtcCallService?.toggleMuteMicrophone()
+                        }
 
-                    AlertDialog(
-                        backgroundColor = colorResource(id = R.color.dialogBackground),
-                        contentColor = Color.White,
-                        onDismissRequest = onDismiss,
-                        buttons = {
-                            Row(modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 16.dp, bottom = 8.dp, end = 16.dp),
-                                horizontalArrangement = Arrangement.End) {
-                                dialog.additionalButton?.let { button ->
-                                    button()
-                                    Spacer(modifier = Modifier.weight(1f, true))
-                                }
-                                TextButton(onClick = onDismiss) {
-                                    Text(text = stringResource(id = R.string.button_label_ok))
-                                }
+                        is GoToDiscussion -> {
+                            openDiscussion()
+                        }
+
+                        ShareScreen -> {
+                            if ((webrtcCallService?.getCallParticipantsLiveData()?.value?.size
+                                    ?: 0) > WebrtcPeerConnectionHolder.MAXIMUM_OTHER_PARTICIPANTS_FOR_VIDEO
+                            ) {
+                                App.toast(
+                                    getString(
+                                        R.string.toast_message_video_calls_xxx_participants,
+                                        WebrtcPeerConnectionHolder.MAXIMUM_OTHER_PARTICIPANTS_FOR_VIDEO + 1
+                                    ), Toast.LENGTH_SHORT, Gravity.BOTTOM
+                                )
+                                return@CallScreen
                             }
+
+                            val width: Int
+                            val height: Int
+                            if (VERSION.SDK_INT >= VERSION_CODES.R) {
+                                windowManager.currentWindowMetrics.bounds.let {
+                                    width = it.width()
+                                    height = it.height()
+                                }
+                            } else {
+                                val point = Point()
+                                @Suppress("DEPRECATION")
+                                windowManager.defaultDisplay.getRealSize(point)
+                                width = point.x
+                                height = point.y
+                            }
+
+                            webrtcCallService?.setScreenSize(width, height)
+                            if (webrtcCallService?.screenShareActive == false) {
+                                webrtcCallService?.requestingScreenCast = true
+                                @Suppress("DEPRECATION")
+                                startActivityForResult(
+                                    screenCaptureIntent,
+                                    REQUEST_MEDIA_PROJECTION
+                                )
+                            } else {
+                                webrtcCallService?.toggleScreenShare()
+                            }
+                        }
+
+                        ToggleSpeaker -> {}
+                        is AddParticipant -> {
+                            addingParticipant = callAction.open
+                        }
+                    }
+                }
+            )
+
+            // permission request dialog to show if some permissions were denied
+            permissionDialogToShow?.let { dialog ->
+                val onDismiss = {
+                    dialog.dismissCallback?.invoke()
+                    permissionDialogToShow = null
+                }
+
+                DialogSecure(onDismissRequest = onDismiss) {
+                    BaseDialogContent(
+                        title = stringResource(id = dialog.titleStringResId),
+                        content = {
+                            androidx.compose.material3.Text(
+                                text = stringResource(id = dialog.messageStringResId),
+                                style = OlvidTypography.body1,
+                                color = colorResource(R.color.greyTint)
+                            )
                         },
-                        title = {
-                            Text(text = stringResource(id = dialog.titleStringResId))
-                        },
-                        text = {
-                            Text(text = stringResource(id = dialog.messageStringResId))
-                        })
+                        actions = {
+                            dialog.additionalButton?.let { button ->
+                                button()
+                                Spacer(modifier = Modifier.weight(1f, true))
+                            }
+                            OlvidTextButton(
+                                text = stringResource(id = R.string.button_label_ok),
+                                onClick = onDismiss
+                            )
+                        }
+                    )
                 }
             }
         }
@@ -569,16 +573,17 @@ class WebrtcCallActivity : AppCompatActivity() {
                         titleStringResId = R.string.dialog_title_webrtc_permissions_audio_blocked,
                         messageStringResId = R.string.dialog_message_webrtc_permissions_audio_blocked,
                         additionalButton = {
-                            TextButton(onClick = {
-                                val settingsIntent = Intent()
-                                settingsIntent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                                settingsIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                                val uri = Uri.fromParts("package", packageName, null)
-                                settingsIntent.data = uri
-                                startActivity(settingsIntent)
-                            }) {
-                                Text(text = stringResource(id = R.string.button_label_app_settings))
-                            }
+                            OlvidTextButton(
+                                text = stringResource(id = R.string.button_label_app_settings),
+                                onClick = {
+                                    val settingsIntent = Intent()
+                                    settingsIntent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                                    settingsIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                                    val uri = Uri.fromParts("package", packageName, null)
+                                    settingsIntent.data = uri
+                                    startActivity(settingsIntent)
+                                }
+                            )
                         }
                     ) {
                         requestPermissionsIfNeeded(true)
@@ -595,16 +600,17 @@ class WebrtcCallActivity : AppCompatActivity() {
                         titleStringResId = R.string.dialog_title_webrtc_permissions_camera_blocked,
                         messageStringResId = R.string.dialog_message_webrtc_permissions_camera_blocked,
                         additionalButton = {
-                            TextButton(onClick = {
-                                val settingsIntent = Intent()
-                                settingsIntent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                                settingsIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                                val uri = Uri.fromParts("package", packageName, null)
-                                settingsIntent.data = uri
-                                startActivity(settingsIntent)
-                            }) {
-                                Text(text = stringResource(id = R.string.button_label_app_settings))
-                            }
+                            OlvidTextButton(
+                                text = stringResource(id = R.string.button_label_app_settings),
+                                onClick = {
+                                    val settingsIntent = Intent()
+                                    settingsIntent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                                    settingsIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                                    val uri = Uri.fromParts("package", packageName, null)
+                                    settingsIntent.data = uri
+                                    startActivity(settingsIntent)
+                                }
+                            )
                         }
                     ) {
                         requestPermissionsIfNeeded(true)

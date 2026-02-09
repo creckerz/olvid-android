@@ -67,7 +67,7 @@ class DiscussionSettingsHeadersFragment : PreferenceFragmentCompat(), SettingsCh
                     val discussion = discussionSettingsViewModel.discussionLiveData.value
                     if (discussion != null) {
                         App.runThread {
-                            val pinned = if (discussion.pinned != 0) 0 else AppDatabase.getInstance().discussionDao().getMaxPinnedIndex(discussion.bytesOwnedIdentity) + 1
+                            val pinned = if (discussion.pinned != 0) 0 else (AppDatabase.getInstance().discussionDao().getMaxPinnedIndex(discussion.bytesOwnedIdentity) ?: 0) + 1
                             AppDatabase.getInstance().discussionDao().updatePinned(discussion.id, pinned)
                             PropagatePinnedDiscussionsChangeTask(discussion.bytesOwnedIdentity).run()
                         }

@@ -129,7 +129,7 @@ public class PostMessageInDiscussionTask implements Runnable {
                         0,
                         0,
                         null);
-                message.mentioned = message.isIdentityMentioned(message.senderIdentifier);
+                message.mentioned = JsonUserMention.isIdentityMentioned(jsonMessage.jsonUserMentions, message.senderIdentifier);
                 if (message.isEmpty()) {
                     return;
                 }
@@ -158,7 +158,7 @@ public class PostMessageInDiscussionTask implements Runnable {
                 db.discussionDao().updateLastMessageTimestamp(discussion.id, discussion.lastMessageTimestamp);
                 draftMessage.senderSequenceNumber = discussion.lastOutboundMessageSequenceNumber;
                 draftMessage.setJsonMessage(jsonMessage);
-                draftMessage.mentioned = draftMessage.isIdentityMentioned(draftMessage.senderIdentifier);
+                draftMessage.mentioned = JsonUserMention.isIdentityMentioned(jsonMessage.jsonUserMentions, draftMessage.senderIdentifier);
                 draftMessage.status = Message.STATUS_UNPROCESSED;
                 draftMessage.timestamp = System.currentTimeMillis();
                 draftMessage.computeOutboundSortIndex(db);

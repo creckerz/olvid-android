@@ -486,6 +486,8 @@
 	<string name="notification_action_end_call" state="needs_review" hash="-1678527967">إنهاء المكالمة</string>
 	<string name="notification_channel_webrtc_call_service_name" state="needs_review" hash="-623348883">المكالمات الواردة</string>
 	<string name="notification_channel_webrtc_call_service_description" state="needs_review" hash="318507261">إشعار بالاتصالات الواردة</string>
+	<string name="notification_channel_transfer_service_name" state="needs_review" hash="-1765472866">نقل السجل</string>
+	<string name="notification_channel_transfer_service_description" state="needs_review" hash="1606671624">يعرض التقدم أثناء نقل سجل الدردشة.</string>
 	<string name="activity_title_webrtc_incoming_call" state="needs_review" hash="-1672458216">مكالمة واردة من Olvid</string>
 	<string name="text_incoming_call_from" state="needs_review" hash="416481913">مكالمة واردة من…</string>
 	<string name="toast_message_already_in_a_call" state="needs_review" hash="702053866">أنت بالفعل في مكالمة. أنهِ المكالمة الحالية قبل البدء بأخرى.</string>
@@ -1578,10 +1580,7 @@
 	<string name="text_setting_full" state="needs_review" hash="-1858792643">كامل</string>
 	<string name="text_setting_none" state="needs_review" hash="752790864">لا شيء</string>
 	<string name="activity_title_settings_update" state="needs_review" hash="1186086183">تحديث الإعدادات</string>
-	<string name="xx_gbps" state="needs_review" hash="-503020032">%1$sG/s</string>
-	<string name="xx_mbps" state="needs_review" hash="-1682095296">%1$s ميجابايت/ثانية</string>
-	<string name="xx_kbps" state="needs_review" hash="1012462976">%1$sk/s</string>
-	<string name="xx_bps" state="needs_review" hash="479585933">%1$s بايت/ثانية</string>
+	<string name="xxx_per_s" state="needs_review" hash="-1456430978">%1$s/s</string>
 	<string name="text_you_captured_sensitive_message" state="needs_review" hash="-929928147">لقد التقطت لقطة شاشة لرسالة حساسة.</string>
 	<string name="text_unknown_member_captured_sensitive_message" state="needs_review" hash="-749114410">قام مستخدم غير معروف بالتقاط لقطة شاشة لرسالة حساسة.</string>
 	<string name="text_xxx_captured_sensitive_message" state="needs_review" hash="233294474">لقد التقط %1$s لقطة شاشة لرسالة حساسة</string>
@@ -2144,6 +2143,18 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">الجهاز المقابل غير قابل للوصول</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">إعادة إنشاء جميع القنوات الآمنة</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">سيؤدي إعادة إنشاء جميع القنوات الآمنة إلى إجبار Olvid على إنشاء قنوات اتصال آمنة جديدة مع جميع أجهزة جهات الاتصال الخاصة بك. هذا ليس مفيدًا بشكل عام، ولكنه يمكن أن يحل حالات نادرة حيث تكون بعض هذه القنوات \"غير متزامنة\".\n\n**تحذير:** إذا كان لديك العديد من جهات الاتصال، فقد تستغرق هذه العملية بضع دقائق وقد تفقد بعض الرسائل الواردة أثناء تشغيلها.</string>
+	<string name="label_untransferred" state="needs_review" hash="-1851678218">لم يتم النقل</string>
+	<string name="history_transfer_title" state="needs_review" hash="1191393558">نقل سجل الدردشة</string>
+	<string name="history_transfer_step_none" state="needs_review" hash="1228580785">لا يوجد نقل قيد التنفيذ</string>
+	<string name="history_transfer_step_contacting_other_device" state="needs_review" hash="1719019815">في انتظار الجهاز الآخر</string>
+	<string name="history_transfer_step_connecting" state="needs_review" hash="1836039168">الاتصال بالجهاز الآخر</string>
+	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">التفاوض (الخطوة 1 من 3)</string>
+	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">نقل الرسائل (الخطوة 2 من 3)</string>
+	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">نقل المرفقات (الخطوة 3 من 3)</string>
+	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">اكتمل النقل</string>
+	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">تم مقاطعة النقل</string>
+	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">نقل سجل الدردشة (إصدار تجريبي)</string>
+	<string name="toast_message_unable_to_start_transfer" state="needs_review" hash="362080814">تعذر بدء النقل. ربما يكون هناك نقل آخر قيد التنفيذ بالفعل؟</string>
 	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">استخدم \"الرابط السحري\"</string>
 	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">رابط سحري غير صالح</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">تم إنهاء المكالمة</string>
@@ -2153,4 +2164,16 @@
 	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">تعذر التحقق</string>
 	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">يتم حاليًا إدارة ملفك الشخصي بواسطة مؤسستك ويتطلب إعادة المصادقة. ومع ذلك، لا يبدو أن أي طريقة مصادقة مدعومة متاحة.\n\nيرجى الاتصال بالمسؤول الخاص بك للحصول على مزيد من التفاصيل.</string>
 	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">لا يبدو أن أيًا من طرق المصادقة المدعومة متاحة.</string>
+	<string name="pref_use_alt_turn_servers_title" state="needs_review" hash="-1956132776">استخدم خوادم TURN بديلة</string>
+	<string name="pref_use_alt_turn_servers_summary" state="needs_review" hash="357427162">قم بتفعيل هذا الخيار لاستخدام خوادم TURN مع عناوين IP متغيرة. إذا لم تكن متأكدًا، فاترك هذا الخيار معطلاً 😁</string>
+	<string name="button_label_transfer_through_webrtc" state="needs_review" hash="-1809138918">النقل عبر الشبكة المحلية</string>
+	<string name="button_label_export_zip" state="needs_review" hash="1575043364">تصدير ملف مضغوط</string>
+	<string name="button_label_import_zip" state="needs_review" hash="1299665090">استيراد ملف ZIP</string>
+	<string name="dialog_title_transfer_choose_target_device" state="needs_review" hash="218115750">اختر الجهاز المستهدف لهذه النقلة.</string>
+	<string name="transfer_label_no_other_active_device" state="needs_review" hash="-2135899221">لا يوجد جهاز آخر نشط</string>
+	<string name="transfer_label_messages" state="needs_review" hash="-1639407912">رسائل</string>
+	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">معدل النقل</string>
+	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">المتبقي</string>
+	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">مرفقات</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">لا تزال هذه الميزة في مرحلة الاختبار التجريبي، وقد لا يكون التنفيذ الحالي متوافقًا مع التنفيذ النهائي لنقل سجل Olvid.\n\nقبل استخدام هذه الميزة، يرجى التأكد من أن أجهزتك تعمل بأحدث إصدار من Olvid.</string>
 </resources>

@@ -486,6 +486,8 @@
 	<string name="notification_action_end_call" state="needs_review" hash="-1678527967">Gesprek beëindig</string>
 	<string name="notification_channel_webrtc_call_service_name" state="needs_review" hash="-623348883">Inkomende oproepe</string>
 	<string name="notification_channel_webrtc_call_service_description" state="needs_review" hash="318507261">Kennisgewing vir inkomende oproepe</string>
+	<string name="notification_channel_transfer_service_name" state="needs_review" hash="-1765472866">Geskiedenis oordra</string>
+	<string name="notification_channel_transfer_service_description" state="needs_review" hash="1606671624">Toon vordering tydens die oordrag van die kletsgeskiedenis.</string>
 	<string name="activity_title_webrtc_incoming_call" state="needs_review" hash="-1672458216">Inkomende Olvid-oproep</string>
 	<string name="text_incoming_call_from" state="needs_review" hash="416481913">Inkomende oproep van…</string>
 	<string name="toast_message_already_in_a_call" state="needs_review" hash="702053866">Jy is reeds in \'n gesprek. Beëindig dit voordat jy \'n nuwe een begin.</string>
@@ -1585,10 +1587,7 @@ Olvid sal nie toegang hê tot enige van u lêers op Google Drive nie.</string>
 	<string name="text_setting_full" state="needs_review" hash="-1858792643">volledig</string>
 	<string name="text_setting_none" state="needs_review" hash="752790864">geen</string>
 	<string name="activity_title_settings_update" state="needs_review" hash="1186086183">Instellingsopdatering</string>
-	<string name="xx_gbps" state="needs_review" hash="-503020032">%1$sG/s</string>
-	<string name="xx_mbps" state="needs_review" hash="-1682095296">%1$sM/s</string>
-	<string name="xx_kbps" state="needs_review" hash="1012462976">%1$sk/s</string>
-	<string name="xx_bps" state="needs_review" hash="479585933">%1$sB/s</string>
+	<string name="xxx_per_s" state="needs_review" hash="-1456430978">%1$s/s</string>
 	<string name="text_you_captured_sensitive_message" state="needs_review" hash="-929928147">Jy het \'n skermskoot van \'n sensitiewe boodskap geneem</string>
 	<string name="text_unknown_member_captured_sensitive_message" state="needs_review" hash="-749114410">\'n Onbekende gebruiker het \'n skermkiekie van \'n sensitiewe boodskap geneem</string>
 	<string name="text_xxx_captured_sensitive_message" state="needs_review" hash="233294474">%1$s het \'n skermskoot van \'n sensitiewe boodskap geneem</string>
@@ -2151,6 +2150,18 @@ Olvid sal nie toegang hê tot enige van u lêers op Google Drive nie.</string>
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Gelykgestelde toestel onbereikbaar</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Herstel alle veilige kanale</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Die herstel van alle veilige kanale sal Olvid dwing om nuwe veilige kommunikasiekanale met al die toestelle van jou kontakte te skep. Dit is gewoonlik nie nuttig nie, maar kan seldsame situasies oplos waar sommige van hierdie kanale \"nie gesinkroniseer is nie\".\n\n**Waarskuwing:** as jy baie kontakte het, kan hierdie operasie \'n paar minute neem en kan jy sommige inkomende boodskappe verloor terwyl dit loop.</string>
+	<string name="label_untransferred" state="needs_review" hash="-1851678218">Nie oorgedra</string>
+	<string name="history_transfer_title" state="needs_review" hash="1191393558">Geskiedenis van gesprekke oordra</string>
+	<string name="history_transfer_step_none" state="needs_review" hash="1228580785">Geen oordrag is aan die gang</string>
+	<string name="history_transfer_step_contacting_other_device" state="needs_review" hash="1719019815">Wag vir die ander toestel</string>
+	<string name="history_transfer_step_connecting" state="needs_review" hash="1836039168">Koppel aan die ander toestel</string>
+	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">Onderhandeling (stap 1 van 3)</string>
+	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Boodskappe oordra (stap 2 van 3)</string>
+	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">Besig om bysluit aan te dra (stap 3 van 3)</string>
+	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Oordrag voltooi</string>
+	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Oordrag onderbreek</string>
+	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Gesprekshistorie-oordrag (beta)</string>
+	<string name="toast_message_unable_to_start_transfer" state="needs_review" hash="362080814">Kon nie \'n oordrag begin nie. Miskien is daar reeds \'n ander oordrag aan die gang?</string>
 	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">Gebruik die \"magiese skakel\"</string>
 	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">Ongeldige magiese skakel</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Oproep beëindig</string>
@@ -2160,4 +2171,16 @@ Olvid sal nie toegang hê tot enige van u lêers op Google Drive nie.</string>
 	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">Verifikasie is nie moontlik nie</string>
 	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">Jou profiel word tans by jou organisasie bestuur en her-verifikasie is vereis. Geen van die ondersteunde verifikasiemetodes is egter beskikbaar nie.\n\nKontak asseblief jou administrateur vir meer besonderhede.</string>
 	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">Geen van die ondersteunde verifikasiemetodes lyk beskikbaar nie.</string>
+	<string name="pref_use_alt_turn_servers_title" state="needs_review" hash="-1956132776">Gebruik alternatiewe TURN-bedieners</string>
+	<string name="pref_use_alt_turn_servers_summary" state="needs_review" hash="357427162">Aktiveer hierdie opsie om TURN-bedieners met roterende IP-adresse te gebruik. Indien u nie seker is nie, laat hierdie opsie asb. af 😁</string>
+	<string name="button_label_transfer_through_webrtc" state="needs_review" hash="-1809138918">Deur die plaaslike netwerk oordra</string>
+	<string name="button_label_export_zip" state="needs_review" hash="1575043364">Voer ZIP uit</string>
+	<string name="button_label_import_zip" state="needs_review" hash="1299665090">Voer ZIP in</string>
+	<string name="dialog_title_transfer_choose_target_device" state="needs_review" hash="218115750">Kies die teikenapparaat vir hierdie oordrag.</string>
+	<string name="transfer_label_no_other_active_device" state="needs_review" hash="-2135899221">Geen ander aktiewe toestel nie</string>
+	<string name="transfer_label_messages" state="needs_review" hash="-1639407912">Boodskappe</string>
+	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Deurvoer</string>
+	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Resterend</string>
+	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Aanhangsels</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Hierdie funksie is nog in die beta-toetsfase en die huidige implementering is moontlik nie versoenbaar met die finale implementering van Olvid se geskiedenis-oordrag nie.\n\nMaak asseblief seker dat jou toestelle die nuutste weergawe van Olvid gebruik voordat jy hierdie funksie gebruik.</string>
 </resources>

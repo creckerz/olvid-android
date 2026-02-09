@@ -26,11 +26,9 @@ import java.util.concurrent.Executors;
 import io.olvid.engine.Logger;
 
 public class NoExceptionSingleThreadExecutor implements Executor {
-    private final String name;
     private final ExecutorService executor;
 
     public NoExceptionSingleThreadExecutor(String name) {
-        this.name = name;
         this.executor = Executors.newSingleThreadExecutor(r -> new Thread(r, name));
     }
 
@@ -39,7 +37,7 @@ public class NoExceptionSingleThreadExecutor implements Executor {
     public void execute(Runnable r) {
         try {
             executor.execute(r);
-        } catch (Exception e) {
+        } catch (Error | Exception e) {
             // do nothing, this is sometimes normal
         }
     }
@@ -47,7 +45,7 @@ public class NoExceptionSingleThreadExecutor implements Executor {
     public void shutdownNow() {
         try {
             executor.shutdownNow();
-        } catch (Exception e) {
+        } catch (Error | Exception e) {
             Logger.x(e);
         }
     }

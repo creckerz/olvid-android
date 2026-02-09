@@ -45,6 +45,7 @@ import io.olvid.messenger.databases.entity.MessageRecipientInfo
 import io.olvid.messenger.databases.entity.RemoteDeleteAndEditRequest
 import io.olvid.messenger.databases.entity.jsons.JsonMessage
 import io.olvid.messenger.databases.entity.jsons.JsonReturnReceipt
+import io.olvid.messenger.databases.entity.jsons.JsonUserMention
 import io.olvid.messenger.databases.tasks.HandleStalledReturnReceipts
 import io.olvid.messenger.discussion.linkpreview.OpenGraph
 import io.olvid.messenger.notifications.AndroidNotificationManager
@@ -90,7 +91,7 @@ fun handleNormalMessage(
         it.lastRemoteDeleteTimestamp <= obvMessage.serverTimestamp // if the message is older than the latest "delete discussion" request, delete the message
     }?.let { discussion ->
 
-        val remoteDeleteAndEditRequest = db.remoteDeleteAndEditRequestDao().getBySenderSequenceNumber(jsonMessage.senderSequenceNumber, jsonMessage.senderThreadIdentifier, messageSender.senderIdentity, discussion.id)
+        val remoteDeleteAndEditRequest = db.remoteDeleteAndEditRequestDao().getBySenderSequenceNumber(jsonMessage.senderSequenceNumber, jsonMessage.senderThreadIdentifier!!, messageSender.senderIdentity, discussion.id)
         val jsonExpiration = jsonMessage.jsonExpiration
 
         if (jsonExpiration?.readOnce == true && messageSender.type == MessageSender.Type.OWNED_IDENTITY) {
@@ -127,7 +128,7 @@ fun handleNormalMessage(
                 db.onHoldInboxMessageDao().getAllForMessage(
                     discussion.bytesOwnedIdentity,
                     messageSender.senderIdentity,
-                    jsonMessage.senderThreadIdentifier,
+                    jsonMessage.senderThreadIdentifier!!,
                     jsonMessage.senderSequenceNumber
                 ).forEach { onHoldInboxMessage ->
                     if (
@@ -163,7 +164,7 @@ fun handleNormalMessage(
                             discussion.id,
                             obvMessage.identifier,
                             messageSender.senderIdentity,
-                            jsonMessage.senderThreadIdentifier,
+                            jsonMessage.senderThreadIdentifier!!,
                             0,
                             0,
                             0,
@@ -171,7 +172,7 @@ fun handleNormalMessage(
                             null
                         )
 
-                        message.missedMessageCount = processSequenceNumber(db, discussion.id, messageSender.senderIdentity, jsonMessage.senderThreadIdentifier, jsonMessage.senderSequenceNumber)
+                        message.missedMessageCount = processSequenceNumber(db, discussion.id, messageSender.senderIdentity, jsonMessage.senderThreadIdentifier!!, jsonMessage.senderSequenceNumber)
                         message.contentBody = null
                         message.jsonReply = null
                         message.jsonLocation = null
@@ -267,7 +268,7 @@ fun handleNormalMessage(
                     // read once messages have already been discarded
                     // existence duration and visibility duration should be treated the same way --> we move visibility to existence
                     if (jsonExpiration?.visibilityDuration != null) {
-                        if (jsonExpiration.existenceDuration == null || jsonExpiration.existenceDuration > jsonExpiration.visibilityDuration) {
+                        if (jsonExpiration.existenceDuration == null || jsonExpiration.existenceDuration!! > jsonExpiration.visibilityDuration!!) {
                             jsonExpiration.existenceDuration = jsonExpiration.visibilityDuration
                         }
                     }
@@ -283,7 +284,7 @@ fun handleNormalMessage(
 
                 var messageServerTimestamp = obvMessage.serverTimestamp
                 if (jsonMessage.originalServerTimestamp != null && discussion.discussionType == Discussion.TYPE_GROUP_V2) {
-                    messageServerTimestamp = messageServerTimestamp.coerceAtMost(jsonMessage.originalServerTimestamp)
+                    messageServerTimestamp = messageServerTimestamp.coerceAtMost(jsonMessage.originalServerTimestamp!!)
                 }
 
                 val message = Message(
@@ -297,16 +298,16 @@ fun handleNormalMessage(
                     discussion.id,
                     obvMessage.identifier,
                     messageSender.senderIdentity,
-                    jsonMessage.senderThreadIdentifier,
+                    jsonMessage.senderThreadIdentifier!!,
                     attachmentCount,
                     imageAndVideoCount,
                     videoCount,
                     audioCount,
                     firstAttachmentName
                 )
-                message.missedMessageCount = processSequenceNumber(db, discussion.id, messageSender.senderIdentity, jsonMessage.senderThreadIdentifier, jsonMessage.senderSequenceNumber)
+                message.missedMessageCount = processSequenceNumber(db, discussion.id, messageSender.senderIdentity, jsonMessage.senderThreadIdentifier!!, jsonMessage.senderSequenceNumber)
                 message.forwarded = jsonMessage.isForwarded == true
-                message.mentioned = message.isIdentityMentioned(messageSender.bytesOwnedIdentity) || message.isOwnMessageReply(messageSender.bytesOwnedIdentity)
+                message.mentioned = JsonUserMention.isIdentityMentioned(jsonMessage.jsonUserMentions, messageSender.bytesOwnedIdentity) || message.isOwnMessageReply(messageSender.bytesOwnedIdentity)
                 var edited = false
 
                 jsonMessage.jsonPoll?.let poll@{ jsonPoll ->
@@ -380,7 +381,7 @@ fun handleNormalMessage(
 
                 remoteDeleteAndEditRequest?.let { db.remoteDeleteAndEditRequestDao().delete(it) }
 
-
+                // for messages sent from another of our devices, create the MessageRecipientInfo to be able to track the message delivery status
                 if (message.messageType == Message.TYPE_OUTBOUND_MESSAGE && jsonReturnReceipt != null) {
                     val messageRecipientInfoMap = mutableMapOf<BytesKey, MessageRecipientInfo>()
 

@@ -149,7 +149,7 @@ public class Message {
     public static final int STATUS_DELIVERED_AND_READ = 7;
     public static final int STATUS_COMPUTING_PREVIEW = 8; // computing a preview of the image/video attachments before passing to engine
     public static final int STATUS_UNDELIVERED = 9; // for outbound messages, the message could not be uploaded/delivered and will never be
-    public static final int STATUS_SENT_FROM_ANOTHER_DEVICE = 10; // for outbound messages sent from another device. If some day we synchronize outbound status, this should no longer be used.
+    public static final int STATUS_SENT_FROM_ANOTHER_DEVICE = 10; // for outbound messages sent from another device. Now that we synchronize outbound status, this is only used before receiving a first return receipt.
     public static final int STATUS_DELIVERED_ALL = 11;
     public static final int STATUS_DELIVERED_ALL_READ_ONE = 12;
     public static final int STATUS_DELIVERED_ALL_READ_ALL = 13;
@@ -1734,14 +1734,7 @@ public class Message {
 
     public boolean isIdentityMentioned(byte[] ownedIdentity) {
         try {
-            List<JsonUserMention> mentions = getMentions();
-            if (mentions != null) {
-                for (JsonUserMention mention : mentions) {
-                    if (Arrays.equals(ownedIdentity, mention.getUserIdentifier())) {
-                        return true;
-                    }
-                }
-            }
+            return JsonUserMention.isIdentityMentioned(getMentions(), ownedIdentity);
         } catch (Exception ex) {
             Logger.e("Error handling mentions");
         }

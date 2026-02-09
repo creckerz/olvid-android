@@ -27,7 +27,7 @@ public class EtaEstimator {
     public static final long MIN_SAMPLE_DURATION = 10_000L;
 
     private final long totalBytes;
-    private final List<Sample> samples;
+    private List<Sample> samples;
     private int offset = 0;
 
     public EtaEstimator(long initialBytes, long totalBytes) {
@@ -38,25 +38,34 @@ public class EtaEstimator {
 
     public void update(long currentBytes) {
         long timestamp = System.currentTimeMillis();
-        this.samples.add(new Sample(timestamp, currentBytes));
-        // only ever consider the last 10 seconds of sample, but never less than 10 samples
-        while (this.samples.size() - offset > MIN_SAMPLE_COUNT
-                && timestamp - this.samples.get(offset).timestamp > MIN_SAMPLE_DURATION) {
-            offset++;
+        synchronized(this) {
+            this.samples.add(new Sample(timestamp, currentBytes));
+            // only ever consider the last 10 seconds of sample, but never less than 10 samples
+            while (this.samples.size() - offset > MIN_SAMPLE_COUNT
+                    && timestamp - this.samples.get(offset).timestamp > MIN_SAMPLE_DURATION) {
+                offset++;
+            }
+            // once in a while, truncate the list
+            if (offset > 1000) {
+                samples = samples.subList(offset, samples.size());
+                offset = 0;
+            }
         }
     }
 
     public SpeedAndEta getSpeedAndEta() {
-        Sample start = samples.get(offset);
-        Sample end = samples.get(samples.size() - 1);
-        long elapsed = end.timestamp - start.timestamp;
-        long xferred = end.byteCount - start.byteCount;
-        if (elapsed == 0 || xferred == 0) {
-            return new SpeedAndEta(0, 0);
+        synchronized (this) {
+            Sample start = samples.get(offset);
+            Sample end = samples.get(samples.size() - 1);
+            long elapsed = end.timestamp - start.timestamp;
+            long xferred = end.byteCount - start.byteCount;
+            if (elapsed == 0 || xferred == 0) {
+                return new SpeedAndEta(0, 0);
+            }
+            float speed = 1000 * (float) xferred / (float) elapsed;
+            int eta = Math.round((totalBytes - end.byteCount) / speed);
+            return new SpeedAndEta(speed, eta);
         }
-        float speed =  1000 * (float) xferred / (float) elapsed;
-        int eta = Math.round((totalBytes - end.byteCount) / speed);
-        return new SpeedAndEta(speed, eta);
     }
 
     private static class Sample {

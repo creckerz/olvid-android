@@ -503,15 +503,15 @@ class DeferrableStatement implements Statement {
         return statement.isWrapperFor(aClass);
     }
 
-    @Override
-    public void closeOnCompletion() throws SQLException {
-        statement.closeOnCompletion();
-    }
-
-    @Override
-    public boolean isCloseOnCompletion() throws SQLException {
-        return statement.isCloseOnCompletion();
-    }
+//    @Override
+//    public void closeOnCompletion() throws SQLException {
+//        statement.closeOnCompletion();
+//    }
+//
+//    @Override
+//    public boolean isCloseOnCompletion() throws SQLException {
+//        return statement.isCloseOnCompletion();
+//    }
 }
 
 
@@ -1032,13 +1032,13 @@ class DeferrablePreparedStatement implements PreparedStatement {
         return statement.isWrapperFor(aClass);
     }
 
-    @Override
-    public void closeOnCompletion() throws SQLException {
-        statement.closeOnCompletion();
-    }
-
-    @Override
-    public boolean isCloseOnCompletion() throws SQLException {
-        return statement.isCloseOnCompletion();
-    }
+//    @Override
+//    public void closeOnCompletion() throws SQLException {
+//        statement.closeOnCompletion();
+//    }
+//
+//    @Override
+//    public boolean isCloseOnCompletion() throws SQLException {
+//        return statement.isCloseOnCompletion();
+//    }
 }

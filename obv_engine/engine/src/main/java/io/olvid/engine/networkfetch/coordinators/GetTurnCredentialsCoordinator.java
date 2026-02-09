@@ -74,10 +74,9 @@ public class GetTurnCredentialsCoordinator implements Operation.OnFinishCallback
 
     @Override
     public void onFinishCallback(Operation operation) {
-        if (!(operation instanceof GetTurnCredentialsOperation)) {
+        if (!(operation instanceof GetTurnCredentialsOperation getTurnCredentialsOperation)) {
             return;
         }
-        GetTurnCredentialsOperation getTurnCredentialsOperation = (GetTurnCredentialsOperation) operation;
 
         HashMap<String, Object> userInfo = new HashMap<>();
         userInfo.put(DownloadNotifications.NOTIFICATION_TURN_CREDENTIALS_RECEIVED_OWNED_IDENTITY_KEY, getTurnCredentialsOperation.getOwnedIdentity());
@@ -87,6 +86,7 @@ public class GetTurnCredentialsCoordinator implements Operation.OnFinishCallback
         userInfo.put(DownloadNotifications.NOTIFICATION_TURN_CREDENTIALS_RECEIVED_USERNAME_2_KEY, getTurnCredentialsOperation.getExpiringUsername2());
         userInfo.put(DownloadNotifications.NOTIFICATION_TURN_CREDENTIALS_RECEIVED_PASSWORD_2_KEY, getTurnCredentialsOperation.getPassword2());
         userInfo.put(DownloadNotifications.NOTIFICATION_TURN_CREDENTIALS_RECEIVED_SERVERS_KEY, getTurnCredentialsOperation.getTurnServers());
+        userInfo.put(DownloadNotifications.NOTIFICATION_TURN_CREDENTIALS_RECEIVED_ALT_SERVERS_KEY, getTurnCredentialsOperation.getAltTurnServers());
 
         if (notificationPostingDelegate != null) {
             notificationPostingDelegate.postNotification(DownloadNotifications.NOTIFICATION_TURN_CREDENTIALS_RECEIVED, userInfo);
@@ -95,10 +95,9 @@ public class GetTurnCredentialsCoordinator implements Operation.OnFinishCallback
 
     @Override
     public void onCancelCallback(Operation operation) {
-        if (!(operation instanceof GetTurnCredentialsOperation)) {
+        if (!(operation instanceof GetTurnCredentialsOperation getTurnCredentialsOperation)) {
             return;
         }
-        GetTurnCredentialsOperation getTurnCredentialsOperation = (GetTurnCredentialsOperation) operation;
         Integer rfc = getTurnCredentialsOperation.getReasonForCancel();
         if (rfc == null) {
             rfc = Operation.RFC_NULL;

@@ -30,6 +30,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
+import io.olvid.messenger.databases.entity.Discussion;
 import io.olvid.messenger.databases.entity.Fyle;
 import io.olvid.messenger.databases.entity.FyleMessageJoinWithStatus;
 import io.olvid.messenger.databases.entity.Message;
@@ -66,8 +67,46 @@ public interface FyleDao {
             " LEFT JOIN " + FyleMessageJoinWithStatus.TABLE_NAME + " AS FMJoin " +
             " ON fyle.id = FMjoin." + FyleMessageJoinWithStatus.FYLE_ID +
             " WHERE FMjoin." + FyleMessageJoinWithStatus.MESSAGE_ID + " IS NULL")
-    List<Fyle> getStray();
+    @NonNull List<Fyle> getStray();
 
     @Query("SELECT " + Fyle.SHA256 + " FROM " + Fyle.TABLE_NAME)
-    List<byte[]> getAllSha256();
+    @NonNull List<byte[]> getAllSha256();
+
+    @Query("SELECT DISTINCT fyle.* FROM " + Fyle.TABLE_NAME + " AS fyle " +
+            " INNER JOIN " + FyleMessageJoinWithStatus.TABLE_NAME + " AS FMjoin " +
+            " ON fyle.id = FMjoin." + FyleMessageJoinWithStatus.FYLE_ID +
+            " INNER JOIN " + Message.TABLE_NAME + " AS mess " +
+            " ON FMjoin." + FyleMessageJoinWithStatus.MESSAGE_ID + " = mess.id " +
+            " WHERE fyle." + Fyle.SHA256 + " IS NOT NULL " +
+            " AND fyle." + Fyle.FILE_PATH + " IS NOT NULL " +
+            " AND mess." + Message.DISCUSSION_ID + " IN (:discussionIds) " +
+            " AND mess." + Message.MESSAGE_TYPE + " IN ( " + Message.TYPE_OUTBOUND_MESSAGE + "," + Message.TYPE_INBOUND_MESSAGE + ") "
+    )
+    @NonNull List<Fyle> getAllTransferableForDiscussionIds(@NonNull List<Long> discussionIds);
+
+    @Query("SELECT DISTINCT fyle.* FROM " + Fyle.TABLE_NAME + " AS fyle " +
+            " INNER JOIN " + FyleMessageJoinWithStatus.TABLE_NAME + " AS FMjoin " +
+            " ON fyle.id = FMjoin." + FyleMessageJoinWithStatus.FYLE_ID +
+            " INNER JOIN " + Message.TABLE_NAME + " AS mess " +
+            " ON FMjoin." + FyleMessageJoinWithStatus.MESSAGE_ID + " = mess.id " +
+            " INNER JOIN " + Discussion.TABLE_NAME + " AS disc " +
+            " ON mess." + Message.DISCUSSION_ID + " = disc.id " +
+            " WHERE fyle." + Fyle.SHA256 + " IS NOT NULL " +
+            " AND fyle." + Fyle.FILE_PATH + " IS NOT NULL " +
+            " AND disc." + Discussion.BYTES_OWNED_IDENTITY + " = :bytesOwnedIdentity " +
+            " AND mess." + Message.MESSAGE_TYPE + " IN ( " + Message.TYPE_OUTBOUND_MESSAGE + "," + Message.TYPE_INBOUND_MESSAGE + ") "
+    )
+    @NonNull List<Fyle> getAllTransferableForOwnedIdentity(@NonNull byte[] bytesOwnedIdentity);
+
+    @Query("SELECT " + Fyle.SHA256 + " FROM " + Fyle.TABLE_NAME +
+            " WHERE " + Fyle.FILE_PATH + " IS NOT NULL " +
+            " AND " + Fyle.SHA256 + " IN (:sha256s) "
+    )
+    @NonNull List<byte[]> filterKnownAndComplete(@NonNull List<byte[]> sha256s);
+
+    @Query("SELECT " + Fyle.SHA256 + " FROM " + Fyle.TABLE_NAME +
+            " WHERE " + Fyle.FILE_PATH + " IS NULL " +
+            " AND " + Fyle.SHA256 + " IN (:sha256s) "
+    )
+    @NonNull List<byte[]> filterKnownAndIncomplete(@NonNull List<byte[]> sha256s);
 }

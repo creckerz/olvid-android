@@ -24,7 +24,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.EaseOutExpo
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.border
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -43,7 +43,8 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -104,6 +105,7 @@ fun VideoCallContent(
                 pipAspectCallback = pipAspectCallback
             )
             AnimatedVisibility(!isPip) {
+                // small preview of (usually) your own video at the top left
                 Card(
                     modifier = Modifier
                         .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Start))
@@ -111,12 +113,14 @@ fun VideoCallContent(
                         .clickable {
                             webrtcCallService.selectedParticipant =
                                 webrtcCallService.bytesOwnedIdentity
-                        }
-                        .border(
-                            width = 2.dp,
-                            color = borderColorOwned,
-                            shape = RoundedCornerShape(16.dp)
-                        ),
+                        },
+                    border = BorderStroke(
+                        width = 2.dp,
+                        color = borderColorOwned
+                    ),
+                    colors = CardDefaults.cardColors(
+                      containerColor = colorResource(R.color.newDialogBackground),
+                    ),
                     shape = RoundedCornerShape(16.dp)
                 ) {
                     CallParticipant(
@@ -154,6 +158,9 @@ fun VideoCallContent(
                             webrtcCallService.selectedParticipant =
                                 participants.firstOrNull()?.bytesContactIdentity!!
                         },
+                    colors = CardDefaults.cardColors(
+                        containerColor = colorResource(R.color.newDialogBackground),
+                    ),
                     shape = RoundedCornerShape(16.dp)
                 ) {
                     CallParticipant(
@@ -210,12 +217,11 @@ fun VideoCallContent(
                                 Modifier
                                     .fillMaxWidth()
                                     .height(boxWithConstraintsScope.maxHeight / 2 - 6.dp)
-                        )
-                        .border(
-                            width = 2.dp,
-                            color = borderColorFirst,
-                            shape = RoundedCornerShape(20.dp)
                         ),
+                    border = BorderStroke(
+                        width = 2.dp,
+                        color = borderColorFirst,
+                    ),
                     shape = RoundedCornerShape(20.dp)
                 ) {
                     val remoteVideoTrack =
@@ -242,12 +248,11 @@ fun VideoCallContent(
                                 Modifier
                                     .fillMaxWidth()
                                     .height(boxWithConstraintsScope.maxHeight / 2 - 6.dp)
-                        )
-                        .border(
-                            width = 2.dp,
-                            color = borderColorSecond,
-                            shape = RoundedCornerShape(20.dp)
                         ),
+                    border = BorderStroke(
+                        width = 2.dp,
+                        color = borderColorSecond,
+                    ),
                     shape = RoundedCornerShape(20.dp)
                 ) {
                     val remoteVideoTrack =
@@ -269,12 +274,11 @@ fun VideoCallContent(
             Card(
                 modifier = Modifier
                     .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Start))
-                    .padding(start = 10.dp, top = 10.dp)
-                    .border(
-                        width = 2.dp,
-                        color = borderColorOwned,
-                        shape = RoundedCornerShape(16.dp)
-                    ),
+                    .padding(start = 10.dp, top = 10.dp),
+                border = BorderStroke(
+                    width = 2.dp,
+                    color = borderColorOwned,
+                ),
                 shape = RoundedCornerShape(16.dp)
             ) {
                 CallParticipant(

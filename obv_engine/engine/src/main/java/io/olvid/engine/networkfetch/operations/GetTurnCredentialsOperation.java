@@ -54,6 +54,7 @@ public class GetTurnCredentialsOperation extends Operation {
     private final String username2;
 
     private List<String> turnServers;
+    private List<String> altTurnServers;
     private String expiringUsername1;
     private String password1;
     private String expiringUsername2;
@@ -69,6 +70,10 @@ public class GetTurnCredentialsOperation extends Operation {
 
     public List<String> getTurnServers() {
         return turnServers;
+    }
+
+    public List<String> getAltTurnServers() {
+        return altTurnServers;
     }
 
     public String getExpiringUsername1() {
@@ -111,6 +116,7 @@ public class GetTurnCredentialsOperation extends Operation {
             try {
                 try {
                     turnServers = wellKnownCacheDelegate.getTurnUrls(ownedIdentity.getServer());
+                    altTurnServers = wellKnownCacheDelegate.getAltTurnUrls(ownedIdentity.getServer());
                 } catch (WellKnownCoordinator.NotCachedException e) {
                     cancel(RFC_WELL_KNOWN_NOT_CACHED);
                     return;

@@ -487,6 +487,8 @@
     <string name="notification_action_end_call">Raccrocher</string>
     <string name="notification_channel_webrtc_call_service_name">Appels entrants</string>
     <string name="notification_channel_webrtc_call_service_description">Notifications pour les appels entrants</string>
+    <string name="notification_channel_transfer_service_name">Transfert d\'historique</string>
+    <string name="notification_channel_transfer_service_description">Affichage de l\'état d\'avancement lors d\'un transfert d\'historique</string>
     <string name="activity_title_webrtc_incoming_call">Appel Olvid entrant</string>
     <string name="text_incoming_call_from">Appel entrant de…</string>
     <string name="toast_message_already_in_a_call">Un appel est déjà en cours. Finissez le avant d\'en démarrer un autre.</string>
@@ -1573,10 +1575,7 @@
     <string name="text_group_remote_delete_setting_everyone">Tout le monde</string>
     <string name="text_group_remote_delete_setting_admins">Les administrateurs uniquement</string>
     <string name="activity_title_settings_update">Mise à jour des paramètres</string>
-    <string name="xx_gbps">%1$sG/s</string>
-    <string name="xx_mbps">%1$sM/s</string>
-    <string name="xx_kbps">%1$sk/s</string>
-    <string name="xx_bps">%1$so/s</string>
+    <string name="xxx_per_s">%1$s/s</string>
     <string name="text_you_captured_sensitive_message">Vous avez fait une capture d\'un message sensible</string>
     <string name="text_unknown_member_captured_sensitive_message">Un utilisateur inconnu a fait une capture d\'un message sensible</string>
     <string name="text_xxx_captured_sensitive_message">%1$s a fait une capture d\'un message sensible</string>
@@ -2140,6 +2139,18 @@
     <string name="webrtc_status_start_call_timeout">Appareil du correspondant injoignable</string>
     <string name="recreate_all_secure_channels">Recréer tous les canaux sécurisés</string>
     <string name="recreate_all_secure_channels_explanation">Recréer tous les canaux sécurisés forcera Olvid à créer de nouveaux canaux de communication sécurisés avec tous les appareils de vos contacts. Ceci n\'est généralement pas utile, mais peut débloquer de rares situations où certains de ces canaux sont « désynchronisés ».\n\n**Attention :** si vous avez de nombreux contacts, cette opération peut prendre quelques minutes et vous pourriez perdre certains messages reçus pendant qu\'elle s\'exécute.</string>
+    <string name="label_untransferred">Non transféré</string>
+    <string name="history_transfer_title">Transfert d\'historique</string>
+    <string name="history_transfer_step_none">Aucun transfert en cours</string>
+    <string name="history_transfer_step_contacting_other_device">En attente de l\'autre appareil</string>
+    <string name="history_transfer_step_connecting">Connexion à l\'autre appareil</string>
+    <string name="history_transfer_step_negotiating">Négociation (étape 1 sur 3)</string>
+    <string name="history_transfer_step_transferring_messages">Transfert des messages (étape 2 sur 3)</string>
+    <string name="history_transfer_step_transferring_files">Transfert des pièces jointes (étape 3 sur 3)</string>
+    <string name="history_transfer_step_finished">Transfert terminé</string>
+    <string name="history_transfer_step_failed">Transfert interrompu</string>
+    <string name="pref_category_history_transfer_title">Transfert d\'historique (bêta)</string>
+    <string name="toast_message_unable_to_start_transfer">Impossible de démarrer le transfert. Un autre transfert est-il en cours ?</string>
     <string name="button_label_use_magic_link">Utiliser le « lien magique »</string>
     <string name="toast_message_magic_link_failed">« Lien magique » invalide</string>
     <string name="label_hanged_up">Appel raccroché</string>
@@ -2149,4 +2160,16 @@
     <string name="dialog_title_keycloak_authentication_impossible">Authentification impossible</string>
     <string name="dialog_message_keycloak_authentication_impossible">Votre profil est actuellement géré par votre organisation et une ré-authentification est nécessaire. Cependant, aucune méthode d\'authentification compatible ne semble disponible.\n\nVeuillez contacter votre administrateur pour plus de détails.</string>
     <string name="onboarding_transfer_keycloak_error_message_authentication_impossible">Aucune méthode d\'authentification compatible ne semble disponible.</string>
+    <string name="pref_use_alt_turn_servers_title">Utiliser des serveurs TURN alternatifs</string>
+    <string name="pref_use_alt_turn_servers_summary">Activez cette option pour utiliser des serveurs TURN avec des adresses IP tournantes. Si vous n\'êtes pas sûr de vous, gardez cette option inactive 😁</string>
+    <string name="button_label_transfer_through_webrtc">Transférer via le réseau local</string>
+    <string name="button_label_export_zip">Exporter un ZIP</string>
+    <string name="button_label_import_zip">Importer un ZIP</string>
+    <string name="dialog_title_transfer_choose_target_device">Choisissez l\'appareil vers lequel transférer</string>
+    <string name="transfer_label_no_other_active_device">Aucun autre appareil actif</string>
+    <string name="transfer_label_messages">Messages</string>
+    <string name="transfer_label_throughput">Débit</string>
+    <string name="transfer_label_remaining">Restant</string>
+    <string name="transfer_label_attachments">Pièces jointes</string>
+    <string name="transfer_disclaimer_beta">Cette fonctionnalité est encore en phase de bêta test et l\'implémentation actuelle pourrait ne pas être compatible avec l\'implémentation finale du transfert d\'historique Olvid.\n\nAvant d\'utiliser cette fonctionnalité, assurez vous que vos appareils ont bien la dernière version d\'Olvid installée.</string>
 </resources>

@@ -242,13 +242,15 @@ public class CreateOrUpdateGroupV2Task implements Runnable {
                 if (insertGainedAdminMessage) {
                     Message adminMessage = Message.createGainedGroupAdminMessage(db, discussion.id, discussion.bytesOwnedIdentity, groupUpdateTimestamp + 1);
                     db.messageDao().insert(adminMessage);
-                    if (discussion.updateLastMessageTimestamp(adminMessage.timestamp)) {
+                    Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(discussion.bytesOwnedIdentity);
+                    if (discussion.updateLastMessageTimestamp((timestamp!= null && timestamp < adminMessage.timestamp) ? timestamp + 10 : adminMessage.timestamp)) {
                         db.discussionDao().updateLastMessageTimestamp(discussion.id, discussion.lastMessageTimestamp);
                     }
                 } else if (insertLostAdminMessage && !insertLostSendMessage) { // only insert lost admin if we did not lose write permission too
                     Message adminMessage = Message.createLostGroupAdminMessage(db, discussion.id, discussion.bytesOwnedIdentity, groupUpdateTimestamp + 1);
                     db.messageDao().insert(adminMessage);
-                    if (discussion.updateLastMessageTimestamp(adminMessage.timestamp)) {
+                    Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(discussion.bytesOwnedIdentity);
+                    if (discussion.updateLastMessageTimestamp((timestamp!= null && timestamp < adminMessage.timestamp) ? timestamp + 10 : adminMessage.timestamp)) {
                         db.discussionDao().updateLastMessageTimestamp(discussion.id, discussion.lastMessageTimestamp);
                     }
                 }
@@ -256,13 +258,15 @@ public class CreateOrUpdateGroupV2Task implements Runnable {
                 if (!insertGainedAdminMessage && insertGainedSendMessage) { // only insert a "can write" message if we are not an admin
                     Message gainedSendMessage = Message.createGainedGroupSendMessage(db, discussion.id, discussion.bytesOwnedIdentity, groupUpdateTimestamp + 1);
                     db.messageDao().insert(gainedSendMessage);
-                    if (discussion.updateLastMessageTimestamp(gainedSendMessage.timestamp)) {
+                    Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(discussion.bytesOwnedIdentity);
+                    if (discussion.updateLastMessageTimestamp((timestamp!= null && timestamp < gainedSendMessage.timestamp) ? timestamp + 10 : gainedSendMessage.timestamp)) {
                         db.discussionDao().updateLastMessageTimestamp(discussion.id, discussion.lastMessageTimestamp);
                     }
                 } else if (insertLostSendMessage) {
                     Message lostSendMessage = Message.createLostGroupSendMessage(db, discussion.id, discussion.bytesOwnedIdentity, groupUpdateTimestamp + 1);
                     db.messageDao().insert(lostSendMessage);
-                    if (discussion.updateLastMessageTimestamp(lostSendMessage.timestamp)) {
+                    Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(discussion.bytesOwnedIdentity);
+                    if (discussion.updateLastMessageTimestamp((timestamp!= null && timestamp < lostSendMessage.timestamp) ? timestamp + 10 : lostSendMessage.timestamp)) {
                         db.discussionDao().updateLastMessageTimestamp(discussion.id, discussion.lastMessageTimestamp);
                     }
                 }
@@ -610,8 +614,11 @@ public class CreateOrUpdateGroupV2Task implements Runnable {
                     }
                 }
 
-                if (messageInserted && discussion.updateLastMessageTimestamp(System.currentTimeMillis())) {
-                    db.discussionDao().updateLastMessageTimestamp(discussion.id, discussion.lastMessageTimestamp);
+                if (messageInserted) {
+                    Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(discussion.bytesOwnedIdentity);
+                    if (discussion.updateLastMessageTimestamp((timestamp == null) ? 10 : timestamp + 10)) {
+                        db.discussionDao().updateLastMessageTimestamp(discussion.id, discussion.lastMessageTimestamp);
+                    }
                 }
 
                 if (((groupWasJustCreatedByMe && createdOnOtherDevice) || !updatedByMe)

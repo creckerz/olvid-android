@@ -486,6 +486,8 @@
 	<string name="notification_action_end_call" state="needs_review" hash="-1678527967">通話を終了</string>
 	<string name="notification_channel_webrtc_call_service_name" state="needs_review" hash="-623348883">着信</string>
 	<string name="notification_channel_webrtc_call_service_description" state="needs_review" hash="318507261">着信通知</string>
+	<string name="notification_channel_transfer_service_name" state="needs_review" hash="-1765472866">履歴の転送</string>
+	<string name="notification_channel_transfer_service_description" state="needs_review" hash="1606671624">チャット履歴の転送中の進捗状況を表示します</string>
 	<string name="activity_title_webrtc_incoming_call" state="needs_review" hash="-1672458216">Olvidからの着信</string>
 	<string name="text_incoming_call_from" state="needs_review" hash="416481913">…からの着信</string>
 	<string name="toast_message_already_in_a_call" state="needs_review" hash="702053866">すでに通話中です。新しい通話を開始する前に、通話を終了してください。</string>
@@ -1576,10 +1578,7 @@
 	<string name="text_setting_full" state="needs_review" hash="-1858792643">完全</string>
 	<string name="text_setting_none" state="needs_review" hash="752790864">なし</string>
 	<string name="activity_title_settings_update" state="needs_review" hash="1186086183">設定の更新</string>
-	<string name="xx_gbps" state="needs_review" hash="-503020032">%1$sG/s</string>
-	<string name="xx_mbps" state="needs_review" hash="-1682095296">%1$sMB/秒</string>
-	<string name="xx_kbps" state="needs_review" hash="1012462976">%1$sk/s</string>
-	<string name="xx_bps" state="needs_review" hash="479585933">%1$sB/秒</string>
+	<string name="xxx_per_s" state="needs_review" hash="-1456430978">%1$s/s</string>
 	<string name="text_you_captured_sensitive_message" state="needs_review" hash="-929928147">機密性の高いメッセージのスクリーンショットを撮りました。</string>
 	<string name="text_unknown_member_captured_sensitive_message" state="needs_review" hash="-749114410">身に覚えのないユーザーが、機密性の高いメッセージのスクリーンショットを撮りました。</string>
 	<string name="text_xxx_captured_sensitive_message" state="needs_review" hash="233294474">%1$sが機密メッセージのスクリーンショットを撮りました</string>
@@ -2142,6 +2141,18 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">相手のデバイスに接続できません</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">すべての安全なチャンネルを再作成する</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">すべての安全なチャンネルを再作成すると、Olvidはすべての連絡先のデバイスと新しい安全な通信チャンネルを作成するように強制されます。通常は役に立ちませんが、これらのチャンネルのいくつかが「同期されていない」という珍しい状況を解決できる場合があります。\n\n**警告：** 連絡先が多い場合、この操作には数分かかる可能性があり、実行中に一部の受信メッセージを失う可能性があります。</string>
+	<string name="label_untransferred" state="needs_review" hash="-1851678218">転送されませんでした</string>
+	<string name="history_transfer_title" state="needs_review" hash="1191393558">チャット履歴の転送</string>
+	<string name="history_transfer_step_none" state="needs_review" hash="1228580785">現在転送中のデータはありません</string>
+	<string name="history_transfer_step_contacting_other_device" state="needs_review" hash="1719019815">他のデバイスを待機中</string>
+	<string name="history_transfer_step_connecting" state="needs_review" hash="1836039168">別のデバイスに接続中</string>
+	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">交渉中（3段階のうち1段階目）</string>
+	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">メッセージの転送（3段階のうちの2段階目）</string>
+	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">添付ファイルの転送（3/3）</string>
+	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">転送が完了しました</string>
+	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">転送が中断されました</string>
+	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">チャット履歴の転送（ベータ版）</string>
+	<string name="toast_message_unable_to_start_transfer" state="needs_review" hash="362080814">転送を開始できません。別の転送がすでに実行されている可能性があります。</string>
 	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">「マジックリンク」を使用する</string>
 	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">無効なマジックリンク</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">通話が切断されました</string>
@@ -2151,4 +2162,16 @@
 	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">認証できません</string>
 	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">お客様のプロファイルは現在、お客様の組織によって管理されており、再認証が必要です。ただし、利用可能な認証方法がないようです。\n\n詳細については、管理者にお問い合わせください。</string>
 	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">利用可能な認証方法が見つかりません。</string>
+	<string name="pref_use_alt_turn_servers_title" state="needs_review" hash="-1956132776">別のTURNサーバーを使用する</string>
+	<string name="pref_use_alt_turn_servers_summary" state="needs_review" hash="357427162">このオプションを有効にすると、IPアドレスが変更されるTURNサーバーを使用できます。不明な場合は、このオプションをオフのままにしてください。😁</string>
+	<string name="button_label_transfer_through_webrtc" state="needs_review" hash="-1809138918">ローカルネットワーク経由での転送</string>
+	<string name="button_label_export_zip" state="needs_review" hash="1575043364">ZIPファイルとしてエクスポート</string>
+	<string name="button_label_import_zip" state="needs_review" hash="1299665090">ZIPファイルをインポート</string>
+	<string name="dialog_title_transfer_choose_target_device" state="needs_review" hash="218115750">この転送の対象デバイスを選択してください</string>
+	<string name="transfer_label_no_other_active_device" state="needs_review" hash="-2135899221">他のアクティブなデバイスはありません</string>
+	<string name="transfer_label_messages" state="needs_review" hash="-1639407912">メッセージ</string>
+	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">スループット</string>
+	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">残り</string>
+	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">添付ファイル</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">この機能はまだベータテスト段階にあり、現在の実装はOlvidの履歴転送の最終実装と互換性がない場合があります。\n\nこの機能を使用する前に、お使いのデバイスにOlvidの最新バージョンがインストールされていることを確認してください。</string>
 </resources>

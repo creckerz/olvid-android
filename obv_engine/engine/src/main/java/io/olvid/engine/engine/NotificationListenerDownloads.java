@@ -287,6 +287,8 @@ public class NotificationListenerDownloads implements NotificationListener {
                 String password2 = (String) userInfo.get(DownloadNotifications.NOTIFICATION_TURN_CREDENTIALS_RECEIVED_PASSWORD_2_KEY);
                 //noinspection unchecked
                 List<String> turnServers = (List<String>) userInfo.get(DownloadNotifications.NOTIFICATION_TURN_CREDENTIALS_RECEIVED_SERVERS_KEY);
+                //noinspection unchecked
+                List<String> altTurnServers = (List<String>) userInfo.get(DownloadNotifications.NOTIFICATION_TURN_CREDENTIALS_RECEIVED_ALT_SERVERS_KEY);
 
                 HashMap<String, Object> engineInfo = new HashMap<>();
                 engineInfo.put(EngineNotifications.TURN_CREDENTIALS_RECEIVED_OWNED_IDENTITY_KEY, ownedIdentity.getBytes());
@@ -296,6 +298,7 @@ public class NotificationListenerDownloads implements NotificationListener {
                 engineInfo.put(EngineNotifications.TURN_CREDENTIALS_RECEIVED_USERNAME_2_KEY, username2);
                 engineInfo.put(EngineNotifications.TURN_CREDENTIALS_RECEIVED_PASSWORD_2_KEY, password2);
                 engineInfo.put(EngineNotifications.TURN_CREDENTIALS_RECEIVED_SERVERS_KEY, turnServers);
+                engineInfo.put(EngineNotifications.TURN_CREDENTIALS_RECEIVED_ALT_SERVERS_KEY, altTurnServers);
                 engine.postEngineNotification(EngineNotifications.TURN_CREDENTIALS_RECEIVED, engineInfo);
                 break;
             }

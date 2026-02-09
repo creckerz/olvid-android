@@ -30,9 +30,9 @@ import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JsonExpiration {
-    public Long existenceDuration; // in seconds
-    public Long visibilityDuration; // in seconds
-    public Boolean readOnce;
+    @Nullable public Long existenceDuration; // in seconds
+    @Nullable public Long visibilityDuration; // in seconds
+    @Nullable public Boolean readOnce;
 
     @JsonProperty("ex")
     public Long getExistenceDuration() {

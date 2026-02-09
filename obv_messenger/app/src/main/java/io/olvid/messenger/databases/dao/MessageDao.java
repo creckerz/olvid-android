@@ -493,6 +493,15 @@ public interface MessageDao {
             " WHERE FMjoin." + FyleMessageJoinWithStatus.MIME_TYPE + " = '" + OpenGraph.MIME_TYPE + "'")
     List<Message> getAllWithLinkPreview();
 
+    @Query("SELECT * FROM " + Message.TABLE_NAME +
+            " WHERE " + Message.MESSAGE_TYPE + " IN (" + Message.TYPE_OUTBOUND_MESSAGE + "," + Message.TYPE_INBOUND_MESSAGE + " ) " +
+            " AND " + Message.DISCUSSION_ID + " = :discussionId " +
+            " AND " + Message.WIPE_STATUS + " = " + Message.WIPE_STATUS_NONE +
+            " AND " + Message.LIMITED_VISIBILITY + " = 0 " +
+            " ORDER BY " + Message.SENDER_IDENTIFIER + ", " + Message.SENDER_THREAD_IDENTIFIER + ", " + Message.SENDER_SEQUENCE_NUMBER + " ASC "
+    )
+    @NonNull List<Message> getAllTransferableForDiscussion(long discussionId);
+
     @Query("SELECT id FROM " + Message.TABLE_NAME +
             " WHERE " + Message.DISCUSSION_ID + " = :discussionId " +
             " AND " + Message.TIMESTAMP + " < :minTimestamp" +

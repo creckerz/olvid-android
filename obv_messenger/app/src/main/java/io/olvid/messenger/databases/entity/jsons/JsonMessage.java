@@ -32,20 +32,20 @@ import java.util.UUID;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JsonMessage {
-    public String body;
-    public long senderSequenceNumber;
-    public UUID senderThreadIdentifier;
-    public byte[] groupUid;
-    public byte[] groupOwner;
-    public byte[] groupV2Identifier;
-    public JsonOneToOneMessageIdentifier oneToOneIdentifier; // an array containing bytesOwnedIdentity and bytesContactIdentity for one-to-one discussions --> allows other devices to know in which discussion to put propagated one-to-one messages
-    public Boolean forwarded;
-    public Long originalServerTimestamp;
-    public JsonMessageReference jsonReply;
-    public JsonExpiration jsonExpiration;
-    public JsonLocation jsonLocation;
-    public List<JsonUserMention> jsonUserMentions;
-    public JsonPoll jsonPoll;
+    @Nullable public String body;
+    @Nullable public long senderSequenceNumber;
+    @Nullable public UUID senderThreadIdentifier;
+    @Nullable public byte[] groupUid;
+    @Nullable public byte[] groupOwner;
+    @Nullable public byte[] groupV2Identifier;
+    @Nullable public JsonOneToOneMessageIdentifier oneToOneIdentifier; // an array containing bytesOwnedIdentity and bytesContactIdentity for one-to-one discussions --> allows other devices to know in which discussion to put propagated one-to-one messages
+    @Nullable public Boolean forwarded;
+    @Nullable public Long originalServerTimestamp;
+    @Nullable public JsonMessageReference jsonReply;
+    @Nullable public JsonExpiration jsonExpiration;
+    @Nullable public JsonLocation jsonLocation;
+    @Nullable public List<JsonUserMention> jsonUserMentions;
+    @Nullable public JsonPoll jsonPoll;
 
 
     public JsonMessage(String body) {
@@ -55,6 +55,7 @@ public class JsonMessage {
     public JsonMessage() {
     }
 
+    @Nullable
     public String getBody() {
         return body;
     }
@@ -64,6 +65,7 @@ public class JsonMessage {
     }
 
     @JsonProperty("ssn")
+    @Nullable
     public long getSenderSequenceNumber() {
         return senderSequenceNumber;
     }
@@ -74,6 +76,7 @@ public class JsonMessage {
     }
 
     @JsonProperty("sti")
+    @Nullable
     public UUID getSenderThreadIdentifier() {
         return senderThreadIdentifier;
     }
@@ -84,6 +87,7 @@ public class JsonMessage {
     }
 
     @JsonProperty("guid")
+    @Nullable
     public byte[] getGroupUid() {
         return groupUid;
     }
@@ -94,6 +98,7 @@ public class JsonMessage {
     }
 
     @JsonProperty("go")
+    @Nullable
     public byte[] getGroupOwner() {
         return groupOwner;
     }
@@ -104,6 +109,7 @@ public class JsonMessage {
     }
 
     @JsonProperty("gid2")
+    @Nullable
     public byte[] getGroupV2Identifier() {
         return groupV2Identifier;
     }
@@ -114,6 +120,7 @@ public class JsonMessage {
     }
 
     @JsonProperty("o2oi")
+    @Nullable
     public JsonOneToOneMessageIdentifier getOneToOneIdentifier() {
         return oneToOneIdentifier;
     }
@@ -124,6 +131,7 @@ public class JsonMessage {
     }
 
     @JsonProperty("fw")
+    @Nullable
     public Boolean isForwarded() {
         return forwarded;
     }
@@ -134,6 +142,7 @@ public class JsonMessage {
     }
 
     @JsonProperty("ost")
+    @Nullable
     public Long getOriginalServerTimestamp() {
         return originalServerTimestamp;
     }
@@ -144,6 +153,7 @@ public class JsonMessage {
     }
 
     @JsonProperty("re")
+    @Nullable
     public JsonMessageReference getJsonReply() {
         return jsonReply;
     }
@@ -154,6 +164,7 @@ public class JsonMessage {
     }
 
     @JsonProperty("exp")
+    @Nullable
     public JsonExpiration getJsonExpiration() {
         return jsonExpiration;
     }
@@ -164,6 +175,7 @@ public class JsonMessage {
     }
 
     @JsonProperty("loc")
+    @Nullable
     public JsonLocation getJsonLocation() {
         return jsonLocation;
     }

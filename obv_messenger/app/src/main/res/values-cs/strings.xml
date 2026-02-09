@@ -486,6 +486,8 @@
 	<string name="notification_action_end_call" state="needs_review" hash="-1678527967">Ukončit hovor</string>
 	<string name="notification_channel_webrtc_call_service_name" state="needs_review" hash="-623348883">Příchozí hovory</string>
 	<string name="notification_channel_webrtc_call_service_description" state="needs_review" hash="318507261">Upozornění na příchozí hovory</string>
+	<string name="notification_channel_transfer_service_name" state="needs_review" hash="-1765472866">Přenos historie</string>
+	<string name="notification_channel_transfer_service_description" state="needs_review" hash="1606671624">Zobrazuje průběh během přenosu historie chatu.</string>
 	<string name="activity_title_webrtc_incoming_call" state="needs_review" hash="-1672458216">Příchozí hovor Olvid</string>
 	<string name="text_incoming_call_from" state="needs_review" hash="416481913">Příchozí hovor od…</string>
 	<string name="toast_message_already_in_a_call" state="needs_review" hash="702053866">Už jsi ve volání. Ukonči ho, než začneš nové.</string>
@@ -1577,10 +1579,7 @@
 	<string name="text_setting_full" state="needs_review" hash="-1858792643">úplný</string>
 	<string name="text_setting_none" state="needs_review" hash="752790864">žádný</string>
 	<string name="activity_title_settings_update" state="needs_review" hash="1186086183">Aktualizace nastavení</string>
-	<string name="xx_gbps" state="needs_review" hash="-503020032">%1$sG/s</string>
-	<string name="xx_mbps" state="needs_review" hash="-1682095296">%1$sM/s</string>
-	<string name="xx_kbps" state="needs_review" hash="1012462976">%1$s k/s</string>
-	<string name="xx_bps" state="needs_review" hash="479585933">%1$s/s</string>
+	<string name="xxx_per_s" state="needs_review" hash="-1456430978">%1$s/s</string>
 	<string name="text_you_captured_sensitive_message" state="needs_review" hash="-929928147">Pořídili jste snímek obrazovky citlivé zprávy</string>
 	<string name="text_unknown_member_captured_sensitive_message" state="needs_review" hash="-749114410">Neznámý uživatel pořídil snímek obrazovky citlivé zprávy</string>
 	<string name="text_xxx_captured_sensitive_message" state="needs_review" hash="233294474">%1$s pořídil snímek obrazovky citlivé zprávy</string>
@@ -2143,6 +2142,18 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Zařízení protistrany je nedostupné</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Obnovit všechny zabezpečené kanály</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Obnovení všech zabezpečených kanálů donutí Olvid vytvořit nové zabezpečené komunikační kanály se všemi zařízeními vašich kontaktů. To obvykle není užitečné, ale může vyřešit vzácné situace, kdy jsou některé z těchto kanálů „nesynchronizované“.\n\n**Upozornění:** pokud máte mnoho kontaktů, může tato operace trvat několik minut a můžete ztratit některé příchozí zprávy během jejího provádění.</string>
+	<string name="label_untransferred" state="needs_review" hash="-1851678218">Nepřeneseno</string>
+	<string name="history_transfer_title" state="needs_review" hash="1191393558">Přenos historie chatu</string>
+	<string name="history_transfer_step_none" state="needs_review" hash="1228580785">Žádný probíhající přenos</string>
+	<string name="history_transfer_step_contacting_other_device" state="needs_review" hash="1719019815">Čekám na jiné zařízení</string>
+	<string name="history_transfer_step_connecting" state="needs_review" hash="1836039168">Připojuji se k jinému zařízení</string>
+	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">Probíhá vyjednávání (krok 1 ze 3)</string>
+	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Přenos zpráv (krok 2 ze 3)</string>
+	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">Přenos příloh (krok 3 ze 3)</string>
+	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Přenos dokončen</string>
+	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Přenos přerušen</string>
+	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Přenos historie chatu (beta verze)</string>
+	<string name="toast_message_unable_to_start_transfer" state="needs_review" hash="362080814">Nelze zahájit přenos. Možná už probíhá jiný přenos?</string>
 	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">Použijte \"magický odkaz\"</string>
 	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">Neplatný magický odkaz</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Hovor byl ukončen</string>
@@ -2152,4 +2163,16 @@
 	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">Ověření není možné</string>
 	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">Váš profil je aktuálně spravován vaší organizací a je vyžadována nová autentizace. Zdá se však, že žádná z podporovaných metod autentizace není k dispozici.\n\nPro více informací kontaktujte svého administrátora.</string>
 	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">Zdá se, že žádná z podporovaných metod ověřování není k dispozici.</string>
+	<string name="pref_use_alt_turn_servers_title" state="needs_review" hash="-1956132776">Použijte alternativní servery TURN</string>
+	<string name="pref_use_alt_turn_servers_summary" state="needs_review" hash="357427162">Aktivujte tuto možnost pro použití TURN serverů s rotujícími IP adresami. Pokud si nejste jisti, nechte tuto možnost vypnutou 😁</string>
+	<string name="button_label_transfer_through_webrtc" state="needs_review" hash="-1809138918">Přenos přes lokální síť</string>
+	<string name="button_label_export_zip" state="needs_review" hash="1575043364">Exportovat ZIP</string>
+	<string name="button_label_import_zip" state="needs_review" hash="1299665090">Importovat ZIP</string>
+	<string name="dialog_title_transfer_choose_target_device" state="needs_review" hash="218115750">Vyberte cílové zařízení pro tento přenos.</string>
+	<string name="transfer_label_no_other_active_device" state="needs_review" hash="-2135899221">Žádné jiné aktivní zařízení</string>
+	<string name="transfer_label_messages" state="needs_review" hash="-1639407912">Zprávy</string>
+	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Propustnost</string>
+	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Zbývající</string>
+	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Přílohy</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Tato funkce je stále ve fázi beta testování a aktuální implementace nemusí být kompatibilní s finální implementací přenosu historie Olvid.\n\nNež začnete tuto funkci používat, ujistěte se, že vaše zařízení mají nainstalovanou nejnovější verzi Olvid.</string>
 </resources>

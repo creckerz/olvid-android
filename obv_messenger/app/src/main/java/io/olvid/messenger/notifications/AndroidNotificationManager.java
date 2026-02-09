@@ -105,6 +105,7 @@ public class AndroidNotificationManager {
     public static final String MESSAGE_NOTIFICATION_CHANNEL_ID = "message";
     public static final String UNIFIED_SERVICE_NOTIFICATION_CHANNEL_ID = "unified";
     public static final String WEBRTC_CALL_SERVICE_NOTIFICATION_CHANNEL_ID = "calls";
+    public static final String TRANSFER_SERVICE_NOTIFICATION_CHANNEL_ID = "transfers";
     public static final String MEDIA_PLAYER_SERVICE_NOTIFICATION_CHANNEL_ID = "media_player";
 
     public static final String DISCUSSION_NOTIFICATION_CHANNELS_GROUP_ID = "discussions";
@@ -185,9 +186,20 @@ public class AndroidNotificationManager {
         webrtcCallServiceChannel.setDescription(App.getContext().getString(R.string.notification_channel_webrtc_call_service_description));
         webrtcCallServiceChannel.setShowBadge(false);
         webrtcCallServiceChannel.enableVibration(true);
-        webrtcCallServiceChannel.enableLights(false);
+        webrtcCallServiceChannel.enableLights(true);
         webrtcCallServiceChannel.setSound(null, null);
         webrtcCallServiceChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+
+        NotificationChannel transferServiceChannel = new NotificationChannel(
+                TRANSFER_SERVICE_NOTIFICATION_CHANNEL_ID,
+                App.getContext().getString(R.string.notification_channel_transfer_service_name),
+                NotificationManager.IMPORTANCE_HIGH);
+        transferServiceChannel.setDescription(App.getContext().getString(R.string.notification_channel_transfer_service_description));
+        transferServiceChannel.setShowBadge(false);
+        transferServiceChannel.enableVibration(false);
+        transferServiceChannel.enableLights(false);
+        transferServiceChannel.setSound(null, null);
+        transferServiceChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
 
         NotificationChannel mediaPlayerServiceChannel = new NotificationChannel(
                 MEDIA_PLAYER_SERVICE_NOTIFICATION_CHANNEL_ID,
@@ -203,6 +215,7 @@ public class AndroidNotificationManager {
                 messageChannel,
                 unifiedForegroundServiceChannel,
                 webrtcCallServiceChannel,
+                transferServiceChannel,
                 mediaPlayerServiceChannel
         ));
 

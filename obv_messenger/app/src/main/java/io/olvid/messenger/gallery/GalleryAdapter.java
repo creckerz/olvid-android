@@ -130,7 +130,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryI
         final FyleMessageJoinWithStatusDao.FyleAndStatus fyleAndStatus = fyleAndStatuses.get(position);
         holder.fyleAndStatus = fyleAndStatus;
         if (holder.imageView != null) {
-            if (fyleAndStatus.fyleMessageJoinWithStatus.status == FyleMessageJoinWithStatus.STATUS_FAILED) {
+            if (fyleAndStatus.fyleMessageJoinWithStatus.status == FyleMessageJoinWithStatus.STATUS_FAILED
+                    || fyleAndStatus.fyleMessageJoinWithStatus.status == FyleMessageJoinWithStatus.STATUS_UNTRANSFERRED) {
                 holder.attachmentFailedTextView.setVisibility(View.VISIBLE);
             } else {
                 holder.attachmentFailedTextView.setVisibility(View.GONE);
@@ -142,7 +143,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryI
                         Drawable drawable = PreviewUtilsWithDrawables.getDrawablePreview(fyleAndStatus.fyle, fyleAndStatus.fyleMessageJoinWithStatus, PreviewUtils.MAX_SIZE);
                         if (holder.fyleAndStatus.equals(fyleAndStatus)) {
                             new Handler(Looper.getMainLooper()).post(() -> {
-                                if (drawable == null && fyleAndStatus.fyleMessageJoinWithStatus.status != FyleMessageJoinWithStatus.STATUS_FAILED) {
+                                if (drawable == null && fyleAndStatus.fyleMessageJoinWithStatus.status != FyleMessageJoinWithStatus.STATUS_FAILED
+                                        || fyleAndStatus.fyleMessageJoinWithStatus.status == FyleMessageJoinWithStatus.STATUS_UNTRANSFERRED) {
                                     holder.previewErrorTextView.setVisibility(View.VISIBLE);
                                 } else {
                                     holder.previewErrorTextView.setVisibility(View.GONE);
@@ -164,7 +166,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryI
                 Bitmap bitmap = PreviewUtils.getBitmapPreview(fyleAndStatus.fyle, fyleAndStatus.fyleMessageJoinWithStatus, PreviewUtils.MAX_SIZE);
                 if (holder.fyleAndStatus.equals(fyleAndStatus)) {
                     new Handler(Looper.getMainLooper()).post(() -> {
-                        if (bitmap == null && fyleAndStatus.fyleMessageJoinWithStatus.status != FyleMessageJoinWithStatus.STATUS_FAILED) {
+                        if (bitmap == null && fyleAndStatus.fyleMessageJoinWithStatus.status != FyleMessageJoinWithStatus.STATUS_FAILED
+                                || fyleAndStatus.fyleMessageJoinWithStatus.status == FyleMessageJoinWithStatus.STATUS_UNTRANSFERRED) {
                             holder.previewErrorTextView.setVisibility(View.VISIBLE);
                         } else {
                             holder.previewErrorTextView.setVisibility(View.GONE);
@@ -177,7 +180,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryI
             });
         } else if (holder.playerView != null) {
             try {
-                if (fyleAndStatus.fyleMessageJoinWithStatus.status == FyleMessageJoinWithStatus.STATUS_FAILED) {
+                if (fyleAndStatus.fyleMessageJoinWithStatus.status == FyleMessageJoinWithStatus.STATUS_FAILED
+                        || fyleAndStatus.fyleMessageJoinWithStatus.status == FyleMessageJoinWithStatus.STATUS_UNTRANSFERRED) {
                     holder.playerView.setVisibility(View.GONE);
                     holder.attachmentFailedTextView.setVisibility(View.VISIBLE);
                     return;

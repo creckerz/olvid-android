@@ -486,6 +486,8 @@
 	<string name="notification_action_end_call" state="needs_review" hash="-1678527967">Desligar</string>
 	<string name="notification_channel_webrtc_call_service_name" state="needs_review" hash="-623348883">Chamadas recebidas</string>
 	<string name="notification_channel_webrtc_call_service_description" state="needs_review" hash="318507261">Notificação para chamadas recebidas</string>
+	<string name="notification_channel_transfer_service_name" state="needs_review" hash="-1765472866">Transferir histórico</string>
+	<string name="notification_channel_transfer_service_description" state="needs_review" hash="1606671624">Mostra o progresso durante a transferência do histórico de conversas</string>
 	<string name="activity_title_webrtc_incoming_call" state="needs_review" hash="-1672458216">Chamada de entrada Olvid</string>
 	<string name="text_incoming_call_from" state="needs_review" hash="416481913">Chamada a entrar de…</string>
 	<string name="toast_message_already_in_a_call" state="needs_review" hash="702053866">Você já está em uma chamada. Encerre-a antes de iniciar uma nova.</string>
@@ -1579,10 +1581,7 @@
 	<string name="text_setting_full" state="needs_review" hash="-1858792643">completo</string>
 	<string name="text_setting_none" state="needs_review" hash="752790864">nenhum</string>
 	<string name="activity_title_settings_update" state="needs_review" hash="1186086183">Atualização de configurações</string>
-	<string name="xx_gbps" state="needs_review" hash="-503020032">%1$sG/s</string>
-	<string name="xx_mbps" state="needs_review" hash="-1682095296">%1$sM/s</string>
-	<string name="xx_kbps" state="needs_review" hash="1012462976">%1$sk/s</string>
-	<string name="xx_bps" state="needs_review" hash="479585933">%1$sB/s</string>
+	<string name="xxx_per_s" state="needs_review" hash="-1456430978">%1$s/s</string>
 	<string name="text_you_captured_sensitive_message" state="needs_review" hash="-929928147">Você tirou uma captura de tela de uma mensagem sensível</string>
 	<string name="text_unknown_member_captured_sensitive_message" state="needs_review" hash="-749114410">Um utilizador desconhecido capturou um ecrã de uma mensagem sensível</string>
 	<string name="text_xxx_captured_sensitive_message" state="needs_review" hash="233294474">%1$s capturou uma mensagem sensível</string>
@@ -2145,6 +2144,18 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Dispositivo do contato inacessível</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Recriar todos os canais seguros</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Recriar todos os canais seguros forçará o Olvid a criar novos canais de comunicação seguros com todos os dispositivos dos seus contactos. Geralmente não é útil, mas pode resolver situações raras onde alguns destes canais estão \"fora de sincronia\".\n\n**Aviso:** se tiver muitos contactos, esta operação pode demorar alguns minutos e poderá perder algumas mensagens recebidas durante a sua execução.</string>
+	<string name="label_untransferred" state="needs_review" hash="-1851678218">Não transferido</string>
+	<string name="history_transfer_title" state="needs_review" hash="1191393558">Transferência do histórico de conversas</string>
+	<string name="history_transfer_step_none" state="needs_review" hash="1228580785">Nenhuma transferência em andamento</string>
+	<string name="history_transfer_step_contacting_other_device" state="needs_review" hash="1719019815">Aguardando o outro dispositivo</string>
+	<string name="history_transfer_step_connecting" state="needs_review" hash="1836039168">Conectando-se a outro dispositivo</string>
+	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">Negociação (passo 1 de 3)</string>
+	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Transferindo mensagens (passo 2 de 3)</string>
+	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">Transferindo anexos (passo 3 de 3)</string>
+	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Transferência concluída</string>
+	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Transferência interrompida</string>
+	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Transferência do histórico de conversas (versão beta)</string>
+	<string name="toast_message_unable_to_start_transfer" state="needs_review" hash="362080814">Não foi possível iniciar a transferência. Talvez outra transferência já esteja em andamento?</string>
 	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">Use o \"link mágico\"</string>
 	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">Link mágico inválido</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Chamada encerrada</string>
@@ -2154,4 +2165,16 @@
 	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">Autenticação impossível</string>
 	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">O seu perfil é atualmente gerido pela sua organização e é necessária uma nova autenticação. No entanto, parece que nenhuma das opções de autenticação suportadas está disponível.\n\nContacte o seu administrador para obter mais informações.</string>
 	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">Nenhum método de autenticação suportado parece estar disponível.</string>
+	<string name="pref_use_alt_turn_servers_title" state="needs_review" hash="-1956132776">Use servidores TURN alternativos</string>
+	<string name="pref_use_alt_turn_servers_summary" state="needs_review" hash="357427162">Ative esta opção para usar servidores TURN com endereços IP rotativos. Se não tiver a certeza, mantenha esta opção desativada 😁</string>
+	<string name="button_label_transfer_through_webrtc" state="needs_review" hash="-1809138918">Transferir através da rede local</string>
+	<string name="button_label_export_zip" state="needs_review" hash="1575043364">Exportar ZIP</string>
+	<string name="button_label_import_zip" state="needs_review" hash="1299665090">Importar ZIP</string>
+	<string name="dialog_title_transfer_choose_target_device" state="needs_review" hash="218115750">Escolha o dispositivo de destino para esta transferência</string>
+	<string name="transfer_label_no_other_active_device" state="needs_review" hash="-2135899221">Nenhum outro dispositivo ativo</string>
+	<string name="transfer_label_messages" state="needs_review" hash="-1639407912">Mensagens</string>
+	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Taxa de transferência</string>
+	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Restante</string>
+	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Anexos</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Este recurso ainda está em fase de testes beta e a implementação atual pode não ser compatível com a implementação final da transferência de histórico do Olvid.\n\nAntes de usar este recurso, certifique-se de que seus dispositivos estão executando a versão mais recente do Olvid.</string>
 </resources>

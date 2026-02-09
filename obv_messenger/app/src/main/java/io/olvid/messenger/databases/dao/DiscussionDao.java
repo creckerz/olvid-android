@@ -247,6 +247,9 @@ public abstract class DiscussionDao {
             " ORDER BY " + PINNED_ORDER + ", disc." + Discussion.LAST_MESSAGE_TIMESTAMP + " DESC" )
     public abstract LiveData<List<DiscussionAndLastMessage>> getAllDiscussionsAndLastMessagesForWebClient(@NonNull byte[] bytesOwnedIdentity);
 
+    @Query("SELECT * FROM " + Discussion.TABLE_NAME + " WHERE " + Discussion.BYTES_OWNED_IDENTITY + " = :bytesOwnedIdentity AND " + Discussion.STATUS + " != " + Discussion.STATUS_PRE_DISCUSSION)
+    public abstract List<Discussion> getAllNotPreDiscussion(byte[] bytesOwnedIdentity);
+
 
     @Query("SELECT * FROM " + Discussion.TABLE_NAME + " WHERE id = :discussionId")
     @Nullable public abstract Discussion getById(long discussionId);
@@ -544,7 +547,13 @@ public abstract class DiscussionDao {
 
     @Query("SELECT MAX(" + Discussion.PINNED + ") FROM " + Discussion.TABLE_NAME +
             " WHERE " + Discussion.BYTES_OWNED_IDENTITY + " = :bytesOwnedIdentity ")
-    public abstract int getMaxPinnedIndex(@NonNull byte[] bytesOwnedIdentity);
+    @Nullable public abstract Integer getMaxPinnedIndex(@NonNull byte[] bytesOwnedIdentity);
+
+
+    @Query("SELECT MAX(" + Discussion.LAST_MESSAGE_TIMESTAMP + ") FROM " + Discussion.TABLE_NAME +
+            " WHERE " + Discussion.BYTES_OWNED_IDENTITY + " = :bytesOwnedIdentity ")
+    @Nullable public abstract Long getMaxLastMessageTimestamp(@NonNull byte[] bytesOwnedIdentity);
+
 
     public static class DiscussionAndLastMessage {
         @Embedded(prefix = "disc_")

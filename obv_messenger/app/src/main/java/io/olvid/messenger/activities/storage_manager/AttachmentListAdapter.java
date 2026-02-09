@@ -200,7 +200,8 @@ class AttachmentListAdapter extends RecyclerView.Adapter<AttachmentListAdapter.A
         if (fyleAndOrigin.fyleAndStatus.fyle.isComplete()) {
             holder.progressBar.setVisibility(View.GONE);
             holder.failedImageView.setVisibility(View.GONE);
-        } else if (fyleAndOrigin.fyleAndStatus.fyleMessageJoinWithStatus.status == FyleMessageJoinWithStatus.STATUS_FAILED) {
+        } else if (fyleAndOrigin.fyleAndStatus.fyleMessageJoinWithStatus.status == FyleMessageJoinWithStatus.STATUS_FAILED
+                || fyleAndOrigin.fyleAndStatus.fyleMessageJoinWithStatus.status == FyleMessageJoinWithStatus.STATUS_UNTRANSFERRED) {
             holder.progressBar.setVisibility(View.GONE);
             holder.failedImageView.setVisibility(View.VISIBLE);
         } else {

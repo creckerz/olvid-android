@@ -125,8 +125,8 @@ public class EngineNotificationProcessorForMessages implements EngineNotificatio
                             break;
                         }
                         try {
-                            Fyle.acquireLock(sha256);
                             Fyle.SizeAndSha256 sizeAndSha256 = Fyle.computeSHA256FromFile(App.absolutePathFromRelative(downloadedAttachment.getUrl()));
+                            Fyle.acquireLock(sha256);
                             if ((sizeAndSha256 == null) || !Arrays.equals(sha256, sizeAndSha256.sha256)) {
                                 // OMG, the metadata contained an erroneous sha256!!! Delete everything
                                 List<Long> messageIds = db.fyleMessageJoinWithStatusDao().getMessageIdsForFyleSync(fyle.id);
@@ -151,6 +151,7 @@ public class EngineNotificationProcessorForMessages implements EngineNotificatio
                                 FyleProgressSingleton.INSTANCE.finishProgress(fyleMessageJoinWithStatus.fyleId, fyleMessageJoinWithStatus.messageId);
                                 //noinspection ConstantConditions
                                 fyleMessageJoinWithStatus.filePath = fyle.filePath;
+                                fyleMessageJoinWithStatus.size = sizeAndSha256.fileSize;
                                 db.fyleMessageJoinWithStatusDao().update(fyleMessageJoinWithStatus);
                                 fyleMessageJoinWithStatus.sendReturnReceipt(FyleMessageJoinWithStatus.RECEPTION_STATUS_DELIVERED, null);
                                 fyleMessageJoinWithStatus.computeTextContentForFullTextSearchOnOtherThread(db, fyle);
@@ -162,6 +163,7 @@ public class EngineNotificationProcessorForMessages implements EngineNotificatio
                                         case FyleMessageJoinWithStatus.STATUS_DOWNLOADABLE:
                                         case FyleMessageJoinWithStatus.STATUS_DOWNLOADING:
                                         case FyleMessageJoinWithStatus.STATUS_FAILED:
+                                        case FyleMessageJoinWithStatus.STATUS_UNTRANSFERRED:
                                             otherFyleMessageJoinWithStatus.status = FyleMessageJoinWithStatus.STATUS_COMPLETE;
                                             FyleProgressSingleton.INSTANCE.finishProgress(otherFyleMessageJoinWithStatus.fyleId, otherFyleMessageJoinWithStatus.messageId);
                                             otherFyleMessageJoinWithStatus.filePath = fyleMessageJoinWithStatus.filePath;

@@ -102,7 +102,7 @@ import io.olvid.messenger.databases.entity.Discussion.TYPE_CONTACT
 import io.olvid.messenger.databases.entity.DiscussionCustomization
 import io.olvid.messenger.databases.entity.Message
 import io.olvid.messenger.databases.entity.jsons.JsonPayload
-import io.olvid.messenger.databases.entity.jsons.JsonWebrtcMessage
+import io.olvid.messenger.databases.entity.jsons.JsonWebrtcCallMessage
 import io.olvid.messenger.notifications.AndroidNotificationManager
 import io.olvid.messenger.settings.SettingsActivity
 import io.olvid.messenger.webrtc.OutgoingCallRinger.Type
@@ -1228,6 +1228,7 @@ class WebrtcCallService : Service() {
             val username2 = callCredentialsCacheSharedPreference.getString(PREF_KEY_USERNAME2, null)
             val password2 = callCredentialsCacheSharedPreference.getString(PREF_KEY_PASSWORD2, null)
             val turnServers = callCredentialsCacheSharedPreference.getStringSet(PREF_KEY_TURN_SERVERS, null)
+            val altTurnServers = callCredentialsCacheSharedPreference.getStringSet(PREF_KEY_ALT_TURN_SERVERS, null)
             if (username1 != null && password1 != null && username2 != null && password2 != null && turnServers != null) {
                 Logger.d("☎ Reusing cached turn credentials")
                 setState(GETTING_TURN_CREDENTIALS)
@@ -1236,7 +1237,8 @@ class WebrtcCallService : Service() {
                     password1,
                     username2,
                     password2,
-                    ArrayList(turnServers)
+                    ArrayList(turnServers),
+                    altTurnServers?.let { ArrayList(it) }
                 )
                 return
             }
@@ -1298,7 +1300,8 @@ class WebrtcCallService : Service() {
         callerPassword: String,
         recipientUsername: String,
         recipientPassword: String,
-        turnServers: List<String>
+        turnServers: List<String>,
+        altTurnServers: List<String>?
     ) {
         executor.execute {
             if (_state != GETTING_TURN_CREDENTIALS) {
@@ -1306,7 +1309,7 @@ class WebrtcCallService : Service() {
             }
             turnUserName = callerUsername
             turnPassword = callerPassword
-            this.turnServers[TurnServerOrigin.WELL_KNOWN] = turnServers
+            this.turnServers[TurnServerOrigin.WELL_KNOWN] = if (SettingsActivity.useAltTurnServers) (altTurnServers ?: turnServers) else turnServers
             recipientTurnUserName = recipientUsername
             recipientTurnPassword = recipientPassword
             for (callParticipant in callParticipants.values) {
@@ -1793,9 +1796,14 @@ class WebrtcCallService : Service() {
                 call.callerTurnServers?.let {
                     this@WebrtcCallService.turnServers[TurnServerOrigin.FROM_CALLER] = it
                 }
-                AppSingleton.getEngine().getWellKnownTurnServers(bytesOwnedIdentity)?.let {
-                    this@WebrtcCallService.turnServers[TurnServerOrigin.WELL_KNOWN] = it
-                }
+                (if (SettingsActivity.useAltTurnServers)
+                    // get the alt servers, but fallback to non-alt ones if they are not defined on server side
+                    AppSingleton.getEngine().getWellKnownAltTurnServers(bytesOwnedIdentity) ?: AppSingleton.getEngine().getWellKnownTurnServers(bytesOwnedIdentity)
+                else
+                    AppSingleton.getEngine().getWellKnownTurnServers(bytesOwnedIdentity)
+                )?.let {
+                        this@WebrtcCallService.turnServers[TurnServerOrigin.WELL_KNOWN] = it
+                    }
 
                 callerCallParticipant?.let {
                     it.peerConnectionHolder.setGatheringPolicy(call.gatheringPolicy)
@@ -3648,6 +3656,8 @@ class WebrtcCallService : Service() {
                             userInfo[EngineNotifications.TURN_CREDENTIALS_RECEIVED_PASSWORD_2_KEY] as String?
                         @Suppress("UNCHECKED_CAST") val turnServers =
                             userInfo[EngineNotifications.TURN_CREDENTIALS_RECEIVED_SERVERS_KEY] as List<String>?
+                        @Suppress("UNCHECKED_CAST") val altTurnServers =
+                            (userInfo[EngineNotifications.TURN_CREDENTIALS_RECEIVED_ALT_SERVERS_KEY] as? List<String>?)
                         if (callerUsername == null || callerPassword == null || recipientUsername == null || recipientPassword == null || turnServers == null) {
                             callerFailedTurnCredentials(UNABLE_TO_CONTACT_SERVER)
                         } else {
@@ -3656,7 +3666,8 @@ class WebrtcCallService : Service() {
                                 callerPassword,
                                 recipientUsername,
                                 recipientPassword,
-                                turnServers
+                                turnServers,
+                                altTurnServers
                             )
                             Logger.d("☎ Caching received turn credentials for reuse")
                             val callCredentialsCacheSharedPreference =
@@ -3674,6 +3685,7 @@ class WebrtcCallService : Service() {
                                 putString(PREF_KEY_USERNAME2, recipientUsername)
                                 putString(PREF_KEY_PASSWORD2, recipientPassword)
                                 putStringSet(PREF_KEY_TURN_SERVERS, HashSet(turnServers))
+                                putStringSet(PREF_KEY_ALT_TURN_SERVERS, altTurnServers?.let { HashSet(it) })
                             }
                         }
                     }
@@ -4184,13 +4196,13 @@ class WebrtcCallService : Service() {
         callIdentifier: UUID?
     ): Boolean {
         return try {
-            val jsonWebrtcMessage = JsonWebrtcMessage()
-            jsonWebrtcMessage.messageType = protocolMessage.messageType
-            jsonWebrtcMessage.callIdentifier = callIdentifier
-            jsonWebrtcMessage.serializedMessagePayload =
+            val jsonWebrtcCallMessage = JsonWebrtcCallMessage()
+            jsonWebrtcCallMessage.messageType = protocolMessage.messageType
+            jsonWebrtcCallMessage.callIdentifier = callIdentifier
+            jsonWebrtcCallMessage.serializedMessagePayload =
                 objectMapper.writeValueAsString(protocolMessage)
             val jsonPayload = JsonPayload()
-            jsonPayload.jsonWebrtcMessage = jsonWebrtcMessage
+            jsonPayload.jsonWebrtcMessage = jsonWebrtcCallMessage
 
             // only mark START_CALL_MESSAGE_TYPE messages as voip
             val tagAsVoipMessage = protocolMessage.messageType == START_CALL_MESSAGE_TYPE
@@ -4669,6 +4681,7 @@ class WebrtcCallService : Service() {
         private const val PREF_KEY_USERNAME2 = "username2"
         private const val PREF_KEY_PASSWORD2 = "password2"
         private const val PREF_KEY_TURN_SERVERS = "turn_servers"
+        private const val PREF_KEY_ALT_TURN_SERVERS = "alt_turn_servers"
 
         const val SERVICE_ID = 9001
         const val NOT_FOREGROUND_NOTIFICATION_ID = 9086

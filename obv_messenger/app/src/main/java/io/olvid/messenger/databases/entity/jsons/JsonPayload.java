@@ -28,7 +28,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class JsonPayload {
     JsonMessage jsonMessage;
     JsonReturnReceipt jsonReturnReceipt;
-    JsonWebrtcMessage jsonWebrtcMessage;
+    JsonWebrtcCallMessage jsonWebrtcCallMessage;
+    JsonWebrtcHistoryTransferMessage jsonWebrtcHistoryTransferMessage;
     JsonSharedSettings jsonSharedSettings;
     JsonQuerySharedSettings jsonQuerySharedSettings;
     JsonUpdateMessage jsonUpdateMessage;
@@ -72,13 +73,23 @@ public class JsonPayload {
 
     @JsonProperty("rtc")
     @Nullable
-    public JsonWebrtcMessage getJsonWebrtcMessage() {
-        return jsonWebrtcMessage;
+    public JsonWebrtcCallMessage getJsonWebrtcMessage() {
+        return jsonWebrtcCallMessage;
     }
 
     @JsonProperty("rtc")
-    public void setJsonWebrtcMessage(JsonWebrtcMessage jsonWebrtcMessage) {
-        this.jsonWebrtcMessage = jsonWebrtcMessage;
+    public void setJsonWebrtcMessage(JsonWebrtcCallMessage jsonWebrtcCallMessage) {
+        this.jsonWebrtcCallMessage = jsonWebrtcCallMessage;
+    }
+
+    @JsonProperty("ht")
+    public JsonWebrtcHistoryTransferMessage getJsonHistoryTransferMessage() {
+        return jsonWebrtcHistoryTransferMessage;
+    }
+
+    @JsonProperty("ht")
+    public void setJsonHistoryTransferMessage(JsonWebrtcHistoryTransferMessage jsonWebrtcHistoryTransferMessage) {
+        this.jsonWebrtcHistoryTransferMessage = jsonWebrtcHistoryTransferMessage;
     }
 
     @JsonProperty("settings")

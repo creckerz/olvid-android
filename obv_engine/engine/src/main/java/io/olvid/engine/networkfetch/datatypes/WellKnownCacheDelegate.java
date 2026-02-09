@@ -28,6 +28,7 @@ import io.olvid.engine.networkfetch.coordinators.WellKnownCoordinator;
 public interface WellKnownCacheDelegate {
     String getWsUrl(String server) throws WellKnownCoordinator.NotCachedException;
     List<String> getTurnUrls(String server) throws WellKnownCoordinator.NotCachedException;
+    List<String> getAltTurnUrls(String server) throws WellKnownCoordinator.NotCachedException;
     List<JsonOsmStyle> getOsmStyles(String server) throws WellKnownCoordinator.NotCachedException;
     String getAddressUrl(String server) throws WellKnownCoordinator.NotCachedException;
 }

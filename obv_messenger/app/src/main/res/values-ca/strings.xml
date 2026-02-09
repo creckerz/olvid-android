@@ -486,6 +486,8 @@
 	<string name="notification_action_end_call" state="needs_review" hash="-1678527967">Penjar</string>
 	<string name="notification_channel_webrtc_call_service_name" state="needs_review" hash="-623348883">Trucades entrants</string>
 	<string name="notification_channel_webrtc_call_service_description" state="needs_review" hash="318507261">Notificació per a trucades entrants</string>
+	<string name="notification_channel_transfer_service_name" state="needs_review" hash="-1765472866">Transferència de l\'historial</string>
+	<string name="notification_channel_transfer_service_description" state="needs_review" hash="1606671624">Mostra el progrés durant la transferència de l\'historial de xat.</string>
 	<string name="activity_title_webrtc_incoming_call" state="needs_review" hash="-1672458216">Llamada entrant d\'Olvid</string>
 	<string name="text_incoming_call_from" state="needs_review" hash="416481913">Crida entrant de…</string>
 	<string name="toast_message_already_in_a_call" state="needs_review" hash="702053866">Ja estàs en una trucada. Acaba-la abans d\'iniciar-ne una de nova.</string>
@@ -1578,10 +1580,7 @@
 	<string name="text_setting_full" state="needs_review" hash="-1858792643">complet</string>
 	<string name="text_setting_none" state="needs_review" hash="752790864">cap</string>
 	<string name="activity_title_settings_update" state="needs_review" hash="1186086183">Actualització de configuració</string>
-	<string name="xx_gbps" state="needs_review" hash="-503020032">%1$sG/s</string>
-	<string name="xx_mbps" state="needs_review" hash="-1682095296">%1$sM/s</string>
-	<string name="xx_kbps" state="needs_review" hash="1012462976">%1$sk/s</string>
-	<string name="xx_bps" state="needs_review" hash="479585933">%1$sB/s</string>
+	<string name="xxx_per_s" state="needs_review" hash="-1456430978">%1$s/s</string>
 	<string name="text_you_captured_sensitive_message" state="needs_review" hash="-929928147">Has fet una captura de pantalla d\'un missatge confidencial</string>
 	<string name="text_unknown_member_captured_sensitive_message" state="needs_review" hash="-749114410">Un usuari desconegut ha fet una captura de pantalla d\'un missatge confidencial</string>
 	<string name="text_xxx_captured_sensitive_message" state="needs_review" hash="233294474">%1$s ha fet una captura de pantalla d\'un missatge confidencial</string>
@@ -2144,6 +2143,18 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Dispositiu del destinatari inassolible</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Recrea tots els canals segurs</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Recrear tots els canals segurs forçarà Olvid a crear nous canals de comunicació segura amb tots els dispositius dels teus contactes. Això generalment no és útil, però pot resoldre situacions rares on alguns d\'aquests canals estan \"desincronitzats\".\n\n**Advertència:** si tens molts contactes, aquesta operació pot trigar uns minuts i podries perdre alguns missatges entrants mentre s\'executa.</string>
+	<string name="label_untransferred" state="needs_review" hash="-1851678218">No transferit</string>
+	<string name="history_transfer_title" state="needs_review" hash="1191393558">Transferència de l\'historial de xat</string>
+	<string name="history_transfer_step_none" state="needs_review" hash="1228580785">No hi ha cap transfer en curs</string>
+	<string name="history_transfer_step_contacting_other_device" state="needs_review" hash="1719019815">Esperant l\'altre dispositiu</string>
+	<string name="history_transfer_step_connecting" state="needs_review" hash="1836039168">Connectant-se a l\'altre dispositiu</string>
+	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">Negociant (pas 1 de 3)</string>
+	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Transferint missatges (pas 2 de 3)</string>
+	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">S\'estan transferint els arxius adjunts (pas 3 de 3)</string>
+	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Transferència completada</string>
+	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Transferència interrompuda</string>
+	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Transferència de l\'historial de xat (versió beta)</string>
+	<string name="toast_message_unable_to_start_transfer" state="needs_review" hash="362080814">No s\'ha pogut iniciar la transferència. Potser ja hi ha una altra transferència en curs?</string>
 	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">Utilitza el \"enllaç màgic\"</string>
 	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">Enllaç màgic no vàlid</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">S\'ha penjat la trucada</string>
@@ -2153,4 +2164,16 @@
 	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">Autenticació impossible</string>
 	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">Actualment, el vostre perfil està gestionat per la vostra organització i cal fer una nova autenticació. No obstant això, sembla que no hi hagi cap mètode d\'autenticació compatible disponible.\n\nSi us plau, poseu-vos en contacte amb el vostre administrador per obtenir més informació.</string>
 	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">Sembla que no hi hagi cap mètode d\'autenticació compatible disponible.</string>
+	<string name="pref_use_alt_turn_servers_title" state="needs_review" hash="-1956132776">Utilitza servidors TURN alternatius</string>
+	<string name="pref_use_alt_turn_servers_summary" state="needs_review" hash="357427162">Activeu aquesta opció per utilitzar servidors TURN amb adreces IP rotatives. Si no esteu segur, deixeu aquesta opció desactivada 😁</string>
+	<string name="button_label_transfer_through_webrtc" state="needs_review" hash="-1809138918">Transferència a través de la xarxa local</string>
+	<string name="button_label_export_zip" state="needs_review" hash="1575043364">Exporta un fitxer ZIP</string>
+	<string name="button_label_import_zip" state="needs_review" hash="1299665090">Importa un fitxer ZIP</string>
+	<string name="dialog_title_transfer_choose_target_device" state="needs_review" hash="218115750">Trieu el dispositiu de destinació per a aquesta transferència.</string>
+	<string name="transfer_label_no_other_active_device" state="needs_review" hash="-2135899221">No hi ha cap altre dispositiu actiu</string>
+	<string name="transfer_label_messages" state="needs_review" hash="-1639407912">Missatges</string>
+	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Rendiment</string>
+	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Restant</string>
+	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Adjunts</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Aquesta funció encara està en fase de proves beta i és possible que la implementació actual no sigui compatible amb la implementació final de la transferència d\'historial d\'Olvid.\n\nAbans d\'utilitzar aquesta funció, assegureu-vos que els vostres dispositius tinguin instal·lada la darrera versió d\'Olvid.</string>
 </resources>

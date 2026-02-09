@@ -486,6 +486,8 @@
 	<string name="notification_action_end_call" state="needs_review" hash="-1678527967">Oproep beëindigen</string>
 	<string name="notification_channel_webrtc_call_service_name" state="needs_review" hash="-623348883">Inkomende oproepen</string>
 	<string name="notification_channel_webrtc_call_service_description" state="needs_review" hash="318507261">Melding voor inkomende oproepen</string>
+	<string name="notification_channel_transfer_service_name" state="needs_review" hash="-1765472866">Gespreksgeschiedenis overzetten</string>
+	<string name="notification_channel_transfer_service_description" state="needs_review" hash="1606671624">Toont de voortgang tijdens het overzetten van de chatgeschiedenis.</string>
 	<string name="activity_title_webrtc_incoming_call" state="needs_review" hash="-1672458216">Inkomend Olvid-gesprek</string>
 	<string name="text_incoming_call_from" state="needs_review" hash="416481913">Inkomend gesprek van…</string>
 	<string name="toast_message_already_in_a_call" state="needs_review" hash="702053866">Je bent al in een gesprek. Beëindig het voordat je een nieuwe start.</string>
@@ -1578,10 +1580,7 @@
 	<string name="text_setting_full" state="needs_review" hash="-1858792643">volledig</string>
 	<string name="text_setting_none" state="needs_review" hash="752790864">geen</string>
 	<string name="activity_title_settings_update" state="needs_review" hash="1186086183">Instellingen bijwerken</string>
-	<string name="xx_gbps" state="needs_review" hash="-503020032">%1$sG/s</string>
-	<string name="xx_mbps" state="needs_review" hash="-1682095296">%1$sM/s</string>
-	<string name="xx_kbps" state="needs_review" hash="1012462976">%1$sk/s</string>
-	<string name="xx_bps" state="needs_review" hash="479585933">%1$sB/s</string>
+	<string name="xxx_per_s" state="needs_review" hash="-1456430978">%1$s/s</string>
 	<string name="text_you_captured_sensitive_message" state="needs_review" hash="-929928147">Je hebt een screenshot gemaakt van een gevoelig bericht</string>
 	<string name="text_unknown_member_captured_sensitive_message" state="needs_review" hash="-749114410">Een onbekende gebruiker heeft een screenshot gemaakt van een gevoelig bericht.</string>
 	<string name="text_xxx_captured_sensitive_message" state="needs_review" hash="233294474">%1$s heeft een screenshot gemaakt van een gevoelig bericht</string>
@@ -2144,6 +2143,18 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Apparaat van de contactpersoon is onbereikbaar.</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Alle beveiligde kanalen opnieuw aanmaken.</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Het opnieuw aanmaken van alle beveiligde kanalen dwingt Olvid om nieuwe beveiligde communicatiekanalen met alle apparaten van je contacten te creëren. Dit is over het algemeen niet nuttig, maar kan zeldzame situaties oplossen waarin sommige van deze kanalen \"niet gesynchroniseerd\" zijn.\n\n**Waarschuwing:** als je veel contacten hebt, kan deze bewerking enkele minuten duren en kun je mogelijk enkele inkomende berichten mislopen tijdens het uitvoeren ervan.</string>
+	<string name="label_untransferred" state="needs_review" hash="-1851678218">Niet overgedragen</string>
+	<string name="history_transfer_title" state="needs_review" hash="1191393558">Chatgeschiedenis overzetten</string>
+	<string name="history_transfer_step_none" state="needs_review" hash="1228580785">Er is geen actieve overdracht.</string>
+	<string name="history_transfer_step_contacting_other_device" state="needs_review" hash="1719019815">Wacht op het andere apparaat.</string>
+	<string name="history_transfer_step_connecting" state="needs_review" hash="1836039168">Verbinden met een ander apparaat</string>
+	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">Bezig met onderhandelen (stap 1 van 3)</string>
+	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Berichten worden overgedragen (stap 2 van 3)</string>
+	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">Bestanden verzenden (stap 3 van 3)</string>
+	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Overdracht voltooid</string>
+	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Overdracht onderbroken.</string>
+	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Chatgeschiedenis overzetten (bèta)</string>
+	<string name="toast_message_unable_to_start_transfer" state="needs_review" hash="362080814">Kan de overdracht niet starten. Mogelijk is er al een andere overdracht gaande.</string>
 	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">Gebruik de \"magische link\"</string>
 	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">Ongeldige magische link.</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Oproep beëindigd.</string>
@@ -2153,4 +2164,16 @@
 	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">Authenticatie mislukt</string>
 	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">Uw profiel wordt momenteel beheerd door uw organisatie en er is een herauthentificatie vereist. Er lijkt echter geen ondersteunde authenticatiemethode beschikbaar te zijn.\n\nNeem contact op met uw beheerder voor meer informatie.</string>
 	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">Er lijkt geen ondersteunde authenticatiemethode beschikbaar te zijn.</string>
+	<string name="pref_use_alt_turn_servers_title" state="needs_review" hash="-1956132776">Gebruik alternatieve TURN-servers</string>
+	<string name="pref_use_alt_turn_servers_summary" state="needs_review" hash="357427162">Schakel deze optie in om TURN-servers met roterende IP-adressen te gebruiken. Als je het niet zeker weet, laat deze optie dan uitgeschakeld staan 😁</string>
+	<string name="button_label_transfer_through_webrtc" state="needs_review" hash="-1809138918">Overzetten via het lokale netwerk</string>
+	<string name="button_label_export_zip" state="needs_review" hash="1575043364">Exporteer als ZIP</string>
+	<string name="button_label_import_zip" state="needs_review" hash="1299665090">ZIP importeren</string>
+	<string name="dialog_title_transfer_choose_target_device" state="needs_review" hash="218115750">Selecteer het doelapparaat voor deze overdracht.</string>
+	<string name="transfer_label_no_other_active_device" state="needs_review" hash="-2135899221">Geen andere actieve apparaten.</string>
+	<string name="transfer_label_messages" state="needs_review" hash="-1639407912">Berichten</string>
+	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Doorvoer</string>
+	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Resterend</string>
+	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Bijlagen</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Deze functie bevindt zich nog in de bètatestfase en de huidige implementatie is mogelijk niet compatibel met de uiteindelijke implementatie van de geschiedenistransfer van Olvid.\n\nVoordat u deze functie gebruikt, moet u ervoor zorgen dat uw apparaten de nieuwste versie van Olvid hebben geïnstalleerd.</string>
 </resources>

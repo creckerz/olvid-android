@@ -486,6 +486,8 @@
 	<string name="notification_action_end_call" state="needs_review" hash="-1678527967">कॉल समाप्त करें</string>
 	<string name="notification_channel_webrtc_call_service_name" state="needs_review" hash="-623348883">आने वाले कॉल</string>
 	<string name="notification_channel_webrtc_call_service_description" state="needs_review" hash="318507261">आने वाले कॉल के लिए सूचना</string>
+	<string name="notification_channel_transfer_service_name" state="needs_review" hash="-1765472866">इतिहास स्थानांतरण</string>
+	<string name="notification_channel_transfer_service_description" state="needs_review" hash="1606671624">चैट इतिहास स्थानांतरण के दौरान प्रगति प्रदर्शित करता है</string>
 	<string name="activity_title_webrtc_incoming_call" state="needs_review" hash="-1672458216">Olvid से आने वाली कॉल</string>
 	<string name="text_incoming_call_from" state="needs_review" hash="416481913">…से आने वाली कॉल</string>
 	<string name="toast_message_already_in_a_call" state="needs_review" hash="702053866">आप पहले से ही कॉल पर हैं। नया शुरू करने से पहले इसे समाप्त करें।</string>
@@ -1578,10 +1580,7 @@
 	<string name="text_setting_full" state="needs_review" hash="-1858792643">पूरा</string>
 	<string name="text_setting_none" state="needs_review" hash="752790864">कोई नहीं</string>
 	<string name="activity_title_settings_update" state="needs_review" hash="1186086183">सेटिंग अपडेट</string>
-	<string name="xx_gbps" state="needs_review" hash="-503020032">%1$sG/s</string>
-	<string name="xx_mbps" state="needs_review" hash="-1682095296">%1$s एमबी/सेकंड</string>
-	<string name="xx_kbps" state="needs_review" hash="1012462976">%1$sk/s</string>
-	<string name="xx_bps" state="needs_review" hash="479585933">%1$sब/से</string>
+	<string name="xxx_per_s" state="needs_review" hash="-1456430978">%1$s/सेकंड</string>
 	<string name="text_you_captured_sensitive_message" state="needs_review" hash="-929928147">आपने एक संवेदनशील संदेश का स्क्रीनशॉट लिया है।</string>
 	<string name="text_unknown_member_captured_sensitive_message" state="needs_review" hash="-749114410">किसी अज्ञात उपयोगकर्ता ने एक संवेदनशील संदेश का स्क्रीनशॉट लिया।</string>
 	<string name="text_xxx_captured_sensitive_message" state="needs_review" hash="233294474">%1$s ने एक संवेदनशील संदेश का स्क्रीनशॉट लिया</string>
@@ -2144,6 +2143,18 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">पीयर डिवाइस अनुपलब्ध है</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">सभी सुरक्षित चैनलों को फिर से बनाएँ</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">सभी सुरक्षित चैनलों को फिर से बनाने से Olvid आपके संपर्कों के सभी उपकरणों के साथ नए सुरक्षित संचार चैनल बनाने के लिए मजबूर हो जाएगा। यह आमतौर पर उपयोगी नहीं है, लेकिन दुर्लभ स्थितियों को हल कर सकता है जहां ये चैनल «सिंक से बाहर» हैं।\n\n**चेतावनी:** यदि आपके पास बहुत सारे संपर्क हैं, तो इस ऑपरेशन में कुछ मिनट लग सकते हैं और आप इसके चलने के दौरान कुछ आने वाले संदेश खो सकते हैं।</string>
+	<string name="label_untransferred" state="needs_review" hash="-1851678218">स्थानांतरित नहीं किया गया</string>
+	<string name="history_transfer_title" state="needs_review" hash="1191393558">चैट इतिहास स्थानांतरण</string>
+	<string name="history_transfer_step_none" state="needs_review" hash="1228580785">कोई भी स्थानांतरण जारी नहीं है</string>
+	<string name="history_transfer_step_contacting_other_device" state="needs_review" hash="1719019815">दूसरे डिवाइस का इंतजार किया जा रहा है</string>
+	<string name="history_transfer_step_connecting" state="needs_review" hash="1836039168">दूसरे डिवाइस से कनेक्ट हो रहा है</string>
+	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">समझौता किया जा रहा है (चरण 1/3)</string>
+	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">संदेशों का स्थानांतरण (चरण 2/3)</string>
+	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">अटैचमेंट स्थानांतरित करना (चरण 3 में से 3)</string>
+	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">स्थानांतरण पूरा हुआ</string>
+	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">स्थानांतरण बाधित</string>
+	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">चैट इतिहास स्थानांतरण (बीटा)</string>
+	<string name="toast_message_unable_to_start_transfer" state="needs_review" hash="362080814">स्थानांतर शुरू करने में असमर्थ। शायद कोई अन्य स्थानांतरण पहले से ही चल रहा है?</string>
 	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">\"जादुई लिंक\" का उपयोग करें</string>
 	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">अमान्य मैजिक लिंक</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">कॉल कट हो गई</string>
@@ -2153,4 +2164,16 @@
 	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">प्रमाणीकरण संभव नहीं है</string>
 	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">आपका प्रोफ़ाइल वर्तमान में आपके संगठन द्वारा प्रबंधित किया जा रहा है और पुन: प्रमाणीकरण की आवश्यकता है। हालाँकि, ऐसा लगता है कि कोई भी समर्थित प्रमाणीकरण विधि उपलब्ध नहीं है।\n\nअधिक जानकारी के लिए कृपया अपने व्यवस्थापक से संपर्क करें।</string>
 	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">कोई भी समर्थित प्रमाणीकरण विधि उपलब्ध नहीं है।</string>
+	<string name="pref_use_alt_turn_servers_title" state="needs_review" hash="-1956132776">वैकल्पिक TURN सर्वर का उपयोग करें</string>
+	<string name="pref_use_alt_turn_servers_summary" state="needs_review" hash="357427162">घूर्णनशील आईपी पतों के साथ TURN सर्वर का उपयोग करने के लिए इस विकल्प को सक्रिय करें। यदि आप अनिश्चित हैं, तो इस विकल्प को बंद रखें 😁</string>
+	<string name="button_label_transfer_through_webrtc" state="needs_review" hash="-1809138918">स्थानीय नेटवर्क के माध्यम से स्थानांतरित करें</string>
+	<string name="button_label_export_zip" state="needs_review" hash="1575043364">ज़िप फ़ाइल के रूप में निर्यात करें</string>
+	<string name="button_label_import_zip" state="needs_review" hash="1299665090">ज़िप फ़ाइल आयात करें</string>
+	<string name="dialog_title_transfer_choose_target_device" state="needs_review" hash="218115750">इस स्थानांतरण के लिए लक्षित डिवाइस चुनें।</string>
+	<string name="transfer_label_no_other_active_device" state="needs_review" hash="-2135899221">कोई अन्य सक्रिय डिवाइस नहीं</string>
+	<string name="transfer_label_messages" state="needs_review" hash="-1639407912">संदेश</string>
+	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">थ्रूपुट</string>
+	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">शेष</string>
+	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">अटैचमेंट</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">यह सुविधा अभी भी बीटा परीक्षण चरण में है और वर्तमान कार्यान्वयन Olvid के इतिहास स्थानांतरण के अंतिम कार्यान्वयन के साथ संगत नहीं हो सकता है।\n\nइस सुविधा का उपयोग करने से पहले, कृपया सुनिश्चित करें कि आपके उपकरणों पर Olvid का नवीनतम संस्करण स्थापित है।</string>
 </resources>

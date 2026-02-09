@@ -486,6 +486,8 @@
 	<string name="notification_action_end_call" state="needs_review" hash="-1678527967">پایان تماس</string>
 	<string name="notification_channel_webrtc_call_service_name" state="needs_review" hash="-623348883">تماس‌های ورودی</string>
 	<string name="notification_channel_webrtc_call_service_description" state="needs_review" hash="318507261">اعلان تماس‌های ورودی</string>
+	<string name="notification_channel_transfer_service_name" state="needs_review" hash="-1765472866">انتقال تاریخچه</string>
+	<string name="notification_channel_transfer_service_description" state="needs_review" hash="1606671624">نمایش پیشرفت در حین انتقال تاریخچه چت</string>
 	<string name="activity_title_webrtc_incoming_call" state="needs_review" hash="-1672458216">تماس ورودی Olvid</string>
 	<string name="text_incoming_call_from" state="needs_review" hash="416481913">تماس ورودی از…</string>
 	<string name="toast_message_already_in_a_call" state="needs_review" hash="702053866">شما در حال حاضر در یک تماس هستید. قبل از شروع تماس جدید، آن را پایان دهید.</string>
@@ -1579,10 +1581,7 @@
 	<string name="text_setting_full" state="needs_review" hash="-1858792643">کامل</string>
 	<string name="text_setting_none" state="needs_review" hash="752790864">هیچ‌کدام</string>
 	<string name="activity_title_settings_update" state="needs_review" hash="1186086183">به‌روزرسانی تنظیمات</string>
-	<string name="xx_gbps" state="needs_review" hash="-503020032">%1$sگیگابایت بر ثانیه</string>
-	<string name="xx_mbps" state="needs_review" hash="-1682095296">%1$sمگابایت بر ثانیه</string>
-	<string name="xx_kbps" state="needs_review" hash="1012462976">%1$sکی‌بایت بر ثانیه</string>
-	<string name="xx_bps" state="needs_review" hash="479585933">%1$sب/ث</string>
+	<string name="xxx_per_s" state="needs_review" hash="-1456430978">%1$s/ثانیه</string>
 	<string name="text_you_captured_sensitive_message" state="needs_review" hash="-929928147">از یک پیام حساس اسکرین‌شات گرفتید</string>
 	<string name="text_unknown_member_captured_sensitive_message" state="needs_review" hash="-749114410">یک کاربر ناشناس از یک پیام حساس اسکرین‌شات گرفته است</string>
 	<string name="text_xxx_captured_sensitive_message" state="needs_review" hash="233294474">%1$s از یک پیام حساس اسکرین‌شات گرفت</string>
@@ -2146,6 +2145,18 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">دستگاه همتا در دسترس نیست</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">بازسازی همه کانال‌های امن</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">بازسازی تمام کانال‌های امن، اولوید را مجبور می‌کند تا کانال‌های ارتباطی امن جدیدی با تمام دستگاه‌های مخاطبین شما ایجاد کند. این کار معمولاً مفید نیست، اما می‌تواند موقعیت‌های نادری را که در آن برخی از این کانال‌ها «همگام‌سازی نشده‌اند» حل کند.\n\n**هشدار:** اگر مخاطبین زیادی دارید، این عملیات ممکن است چند دقیقه طول بکشد و ممکن است در حین انجام آن برخی از پیام‌های دریافتی را از دست بدهید.</string>
+	<string name="label_untransferred" state="needs_review" hash="-1851678218">انتقال داده نشد</string>
+	<string name="history_transfer_title" state="needs_review" hash="1191393558">انتقال تاریخچه چت</string>
+	<string name="history_transfer_step_none" state="needs_review" hash="1228580785">انتقال فعالی در حال انجام نیست</string>
+	<string name="history_transfer_step_contacting_other_device" state="needs_review" hash="1719019815">در حال انتظار برای دستگاه دیگر</string>
+	<string name="history_transfer_step_connecting" state="needs_review" hash="1836039168">در حال اتصال به دستگاه دیگر</string>
+	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">در حال مذاکره (مرحله 1 از 3)</string>
+	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">انتقال پیام‌ها (مرحله ۲ از ۳)</string>
+	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">انتقال فایل‌های پیوست (مرحله 3 از 3)</string>
+	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">انتقال با موفقیت انجام شد</string>
+	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">انتقال متوقف شد</string>
+	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">انتقال تاریخچه چت (نسخه آزمایشی)</string>
+	<string name="toast_message_unable_to_start_transfer" state="needs_review" hash="362080814">انتقال انجام نشد. ممکن است انتقال دیگری در حال انجام باشد؟</string>
 	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">از «پیوند جادویی» استفاده کنید</string>
 	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">پیوند جادویی نامعتبر است</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">تماس قطع شد</string>
@@ -2155,4 +2166,16 @@
 	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">احراز هویت امکان پذیر نیست</string>
 	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">در حال حاضر، پروفایل شما توسط سازمان شما مدیریت می‌شود و برای ادامه کار، نیاز به احراز هویت مجدد است. با این حال، به نظر می‌رسد هیچ روش احراز هویت معتبری در دسترس نباشد.\n\nلطفاً برای اطلاعات بیشتر با مدیر سیستم خود تماس بگیرید.</string>
 	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">هیچ روش احراز هویت پشتیبانی شده‌ای در دسترس نیست.</string>
+	<string name="pref_use_alt_turn_servers_title" state="needs_review" hash="-1956132776">از سرورهای TURN جایگزین استفاده کنید</string>
+	<string name="pref_use_alt_turn_servers_summary" state="needs_review" hash="357427162">برای استفاده از سرورهای TURN با آدرس‌های IP متغیر، این گزینه را فعال کنید. اگر مطمئن نیستید، این گزینه را غیرفعال نگه دارید 😁</string>
+	<string name="button_label_transfer_through_webrtc" state="needs_review" hash="-1809138918">انتقال از طریق شبکه محلی</string>
+	<string name="button_label_export_zip" state="needs_review" hash="1575043364">خروجی گرفتن به صورت فایل ZIP</string>
+	<string name="button_label_import_zip" state="needs_review" hash="1299665090">وارد کردن فایل ZIP</string>
+	<string name="dialog_title_transfer_choose_target_device" state="needs_review" hash="218115750">دستگاهی را که می‌خواهید این اطلاعات را به آن منتقل کنید، انتخاب کنید.</string>
+	<string name="transfer_label_no_other_active_device" state="needs_review" hash="-2135899221">هیچ دستگاه فعال دیگری وجود ندارد</string>
+	<string name="transfer_label_messages" state="needs_review" hash="-1639407912">پیام‌ها</string>
+	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">حجم داده‌ی ارسالی</string>
+	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">باقی‌مانده</string>
+	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">پیوست‌ها</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">این ویژگی هنوز در مرحله آزمایش بتا قرار دارد و پیاده‌سازی فعلی ممکن است با پیاده‌سازی نهایی انتقال تاریخچه Olvid سازگار نباشد.\n\nقبل از استفاده از این ویژگی، لطفاً اطمینان حاصل کنید که دستگاه‌های شما آخرین نسخه Olvid را اجرا می‌کنند.</string>
 </resources>

@@ -171,6 +171,7 @@ public class Discussion {
 
 
     @Ignore
+    @Nullable
     public static Discussion createOrReuseOneToOneDiscussion(@NonNull AppDatabase db, @NonNull Contact contact) {
         if (!db.inTransaction()) {
             Logger.e("ERROR: running discussion createOrReuseOneToOneDiscussion outside a transaction");
@@ -182,6 +183,7 @@ public class Discussion {
 
         if (discussion == null) {
             // no existing discussion --> create a new one
+            Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(contact.bytesOwnedIdentity);
             discussion = new Discussion(
                     contact.getCustomDisplayName(),
                     contact.bytesOwnedIdentity,
@@ -189,7 +191,7 @@ public class Discussion {
                     contact.bytesContactIdentity,
                     UUID.randomUUID(),
                     0,
-                    System.currentTimeMillis(),
+                    (timestamp == null) ? 10 : timestamp + 10,
                     contact.getCustomPhotoUrl(),
                     contact.keycloakManaged,
                     false,
@@ -221,9 +223,10 @@ public class Discussion {
                 // set default ephemeral message settings
                 setDefaultEphemeralMessageSettings(discussion, db, contact.bytesOwnedIdentity);
             }
+            Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(contact.bytesOwnedIdentity);
 
             discussion.title = contact.getCustomDisplayName();
-            discussion.lastMessageTimestamp = System.currentTimeMillis();
+            discussion.lastMessageTimestamp = (timestamp == null) ? 10 : timestamp + 10;;
             discussion.photoUrl = contact.getCustomPhotoUrl();
             discussion.keycloakManaged = contact.keycloakManaged;
             discussion.active = contact.active;
@@ -282,6 +285,7 @@ public class Discussion {
     }
 
     @Ignore
+    @Nullable
     public static Discussion createOrReuseGroupDiscussion(AppDatabase db, @NonNull Group group, boolean createdByMeOnOtherDevice) {
         if (!db.inTransaction()) {
             Logger.e("ERROR: running discussion createOrReuseGroupDiscussion outside a transaction");
@@ -292,6 +296,7 @@ public class Discussion {
         Discussion discussion = db.discussionDao().getByGroupOwnerAndUidWithAnyStatus(group.bytesOwnedIdentity, group.bytesGroupOwnerAndUid);
 
         if (discussion == null) {
+            Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(group.bytesOwnedIdentity);
             discussion = new Discussion(
                     group.getCustomName(),
                     group.bytesOwnedIdentity,
@@ -299,7 +304,7 @@ public class Discussion {
                     group.bytesGroupOwnerAndUid,
                     UUID.randomUUID(),
                     0,
-                    System.currentTimeMillis(),
+                    (timestamp == null) ? 10 : timestamp + 10,
                     group.getCustomPhotoUrl(),
                     false,
                     false,
@@ -320,8 +325,10 @@ public class Discussion {
                 db.messageDao().insert(reJoinedGroup);
             }
 
+            Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(group.bytesOwnedIdentity);
+
             discussion.title = group.getCustomName();
-            discussion.lastMessageTimestamp = System.currentTimeMillis();
+            discussion.lastMessageTimestamp = (timestamp == null) ? 10 : timestamp + 10;
             discussion.photoUrl = group.getCustomPhotoUrl();
             discussion.keycloakManaged = false;
             discussion.active = true;
@@ -336,6 +343,7 @@ public class Discussion {
     }
 
     @Ignore
+    @Nullable
     public static Discussion createOrReuseGroupV2Discussion(AppDatabase db, @NonNull Group2 group2, boolean groupWasJustCreatedByMe, boolean createdOnOtherDevice, byte[] updatedBy, long groupUpdateTimestamp) {
         if (!db.inTransaction()) {
             Logger.e("ERROR: running discussion createOrReuseGroupV2Discussion outside a transaction");
@@ -346,6 +354,7 @@ public class Discussion {
         Discussion discussion = db.discussionDao().getByGroupIdentifierWithAnyStatus(group2.bytesOwnedIdentity, group2.bytesGroupIdentifier);
 
         if (discussion == null) {
+            Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(group2.bytesOwnedIdentity);
             discussion = new Discussion(
                     group2.getCustomName(),
                     group2.bytesOwnedIdentity,
@@ -353,7 +362,7 @@ public class Discussion {
                     group2.bytesGroupIdentifier,
                     UUID.randomUUID(),
                     0,
-                    System.currentTimeMillis(),
+                    (timestamp == null) ? 10 : timestamp + 10,
                     group2.getCustomPhotoUrl(),
                     group2.keycloakManaged,
                     false,
@@ -382,9 +391,10 @@ public class Discussion {
                 Message joinedGroup = Message.createJoinedGroupMessage(db, discussion.id, discussion.bytesOwnedIdentity, updatedBy, groupUpdateTimestamp);
                 db.messageDao().insert(joinedGroup);
             }
+            Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(group2.bytesOwnedIdentity);
 
             discussion.title = group2.getCustomName();
-            discussion.lastMessageTimestamp = System.currentTimeMillis();
+            discussion.lastMessageTimestamp = (timestamp == null) ? 10 : timestamp + 10;
             discussion.photoUrl = group2.getCustomPhotoUrl();
             discussion.keycloakManaged = group2.keycloakManaged;
             discussion.active = true;
@@ -396,6 +406,40 @@ public class Discussion {
         }
 
         return discussion;
+    }
+
+    @Ignore
+    @Nullable
+    public static Discussion createLocked(@NonNull AppDatabase db, @NonNull byte[] bytesOwnedIdentity, int discussionType, @NonNull byte[] bytesDiscussionIdentifier, @Nullable String title) {
+        if (discussionType != TYPE_CONTACT && discussionType != TYPE_GROUP && discussionType != TYPE_GROUP_V2) {
+            return null;
+        }
+        try {
+            Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(bytesOwnedIdentity);
+            Discussion discussion = new Discussion(
+                    title,
+                    bytesOwnedIdentity,
+                    discussionType,
+                    bytesDiscussionIdentifier,
+                    UUID.randomUUID(),
+                    0,
+                    (timestamp == null) ? 10 : timestamp + 10,
+                    null,
+                    false,
+                    false,
+                    0,
+                    false,
+                    true,
+                    null,
+                    STATUS_LOCKED
+            );
+            discussion.id = db.discussionDao().insert(discussion);
+            return discussion;
+        } catch (Exception e) {
+            // might have an exception if insertion fails because of a duplicate
+            Logger.x(e);
+            return null;
+        }
     }
 
 

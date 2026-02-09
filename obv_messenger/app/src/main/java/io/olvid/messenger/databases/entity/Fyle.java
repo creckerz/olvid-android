@@ -143,6 +143,7 @@ public class Fyle {
 
     }
 
+    @Nullable
     public static SizeAndSha256 computeSHA256FromFile(String file) {
         try (InputStream is = new FileInputStream(file)) {
             return computeSHA256FromInputStream(is);

@@ -60,7 +60,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Badge
 import androidx.compose.material.BadgedBox
-import androidx.compose.material.Checkbox
+import androidx.compose.material3.Checkbox
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
@@ -70,6 +70,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material.ripple
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -379,6 +380,11 @@ fun ContactListScreen(
                                                                 if (selectable) {
                                                                     {
                                                                         Checkbox(
+                                                                            colors = CheckboxDefaults.colors(
+                                                                                uncheckedColor = colorResource(R.color.darkGrey),
+                                                                                checkedColor = colorResource(R.color.olvid_gradient_light),
+                                                                                checkmarkColor = colorResource(R.color.almostBlack)
+                                                                            ),
                                                                             checked = contactListViewModel.selectedContacts.any {
                                                                                 it.bytesContactIdentity.contentEquals(
                                                                                     contactOrKeycloakDetails.contact?.bytesContactIdentity

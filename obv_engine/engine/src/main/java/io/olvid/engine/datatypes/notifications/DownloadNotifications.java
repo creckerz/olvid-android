@@ -92,7 +92,8 @@ public abstract class DownloadNotifications {
     public static final String NOTIFICATION_TURN_CREDENTIALS_RECEIVED_PASSWORD_1_KEY = "username2"; // String
     public static final String NOTIFICATION_TURN_CREDENTIALS_RECEIVED_USERNAME_2_KEY = "password1"; // String
     public static final String NOTIFICATION_TURN_CREDENTIALS_RECEIVED_PASSWORD_2_KEY = "password2"; // String
-    public static final String NOTIFICATION_TURN_CREDENTIALS_RECEIVED_SERVERS_KEY = "servers"; // List<String>
+    public static final String NOTIFICATION_TURN_CREDENTIALS_RECEIVED_SERVERS_KEY = "turn_servers"; // List<String>
+    public static final String NOTIFICATION_TURN_CREDENTIALS_RECEIVED_ALT_SERVERS_KEY = "alt_servers"; // List<String>
 
     public static final String NOTIFICATION_TURN_CREDENTIALS_FAILED = "network_fetch_notification_turn_credentials_failed";
     public static final String NOTIFICATION_TURN_CREDENTIALS_FAILED_OWNED_IDENTITY_KEY = "owned_identity"; // Identity

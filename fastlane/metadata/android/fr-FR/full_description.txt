@@ -1,7 +1,7 @@
 Olvid est la première messagerie privée pour tous. Échangez des messages, des photos, des fichiers et passez des appels audio et vidéo sécurisés.
 
 
-# Qu’est-ce qu’une messagerie « privée » ?
+Qu’est-ce qu’une messagerie « privée » ?
 
 C’est une messagerie :
 - Qui ne vous impose pas de nouveaux contacts : vous seuls décidez avec qui vous désirez discuter. Olvid offre plusieurs façons d’entrer en contact avec d’autres utilisateurs, en face-à-face ou à distance.
@@ -14,14 +14,14 @@ Olvid vous garantit des espaces de confiance, hermétiques aux agressions extern
 Olvid a été conçue pour être le meilleur endroit où échanger sur les sujets qui importent, avec ceux qui comptent pour vous.
 
 
-# Olvid - Technologie
+Olvid - Technologie
 
 Au cœur d'Olvid, un « moteur cryptographique », issu de plusieurs années de R&D, qui permet de prouver mathématiquement l'intégrité, la confidentialité et l'anonymat de vos communications.
 
 
-# Distinctions
+Distinctions
 
 - Olvid est la première messagerie instantanée certifiée CSPN par l'ANSSI.
 - Olvid est lauréate du programme FRENCH TECH DEEPNUM20 qui accompagne des champions technologiques dans les secteurs stratégiques de l’économie.
-- Olvid a remporté le Prix de l'Innovation 2020 des Assises de la Sécurité.
+- Olvid a remporté le Prix de l’Innovation 2020 des Assises de la Sécurité.
 - Olvid est prix de la Startup FIC 2020.

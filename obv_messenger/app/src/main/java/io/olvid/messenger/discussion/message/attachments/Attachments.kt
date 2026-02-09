@@ -60,6 +60,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
@@ -108,6 +109,8 @@ import io.olvid.messenger.customClasses.PreviewUtilsWithDrawables
 import io.olvid.messenger.customClasses.SecureAlertDialogBuilder
 import io.olvid.messenger.customClasses.SecureDeleteEverywhereDialogBuilder
 import io.olvid.messenger.customClasses.StringUtils
+import io.olvid.messenger.customClasses.formatBytesSpeed
+import io.olvid.messenger.customClasses.formatEtaSeconds
 import io.olvid.messenger.databases.AppDatabase
 import io.olvid.messenger.databases.dao.FyleMessageJoinWithStatusDao.FyleAndStatus
 import io.olvid.messenger.databases.entity.Fyle
@@ -238,90 +241,19 @@ fun Attachments(
 
             val speed: String? by remember {
                 derivedStateOf {
-                    (progressStatus as? ProgressStatus.InProgress)?.speedAndEta?.speedBps?.let {
-                        if (it >= 10000000000f) {
-                            context.getString(
-                                R.string.xx_gbps,
-                                String.format(
-                                    Locale.ENGLISH,
-                                    "%d",
-                                    (it / 1000000000f).toInt()
-                                )
-                            )
-                        } else if (it >= 1000000000f) {
-                            context.getString(
-                                R.string.xx_gbps,
-                                String.format(
-                                    Locale.ENGLISH,
-                                    "%1.1f",
-                                    it / 1000000000f
-                                )
-                            )
-                        } else if (it >= 10000000f) {
-                            context.getString(
-                                R.string.xx_mbps,
-                                String.format(
-                                    Locale.ENGLISH,
-                                    "%d",
-                                    (it / 1000000f).toInt()
-                                )
-                            )
-                        } else if (it >= 1000000f) {
-                            context.getString(
-                                R.string.xx_mbps,
-                                String.format(
-                                    Locale.ENGLISH,
-                                    "%1.1f",
-                                    it / 1000000f
-                                )
-                            )
-                        } else if (it >= 10000f) {
-                            context.getString(
-                                R.string.xx_kbps,
-                                String.format(
-                                    Locale.ENGLISH,
-                                    "%d",
-                                    (it / 1000f).toInt()
-                                )
-                            )
-                        } else if (it >= 1000f) {
-                            context.getString(
-                                R.string.xx_kbps,
-                                String.format(Locale.ENGLISH, "%1.1f", it / 1000f)
-                            )
-                        } else {
-                            context.getString(
-                                R.string.xx_bps,
-                                String.format(
-                                    Locale.ENGLISH,
-                                    "%d",
-                                    it.roundToInt()
-                                )
-                            )
-                        }
-                    }
+                    (progressStatus as? ProgressStatus.InProgress)
+                        ?.speedAndEta
+                        ?.speedBps
+                        ?.formatBytesSpeed(context)
                 }
             }
 
             val eta: String? by remember {
                 derivedStateOf {
-                    (progressStatus as? ProgressStatus.InProgress)?.speedAndEta?.etaSeconds?.let {
-                        if (it > 5940) {
-                            context.getString(
-                                R.string.text_timer_h,
-                                it / 3600
-                            )
-                        } else if (it > 99) {
-                            context.getString(
-                                R.string.text_timer_m,
-                                it / 60
-                            )
-                        } else if (it > 0) {
-                            context.getString(R.string.text_timer_s, it)
-                        } else {
-                            "-"
-                        }
-                    }
+                    (progressStatus as? ProgressStatus.InProgress)
+                        ?.speedAndEta
+                        ?.etaSeconds
+                        ?.formatEtaSeconds(context)
                 }
             }
 
@@ -660,9 +592,7 @@ fun Attachments(
                             )
                         }
 
-                        FyleMessageJoinWithStatus.STATUS_DRAFT, FyleMessageJoinWithStatus.STATUS_COMPLETE -> {
-
-                        }
+                        FyleMessageJoinWithStatus.STATUS_DRAFT, FyleMessageJoinWithStatus.STATUS_COMPLETE -> { }
 
                         FyleMessageJoinWithStatus.STATUS_FAILED -> {
                             Image(
@@ -671,6 +601,18 @@ fun Attachments(
                                     .padding(if (imageCount == 1) 0.dp else 4.dp)
                                     .size(if (imageCount == 1) 64.dp else 32.dp),
                                 painter = painterResource(id = R.drawable.ic_attachment_status_failed),
+                                contentDescription = null
+                            )
+                        }
+
+                        FyleMessageJoinWithStatus.STATUS_UNTRANSFERRED -> {
+                            Icon(
+                                modifier = Modifier
+                                    .align(Alignment.BottomEnd)
+                                    .padding(8.dp)
+                                    .size(24.dp),
+                                painter = painterResource(id = R.drawable.ic_transfer),
+                                tint = colorResource(R.color.red),
                                 contentDescription = null
                             )
                         }
@@ -885,6 +827,19 @@ fun Attachments(
                                 contentDescription = null
                             )
                         }
+
+                        FyleMessageJoinWithStatus.STATUS_UNTRANSFERRED -> {
+                            Icon(
+                                modifier = Modifier
+                                    .align(Alignment.BottomEnd)
+                                    .padding(4.dp)
+                                    .size(32.dp)
+                                    .padding(4.dp),
+                                painter = painterResource(id = R.drawable.ic_transfer),
+                                tint = colorResource(R.color.red),
+                                contentDescription = null
+                            )
+                        }
                     }
                 }
             }
@@ -1071,6 +1026,7 @@ fun getProgressLabel(status: Int): String? =
         FyleMessageJoinWithStatus.STATUS_DOWNLOADING -> stringResource(id = R.string.label_download)
         FyleMessageJoinWithStatus.STATUS_COPYING -> stringResource(id = R.string.label_copy)
         FyleMessageJoinWithStatus.STATUS_FAILED -> stringResource(id = R.string.label_no_longer_available)
+        FyleMessageJoinWithStatus.STATUS_UNTRANSFERRED -> stringResource(id = R.string.label_untransferred)
         else -> null
     }
 
@@ -1204,7 +1160,8 @@ fun AttachmentContextMenu(
                 delete()
             }
         } else {
-            if (attachment.fyleMessageJoinWithStatus.status == FyleMessageJoinWithStatus.STATUS_FAILED) {
+            if (attachment.fyleMessageJoinWithStatus.status == FyleMessageJoinWithStatus.STATUS_FAILED
+                || attachment.fyleMessageJoinWithStatus.status == FyleMessageJoinWithStatus.STATUS_UNTRANSFERRED) {
                 delete()
             } else {
                 open()
@@ -1227,7 +1184,7 @@ fun AttachmentDownloadProgress(
         modifier = modifier
             .widthIn(
                 min = (scale * 24).dp,
-                max = (scale * 64).dp
+                max = (scale * 74).dp
             )
             .height((scale * 24).dp)
             .background(
@@ -1245,7 +1202,7 @@ fun AttachmentDownloadProgress(
         if (speed != null || eta != null) {
             Column(
                 modifier = Modifier
-                    .width((scale * 40).dp)
+                    .width((if (scale < 1.5f) 50 else 85).dp)
                     .padding(end = 4.dp),
                 horizontalAlignment = Alignment.End
             ) {
@@ -1321,12 +1278,13 @@ fun AttachmentDownloadProgress(
 @PreviewLightDark
 @Composable
 private fun AttachmentDownloadProgressPreview() {
+    val context = LocalContext.current
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        AttachmentDownloadProgress(speed = "352k/s", eta = "45s", progress = .37f)
+        AttachmentDownloadProgress(speed = 352000f.formatBytesSpeed(context), eta = 45.formatEtaSeconds(context), progress = .37f)
         AttachmentDownloadProgress(speed = null, eta = null, progress = 0f)
         AttachmentDownloadProgress(
-            speed = "3.4M/s",
-            eta = "57s",
+            speed = 398420000f.formatBytesSpeed(context),
+            eta = 57.formatEtaSeconds(context),
             progress = .72f,
             large = false
         )

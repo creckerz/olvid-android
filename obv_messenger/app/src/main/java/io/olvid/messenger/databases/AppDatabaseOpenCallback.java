@@ -610,7 +610,8 @@ public class AppDatabaseOpenCallback implements Runnable {
                                         messageInserted = true;
                                     }
                                     if (messageInserted) {
-                                        if (discussion.updateLastMessageTimestamp(System.currentTimeMillis())) {
+                                        Long maxTimestamp = db.discussionDao().getMaxLastMessageTimestamp(discussion.bytesOwnedIdentity);
+                                        if (discussion.updateLastMessageTimestamp((maxTimestamp == null) ? 10 : maxTimestamp + 10)) {
                                             db.discussionDao().updateLastMessageTimestamp(discussion.id, discussion.lastMessageTimestamp);
                                         }
                                     }
@@ -699,7 +700,8 @@ public class AppDatabaseOpenCallback implements Runnable {
 
                                     if (!contactToAdd.isEmpty() || !contactToRemove.isEmpty()) {
                                         Logger.i("Engine -> App sync: Contact mismatch in group. Remove " + contactToRemove.size() + " and add " + contactToAdd.size());
-                                        if (discussion.updateLastMessageTimestamp(System.currentTimeMillis())) {
+                                        Long maxTimestamp = db.discussionDao().getMaxLastMessageTimestamp(discussion.bytesOwnedIdentity);
+                                        if (discussion.updateLastMessageTimestamp((maxTimestamp == null) ? 10 : maxTimestamp + 10)) {
                                             db.discussionDao().updateLastMessageTimestamp(discussion.id, discussion.lastMessageTimestamp);
                                         }
 

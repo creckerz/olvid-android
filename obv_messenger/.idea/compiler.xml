@@ -7,7 +7,6 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Olvid_for_Android.engine" options="-Xmaxerrs 4000 -Xmaxwarns 4000" />
       <module name="Olvid_for_Android.engine.main" options="-Xmaxerrs 4000 -Xmaxwarns 4000" />
       <module name="Olvid_for_Android.engine.test" options="-Xmaxerrs 4000 -Xmaxwarns 4000" />
     </option>

@@ -486,6 +486,8 @@
 	<string name="notification_action_end_call" state="needs_review" hash="-1678527967">Kết thúc cuộc gọi</string>
 	<string name="notification_channel_webrtc_call_service_name" state="needs_review" hash="-623348883">Cuộc gọi đến</string>
 	<string name="notification_channel_webrtc_call_service_description" state="needs_review" hash="318507261">Thông báo cuộc gọi đến</string>
+	<string name="notification_channel_transfer_service_name" state="needs_review" hash="-1765472866">Chuyển lịch sử</string>
+	<string name="notification_channel_transfer_service_description" state="needs_review" hash="1606671624">Hiển thị tiến trình trong quá trình chuyển lịch sử trò chuyện</string>
 	<string name="activity_title_webrtc_incoming_call" state="needs_review" hash="-1672458216">Cuộc gọi Olvid đến</string>
 	<string name="text_incoming_call_from" state="needs_review" hash="416481913">Cuộc gọi đến từ…</string>
 	<string name="toast_message_already_in_a_call" state="needs_review" hash="702053866">Bạn đã đang trong cuộc gọi. Hãy kết thúc cuộc gọi hiện tại trước khi bắt đầu cuộc gọi mới.</string>
@@ -1579,10 +1581,7 @@
 	<string name="text_setting_full" state="needs_review" hash="-1858792643">đầy đủ</string>
 	<string name="text_setting_none" state="needs_review" hash="752790864">không có</string>
 	<string name="activity_title_settings_update" state="needs_review" hash="1186086183">Cập nhật cài đặt</string>
-	<string name="xx_gbps" state="needs_review" hash="-503020032">%1$sG/giây</string>
-	<string name="xx_mbps" state="needs_review" hash="-1682095296">%1$sMB/giây</string>
-	<string name="xx_kbps" state="needs_review" hash="1012462976">%1$sKB/giây</string>
-	<string name="xx_bps" state="needs_review" hash="479585933">%1$sB/gi</string>
+	<string name="xxx_per_s" state="needs_review" hash="-1456430978">%1$s/giây</string>
 	<string name="text_you_captured_sensitive_message" state="needs_review" hash="-929928147">Bạn đã chụp ảnh màn hình một tin nhắn nhạy cảm</string>
 	<string name="text_unknown_member_captured_sensitive_message" state="needs_review" hash="-749114410">Một người dùng không xác định đã chụp ảnh màn hình một tin nhắn nhạy cảm</string>
 	<string name="text_xxx_captured_sensitive_message" state="needs_review" hash="233294474">%1$s đã chụp ảnh màn hình một tin nhắn nhạy cảm</string>
@@ -2145,6 +2144,18 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Thiết bị của người liên hệ không khả dụng</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Tạo lại tất cả các kênh bảo mật</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Tạo lại tất cả các kênh bảo mật sẽ buộc Olvid tạo các kênh liên lạc bảo mật mới với tất cả các thiết bị của danh bạ của bạn. Điều này thường không hữu ích, nhưng có thể giải quyết các tình huống hiếm gặp khi một số kênh này bị \"mất đồng bộ\".\n\n**Cảnh báo:** nếu bạn có nhiều liên hệ, thao tác này có thể mất vài phút và bạn có thể bỏ lỡ một số tin nhắn đến trong khi nó đang chạy.</string>
+	<string name="label_untransferred" state="needs_review" hash="-1851678218">Không được chuyển</string>
+	<string name="history_transfer_title" state="needs_review" hash="1191393558">Chuyển lịch sử trò chuyện</string>
+	<string name="history_transfer_step_none" state="needs_review" hash="1228580785">Không có chuyển tiếp nào đang diễn ra</string>
+	<string name="history_transfer_step_contacting_other_device" state="needs_review" hash="1719019815">Đang chờ thiết bị khác</string>
+	<string name="history_transfer_step_connecting" state="needs_review" hash="1836039168">Đang kết nối đến thiết bị khác</string>
+	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">Đang thương lượng (bước 1 trong 3)</string>
+	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Đang chuyển các tin nhắn (bước 2 trong 3)</string>
+	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">Đang chuyển các tệp đính kèm (bước 3 trong 3)</string>
+	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Quá trình truyền đã hoàn tất</string>
+	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Quá trình truyền bị gián đoạn</string>
+	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Chuyển lịch sử trò chuyện (phiên bản thử nghiệm)</string>
+	<string name="toast_message_unable_to_start_transfer" state="needs_review" hash="362080814">Không thể bắt đầu quá trình truyền. Có thể một quá trình truyền khác đã đang chạy?</string>
 	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">Sử dụng \"liên kết ma thuật\"</string>
 	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">Liên kết ma thuật không hợp lệ</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Cuộc gọi đã kết thúc</string>
@@ -2154,4 +2165,16 @@
 	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">Không thể xác thực</string>
 	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">Hiện tại, hồ sơ của bạn đang được quản lý bởi tổ chức của bạn và cần phải xác thực lại. Tuy nhiên, có vẻ như không có phương thức xác thực nào được hỗ trợ.\n\nVui lòng liên hệ với quản trị viên của bạn để biết thêm chi tiết.</string>
 	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">Không có phương thức xác thực nào được hỗ trợ.</string>
+	<string name="pref_use_alt_turn_servers_title" state="needs_review" hash="-1956132776">Sử dụng các máy chủ TURN khác</string>
+	<string name="pref_use_alt_turn_servers_summary" state="needs_review" hash="357427162">Bật tùy chọn này để sử dụng các máy chủ TURN với địa chỉ IP thay đổi. Nếu bạn không chắc chắn, hãy tắt tùy chọn này 😁</string>
+	<string name="button_label_transfer_through_webrtc" state="needs_review" hash="-1809138918">Truyền qua mạng cục bộ</string>
+	<string name="button_label_export_zip" state="needs_review" hash="1575043364">Xuất ZIP</string>
+	<string name="button_label_import_zip" state="needs_review" hash="1299665090">Nhập tệp ZIP</string>
+	<string name="dialog_title_transfer_choose_target_device" state="needs_review" hash="218115750">Chọn thiết bị đích để chuyển dữ liệu.</string>
+	<string name="transfer_label_no_other_active_device" state="needs_review" hash="-2135899221">Không có thiết bị nào khác đang hoạt động</string>
+	<string name="transfer_label_messages" state="needs_review" hash="-1639407912">Tin nhắn</string>
+	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Thông lượng</string>
+	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Số còn lại</string>
+	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Tệp đính kèm</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Tính năng này vẫn đang trong giai đoạn thử nghiệm beta và phiên bản hiện tại có thể không tương thích với phiên bản cuối cùng của tính năng chuyển dữ liệu lịch sử của Olvid.\n\nTrước khi sử dụng tính năng này, hãy đảm bảo rằng các thiết bị của bạn đang chạy phiên bản Olvid mới nhất.</string>
 </resources>

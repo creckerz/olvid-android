@@ -24,6 +24,7 @@ import android.icu.lang.UCharacter
 import android.os.Build
 import android.text.SpannableString
 import android.text.Spanned
+import android.text.format.Formatter
 import android.text.style.URLSpan
 import android.text.util.Linkify
 import androidx.compose.ui.graphics.Color
@@ -48,6 +49,8 @@ import io.olvid.messenger.customClasses.StringUtils.unAccentPattern
 import java.text.Normalizer
 import java.util.BitSet
 import java.util.Locale
+import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
 fun String.linkify(context: Context): AnnotatedString {
     val spannableString = SpannableString(this)
@@ -336,4 +339,31 @@ fun String.jsonIdentityDetails() : JsonIdentityDetails? {
         AppSingleton.getJsonObjectMapper()
             .readValue(this, JsonIdentityDetails::class.java)
     }.getOrNull()
+}
+
+
+fun Float?.formatBytesSpeed(context: Context) : String? {
+    return this?.let {
+        context.getString(R.string.xxx_per_s, Formatter.formatShortFileSize(context, it.roundToLong()))
+    }
+}
+
+fun Int?.formatEtaSeconds(context: Context) : String? {
+    return this?.let {
+        if (it > 5940) {
+            context.getString(
+                R.string.text_timer_h,
+                it / 3600
+            )
+        } else if (it > 99) {
+            context.getString(
+                R.string.text_timer_m,
+                it / 60
+            )
+        } else if (it > 0) {
+            context.getString(R.string.text_timer_s, it)
+        } else {
+            "-"
+        }
+    }
 }

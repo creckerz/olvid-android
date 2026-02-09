@@ -81,11 +81,13 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import io.olvid.messenger.App
+import io.olvid.messenger.AppSingleton
 import io.olvid.messenger.R
 import io.olvid.messenger.customClasses.StringUtils
 import io.olvid.messenger.databases.AppDatabase
 import io.olvid.messenger.databases.entity.Discussion
 import io.olvid.messenger.databases.entity.Message
+import io.olvid.messenger.databases.entity.jsons.JsonLocation
 import io.olvid.messenger.databases.tasks.CreateReadMessageMetadata
 import io.olvid.messenger.designsystem.cutoutHorizontalPadding
 import io.olvid.messenger.designsystem.systemBarsHorizontalPadding
@@ -501,13 +503,18 @@ fun MessageList(
                                     locationMessageHandler.onLocationClick(it)
                                 },
                                 onLocationLongClick = {
-                                    view?.let {
-                                        locationMessageHandler.showLocationContextMenu(
-                                            message = message,
-                                            view = it,
-                                            truncatedLatitudeString = message.jsonMessage.getJsonLocation().truncatedLatitudeString,
-                                            truncatedLongitudeString = message.jsonMessage.getJsonLocation().truncatedLongitudeString
-                                        )
+                                    view?.let { view ->
+                                        message.jsonLocation?.let {
+                                            AppSingleton.getJsonObjectMapper()
+                                                .readValue(it, JsonLocation::class.java)
+                                        }?.let { jsonLocation ->
+                                            locationMessageHandler.showLocationContextMenu(
+                                                message = message,
+                                                view = view,
+                                                truncatedLatitudeString = jsonLocation.truncatedLatitudeString,
+                                                truncatedLongitudeString = jsonLocation.truncatedLongitudeString
+                                            )
+                                        }
                                     }
                                 },
                                 onAttachmentLongClick = { fyleAndStatus ->

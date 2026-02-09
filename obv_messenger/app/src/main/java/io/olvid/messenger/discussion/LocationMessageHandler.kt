@@ -27,13 +27,16 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
 import androidx.core.content.ContextCompat
+import io.olvid.engine.Logger
 import io.olvid.messenger.App
+import io.olvid.messenger.AppSingleton
 import io.olvid.messenger.R
 import io.olvid.messenger.customClasses.LocationIntegrationSelectorDialog
 import io.olvid.messenger.customClasses.LocationIntegrationSelectorDialog.OnIntegrationSelectedListener
 import io.olvid.messenger.customClasses.SecureAlertDialogBuilder
 import io.olvid.messenger.databases.AppDatabase
 import io.olvid.messenger.databases.entity.Message
+import io.olvid.messenger.databases.entity.jsons.JsonLocation
 import io.olvid.messenger.discussion.location.FullscreenMapDialogFragment
 import io.olvid.messenger.discussion.message.copyLocationToClipboard
 import io.olvid.messenger.services.UnifiedForegroundService.LocationSharingSubService
@@ -88,13 +91,22 @@ class LocationMessageHandler(
                         }
                     }
                 } else {
-                    // else : open in a third party app
-                    App.openLocationInMapApplication(
-                        activity,
-                        message.jsonMessage.getJsonLocation().truncatedLatitudeString,
-                        message.jsonMessage.getJsonLocation().truncatedLongitudeString,
-                        message.contentBody
-                    ) { discussionViewModel.markAsReadOnPause = false }
+                    try {
+                        message.jsonLocation?.let {
+                            AppSingleton.getJsonObjectMapper()
+                                .readValue(it, JsonLocation::class.java)
+                        }?.let { jsonLocation ->
+                            // else : open in a third party app
+                            App.openLocationInMapApplication(
+                                activity,
+                                jsonLocation.truncatedLatitudeString,
+                                jsonLocation.truncatedLongitudeString,
+                                message.contentBody
+                            ) { discussionViewModel.markAsReadOnPause = false }
+                        }
+                    } catch (e : Exception) {
+                        Logger.x(e)
+                    }
                 }
             }
 

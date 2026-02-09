@@ -132,7 +132,8 @@ public class EngineNotificationProcessorForGroups implements EngineNotificationL
                             }
                         }
                         if (messageInserted) {
-                            if (discussion.updateLastMessageTimestamp(System.currentTimeMillis())) {
+                            Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(discussion.bytesOwnedIdentity);
+                            if (discussion.updateLastMessageTimestamp((timestamp == null) ? 10 : timestamp + 10)) {
                                 db.discussionDao().updateLastMessageTimestamp(discussion.id, discussion.lastMessageTimestamp);
                             }
                         }
@@ -227,7 +228,8 @@ public class EngineNotificationProcessorForGroups implements EngineNotificationL
 
                                     Message groupJoinedMessage = Message.createMemberJoinedGroupMessage(db, discussion.id, contact.bytesContactIdentity, Arrays.copyOfRange(group.bytesGroupOwnerAndUid, 0, group.bytesGroupOwnerAndUid.length - UID.UID_LENGTH), System.currentTimeMillis());
                                     db.messageDao().upsert(groupJoinedMessage);
-                                    if (discussion.updateLastMessageTimestamp(System.currentTimeMillis())) {
+                                    Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(discussion.bytesOwnedIdentity);
+                                    if (discussion.updateLastMessageTimestamp((timestamp == null) ? 10 : timestamp + 10)) {
                                         db.discussionDao().updateLastMessageTimestamp(discussion.id, discussion.lastMessageTimestamp);
                                     }
                                 }
@@ -334,7 +336,8 @@ public class EngineNotificationProcessorForGroups implements EngineNotificationL
 
                                     Message groupLeftMessage = Message.createMemberLeftGroupMessage(db, discussion.id, contact.bytesContactIdentity, null, System.currentTimeMillis());
                                     db.messageDao().upsert(groupLeftMessage);
-                                    if (discussion.updateLastMessageTimestamp(System.currentTimeMillis())) {
+                                    Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(discussion.bytesOwnedIdentity);
+                                    if (discussion.updateLastMessageTimestamp((timestamp == null) ? 10 : timestamp + 10)) {
                                         db.discussionDao().updateLastMessageTimestamp(discussion.id, discussion.lastMessageTimestamp);
                                     }
                                 }

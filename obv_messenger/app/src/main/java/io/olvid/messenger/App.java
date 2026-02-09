@@ -102,7 +102,7 @@ import io.olvid.messenger.databases.entity.Contact;
 import io.olvid.messenger.databases.entity.Discussion;
 import io.olvid.messenger.databases.entity.Message;
 import io.olvid.messenger.databases.entity.OwnedIdentity;
-import io.olvid.messenger.databases.entity.jsons.JsonWebrtcMessage;
+import io.olvid.messenger.databases.entity.jsons.JsonWebrtcCallMessage;
 import io.olvid.messenger.databases.tasks.new_message.ProcessReadyToProcessOnHoldMessagesTask;
 import io.olvid.messenger.discussion.DiscussionActivity;
 import io.olvid.messenger.discussion.message.MessageDetailsActivity;
@@ -455,11 +455,11 @@ public class App extends Application implements DefaultLifecycleObserver {
         context.startActivity(activityIntent);
     }
 
-    public static void handleWebrtcMessage(byte[] bytesOwnedIdentity, byte[] bytesContactIdentity, byte[] bytesContactDeviceUid, JsonWebrtcMessage jsonWebrtcMessage, long downloadTimestamp, long serverTimestamp) {
-        if (jsonWebrtcMessage.getCallIdentifier() == null || jsonWebrtcMessage.getMessageType() == null || jsonWebrtcMessage.getSerializedMessagePayload() == null) {
+    public static void handleWebrtcMessage(byte[] bytesOwnedIdentity, byte[] bytesContactIdentity, byte[] bytesContactDeviceUid, JsonWebrtcCallMessage jsonWebrtcCallMessage, long downloadTimestamp, long serverTimestamp) {
+        if (jsonWebrtcCallMessage.getCallIdentifier() == null || jsonWebrtcCallMessage.getMessageType() == null || jsonWebrtcCallMessage.getSerializedMessagePayload() == null) {
             return;
         }
-        int messageType = jsonWebrtcMessage.getMessageType();
+        int messageType = jsonWebrtcCallMessage.getMessageType();
 
         if (downloadTimestamp - serverTimestamp > WebrtcCallService.CALL_TIMEOUT_MILLIS) {
             if (messageType == WebrtcCallService.START_CALL_MESSAGE_TYPE) {
@@ -495,9 +495,9 @@ public class App extends Application implements DefaultLifecycleObserver {
         if (bytesContactDeviceUid != null) {
             intent.putExtra(WebrtcCallService.BYTES_CONTACT_DEVICE_UID_INTENT_EXTRA, bytesContactDeviceUid);
         }
-        intent.putExtra(WebrtcCallService.CALL_IDENTIFIER_INTENT_EXTRA, Logger.getUuidString(jsonWebrtcMessage.getCallIdentifier()));
+        intent.putExtra(WebrtcCallService.CALL_IDENTIFIER_INTENT_EXTRA, Logger.getUuidString(jsonWebrtcCallMessage.getCallIdentifier()));
         intent.putExtra(WebrtcCallService.MESSAGE_TYPE_INTENT_EXTRA, messageType);
-        intent.putExtra(WebrtcCallService.SERIALIZED_MESSAGE_PAYLOAD_INTENT_EXTRA, jsonWebrtcMessage.getSerializedMessagePayload());
+        intent.putExtra(WebrtcCallService.SERIALIZED_MESSAGE_PAYLOAD_INTENT_EXTRA, jsonWebrtcCallMessage.getSerializedMessagePayload());
 
         if (messageType == WebrtcCallService.START_CALL_MESSAGE_TYPE
                 || messageType == WebrtcCallService.NEW_ICE_CANDIDATE_MESSAGE_TYPE

@@ -53,10 +53,11 @@ class InsertMediatorInvitationMessageTask(
                         // we do not update the discussion timestamp for type TYPE_MEDIATOR_INVITATION_SENT,
                         // for other messages, we update only if timestamp was 0 (0 corresponds to discussions hidden from the main list)
                         if (type != Message.TYPE_MEDIATOR_INVITATION_SENT
-                            && discussion.lastMessageTimestamp != 0L
-                            && discussion.updateLastMessageTimestamp(message.timestamp)
-                        ) {
-                            db.discussionDao().updateLastMessageTimestamp(discussion.id, discussion.lastMessageTimestamp)
+                            && discussion.lastMessageTimestamp != 0L) {
+                            val timestamp = db.discussionDao().getMaxLastMessageTimestamp(bytesOwnedIdentity) ?: 0L
+                            if (discussion.updateLastMessageTimestamp(timestamp + 10)) {
+                                db.discussionDao().updateLastMessageTimestamp(discussion.id, discussion.lastMessageTimestamp)
+                            }
                         }
                     }
                 } catch (e: Exception) {

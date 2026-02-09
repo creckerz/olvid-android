@@ -1,3 +1,25 @@
+# Build 291 (4.2.2)
+2026-02-09
+
+- [beta] Fix yet another history transfer bug.
+
+# ~~Build 290 (4.2.2)~~
+2026-02-05
+
+- [beta] Fix another history transfer bug.
+
+# ~~Build 289 (4.2.2)~~
+2026-02-05
+
+- [beta] Fix history transfer bug with duplicate message sequence numbers.
+
+# ~~Build 288 (4.2.2)~~
+2026-02-05
+
+- Add support for "alternate" TURN servers, allowing secure calls through relay servers with rotating IP addresses.
+- [beta] First implementation of chat history transfer between devices.
+- Update dependencies for a future release to F-Droid.
+
 # Build 287 (4.2.1)
 2026-01-27
 

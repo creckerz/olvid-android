@@ -486,6 +486,8 @@
 	<string name="notification_action_end_call" state="needs_review" hash="-1678527967">結束通話</string>
 	<string name="notification_channel_webrtc_call_service_name" state="needs_review" hash="-623348883">來電</string>
 	<string name="notification_channel_webrtc_call_service_description" state="needs_review" hash="318507261">來電通知</string>
+	<string name="notification_channel_transfer_service_name" state="needs_review" hash="-1765472866">歷史記錄轉移</string>
+	<string name="notification_channel_transfer_service_description" state="needs_review" hash="1606671624">顯示聊天記錄傳輸期間的進度</string>
 	<string name="activity_title_webrtc_incoming_call" state="needs_review" hash="-1672458216">來電：Olvid</string>
 	<string name="text_incoming_call_from" state="needs_review" hash="416481913">來自…的來電</string>
 	<string name="toast_message_already_in_a_call" state="needs_review" hash="702053866">您目前正在通話中。請結束通話後再開始新的通話。</string>
@@ -1579,10 +1581,7 @@
 	<string name="text_setting_full" state="needs_review" hash="-1858792643">完整</string>
 	<string name="text_setting_none" state="needs_review" hash="752790864">無</string>
 	<string name="activity_title_settings_update" state="needs_review" hash="1186086183">設定更新</string>
-	<string name="xx_gbps" state="needs_review" hash="-503020032">%1$sG/秒</string>
-	<string name="xx_mbps" state="needs_review" hash="-1682095296">%1$sM/秒</string>
-	<string name="xx_kbps" state="needs_review" hash="1012462976">%1$sk/秒</string>
-	<string name="xx_bps" state="needs_review" hash="479585933">%1$s位元/秒</string>
+	<string name="xxx_per_s" state="needs_review" hash="-1456430978">%1$s/秒</string>
 	<string name="text_you_captured_sensitive_message" state="needs_review" hash="-929928147">您截圖了一則敏感訊息</string>
 	<string name="text_unknown_member_captured_sensitive_message" state="needs_review" hash="-749114410">有不明使用者擷取了敏感訊息的螢幕截圖</string>
 	<string name="text_xxx_captured_sensitive_message" state="needs_review" hash="233294474">%1$s 擷取了敏感訊息的螢幕截圖</string>
@@ -2145,6 +2144,18 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">對端裝置無法連線</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">重新建立所有安全通道</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">重建所有安全通道會強制 Olvid 與您聯絡人的所有裝置建立新的安全通訊管道。 通常情況下這沒有用處，但可以解決一些罕見的情況，即這些管道中的某些管道「不同步」。\n\n**警告：**如果您有很多聯絡人，此操作可能需要幾分鐘，並且您可能會在執行過程中遺失一些傳入訊息。</string>
+	<string name="label_untransferred" state="needs_review" hash="-1851678218">未傳輸</string>
+	<string name="history_transfer_title" state="needs_review" hash="1191393558">聊天記錄轉移</string>
+	<string name="history_transfer_step_none" state="needs_review" hash="1228580785">沒有正在進行的傳輸</string>
+	<string name="history_transfer_step_contacting_other_device" state="needs_review" hash="1719019815">等待其他裝置</string>
+	<string name="history_transfer_step_connecting" state="needs_review" hash="1836039168">正在連接到其他裝置</string>
+	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">正在協商（第 1 步，共 3 步）</string>
+	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">正在傳輸訊息（第 2 步，共 3 步）</string>
+	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">正在傳輸附件（第 3 步，共 3 步）</string>
+	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">傳輸完成</string>
+	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">傳輸中斷</string>
+	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">聊天記錄轉移（測試版）</string>
+	<string name="toast_message_unable_to_start_transfer" state="needs_review" hash="362080814">無法啟動傳輸。可能另一個傳輸正在進行中？</string>
 	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">使用“魔術連結”</string>
 	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">無效的魔法連結</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">通話已結束</string>
@@ -2154,4 +2165,16 @@
 	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">身份驗證失敗</string>
 	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">您的個人資料目前由您的組織管理，需要重新進行身份驗證。但是，似乎沒有可用的受支援的身份驗證方法。\n\n請聯繫您的管理員以獲取更多詳細資訊。</string>
 	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">似乎沒有可用的受支援的驗證方法。</string>
+	<string name="pref_use_alt_turn_servers_title" state="needs_review" hash="-1956132776">使用備用 TURN 伺服器</string>
+	<string name="pref_use_alt_turn_servers_summary" state="needs_review" hash="357427162">啟用此選項以使用具有輪換 IP 位址的 TURN 伺服器。如果不確定，請保持此選項關閉 😁</string>
+	<string name="button_label_transfer_through_webrtc" state="needs_review" hash="-1809138918">透過本機網路傳輸</string>
+	<string name="button_label_export_zip" state="needs_review" hash="1575043364">匯出 ZIP</string>
+	<string name="button_label_import_zip" state="needs_review" hash="1299665090">匯入 ZIP 檔案</string>
+	<string name="dialog_title_transfer_choose_target_device" state="needs_review" hash="218115750">選擇要傳輸資料的目標裝置。</string>
+	<string name="transfer_label_no_other_active_device" state="needs_review" hash="-2135899221">沒有其他已啟用的裝置</string>
+	<string name="transfer_label_messages" state="needs_review" hash="-1639407912">訊息</string>
+	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">吞吐量</string>
+	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">剩餘</string>
+	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">附件</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">此功能仍在測試階段，且目前的實作可能與 Olvid 歷史記錄傳輸的最終實作不相容。\n\n在使用此功能之前，請確保您的裝置已安裝最新版本的 Olvid。</string>
 </resources>

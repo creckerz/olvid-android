@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_REMOTE_MESSAGING" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
     <uses-permission android:name="android.permission.HIDE_OVERLAY_WINDOWS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
@@ -596,6 +597,10 @@
             android:name=".plus_button.scan.ScanActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize"/>
+        <activity android:name="io.olvid.messenger.history_transfer.HistoryTransferActivity"
+            android:launchMode="singleInstance"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
 
         <service android:name=".notifications.NotificationActionService"
             android:exported="false"/>
@@ -610,12 +615,16 @@
             android:exported="false"
             android:foregroundServiceType="microphone|specialUse|mediaProjection">
             <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
-                android:value="This service is started for VoIP both outgoing and incoming VoIP calls. For outgoing calls, the microphone permission is already granted and service can be started as microphone, for incoming calls we start a foreground service while the phone is ringing, following the reception of a push notification. As soon as the recipient picks up the call and grants audio permission, the foreground service is restarted as a microphone service."/>
+                android:value="This service is started for both outgoing and incoming VoIP calls. For outgoing calls, the microphone permission is already granted and service can be started as microphone, for incoming calls we start a foreground service while the phone is ringing, following the reception of a push notification. As soon as the recipient picks up the call and grants audio permission, the foreground service is restarted as a microphone service."/>
         </service>
         <service android:name=".services.MediaPlayerService"
             android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaPlayback"/>
+            android:foregroundServiceType="mediaPlayback" />
+        <service android:name="io.olvid.messenger.history_transfer.TransferNotificationService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
 
         <receiver android:name=".services.MessageExpirationService"
             android:exported="false"/>

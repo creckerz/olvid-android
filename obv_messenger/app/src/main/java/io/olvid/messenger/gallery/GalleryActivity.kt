@@ -551,7 +551,9 @@ class GalleryActivity : LockableActivity() {
             if (fyleAndStatus == null || message == null || fyleAndStatus.fyleMessageJoinWithStatus.messageId != message.id) {
                 NONE
             } else {
-                if (message.wipeStatus == Message.WIPE_STATUS_WIPE_ON_READ || fyleAndStatus.fyleMessageJoinWithStatus.status == FyleMessageJoinWithStatus.STATUS_FAILED) {
+                if (message.wipeStatus == Message.WIPE_STATUS_WIPE_ON_READ
+                    || fyleAndStatus.fyleMessageJoinWithStatus.status == FyleMessageJoinWithStatus.STATUS_FAILED
+                    || fyleAndStatus.fyleMessageJoinWithStatus.status == FyleMessageJoinWithStatus.STATUS_UNTRANSFERRED) {
                     DELETE_ONLY
                 } else if (message.status == Message.STATUS_DRAFT || !fyleAndStatus.fyle.isComplete) {
                     INCOMPLETE_OR_DRAFT

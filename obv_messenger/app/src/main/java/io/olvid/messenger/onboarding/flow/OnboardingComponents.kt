@@ -19,6 +19,7 @@
 
 package io.olvid.messenger.onboarding.flow
 
+import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -184,6 +185,8 @@ fun OnboardingScreen(
                                     colors = ButtonDefaults.buttonColors(
                                         contentColor = colorResource(R.color.alwaysWhite),
                                         containerColor = colorResource(R.color.olvid_gradient_light),
+                                        disabledContentColor = colorResource(R.color.almostWhite),
+                                        disabledContainerColor = colorResource(R.color.mediumGrey)
                                     ),
                                     onClick = action.onClick,
                                     enabled = action.enabled
@@ -210,12 +213,13 @@ fun OnboardingScreen(
                                     shape = RoundedCornerShape(8.dp),
                                     border = BorderStroke(
                                         1.dp,
-                                        colorResource(R.color.olvid_gradient_light)
+                                        if (action.enabled) colorResource(R.color.blueOrWhite) else colorResource(id = R.color.mediumGrey)
                                     ),
                                     onClick = action.onClick,
                                     enabled = action.enabled,
                                     colors = ButtonDefaults.outlinedButtonColors(
                                         contentColor = colorResource(id = R.color.blueOrWhite),
+                                        disabledContentColor = colorResource(id = R.color.mediumGrey)
                                     )
                                 ) {
                                     action.icon?.let {
@@ -502,7 +506,7 @@ fun OnboardingPreview() {
     )
 }
 
-@Preview
+@Preview()
 @Composable
 fun OnboardingPreview2() {
     OnboardingScreen(
@@ -511,6 +515,8 @@ fun OnboardingPreview2() {
             actions = listOf(
                 OnboardingAction(label = AnnotatedString("Button 1"), type = BUTTON_OUTLINED) {},
                 OnboardingAction(label = AnnotatedString("Button 2"), type = BUTTON) {},
+                OnboardingAction(label = AnnotatedString("Button 3"), type = BUTTON_OUTLINED, enabled = false) {},
+                OnboardingAction(label = AnnotatedString("Button 4"), type = BUTTON, enabled = false) {},
             )
         ),
         onBack = {},

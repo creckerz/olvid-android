@@ -23,10 +23,12 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -57,16 +59,15 @@ private fun AudioOutput.stringResource() = when (this) {
 @Composable
 fun AudioOutput.Composable() {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Image(
-            painter = painterResource(
-                id = this@Composable.drawableResource()
-            ), contentDescription = name
+        Icon(
+            painter = painterResource(id = this@Composable.drawableResource()),
+            tint = colorResource(R.color.greyTint),
+            contentDescription = name,
         )
         Spacer(modifier = Modifier.width(16.dp))
         Text(
-            text = stringResource(
-                id = this@Composable.stringResource()
-            )
+            text = stringResource(id = this@Composable.stringResource()),
+            color = colorResource(R.color.alwaysWhite)
         )
     }
 }

@@ -217,6 +217,22 @@ public class WellKnownCoordinator implements Operation.OnFinishCallback, Operati
     }
 
     @Override
+    public List<String> getAltTurnUrls(String server) throws NotCachedException {
+        if (!cacheInitialized) {
+            throw new NotCachedException();
+        }
+        JsonWellKnown jsonWellKnown = wellKnownCache.get(server);
+        if (jsonWellKnown == null) {
+            queueNewWellKnownDownloadOperation(server);
+            throw new NotCachedException();
+        }
+        if (jsonWellKnown.serverConfig == null) {
+            return null;
+        }
+        return jsonWellKnown.serverConfig.altTurnServerUrls;
+    }
+
+    @Override
     public List<JsonOsmStyle> getOsmStyles(String server) throws NotCachedException {
         if (!cacheInitialized) {
             throw new NotCachedException();
@@ -262,6 +278,8 @@ public class WellKnownCoordinator implements Operation.OnFinishCallback, Operati
         public String webSocketUrl;
         @JsonProperty("turn_servers")
         public List<String> turnServerUrls;
+        @JsonProperty("alt_turn_servers")
+        public List<String> altTurnServerUrls;
         // no longer used since we have osmStyles
         //        @JsonProperty("osm_server")
         //        public String osmServerUrl;

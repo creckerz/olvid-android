@@ -486,6 +486,8 @@
 	<string name="notification_action_end_call" state="needs_review" hash="-1678527967">Afslut opkald</string>
 	<string name="notification_channel_webrtc_call_service_name" state="needs_review" hash="-623348883">Indgående opkald</string>
 	<string name="notification_channel_webrtc_call_service_description" state="needs_review" hash="318507261">Notifikation for indgående opkald</string>
+	<string name="notification_channel_transfer_service_name" state="needs_review" hash="-1765472866">Overfør historik</string>
+	<string name="notification_channel_transfer_service_description" state="needs_review" hash="1606671624">Viser fremskridt under overførslen af chatloggen</string>
 	<string name="activity_title_webrtc_incoming_call" state="needs_review" hash="-1672458216">Indgående Olvid-opkald</string>
 	<string name="text_incoming_call_from" state="needs_review" hash="416481913">Indgående opkald fra…</string>
 	<string name="toast_message_already_in_a_call" state="needs_review" hash="702053866">Du er allerede i et opkald. Afslut det, før du starter et nyt.</string>
@@ -1578,10 +1580,7 @@
 	<string name="text_setting_full" state="needs_review" hash="-1858792643">fuld</string>
 	<string name="text_setting_none" state="needs_review" hash="752790864">ingen</string>
 	<string name="activity_title_settings_update" state="needs_review" hash="1186086183">Indstillingsopdatering</string>
-	<string name="xx_gbps" state="needs_review" hash="-503020032">%1$sG/s</string>
-	<string name="xx_mbps" state="needs_review" hash="-1682095296">%1$sM/s</string>
-	<string name="xx_kbps" state="needs_review" hash="1012462976">%1$s k/s</string>
-	<string name="xx_bps" state="needs_review" hash="479585933">%1$s/s</string>
+	<string name="xxx_per_s" state="needs_review" hash="-1456430978">%1$s/s</string>
 	<string name="text_you_captured_sensitive_message" state="needs_review" hash="-929928147">Du har taget et skærmbillede af en følsom besked</string>
 	<string name="text_unknown_member_captured_sensitive_message" state="needs_review" hash="-749114410">En ukendt bruger har taget et skærmbillede af en følsom besked</string>
 	<string name="text_xxx_captured_sensitive_message" state="needs_review" hash="233294474">%1$s tog et skærmbillede af en følsom besked</string>
@@ -2144,6 +2143,18 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Enhed til kontaktperson utilgængelig</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Genopret alle sikre kanaler</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Genoprettelse af alle sikre kanaler vil tvinge Olvid til at oprette nye sikre kommunikationskanaler med alle enheder til dine kontakter. Dette er generelt ikke nyttigt, men kan løse sjældne situationer, hvor nogle af disse kanaler er \"ude af sync\".\n\n**Advarsel:** Hvis du har mange kontakter, kan denne operation tage et par minutter, og du kan miste nogle indgående beskeder, mens den kører.</string>
+	<string name="label_untransferred" state="needs_review" hash="-1851678218">Ikke overført</string>
+	<string name="history_transfer_title" state="needs_review" hash="1191393558">Overfør chatlog</string>
+	<string name="history_transfer_step_none" state="needs_review" hash="1228580785">Ingen igangværende overførsel</string>
+	<string name="history_transfer_step_contacting_other_device" state="needs_review" hash="1719019815">Venter på den anden enhed</string>
+	<string name="history_transfer_step_connecting" state="needs_review" hash="1836039168">Forbinder til en anden enhed</string>
+	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">Forhandling (trin 1 af 3)</string>
+	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Overførsel af beskeder (trin 2 af 3)</string>
+	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">Overførsel af vedhæftede filer (trin 3 af 3)</string>
+	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Overførsel fuldført</string>
+	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Overførsel afbrudt</string>
+	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Overførsel af chatlog (beta)</string>
+	<string name="toast_message_unable_to_start_transfer" state="needs_review" hash="362080814">Kunne ikke starte overførslen. Måske er en anden overførsel allerede i gang?</string>
 	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">Brug \"magisk link\"</string>
 	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">Ugyldigt magisk link</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Opkald afsluttet</string>
@@ -2153,4 +2164,16 @@
 	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">Godkendelse mislykkedes</string>
 	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">Din profil administreres i øjeblikket af din organisation, og der kræves en ny godkendelse. Der ser dog ikke ud til at være nogen understøttede godkendelsesmetoder tilgængelige.\n\nKontakt din administrator for at få flere oplysninger.</string>
 	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">Ingen understøttede autentificeringsmetoder ser ud til at være tilgængelige.</string>
+	<string name="pref_use_alt_turn_servers_title" state="needs_review" hash="-1956132776">Brug alternative TURN-servere</string>
+	<string name="pref_use_alt_turn_servers_summary" state="needs_review" hash="357427162">Aktivér denne indstilling for at bruge TURN-servere med roterende IP-adresser. Hvis du er usikker, skal du lade denne indstilling være deaktiveret 😁</string>
+	<string name="button_label_transfer_through_webrtc" state="needs_review" hash="-1809138918">Overfør via lokalt netværk</string>
+	<string name="button_label_export_zip" state="needs_review" hash="1575043364">Eksportér ZIP</string>
+	<string name="button_label_import_zip" state="needs_review" hash="1299665090">Importer ZIP-fil</string>
+	<string name="dialog_title_transfer_choose_target_device" state="needs_review" hash="218115750">Vælg den enhed, som dataene skal overføres til</string>
+	<string name="transfer_label_no_other_active_device" state="needs_review" hash="-2135899221">Ingen andre aktive enheder</string>
+	<string name="transfer_label_messages" state="needs_review" hash="-1639407912">Beskeder</string>
+	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Gennemstrømning</string>
+	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Resterende</string>
+	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Vedhæftede filer</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Denne funktion er stadig i beta-testfasen, og den nuværende implementering er muligvis ikke kompatibel med den endelige implementering af Olvids historikoverførsel.\n\nFør du bruger denne funktion, skal du sørge for, at dine enheder kører den nyeste version af Olvid.</string>
 </resources>

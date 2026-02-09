@@ -126,7 +126,8 @@ fun AudioListItem(
 
             FyleMessageJoinWithStatus.STATUS_DOWNLOADING,
             FyleMessageJoinWithStatus.STATUS_DOWNLOADABLE,
-            FyleMessageJoinWithStatus.STATUS_FAILED -> {
+            FyleMessageJoinWithStatus.STATUS_FAILED,
+            FyleMessageJoinWithStatus.STATUS_UNTRANSFERRED -> {
                 false
             }
             else -> false

@@ -486,6 +486,8 @@
 	<string name="notification_action_end_call" state="needs_review" hash="-1678527967">Završiti poziv</string>
 	<string name="notification_channel_webrtc_call_service_name" state="needs_review" hash="-623348883">Dolazni pozivi</string>
 	<string name="notification_channel_webrtc_call_service_description" state="needs_review" hash="318507261">Obavijest o dolaznim pozivima</string>
+	<string name="notification_channel_transfer_service_name" state="needs_review" hash="-1765472866">Prijenos povijesti</string>
+	<string name="notification_channel_transfer_service_description" state="needs_review" hash="1606671624">Prikazuje napredak tijekom prijenosa povijesti chata</string>
 	<string name="activity_title_webrtc_incoming_call" state="needs_review" hash="-1672458216">Dolazni Olvid poziv</string>
 	<string name="text_incoming_call_from" state="needs_review" hash="416481913">Dolazni poziv od…</string>
 	<string name="toast_message_already_in_a_call" state="needs_review" hash="702053866">Već ste u pozivu. Završite ga prije nego što započnete novi.</string>
@@ -1579,10 +1581,7 @@
 	<string name="text_setting_full" state="needs_review" hash="-1858792643">potpuno</string>
 	<string name="text_setting_none" state="needs_review" hash="752790864">ništa</string>
 	<string name="activity_title_settings_update" state="needs_review" hash="1186086183">Ažuriranje postavki</string>
-	<string name="xx_gbps" state="needs_review" hash="-503020032">%1$sG/s</string>
-	<string name="xx_mbps" state="needs_review" hash="-1682095296">%1$sMB/s</string>
-	<string name="xx_kbps" state="needs_review" hash="1012462976">%1$s KB/s</string>
-	<string name="xx_bps" state="needs_review" hash="479585933">%1$sB/s</string>
+	<string name="xxx_per_s" state="needs_review" hash="-1456430978">%1$s/s</string>
 	<string name="text_you_captured_sensitive_message" state="needs_review" hash="-929928147">Napravili ste snimku zaslona osjetljive poruke</string>
 	<string name="text_unknown_member_captured_sensitive_message" state="needs_review" hash="-749114410">Nepoznati korisnik snimio je ekran osjetljive poruke</string>
 	<string name="text_xxx_captured_sensitive_message" state="needs_review" hash="233294474">%1$s je snimio ekran osjetljive poruke</string>
@@ -2145,6 +2144,18 @@
 	<string name="webrtc_status_start_call_timeout" state="needs_review" hash="833440939">Uređaj sugovornika je nedostižan</string>
 	<string name="recreate_all_secure_channels" state="needs_review" hash="-377972918">Ponovno kreirajte sve sigurne kanale</string>
 	<string name="recreate_all_secure_channels_explanation" state="needs_review" hash="2103664451">Ponovna uspostava svih sigurnih kanala prisilit će Olvid da uspostavi nove sigurne komunikacijske kanale sa svim uređajima vaših kontakata. Ovo obično nije korisno, ali može riješiti rijetke situacije u kojima su neki od ovih kanala \"izvan sinkronizacije\".\n\n**Upozorenje:** ako imate mnogo kontakata, ova operacija može potrajati nekoliko minuta i možete izgubiti neke dolazne poruke dok se izvršava.</string>
+	<string name="label_untransferred" state="needs_review" hash="-1851678218">Nije preneseno</string>
+	<string name="history_transfer_title" state="needs_review" hash="1191393558">Prijenos povijesti chata</string>
+	<string name="history_transfer_step_none" state="needs_review" hash="1228580785">Nema aktivnih prijenosa</string>
+	<string name="history_transfer_step_contacting_other_device" state="needs_review" hash="1719019815">Čekam drugi uređaj</string>
+	<string name="history_transfer_step_connecting" state="needs_review" hash="1836039168">Povezivanje s drugim uređajem</string>
+	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">U tijeku (korak 1 od 3)</string>
+	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Prenos poruka (korak 2 od 3)</string>
+	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">Prenos priloga (korak 3 od 3)</string>
+	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Prijenos završen</string>
+	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Prijenos prekinut</string>
+	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Prijenos povijesti chata (beta verzija)</string>
+	<string name="toast_message_unable_to_start_transfer" state="needs_review" hash="362080814">Nije moguće započeti prijenos. Možda je već pokrenut neki drugi prijenos?</string>
 	<string name="button_label_use_magic_link" state="needs_review" hash="500618317">Koristite \"magičnu poveznicu\"</string>
 	<string name="toast_message_magic_link_failed" state="needs_review" hash="-2046183433">Neispravna magična poveznica</string>
 	<string name="label_hanged_up" state="needs_review" hash="-1516413384">Poziv prekinut</string>
@@ -2154,4 +2165,16 @@
 	<string name="dialog_title_keycloak_authentication_impossible" state="needs_review" hash="325273853">Autentifikacija nije uspjela</string>
 	<string name="dialog_message_keycloak_authentication_impossible" state="needs_review" hash="390830785">Vaš je profil trenutno pod upravljanjem vaše organizacije i potrebna je ponovna autentifikacija. Međutim, čini se da nije dostupna nijedna podržana metoda autentifikacije.\n\nMolimo, kontaktirajte svog administratora za više informacija.</string>
 	<string name="onboarding_transfer_keycloak_error_message_authentication_impossible" state="needs_review" hash="-1891385979">Čini se da nijedna podržana metoda autentifikacije nije dostupna.</string>
+	<string name="pref_use_alt_turn_servers_title" state="needs_review" hash="-1956132776">Koristite alternativne TURN poslužitelje</string>
+	<string name="pref_use_alt_turn_servers_summary" state="needs_review" hash="357427162">Uključite ovu opciju kako biste koristili TURN poslužitelje s rotirajućim IP adresama. Ako niste sigurni, ostavite ovu opciju isključenom 😁</string>
+	<string name="button_label_transfer_through_webrtc" state="needs_review" hash="-1809138918">Prijenos putem lokalne mreže</string>
+	<string name="button_label_export_zip" state="needs_review" hash="1575043364">Izvezi kao ZIP</string>
+	<string name="button_label_import_zip" state="needs_review" hash="1299665090">Uvezi ZIP datoteku</string>
+	<string name="dialog_title_transfer_choose_target_device" state="needs_review" hash="218115750">Odaberite ciljni uređaj za ovaj prijenos</string>
+	<string name="transfer_label_no_other_active_device" state="needs_review" hash="-2135899221">Nema drugih aktivnih uređaja</string>
+	<string name="transfer_label_messages" state="needs_review" hash="-1639407912">Poruke</string>
+	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Propusnost</string>
+	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Preostalo</string>
+	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Prilozi</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Ova značajka je još uvijek u fazi beta testiranja i trenutna implementacija možda neće biti kompatibilna s konačnom implementacijom prijenosa povijesti Olvid-a.\n\nPrije korištenja ove značajke, provjerite jesu li na vašim uređajima instalirana najnovija izdanja Olvida.</string>
 </resources>

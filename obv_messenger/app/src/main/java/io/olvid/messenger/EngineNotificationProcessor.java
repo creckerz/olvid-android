@@ -657,6 +657,7 @@ public class EngineNotificationProcessor implements EngineNotificationListener {
             if (discussion != null) {
                 return discussion.id;
             } else {
+                Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(dialog.getBytesOwnedIdentity());
                 return db.discussionDao().insert(new Discussion(
                         groupName != null ? groupName : "",
                         dialog.getBytesOwnedIdentity(),
@@ -664,7 +665,7 @@ public class EngineNotificationProcessor implements EngineNotificationListener {
                         dialog.getCategory().getObvGroupV2().groupIdentifier.getBytes(),
                         UUID.randomUUID(),
                         0,
-                        System.currentTimeMillis(),
+                         (timestamp == null) ? 10 : timestamp + 10,
                         null,
                         false,
                         false,
@@ -689,6 +690,7 @@ public class EngineNotificationProcessor implements EngineNotificationListener {
             if (discussion != null) {
                 return discussion.id;
             } else {
+                Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(dialog.getBytesOwnedIdentity());
                 return db.discussionDao().insert(new Discussion(
                         name,
                         dialog.getBytesOwnedIdentity(),
@@ -696,7 +698,7 @@ public class EngineNotificationProcessor implements EngineNotificationListener {
                         dialog.getCategory().getBytesGroupOwnerAndUid(),
                         UUID.randomUUID(),
                         0,
-                        System.currentTimeMillis(),
+                        (timestamp == null) ? 10 : timestamp + 10,
                         null,
                         false,
                         false,
@@ -737,6 +739,7 @@ public class EngineNotificationProcessor implements EngineNotificationListener {
             if (discussion != null) {
                 return discussion.id;
             } else {
+                Long timestamp = db.discussionDao().getMaxLastMessageTimestamp(dialog.getBytesOwnedIdentity());
                 return db.discussionDao().insert(new Discussion(
                         displayName,
                         dialog.getBytesOwnedIdentity(),
@@ -744,7 +747,7 @@ public class EngineNotificationProcessor implements EngineNotificationListener {
                         dialog.getCategory().getBytesContactIdentity(),
                         UUID.randomUUID(),
                         0,
-                        System.currentTimeMillis(),
+                        (timestamp == null) ? 10 : timestamp + 10,
                         null,
                         false,
                         false,

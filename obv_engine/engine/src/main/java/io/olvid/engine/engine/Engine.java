@@ -2884,6 +2884,17 @@ public class Engine implements UserInterfaceDialogListener, EngineSessionFactory
     }
 
     @Override
+    public List<String> getWellKnownAltTurnServers(byte[] bytesOwnedIdentity) {
+        try {
+            Identity ownedIdentity = Identity.of(bytesOwnedIdentity);
+            return fetchManager.getWellKnownAltTurnServers(ownedIdentity);
+        } catch (DecodingException e) {
+            Logger.x(e);
+        }
+        return null;
+    }
+
+    @Override
     public void queryApiKeyStatus(byte[] bytesOwnedIdentity, UUID apiKey) {
         try {
             Identity ownedIdentity = Identity.of(bytesOwnedIdentity);

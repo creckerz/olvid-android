@@ -267,7 +267,7 @@ fun LocationMessage(
     if (jsonMessage.jsonLocation == null) {
         return
     }
-    LaunchedEffect(message.jsonMessage.jsonLocation.type) {
+    LaunchedEffect(message.jsonMessage.jsonLocation?.type) {
         if (message.locationType == Message.LOCATION_TYPE_SHARE || message.locationType == Message.LOCATION_TYPE_SHARE_FINISHED) {
             // update location type if needed (will update locationType )
             if (message.isSharingExpired) { // isSharingExpired only return true if locationType == LOCATION_TYPE_SHARE
@@ -291,8 +291,8 @@ fun LocationMessage(
         }
     }
     // set location
-    val truncatedLatitudeString = jsonMessage.getJsonLocation().truncatedLatitudeString
-    val truncatedLongitudeString = jsonMessage.getJsonLocation().truncatedLongitudeString
+    val truncatedLatitudeString = jsonMessage.getJsonLocation()!!.truncatedLatitudeString
+    val truncatedLongitudeString = jsonMessage.getJsonLocation()!!.truncatedLongitudeString
     val title = stringResource(
         R.string.label_location_message_content_position,
         truncatedLatitudeString,
@@ -300,13 +300,13 @@ fun LocationMessage(
     )
     val altitude = stringResource(
         R.string.label_location_message_content_altitude,
-        jsonMessage.jsonLocation.getTruncatedAltitudeString(
+        jsonMessage.jsonLocation!!.getTruncatedAltitudeString(
             context
         )
     )
     val precision = stringResource(
         R.string.label_location_message_content_precision,
-        jsonMessage.jsonLocation.getTruncatedPrecisionString(
+        jsonMessage.jsonLocation!!.getTruncatedPrecisionString(
             context
         )
     )
@@ -317,7 +317,7 @@ fun LocationMessage(
         altitude = altitude,
         explanation = when (message.locationType) {
             Message.LOCATION_TYPE_SHARE_FINISHED -> stringResource(id = R.string.label_location_sharing_ended)
-            Message.LOCATION_TYPE_SHARE -> jsonMessage.getJsonLocation().getSharingExpiration()?.let {
+            Message.LOCATION_TYPE_SHARE -> jsonMessage.getJsonLocation()!!.getSharingExpiration()?.let {
                 stringResource(
                     R.string.label_sharing_location_until, DateUtils.formatDateTime(
                         context,
@@ -331,10 +331,10 @@ fun LocationMessage(
         },
         lastUpdated = stringResource(
             R.string.label_share_location_latest_update, StringUtils.getLongNiceDateString(
-                context, jsonMessage.getJsonLocation().getTimestamp()
+                context, jsonMessage.getJsonLocation()!!.getTimestamp()
             )
         ).takeIf { message.locationType == Message.LOCATION_TYPE_SHARE || message.locationType == Message.LOCATION_TYPE_SHARE_FINISHED },
-        address = message.jsonMessage.jsonLocation.address,
+        address = message.jsonMessage.jsonLocation!!.address,
         scale = scale,
         onStopSharingLocation = {
             discussionId?.let {

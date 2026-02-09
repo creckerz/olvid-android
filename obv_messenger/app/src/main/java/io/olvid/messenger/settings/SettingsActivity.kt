@@ -408,6 +408,12 @@ class SettingsActivity : LockableActivity(), OnPreferenceStartFragmentCallback {
                 SubscriptionRepository.loadSubscriptionSettingsHeader(activity, preferenceScreen)
             }
 
+            if (betaFeaturesEnabled) {
+                findPreference<Preference>(PREF_HEADER_KEY_TRANSFER)?.apply {
+                    isVisible = true
+                }
+            }
+
             App.runThread {
                 if (AppDatabase.getInstance().actionShortcutConfigurationDao().countAll() > 0) {
                     Handler(Looper.getMainLooper()).post {
@@ -476,6 +482,7 @@ class SettingsActivity : LockableActivity(), OnPreferenceStartFragmentCallback {
     companion object {
         const val SUB_SETTING_PREF_KEY_TO_OPEN_INTENT_EXTRA: String = "sub_setting"
         const val PREF_HEADER_KEY_BACKUP: String = "pref_header_key_backup"
+        const val PREF_HEADER_KEY_TRANSFER: String = "pref_header_key_history_transfer"
         const val PREF_HEADER_KEY_NOTIFICATIONS: String = "pref_header_key_notifications"
 
         //    const val PREF_HEADER_KEY_PRIVACY: String = "pref_header_key_privacy";
@@ -532,6 +539,9 @@ class SettingsActivity : LockableActivity(), OnPreferenceStartFragmentCallback {
 
         const val PREF_KEY_SCALED_TURN_REGION: String = "pref_key_scaled_turn_region"
         const val PREF_KEY_SCALED_TURN_REGION_DEFAULT: String = "global"
+
+        const val PREF_KEY_USE_ALT_TURN_SERVERS: String = "pref_key_use_alt_turn_servers"
+        const val PREF_KEY_USE_ALT_TURN_SERVERS_DEFAULT: Boolean = false
 
         const val PREF_KEY_EXPORT_APP_DATABASES: String = "pref_key_export_app_databases"
         const val PREF_KEY_STORAGE_EXPLORER: String = "pref_key_storage_explorer"
@@ -1662,6 +1672,16 @@ class SettingsActivity : LockableActivity(), OnPreferenceStartFragmentCallback {
                     return null
                 }
                 return value
+            }
+
+        @JvmStatic
+        val useAltTurnServers: Boolean
+            get() {
+                return PreferenceManager.getDefaultSharedPreferences(App.getContext())
+                    .getBoolean(
+                        PREF_KEY_USE_ALT_TURN_SERVERS,
+                        PREF_KEY_USE_ALT_TURN_SERVERS_DEFAULT
+                    )
             }
 
         @JvmStatic

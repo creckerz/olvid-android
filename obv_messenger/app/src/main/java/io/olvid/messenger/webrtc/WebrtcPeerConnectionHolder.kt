@@ -180,7 +180,7 @@ class WebrtcPeerConnectionHolder(
                 DefaultVideoDecoderFactory(eglBase?.eglBaseContext)
 
 
-//            org.webrtc.Logging.enableLogToDebugOutput(org.webrtc.Logging.Severity.LS_WARNING);
+//            org.webrtc.Logging.enableLogToDebugOutput(org.webrtc.Logging.Severity.LS_INFO);
 
             val builder = PeerConnectionFactory.builder()
                 .setOptions(Options())

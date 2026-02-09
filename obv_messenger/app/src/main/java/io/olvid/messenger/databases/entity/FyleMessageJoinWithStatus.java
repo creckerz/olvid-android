@@ -99,6 +99,7 @@ public class FyleMessageJoinWithStatus {
     public static final int STATUS_COMPLETE = 4;
     public static final int STATUS_COPYING = 5;
     public static final int STATUS_FAILED = 6;
+    public static final int STATUS_UNTRANSFERRED = 7;
 
     public static final int RECEPTION_STATUS_NONE = 0;
     public static final int RECEPTION_STATUS_DELIVERED = 1;

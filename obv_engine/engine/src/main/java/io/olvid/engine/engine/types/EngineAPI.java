@@ -265,6 +265,7 @@ public interface EngineAPI {
 
     void getTurnCredentials(byte[] bytesOwnedIdentity, UUID callUuid, String callerUsername, String recipientUsername);
     List<String> getWellKnownTurnServers(byte[] bytesOwnedIdentity);
+    List<String> getWellKnownAltTurnServers(byte[] bytesOwnedIdentity);
     void queryApiKeyStatus(byte[] bytesOwnedIdentity, UUID apiKey);
     void queryApiKeyStatus(String server, UUID apiKey);
     void queryFreeTrial(byte[] bytesOwnedIdentity);

@@ -60,6 +60,12 @@ interface PollVoteDao {
 
     @Query(
         "SELECT * FROM " + PollVote.TABLE_NAME +
+                " WHERE " + PollVote.MESSAGE_ID + " = :messageId "
+    )
+    fun getAllForMessage(messageId: Long): List<PollVote>
+
+    @Query(
+        "SELECT * FROM " + PollVote.TABLE_NAME +
                 " WHERE " + PollVote.MESSAGE_ID + " = :messageId " +
                 " AND " + PollVote.VOTER + " = :voter "
     )

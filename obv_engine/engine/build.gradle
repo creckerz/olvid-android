@@ -1,4 +1,18 @@
-apply plugin: 'java'
+apply plugin: 'com.android.library'
+
+android {
+    compileSdk = 36
+
+    defaultConfig {
+        minSdkVersion 23
+    }
+    namespace 'io.olvid.engine'
+
+    compileOptions {
+        sourceCompatibility 17
+        targetCompatibility 17
+    }
+}
 
 repositories {
     mavenCentral()
@@ -7,7 +21,7 @@ repositories {
 dependencies {
     // do not update further: jackson >2.13 does not work on older Android APIs
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4'
-    implementation files('libs/sqlite-jdbc-3.50.3.0.jar')
+    implementation 'io.olvid.messenger:olvid-sqlite-jdbc-android:3.50.3.0'
 
     implementation 'org.slf4j:slf4j-api:2.0.17'
     implementation 'org.slf4j:slf4j-simple:2.0.17'

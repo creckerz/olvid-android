@@ -496,6 +496,8 @@
     <string name="notification_action_end_call">End call</string>
     <string name="notification_channel_webrtc_call_service_name">Incoming calls</string>
     <string name="notification_channel_webrtc_call_service_description">Notification for incoming calls</string>
+    <string name="notification_channel_transfer_service_name">History transfer</string>
+    <string name="notification_channel_transfer_service_description">Displays progress during chat history transfer</string>
     <string name="activity_title_webrtc_incoming_call">Incoming Olvid call</string>
     <string name="text_incoming_call_from">Incoming call from…</string>
     <string name="toast_message_already_in_a_call">You are already in a call. End it before starting a new one.</string>
@@ -1596,10 +1598,7 @@
     <string name="text_setting_osm" translatable="false">Open Street Maps</string>
     <string name="text_setting_google_maps" translatable="false">Google Maps</string>
     <string name="activity_title_settings_update">Settings update</string>
-    <string name="xx_gbps">%1$sG/s</string>
-    <string name="xx_mbps">%1$sM/s</string>
-    <string name="xx_kbps">%1$sk/s</string>
-    <string name="xx_bps">%1$sB/s</string>
+    <string name="xxx_per_s">%1$s/s</string>
     <string name="text_you_captured_sensitive_message">You took a screenshot of a sensitive message</string>
     <string name="text_unknown_member_captured_sensitive_message">An unknown user took a screenshot of a sensitive message</string>
     <string name="text_xxx_captured_sensitive_message">%1$s took a screenshot of a sensitive message</string>
@@ -2181,6 +2180,18 @@
     <string name="webrtc_status_start_call_timeout">Peer device unreachable</string>
     <string name="recreate_all_secure_channels">Recreate all secure channels</string>
     <string name="recreate_all_secure_channels_explanation">Recreating all secure channels will force Olvid to create new secure communication channels with all the devices of your contacts. This is generally not useful, but can solve rare situations where some of these channels are \"out of sync\".\n\n**Warning:** if you have many contacts, this operation can take a few minutes and you could lose some incoming messages while it is running.</string>
+    <string name="label_untransferred">Not transferred</string>
+    <string name="history_transfer_title">Chat history transfer</string>
+    <string name="history_transfer_step_none">No ongoing transfer</string>
+    <string name="history_transfer_step_contacting_other_device">Waiting for other device</string>
+    <string name="history_transfer_step_connecting">Connecting to other device</string>
+    <string name="history_transfer_step_negotiating">Negotiating (step 1 of 3)</string>
+    <string name="history_transfer_step_transferring_messages">Transferring messages (step 2 of 3)</string>
+    <string name="history_transfer_step_transferring_files">Transferring attachments (step 3 of 3)</string>
+    <string name="history_transfer_step_finished">Transfer finished</string>
+    <string name="history_transfer_step_failed">Transfer interrupted</string>
+    <string name="pref_category_history_transfer_title">Chat history transfer (beta)</string>
+    <string name="toast_message_unable_to_start_transfer">Unable to initiate a transfer. Maybe another transfer is already running?</string>
     <string name="button_label_use_magic_link">Use "magic link"</string>
     <string name="toast_message_magic_link_failed">Invalid magic link</string>
     <string name="label_hanged_up">Call hanged up</string>
@@ -2190,4 +2201,16 @@
     <string name="dialog_title_keycloak_authentication_impossible">Authentication impossible</string>
     <string name="dialog_message_keycloak_authentication_impossible">Your profile is currently managed by your organisation and re-authentication is required. However, no supported authentication method seems to be available.\n\nPlease contact your administrator for more details.</string>
     <string name="onboarding_transfer_keycloak_error_message_authentication_impossible">No supported authentication method seems to be available.</string>
+    <string name="pref_use_alt_turn_servers_title">Use alternate TURN servers</string>
+    <string name="pref_use_alt_turn_servers_summary">Activate this option to use TURN servers with rotating IP addresses. If unsure, keep this option off 😁</string>
+    <string name="button_label_transfer_through_webrtc">Transfer through local network</string>
+    <string name="button_label_export_zip">Export ZIP</string>
+    <string name="button_label_import_zip">Import ZIP</string>
+    <string name="dialog_title_transfer_choose_target_device">Choose the target device for this transfer</string>
+    <string name="transfer_label_no_other_active_device">No other active device</string>
+    <string name="transfer_label_messages">Messages</string>
+    <string name="transfer_label_throughput">Throughput</string>
+    <string name="transfer_label_remaining">Remaining</string>
+    <string name="transfer_label_attachments">Attachments</string>
+    <string name="transfer_disclaimer_beta">This feature is still in beta testing phase and the current implementation may not be compatible with the final implementation of Olvid\'s history transfer.\n\nBefore using this feature, please make sure your devices are running the latest version of Olvid.</string>
 </resources>

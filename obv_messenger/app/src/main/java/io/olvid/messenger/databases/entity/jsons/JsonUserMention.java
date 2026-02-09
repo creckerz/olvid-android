@@ -19,6 +19,7 @@
 
 package io.olvid.messenger.databases.entity.jsons;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Arrays;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JsonUserMention {
@@ -91,5 +93,18 @@ public class JsonUserMention {
         }
         JsonUserMention other = (JsonUserMention) obj;
         return (rangeStart == other.rangeStart) && (rangeEnd == other.rangeEnd) && Arrays.equals(userIdentifier, other.userIdentifier);
+    }
+
+    @JsonIgnore
+    public static boolean isIdentityMentioned(@Nullable List<JsonUserMention> mentions, @NonNull byte[] bytesIdentity) {
+        if (mentions == null) {
+            return false;
+        }
+        for (JsonUserMention mention : mentions) {
+            if (Arrays.equals(bytesIdentity, mention.getUserIdentifier())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
