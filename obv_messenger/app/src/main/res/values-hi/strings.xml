@@ -2151,6 +2151,9 @@
 	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">समझौता किया जा रहा है (चरण 1/3)</string>
 	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">संदेशों का स्थानांतरण (चरण 2/3)</string>
 	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">अटैचमेंट स्थानांतरित करना (चरण 3 में से 3)</string>
+	<string name="history_transfer_step_negotiating_short" state="needs_review" hash="2025825777">समझौता करना</string>
+	<string name="history_transfer_step_transferring_messages_short" state="needs_review" hash="-1105685790">संदेशों का स्थानांतरण</string>
+	<string name="history_transfer_step_transferring_files_short" state="needs_review" hash="-390125750">अटैचमेंट स्थानांतरित करना</string>
 	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">स्थानांतरण पूरा हुआ</string>
 	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">स्थानांतरण बाधित</string>
 	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">चैट इतिहास स्थानांतरण (बीटा)</string>
@@ -2175,5 +2178,8 @@
 	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">थ्रूपुट</string>
 	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">शेष</string>
 	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">अटैचमेंट</string>
-	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">यह सुविधा अभी भी बीटा परीक्षण चरण में है और वर्तमान कार्यान्वयन Olvid के इतिहास स्थानांतरण के अंतिम कार्यान्वयन के साथ संगत नहीं हो सकता है।\n\nइस सुविधा का उपयोग करने से पहले, कृपया सुनिश्चित करें कि आपके उपकरणों पर Olvid का नवीनतम संस्करण स्थापित है।</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-1992015383">यह सुविधा अभी भी बीटा परीक्षण चरण में है और वर्तमान कार्यान्वयन Olvid के इतिहास स्थानांतरण के अंतिम कार्यान्वयन के साथ संगत नहीं हो सकता है।\n\nइस सुविधा का उपयोग करने से पहले, कृपया सुनिश्चित करें कि आपके उपकरणों पर Olvid का नवीनतम संस्करण स्थापित है।</string>
+	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">क्या चल रहे स्थानांतरण को रद्द करें?</string>
+	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">वर्तमान में इतिहास स्थानांतरण चल रहा है। क्या आप इसे रद्द करना चाहते हैं?</string>
+	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">स्थानांतरण रद्द करें</string>
 </resources>

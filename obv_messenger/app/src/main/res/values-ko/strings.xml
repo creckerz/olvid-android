@@ -2152,6 +2152,9 @@
 	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">협상 중 (3단계 중 1단계)</string>
 	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">메시지 전송 중 (3단계 중 2단계)</string>
 	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">첨부 파일 전송 중 (3단계 중 3단계)</string>
+	<string name="history_transfer_step_negotiating_short" state="needs_review" hash="2025825777">협상 중</string>
+	<string name="history_transfer_step_transferring_messages_short" state="needs_review" hash="-1105685790">메시지 전송 중</string>
+	<string name="history_transfer_step_transferring_files_short" state="needs_review" hash="-390125750">첨부 파일 전송 중</string>
 	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">전송 완료</string>
 	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">전송이 중단되었습니다.</string>
 	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">채팅 기록 전송 (베타)</string>
@@ -2176,5 +2179,8 @@
 	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">처리량</string>
 	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">남은</string>
 	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">첨부 파일</string>
-	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">이 기능은 아직 베타 테스트 단계에 있으며 현재 구현 방식이 Olvid의 최종 기록 전송 구현과 호환되지 않을 수 있습니다.\n\n이 기능을 사용하기 전에 장치에 최신 버전의 Olvid가 설치되어 있는지 확인하십시오.</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-1992015383">이 기능은 아직 베타 테스트 단계에 있으며 현재 구현 방식이 Olvid의 최종 기록 전송 구현과 호환되지 않을 수 있습니다.\n\n이 기능을 사용하기 전에 장치에 최신 버전의 Olvid가 설치되어 있는지 확인하십시오.</string>
+	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">진행 중인 전송을 중단하시겠습니까?</string>
+	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">대화 기록 전송이 현재 진행 중입니다. 중단하시겠습니까?</string>
+	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">전송 취소</string>
 </resources>

@@ -2151,6 +2151,9 @@
 	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">Negociación (paso 1 de 3)</string>
 	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Transferencia de mensajes (paso 2 de 3)</string>
 	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">Transferencia de archivos adjuntos (paso 3 de 3)</string>
+	<string name="history_transfer_step_negotiating_short" state="needs_review" hash="2025825777">Negociación</string>
+	<string name="history_transfer_step_transferring_messages_short" state="needs_review" hash="-1105685790">Transferencia de mensajes</string>
+	<string name="history_transfer_step_transferring_files_short" state="needs_review" hash="-390125750">Transferencia de archivos adjuntos</string>
 	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Transferencia completada</string>
 	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Transferencia interrumpida</string>
 	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Transferencia del historial de chat (beta)</string>
@@ -2175,5 +2178,8 @@
 	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Rendimiento</string>
 	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Restante</string>
 	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Archivos adjuntos</string>
-	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Esta función aún se encuentra en fase de pruebas beta y la implementación actual puede no ser compatible con la implementación final de la transferencia de historial de Olvid.\n\nAntes de utilizar esta función, asegúrese de que sus dispositivos tengan instalada la última versión de Olvid.</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-1992015383">Esta función aún se encuentra en fase de pruebas beta y la implementación actual podría no ser compatible con la implementación final de la transferencia de historial de Olvid.\n\nAntes de utilizar esta función, asegúrese de que sus dispositivos tengan instalada la última versión de Olvid.</string>
+	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">¿Cancelar la transferencia en curso?</string>
+	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">Actualmente se está realizando una transferencia del historial. ¿Quiere interrumpirla?</string>
+	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">Cancelar transferencia</string>
 </resources>

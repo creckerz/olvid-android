@@ -2152,6 +2152,9 @@
 	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">במשא ומתן (שלב 1 מתוך 3)</string>
 	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">העברת הודעות (שלב 2 מתוך 3)</string>
 	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">העברת קבצים מצורפים (שלב 3 מתוך 3)</string>
+	<string name="history_transfer_step_negotiating_short" state="needs_review" hash="2025825777">מנהל משא ומתן</string>
+	<string name="history_transfer_step_transferring_messages_short" state="needs_review" hash="-1105685790">העברת הודעות</string>
+	<string name="history_transfer_step_transferring_files_short" state="needs_review" hash="-390125750">העברת קבצים מצורפים</string>
 	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">ההעברה הסתיימה</string>
 	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">העברה הופרעה</string>
 	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">העברת היסטוריית צ\'אט (גרסת בטא)</string>
@@ -2176,5 +2179,8 @@
 	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">תפוקה</string>
 	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">נותר</string>
 	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">קבצים מצורפים</string>
-	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">תכונה זו עדיין נמצאת בשלב בדיקות בטא, והיישום הנוכחי עשוי להיות לא תואם ליישום הסופי של העברת היסטוריית השיחות של Olvid.\n\nלפני השימוש בתכונה זו, אנא ודא שהמכשירים שלך מריצים את הגרסה העדכנית ביותר של Olvid.</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-1992015383">תכונה זו עדיין נמצאת בשלב בדיקות בטא, והיישום הנוכחי עשוי להיות לא תואם ליישום הסופי של העברת היסטוריית השיחות של Olvid.\n\nלפני השימוש בתכונה זו, אנא ודא שהמכשירים שלך מריצים את הגרסה העדכנית ביותר של Olvid.</string>
+	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">להפסיק את ההעברה הנוכחית?</string>
+	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">העברת היסטוריה נמצאת כעת בעיצומה. האם תרצה לבטל אותה?</string>
+	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">בטל את ההעברה</string>
 </resources>

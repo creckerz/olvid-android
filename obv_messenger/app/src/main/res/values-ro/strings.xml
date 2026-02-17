@@ -2152,6 +2152,9 @@
 	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">Negociere (pasul 1 din 3)</string>
 	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Transferarea mesajelor (pasul 2 din 3)</string>
 	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">Transferarea atașamentelor (pasul 3 din 3)</string>
+	<string name="history_transfer_step_negotiating_short" state="needs_review" hash="2025825777">Negociere</string>
+	<string name="history_transfer_step_transferring_messages_short" state="needs_review" hash="-1105685790">Transferarea mesajelor</string>
+	<string name="history_transfer_step_transferring_files_short" state="needs_review" hash="-390125750">Se transferă atașamentele</string>
 	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Transfer efectuat</string>
 	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Transfer întrerupt</string>
 	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Transferă istoricul conversațiilor (versiune beta)</string>
@@ -2176,5 +2179,8 @@
 	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Debit</string>
 	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Rămas</string>
 	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Atașamente</string>
-	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Această funcție este încă în faza de testare beta, iar implementarea actuală s-ar putea să nu fie compatibilă cu implementarea finală a transferului de istoric Olvid.\n\nÎnainte de a utiliza această funcție, asigurați-vă că dispozitivele dvs. rulează cea mai recentă versiune a Olvid.</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-1992015383">Această funcție este încă în faza de testare beta, iar implementarea actuală s-ar putea să nu fie compatibilă cu implementarea finală a transferului de istoric Olvid.\n\nÎnainte de a utiliza această funcție, asigurați-vă că dispozitivele dvs. rulează cea mai recentă versiune a Olvid.</string>
+	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">Anulați transferul în curs?</string>
+	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">O transferare a istoricului este în curs. Doriți să o întrerupeți?</string>
+	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">Anulează transferul</string>
 </resources>

@@ -2151,6 +2151,9 @@
 	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">Forhandling (trin 1 af 3)</string>
 	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Overførsel af beskeder (trin 2 af 3)</string>
 	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">Overførsel af vedhæftede filer (trin 3 af 3)</string>
+	<string name="history_transfer_step_negotiating_short" state="needs_review" hash="2025825777">Forhandling</string>
+	<string name="history_transfer_step_transferring_messages_short" state="needs_review" hash="-1105685790">Overførsel af beskeder</string>
+	<string name="history_transfer_step_transferring_files_short" state="needs_review" hash="-390125750">Overførsel af vedhæftede filer</string>
 	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Overførsel fuldført</string>
 	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Overførsel afbrudt</string>
 	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Overførsel af chatlog (beta)</string>
@@ -2175,5 +2178,8 @@
 	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Gennemstrømning</string>
 	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Resterende</string>
 	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Vedhæftede filer</string>
-	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Denne funktion er stadig i beta-testfasen, og den nuværende implementering er muligvis ikke kompatibel med den endelige implementering af Olvids historikoverførsel.\n\nFør du bruger denne funktion, skal du sørge for, at dine enheder kører den nyeste version af Olvid.</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-1992015383">Denne funktion er stadig i beta-testfasen, og den nuværende implementering er muligvis ikke kompatibel med den endelige implementering af Olvids historikoverførsel.\n\nInden du bruger denne funktion, skal du sørge for, at dine enheder kører den nyeste version af Olvid.</string>
+	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">Afbryd igangværende overførsel?</string>
+	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">En overførsel af chatloggen er i gang. Vil du afbryde den?</string>
+	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">Afbryd overførsel</string>
 </resources>

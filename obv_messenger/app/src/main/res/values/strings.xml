@@ -2188,6 +2188,9 @@
     <string name="history_transfer_step_negotiating">Negotiating (step 1 of 3)</string>
     <string name="history_transfer_step_transferring_messages">Transferring messages (step 2 of 3)</string>
     <string name="history_transfer_step_transferring_files">Transferring attachments (step 3 of 3)</string>
+    <string name="history_transfer_step_negotiating_short">Negotiating</string>
+    <string name="history_transfer_step_transferring_messages_short">Transferring messages</string>
+    <string name="history_transfer_step_transferring_files_short">Transferring attachments</string>
     <string name="history_transfer_step_finished">Transfer finished</string>
     <string name="history_transfer_step_failed">Transfer interrupted</string>
     <string name="pref_category_history_transfer_title">Chat history transfer (beta)</string>
@@ -2213,4 +2216,7 @@
     <string name="transfer_label_remaining">Remaining</string>
     <string name="transfer_label_attachments">Attachments</string>
     <string name="transfer_disclaimer_beta">This feature is still in beta testing phase and the current implementation may not be compatible with the final implementation of Olvid\'s history transfer.\n\nBefore using this feature, please make sure your devices are running the latest version of Olvid.</string>
+    <string name="history_transfer_abort_dialog_title">Abort ongoing transfer?</string>
+    <string name="history_transfer_abort_dialog_message">A history transfer is currently in progress. Do you want to abort it?</string>
+    <string name="button_label_abort_transfer">Abort transfer</string>
 </resources>

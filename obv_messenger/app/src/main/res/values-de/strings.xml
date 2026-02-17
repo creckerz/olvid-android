@@ -2148,6 +2148,9 @@
 	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">Verhandlung (Schritt 1 von 3)</string>
 	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Übertragen von Nachrichten (Schritt 2 von 3)</string>
 	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">Übertragen von Anhängen (Schritt 3 von 3)</string>
+	<string name="history_transfer_step_negotiating_short" state="needs_review" hash="2025825777">Verhandlung</string>
+	<string name="history_transfer_step_transferring_messages_short" state="needs_review" hash="-1105685790">Nachrichten werden übertragen</string>
+	<string name="history_transfer_step_transferring_files_short" state="needs_review" hash="-390125750">Übertragen von Anhängen</string>
 	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Übertragung abgeschlossen</string>
 	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Übertragung unterbrochen</string>
 	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Chatverlauf übertragen (Beta)</string>
@@ -2172,5 +2175,8 @@
 	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Durchsatz</string>
 	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Verbleibend</string>
 	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Anhänge</string>
-	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Diese Funktion befindet sich noch in der Beta-Testphase, und die aktuelle Implementierung ist möglicherweise nicht mit der endgültigen Implementierung der Olvid-Historienübertragung kompatibel.\n\nBevor Sie diese Funktion verwenden, stellen Sie sicher, dass Ihre Geräte die neueste Version von Olvid ausführen.</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-1992015383">Diese Funktion befindet sich noch in der Beta-Testphase, und die aktuelle Implementierung ist möglicherweise nicht mit der endgültigen Implementierung der Olvid-Historienübertragung kompatibel.\n\nBevor Sie diese Funktion verwenden, stellen Sie sicher, dass auf Ihren Geräten die neueste Version von Olvid installiert ist.</string>
+	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">Laufende Übertragung abbrechen?</string>
+	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">Eine Chatverlaufsübertragung ist gerade im Gange. Möchten Sie diese abbrechen?</string>
+	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">Übertragung abbrechen</string>
 </resources>

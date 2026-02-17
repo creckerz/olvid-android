@@ -2151,6 +2151,9 @@
 	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">التفاوض (الخطوة 1 من 3)</string>
 	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">نقل الرسائل (الخطوة 2 من 3)</string>
 	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">نقل المرفقات (الخطوة 3 من 3)</string>
+	<string name="history_transfer_step_negotiating_short" state="needs_review" hash="2025825777">التفاوض</string>
+	<string name="history_transfer_step_transferring_messages_short" state="needs_review" hash="-1105685790">نقل الرسائل</string>
+	<string name="history_transfer_step_transferring_files_short" state="needs_review" hash="-390125750">نقل المرفقات</string>
 	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">اكتمل النقل</string>
 	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">تم مقاطعة النقل</string>
 	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">نقل سجل الدردشة (إصدار تجريبي)</string>
@@ -2175,5 +2178,8 @@
 	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">معدل النقل</string>
 	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">المتبقي</string>
 	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">مرفقات</string>
-	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">لا تزال هذه الميزة في مرحلة الاختبار التجريبي، وقد لا يكون التنفيذ الحالي متوافقًا مع التنفيذ النهائي لنقل سجل Olvid.\n\nقبل استخدام هذه الميزة، يرجى التأكد من أن أجهزتك تعمل بأحدث إصدار من Olvid.</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-1992015383">لا تزال هذه الميزة في مرحلة الاختبار التجريبي، وقد لا يكون التنفيذ الحالي متوافقًا مع التنفيذ النهائي لنقل سجل Olvid.\n\nقبل استخدام هذه الميزة، يرجى التأكد من أن أجهزتك تعمل بأحدث إصدار من Olvid.</string>
+	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">هل تريد إيقاف عملية النقل الحالية؟</string>
+	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">يتم نقل سجل الدردشة حاليًا. هل تريد إيقافه؟</string>
+	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">إلغاء النقل</string>
 </resources>

@@ -2153,6 +2153,9 @@
 	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">در حال مذاکره (مرحله 1 از 3)</string>
 	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">انتقال پیام‌ها (مرحله ۲ از ۳)</string>
 	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">انتقال فایل‌های پیوست (مرحله 3 از 3)</string>
+	<string name="history_transfer_step_negotiating_short" state="needs_review" hash="2025825777">در حال مذاکره</string>
+	<string name="history_transfer_step_transferring_messages_short" state="needs_review" hash="-1105685790">انتقال پیام‌ها</string>
+	<string name="history_transfer_step_transferring_files_short" state="needs_review" hash="-390125750">انتقال فایل‌های پیوست‌شده</string>
 	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">انتقال با موفقیت انجام شد</string>
 	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">انتقال متوقف شد</string>
 	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">انتقال تاریخچه چت (نسخه آزمایشی)</string>
@@ -2177,5 +2180,8 @@
 	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">حجم داده‌ی ارسالی</string>
 	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">باقی‌مانده</string>
 	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">پیوست‌ها</string>
-	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">این ویژگی هنوز در مرحله آزمایش بتا قرار دارد و پیاده‌سازی فعلی ممکن است با پیاده‌سازی نهایی انتقال تاریخچه Olvid سازگار نباشد.\n\nقبل از استفاده از این ویژگی، لطفاً اطمینان حاصل کنید که دستگاه‌های شما آخرین نسخه Olvid را اجرا می‌کنند.</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-1992015383">این ویژگی هنوز در مرحله آزمایش بتا قرار دارد و پیاده‌سازی فعلی ممکن است با پیاده‌سازی نهایی انتقال تاریخچه Olvid سازگار نباشد.\n\nقبل از استفاده از این ویژگی، لطفاً اطمینان حاصل کنید که دستگاه‌های شما آخرین نسخه Olvid را اجرا می‌کنند.</string>
+	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">آیا انتقال در حال انجام را متوقف کنیم؟</string>
+	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">انتقال تاریخچه در حال انجام است. آیا می‌خواهید آن را متوقف کنید؟</string>
+	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">انتقال را متوقف کنید</string>
 </resources>

@@ -2181,6 +2181,9 @@ Jeśli jest to klucz kopii zapasowej starszej generacji, możesz spróbować prz
 	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">Trwa negocjacja (krok 1 z 3)</string>
 	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Przenoszenie wiadomości (krok 2 z 3)</string>
 	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">Przesyłanie załączników (krok 3 z 3)</string>
+	<string name="history_transfer_step_negotiating_short" state="needs_review" hash="2025825777">Negocjacje</string>
+	<string name="history_transfer_step_transferring_messages_short" state="needs_review" hash="-1105685790">Przesyłanie wiadomości</string>
+	<string name="history_transfer_step_transferring_files_short" state="needs_review" hash="-390125750">Przesyłanie załączników</string>
 	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Transfer zakończony</string>
 	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Transfer przerwany.</string>
 	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Przenoszenie historii czatu (wersja beta)</string>
@@ -2205,5 +2208,8 @@ Jeśli jest to klucz kopii zapasowej starszej generacji, możesz spróbować prz
 	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Przepustowość</string>
 	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Pozostałe</string>
 	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Załączniki</string>
-	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Ta funkcja jest nadal w fazie testów beta, a obecna implementacja może być niekompatybilna z ostateczną implementacją funkcji przesyłania historii Olvid.\n\nPrzed użyciem tej funkcji upewnij się, że na Twoich urządzeniach zainstalowano najnowszą wersję Olvid.</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-1992015383">Ta funkcja jest nadal w fazie testów beta, a obecna implementacja może być niekompatybilna z ostateczną implementacją funkcji przesyłania historii Olvid.\n\nPrzed użyciem tej funkcji upewnij się, że na Twoich urządzeniach zainstalowano najnowszą wersję Olvid.</string>
+	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">Przerwać aktualne przesyłanie?</string>
+	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">Aktualnie trwa przesyłanie historii wiadomości. Czy chcesz to przerwać?</string>
+	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">Anuluj transfer</string>
 </resources>

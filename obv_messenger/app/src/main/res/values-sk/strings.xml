@@ -2151,6 +2151,9 @@
 	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">Prebieha vyjednávanie (krok 1 z 3)</string>
 	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Prenášanie správ (krok 2 z 3)</string>
 	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">Prenášam prílohy (krok 3 z 3)</string>
+	<string name="history_transfer_step_negotiating_short" state="needs_review" hash="2025825777">Vyjednávanie</string>
+	<string name="history_transfer_step_transferring_messages_short" state="needs_review" hash="-1105685790">Prenos správ</string>
+	<string name="history_transfer_step_transferring_files_short" state="needs_review" hash="-390125750">Prenášam prílohy</string>
 	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Prenos dokončený</string>
 	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Prenos prerušený</string>
 	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Prenos histórie chatu (beta)</string>
@@ -2175,5 +2178,8 @@
 	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Priepustnosť</string>
 	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Zostávajúce</string>
 	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Prílohy</string>
-	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Táto funkcia je stále v testovacej fáze a súčasná implementácia nemusí byť kompatibilná s finálnou implementáciou prenosu histórie Olvid.\n\nPred použitím tejto funkcie sa uistite, že vaše zariadenia majú nainštalovanú najnovšiu verziu Olvid.</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-1992015383">Táto funkcia je stále v testovacej fáze beta a súčasná implementácia nemusí byť kompatibilná s finálnou implementáciou prenosu histórie Olvid.\n\nPred použitím tejto funkcie sa uistite, že vaše zariadenia majú nainštalovanú najnovšiu verziu Olvid.</string>
+	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">Zrušiť prebiehajúci prenos?</string>
+	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">Prebieha prenos histórie. Chcete ho prerušiť?</string>
+	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">Zrušiť prenos</string>
 </resources>

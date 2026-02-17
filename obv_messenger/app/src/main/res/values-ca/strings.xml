@@ -2151,6 +2151,9 @@
 	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">Negociant (pas 1 de 3)</string>
 	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Transferint missatges (pas 2 de 3)</string>
 	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">S\'estan transferint els arxius adjunts (pas 3 de 3)</string>
+	<string name="history_transfer_step_negotiating_short" state="needs_review" hash="2025825777">Negociant</string>
+	<string name="history_transfer_step_transferring_messages_short" state="needs_review" hash="-1105685790">Transferint missatges</string>
+	<string name="history_transfer_step_transferring_files_short" state="needs_review" hash="-390125750">S\'estan transferint els arxius adjunts</string>
 	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Transferència completada</string>
 	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Transferència interrompuda</string>
 	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Transferència de l\'historial de xat (versió beta)</string>
@@ -2175,5 +2178,8 @@
 	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Rendiment</string>
 	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Restant</string>
 	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Adjunts</string>
-	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Aquesta funció encara està en fase de proves beta i és possible que la implementació actual no sigui compatible amb la implementació final de la transferència d\'historial d\'Olvid.\n\nAbans d\'utilitzar aquesta funció, assegureu-vos que els vostres dispositius tinguin instal·lada la darrera versió d\'Olvid.</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-1992015383">Aquesta funció encara està en fase de proves beta i és possible que la implementació actual no sigui compatible amb la implementació final de la transferència d\'historial d\'Olvid.\n\nAbans d\'utilitzar aquesta funció, assegureu-vos que els vostres dispositius tinguin instal·lada la darrera versió d\'Olvid.</string>
+	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">Vols cancel·lar la transferència en curs?</string>
+	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">Actualment s\'està transferint l\'historial. Vols cancel·lar-ho?</string>
+	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">Interrompre la transferència</string>
 </resources>

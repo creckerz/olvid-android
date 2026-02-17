@@ -2151,6 +2151,9 @@
 	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">Согласование (шаг 1 из 3)</string>
 	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Передача сообщений (шаг 2 из 3)</string>
 	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">Передача вложений (шаг 3 из 3)</string>
+	<string name="history_transfer_step_negotiating_short" state="needs_review" hash="2025825777">Ведутся переговоры</string>
+	<string name="history_transfer_step_transferring_messages_short" state="needs_review" hash="-1105685790">Передача сообщений</string>
+	<string name="history_transfer_step_transferring_files_short" state="needs_review" hash="-390125750">Передача вложений</string>
 	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Передача завершена</string>
 	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Передача прервана</string>
 	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Перенос истории чатов (бета-версия)</string>
@@ -2175,5 +2178,8 @@
 	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Пропускная способность</string>
 	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Остаток</string>
 	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Вложения</string>
-	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Эта функция все еще находится на стадии бета-тестирования, и текущая реализация может быть несовместима с окончательной реализацией функции переноса истории Olvid.\n\nПрежде чем использовать эту функцию, убедитесь, что на ваших устройствах установлена последняя версия Olvid.</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-1992015383">Эта функция все еще находится на стадии бета-тестирования, и текущая реализация может быть несовместима с окончательной реализацией функции переноса истории Olvid.\n\nПрежде чем использовать эту функцию, убедитесь, что на ваших устройствах установлена последняя версия Olvid.</string>
+	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">Отменить текущую передачу?</string>
+	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">В данный момент выполняется перенос истории. Хотите отменить его?</string>
+	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">Отменить передачу</string>
 </resources>

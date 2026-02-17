@@ -1,3 +1,7 @@
+# Build 292 (4.2.3)
+
+- [beta] Improvements and bug fixes for history transfer
+
 # Build 291 (4.2.2)
 2026-02-09
 

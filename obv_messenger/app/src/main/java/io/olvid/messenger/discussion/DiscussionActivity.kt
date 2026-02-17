@@ -452,7 +452,8 @@ class DiscussionActivity : LockableActivity() {
                             .clickable(
                                 interactionSource = null,
                                 indication = null,
-                            ) { discussionViewModel.fullScreenPhotoUrl = null },
+                            ) { discussionViewModel.fullScreenPhotoUrl = null }
+                            .safeDrawingPadding(),
                         contentAlignment = Alignment.Center
                     ) {
                         AsyncImage(

@@ -2151,6 +2151,9 @@
 	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">Tárgyalás (1. lépés, összesen 3-ból)</string>
 	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Üzenetek átvitele (2. lépés, összesen 3-ból)</string>
 	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">Mellékletek átvitele (3. lépés, összesen 3-ból)</string>
+	<string name="history_transfer_step_negotiating_short" state="needs_review" hash="2025825777">Tárgyalás</string>
+	<string name="history_transfer_step_transferring_messages_short" state="needs_review" hash="-1105685790">Üzenetek átvitele</string>
+	<string name="history_transfer_step_transferring_files_short" state="needs_review" hash="-390125750">Mellékletek átvitele</string>
 	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Az átvitel befejeződött</string>
 	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Az átvitel megszakadt</string>
 	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Chat-előzmények átvitele (béta)</string>
@@ -2175,5 +2178,8 @@
 	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Átvitel</string>
 	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Megmaradt</string>
 	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Mellékletek</string>
-	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Ez a funkció még a béta tesztelési fázisban van, és a jelenlegi implementáció nem feltétlenül kompatibilis az Olvid történetátvitelének végleges implementációjával.\n\nMielőtt használná ezt a funkciót, győződjön meg arról, hogy az eszközein a legújabb Olvid verzió van telepítve.</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-1992015383">Ez a funkció még a béta tesztelési fázisban van, és a jelenlegi implementáció nem feltétlenül kompatibilis az Olvid történetátvitelének végleges implementációjával.\n\nMielőtt használná ezt a funkciót, győződjön meg arról, hogy az eszközein a legújabb Olvid verzió van telepítve.</string>
+	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">Megszakassam a folyamatban lévő átvitelt?</string>
+	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">Jelenleg egy előzményátvitel zajlik. Szeretnéd leállítani?</string>
+	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">Állítsa le az átvitelt</string>
 </resources>

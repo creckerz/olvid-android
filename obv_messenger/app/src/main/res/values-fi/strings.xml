@@ -2152,6 +2152,9 @@
 	<string name="history_transfer_step_negotiating" state="needs_review" hash="542829407">Neuvottelussa (vaihe 1/3)</string>
 	<string name="history_transfer_step_transferring_messages" state="needs_review" hash="1906529976">Viestien siirtäminen (vaihe 2/3)</string>
 	<string name="history_transfer_step_transferring_files" state="needs_review" hash="-49397632">Liitteiden siirtäminen (vaihe 3/3)</string>
+	<string name="history_transfer_step_negotiating_short" state="needs_review" hash="2025825777">Neuvottelemassa</string>
+	<string name="history_transfer_step_transferring_messages_short" state="needs_review" hash="-1105685790">Viestien siirtäminen</string>
+	<string name="history_transfer_step_transferring_files_short" state="needs_review" hash="-390125750">Liitteiden siirtäminen</string>
 	<string name="history_transfer_step_finished" state="needs_review" hash="-1834598630">Siirto valmis</string>
 	<string name="history_transfer_step_failed" state="needs_review" hash="-292738979">Siirto keskeytettiin</string>
 	<string name="pref_category_history_transfer_title" state="needs_review" hash="426525321">Chat-historian siirto (beta)</string>
@@ -2176,5 +2179,8 @@
 	<string name="transfer_label_throughput" state="needs_review" hash="-969920066">Läpimenomäärä</string>
 	<string name="transfer_label_remaining" state="needs_review" hash="-1186772259">Jäljellä</string>
 	<string name="transfer_label_attachments" state="needs_review" hash="1171691562">Liitteet</string>
-	<string name="transfer_disclaimer_beta" state="needs_review" hash="-344386922">Tämä ominaisuus on vielä beta-testausvaiheessa, eikä nykyinen toteutus välttämättä ole yhteensopiva Olvidin historian siirron lopullisen toteutuksen kanssa.\n\nEnnen kuin käytät tätä ominaisuutta, varmista, että laitteissasi on asennettuna uusin Olvid-versio.</string>
+	<string name="transfer_disclaimer_beta" state="needs_review" hash="-1992015383">Tämä ominaisuus on vielä beta-testausvaiheessa, eikä nykyinen toteutus välttämättä ole yhteensopiva Olvidin historian siirron lopullisen toteutuksen kanssa.\n\nEnnen kuin käytät tätä ominaisuutta, varmista, että laitteissasi on asennettuna uusin Olvid-versio.</string>
+	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">Keskeytetäänkö käynnissä oleva tiedonsiirto?</string>
+	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">Historiansiirto on parhaillaan käynnissä. Haluatko keskeyttää sen?</string>
+	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">Keskeytä tiedonsiirto</string>
 </resources>
