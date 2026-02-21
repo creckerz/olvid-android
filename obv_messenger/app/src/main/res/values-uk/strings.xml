@@ -1025,10 +1025,6 @@
 	<string name="toast_message_error_querying_for_available_browsers" state="needs_review" hash="-1647725573">Не вдалося отримати список встановлених браузерів</string>
 	<string name="dialog_title_choose_browser_for_authentication" state="needs_review" hash="1953462781">Оберіть браузер для використання при аутентифікації</string>
 	<string name="text_default_browser" state="needs_review" hash="-704738713">Браузер за замовчуванням</string>
-	<string name="pref_text_regional_turn_server_global" state="needs_review" hash="-2137414824">Глобальні TURN-сервери на основі регіонів</string>
-	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">Сервери TURN в Парижі</string>
-	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">TURN-сервери Нью-Йорка</string>
-	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">TURN-сервери Сінгапуру</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d контактів</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">%1$d контактів у групі %2$s</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">Потрібне оновлення</string>
@@ -2183,4 +2179,5 @@
 	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">Скасувати поточне передавання даних?</string>
 	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">Зараз відбувається передача історії. Чи хочете ви її скасувати?</string>
 	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">Скасувати передачу</string>
+	<string name="message_discussion_waiting_to_join" state="needs_review" hash="-1639833276">Очікуємо на приєднання до цієї дискусії</string>
 </resources>

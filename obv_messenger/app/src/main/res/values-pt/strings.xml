@@ -1024,10 +1024,6 @@
 	<string name="toast_message_error_querying_for_available_browsers" state="needs_review" hash="-1647725573">Não foi possível encontrar os navegadores instalados</string>
 	<string name="dialog_title_choose_browser_for_authentication" state="needs_review" hash="1953462781">Escolha qual navegador usar para a autenticação</string>
 	<string name="text_default_browser" state="needs_review" hash="-704738713">Navegador padrão</string>
-	<string name="pref_text_regional_turn_server_global" state="needs_review" hash="-2137414824">Servidores TURN regionais globais</string>
-	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">Servidores TURN de Paris</string>
-	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">Servidores TURN de Nova Iorque</string>
-	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">Servidores TURN de Singapura</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d contactos</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">%1$d contactos no grupo %2$s</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">Atualização necessária</string>
@@ -1935,7 +1931,7 @@
 	<string name="dialog_message_reset_backup_key" state="needs_review" hash="-880239601">Se a sua chave de backup foi perdida ou comprometida, pode redefini-la para **eliminar qualquer backup da sua conta associado a esta chave**. Esta chave não poderá mais ser usada para restaurar sua conta.\n\nSe você acredita que alguém possa já ter usado esta chave para acessar sua conta de forma maliciosa, você deve **verificar sua lista de dispositivos** nos detalhes do seu perfil para verificar se há algum dispositivo inesperado.</string>
 	<string name="pref_manage_backups_title" state="needs_review" hash="268639056">Gerir as minhas cópias de segurança do Olvid</string>
 	<string name="pref_initiate_backup_now_title" state="needs_review" hash="1295112545">Iniciar uma cópia de segurança agora</string>
-	<string name="backup_faq_link" state="needs_review" hash="-92834363">https://olvid.io/faq/fazer-backup-dos-seus-perfis/</string>
+	<string name="backup_faq_link" state="needs_review" hash="-92834363">https://olvid.io/faq/backup-your-profiles/</string>
 	<string name="content_description_close_button" state="needs_review" hash="1454843231">Fechar</string>
 	<string name="dialog_title_your_online_backups" state="needs_review" hash="-309422767">As tuas cópias de segurança online</string>
 	<string name="button_label_reset" state="needs_review" hash="-1702159211">Redefinir</string>
@@ -2183,4 +2179,5 @@
 	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">Cancelar a transferência em andamento?</string>
 	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">Uma transferência de histórico está em andamento. Deseja interrompê-la?</string>
 	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">Cancelar transferência</string>
+	<string name="message_discussion_waiting_to_join" state="needs_review" hash="-1639833276">Aguardando para participar desta conversa</string>
 </resources>

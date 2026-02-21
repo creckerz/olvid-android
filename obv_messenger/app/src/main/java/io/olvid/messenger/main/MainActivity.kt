@@ -629,7 +629,7 @@ class MainActivity : LockableActivity(), OnClickListener, SharedPreferences.OnSh
                     val configurationMatcher = ObvLinkActivity.CONFIGURATION_PATTERN.matcher(uri)
                     if (configurationMatcher.find()) {
                         try {
-                            // detect if it is a licence or a keycloak
+                            // detect if it is a license or a keycloak
                             val configurationPojo = AppSingleton.getJsonObjectMapper().readValue(
                                 ObvBase64.decode(configurationMatcher.group(2)),
                                 ConfigurationPojo::class.java
@@ -639,7 +639,7 @@ class MainActivity : LockableActivity(), OnClickListener, SharedPreferences.OnSh
                                     // offer to chose a profile or create a new one for profile binding
                                     R.string.dialog_title_chose_profile_keycloak_configuration
                                 } else {
-                                    // offer to chose a profile or create a new one for licence activation or configuration
+                                    // offer to chose a profile or create a new one for license activation or configuration
                                     R.string.dialog_title_chose_profile_configuration
                                 }
                             val ownedIdentitySelectionDialogFragment =

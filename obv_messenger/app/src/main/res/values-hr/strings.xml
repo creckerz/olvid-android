@@ -1024,10 +1024,6 @@
 	<string name="toast_message_error_querying_for_available_browsers" state="needs_review" hash="-1647725573">Nije moguće pronaći instalirane preglednike</string>
 	<string name="dialog_title_choose_browser_for_authentication" state="needs_review" hash="1953462781">Odaberite preglednik koji ćete koristiti za autentifikaciju</string>
 	<string name="text_default_browser" state="needs_review" hash="-704738713">Zadana preglednica</string>
-	<string name="pref_text_regional_turn_server_global" state="needs_review" hash="-2137414824">Globalni TURN poslužitelji bazirani na regijama</string>
-	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">Paris TURN poslužitelji</string>
-	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">TURN poslužitelji New Yorka</string>
-	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">TURN poslužitelji Singapura</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d kontakti</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">%1$d kontakata u grupi %2$s</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">Zahtijeva se ažuriranje</string>
@@ -1935,7 +1931,7 @@
 	<string name="dialog_message_reset_backup_key" state="needs_review" hash="-880239601">Ako je vaš ključ za sigurnosnu kopiju izgubljen ili kompromitiran, možete ga resetirati kako biste **izbrisali sve sigurnosne kopije vašeg računa povezane s ovim ključem**. Ovaj ključ više neće biti upotrebljiv za vraćanje vašeg računa.\n\nAko sumnjate da je netko već mogao koristiti ovaj ključ za zlonamjerni pristup vašem računu, trebali biste **provjeriti popis svojih uređaja** u detaljima profila kako biste pronašli bilo koji neočekivani uređaj.</string>
 	<string name="pref_manage_backups_title" state="needs_review" hash="268639056">Upravljanje mojim Olvid sigurnosnim kopijama</string>
 	<string name="pref_initiate_backup_now_title" state="needs_review" hash="1295112545">Pokreni sigurnosnu kopiju sada</string>
-	<string name="backup_faq_link" state="needs_review" hash="-92834363">https://olvid.io/faq/sigurnosno-kopiranje-profila/</string>
+	<string name="backup_faq_link" state="needs_review" hash="-92834363">https://olvid.io/faq/backup-your-profiles/</string>
 	<string name="content_description_close_button" state="needs_review" hash="1454843231">Zatvori</string>
 	<string name="dialog_title_your_online_backups" state="needs_review" hash="-309422767">Vaše online sigurnosne kopije</string>
 	<string name="button_label_reset" state="needs_review" hash="-1702159211">Poništi</string>
@@ -2183,4 +2179,5 @@
 	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">Prekinuti trenutni prijenos?</string>
 	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">Prijenos povijesti je trenutno u tijeku. Želite li ga prekinuti?</string>
 	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">Otkaži prijenos</string>
+	<string name="message_discussion_waiting_to_join" state="needs_review" hash="-1639833276">Čekam da se pridružim ovoj raspravi</string>
 </resources>

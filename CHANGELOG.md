@@ -1,4 +1,10 @@
+# Build 296 (4.2.4)
+2026-02-21
+
+- Fix a bug with the search inside a discussion.
+
 # Build 292 (4.2.3)
+2026-02-18
 
 - [beta] Improvements and bug fixes for history transfer
 

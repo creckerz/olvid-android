@@ -1024,10 +1024,6 @@
 	<string name="toast_message_error_querying_for_available_browsers" state="needs_review" hash="-1647725573">Kunne ikke finne installerte nettlesere</string>
 	<string name="dialog_title_choose_browser_for_authentication" state="needs_review" hash="1953462781">Velg hvilken nettleser du vil bruke for autentisering</string>
 	<string name="text_default_browser" state="needs_review" hash="-704738713">Standardnettleser</string>
-	<string name="pref_text_regional_turn_server_global" state="needs_review" hash="-2137414824">Globale regionsbaserte TURN-servere</string>
-	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">Paris TURN-servere</string>
-	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">New York TURN-servere</string>
-	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">Singapore TURN-servere</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d kontakter</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">%1$d kontakter i gruppen %2$s</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">Oppdatering kreves</string>
@@ -1935,7 +1931,7 @@
 	<string name="dialog_message_reset_backup_key" state="needs_review" hash="-880239601">Hvis sikkerhetsnøkkelen din er mistet eller kompromittert, kan du tilbakestille den for å **slette alle sikkerhetskopier av kontoen din som er knyttet til denne nøkkelen**. Denne nøkkelen kan ikke lenger brukes til å gjenopprette kontoen din.\n\nHvis du tror at noen allerede kan ha brukt denne nøkkelen til å få uautorisert tilgang til kontoen din, bør du **sjekke enhetslisten** i profildetaljene dine for uventede enheter.</string>
 	<string name="pref_manage_backups_title" state="needs_review" hash="268639056">Administrer mine Olvid-sikkerhetskopier</string>
 	<string name="pref_initiate_backup_now_title" state="needs_review" hash="1295112545">Start en sikkerhetskopi nå</string>
-	<string name="backup_faq_link" state="needs_review" hash="-92834363">https://olvid.io/faq/backup-dine-profiler/</string>
+	<string name="backup_faq_link" state="needs_review" hash="-92834363">https://olvid.io/faq/backup-your-profiles/</string>
 	<string name="content_description_close_button" state="needs_review" hash="1454843231">Lukk</string>
 	<string name="dialog_title_your_online_backups" state="needs_review" hash="-309422767">Dine online sikkerhetskopier</string>
 	<string name="button_label_reset" state="needs_review" hash="-1702159211">Tilbakestill</string>
@@ -2183,4 +2179,5 @@
 	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">Avbryte pågående overføring?</string>
 	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">Overføringen av meldingshistorikken er for øyeblikket i gang. Vil du avbryte den?</string>
 	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">Avbryt overføringen</string>
+	<string name="message_discussion_waiting_to_join" state="needs_review" hash="-1639833276">Venter på å bli med i denne samtalen.</string>
 </resources>

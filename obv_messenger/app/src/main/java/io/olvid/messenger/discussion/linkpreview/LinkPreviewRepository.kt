@@ -65,7 +65,7 @@ class LinkPreviewRepository {
                         }
                         val trustManager = trustManagers[0] as X509TrustManager
                         this.sslSocketFactory(sslSocketFactory, trustManager)
-                    } catch (e: java.lang.Exception) {
+                    } catch (_: Exception) {
                         Log.e("LinkPreviewRepository", "Error initializing okHttpClient trustManager")
                     }
                 }
@@ -116,7 +116,7 @@ class LinkPreviewRepository {
         return try {
             val response = client.newCall(Request.Builder().url(uri).build()).execute()
             if (response.isSuccessful) {
-                response.body?.let {
+                response.body.let {
                     if (it.contentLength() > MAX_IMAGE_SIZE) return null
                     decodeSampledBitmapFromBytes(it.byteStream().readBytes(), imageWidth, imageHeight)
                 }

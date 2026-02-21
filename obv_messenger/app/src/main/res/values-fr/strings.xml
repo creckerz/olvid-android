@@ -1025,10 +1025,6 @@
     <string name="toast_message_error_querying_for_available_browsers">Impossible de lister les navigateurs installés</string>
     <string name="dialog_title_choose_browser_for_authentication">Choisissez le navigateur à utiliser pour l\'authentification</string>
     <string name="text_default_browser">Navigateur par défaut</string>
-    <string name="pref_text_regional_turn_server_global">Serveurs TURN régionaux globaux</string>
-    <string name="pref_text_regional_turn_server_paris">Serveurs TURN de Paris</string>
-    <string name="pref_text_regional_turn_server_new_york">Serveurs TURN de New-York</string>
-    <string name="pref_text_regional_turn_server_singapore">Serveurs TURN de Singapour</string>
     <string name="text_count_contacts">%1$d contacts</string>
     <string name="text_count_contacts_from_group">%1$d contacts du groupe %2$s</string>
     <string name="dialog_title_outdated_version">Mise à jour requise</string>
@@ -2178,4 +2174,5 @@
     <string name="history_transfer_abort_dialog_title">Interrompre le transfert en cours ?</string>
     <string name="history_transfer_abort_dialog_message">Un transfert d\'historique est en cours. Souhaitez-vous l\'interrompre ?</string>
     <string name="button_label_abort_transfer">Interrompre le transfert</string>
+    <string name="message_discussion_waiting_to_join">En attente de rejoindre la discussion</string>
 </resources>

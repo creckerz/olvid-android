@@ -1035,10 +1035,6 @@
     <string name="toast_message_error_querying_for_available_browsers">Unable to query for installed browsers</string>
     <string name="dialog_title_choose_browser_for_authentication">Choose which browser to use for authentication</string>
     <string name="text_default_browser">Default browser</string>
-    <string name="pref_text_regional_turn_server_global">Global region-based TURN servers</string>
-    <string name="pref_text_regional_turn_server_paris">Paris TURN servers</string>
-    <string name="pref_text_regional_turn_server_new_york">New-York TURN servers</string>
-    <string name="pref_text_regional_turn_server_singapore">Singapore TURN servers</string>
     <string name="text_count_contacts">%1$d contacts</string>
     <string name="text_count_contacts_from_group">%1$d contacts in group %2$s</string>
     <string name="dialog_title_outdated_version">Update required</string>
@@ -2219,4 +2215,5 @@
     <string name="history_transfer_abort_dialog_title">Abort ongoing transfer?</string>
     <string name="history_transfer_abort_dialog_message">A history transfer is currently in progress. Do you want to abort it?</string>
     <string name="button_label_abort_transfer">Abort transfer</string>
+    <string name="message_discussion_waiting_to_join">Waiting to join this discussion</string>
 </resources>

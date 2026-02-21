@@ -1024,10 +1024,6 @@
 	<string name="toast_message_error_querying_for_available_browsers" state="needs_review" hash="-1647725573">無法查詢已安裝的瀏覽器</string>
 	<string name="dialog_title_choose_browser_for_authentication" state="needs_review" hash="1953462781">請選擇用於驗證的瀏覽器</string>
 	<string name="text_default_browser" state="needs_review" hash="-704738713">預設瀏覽器</string>
-	<string name="pref_text_regional_turn_server_global" state="needs_review" hash="-2137414824">全球區域 TURN 伺服器</string>
-	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">巴黎 TURN 伺服器</string>
-	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">紐約 TURN 伺服器</string>
-	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">新加坡 TURN 伺服器</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d 位聯絡人</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">群組 %2$s 中有 %1$d 位聯絡人</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">需要更新</string>
@@ -1935,7 +1931,7 @@
 	<string name="dialog_message_reset_backup_key" state="needs_review" hash="-880239601">如果您的備份金鑰遺失或遭到洩漏，您可以重設它以**刪除與此金鑰相關聯的所有帳戶備份**。此金鑰將不再可用於還原您的帳戶。\n\n如果您認為有人可能已經使用此金鑰惡意存取您的帳戶，您應該**檢查您的裝置清單**，查看個人資料詳細資料中是否有任何異常裝置。</string>
 	<string name="pref_manage_backups_title" state="needs_review" hash="268639056">管理我的 Olvid 備份</string>
 	<string name="pref_initiate_backup_now_title" state="needs_review" hash="1295112545">立即開始備份</string>
-	<string name="backup_faq_link" state="needs_review" hash="-92834363">https://olvid.io/faq/備份您的個人資料/</string>
+	<string name="backup_faq_link" state="needs_review" hash="-92834363">https://olvid.io/faq/backup-your-profiles/</string>
 	<string name="content_description_close_button" state="needs_review" hash="1454843231">關閉</string>
 	<string name="dialog_title_your_online_backups" state="needs_review" hash="-309422767">您的線上備份</string>
 	<string name="button_label_reset" state="needs_review" hash="-1702159211">重置</string>
@@ -2183,4 +2179,5 @@
 	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">取消目前的傳輸？</string>
 	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">歷史記錄傳輸正在進行中。您要取消嗎？</string>
 	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">取消傳輸</string>
+	<string name="message_discussion_waiting_to_join" state="needs_review" hash="-1639833276">等待加入此討論</string>
 </resources>

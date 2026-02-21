@@ -1024,10 +1024,6 @@
 	<string name="toast_message_error_querying_for_available_browsers" state="needs_review" hash="-1647725573">No s\'han pogut trobar els navegadors instal·lats</string>
 	<string name="dialog_title_choose_browser_for_authentication" state="needs_review" hash="1953462781">Tria quin navegador utilitzar per a l\'autenticació</string>
 	<string name="text_default_browser" state="needs_review" hash="-704738713">Navegador per defecte</string>
-	<string name="pref_text_regional_turn_server_global" state="needs_review" hash="-2137414824">Servidors TURN regionals globals</string>
-	<string name="pref_text_regional_turn_server_paris" state="needs_review" hash="-1805142760">Servidors TURN de París</string>
-	<string name="pref_text_regional_turn_server_new_york" state="needs_review" hash="-933590208">Servidors TURN de Nova York</string>
-	<string name="pref_text_regional_turn_server_singapore" state="needs_review" hash="1897065698">Servidors TURN de Singapur</string>
 	<string name="text_count_contacts" state="needs_review" hash="1022571360">%1$d contactes</string>
 	<string name="text_count_contacts_from_group" state="needs_review" hash="1527328959">%1$d contactes al grup %2$s</string>
 	<string name="dialog_title_outdated_version" state="needs_review" hash="-885405214">S\'actualització necessària</string>
@@ -1934,7 +1930,7 @@
 	<string name="dialog_message_reset_backup_key" state="needs_review" hash="-880239601">Si la teva clau de seguretat s\'ha perdut o ha estat compromesa, pots restablir-la per **eliminar qualsevol còpia de seguretat del teu compte associada a aquesta clau**. Aquesta clau ja no es podrà utilitzar per restaurar el teu compte.\n\nSi creus que algú podria haver utilitzat aquesta clau per accedir maliciosament al teu compte, hauries de **comprovar la llista de dispositius** als detalls del teu perfil per si hi ha algun dispositiu inesperat.</string>
 	<string name="pref_manage_backups_title" state="needs_review" hash="268639056">Gestionar les meves còpies de seguretat d\'Olvid</string>
 	<string name="pref_initiate_backup_now_title" state="needs_review" hash="1295112545">Iniciar una còpia de seguretat ara</string>
-	<string name="backup_faq_link" state="needs_review" hash="-92834363">https://olvid.io/faq/fa-copia-de-seguretat-dels-teus-perfils/</string>
+	<string name="backup_faq_link" state="needs_review" hash="-92834363">https://olvid.io/faq/backup-your-profiles/</string>
 	<string name="content_description_close_button" state="needs_review" hash="1454843231">Tanca</string>
 	<string name="dialog_title_your_online_backups" state="needs_review" hash="-309422767">Les teves còpies de seguretat en línia</string>
 	<string name="button_label_reset" state="needs_review" hash="-1702159211">Restablir</string>
@@ -2182,4 +2178,5 @@
 	<string name="history_transfer_abort_dialog_title" state="needs_review" hash="-1257390112">Vols cancel·lar la transferència en curs?</string>
 	<string name="history_transfer_abort_dialog_message" state="needs_review" hash="-1759296671">Actualment s\'està transferint l\'historial. Vols cancel·lar-ho?</string>
 	<string name="button_label_abort_transfer" state="needs_review" hash="-520659986">Interrompre la transferència</string>
+	<string name="message_discussion_waiting_to_join" state="needs_review" hash="-1639833276">Esperant per unir-me a aquesta conversa</string>
 </resources>
