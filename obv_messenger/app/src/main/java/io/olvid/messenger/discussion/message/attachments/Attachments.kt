@@ -1,6 +1,6 @@
 /*
  *  Olvid for Android
- *  Copyright © 2019-2025 Olvid SAS
+ *  Copyright © 2019-2026 Olvid SAS
  *
  *  This file is part of Olvid for Android.
  *
@@ -135,8 +135,6 @@ import io.olvid.messenger.discussion.search.DiscussionSearchViewModel
 import io.olvid.messenger.settings.SettingsActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.Locale
-import kotlin.math.roundToInt
 
 enum class Visibility {
     VISIBLE,

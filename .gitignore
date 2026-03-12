@@ -7,6 +7,7 @@ avd/
 *.iml
 .gradle
 /local.properties
+/fdroid-apks
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
