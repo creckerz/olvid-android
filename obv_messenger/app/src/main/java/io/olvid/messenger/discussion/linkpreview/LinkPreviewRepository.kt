@@ -116,7 +116,7 @@ class LinkPreviewRepository {
         return try {
             val response = client.newCall(Request.Builder().url(uri).build()).execute()
             if (response.isSuccessful) {
-                response.body.let {
+                response.body?.let {
                     if (it.contentLength() > MAX_IMAGE_SIZE) return null
                     decodeSampledBitmapFromBytes(it.byteStream().readBytes(), imageWidth, imageHeight)
                 }

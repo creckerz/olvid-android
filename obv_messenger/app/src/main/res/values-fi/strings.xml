@@ -148,10 +148,10 @@
 	<string name="invitation_status_exchange_sas_with" state="needs_review" hash="-1787508633">Anna koodisi käyttäjälle %1$s</string>
 	<string name="invitation_status_group_invite" state="needs_review" hash="1220924544">Ryhmäkutsut</string>
 	<string name="invitation_status_invite_accepted" state="needs_review" hash="-1862275659">Ole hyvä ja odota</string>
-	<string name="invitation_status_invite_sent" state="needs_review" hash="318192131">Odotetaan %1$s:ää</string>
+	<string name="invitation_status_invite_sent" state="needs_review" hash="318192131">Odotetaan %1$s</string>
 	<string name="invitation_status_mediator_invite" state="needs_review" hash="-1216588869">Yhteystiedon esittely</string>
 	<string name="invitation_status_mediator_invite_accepted" state="needs_review" hash="-1362366154">Esittely hyväksytty</string>
-	<string name="invitation_status_mediator_invite_information_sent" state="needs_review" hash="1829213391">Esittelit %1$s:n</string>
+	<string name="invitation_status_mediator_invite_information_sent" state="needs_review" hash="1829213391">Esittelit %1$s</string>
 	<string name="invitation_status_mediator_invite_information_accepted" state="needs_review" hash="-744115153">Olet hyväksynyt %1$s:n esittelyn</string>
 	<string name="invitation_status_mediator_invite_information_ignored" state="needs_review" hash="533777275">Olet jättänyt huomiotta %1$s:n esittelyn</string>
 	<string name="label_copy" state="needs_review" hash="-811327733">Kopioi</string>
@@ -201,7 +201,7 @@
 	<string name="menu_action_unbookmark" state="needs_review" hash="-1117840659">Poista kirjanmerkki</string>
 	<string name="menu_action_archive" state="needs_review" hash="-1970974030">Arkistoi</string>
 	<string name="menu_action_unarchive" state="needs_review" hash="551888469">Pura arkistosta</string>
-	<string name="menu_check_update" state="needs_review" hash="266262263">Tarkista päivitykset Google Playstä</string>
+	<string name="menu_check_update" state="needs_review" hash="1635875089">Tarkista päivitykset</string>
 	<string name="message_discussion_locked" state="needs_review" hash="1316975941">Tämä keskustelu on lukittu</string>
 	<string name="message_discussion_readonly" state="needs_review" hash="-858225323">Tämä keskustelu on vain lukutilassa</string>
 	<string name="message_discussion_no_channel" state="needs_review" hash="-1921985024">Viestisi lähetetään automaattisesti, kun turvallinen yhteys on muodostettu tähän keskusteluun. Siihen asti ne pysyvät odotustilassa.</string>
@@ -594,7 +594,7 @@
 	<string name="label_subscription_offer_save_percent" state="needs_review" hash="479307719">Tallenna %1$d%%</string>
 	<string name="label_subscription_offer_monthly" state="needs_review" hash="-1602490190">Kuukausittain</string>
 	<string name="label_subscription_offer_yearly" state="needs_review" hash="1246240165">Vuosittain</string>
-	<string name="label_subscription_status" state="needs_review" hash="1154002053">Tilaustila</string>
+	<string name="label_subscription_status" state="needs_review" hash="1154002053">Tilaukset</string>
 	<string name="text_feature_initiate_secure_calls" state="needs_review" hash="1414263062">Aloita suojatut puhelut</string>
 	<string name="text_premium_features" state="needs_review" hash="603728806">Premium-ominaisuudet</string>
 	<string name="text_subscription_active" state="needs_review" hash="960106589">Tilaus on aktiivinen</string>
@@ -687,7 +687,7 @@
 	<string name="text_awaiting_subscription_payment" state="needs_review" hash="1135205985">Tilauksen maksu hylätty</string>
 	<string name="text_subscription_in_grace_period_until" state="needs_review" hash="-1685522686">Armonaika päättyy: %1$s</string>
 	<string name="text_subscription_on_hold_since" state="needs_review" hash="-515586151">Tilaus on ollut keskeytettynä: %1$s</string>
-	<string name="menu_action_refresh_subscription_status" state="needs_review" hash="-486840226">Päivitä tilausstatus</string>
+	<string name="menu_action_refresh_subscription_status" state="needs_review" hash="-486840226">Päivitä tilauksen tila</string>
 	<string name="label_fix_payment_method" state="needs_review" hash="-41275395">Päivitä maksutapa</string>
 	<string name="label_fix_payment_method_explanation" state="needs_review" hash="-2118046403">Jotta voit säilyttää tilauksesi Olvidissa, päivitä maksutapasi.</string>
 	<string name="pref_title_subscription" state="needs_review" hash="-1948915367">Hallinnoi Olvid-tilaustasi</string>
@@ -854,7 +854,7 @@
 	<string name="troubleshooting_update_valid_title" state="needs_review" hash="741828768">Olvid on päivitetty</string>
 	<string name="explanation_latest_olvid_version" state="needs_review" hash="-1038138294">Sinulla on asennettuna uusin Olvid-versio</string>
 	<string name="dialog_title_update_available" state="needs_review" hash="-1893271535">Päivitys saatavilla</string>
-	<string name="dialog_message_update_available" state="needs_review" hash="259838609">Uudempi versio Olvidista on saatavilla Google Playssa.\n\nPäivitä, jotta voit hyödyntää uusimpia ominaisuuksia.</string>
+	<string name="dialog_message_update_available" state="needs_review" hash="416187645">Olvidin uudempi versio on saatavilla.\n\nPäivitä, jotta voit hyödyntää uusimpia ominaisuuksia.</string>
 	<string name="dialog_title_call_initiation_not_supported" state="needs_review" hash="-2088021831">Puhelun aloitus epäonnistui</string>
 	<string name="dialog_message_call_initiation_not_supported" state="needs_review" hash="1760333819">Näyttää siltä, että Olvid-palvelimesi ei tue suojattujen puheluiden aloittamista.\n\nOta yhteyttä järjestelmänvalvojaan saadaksesi lisätietoja.</string>
 	<string name="label_identity_creation_options" state="needs_review" hash="1180456032">ID:n luontivaihtoehdot</string>
@@ -1086,7 +1086,7 @@
 	<string name="text_notification_location_permission_denied_title" state="needs_review" hash="-790054697">Sijaintilupa evätty</string>
 	<string name="text_notification_location_permission_denied_message" state="needs_review" hash="134258093">Olvid tarvitsee pääsyn sijaintiisi jatkaakseen jakamista.</string>
 	<string name="notification_action_authenticate" state="needs_review" hash="272245375">Vahvista</string>
-	<string name="button_label_manage" state="needs_review" hash="1671874936">Hallinnoida</string>
+	<string name="button_label_manage" state="needs_review" hash="1671874936">Hallinnoi</string>
 	<string name="button_label_add_new_profile" state="needs_review" hash="-2002397142">Lisää profiili</string>
 	<string name="dialog_title_open_hidden_profile" state="needs_review" hash="36372079">Avaa piilotettu profiili</string>
 	<string name="hint_profile_nickname" state="needs_review" hash="524858188">Profiilin lempinimi</string>

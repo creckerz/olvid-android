@@ -34,7 +34,7 @@ class OpenGraphParser {
             var html = ""
             client.newCall(Request.Builder().url(url).build()).execute().use { response ->
                 if (response.isSuccessful) {
-                    response.body.let { body ->
+                    response.body?.let { body ->
                         if (body.contentType()?.subtype != "html") return null
                         html = String(
                             body.byteStream().readBytes(),
