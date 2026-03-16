@@ -91,6 +91,7 @@ import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -483,7 +484,6 @@ fun Message(
                         Replied(
                             message = message,
                             context = context,
-                            discussionViewModel = discussionViewModel,
                             scrollToMessage = scrollToMessage,
                         )
 
@@ -810,7 +810,6 @@ fun OutboundMessageStatus(modifier: Modifier = Modifier, size: Dp = 16.dp, messa
 private fun Replied(
     message: Message,
     context: Context,
-    discussionViewModel: DiscussionViewModel? = null,
     scrollToMessage: (messageId: Long) -> Unit
 ) {
     val repliedToMessage: State<Message?>? = message.jsonMessage.jsonReply?.let { jsonReply ->
@@ -956,6 +955,7 @@ fun MessageBody(
     blockClicks: Boolean,
 ) {
     val context = LocalContext.current
+    val resources = LocalResources.current
 
     LaunchedEffect(Unit) {
         if (message.isContentHidden) {
@@ -1013,14 +1013,14 @@ fun MessageBody(
                             )
                         ) {
                             text =
-                                context.getString(R.string.text_message_content_remote_deleted_by_you)
+                                resources.getString(R.string.text_message_content_remote_deleted_by_you)
                         } else {
                             val displayName =
                                 ContactCacheSingleton.getContactCustomDisplayName(
                                     messageMetadata.bytesRemoteIdentity
                                 )
                             if (displayName != null) {
-                                context.getString(
+                                resources.getString(
                                     R.string.text_message_content_remote_deleted_by,
                                     displayName
                                 )
@@ -1247,9 +1247,9 @@ fun MessageBody(
                                     )
                                 }) {
                                 App.toast(
-                                    context.getString(
+                                    resources.getString(
                                         R.string.toast_message_remove_none_answer,
-                                        context.getString(R.string.text_none_answer)
+                                        resources.getString(R.string.text_none_answer)
                                     ), Toast.LENGTH_SHORT, Gravity.BOTTOM
                                 )
                                 return@PollMessageBody
@@ -1667,7 +1667,7 @@ fun GroupUpdateMessageInfo(
     onLongClick: (() -> Unit)? = null,
     interactionSource: MutableInteractionSource? = null,
 ) {
-    val context = LocalContext.current
+    val resources = LocalResources.current
     var expanded by remember { mutableStateOf(false) }
 
     if (message.jsonMentions == null) {
@@ -1698,7 +1698,7 @@ fun GroupUpdateMessageInfo(
         val mention = remember(expanded, message.jsonMentions) {
             message.mentions?.map {
                 ContactCacheSingleton.getContactCustomDisplayName(it.userIdentifier)
-                    ?: context.getString(R.string.text_unknown_member)
+                    ?: resources.getString(R.string.text_unknown_member)
             }?.sortedBy {
                 StringUtils.unAccent(it)
             }?.let {

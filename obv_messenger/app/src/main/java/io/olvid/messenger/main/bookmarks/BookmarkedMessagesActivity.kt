@@ -167,7 +167,7 @@ class BookmarkedMessagesActivity : LockableActivity() {
                                     message = resources.getQuantityString(
                                         R.plurals.label_message_unbookmark_done, count, count
                                     ),
-                                    actionLabel = context.getString(R.string.snackbar_action_label_undo),
+                                    actionLabel = resources.getString(R.string.snackbar_action_label_undo),
                                     duration = Short
                                 )
                                 when (result) {

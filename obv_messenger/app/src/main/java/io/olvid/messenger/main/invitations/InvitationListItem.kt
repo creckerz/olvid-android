@@ -73,6 +73,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -231,6 +232,7 @@ fun InvitationListItem(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     val context = LocalContext.current
+                    val resources = LocalResources.current
 
                     val myCode = String(invitation?.associatedDialog?.category?.sasToDisplay ?: byteArrayOf(), StandardCharsets.UTF_8)
 
@@ -242,7 +244,7 @@ fun InvitationListItem(
                                 indication = null,
                             ) {
                                 val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
-                                val clip = ClipData.newPlainText(context.getString(R.string.label_text_copied_from_olvid), myCode)
+                                val clip = ClipData.newPlainText(resources.getString(R.string.label_text_copied_from_olvid), myCode)
                                 if (clipboard != null) {
                                     clipboard.setPrimaryClip(clip)
                                     App.toast(R.string.toast_code_copied, Toast.LENGTH_SHORT)

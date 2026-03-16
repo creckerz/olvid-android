@@ -2017,13 +2017,13 @@ class WebrtcCallService : Service() {
     }
 
     private fun internalRemoveCallParticipant(callParticipant: CallParticipant) {
-        callParticipant.peerConnectionHolder.cleanUp()
         val index = callParticipantIndexes.remove(BytesKey(callParticipant.bytesContactIdentity))
         if (index != null) {
             callParticipants.remove(index)
         } else {
             Logger.w("☎ Calling removeCallParticipant for participant not in the call")
         }
+        callParticipant.peerConnectionHolder.cleanUp()
         notifyCallParticipantsChanged()
     }
 
@@ -2636,10 +2636,7 @@ class WebrtcCallService : Service() {
         }
 
     private fun notifyCallParticipantsChanged() {
-        val pojos: MutableList<CallParticipantPojo> = ArrayList(callParticipants.size)
-        for (callParticipant in callParticipants.values) {
-            pojos.add(CallParticipantPojo(callParticipant))
-        }
+        val pojos = callParticipants.values.map { CallParticipantPojo(it) }
         callParticipantsLiveData.postValue(pojos)
         if (callParticipants.size > MAXIMUM_OTHER_PARTICIPANTS_FOR_VIDEO) {
             // we disable video

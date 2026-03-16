@@ -85,6 +85,7 @@ import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -1042,6 +1043,7 @@ fun AttachmentContextMenu(
     saveAllAttachments: () -> Unit
 ) {
     val context = LocalContext.current
+    val resources = LocalResources.current
     // delete
     val delete = @Composable {
         OlvidDropdownMenuItem(
@@ -1053,7 +1055,7 @@ fun AttachmentContextMenu(
                     SecureAlertDialogBuilder(context, R.style.CustomAlertDialog)
                         .setTitle(R.string.dialog_title_delete_attachment)
                         .setMessage(
-                            context.getString(
+                            resources.getString(
                                 R.string.dialog_message_delete_attachment,
                                 attachment.fyleMessageJoinWithStatus.fileName
                             )
@@ -1147,7 +1149,7 @@ fun AttachmentContextMenu(
                     context.startActivity(
                         Intent.createChooser(
                             intent,
-                            context.getString(R.string.title_sharing_chooser)
+                            resources.getString(R.string.title_sharing_chooser)
                         )
                     )
                     onDismiss()

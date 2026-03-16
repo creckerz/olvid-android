@@ -79,6 +79,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -90,6 +91,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
@@ -256,8 +258,9 @@ fun ScanScreen(
             })
         }
 
-        val currentOffset = bottomSheetState.requireOffset()
-        val progress = ((collapsedOffset - currentOffset) / collapsedOffset).coerceIn(0f, 1f)
+        val progress by remember(collapsedOffset) {
+            derivedStateOf { ((collapsedOffset - bottomSheetState.requireOffset()) / collapsedOffset).coerceIn(0f, 1f) }
+        }
 
 
         val isMutualScanActive = currentUiState is ScanUiState.MutualScanProcessing ||
@@ -298,9 +301,11 @@ fun ScanScreen(
                     QrCodeScanner(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(with(density) {
-                                bottomSheetState.requireOffset().toDp()
-                            }),
+                            .layout { measurable, constraints ->
+                                val height = bottomSheetState.requireOffset().toInt().coerceAtLeast(0)
+                                val placeable = measurable.measure(constraints.copy(minHeight = height, maxHeight = height))
+                                layout(placeable.width, height) { placeable.placeRelative(0, 0) }
+                            },
                         currentUiState = currentUiState,
                         progress = progress,
                         onCancel = onCancel,
@@ -321,7 +326,12 @@ fun ScanScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(top = ((bottomSheetState.requireOffset() / density.density).coerceAtLeast(0f)).dp)
+                        .layout { measurable, constraints ->
+                            val topOffset = bottomSheetState.requireOffset().toInt().coerceAtLeast(0)
+                            val contentHeight = (constraints.maxHeight - topOffset).coerceAtLeast(0)
+                            val placeable = measurable.measure(constraints.copy(minHeight = 0, maxHeight = contentHeight))
+                            layout(constraints.maxWidth, constraints.maxHeight) { placeable.placeRelative(0, topOffset) }
+                        }
                         .anchoredDraggable(bottomSheetState, Orientation.Vertical)
                 ) {
                     BottomSheetContent(
@@ -372,7 +382,9 @@ fun BottomSheetContent(
                 if (largeScreen)
                     Modifier
                         .background(color = colorResource(R.color.lightGrey))
-                        .windowInsetsPadding(WindowInsets.Companion.safeDrawing.only(WindowInsetsSides.Companion.End))
+                        .windowInsetsPadding(
+                            WindowInsets.safeDrawing.only(
+                            WindowInsetsSides.End))
                 else
                     Modifier
                         .background(
@@ -791,7 +803,9 @@ fun QrCodeScanner(
                 modifier = Modifier
                     .then(
                     if (largeScreen)
-                        Modifier.windowInsetsPadding(WindowInsets.Companion.safeDrawing.only(WindowInsetsSides.Companion.Start))
+                        Modifier.windowInsetsPadding(
+                            WindowInsets.safeDrawing.only(
+                            WindowInsetsSides.Start))
                     else
                         Modifier
                 ),

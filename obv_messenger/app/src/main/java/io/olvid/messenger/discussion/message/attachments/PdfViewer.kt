@@ -82,9 +82,9 @@ import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -120,6 +120,8 @@ fun PdfViewerScreen(
     val minZoom = .8f
     val maxZoom = 3f
     val context = LocalContext.current
+    val density = LocalDensity.current
+    val containerSize = LocalWindowInfo.current.containerSize
     val pdfBitmapConverter = remember {
         PdfBitmapConverter()
     }
@@ -139,11 +141,10 @@ fun PdfViewerScreen(
     var passwordError by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
 
-    val maxPageWidthPx =
-        with(LocalDensity.current) { LocalConfiguration.current.screenWidthDp.dp.toPx() } * maxZoom
-    val maxPageHeightPx =
-        with(LocalDensity.current) { LocalConfiguration.current.screenHeightDp.dp.toPx() } * maxZoom
-    val screenWidthDp = LocalConfiguration.current.screenWidthDp.dp
+    val maxPageWidthPx = containerSize.width * maxZoom
+    val maxPageHeightPx = containerSize.height * maxZoom
+    val screenWidthDp = with(density) { containerSize.width.toDp() }
+
     LaunchedEffect(tempPassword) {
         passwordError = false
     }

@@ -120,15 +120,19 @@ public class OtherPreferenceFragment extends PreferenceFragmentCompat {
 
         SwitchPreference shareAppVersionPreference = screen.findPreference(SettingsActivity.PREF_KEY_SHARE_APP_VERSION);
         if (shareAppVersionPreference != null) {
-            shareAppVersionPreference.setOnPreferenceChangeListener((preference, newValue) -> {
-                boolean checked = (Boolean) newValue;
-                if (checked) {
-                    AppSingleton.getEngine().connectWebsocket(false, "android", Integer.toString(android.os.Build.VERSION.SDK_INT), (BuildConfig.VERSION_CODE / BuildConfig.VERSION_CODE_MULTIPLIER), BuildConfig.VERSION_NAME);
-                } else {
-                    AppSingleton.getEngine().connectWebsocket(false, null, null, 0, null);
-                }
-                return true;
-            });
+            if (BuildConfig.USE_GOOGLE_LIBS) {
+                shareAppVersionPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+                    boolean checked = (Boolean) newValue;
+                    if (checked) {
+                        AppSingleton.getEngine().connectWebsocket(false, "android", Integer.toString(android.os.Build.VERSION.SDK_INT), (BuildConfig.VERSION_CODE / BuildConfig.VERSION_CODE_MULTIPLIER), BuildConfig.VERSION_NAME);
+                    } else {
+                        AppSingleton.getEngine().connectWebsocket(false, null, null, 0, null);
+                    }
+                    return true;
+                });
+            } else {
+                screen.removePreference(shareAppVersionPreference);
+            }
         }
 
 

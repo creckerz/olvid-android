@@ -52,7 +52,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -78,7 +78,7 @@ fun KeycloakBindScreen(
     onBindSuccess: () -> Unit,
     onBack: () -> Unit
 ) {
-    val context = LocalContext.current
+    val resources = LocalResources.current
     val coroutineScope = rememberCoroutineScope()
 
     var binding by rememberSaveable { mutableStateOf(false) }
@@ -94,12 +94,12 @@ fun KeycloakBindScreen(
             // An identity is present and does not match ours
             if (viewModel.isKeycloakRevocationAllowed) {
                 warningText =
-                    context.getString(R.string.text_explanation_warning_identity_creation_keycloak_revocation_needed)
+                    resources.getString(R.string.text_explanation_warning_identity_creation_keycloak_revocation_needed)
                 warningIsError = false
                 forceDisabled = false
             } else {
                 warningText =
-                    context.getString(R.string.text_explanation_warning_binding_keycloak_revocation_impossible)
+                    resources.getString(R.string.text_explanation_warning_binding_keycloak_revocation_impossible)
                 warningIsError = true
                 forceDisabled = true
             }
@@ -184,7 +184,7 @@ fun KeycloakBindScreen(
                                 KeycloakTasks.RFC_IDENTITY_REVOKED -> {
                                     forceDisabled = true
                                     warningText =
-                                        context.getString(R.string.text_explanation_warning_olvid_id_revoked_on_keycloak)
+                                        resources.getString(R.string.text_explanation_warning_olvid_id_revoked_on_keycloak)
                                     warningIsError = true
                                 }
 

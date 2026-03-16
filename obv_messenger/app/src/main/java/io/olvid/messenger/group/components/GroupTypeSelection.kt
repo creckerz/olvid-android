@@ -55,6 +55,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -90,6 +91,7 @@ fun GroupTypeSelection(
     onSelectAdmins: (() -> Unit)? = null,
 ) {
     val context = LocalContext.current
+    val resources = LocalResources.current
 
     Box {
         Column(
@@ -225,13 +227,13 @@ fun GroupTypeSelection(
                             val changes = getPermissionsChanges()
                             if (changes.isEmpty().not()) {
                                 SecureAlertDialogBuilder(context, R.style.CustomAlertDialog)
-                                    .setTitle(context.getString(R.string.dialog_permissions_change_title))
+                                    .setTitle(resources.getString(R.string.dialog_permissions_change_title))
                                     .setMessage(changes.formatMarkdown())
-                                    .setPositiveButton(context.getString(R.string.button_label_ok)) { _, _ ->
+                                    .setPositiveButton(resources.getString(R.string.button_label_ok)) { _, _ ->
                                         onValidate()
                                     }
                                     .setNegativeButton(
-                                        context.getString(R.string.button_label_cancel),
+                                        resources.getString(R.string.button_label_cancel),
                                         null
                                     )
                                     .show()

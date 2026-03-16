@@ -44,6 +44,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -132,6 +133,7 @@ fun SubscriptionStatusHeader(
     onFixPaymentClicked: () -> Unit
 ) {
     val context = LocalContext.current
+    val resources = LocalResources.current
     val (statusText, expirationText, showSubscribeButton) = when (apiKeyStatus) {
         EngineAPI.ApiKeyStatus.UNKNOWN -> Triple(
             stringResource(if (licenseQuery) R.string.text_unknown_license else R.string.text_no_subscription),
@@ -147,7 +149,7 @@ fun SubscriptionStatusHeader(
                     StringUtils.getPreciseAbsoluteDateString(
                         context,
                         it,
-                        context.getString(R.string.text_date_time_separator)
+                        resources.getString(R.string.text_date_time_separator)
                     )
                 )
             },
@@ -168,7 +170,7 @@ fun SubscriptionStatusHeader(
                     StringUtils.getPreciseAbsoluteDateString(
                         context,
                         it,
-                        context.getString(R.string.text_date_time_separator)
+                        resources.getString(R.string.text_date_time_separator)
                     )
                 )
             },
@@ -183,7 +185,7 @@ fun SubscriptionStatusHeader(
                     StringUtils.getPreciseAbsoluteDateString(
                         context,
                         it,
-                        context.getString(R.string.text_date_time_separator)
+                        resources.getString(R.string.text_date_time_separator)
                     )
                 )
             } ?: stringResource(R.string.text_premium_features_available),
@@ -198,7 +200,7 @@ fun SubscriptionStatusHeader(
                     StringUtils.getPreciseAbsoluteDateString(
                         context,
                         it,
-                        context.getString(R.string.text_date_time_separator)
+                        resources.getString(R.string.text_date_time_separator)
                     )
                 )
             } ?: stringResource(R.string.text_premium_features_available),
@@ -214,7 +216,7 @@ fun SubscriptionStatusHeader(
                         StringUtils.getPreciseAbsoluteDateString(
                             context,
                             it,
-                            context.getString(R.string.text_date_time_separator)
+                            resources.getString(R.string.text_date_time_separator)
                         )
                     )
                 } else {
@@ -223,7 +225,7 @@ fun SubscriptionStatusHeader(
                         StringUtils.getPreciseAbsoluteDateString(
                             context,
                             it,
-                            context.getString(R.string.text_date_time_separator)
+                            resources.getString(R.string.text_date_time_separator)
                         )
                     )
                 }
@@ -239,7 +241,7 @@ fun SubscriptionStatusHeader(
                     StringUtils.getPreciseAbsoluteDateString(
                         context,
                         it,
-                        context.getString(R.string.text_date_time_separator)
+                        resources.getString(R.string.text_date_time_separator)
                     )
                 )
             },

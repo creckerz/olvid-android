@@ -1281,7 +1281,7 @@ class ContactDetailsActivity : LockableActivity(), OnClickListener,
             return true
         } else if (itemId == R.id.action_refresh_status) {
             contactDetailsViewModel.contactAndInvitation?.value?.contact?.let { contact ->
-                AppSingleton.getEngine().forceContactDeviceDiscovery(contact.bytesOwnedIdentity, contact.bytesContactIdentity);
+                AppSingleton.getEngine().forceContactDeviceDiscovery(contact.bytesOwnedIdentity, contact.bytesContactIdentity)
             }
             return true
         } else if (itemId == R.id.action_recreate_channels) {
@@ -1373,7 +1373,7 @@ class ContactDetailsActivity : LockableActivity(), OnClickListener,
                     .setNeutralButton(R.string.button_label_copy) { _, _ ->
                         val clipboardManager: ClipboardManager? = getSystemService(CLIPBOARD_SERVICE) as? ClipboardManager
                         clipboardManager?.setPrimaryClip(ClipData.newPlainText(link, link))
-                        App.toast(R.string.toast_message_clipboard_copied, Toast.LENGTH_SHORT);
+                        App.toast(R.string.toast_message_clipboard_copied, Toast.LENGTH_SHORT)
                     }
                     .setPositiveButton(R.string.button_label_ok, null)
                 builder.create().show()

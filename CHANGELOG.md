@@ -1,3 +1,8 @@
+# ~~Build 297 (4.2.5)~~
+2026-03-16
+
+- Minor adjustments to the gradle build process for publication to F-Droid.
+
 # Build 296 (4.2.4)
 2026-02-21
 

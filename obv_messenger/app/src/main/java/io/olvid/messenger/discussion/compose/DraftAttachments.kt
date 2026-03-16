@@ -60,6 +60,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -470,6 +471,8 @@ fun DraftAttachmentContextMenu(
     onDeleteClick: () -> Unit
 ) {
     val context = LocalContext.current
+    val resources = LocalResources.current
+
     OlvidDropdownMenu(
         expanded = expanded,
         onDismissRequest = onDismiss
@@ -503,7 +506,7 @@ fun DraftAttachmentContextMenu(
                 SecureAlertDialogBuilder(context, R.style.CustomAlertDialog)
                     .setTitle(R.string.dialog_title_delete_attachment)
                     .setMessage(
-                        context.getString(
+                        resources.getString(
                             R.string.dialog_message_delete_attachment,
                             attachment.fyleMessageJoinWithStatus.fileName
                         )

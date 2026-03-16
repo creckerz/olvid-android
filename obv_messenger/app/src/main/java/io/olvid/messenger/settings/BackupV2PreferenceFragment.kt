@@ -74,6 +74,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -539,6 +540,7 @@ fun CredentialManager.loadCredentials(activity: FragmentActivity?, executor: Exe
 @Composable
 fun BackupsHeader() {
     val context = LocalContext.current
+    val resources = LocalResources.current
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -572,7 +574,7 @@ fun BackupsHeader() {
                     try {
                         App.openLink(
                             context,
-                            context.getString(R.string.backup_faq_link).toUri()
+                            resources.getString(R.string.backup_faq_link).toUri()
                         )
                     } catch (_: Exception) {}
                 },

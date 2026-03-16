@@ -216,7 +216,7 @@ class ArchivedDiscussionsActivity : LockableActivity() {
                                         count,
                                         count
                                     ),
-                                    actionLabel = context.getString(R.string.snackbar_action_label_undo),
+                                    actionLabel = resources.getString(R.string.snackbar_action_label_undo),
                                     duration = Short
                                 )
                                 when (result) {

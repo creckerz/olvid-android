@@ -756,7 +756,7 @@ class SettingsActivity : LockableActivity(), OnPreferenceStartFragmentCallback {
         const val PREF_KEY_PING_CONNECTIVITY_INDICATOR_DEFAULT: String = "null"
 
         const val PREF_KEY_SHARE_APP_VERSION: String = "pref_key_share_app_version"
-        const val PREF_KEY_SHARE_APP_VERSION_DEFAULT: Boolean = BuildConfig.USE_GOOGLE_LIBS
+        const val PREF_KEY_SHARE_APP_VERSION_DEFAULT: Boolean = true
 
         const val PREF_KEY_NOTIFY_CERTIFICATE_CHANGE: String = "pref_key_notify_certificate_change"
         const val PREF_KEY_NOTIFY_CERTIFICATE_CHANGE_DEFAULT: Boolean = false
@@ -1940,9 +1940,12 @@ class SettingsActivity : LockableActivity(), OnPreferenceStartFragmentCallback {
 
         @JvmStatic
         fun shareAppVersion(): Boolean {
-            return PreferenceManager.getDefaultSharedPreferences(App.getContext()).getBoolean(
-                PREF_KEY_SHARE_APP_VERSION, PREF_KEY_SHARE_APP_VERSION_DEFAULT
-            )
+            if (BuildConfig.USE_GOOGLE_LIBS) {
+                return PreferenceManager.getDefaultSharedPreferences(App.getContext()).getBoolean(
+                    PREF_KEY_SHARE_APP_VERSION, PREF_KEY_SHARE_APP_VERSION_DEFAULT
+                )
+            }
+            return false
         }
 
         @JvmStatic

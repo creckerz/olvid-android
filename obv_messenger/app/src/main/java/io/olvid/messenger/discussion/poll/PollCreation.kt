@@ -77,6 +77,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -209,7 +210,7 @@ fun PollCreationScreen(
             itemsIndexed(
                 items = pollViewModel.answers,
                 key = { _, answer -> answer.uuid }
-            ) { index, answer ->
+            ) { _, answer ->
                 ReorderableItem(
                     enabled = answer.text.isNotBlank() && answer.uuid != NONE_ANSWER.uuid,
                     state = reorderableState,
@@ -545,10 +546,10 @@ private fun SendButton(
     onClick: () -> Unit,
     enabled: Boolean = true,
 ) {
-    val context = LocalContext.current
+    val resources = LocalResources.current
     TextButton(
         modifier = Modifier.semantics {
-            onClick(label = context.getString(R.string.button_label_send)) {
+            onClick(label = resources.getString(R.string.button_label_send)) {
                 onClick()
                 true
             }

@@ -63,9 +63,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalResources
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
@@ -101,12 +102,13 @@ fun CallScreen(
 ) {
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
+    val resources = LocalResources.current
 
     val statusBarHeight = with(LocalDensity.current) { WindowInsets.statusBars.getTop(this).toDp() }
     val navigationBarHeight =
         with(LocalDensity.current) { WindowInsets.navigationBars.getBottom(this).toDp() }
 
-    val screenWidthDp = LocalConfiguration.current.screenWidthDp
+    val screenWidthDp =LocalWindowInfo.current.containerDpSize.width.value
     val callButtonSize by remember(screenWidthDp) {
         mutableFloatStateOf(
             (screenWidthDp / 6f).coerceAtMost(
@@ -194,8 +196,8 @@ fun CallScreen(
         if (webrtcCallService?.speakingWhileMuted == true) {
             val result = snackbarHostState
                 .showSnackbar(
-                    message = context.getString(R.string.webrtc_speaking_while_muted),
-                    actionLabel = context.getString(R.string.webrtc_speaking_while_muted_action),
+                    message = resources.getString(R.string.webrtc_speaking_while_muted),
+                    actionLabel = resources.getString(R.string.webrtc_speaking_while_muted_action),
                 )
             when (result) {
                 SnackbarResult.ActionPerformed -> {

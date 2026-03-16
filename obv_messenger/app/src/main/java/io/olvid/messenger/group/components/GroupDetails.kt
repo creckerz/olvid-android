@@ -67,6 +67,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
@@ -695,11 +696,13 @@ fun GroupMemberItem(
     onInvite: ((contact: Contact) -> Unit)? = null
 ) {
     val context = LocalContext.current
+    val resources = LocalResources.current
+
     ContactListItem(
         modifier = modifier,
         padding = PaddingValues(4.dp),
         title = AnnotatedString(
-            member.getDisplayName(context) + if (member.isYou) " (${context.getString(R.string.text_you)})" else ""
+            member.getDisplayName(context) + if (member.isYou) " (${resources.getString(R.string.text_you)})" else ""
         ),
         body = (ContactCacheSingleton.getContactDetailsSecondLine(member.bytesIdentity)
             ?: member.jsonIdentityDetails?.formatPositionAndCompany(""))?.takeIf { it.isNotEmpty() }

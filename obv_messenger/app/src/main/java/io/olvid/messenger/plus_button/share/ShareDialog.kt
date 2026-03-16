@@ -30,6 +30,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.core.graphics.createBitmap
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
@@ -47,6 +48,7 @@ import java.util.regex.Pattern
 @Composable
 fun ShareDialog(onDismissRequest: () -> Unit = {}) {
     val context = LocalContext.current
+    val resources = LocalResources.current
     val clipboardManager = LocalClipboard.current
 
     val saveQrCodeLauncher = rememberLauncherForActivityResult(
@@ -157,11 +159,11 @@ fun ShareDialog(onDismissRequest: () -> Unit = {}) {
                 }
                 intent.putExtra(
                     Intent.EXTRA_SUBJECT,
-                    context.getString(R.string.message_user_invitation_subject, inviteName)
+                    resources.getString(R.string.message_user_invitation_subject, inviteName)
                 )
                 intent.putExtra(
                     Intent.EXTRA_TEXT,
-                    context.getString(
+                    resources.getString(
                         R.string.message_user_invitation,
                         inviteName,
                         urlIdentity.getUrlRepresentation(false)
@@ -170,7 +172,7 @@ fun ShareDialog(onDismissRequest: () -> Unit = {}) {
                 context.startActivity(
                     Intent.createChooser(
                         intent,
-                        context.getString(R.string.title_invite_chooser)
+                        resources.getString(R.string.title_invite_chooser)
                     )
                 )
             }

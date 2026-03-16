@@ -38,8 +38,8 @@ android {
         applicationId = "io.olvid.messenger"
         minSdk = 23
         targetSdk = 36
-        versionCode = 296
-        versionName = "4.2.4"
+        versionCode = 297
+        versionName = "4.2.5"
         vectorDrawables.useSupportLibrary = true
         // MultiDex is enabled by default for minSdk >= 21
         androidResources {

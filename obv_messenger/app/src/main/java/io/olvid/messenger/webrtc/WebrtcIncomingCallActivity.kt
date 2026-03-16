@@ -162,7 +162,7 @@ class WebrtcIncomingCallActivity : AppCompatActivity() {
             call.bytesOwnedIdentity,
             call.callIdentifier
         )
-        // do not close activity here, the live data will take car of it
+        // do not close activity here, the live data will take care of it
     }
 
     private fun closeActivity() {
