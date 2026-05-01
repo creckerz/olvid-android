@@ -396,8 +396,8 @@ fun Message(
                     modifier = Modifier.weight(1f, fill = false)
                 ) {
                     val interactionSource = remember { MutableInteractionSource() }
-                    val customOutboundBubbleColor = remember { SettingsActivity.getOutboundBubbleColor() }
-                    val customInboundBubbleColor = remember { SettingsActivity.getInboundBubbleColor() }
+                    val customOutboundBubbleColor = remember { SettingsActivity.outboundBubbleColor }
+                    val customInboundBubbleColor = remember { SettingsActivity.inboundBubbleColor }
 
                     MessageInnerStack(
                         modifier = Modifier
