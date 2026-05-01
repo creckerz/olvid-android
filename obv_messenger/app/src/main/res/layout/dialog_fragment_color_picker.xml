@@ -123,9 +123,9 @@
                 app:layout_constraintStart_toEndOf="@+id/alpha_input_layout" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/color_swatches_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView">
@@ -466,21 +466,128 @@
                     android:id="@+id/color_blue_grey"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
                     app:cardBackgroundColor="#607d8b"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="4dp"
                     android:foreground="?attr/selectableItemBackground"
                     android:theme="@style/WhiteRipple"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="1"
                     app:layout_constraintEnd_toStartOf="@+id/color_grey"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/color_green"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/advanced_color_picker_section"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/color_swatches_layout">
+
+                <TextView
+                    android:id="@+id/advanced_toggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/label_advanced"
+                    android:drawableEnd="@drawable/ic_chevron_down"
+                    android:gravity="center_vertical"
+                    android:textAppearance="@style/RobotoMedium"
+                    android:textColor="@color/primary700"
+                    android:foreground="?attr/selectableItemBackground" />
+
+                <LinearLayout
+                    android:id="@+id/advanced_color_options"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:paddingBottom="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="8dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_hue"
+                            android:textColor="@color/greyTint" />
+
+                        <SeekBar
+                            android:id="@+id/hue_seekbar"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:max="360" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="8dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_saturation"
+                            android:textColor="@color/greyTint" />
+
+                        <SeekBar
+                            android:id="@+id/saturation_seekbar"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:max="100" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="8dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_brightness"
+                            android:textColor="@color/greyTint" />
+
+                        <SeekBar
+                            android:id="@+id/brightness_seekbar"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:max="100" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

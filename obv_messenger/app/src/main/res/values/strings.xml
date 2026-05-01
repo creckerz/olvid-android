@@ -330,6 +330,9 @@
     <string name="button_label_clear">Clear</string>
     <string name="hint_color_hex">Color hex</string>
     <string name="hint_alpha">Alpha</string>
+    <string name="label_hue">Hue</string>
+    <string name="label_saturation">Saturation</string>
+    <string name="label_brightness">Brightness</string>
     <string name="label_no_longer_available">No longer available</string>
     <string name="activity_title_message_details">Message Details</string>
     <string name="activity_title_bookmarks">Bookmarked messages</string>
