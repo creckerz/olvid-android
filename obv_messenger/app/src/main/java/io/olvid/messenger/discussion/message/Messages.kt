@@ -408,11 +408,11 @@ fun Message(
                             )
                             .background(
                                 color = if (message.isInbound) {
-                                    if (customInboundBubbleColor != null) Color(0xFF000000.toInt() or Integer.parseInt(customInboundBubbleColor.substring(1), 16))
-                                    else colorResource(id = R.color.lighterGrey)
+                                    parseHexColor(customInboundBubbleColor)
+                                        ?: colorResource(id = R.color.lighterGrey)
                                 } else if (message.messageType == Message.TYPE_OUTBOUND_MESSAGE) {
-                                    if (customOutboundBubbleColor != null) Color(0xFF000000.toInt() or Integer.parseInt(customOutboundBubbleColor.substring(1), 16))
-                                    else colorResource(id = R.color.primary100)
+                                    parseHexColor(customOutboundBubbleColor)
+                                        ?: colorResource(id = R.color.primary100)
                                 } else Color.Transparent,
                                 shape = RoundedCornerShape(8.dp)
                             )
@@ -1466,6 +1466,15 @@ private fun MessageInfo(
         text = text,
         color = colorResource(id = R.color.primary700)
     )
+}
+
+private fun parseHexColor(colorString: String?): Color? {
+    if (colorString == null || colorString.length != 7 || !colorString.startsWith("#")) return null
+    return try {
+        Color(0xFF000000.toInt() or Integer.parseInt(colorString.substring(1), 16))
+    } catch (_: NumberFormatException) {
+        null
+    }
 }
 
 fun getAnnotatedStringContent(

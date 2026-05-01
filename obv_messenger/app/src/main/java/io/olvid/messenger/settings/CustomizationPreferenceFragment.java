@@ -442,11 +442,15 @@ public class CustomizationPreferenceFragment extends PreferenceFragmentCompat {
     private void updateOutboundBubbleColorImage() {
         if (outboundBubbleColorPreference != null) {
             String colorString = SettingsActivity.getOutboundBubbleColor();
-            if (colorString == null) {
+            if (colorString == null || colorString.length() != 7 || !colorString.startsWith("#")) {
                 outboundBubbleColorPreference.setColor((Integer) null);
             } else {
-                int color = Integer.parseInt(colorString.substring(1), 16);
-                outboundBubbleColorPreference.setColor(color);
+                try {
+                    int color = Integer.parseInt(colorString.substring(1), 16);
+                    outboundBubbleColorPreference.setColor(color);
+                } catch (NumberFormatException e) {
+                    outboundBubbleColorPreference.setColor((Integer) null);
+                }
             }
         }
     }
@@ -454,11 +458,15 @@ public class CustomizationPreferenceFragment extends PreferenceFragmentCompat {
     private void updateInboundBubbleColorImage() {
         if (inboundBubbleColorPreference != null) {
             String colorString = SettingsActivity.getInboundBubbleColor();
-            if (colorString == null) {
+            if (colorString == null || colorString.length() != 7 || !colorString.startsWith("#")) {
                 inboundBubbleColorPreference.setColor((Integer) null);
             } else {
-                int color = Integer.parseInt(colorString.substring(1), 16);
-                inboundBubbleColorPreference.setColor(color);
+                try {
+                    int color = Integer.parseInt(colorString.substring(1), 16);
+                    inboundBubbleColorPreference.setColor(color);
+                } catch (NumberFormatException e) {
+                    inboundBubbleColorPreference.setColor((Integer) null);
+                }
             }
         }
     }
