@@ -64,8 +64,13 @@ public class ColorPickerDialogFragment extends DialogFragment implements View.On
     private TextInputEditText colorEditText;
     private TextInputEditText alphaEditText;
     private SeekBar alphaSeekBar;
+    private SeekBar hueSeekBar;
+    private SeekBar saturationSeekBar;
+    private SeekBar brightnessSeekBar;
     private View fullPreview;
     private View alphaPreview;
+    private boolean updatingHsvFromHex = false;
+    private boolean updatingHexFromHsv = false;
 
     public static ColorPickerDialogFragment newInstance(long discussionId) {
         ColorPickerDialogFragment fragment = new ColorPickerDialogFragment();
@@ -200,6 +205,54 @@ public class ColorPickerDialogFragment extends DialogFragment implements View.On
         fullPreview = dialogView.findViewById(R.id.color_preview_full);
         alphaPreview = dialogView.findViewById(R.id.color_preview_alpha);
 
+        hueSeekBar = dialogView.findViewById(R.id.hue_seekbar);
+        saturationSeekBar = dialogView.findViewById(R.id.saturation_seekbar);
+        brightnessSeekBar = dialogView.findViewById(R.id.brightness_seekbar);
+
+        SeekBar.OnSeekBarChangeListener hsvListener = new SeekBar.OnSeekBarChangeListener() {
+            boolean tracking = false;
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (tracking && !updatingHsvFromHex) {
+                    updatingHexFromHsv = true;
+                    float h = hueSeekBar.getProgress();
+                    float s = saturationSeekBar.getProgress() / 100f;
+                    float v = brightnessSeekBar.getProgress() / 100f;
+                    float[] hsv = {h, s, v};
+                    int rgb = android.graphics.Color.HSVToColor(hsv) & 0xffffff;
+                    colorEditText.setText(String.format(Locale.ENGLISH, "#%06x", rgb));
+                    updatingHexFromHsv = false;
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                tracking = true;
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                tracking = false;
+            }
+        };
+        hueSeekBar.setOnSeekBarChangeListener(hsvListener);
+        saturationSeekBar.setOnSeekBarChangeListener(hsvListener);
+        brightnessSeekBar.setOnSeekBarChangeListener(hsvListener);
+
+        View advancedOptions = dialogView.findViewById(R.id.advanced_color_options);
+        TextView advancedToggle = dialogView.findViewById(R.id.advanced_toggle);
+        advancedToggle.setOnClickListener(v -> {
+            if (advancedOptions.getVisibility() == View.VISIBLE) {
+                advancedOptions.setVisibility(View.GONE);
+                advancedToggle.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_chevron_down, 0);
+            } else {
+                advancedOptions.setVisibility(View.VISIBLE);
+                advancedToggle.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_chevron_right, 0);
+                syncHsvFromColor();
+            }
+        });
+
         dialogView.findViewById(R.id.color_black).setOnClickListener(this);
         dialogView.findViewById(R.id.color_red).setOnClickListener(this);
         dialogView.findViewById(R.id.color_pink).setOnClickListener(this);
@@ -288,6 +341,9 @@ public class ColorPickerDialogFragment extends DialogFragment implements View.On
     private void setColor(Integer color) {
         this.color = color;
         update();
+        if (!updatingHexFromHsv) {
+            syncHsvFromColor();
+        }
     }
 
     private void setAlpha(Float alpha) {
@@ -308,6 +364,22 @@ public class ColorPickerDialogFragment extends DialogFragment implements View.On
             alpha = .2f;
         }
         alphaEditText.setText(String.format(Locale.ENGLISH, "%.2f", alpha));
+    }
+
+    private void syncHsvFromColor() {
+        if (hueSeekBar == null || saturationSeekBar == null || brightnessSeekBar == null) {
+            return;
+        }
+        if (color == null) {
+            return;
+        }
+        updatingHsvFromHex = true;
+        float[] hsv = new float[3];
+        android.graphics.Color.colorToHSV(color | 0xff000000, hsv);
+        hueSeekBar.setProgress(Math.round(hsv[0]));
+        saturationSeekBar.setProgress(Math.round(hsv[1] * 100));
+        brightnessSeekBar.setProgress(Math.round(hsv[2] * 100));
+        updatingHsvFromHex = false;
     }
 
     private void update() {
