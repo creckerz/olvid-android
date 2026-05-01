@@ -484,6 +484,10 @@
     <string name="dialog_message_create_empty_group">You have not selected any contact to add to your group. Are you sure you want to create an empty group?</string>
     <string name="pref_dark_mode_title">Dark mode</string>
     <string name="pref_dark_mode_summary">Enable dark mode to save your battery and your eyes.</string>
+    <string name="pref_outbound_bubble_color_title">Outbound message bubble color</string>
+    <string name="pref_outbound_bubble_color_summary">Color of your own sent messages</string>
+    <string name="pref_inbound_bubble_color_title">Inbound message bubble color</string>
+    <string name="pref_inbound_bubble_color_summary">Color of received messages from others</string>
     <string name="pref_text_dark_mode_on">Always use dark theme</string>
     <string name="pref_text_dark_mode_off">Always use light theme</string>
     <string name="pref_text_dark_mode_auto">Follow system preference</string>

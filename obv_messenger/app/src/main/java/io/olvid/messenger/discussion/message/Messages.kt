@@ -396,6 +396,8 @@ fun Message(
                     modifier = Modifier.weight(1f, fill = false)
                 ) {
                     val interactionSource = remember { MutableInteractionSource() }
+                    val customOutboundBubbleColor = remember { SettingsActivity.getOutboundBubbleColor() }
+                    val customInboundBubbleColor = remember { SettingsActivity.getInboundBubbleColor() }
 
                     MessageInnerStack(
                         modifier = Modifier
@@ -405,11 +407,13 @@ fun Message(
                                 } ?: Modifier
                             )
                             .background(
-                                color = if (message.isInbound) colorResource(id = R.color.lighterGrey)
-                                else if (message.messageType == Message.TYPE_OUTBOUND_MESSAGE) colorResource(
-                                    id = R.color.primary100
-                                )
-                                else Color.Transparent,
+                                color = if (message.isInbound) {
+                                    parseHexColor(customInboundBubbleColor)
+                                        ?: colorResource(id = R.color.lighterGrey)
+                                } else if (message.messageType == Message.TYPE_OUTBOUND_MESSAGE) {
+                                    parseHexColor(customOutboundBubbleColor)
+                                        ?: colorResource(id = R.color.primary100)
+                                } else Color.Transparent,
                                 shape = RoundedCornerShape(8.dp)
                             )
                             .clip(RoundedCornerShape(8.dp))
@@ -1462,6 +1466,15 @@ private fun MessageInfo(
         text = text,
         color = colorResource(id = R.color.primary700)
     )
+}
+
+private fun parseHexColor(colorString: String?): Color? {
+    if (colorString == null || colorString.length != 7 || !colorString.startsWith("#")) return null
+    return try {
+        Color(0xFF000000.toInt() or Integer.parseInt(colorString.substring(1), 16))
+    } catch (_: NumberFormatException) {
+        null
+    }
 }
 
 fun getAnnotatedStringContent(
