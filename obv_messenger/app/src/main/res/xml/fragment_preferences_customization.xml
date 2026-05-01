@@ -75,6 +75,21 @@
         android:icon="@drawable/ic_pref_emoji_animated"
         android:order="15"
         />
+
+    <io.olvid.messenger.customClasses.ImageViewPreference
+        android:key="pref_key_outbound_bubble_color"
+        android:title="@string/pref_outbound_bubble_color_title"
+        android:summary="@string/pref_outbound_bubble_color_summary"
+        android:icon="@drawable/ic_pref_color"
+        android:order="20" />
+
+    <io.olvid.messenger.customClasses.ImageViewPreference
+        android:key="pref_key_inbound_bubble_color"
+        android:title="@string/pref_inbound_bubble_color_title"
+        android:summary="@string/pref_inbound_bubble_color_summary"
+        android:icon="@drawable/ic_pref_color"
+        android:order="21" />
+
     <DropDownPreference
         android:key="pref_key_ping_connectivity_indicator"
         android:title="@string/pref_ping_connectivity_indicator_title"

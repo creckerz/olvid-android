@@ -47,10 +47,13 @@ import io.olvid.messenger.App;
 import io.olvid.messenger.R;
 import io.olvid.messenger.customClasses.ImageViewPreference;
 import io.olvid.messenger.customClasses.MultilineSummaryPreferenceCategory;
+import io.olvid.messenger.fragments.dialog.LedColorPickerDialogFragment;
 
 public class CustomizationPreferenceFragment extends PreferenceFragmentCompat {
     FragmentActivity activity;
     ImageViewPreference appIconPreference;
+    ImageViewPreference outboundBubbleColorPreference;
+    ImageViewPreference inboundBubbleColorPreference;
 
     @Override
     public void onResume() {
@@ -400,6 +403,62 @@ public class CustomizationPreferenceFragment extends PreferenceFragmentCompat {
             final DropDownPreference screenScalePreference = screen.findPreference(SettingsActivity.PREF_KEY_SCREEN_SCALE);
             if (screenScalePreference != null) {
                 screenScalePreference.setOnPreferenceChangeListener(listener);
+            }
+        }
+
+        {
+            outboundBubbleColorPreference = screen.findPreference(SettingsActivity.PREF_KEY_OUTBOUND_BUBBLE_COLOR);
+            if (outboundBubbleColorPreference != null) {
+                outboundBubbleColorPreference.setOnPreferenceClickListener(preference -> {
+                    LedColorPickerDialogFragment picker = LedColorPickerDialogFragment.newInstance();
+                    picker.setInitialColor(SettingsActivity.getOutboundBubbleColor());
+                    picker.setOnLedColorSelectedListener(color -> {
+                        SettingsActivity.setOutboundBubbleColor(color);
+                        updateOutboundBubbleColorImage();
+                    });
+                    picker.show(getChildFragmentManager(), "outbound_bubble_color");
+                    return true;
+                });
+                updateOutboundBubbleColorImage();
+            }
+
+            inboundBubbleColorPreference = screen.findPreference(SettingsActivity.PREF_KEY_INBOUND_BUBBLE_COLOR);
+            if (inboundBubbleColorPreference != null) {
+                inboundBubbleColorPreference.setOnPreferenceClickListener(preference -> {
+                    LedColorPickerDialogFragment picker = LedColorPickerDialogFragment.newInstance();
+                    picker.setInitialColor(SettingsActivity.getInboundBubbleColor());
+                    picker.setOnLedColorSelectedListener(color -> {
+                        SettingsActivity.setInboundBubbleColor(color);
+                        updateInboundBubbleColorImage();
+                    });
+                    picker.show(getChildFragmentManager(), "inbound_bubble_color");
+                    return true;
+                });
+                updateInboundBubbleColorImage();
+            }
+        }
+    }
+
+    private void updateOutboundBubbleColorImage() {
+        if (outboundBubbleColorPreference != null) {
+            String colorString = SettingsActivity.getOutboundBubbleColor();
+            if (colorString == null) {
+                outboundBubbleColorPreference.setColor((Integer) null);
+            } else {
+                int color = Integer.parseInt(colorString.substring(1), 16);
+                outboundBubbleColorPreference.setColor(color);
+            }
+        }
+    }
+
+    private void updateInboundBubbleColorImage() {
+        if (inboundBubbleColorPreference != null) {
+            String colorString = SettingsActivity.getInboundBubbleColor();
+            if (colorString == null) {
+                inboundBubbleColorPreference.setColor((Integer) null);
+            } else {
+                int color = Integer.parseInt(colorString.substring(1), 16);
+                inboundBubbleColorPreference.setColor(color);
             }
         }
     }

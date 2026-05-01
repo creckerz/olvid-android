@@ -561,6 +561,10 @@ class SettingsActivity : LockableActivity(), OnPreferenceStartFragmentCallback {
         const val PREF_KEY_PERMANENT_FOREGROUND_SERVICE_DEFAULT: Boolean = false
 
 
+        // CHAT BUBBLE COLORS
+        const val PREF_KEY_OUTBOUND_BUBBLE_COLOR: String = "pref_key_outbound_bubble_color"
+        const val PREF_KEY_INBOUND_BUBBLE_COLOR: String = "pref_key_inbound_bubble_color"
+
         // CUSTOMIZATION
         const val PREF_KEY_APP_LANGUAGE_CATEGORY: String = "pref_key_app_language_category"
         const val PREF_KEY_APP_LANGUAGE: String = "pref_key_app_language"
@@ -2567,6 +2571,36 @@ class SettingsActivity : LockableActivity(), OnPreferenceStartFragmentCallback {
                         } else {
                             putString(PREF_KEY_MESSAGE_LED_COLOR, color)
                         }
+                    }
+            }
+
+        @JvmStatic
+        var outboundBubbleColor: String?
+            get() {
+                val color: String =
+                    PreferenceManager.getDefaultSharedPreferences(App.getContext())
+                        .getString(PREF_KEY_OUTBOUND_BUBBLE_COLOR, "") ?: ""
+                return if (color.isEmpty()) null else color
+            }
+            set(color) {
+                PreferenceManager.getDefaultSharedPreferences(App.getContext())
+                    .edit {
+                        putString(PREF_KEY_OUTBOUND_BUBBLE_COLOR, color ?: "")
+                    }
+            }
+
+        @JvmStatic
+        var inboundBubbleColor: String?
+            get() {
+                val color: String =
+                    PreferenceManager.getDefaultSharedPreferences(App.getContext())
+                        .getString(PREF_KEY_INBOUND_BUBBLE_COLOR, "") ?: ""
+                return if (color.isEmpty()) null else color
+            }
+            set(color) {
+                PreferenceManager.getDefaultSharedPreferences(App.getContext())
+                    .edit {
+                        putString(PREF_KEY_INBOUND_BUBBLE_COLOR, color ?: "")
                     }
             }
 
