@@ -565,6 +565,12 @@ class SettingsActivity : LockableActivity(), OnPreferenceStartFragmentCallback {
         const val PREF_KEY_OUTBOUND_BUBBLE_COLOR: String = "pref_key_outbound_bubble_color"
         const val PREF_KEY_INBOUND_BUBBLE_COLOR: String = "pref_key_inbound_bubble_color"
 
+        // CHAT FONT COLORS
+        const val PREF_KEY_OUTBOUND_FONT_COLOR: String = "pref_key_outbound_font_color"
+        const val PREF_KEY_OUTBOUND_FONT_COLOR_DARK: String = "pref_key_outbound_font_color_dark"
+        const val PREF_KEY_INBOUND_FONT_COLOR: String = "pref_key_inbound_font_color"
+        const val PREF_KEY_INBOUND_FONT_COLOR_DARK: String = "pref_key_inbound_font_color_dark"
+
         // CUSTOMIZATION
         const val PREF_KEY_APP_LANGUAGE_CATEGORY: String = "pref_key_app_language_category"
         const val PREF_KEY_APP_LANGUAGE: String = "pref_key_app_language"
@@ -2601,6 +2607,66 @@ class SettingsActivity : LockableActivity(), OnPreferenceStartFragmentCallback {
                 PreferenceManager.getDefaultSharedPreferences(App.getContext())
                     .edit {
                         putString(PREF_KEY_INBOUND_BUBBLE_COLOR, color ?: "")
+                    }
+            }
+
+        @JvmStatic
+        var outboundFontColor: String?
+            get() {
+                val color: String =
+                    PreferenceManager.getDefaultSharedPreferences(App.getContext())
+                        .getString(PREF_KEY_OUTBOUND_FONT_COLOR, "") ?: ""
+                return if (color.isEmpty()) null else color
+            }
+            set(color) {
+                PreferenceManager.getDefaultSharedPreferences(App.getContext())
+                    .edit {
+                        putString(PREF_KEY_OUTBOUND_FONT_COLOR, color ?: "")
+                    }
+            }
+
+        @JvmStatic
+        var outboundFontColorDark: String?
+            get() {
+                val color: String =
+                    PreferenceManager.getDefaultSharedPreferences(App.getContext())
+                        .getString(PREF_KEY_OUTBOUND_FONT_COLOR_DARK, "") ?: ""
+                return if (color.isEmpty()) null else color
+            }
+            set(color) {
+                PreferenceManager.getDefaultSharedPreferences(App.getContext())
+                    .edit {
+                        putString(PREF_KEY_OUTBOUND_FONT_COLOR_DARK, color ?: "")
+                    }
+            }
+
+        @JvmStatic
+        var inboundFontColor: String?
+            get() {
+                val color: String =
+                    PreferenceManager.getDefaultSharedPreferences(App.getContext())
+                        .getString(PREF_KEY_INBOUND_FONT_COLOR, "") ?: ""
+                return if (color.isEmpty()) null else color
+            }
+            set(color) {
+                PreferenceManager.getDefaultSharedPreferences(App.getContext())
+                    .edit {
+                        putString(PREF_KEY_INBOUND_FONT_COLOR, color ?: "")
+                    }
+            }
+
+        @JvmStatic
+        var inboundFontColorDark: String?
+            get() {
+                val color: String =
+                    PreferenceManager.getDefaultSharedPreferences(App.getContext())
+                        .getString(PREF_KEY_INBOUND_FONT_COLOR_DARK, "") ?: ""
+                return if (color.isEmpty()) null else color
+            }
+            set(color) {
+                PreferenceManager.getDefaultSharedPreferences(App.getContext())
+                    .edit {
+                        putString(PREF_KEY_INBOUND_FONT_COLOR_DARK, color ?: "")
                     }
             }
 

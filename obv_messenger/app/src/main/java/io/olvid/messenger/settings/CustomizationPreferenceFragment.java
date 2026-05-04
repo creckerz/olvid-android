@@ -54,6 +54,10 @@ public class CustomizationPreferenceFragment extends PreferenceFragmentCompat {
     ImageViewPreference appIconPreference;
     ImageViewPreference outboundBubbleColorPreference;
     ImageViewPreference inboundBubbleColorPreference;
+    ImageViewPreference outboundFontColorPreference;
+    ImageViewPreference outboundFontColorDarkPreference;
+    ImageViewPreference inboundFontColorPreference;
+    ImageViewPreference inboundFontColorDarkPreference;
 
     @Override
     public void onResume() {
@@ -437,6 +441,68 @@ public class CustomizationPreferenceFragment extends PreferenceFragmentCompat {
                 updateInboundBubbleColorImage();
             }
         }
+
+        {
+            outboundFontColorPreference = screen.findPreference(SettingsActivity.PREF_KEY_OUTBOUND_FONT_COLOR);
+            if (outboundFontColorPreference != null) {
+                outboundFontColorPreference.setOnPreferenceClickListener(preference -> {
+                    LedColorPickerDialogFragment picker = LedColorPickerDialogFragment.newInstance();
+                    picker.setInitialColor(SettingsActivity.getOutboundFontColor());
+                    picker.setOnLedColorSelectedListener(color -> {
+                        SettingsActivity.setOutboundFontColor(color);
+                        updateColorImage(outboundFontColorPreference, SettingsActivity.getOutboundFontColor());
+                    });
+                    picker.show(getChildFragmentManager(), "outbound_font_color");
+                    return true;
+                });
+                updateColorImage(outboundFontColorPreference, SettingsActivity.getOutboundFontColor());
+            }
+
+            outboundFontColorDarkPreference = screen.findPreference(SettingsActivity.PREF_KEY_OUTBOUND_FONT_COLOR_DARK);
+            if (outboundFontColorDarkPreference != null) {
+                outboundFontColorDarkPreference.setOnPreferenceClickListener(preference -> {
+                    LedColorPickerDialogFragment picker = LedColorPickerDialogFragment.newInstance();
+                    picker.setInitialColor(SettingsActivity.getOutboundFontColorDark());
+                    picker.setOnLedColorSelectedListener(color -> {
+                        SettingsActivity.setOutboundFontColorDark(color);
+                        updateColorImage(outboundFontColorDarkPreference, SettingsActivity.getOutboundFontColorDark());
+                    });
+                    picker.show(getChildFragmentManager(), "outbound_font_color_dark");
+                    return true;
+                });
+                updateColorImage(outboundFontColorDarkPreference, SettingsActivity.getOutboundFontColorDark());
+            }
+
+            inboundFontColorPreference = screen.findPreference(SettingsActivity.PREF_KEY_INBOUND_FONT_COLOR);
+            if (inboundFontColorPreference != null) {
+                inboundFontColorPreference.setOnPreferenceClickListener(preference -> {
+                    LedColorPickerDialogFragment picker = LedColorPickerDialogFragment.newInstance();
+                    picker.setInitialColor(SettingsActivity.getInboundFontColor());
+                    picker.setOnLedColorSelectedListener(color -> {
+                        SettingsActivity.setInboundFontColor(color);
+                        updateColorImage(inboundFontColorPreference, SettingsActivity.getInboundFontColor());
+                    });
+                    picker.show(getChildFragmentManager(), "inbound_font_color");
+                    return true;
+                });
+                updateColorImage(inboundFontColorPreference, SettingsActivity.getInboundFontColor());
+            }
+
+            inboundFontColorDarkPreference = screen.findPreference(SettingsActivity.PREF_KEY_INBOUND_FONT_COLOR_DARK);
+            if (inboundFontColorDarkPreference != null) {
+                inboundFontColorDarkPreference.setOnPreferenceClickListener(preference -> {
+                    LedColorPickerDialogFragment picker = LedColorPickerDialogFragment.newInstance();
+                    picker.setInitialColor(SettingsActivity.getInboundFontColorDark());
+                    picker.setOnLedColorSelectedListener(color -> {
+                        SettingsActivity.setInboundFontColorDark(color);
+                        updateColorImage(inboundFontColorDarkPreference, SettingsActivity.getInboundFontColorDark());
+                    });
+                    picker.show(getChildFragmentManager(), "inbound_font_color_dark");
+                    return true;
+                });
+                updateColorImage(inboundFontColorDarkPreference, SettingsActivity.getInboundFontColorDark());
+            }
+        }
     }
 
     private void updateOutboundBubbleColorImage() {
@@ -466,6 +532,21 @@ public class CustomizationPreferenceFragment extends PreferenceFragmentCompat {
                     inboundBubbleColorPreference.setColor(color);
                 } catch (NumberFormatException e) {
                     inboundBubbleColorPreference.setColor((Integer) null);
+                }
+            }
+        }
+    }
+
+    private void updateColorImage(ImageViewPreference preference, String colorString) {
+        if (preference != null) {
+            if (colorString == null || colorString.length() != 7 || !colorString.startsWith("#")) {
+                preference.setColor((Integer) null);
+            } else {
+                try {
+                    int color = Integer.parseInt(colorString.substring(1), 16);
+                    preference.setColor(color);
+                } catch (NumberFormatException e) {
+                    preference.setColor((Integer) null);
                 }
             }
         }

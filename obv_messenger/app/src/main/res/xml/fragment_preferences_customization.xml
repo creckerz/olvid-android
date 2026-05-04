@@ -90,6 +90,34 @@
         android:icon="@drawable/ic_pref_color"
         android:order="21" />
 
+    <io.olvid.messenger.customClasses.ImageViewPreference
+        android:key="pref_key_outbound_font_color"
+        android:title="@string/pref_outbound_font_color_title"
+        android:summary="@string/pref_outbound_font_color_summary"
+        android:icon="@drawable/ic_pref_color"
+        android:order="22" />
+
+    <io.olvid.messenger.customClasses.ImageViewPreference
+        android:key="pref_key_outbound_font_color_dark"
+        android:title="@string/pref_outbound_font_color_dark_title"
+        android:summary="@string/pref_outbound_font_color_dark_summary"
+        android:icon="@drawable/ic_pref_color"
+        android:order="23" />
+
+    <io.olvid.messenger.customClasses.ImageViewPreference
+        android:key="pref_key_inbound_font_color"
+        android:title="@string/pref_inbound_font_color_title"
+        android:summary="@string/pref_inbound_font_color_summary"
+        android:icon="@drawable/ic_pref_color"
+        android:order="24" />
+
+    <io.olvid.messenger.customClasses.ImageViewPreference
+        android:key="pref_key_inbound_font_color_dark"
+        android:title="@string/pref_inbound_font_color_dark_title"
+        android:summary="@string/pref_inbound_font_color_dark_summary"
+        android:icon="@drawable/ic_pref_color"
+        android:order="25" />
+
     <DropDownPreference
         android:key="pref_key_ping_connectivity_indicator"
         android:title="@string/pref_ping_connectivity_indicator_title"

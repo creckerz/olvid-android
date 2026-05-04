@@ -65,6 +65,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
@@ -960,6 +961,13 @@ fun MessageBody(
 ) {
     val context = LocalContext.current
     val resources = LocalResources.current
+    val isDarkTheme = SettingsActivity.forcedDarkMode ?: isSystemInDarkTheme()
+    val customOutboundFontColor = remember(isDarkTheme) {
+        if (isDarkTheme) SettingsActivity.outboundFontColorDark else SettingsActivity.outboundFontColor
+    }
+    val customInboundFontColor = remember(isDarkTheme) {
+        if (isDarkTheme) SettingsActivity.inboundFontColorDark else SettingsActivity.inboundFontColor
+    }
 
     LaunchedEffect(Unit) {
         if (message.isContentHidden) {
@@ -1036,9 +1044,11 @@ fun MessageBody(
         }
         Text(
             text = text,
-            color = if (message.isInbound) colorResource(id = R.color.inboundMessageBody) else colorResource(
-                id = R.color.primary700
-            ),
+            color = if (message.isInbound) {
+                parseHexColor(customInboundFontColor) ?: colorResource(id = R.color.inboundMessageBody)
+            } else {
+                parseHexColor(customOutboundFontColor) ?: colorResource(id = R.color.primary700)
+            },
             style = if (message.isInbound || message.messageType == Message.TYPE_OUTBOUND_MESSAGE) OlvidTypography.body1.copy(
                 fontSize = (16 * scale).sp,
                 lineHeight = (16 * scale).sp
@@ -1373,9 +1383,11 @@ fun MessageBody(
                             textAlign = if (message.isInbound || message.messageType == Message.TYPE_OUTBOUND_MESSAGE) textAlign else TextAlign.Center,
                             onTextLayout = { layoutResult = it },
                             overflow = TextOverflow.Visible,
-                            color = if (message.isInbound) colorResource(id = R.color.inboundMessageBody) else colorResource(
-                                id = R.color.primary700
-                            ),
+                            color = if (message.isInbound) {
+                                parseHexColor(customInboundFontColor) ?: colorResource(id = R.color.inboundMessageBody)
+                            } else {
+                                parseHexColor(customOutboundFontColor) ?: colorResource(id = R.color.primary700)
+                            },
                             style = if (message.isInbound || message.messageType == Message.TYPE_OUTBOUND_MESSAGE) OlvidTypography.body1.copy(
                                 fontSize = textSize,
                                 lineHeight = 1.1.em
