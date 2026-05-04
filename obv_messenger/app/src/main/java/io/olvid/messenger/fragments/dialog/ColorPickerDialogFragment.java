@@ -69,6 +69,8 @@ public class ColorPickerDialogFragment extends DialogFragment implements View.On
     private SeekBar brightnessSeekBar;
     private View fullPreview;
     private View alphaPreview;
+    private View advancedOptions;
+    private TextView advancedToggle;
     private boolean updatingHsvFromHex = false;
     private boolean updatingHexFromHsv = false;
 
@@ -240,8 +242,8 @@ public class ColorPickerDialogFragment extends DialogFragment implements View.On
         saturationSeekBar.setOnSeekBarChangeListener(hsvListener);
         brightnessSeekBar.setOnSeekBarChangeListener(hsvListener);
 
-        View advancedOptions = dialogView.findViewById(R.id.advanced_color_options);
-        TextView advancedToggle = dialogView.findViewById(R.id.advanced_toggle);
+        advancedOptions = dialogView.findViewById(R.id.advanced_color_options);
+        advancedToggle = dialogView.findViewById(R.id.advanced_toggle);
         advancedToggle.setOnClickListener(v -> {
             if (advancedOptions.getVisibility() == View.VISIBLE) {
                 advancedOptions.setVisibility(View.GONE);
@@ -273,6 +275,7 @@ public class ColorPickerDialogFragment extends DialogFragment implements View.On
         dialogView.findViewById(R.id.color_brown).setOnClickListener(this);
         dialogView.findViewById(R.id.color_grey).setOnClickListener(this);
         dialogView.findViewById(R.id.color_blue_grey).setOnClickListener(this);
+        dialogView.findViewById(R.id.color_custom).setOnClickListener(this);
 
         dialogView.findViewById(R.id.button_ok).setOnClickListener(this);
         dialogView.findViewById(R.id.button_clear).setOnClickListener(this);
@@ -335,6 +338,12 @@ public class ColorPickerDialogFragment extends DialogFragment implements View.On
             colorEditText.setText("#9e9e9e");
         } else if (id == R.id.color_blue_grey) {
             colorEditText.setText("#607d8b");
+        } else if (id == R.id.color_custom) {
+            if (advancedOptions.getVisibility() != View.VISIBLE) {
+                advancedOptions.setVisibility(View.VISIBLE);
+                advancedToggle.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_chevron_right, 0);
+                syncHsvFromColor();
+            }
         }
     }
 
